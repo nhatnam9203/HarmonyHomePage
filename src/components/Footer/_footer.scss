@@ -1,0 +1,48 @@
+footer {
+  color: $white-0;
+  .top_footer {
+    background-color: $blue-0;
+    height: 18rem;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    &-title {
+      padding-top: 6.25rem;
+      font-weight: $fw-2;
+      letter-spacing: $title-0;
+      margin-bottom: $m-7;
+    }
+    &-form {
+      width: 50rem !important;
+      height: 3.25rem;
+      margin-bottom: $m-7;
+      border: 1px solid $white-0;
+      border-radius: 5px;
+      outline: none;
+      &--button {
+        width: 12.5rem;
+        background-color: $blue-0;
+      }
+    }
+  }
+  .bot_footer {
+    background-color: $blue-1;
+    height: 7.5rem;
+    .footer-copyrigh {
+      letter-spacing: 0.01rem;
+      font-size: 0.9rem;
+    }
+    &-link {
+      letter-spacing: $text-0;
+      font: normal normal normal 17px/20px Roboto;
+    }
+    .divider_link-footer::before {
+      content: "";
+      margin-right: $m-6;
+      margin-left: $m-6;
+      height: 1.25rem;
+      border-left: 2px solid $white-0;
+    }
+  }
+}

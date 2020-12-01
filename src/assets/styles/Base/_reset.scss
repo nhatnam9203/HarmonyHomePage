@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -5,13 +7,19 @@
   outline: none !important;
 }
 
+a {
+  color: #fff;
+  // list-style: none !important;
+}
+
 a:hover {
   text-decoration: none !important;
+  color: #0f6ed9;
 }
 
 body {
-  font-family: "Roboto", sans-serif !important;
-  // font-size: 15px !important;
+  font-family: "Open Sans", sans-serif !important;
+  font-size: 16px !important;
 }
 
 header,
