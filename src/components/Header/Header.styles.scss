@@ -1,0 +1,28 @@
+.top_header {
+  background-color: #0764b0;
+  color: white;
+}
+
+.top_header {
+  .telephone {
+    display: flex;
+    align-items: center;
+    float: right;
+
+    a {
+      color: white;
+      padding-left: 8px;
+    }
+  }
+
+  .flag {
+    width: 1.4em;
+    margin-top: 5px;
+  }
+
+  .form-control {
+    background-color: #0764b0;
+    color: white;
+    border: 0px;
+  }
+}
