@@ -1,0 +1,48 @@
+// @mixin styleText($fs, $fw, $color) {
+//     font-size: $fs;
+//     font-weight: $fw;
+//     color: $color;
+// }
+
+// @mixin styleButton($bg-color, $border-cl, $pd-tb, $pd-lr, $border-radius) {
+//     background-color: $bg-color;
+//     border: 1px solid $border-cl;
+//     padding: $pd-tb $pd-lr;
+//     border-radius: $border-radius;
+// }
+
+// @mixin hoverButton($bg-color, $color, $border-cl) {
+//     background-color: $bg-color;
+//     color: $color;
+//     border: 1px solid $border-cl;
+// }
+
+@mixin mediaQueryMin($screen) {
+  @if map-has-key($map: $breakpoints, $key: $screen) {
+    $value: map-get(
+      $map: $breakpoints,
+      $key: $screen,
+    );
+
+    @media screen and (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "`#($screen)` không tồn tại";
+  }
+}
+
+@mixin mediaQueryMax($screen) {
+  @if map-has-key($map: $breakpoints, $key: $screen) {
+    $value: map-get(
+      $map: $breakpoints,
+      $key: $screen,
+    );
+
+    @media screen and (max-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "`#($screen)` không tồn tại";
+  }
+}

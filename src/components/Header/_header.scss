@@ -1,9 +1,6 @@
 .top_header {
-  background-color: #0764b0;
-  color: white;
-}
-
-.top_header {
+  background-color: $blue-0;
+  color: $white-0;
   .telephone {
     display: flex;
     align-items: center;
@@ -21,8 +18,8 @@
   }
 
   .form-control {
-    background-color: #0764b0;
-    color: white;
+    background-color: $blue-0;
+    color: $white-0;
     border: 0px;
   }
 }

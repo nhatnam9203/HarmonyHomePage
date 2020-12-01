@@ -15,8 +15,6 @@ import { FiPhoneCall } from "react-icons/fi";
 import Flags from "country-flag-icons/react/3x2";
 import Logo from "../../assets/images/logo_blue.png";
 
-import "./Header.styles.scss";
-
 export default function Header() {
   const { t, i18n } = useTranslation("header");
 
@@ -42,7 +40,7 @@ export default function Header() {
               {i18n.language === "en" ? (
                 <Flags.US title="United States" className="flag" />
               ) : (
-                <Flags.VN title="United States" className="flag" />
+                <Flags.VN title="Vietnamese" className="flag" />
               )}
             </Col>
             <Col xs="auto" className="px-0 pb-1">

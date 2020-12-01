@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 // # Routes
 import Home from "./container/Home/Home";
@@ -12,13 +13,13 @@ import Application from "./container/Application/Application";
 import About from "./container/About/About";
 import Contact from "./container/Contact/Contact";
 
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/styles/main.scss";
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <Header />
         <main className="app-main-content">
           <Switch>
@@ -31,6 +32,7 @@ function App() {
             <Route path="/contact" component={Contact} />
           </Switch>
         </main>
+        <Footer />
       </div>
     </Router>
   );
