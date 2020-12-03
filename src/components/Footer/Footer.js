@@ -31,10 +31,10 @@ export default function Footer() {
               placeholder="Email"
               aria-label="Email"
               aria-describedby="Email"
-              className="h-100 border-white"
+              className="h-100 border-white border rounded-0"
             />
             <InputGroup.Append>
-              <Button className="top_footer-form--button" type="submit">
+              <Button className="top_footer-form--button">
                 {t("Subscribe")}
               </Button>
             </InputGroup.Append>
@@ -49,7 +49,7 @@ export default function Footer() {
               className="d-flex justify-content-center align-items-center"
             >
               <div className="footer-copyrigh">
-                {new Date().getFullYear()} &copy; {t("Copyright")}:{" "}
+                {new Date().getFullYear()} &copy; {t("Copyright")} -{" "}
                 <a href="https://www.harmonypayment.com/">HarmonyPay Inc</a>
               </div>
               <ul className="d-flex mb-0 bot_footer-link">
@@ -62,9 +62,9 @@ export default function Footer() {
                 <li className="list-unstyled divider_link-footer">
                   <a href="#!"> {t("Policy")} </a>
                 </li>
-                <li className="list-unstyled divider_link-footer">
+                {/* <li className="list-unstyled divider_link-footer">
                   <a href="#!"> {t("Consumer Policy")} </a>
-                </li>
+                </li> */}
                 <li className="list-unstyled divider_link-footer">
                   <a href="#!"> {t("User Guide")} </a>
                 </li>
