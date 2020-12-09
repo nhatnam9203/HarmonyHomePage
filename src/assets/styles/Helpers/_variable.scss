@@ -2,8 +2,11 @@
 
 $black-0: #000;
 $black-1: #222;
+$black-2: #111;
+$black-3: #333;
 
 $white-0: #fff;
+$white-1: #fafafa;
 
 $blue-0: #0764b0;
 $blue-1: #04579b;
@@ -11,6 +14,7 @@ $blue-2: #002d53;
 $blue-3: #0f6ed9;
 
 $brown-0: #606060;
+$brown-1: #888888;
 $brown-5: #685967;
 
 $gray-0: #ffffff00;
@@ -18,7 +22,8 @@ $gray-0: #ffffff00;
 //Font size
 $fs-title-banner: 3.7rem;
 $fs-text-banner: 1.625rem;
-$fs-title: 2.5rem;
+$fs-title: 2.5625rem;
+$fs-text-button: 1.3125rem;
 
 //Font weight
 $fw-normal: normal;
@@ -41,7 +46,8 @@ $p-7: 2.5rem;
 //Line-height
 
 //Letter-spacing
-$title-0: 0.1rem;
+$title-0: 0.1025rem;
+$title-1: 0.051875rem;
 $text-0: 0.0425rem;
 
 //transition

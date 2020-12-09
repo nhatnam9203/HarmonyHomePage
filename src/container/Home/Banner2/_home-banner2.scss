@@ -1,0 +1,26 @@
+.home_banner2 {
+  height: 51.625rem;
+  background: transparent url("../../../assets/images/Banner\ 2.png") 0% 0%
+    no-repeat padding-box;
+  background-position: center;
+  padding: 7.5rem 3rem;
+  margin-bottom: 6.25rem;
+  &-title {
+    color: $blue-0;
+    letter-spacing: $title-0;
+    font-size: $fs-title;
+    margin-bottom: $m-6;
+  }
+
+  &-text {
+    max-width: 62.5rem;
+  }
+
+  &-icon {
+    width: 2rem;
+    height: 2rem;
+    color: $blue-0;
+
+    cursor: pointer;
+  }
+}

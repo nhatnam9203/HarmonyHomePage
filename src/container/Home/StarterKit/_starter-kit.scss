@@ -1,0 +1,65 @@
+.starter {
+  margin-bottom: 6.25rem;
+  &_kit-wrap {
+    margin-bottom: 3.75rem;
+  }
+  &_title {
+    color: $blue-0;
+    font-size: $fs-title;
+    letter-spacing: $title-0;
+
+    margin-bottom: $m-6;
+  }
+  &_text {
+    letter-spacing: 0;
+    margin-bottom: 3.75rem;
+  }
+  &_card-body {
+    padding-top: $m-7;
+    padding-left: $m-7;
+    padding-right: $m-7;
+    padding-bottom: 0.625rem;
+  }
+  &_card-title {
+    color: $black-2;
+    letter-spacing: 0.07rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  &_card-text {
+    color: $brown-1;
+    font-size: 1.125rem;
+    letter-spacing: 0.045rem;
+    margin-bottom: 8.42rem;
+  }
+  &_card-img {
+    padding: 0 4.625rem;
+  }
+  &_card-text--item {
+    color: $brown-1;
+    font-size: 1.125rem;
+    letter-spacing: 0.045rem;
+    margin-bottom: 1.1875rem;
+  }
+  &_card-img--item {
+    max-width: 12.5rem;
+  }
+  .pax_img {
+    max-width: 7.81rem;
+  }
+  &_button {
+    cursor: pointer;
+    padding: 1rem 3.75rem;
+    color: $blue-0;
+    border: 1px solid $blue-0;
+    background: #ffffff00 0% 0% no-repeat padding-box;
+
+    font-size: $fs-text-button;
+    letter-spacing: 0;
+    &:hover {
+      background-color: $blue-1;
+      color: $white-0;
+      transition: $transition-0;
+    }
+  }
+}
