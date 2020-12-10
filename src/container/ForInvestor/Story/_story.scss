@@ -1,0 +1,37 @@
+.story {
+  max-width: 88.625rem;
+  padding: 6.25rem;
+
+  &_title {
+    color: $black-2;
+    letter-spacing: $title-0;
+    font-size: $fs-title;
+    margin-bottom: $m-6;
+  }
+  &_text {
+    color: $black-3;
+    letter-spacing: $text-2;
+  }
+}
+
+.vision {
+  background-color: $white-1;
+  &__wrap {
+    padding: 3.75rem;
+  }
+  &_title {
+    color: $black-2;
+    letter-spacing: $title-0;
+    font-size: $fs-title;
+    margin-bottom: $m-6;
+  }
+  &_text {
+    color: $black-3;
+    letter-spacing: $text-2;
+  }
+  &_link {
+    margin-left: $m-7;
+    color: $black-3;
+    letter-spacing: $text-2;
+  }
+}

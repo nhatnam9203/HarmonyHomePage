@@ -3,7 +3,7 @@ import { AiFillPlayCircle } from "react-icons/ai";
 
 export default function HomeBanner2() {
   return (
-    <main className="home_banner2 d-flex flex-column justify-content-start align-items-center">
+    <main className="home_banner2 d-flex flex-column justify-content-start align-items-center w-100">
       <h1 className="home_banner2-title text-uppercase font-weight-bold text-center">
         salon 4-in-1 pos system
       </h1>

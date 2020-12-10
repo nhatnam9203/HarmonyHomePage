@@ -19,7 +19,7 @@ export default function HomeFeatures2() {
           Including all features of other legacy POS system and much more
         </p>
       </div>
-      <div className="bot_features2 mx-auto px-5">
+      <div className="bot_features2 mx-auto px-4">
         <div className="bot_features2-item d-flex flex-column justify-content-center align-items-center">
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             HarmonyPay Salon POS
@@ -35,7 +35,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="d-sm-flex d-md-block justify-content-center p-0"
+              className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
               <img className="bot_features2-item--img" src={POS1} alt="POS" />
             </Col>
@@ -72,7 +72,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
+              className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
               <img className="bot_features2-item--img" src={POS2} alt="POS" />
             </Col>
@@ -108,7 +108,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
+              className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
               <img
                 className="bot_features2-item--img"
@@ -134,7 +134,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={3}
-              className="d-sm-flex d-md-block justify-content-center p-0"
+              className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
               <img
                 className="bot_features2-item--phone"
@@ -185,7 +185,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={3}
-              className="d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
+              className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
               <img
                 className="bot_features2-item--phone"
@@ -228,7 +228,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
+              className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
               <img className="bot_features2-item--img" src={POS3} alt="POS" />
             </Col>
@@ -237,7 +237,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="d-sm-flex d-md-block justify-content-center p-0"
+              className=" xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
               <img className="bot_features2-item--img" src={Lap} alt="POS" />
             </Col>

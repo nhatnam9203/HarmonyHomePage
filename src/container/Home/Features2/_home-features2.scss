@@ -2,7 +2,7 @@
   .top-features2 {
     background: #002d53 0% 0% no-repeat padding-box;
     mix-blend-mode: multiply;
-    padding: 6.25rem 3rem;
+    padding: 6.25rem 1.5rem;
     margin-bottom: 6.25rem;
     &-title {
       letter-spacing: $title-0;
@@ -17,7 +17,7 @@
   }
 
   .bot_features2 {
-    max-width: 91.625rem;
+    max-width: 88.625rem;
 
     &-item {
       margin-bottom: 6.25rem;
@@ -51,6 +51,13 @@
         letter-spacing: 0.27px;
         color: $black-3;
       }
+    }
+  }
+
+  .xs-d-flex {
+    @include mediaQueryMax("medium") {
+      display: flex;
+      justify-content: center;
     }
   }
 }

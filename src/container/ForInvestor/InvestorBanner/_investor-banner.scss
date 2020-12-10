@@ -1,0 +1,31 @@
+.investor_banner {
+  height: 30rem;
+  background-image: url(https://picsum.photos/2000/500);
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #707070;
+  &-overlay {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 80%
+    );
+  }
+  &-title {
+    letter-spacing: $title-0;
+    font-size: $fs-title;
+    position: relative;
+    // margin-bottom: 1rem;
+
+    &::after {
+      content: "";
+      width: 70%;
+      height: 5px;
+      position: absolute;
+      background-color: $blue-4;
+      left: 15%;
+      bottom: -1rem;
+    }
+  }
+}

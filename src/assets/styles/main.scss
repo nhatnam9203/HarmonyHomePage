@@ -10,9 +10,14 @@
 }
 @import "../../components/Header/_header";
 @import "../../components/Footer/_footer";
-@import "../../container/Home/Banner/_home-banner";
-@import "../../container/Home/Features/_home-features";
-@import "../../container/Home/StarterKit/_starter-kit";
+// @import "../../container/Home/Banner/_home-banner";
+// @import "../../container/Home/Features/_home-features";
+// @import "../../container/Home/StarterKit/_starter-kit";
 
 @import "../../container/Home/Banner2/_home-banner2";
 @import "../../container/Home/Features2/_home-features2";
+@import "../../container/ForInvestor/InvestorBanner/investor-banner";
+@import "../../container/ForInvestor/Story/story";
+@import "../../container/ForInvestor/Team/team";
+@import "../../container/ForInvestor/PartnerShips/_partner";
+@import "../../container/ForConsumer/_consumer";

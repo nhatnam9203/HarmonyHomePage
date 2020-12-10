@@ -1,0 +1,60 @@
+.team {
+  background-color: $white-1;
+  padding-top: 6.25rem;
+  padding-bottom: 6.25rem;
+
+  &_title {
+    color: $black-2;
+    letter-spacing: $title-0;
+    font-size: $fs-title;
+    margin-bottom: $m-6;
+  }
+  &_text {
+    max-width: 50rem;
+    color: $black-3;
+    letter-spacing: $text-2;
+    margin-bottom: 3.8125rem;
+  }
+  &_card {
+    border: none;
+    border-top: 12px solid $blue-5;
+    border-radius: 12px;
+    // padding-left: 2rem;
+    // padding-right: 2rem;
+    &-img {
+      max-width: 10rem;
+      margin-top: 3.25rem;
+    }
+    &-title {
+      color: #1a1a1a;
+      font-size: 1.4375rem;
+      font-weight: 600;
+      letter-spacing: 0.04rem;
+      // margin-bottom: 0.75rem;
+    }
+    &-subtitle {
+      letter-spacing: $text-2;
+      color: $blue-5;
+      position: relative;
+      // margin-bottom: 2rem;
+      &::after {
+        content: "";
+        width: 42px;
+        height: 4px;
+        background-color: $blue-0;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        bottom: -0.75rem;
+        text-align: center;
+      }
+    }
+    &-text {
+      color: $black-3;
+      letter-spacing: $text-2;
+      padding: 1rem;
+    }
+  }
+}

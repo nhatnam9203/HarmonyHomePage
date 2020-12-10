@@ -2,8 +2,9 @@
   height: 51.625rem;
   background: transparent url("../../../assets/images/Banner\ 2.png") 0% 0%
     no-repeat padding-box;
+  background-size: cover;
   background-position: center;
-  padding: 7.5rem 3rem;
+  padding: 7.5rem 1.5rem;
   margin-bottom: 6.25rem;
   &-title {
     color: $blue-0;

@@ -8,6 +8,7 @@ import {
   Col,
   Form,
   NavItem,
+  Button,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
@@ -69,7 +70,7 @@ export default function Header() {
                   {t("Home")}
                 </Link>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <Link to="/features" className="nav-link">
                   {t("Features")}
                 </Link>
@@ -78,13 +79,13 @@ export default function Header() {
                 <Link to="/shop" className="nav-link">
                   {t("Shop")}
                 </Link>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <Link to="/pricing" className="nav-link">
                   {t("Pricing")}
                 </Link>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <Link to="/application" className="nav-link">
                   {t("Applications")}
                 </Link>
@@ -93,12 +94,35 @@ export default function Header() {
                 <Link to="/about" className="nav-link">
                   {t("About us")}
                 </Link>
+              </NavItem> */}
+              <NavItem>
+                <Link to="/devices" className="nav-link text-uppercase">
+                  devices
+                </Link>
               </NavItem>
               <NavItem>
                 <Link to="/contact" className="nav-link">
                   {t("Contact")}
                 </Link>
               </NavItem>
+            </Nav>
+            <Nav>
+              <NavItem>
+                <Link to="/" className="nav-link text-uppercase">
+                  for merchant
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/investor" className="nav-link text-uppercase">
+                  for investor
+                </Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/consumer" className="nav-link text-uppercase">
+                  for consumner
+                </Link>
+              </NavItem>
+              <Button>START FREE TRIAL</Button>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -12,6 +12,8 @@ $blue-0: #0764b0;
 $blue-1: #04579b;
 $blue-2: #002d53;
 $blue-3: #0f6ed9;
+$blue-4: #00ffe5;
+$blue-5: #0868b0;
 
 $brown-0: #606060;
 $brown-1: #888888;
@@ -49,6 +51,7 @@ $p-7: 2.5rem;
 $title-0: 0.1025rem;
 $title-1: 0.051875rem;
 $text-0: 0.0425rem;
+$text-2: 0.01625rem;
 
 //transition
 $transition-0: all 0.35s ease-in-out;
@@ -57,6 +60,6 @@ $transition-0: all 0.35s ease-in-out;
 $breakpoints: (
   "extra-large": 1200px,
   "large": 992px,
-  "medium": 768px,
+  "medium": 767px,
   "small": 576px,
 );
