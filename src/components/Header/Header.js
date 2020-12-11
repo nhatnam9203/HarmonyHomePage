@@ -9,7 +9,7 @@ import {
   Form,
   NavItem,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
 
 import Flags from "country-flag-icons/react/3x2";
@@ -29,7 +29,7 @@ export default function Header() {
           <Row className="justify-content-end">
             <Col className="pt-1 mx-1 pr-0">
               <div className="telephone">
-                <FiPhoneCall size={17} />
+                <FiPhoneCall size={21} />
                 <a href="tel:800-531-3126">800-531-3126</a>
               </div>
             </Col>
@@ -56,8 +56,8 @@ export default function Header() {
           </Row>
         </Container>
       </div>
-      <Navbar bg="light" expand="lg">
-        <Container>
+      <Navbar bg="light" expand="lg" className="nav_header" sticky="top">
+        <Container className="px-0">
           <Navbar.Brand href="#home">
             <img src={Logo} className="d-inline-block align-top" />
           </Navbar.Brand>
@@ -65,39 +65,79 @@ export default function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <NavItem>
-                <Link to="/" className="nav-link">
+                <NavLink
+                  to="/home"
+                  className="nav-NavLink "
+                  activeClassName="active_link"
+                  exact
+                >
                   {t("Home")}
-                </Link>
+                </NavLink>
               </NavItem>
               <NavItem>
-                <Link to="/features" className="nav-link">
-                  {t("Features")}
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/shop" className="nav-link">
-                  {t("Shop")}
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/pricing" className="nav-link">
+                <NavLink
+                  to="/pricing"
+                  className="nav-NavLink"
+                  activeClassName="active_link"
+                >
                   {t("Pricing")}
-                </Link>
+                </NavLink>
               </NavItem>
               <NavItem>
-                <Link to="/application" className="nav-link">
-                  {t("Applications")}
-                </Link>
+                <NavLink
+                  to="/devices"
+                  className="nav-NavLink"
+                  activeClassName="active_link"
+                >
+                  {t("Devices")}
+                </NavLink>
               </NavItem>
               <NavItem>
-                <Link to="/about" className="nav-link">
-                  {t("About us")}
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/contact" className="nav-link">
+                <NavLink
+                  to="/contact"
+                  className="nav-NavLink"
+                  activeClassName="active_link"
+                >
                   {t("Contact")}
-                </Link>
+                </NavLink>
+              </NavItem>
+            </Nav>
+
+            <Nav className="align-items-sm-end">
+              <NavItem>
+                <NavLink
+                  exact
+                  to="/merchant"
+                  className="nav-NavLink"
+                  activeClassName="active_link"
+                  style={{ color: "#0764B0", fontWeight: "560" }}
+                >
+                  FOR MERCHANT
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  to="/investor"
+                  className="nav-NavLink"
+                  activeClassName="active_link"
+                >
+                  FOR INVESTOR
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  to="/consumer"
+                  className="nav-NavLink"
+                  activeClassName="active_link"
+                >
+                  FOR CONSUMER
+                </NavLink>
+              </NavItem>
+
+              <NavItem className="sign_up">
+                <NavLink to="/sign-up" className="nav-NavLink ">
+                  START FREE TRIAL
+                </NavLink>
               </NavItem>
             </Nav>
           </Navbar.Collapse>

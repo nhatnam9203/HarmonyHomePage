@@ -6,7 +6,7 @@ import Footer from "./components/Footer/Footer";
 
 // # Routes
 import Home from "./container/Home/Home";
-import Feature from "./container/Feature/Feature";
+import SignUp from "./container/SignUp/SignUp";
 import Shop from "./container/Shop/Shop";
 import Pricing from "./container/Pricing/Pricing";
 import Application from "./container/Application/Application";
@@ -23,8 +23,8 @@ function App() {
         <Header />
         <main className="app-main-content">
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/features" component={Feature} />
+            <Route exact path="/home" component={Home} />
+            <Route path="/sign-up" component={SignUp} />
             <Route path="/shop" component={Shop} />
             <Route path="/pricing" component={Pricing} />
             <Route path="/application" component={Application} />
