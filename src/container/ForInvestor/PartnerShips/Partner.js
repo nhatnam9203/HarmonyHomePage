@@ -2,6 +2,10 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import partner2 from "../../../assets/images/investor/Rectangle 549.png";
 import partner1 from "../../../assets/images/investor/about us 2.png";
+import logo1 from "../../../assets/images/investor/1.png";
+import logo2 from "../../../assets/images/investor/2.png";
+import logo3 from "../../../assets/images/investor/3.png";
+import logo4 from "../../../assets/images/investor/4.png";
 
 export default function Partner() {
   return (
@@ -17,32 +21,16 @@ export default function Partner() {
         </p>
         <Row className="top_partner-icon d-flex justify-content-between m-0">
           <Col xs={12} md={6} lg={3}>
-            <img
-              src="https://picsum.photos/200/300"
-              alt=""
-              className="top_partner-icon--item"
-            />
+            <img src={logo1} alt="" className="top_partner-icon--item" />
           </Col>
           <Col xs={12} md={6} lg={3}>
-            <img
-              src="https://picsum.photos/200/300"
-              alt=""
-              className="top_partner-icon--item"
-            />
+            <img src={logo2} alt="" className="top_partner-icon--item" />
           </Col>
           <Col xs={12} md={6} lg={3}>
-            <img
-              src="https://picsum.photos/200/300"
-              alt=""
-              className="top_partner-icon--item"
-            />
+            <img src={logo3} alt="" className="top_partner-icon--item" />
           </Col>
           <Col xs={12} md={6} lg={3}>
-            <img
-              src="https://picsum.photos/200/300"
-              alt=""
-              className="top_partner-icon--item"
-            />
+            <img src={logo4} alt="" className="top_partner-icon--item" />
           </Col>
         </Row>
       </div>

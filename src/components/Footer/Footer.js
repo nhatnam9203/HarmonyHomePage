@@ -50,29 +50,49 @@ export default function Footer() {
             >
               <div className="footer-copyrigh">
                 {new Date().getFullYear()} &copy; {t("Copyright")} -{" "}
-                <a href="https://www.harmonypayment.com/">HarmonyPay Inc</a>
+                <a
+                  href="https://www.harmonypayment.com/"
+                  className="text-white"
+                >
+                  HarmonyPay Inc
+                </a>
               </div>
               <ul className="d-flex mb-0 bot_footer-link">
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!"> {t("Terms & Conditions")} </a>
+                  <a href="#!" className="text-white">
+                    {" "}
+                    {t("Terms & Conditions")}{" "}
+                  </a>
                 </li>
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!"> {t("Gift Card Terms")} </a>
+                  <a href="#!" className="text-white">
+                    {" "}
+                    {t("Gift Card Terms")}{" "}
+                  </a>
                 </li>
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!"> {t("Policy")} </a>
+                  <a href="#!" className="text-white">
+                    {" "}
+                    {t("Policy")}{" "}
+                  </a>
                 </li>
                 {/* <li className="list-unstyled divider_link-footer">
                   <a href="#!"> {t("Consumer Policy")} </a>
                 </li> */}
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!"> {t("User Guide")} </a>
+                  <a href="#!" className="text-white">
+                    {" "}
+                    {t("User Guide")}{" "}
+                  </a>
                 </li>
               </ul>
             </Col>
             <Col xs="auto">
-              <a href="https://www.facebook.com/harmonypayapp">
-                <AiFillFacebook size={48} className="white" />
+              <a
+                href="https://www.facebook.com/harmonypayapp"
+                className="text-white"
+              >
+                <AiFillFacebook size={48} />
               </a>
             </Col>
           </Row>
