@@ -14,6 +14,8 @@ import Devices from "./container/Devices/Devices";
 import ForInvestor from "./container/ForInvestor/ForInvestor";
 import ForConsumer from "./container/ForConsumer/ForConsumer";
 
+import Account from "./container/Account";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/main.scss";
 
@@ -32,6 +34,7 @@ function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/investor" component={ForInvestor} />
             <Route path="/consumer" component={ForConsumer} />
+            <Route path="/account" component={Account} />
           </Switch>
         </main>
         <Footer />

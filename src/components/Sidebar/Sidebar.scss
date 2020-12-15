@@ -1,0 +1,25 @@
+.sidebar {
+  padding-top: 2.2rem;
+
+  .nav-NavLink {
+    color: #707070;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.7em 0.7em 0.7em 1.3em;
+    box-sizing: border-box;
+    border-left: 4px solid transparent;
+    display: block;
+    letter-spacing: 0.32px;
+    transition: 0.3s;
+
+    &:hover {
+      color: black;
+      background-color: #f1f1f1;
+    }
+  }
+  .active_link {
+    color: #0764b0;
+    border-left: 4px solid #0764b0;
+    background-color: #f1f1f1;
+  }
+}

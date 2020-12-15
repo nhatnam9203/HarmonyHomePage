@@ -1,0 +1,18 @@
+.account {
+  max-width: 1370px;
+  margin: 0 auto;
+  padding-top: 1rem;
+  height: 100vh;
+
+  .text_btn {
+    color: #0868b0;
+    background-color: white;
+    border: 0;
+    padding-right: 0.5rem;
+    font-weight: 500;
+  }
+  .edit_btn {
+    border-right: 1px solid #dddddd;
+    padding-right: 1em;
+  }
+}

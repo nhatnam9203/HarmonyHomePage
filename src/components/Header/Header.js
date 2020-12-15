@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation, initReactI18next } from "react-i18next";
 import {
   Navbar,
@@ -17,6 +17,7 @@ import Logo from "../../assets/images/logo_blue.png";
 
 export default function Header() {
   const { t, i18n } = useTranslation("header");
+  const [expanded, setExpanded] = useState(false);
 
   const handleLanguageChange = (lang) => {
     i18n.use(initReactI18next).init({ lng: lang });
@@ -56,25 +57,42 @@ export default function Header() {
           </Row>
         </Container>
       </div>
-      <Navbar bg="light" expand="lg" className="nav_header" sticky="top">
-        <Container className="px-0">
+      <Navbar
+        bg="light"
+        expanded={expanded}
+        expand="xl"
+        className="nav_header"
+        sticky="top"
+        collapseOnSelect
+      >
+        <Container>
           <Navbar.Brand href="#home">
             <img src={Logo} className="d-inline-block align-top" />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={() =>
+              setTimeout(() => {
+                setExpanded(!expanded);
+              }, 150)
+            }
+          />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <NavItem>
+              <NavItem
+                onClick={() => setExpanded(false)}
+                className="py-md-2 py-xs-4"
+              >
                 <NavLink
                   to="/home"
-                  className="nav-NavLink "
+                  className="nav-NavLink"
                   activeClassName="active_link"
                   exact
                 >
                   {t("Home")}
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   to="/pricing"
                   className="nav-NavLink"
@@ -83,7 +101,7 @@ export default function Header() {
                   {t("Pricing")}
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   to="/devices"
                   className="nav-NavLink"
@@ -92,7 +110,7 @@ export default function Header() {
                   {t("Devices")}
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   to="/contact"
                   className="nav-NavLink"
@@ -104,18 +122,17 @@ export default function Header() {
             </Nav>
 
             <Nav className="align-items-sm-end">
-              <NavItem>
+              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   exact
                   to="/home"
-                  className="nav-NavLink"
+                  className="nav-NavLink merchant_nav"
                   activeClassName="active_link"
-                  style={{ color: "#0764B0", fontWeight: "560" }}
                 >
                   FOR MERCHANT
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   to="/investor"
                   className="nav-NavLink"
@@ -124,7 +141,7 @@ export default function Header() {
                   FOR INVESTOR
                 </NavLink>
               </NavItem>
-              <NavItem>
+              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   to="/consumer"
                   className="nav-NavLink"
@@ -134,30 +151,15 @@ export default function Header() {
                 </NavLink>
               </NavItem>
 
-              <NavItem className="sign_up">
+              <NavItem
+                className="sign_up py-md-2"
+                onClick={() => setExpanded(false)}
+              >
                 <NavLink to="/sign-up" className="nav-NavLink ">
                   START FREE TRIAL
                 </NavLink>
               </NavItem>
             </Nav>
-            {/* <Nav>
-              <NavItem>
-                <Link to="/" className="nav-link text-uppercase">
-                  for merchant
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/investor" className="nav-link text-uppercase">
-                  for investor
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/consumer" className="nav-link text-uppercase">
-                  for consumner
-                </Link>
-              </NavItem>
-              <Button>START FREE TRIAL</Button>
-            </Nav> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
