@@ -1,0 +1,26 @@
+.contact__home {
+  background-color: #fafafa;
+  background-image: url("../../assets/images/Rectangle 512.png");
+  max-height: 30rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  margin-bottom: 30rem;
+
+  &-item {
+    padding-top: 8rem;
+    // transform: translateY(50%);
+  }
+  &-img {
+    width: 100%;
+    max-height: 30rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background: #002d53 0% 0% no-repeat padding-box;
+    mix-blend-mode: multiply;
+    opacity: 0.57;
+  }
+}

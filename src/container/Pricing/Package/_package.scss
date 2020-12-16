@@ -1,0 +1,86 @@
+.package {
+  margin-top: 3.75rem;
+  &__title {
+    letter-spacing: $title-0;
+    font-size: $fs-title;
+    margin-bottom: $m-6;
+  }
+  &__text {
+    margin-bottom: 3.75rem;
+  }
+
+  &__container {
+    max-width: 85.625rem;
+    .package__item {
+      border-radius: 3px 3px 0px 0px;
+      &--title {
+        font: normal normal bold 48px/58px Roboto;
+        letter-spacing: 0px;
+        color: #11a54c;
+        margin-bottom: 1.5rem;
+      }
+      &--sub {
+        font: normal normal normal 24px/29px Roboto;
+        letter-spacing: 0px;
+        color: #11a54c;
+      }
+      &--cardbody {
+        padding-top: 1.5rem;
+        padding-bottom: 2.5rem;
+      }
+      &--btn {
+        margin: auto;
+        max-width: 200px;
+        text-align: center;
+        font: normal normal 600 16px/22px Open Sans;
+        letter-spacing: 0.32px;
+        color: #ffffff;
+        background-color: $blue-0;
+        cursor: pointer;
+        padding: 1rem 2.5rem;
+
+        &:hover {
+          background-color: $blue-1;
+          color: #fff;
+          transform: $transition-0;
+        }
+      }
+    }
+  }
+  &__features {
+    background: #f1f1f1 0% 0% no-repeat padding-box;
+    border: 1px solid #cccccc;
+    font: normal normal bold 26px/40px Open Sans;
+    letter-spacing: 0px;
+    color: #111111;
+    padding: 1.25rem;
+    &--row {
+      // border: 1px solid #CCCCCC;
+    }
+    &--title {
+      border: 1px solid #cccccc;
+      color: #1a1a1a;
+      letter-spacing: 0.04rem;
+      font-weight: 600;
+      font-size: 1.4375rem;
+      padding: 1.5rem;
+    }
+    &--tick {
+      border: 1px solid #cccccc;
+      color: #11a54c;
+    }
+    &--btn {
+      color: $blue-0;
+      letter-spacing: 0.36px;
+      font-size: 1.125rem;
+      margin: 1.5rem;
+      &:hover {
+        color: $blue-1;
+        .package__rightArr {
+          transform: translate(5px);
+          transition: $transition-0;
+        }
+      }
+    }
+  }
+}

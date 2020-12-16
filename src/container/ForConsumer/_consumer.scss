@@ -1,4 +1,7 @@
 .consumer {
+  background: #fafafa 0% 0% no-repeat padding-box;
+  background-image: url("../../assets/images/For Consumer/Intersection 1.svg");
+  background-position: bottom right;
   &_app {
     width: 12.5rem;
     height: 12.5rem;
@@ -25,5 +28,13 @@
   }
   &_downicon {
     margin-bottom: 13.5rem;
+  }
+  .consumer__right {
+    position: relative;
+    &-img {
+      position: absolute;
+      right: 10%;
+      top: 8%;
+    }
   }
 }

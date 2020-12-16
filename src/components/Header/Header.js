@@ -56,7 +56,11 @@ export default function Header() {
           </Row>
         </Container>
       </div>
-      <Navbar bg="light" expand="lg" className="nav_header" sticky="top">
+      <Navbar
+        expand="lg"
+        className="nav_header bg-white shadow-sm"
+        sticky="top"
+      >
         <Container className="px-0">
           <Navbar.Brand href="#home">
             <img src={Logo} className="d-inline-block align-top" />
@@ -135,29 +139,11 @@ export default function Header() {
               </NavItem>
 
               <NavItem className="sign_up">
-                <NavLink to="/sign-up" className="nav-NavLink ">
+                <NavLink to="/sign-up" className="">
                   START FREE TRIAL
                 </NavLink>
               </NavItem>
             </Nav>
-            {/* <Nav>
-              <NavItem>
-                <Link to="/" className="nav-link text-uppercase">
-                  for merchant
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/investor" className="nav-link text-uppercase">
-                  for investor
-                </Link>
-              </NavItem>
-              <NavItem>
-                <Link to="/consumer" className="nav-link text-uppercase">
-                  for consumner
-                </Link>
-              </NavItem>
-              <Button>START FREE TRIAL</Button>
-            </Nav> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>

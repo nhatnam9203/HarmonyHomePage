@@ -1,7 +1,14 @@
 import React from "react";
+import Carousel from "./Carousel/Carousel";
+import Package from "./Package/Package";
 
 function Pricing() {
-  return <div>Pricing</div>;
+  return (
+    <>
+      <Package />
+      <Carousel />
+    </>
+  );
 }
 
 export default Pricing;

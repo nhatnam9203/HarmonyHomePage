@@ -94,7 +94,7 @@ export default function Partner() {
             <p className="bot_partner-text pb-4">
               If you need more detail from our plan, please drop us a message!
             </p>
-            <button className="bot_partner-button">Contac us</button>
+            {/* <button className="bot_partner-button">Contac us</button> */}
           </Col>
           <Col xs={12} md={6} className="p-0 order-0 order-md-1">
             <img src={partner2} alt="" className="w-100 h-100" />

@@ -1,15 +1,15 @@
 .investor_banner {
   height: 30rem;
-  background-image: url(https://picsum.photos/2000/500);
-  background-size: cover;
-  background-position: center;
+  background-image: url("../../../assets/images/investor/about us.png");
+  background-size: auto;
+  background-position: right;
   border: 1px solid #707070;
   &-overlay {
     background: rgb(0, 0, 0);
     background: linear-gradient(
       90deg,
       rgba(0, 0, 0, 1) 0%,
-      rgba(0, 0, 0, 0) 80%
+      rgba(0, 0, 0, 0) 75%
     );
   }
   &-title {

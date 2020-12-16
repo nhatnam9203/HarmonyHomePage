@@ -10,6 +10,8 @@
 }
 @import "../../components/Header/_header";
 @import "../../components/Footer/_footer";
+@import "../../components/ContactUs/_contact-us";
+
 // @import "../../container/Home/Banner/_home-banner";
 // @import "../../container/Home/Features/_home-features";
 // @import "../../container/Home/StarterKit/_starter-kit";
@@ -20,4 +22,10 @@
 @import "../../container/ForInvestor/Story/story";
 @import "../../container/ForInvestor/Team/team";
 @import "../../container/ForInvestor/PartnerShips/_partner";
+@import "../../container/ForInvestor/Contact/_contactUs-investor";
 @import "../../container/ForConsumer/_consumer";
+@import "../../container/Contact/_contact-home";
+@import "../../container/Devices/DevicesBanner/_devices-banner";
+@import "../../container/Devices/DevicesItem/_devices-item";
+@import "../../container/Pricing/Carousel/_caruosel";
+@import "../../container/Pricing/Package/package";

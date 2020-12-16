@@ -1,4 +1,5 @@
 import React from "react";
+import ContactUsInvestor from "./Contact/ContactUsInvestor";
 import Investorbanner from "./InvestorBanner/InvestorBanner";
 import Partner from "./PartnerShips/Partner";
 import Story from "./Story/Story";
@@ -11,6 +12,7 @@ export default function ForInvestor() {
       <Story />
       <Team />
       <Partner />
+      <ContactUsInvestor />
     </>
   );
 }
