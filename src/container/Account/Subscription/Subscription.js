@@ -1,13 +1,20 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
+import { useHistory } from "react-router-dom";
 
 import "./Subscription.scss";
 
 function Subscription() {
+  const history = useHistory();
+
+  const handleBilling = () => {
+    history.push("/account/subscription/billing");
+  };
+
   return (
     <div className="sub">
       <h1>My Subscriptions</h1>
-      <Table striped bordered hover className="mt-4 ml-3">
+      <Table bordered className="mt-4">
         <thead>
           <tr>
             <th>Merchant ID</th>
@@ -26,8 +33,9 @@ function Subscription() {
             <td>$34.95</td>
             <td>Active</td>
             <td>
-              <button className="text_btn edit_btn">Edit</button>
-              <button className="text_btn pl-3">Extend</button>
+              <button className="text_btn" onClick={handleBilling}>
+                Edit
+              </button>
             </td>
           </tr>
           <tr>
@@ -36,7 +44,9 @@ function Subscription() {
             <td>Apr 9, 2020</td>
             <td>$69.00</td>
             <td>Canceled</td>
-            <td className="text_btn">Renew</td>
+            <td className="text_btn" onClick={handleBilling}>
+              Renew
+            </td>
           </tr>
         </tbody>
       </Table>
