@@ -10,7 +10,7 @@ function Merchant() {
   return (
     <div className="merchant">
       <h1>My Merchant</h1>
-      <Table striped bordered hover className="mt-4 ml-3">
+      <Table bordered className="mt-4">
         <thead>
           <tr>
             <th>ID</th>

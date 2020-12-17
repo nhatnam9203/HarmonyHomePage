@@ -1,46 +1,47 @@
 import React, { useState } from "react";
-import { Form, Table } from "react-bootstrap";
+import { Form, Table, Button } from "react-bootstrap";
+
+import "./EditSub.scss";
 
 function EditSub() {
-  const [billingPlan, setBillingPlan] = useState({});
-
-  const [basicMonthly, setBasicMonthly] = useState(false);
-  const [basicYearly, setBasicYearly] = useState(false);
-  const [medMonthly, setMedMonthly] = useState(false);
-  const [medYearly, setMedYearly] = useState(false);
-  const [proMonthly, setProMonthy] = useState(false);
-  const [proYearly, setProYearly] = useState(false);
+  const [billingPlan, setBillingPlan] = useState({
+    basicMonthly: false,
+    basicYearly: false,
+    medMonthly: false,
+    medYearly: false,
+    proMonthly: false,
+    proYearly: false,
+  });
 
   const handleSubscriptionChange = (e) => {
-    const { name, checked } = e.target;
-    console.log("Name".name);
-    console.log(e.target.checked);
-
-    // switch (name) {
-    //     case basicMonthly:
-
-    //         break;
-
-    //     default:
-    //         break;
-    // }
+    // const { name, checked } = e.target;
+    alert("CHƯA LÀM");
   };
 
+  const {
+    basicMonthly,
+    basicYearly,
+    medMonthly,
+    medYearly,
+    proMonthly,
+    proYearly,
+  } = billingPlan;
+
   return (
-    <div>
+    <div className="sub_edit">
       <h1>Change Subscription</h1>
-      <Table bordered responsive className="mt-4">
+      <Table className="mt-4">
         <thead className>
           <tr>
             <th className="p-3">Packages</th>
-            <th className="p-3">Billed Monthly</th>
-            <th className="p-3">Billed Annually</th>
+            <th className="p-3 text-center">Billed Monthly</th>
+            <th className="p-3 text-center">Billed Annually</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td className="sub_plan">Basic - 8 Staffs</td>
-            <td>
+            <td className="text-center">
               <Form.Check type="radio" id="check-api-radio">
                 <Form.Check.Input
                   type="radio"
@@ -51,7 +52,7 @@ function EditSub() {
                 <Form.Check.Label>$49.95</Form.Check.Label>
               </Form.Check>
             </td>
-            <td>
+            <td className="text-center">
               <Form.Check type="radio" id="check-api-radio">
                 <Form.Check.Input
                   type="radio"
@@ -65,7 +66,7 @@ function EditSub() {
           </tr>
           <tr>
             <td className="sub_plan">Medium - 15 Staffs</td>
-            <td>
+            <td className="text-center">
               <Form.Check type="radio" id="check-api-radio">
                 <Form.Check.Input
                   type="radio"
@@ -76,7 +77,7 @@ function EditSub() {
                 <Form.Check.Label>$89.95</Form.Check.Label>
               </Form.Check>
             </td>
-            <td>
+            <td className="text-center">
               <Form.Check type="radio" id="check-api-radio">
                 <Form.Check.Input
                   type="radio"
@@ -90,7 +91,7 @@ function EditSub() {
           </tr>
           <tr>
             <td className="sub_plan">Professional - 16+ Staffs</td>
-            <td>
+            <td className="text-center">
               <Form.Check type="radio" id="check-api-radio">
                 <Form.Check.Input
                   type="radio"
@@ -101,7 +102,7 @@ function EditSub() {
                 <Form.Check.Label>$94.95</Form.Check.Label>
               </Form.Check>
             </td>
-            <td>
+            <td className="text-center">
               <Form.Check type="radio" id="check-api-radio">
                 <Form.Check.Input
                   type="radio"
@@ -115,6 +116,10 @@ function EditSub() {
           </tr>
         </tbody>
       </Table>
+      <div className="d-flex justify-content-end pt-4">
+        <Button className="btn btn_cancel">Cancel</Button>
+        <Button className="btn btn_save">Save</Button>
+      </div>
     </div>
   );
 }
