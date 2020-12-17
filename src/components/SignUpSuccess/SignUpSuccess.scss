@@ -2,4 +2,52 @@
   background: #0764b0 0% 0% no-repeat padding-box;
   border-radius: 5px 5px 0px 0px;
   box-shadow: 0px 3px 10px #0000001a;
+  width: 82%;
+  text-align: center;
+  color: #fff;
+
+  .sign_up_img {
+    margin: 0 auto;
+    width: 100%;
+
+    img {
+      padding-top: 5em;
+      width: 48%;
+    }
+  }
+
+  .sign_up_message {
+    padding-top: 4em;
+    padding-bottom: 1.5em;
+
+    h1 {
+      font-weight: 600;
+      font-size: 2.6em;
+    }
+
+    p {
+      padding-top: 1em;
+      color: #fff !important;
+      font-size: 1.2em !important;
+    }
+  }
+
+  .sing_up_back {
+    background-color: #fff;
+    padding: 2.5em;
+
+    button {
+      padding: 0.8em 3em;
+      background-color: #fff;
+      color: #0764b0;
+      border-radius: 0px;
+      font-size: 1.3em;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: #0764b0;
+      color: #fff;
+    }
+  }
 }

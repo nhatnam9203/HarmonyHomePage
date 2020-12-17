@@ -1,0 +1,29 @@
+.account {
+  max-width: 1370px;
+  margin: 0 auto;
+  height: 100vh;
+
+  table {
+    th {
+      background-color: #f5f5f5;
+    }
+  }
+
+  .text_btn {
+    color: #0868b0;
+    background-color: white;
+    border: 0;
+    padding-right: 0.5rem;
+    letter-spacing: 0.26px;
+  }
+  .edit_btn {
+    border-right: 1px solid #dddddd;
+    padding-right: 1em;
+  }
+
+  .sub_plan {
+    color: #0868b0;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

@@ -13,13 +13,14 @@ export default function Carousell() {
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
       </p>
+
       <Carousel
         additionalTransfrom={0}
         arrows
         // autoPlay
         // autoPlaySpeed={1500}
         centerMode={false}
-        className="carouesl__container w-75 m-auto"
+        className="carouesl__container w-75 m-auto p-1"
         containerClass="container-with-dots"
         dotListClass=""
         draggable
