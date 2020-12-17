@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
-
+import { useParams, useHistory } from "react-router-dom";
+import { Row, Col, Button } from "react-bootstrap";
 import Collapse from "@kunukn/react-collapse";
 
 import BankVoid from "../../../../assets/images/bank_void.png";
 import DriverLicenseImg from "../../../../assets/images/driver_license.jpg";
 
 import "./Info.scss";
+
 function Info() {
   const id = useParams();
-  const [general, setGeneral] = useState(true);
-  const [bank, setBank] = useState(true);
-  const [principal, setPrincipal] = useState(true);
+  const history = useHistory();
+  const [general, setGeneral] = useState(false);
+  const [bank, setBank] = useState(false);
+  const [principal, setPrincipal] = useState(false);
   return (
     <div className="info_content">
       <h1>{id.id} - Mekira Nails & Spa</h1>
@@ -188,7 +189,7 @@ function Info() {
         {(collapseState) => (
           <div className={"app__content " + collapseState}>
             <p className="title">Principal 1</p>
-            <hr className="" />
+            <hr />
             <Row>
               <Col xs={6} md={4}>
                 <p className="info_label">Full Name</p>
@@ -257,6 +258,18 @@ function Info() {
           </div>
         )}
       </Collapse>
+
+      <div className="d-flex justify-content-end mt-4">
+        <Button className="btn btn_cancel" onClick={() => history.goBack()}>
+          Back
+        </Button>
+        <Button
+          className="btn btn_save"
+          onClick={() => history.push("/account/merchant/123123/edit")}
+        >
+          Edit
+        </Button>
+      </div>
     </div>
   );
 }
