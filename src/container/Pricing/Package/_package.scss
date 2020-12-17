@@ -83,4 +83,34 @@
       }
     }
   }
+  .switch {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 84px;
+    height: 44px;
+    background-color: #c6c6c6;
+    border-radius: 40px;
+    border: 1px solid gray;
+    outline: none;
+    position: relative;
+    transition: 200ms;
+    &:checked {
+      background-color: mediumseagreen;
+      border: 1px solid mediumseagreen;
+
+      &::before {
+        left: 41px;
+      }
+    }
+    &::before {
+      content: "";
+      width: 42px;
+      height: 42px;
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+      top: 0;
+      left: 0;
+    }
+  }
 }

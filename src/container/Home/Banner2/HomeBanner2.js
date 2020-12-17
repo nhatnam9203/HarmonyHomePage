@@ -10,7 +10,7 @@ export default function HomeBanner2() {
       <h1 className="home_banner2-title text-uppercase font-weight-bold text-center">
         salon 4-in-1 pos system
       </h1>
-      <p className="home_banner2-text text-center mb-4">
+      <p className="home_banner2-text text-center mb-1">
         HarmonyPay is a module POS system which included many Apps working with
         each other through an API (Application Programing Interface), allowing
         for mobile interactive booking, On-demand marketing, and mobile payment.
@@ -26,7 +26,7 @@ export default function HomeBanner2() {
         centered
         className="video-modal text-center"
       >
-        <Modal.Body>
+        <Modal.Body className="video-modal-body">
           <iframe
             title="HarmonyPay Salon POS"
             width="100%"

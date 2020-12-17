@@ -8,16 +8,20 @@ import {
   Col,
   Form,
   NavItem,
+  Button,
 } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
+import { FaSignInAlt } from "react-icons/fa";
 
 import Flags from "country-flag-icons/react/3x2";
 import Logo from "../../assets/images/logo_blue.png";
+import Modal from "react-bootstrap/Modal";
 
 export default function Header() {
   const { t, i18n } = useTranslation("header");
   const [expanded, setExpanded] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleLanguageChange = (lang) => {
     i18n.use(initReactI18next).init({ lng: lang });
@@ -29,6 +33,12 @@ export default function Header() {
         <Container>
           <Row className="justify-content-end">
             <Col className="pt-1 mx-1 pr-0">
+              <div className="singin" onClick={() => setShow(true)}>
+                <FaSignInAlt size={21} className="mr-2" />
+                <span className="text-white">Sign in</span>
+              </div>
+            </Col>
+            <Col xs="auto" className="pt-1 mx-1 pr-0">
               <div className="telephone">
                 <FiPhoneCall size={21} />
                 <a href="tel:800-531-3126">800-531-3126</a>
@@ -65,7 +75,7 @@ export default function Header() {
         collapseOnSelect
       >
         <Container>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/home">
             <img src={Logo} className="d-inline-block align-top" />
           </Navbar.Brand>
           <Navbar.Toggle
@@ -162,6 +172,47 @@ export default function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        aria-labelledby="package-modal"
+        centered
+        className=""
+      >
+        <Modal.Body className="modal-body-signin p-4 h-100">
+          <Modal.Title className="sigin__title text-center font-weight-bold">
+            Sign In
+          </Modal.Title>
+          <p className="sigin__text text-center">
+            If you have an account, sign in with your email address.
+          </p>
+          <Form>
+            <Form.Group>
+              <Form.Label>
+                Username <span className="form_required">*</span>
+              </Form.Label>
+              <Form.Control type="text" placeholder="Username" />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>
+                Password <span className="form_required">*</span>
+              </Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <div className="signin__container-btn d-flex justify-content-between align-items-center">
+              <Button
+                type="submit"
+                className="submit_btn text-center font-weight-bold"
+              >
+                Sign in
+              </Button>
+              <Link to="#" className="signin__link">
+                Forgot Password?
+              </Link>
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
