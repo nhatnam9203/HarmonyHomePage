@@ -1,6 +1,9 @@
 import React from "react";
+import { Form, Row, Col, Tab, Tabs } from "react-bootstrap";
 
-function Principal() {
+import PrincipalDetail from "./PrincipalDetail";
+
+function Principal(formik) {
   return (
     <div>
       <div className="app__toggle d-flex justify-content-between toggle_box mt-4">
@@ -10,6 +13,16 @@ function Principal() {
             <h3>Principal Information</h3>
           </div>
         </div>
+      </div>
+      <div className="app__content">
+        <Tabs transition={false}>
+          <Tab eventKey="home" title="Principal 1" className="principal_tab">
+            <PrincipalDetail formik={formik} />
+          </Tab>
+          <Tab eventKey="profile" title="Principal 2" className="principal_tab">
+            <PrincipalDetail formik={formik} />
+          </Tab>
+        </Tabs>
       </div>
     </div>
   );

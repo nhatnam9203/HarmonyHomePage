@@ -66,5 +66,36 @@
       font-size: 1rem;
       font-weight: normal;
     }
+
+    .phone_select {
+      border-radius: 0;
+    }
+
+    .btn_upload {
+      color: #0868b0;
+      font-size: 1rem;
+      margin-left: 7px;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    .nav-link {
+      border: 0 !important;
+      border-color: #dee2e6 #dee2e6 #fff;
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .nav-tabs .nav-item.show .nav-link,
+    .nav-tabs .nav-link.active {
+      font-size: 1.2rem;
+      color: #1a1a1a;
+      font-weight: 600;
+      background-color: #dee2e6 #dee2e6 #fff;
+    }
+
+    a {
+      color: #1a1a1a;
+    }
   }
 }

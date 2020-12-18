@@ -10,6 +10,7 @@ import Principal from "./Steps/Principal";
 import "./EditInfo.scss";
 
 function EditInfo() {
+  const history = useHistory();
   const [step, setStep] = useState(1);
 
   const nextStep = () => {
@@ -59,8 +60,20 @@ function EditInfo() {
       </Form>
 
       <div className="d-flex justify-content-between">
-        <button onClick={() => prevStep()}>Back</button>
-        <button onClick={() => nextStep()}>Next</button>
+        <button className="btn" onClick={() => history.goBack()}>
+          Cancel
+        </button>
+        <div>
+          {step !== 1 && (
+            <button className="btn" onClick={() => prevStep()}>
+              Back
+            </button>
+          )}
+
+          <button className="btn btn_save" onClick={() => nextStep()}>
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );
