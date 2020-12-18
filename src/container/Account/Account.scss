@@ -1,7 +1,7 @@
 .account {
   max-width: 1370px;
   margin: 0 auto;
-  height: 100vh;
+  padding-bottom: 5rem;
 
   table {
     th {
@@ -23,7 +23,49 @@
 
   .sub_plan {
     color: #0868b0;
-    font-weight: 600;
+    // font-weight: 600;
     cursor: pointer;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 1.36px;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    padding-top: 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.46px;
+  }
+
+  p {
+    margin: 0;
+    letter-spacing: 0.26px;
+  }
+
+  .btn {
+    border-radius: 0px;
+    letter-spacing: 0.32px;
+    background-color: #ffffff;
+    color: #707070;
+    padding: 0.6em 3.3em;
+    border-color: #cccccc;
+  }
+
+  .btn_cancel {
+    &:hover {
+      border-color: #cccccc;
+      background-color: #ececec;
+      font-weight: 600;
+      color: black;
+    }
+  }
+
+  .btn_save {
+    margin-left: 2rem;
+    background-color: #0764b0;
+    color: white;
   }
 }

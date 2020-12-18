@@ -9,6 +9,7 @@ import EditAccount from "./MyAccount/Edit/EditAccount";
 
 import Merchant from "./Merchant/Merchant";
 import Info from "./Merchant/Info/Info";
+import EditInfo from "./Merchant/EditInfo/EditInfo";
 
 import Subscription from "./Subscription/Subscription";
 import EditSub from "./Subscription/SubPage/EditSub";
@@ -39,6 +40,7 @@ function Account() {
             <Route path="/account/subscription/billing" component={EditSub} />
 
             <Route exact path="/account/merchant" component={Merchant} />
+            <Route path="/account/merchant/:id/edit" component={EditInfo} />
             <Route path="/account/merchant/:id" component={Info} />
           </Switch>
         </Col>
