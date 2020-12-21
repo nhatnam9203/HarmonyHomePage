@@ -4,16 +4,26 @@
       no-repeat padding-box;
     mix-blend-mode: multiply;
     padding: 6.25rem 1.5rem;
+    background-size: cover;
+    background-position: center;
     margin-bottom: 6.25rem;
+    width: 100%;
     &-title {
       letter-spacing: $title-0;
       font-size: $fs-title;
       margin-bottom: $m-6;
+      @include mediaQueryMax("large") {
+        font-size: 2rem;
+      }
     }
     &-text {
       color: $white-1;
       letter-spacing: 0px;
       font-size: $fs-text-banner;
+      margin-bottom: 0;
+      @include mediaQueryMax("large") {
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -36,6 +46,9 @@
         letter-spacing: $title-0;
         font-size: $fs-title;
         margin-bottom: $m-6;
+        @include mediaQueryMax("large") {
+          font-size: 2rem;
+        }
       }
       &--text {
         letter-spacing: 0.26px;

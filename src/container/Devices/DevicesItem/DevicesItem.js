@@ -263,7 +263,7 @@ export default function DevicesItem() {
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
-                      {'BEELTA IPAD STAND FOR 9.7"/10.2 INCH'}
+                      {'BEELTA IPAD STAND FOR 9.7"/10.2 INCH(2018)'}
                     </Card.Title>
                     <Card.Text className="divices__bot-card--text d-flex justify-content-center">
                       <div className="divices__bot-card--color bg-info mr-4"></div>
@@ -279,7 +279,7 @@ export default function DevicesItem() {
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
-                      BEELTA IPAD STAND FOR 11/12.9 INCH(2018)
+                      {`BEELTA IPAD STAND FOR 11"/12.9 INCH(2018)`}
                     </Card.Title>
                     <Card.Text className="divices__bot-card--text d-flex justify-content-center">
                       <div className="divices__bot-card--color bg-info mr-4"></div>

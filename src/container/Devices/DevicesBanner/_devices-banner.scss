@@ -4,4 +4,16 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 33.75rem;
+  @include mediaQueryMax("xxl") {
+    height: 25.75rem;
+  }
+  @include mediaQueryMax("extra-large") {
+    height: 19.5rem;
+  }
+  @include mediaQueryMax("large") {
+    height: 14.6rem;
+  }
+  @include mediaQueryMax("medium") {
+    height: 10.8rem;
+  }
 }

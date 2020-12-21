@@ -8,6 +8,12 @@
   &__form {
     padding: $p-7 4.375rem;
     border-radius: 10px 0px 0px 10px;
+    @include mediaQueryMax("large") {
+      padding: $p-7 2.5rem;
+    }
+    @include mediaQueryMax("medium") {
+      border-radius: 10px;
+    }
     &-title {
       color: $blue-0;
       letter-spacing: $title-0;
@@ -48,6 +54,9 @@
   &__info {
     background-color: $blue-0;
     border-radius: 0px 10px 10px 0px;
+    @include mediaQueryMax("medium") {
+      border-radius: 10px;
+    }
     &-item {
       padding-top: 3.75rem;
     }

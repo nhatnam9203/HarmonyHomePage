@@ -5,9 +5,11 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
+  // position: relative;
   margin-bottom: 30rem;
-
+  @include mediaQueryMax("medium") {
+    max-height: 70rem;
+  }
   &-item {
     padding-top: 8rem;
     // transform: translateY(50%);
@@ -18,7 +20,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    // position: relative;
     background: #002d53 0% 0% no-repeat padding-box;
     mix-blend-mode: multiply;
     opacity: 0.57;

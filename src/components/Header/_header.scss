@@ -35,6 +35,13 @@
 .nav_header {
   .nav-item {
     padding: 0 0.5rem;
+
+    @include mediaQueryMax("xxl") {
+      padding: 0;
+    }
+    @include mediaQueryMax("medium") {
+      padding: 0.4rem;
+    }
   }
 
   padding: 1rem 0px;
@@ -51,6 +58,9 @@
     letter-spacing: 0.9px;
     font-weight: 500;
     transition: clip-path 275ms ease;
+    @media only screen and (max-width: 1378px) and (min-width: 1200px) {
+      font-size: 0.94rem;
+    }
 
     &:hover {
       color: #0764b0;
@@ -59,7 +69,7 @@
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
       margin: 0;
     }
   }
@@ -105,7 +115,7 @@
     // padding-bottom: 2.2rem;
     // border-bottom: 3px solid #0764b0;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
       // padding-bottom: 0px;
       // border-bottom: 0px;
       &::before {
@@ -121,6 +131,14 @@
   &:hover {
     color: $blue-1;
     text-decoration: underline;
+  }
+}
+.modal-sign-in {
+  .modal-content {
+    @include mediaQueryMax("small") {
+      max-width: 20rem;
+      margin: auto;
+    }
   }
 }
 .modal-body-signin {
@@ -157,6 +175,10 @@
     &:hover {
       background-color: $blue-1;
       transition: $transition-0;
+    }
+
+    @include mediaQueryMax("small") {
+      padding: 0.5rem 2rem;
     }
   }
 }

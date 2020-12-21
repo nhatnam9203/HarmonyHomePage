@@ -3,19 +3,58 @@
   width: 100%;
   background: transparent url("../../../assets/images/Banner\ 2.png") 0% 0%
     no-repeat padding-box;
-  background-size: auto;
+  background-size: cover;
   background-position: center;
-  padding: 7.5rem 1.5rem;
+  position: relative;
   margin-bottom: 6.25rem;
+  @include mediaQueryMax("xxl") {
+    height: 48rem;
+  }
+  @include mediaQueryMax("extra-large") {
+    height: 40rem;
+  }
+  @include mediaQueryMax("large") {
+    height: 30rem;
+  }
+  @include mediaQueryMax("medium") {
+    height: 27rem;
+  }
+  &__content {
+    padding: 6.5rem 1.5rem;
+    @include mediaQueryMax("extra-large") {
+      padding: 3.5rem 1.5rem;
+    }
+    @include mediaQueryMax("large") {
+      padding: 2rem 1.5rem;
+    }
+  }
+  // &-img {
+  //   @include mediaQueryMax("small"){
+
+  //   }
+  // }
   &-title {
     color: $blue-0;
     letter-spacing: $title-0;
     font-size: $fs-title;
     margin-bottom: $m-6;
+    @include mediaQueryMax("large") {
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
   }
 
   &-text {
     max-width: 62.5rem;
+    @include mediaQueryMax("large") {
+      font-size: 0.9rem;
+    }
+    @include mediaQueryMax("small") {
+      display: none;
+    }
+  }
+  &-btn {
+    top: 30%;
   }
 
   &-icon {

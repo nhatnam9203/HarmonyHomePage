@@ -7,6 +7,9 @@
     letter-spacing: $title-0;
     font-size: $fs-title;
     margin-bottom: $m-6;
+    @include mediaQueryMax("large") {
+      font-size: 2rem;
+    }
   }
   &_text {
     color: $black-3;
@@ -18,12 +21,24 @@
   background-color: $white-1;
   &__wrap {
     padding: 3.75rem;
+    // @include mediaQueryMax("extra-large"){
+    //   padding: 1.5rem;
+    // }
+    @media only screen and (max-width: 1200px) and (min-width: 769px) {
+      padding: 1.5rem;
+    }
+    @include mediaQueryMax("large") {
+      padding-bottom: 0rem;
+    }
   }
   &_title {
     color: $black-2;
     letter-spacing: $title-0;
     font-size: $fs-title;
     margin-bottom: $m-6;
+    @include mediaQueryMax("large") {
+      font-size: 2rem;
+    }
   }
   &_text {
     color: $black-3;

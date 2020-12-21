@@ -32,19 +32,19 @@ export default function Header() {
       <div className="text-right align-middle top_header pt-1">
         <Container>
           <Row className="justify-content-end">
-            <Col className="pt-1 mx-1 pr-0">
+            <Col className="pt-1 mx-sm-1 pr-0 pl-0">
               <div className="singin" onClick={() => setShow(true)}>
                 <FaSignInAlt size={21} className="mr-2" />
                 <span className="text-white">Sign in</span>
               </div>
             </Col>
-            <Col xs="auto" className="pt-1 mx-1 pr-0">
+            <Col xs="auto" className="pt-1 mx-sm-1 pr-0">
               <div className="telephone">
                 <FiPhoneCall size={21} />
                 <a href="tel:800-531-3126">800-531-3126</a>
               </div>
             </Col>
-            <Col xs="auto" className="pt-1 mx-3">
+            <Col xs="auto" className="pt-1 mx-sm-2">
               FAG
             </Col>
             <Col xs="auto" className="px-0">
@@ -130,7 +130,7 @@ export default function Header() {
               </NavItem>
             </Nav>
 
-            <Nav className="align-items-sm-end">
+            <Nav className="align-items-xl-end">
               <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   exact
@@ -177,7 +177,7 @@ export default function Header() {
         onHide={() => setShow(false)}
         aria-labelledby="package-modal"
         centered
-        className=""
+        className="modal-sign-in"
       >
         <Modal.Body className="modal-body-signin p-4 h-100">
           <Modal.Title className="sigin__title text-center font-weight-bold">

@@ -26,16 +26,16 @@ export default function Package() {
           <Card className="package__item h-100">
             <Card.Img variant="top" src={Packkage1} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center align-items-center">
-              <Card.Title className="package__features--title text-left border-0">
+              <Card.Title className="package__features--title1 text-left border-0">
                 Pricing model
               </Card.Title>
               <div className="d-flex align-items-center">
-                <span className="text-center mr-3">
+                <span className="text-center mr-lg-3 package__features--span">
                   Billed
                   <br /> Monthly
                 </span>
-                <input type="checkbox" className="switch mr-3" />
-                <span className="text-center">
+                <input type="checkbox" className="switch mr-lg-3" />
+                <span className="text-center package__features--span">
                   Billed
                   <br /> Annually
                 </span>
@@ -45,7 +45,7 @@ export default function Package() {
           <Card className="package__item h-100">
             <Card.Img variant="top" src={Packkage2} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
-              <Card.Title className="package__item--title text-center">
+              <Card.Title className="package__item--title text-center font-weight-bold">
                 $49.95<span className="package__item--sub">/month</span>
               </Card.Title>
               <Link className="package__item--btn text-center" to="/sign-up">
@@ -56,7 +56,7 @@ export default function Package() {
           <Card className="package__item h-100">
             <Card.Img variant="top" src={Packkage3} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
-              <Card.Title className="package__item--title text-center">
+              <Card.Title className="package__item--title text-center font-weight-bold">
                 $89.95<span className="package__item--sub">/month</span>
               </Card.Title>
               <Link className="package__item--btn text-center" to="/sign-up">
@@ -67,7 +67,7 @@ export default function Package() {
           <Card className="package__item h-100">
             <Card.Img variant="top" src={Packkage4} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
-              <Card.Title className="package__item--title text-center">
+              <Card.Title className="package__item--title text-center font-weight-bold">
                 $94.95<span className="package__item--sub">/month</span>
               </Card.Title>
               <Link className="package__item--btn text-center" to="/sign-up">

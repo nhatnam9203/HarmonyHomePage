@@ -18,6 +18,9 @@
     letter-spacing: $title-0;
     font-size: $fs-title;
     margin-bottom: 6.25rem;
+    @include mediaQueryMax("large") {
+      font-size: 2rem;
+    }
   }
   &--text {
     letter-spacing: 0.26px;
@@ -95,12 +98,18 @@
       color: #707070;
       margin-bottom: 1.5rem;
       line-height: 2rem;
+      @include mediaQueryMax("large") {
+        letter-spacing: 0rem;
+      }
     }
     &--title2 {
-      font-size: 0.9375reem;
+      font-size: 0.9375rem;
       font-weight: 600;
       letter-spacing: 0.42px;
       color: #111111;
+      // @include mediaQueryMax("large") {
+      //   font-size: 1.2rem;
+      // }
     }
     &--ul {
     }

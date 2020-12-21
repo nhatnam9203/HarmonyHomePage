@@ -58,8 +58,10 @@ $transition-0: all 0.35s ease-in-out;
 
 //Break points
 $breakpoints: (
+  "xxl": 1378px,
   "extra-large": 1200px,
   "large": 992px,
   "medium": 767px,
   "small": 576px,
+  "xs": 375px,
 );

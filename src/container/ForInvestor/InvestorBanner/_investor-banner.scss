@@ -1,9 +1,21 @@
 .investor_banner {
   height: 30rem;
   background-image: url("../../../assets/images/investor/about us.png");
-  background-size: auto;
+  background-size: cover;
   background-position: right;
   border: 1px solid #707070;
+  @include mediaQueryMax("xxl") {
+    height: 26rem;
+  }
+  @include mediaQueryMax("extra-large") {
+    height: 20rem;
+  }
+  @include mediaQueryMax("large") {
+    height: 15rem;
+  }
+  @include mediaQueryMax("medium") {
+    height: 12rem;
+  }
   &-overlay {
     background: rgb(0, 0, 0);
     background: linear-gradient(
@@ -17,6 +29,9 @@
     font-size: $fs-title;
     position: relative;
     // margin-bottom: 1rem;
+    @include mediaQueryMax("large") {
+      font-size: 2rem;
+    }
 
     &::after {
       content: "";
