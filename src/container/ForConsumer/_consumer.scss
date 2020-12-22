@@ -7,6 +7,10 @@
     height: 12.5rem;
     margin-top: 10rem;
     margin-bottom: 1rem;
+    @include mediaQueryMax("large") {
+      width: 10.5rem;
+      height: 10.5rem;
+    }
   }
   &_title {
     color: $blue-0;
@@ -25,9 +29,17 @@
     letter-spacing: $title-0;
     font-size: $fs-title;
     margin-bottom: 1.75rem;
+    @include mediaQueryMax("extra-large") {
+      font-size: 2rem;
+    }
   }
   &_downicon {
     margin-bottom: 13.5rem;
+    .download--img {
+      @include mediaQueryMax("large") {
+        width: 46%;
+      }
+    }
   }
   .consumer__right {
     position: relative;
@@ -35,6 +47,14 @@
       position: absolute;
       right: 10%;
       top: 8%;
+      @include mediaQueryMax("extra-large") {
+        width: 90%;
+        right: 2%;
+        top: 13%;
+      }
+    }
+    @include mediaQueryMax("medium") {
+      display: none;
     }
   }
 }

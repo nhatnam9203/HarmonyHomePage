@@ -34,7 +34,7 @@ export default function Story() {
         </p>
       </div>
       <div className="vision">
-        <Row>
+        <Row className="mx-0">
           <Col xs={12} lg={6} className="w-100 p-0">
             <img
               src={visionIMG}

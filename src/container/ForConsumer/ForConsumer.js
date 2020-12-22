@@ -8,20 +8,20 @@ import App2 from "../../assets/images/For Consumer/Mask Group 186.svg";
 export default function ForConsumer() {
   return (
     <main className="consumer">
-      <Row>
+      <Row className="mx-0">
         <Col xs={12} md={6} className="consumer__right">
           <img src={consumerAppImg} alt="" className="consumer__right-img" />
         </Col>
         <Col
           xs={12}
           md={6}
-          // className="d-sm-flex d-md-block flex-sm-column justify-content-center align-items-center"
+          className="d-flex d-md-block flex-column align-items-center"
         >
           <img src={consumerApp} alt="" className="consumer_app" />
           <h2 className="consumer_title text-uppercase font-weight-bold">
             HarmonyPay
           </h2>
-          <p className="consumer_text">
+          <p className="consumer_text text-center text-md-left">
             An inclusive app for the most exclusive salon clients. Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
@@ -37,13 +37,13 @@ export default function ForConsumer() {
               href="https://apps.apple.com/us/app/harmonypay/id1478098739"
               className="mr-4"
             >
-              <img src={App1} alt="" />
+              <img src={App1} alt="" className="download--img" />
             </a>
             <a
               target="blank"
               href="https://play.google.com/store/apps/details?id=com.hpconsumer&hl=en"
             >
-              <img src={App2} alt="" />
+              <img src={App2} alt="" className="download--img" />
             </a>
           </div>
         </Col>

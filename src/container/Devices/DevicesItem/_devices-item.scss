@@ -119,8 +119,17 @@
       margin-bottom: 1.5rem;
     }
     &--color {
+      -webkit-appearance: none;
+      appearance: none;
+      border: 1px solid #111;
       width: 32px;
       height: 32px;
+      cursor: pointer;
+      &:focus {
+        width: 35px;
+        height: 35px;
+        transition: $transition-0;
+      }
     }
   }
 }

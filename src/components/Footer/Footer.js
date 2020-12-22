@@ -25,28 +25,30 @@ export default function Footer() {
             Subscribe
           </Button>
         </Form> */}
-        <Form className="top_footer-form m-auto">
-          <InputGroup className="h-100">
-            <FormControl
-              placeholder="Email"
-              aria-label="Email"
-              aria-describedby="Email"
-              className="h-100 border-white border rounded-0"
-            />
-            <InputGroup.Append>
-              <Button className="top_footer-form--button">
-                {t("Subscribe")}
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Form>
+        <div className="mx-4 mx-lg-0">
+          <Form className="top_footer-form m-auto">
+            <InputGroup className="h-100">
+              <FormControl
+                placeholder="Email"
+                aria-label="Email"
+                aria-describedby="Email"
+                className="h-100 border-white border rounded-0 col-xs-12"
+              />
+              <InputGroup.Append>
+                <Button className="top_footer-form--button">
+                  {t("Subscribe")}
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </Form>
+        </div>
       </div>
       <div className="bot_footer d-flex align-items-center">
-        <Container>
-          <Row className="justify-content-between">
+        <Container className="px-0">
+          <Row className="justify-content-between mx-0">
             <Col
               xs="auto"
-              className="d-flex justify-content-center align-items-center"
+              className="d-flex justify-content-center bot_footer-right pr-0"
             >
               <div className="footer-copyrigh">
                 {new Date().getFullYear()} &copy; {t("Copyright")} -{" "}
@@ -87,7 +89,7 @@ export default function Footer() {
                 </li>
               </ul>
             </Col>
-            <Col xs="auto">
+            <Col xs="auto" className="pl-0">
               <a
                 href="https://www.facebook.com/harmonypayapp"
                 className="text-white"

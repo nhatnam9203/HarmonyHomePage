@@ -9,8 +9,8 @@ function SignUp() {
   return (
     <div className="sign_up_container">
       <Container>
-        <Row className="sign_up_content">
-          <Col className="sign_up_left" sm={12} md={6}>
+        <Row className="sign_up_content mx-0">
+          <Col className="sign_up_left" sm={12} lg={6}>
             <h1>REQUEST INFO</h1>
             <hr />
 
@@ -29,7 +29,7 @@ function SignUp() {
             <h3>800-531-3126</h3>
           </Col>
 
-          <Col sm={12} md={6}>
+          <Col sm={12} lg={6}>
             <SignUpSuccess />
             {/* <div className="sign_up_form"> */}
             {/* <div className="p-4">

@@ -14,7 +14,7 @@ export default function Partner() {
         <h1 className="top_partner-title text-uppercase font-weight-bold">
           PARTNERSHIPs
         </h1>
-        <p className="top_partner-text">
+        <p className="top_partner-text px-4 px-lg-0">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry&apos;s standard dummy text
           ever since the
@@ -35,11 +35,11 @@ export default function Partner() {
         </Row>
       </div>
       <div className="bot_partner">
-        <Row>
-          <Col xs={12} md={6} className="p-0">
+        <Row className="mx-0">
+          <Col xs={12} lg={6} className="p-0">
             <img src={partner1} alt="" className="w-100 h-100" />
           </Col>
-          <Col xs={12} md={6} className="bot_partner-content text-white ">
+          <Col xs={12} lg={6} className="bot_partner-content text-white ">
             <h1 className="bot_partner-title text-uppercase font-weight-bold">
               Market Opportunity
             </h1>
@@ -72,11 +72,11 @@ export default function Partner() {
             </p>
           </Col>
         </Row>
-        <Row>
+        <Row className="mx-0">
           <Col
             xs={12}
-            md={6}
-            className="bot_partner-content2 py-5 order-1 order-md-0 d-flex flex-column justify-content-center"
+            lg={6}
+            className="bot_partner-content2 py-5 order-1 order-lg-0 d-flex flex-column justify-content-center"
           >
             <h1 className="bot_partner-title text-uppercase font-weight-bold">
               Full functionality on the go!
@@ -96,7 +96,7 @@ export default function Partner() {
             </p>
             {/* <button className="bot_partner-button">Contac us</button> */}
           </Col>
-          <Col xs={12} md={6} className="p-0 order-0 order-md-1">
+          <Col xs={12} lg={6} className="p-0 order-0 order-lg-1">
             <img src={partner2} alt="" className="w-100 h-100" />
           </Col>
         </Row>

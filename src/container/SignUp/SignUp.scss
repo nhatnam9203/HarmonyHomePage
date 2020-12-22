@@ -2,11 +2,15 @@
   background-image: url("../../assets/images/sign_up1.png");
   background-repeat: no-repeat;
   background-position: 100%;
+  background-size: cover;
   padding-bottom: 5em;
 
   .sign_up_content {
-    padding-top: 4.1rem;
+    padding-top: 3.75rem;
     padding-left: 8.4rem;
+    @media screen and (max-width: 1200px) {
+      padding-left: 0;
+    }
 
     .sign_up_left {
       h1 {
@@ -14,12 +18,22 @@
         font-size: 3.5rem;
         letter-spacing: 2px;
         font-weight: bold;
+        // margin-top: 3.75rem;
+        @media screen and (max-width: 576px) {
+          margin-bottom: 2.5rem;
+        }
       }
       hr {
         margin: 0px;
         border-bottom: 7px solid #00ffe5;
         width: 37%;
         margin-bottom: 13rem;
+        @media screen and (max-width: 1200px) {
+          margin-bottom: 11rem;
+        }
+        @media screen and (max-width: 992px) {
+          margin-bottom: 2rem;
+        }
       }
 
       h4 {
@@ -33,6 +47,9 @@
         font-size: 2.2rem;
         color: #0764b0;
         letter-spacing: 1px;
+        @media screen and (max-width: 576px) {
+          margin-bottom: 2rem;
+        }
       }
 
       hr:nth-last-of-type(1) {

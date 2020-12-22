@@ -19,6 +19,9 @@
       letter-spacing: $title-0;
       font-size: $fs-title;
       margin-bottom: 1rem;
+      @include mediaQueryMax("large") {
+        font-size: 2rem;
+      }
     }
     &-text {
       color: $blue-0;

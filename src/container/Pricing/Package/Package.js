@@ -22,7 +22,7 @@ export default function Package() {
         Try HarmonyPay Merchants free for 30 days, no credit card required
       </p>
       <Row className="package__container mx-auto ">
-        <Col className="d-flex justify-content-center align-items-center px-0">
+        <Col className="package__col d-flex justify-content-center align-items-center px-0">
           <Card className="package__item h-100">
             <Card.Img variant="top" src={Packkage1} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center align-items-center">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardDeck, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PayPoint from "../../../assets/images/Devices/elo paypoint calendar-1.png";
@@ -9,6 +9,9 @@ import Drawer3 from "../../../assets/images/Devices/CX-410_1_800x.png";
 import Ipad1 from "../../../assets/images/Devices/CX-300_2_800x.png";
 import Ipad2 from "../../../assets/images/Devices/SC-102G-A3_1_800x-1.png";
 import Ipad3 from "../../../assets/images/Devices/SC-102B-A4_1_800x.png";
+import StandBlack1 from "../../../assets/images/Devices/stand-black1.jpeg";
+import StandBlack2 from "../../../assets/images/Devices/stand-black2.jpeg";
+import StandBlack3 from "../../../assets/images/Devices/stand-black3.jpeg";
 import Terminal1 from "../../../assets/images/Devices/A80-for-USCA3_3000x.png";
 import Terminal2 from "../../../assets/images/Devices/a920-4-3_1800x.png";
 import Terminal3 from "../../../assets/images/Devices/423350_57691.png";
@@ -17,6 +20,10 @@ import Terminal5 from "../../../assets/images/Devices/SC-102G-A3_1_800x.png";
 import Printer from "../../../assets/images/Devices/41OssYDWNRL.png";
 
 export default function DevicesItem() {
+  const [swap, setSwap] = useState(true);
+  const [swap2, setSwap2] = useState(true);
+  const [swap3, setSwap3] = useState(true);
+
   return (
     <main>
       <div className="divices__container px-4">
@@ -26,7 +33,7 @@ export default function DevicesItem() {
               Choose the Right Hardware for business
             </h1>
 
-            <Row className="row__size">
+            <Row className="row__size mx-0">
               <Col
                 xs={12}
                 md={6}
@@ -62,7 +69,7 @@ export default function DevicesItem() {
                 </Link>
               </Col>
             </Row>
-            <Row>
+            <Row className="mx-0">
               <Col
                 xs={12}
                 md={6}
@@ -104,7 +111,7 @@ export default function DevicesItem() {
               cash drawer
             </h2>
             <hr className="divices__bot-hr" />
-            <Row className="">
+            <Row className="mx-0">
               <CardDeck>
                 <Card className="divices__bot-card">
                   <Card.Img
@@ -253,53 +260,95 @@ export default function DevicesItem() {
               Ipad stand
             </h2>
             <hr className="divices__bot-hr" />
-            <Row className="">
+            <Row className="mx-0">
               <CardDeck>
                 <Card className="divices__bot-card">
-                  <Card.Img
-                    variant="top"
-                    src={Ipad1}
-                    className="divices__bot-card--img mx-auto"
-                  />
+                  {swap ? (
+                    <Card.Img
+                      variant="top"
+                      src={Ipad1}
+                      className="divices__bot-card--img mx-auto"
+                    />
+                  ) : (
+                    <Card.Img
+                      variant="top"
+                      src={StandBlack2}
+                      className="divices__bot-card--img mx-auto"
+                    />
+                  )}
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       {'BEELTA IPAD STAND FOR 9.7"/10.2 INCH(2018)'}
                     </Card.Title>
                     <Card.Text className="divices__bot-card--text d-flex justify-content-center">
-                      <div className="divices__bot-card--color bg-info mr-4"></div>
-                      <div className="divices__bot-card--color bg-dark"></div>
+                      <button
+                        className="divices__bot-card--color mr-4"
+                        onClick={() => setSwap(true)}
+                      ></button>
+                      <button
+                        className="divices__bot-card--color bg-dark"
+                        onClick={() => setSwap(false)}
+                      ></button>
                     </Card.Text>
                   </Card.Body>
                 </Card>
                 <Card className="divices__bot-card">
-                  <Card.Img
-                    variant="top"
-                    src={Ipad2}
-                    className="divices__bot-card--img mx-auto"
-                  />
+                  {swap2 ? (
+                    <Card.Img
+                      variant="top"
+                      src={Ipad2}
+                      className="divices__bot-card--img mx-auto"
+                    />
+                  ) : (
+                    <Card.Img
+                      variant="top"
+                      src={StandBlack1}
+                      className="divices__bot-card--img mx-auto"
+                    />
+                  )}
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       {`BEELTA IPAD STAND FOR 11"/12.9 INCH(2018)`}
                     </Card.Title>
                     <Card.Text className="divices__bot-card--text d-flex justify-content-center">
-                      <div className="divices__bot-card--color bg-info mr-4"></div>
-                      <div className="divices__bot-card--color bg-dark"></div>
+                      <button
+                        className="divices__bot-card--color mr-4"
+                        onClick={() => setSwap2(true)}
+                      ></button>
+                      <button
+                        className="divices__bot-card--color bg-dark"
+                        onClick={() => setSwap2(false)}
+                      ></button>
                     </Card.Text>
                   </Card.Body>
                 </Card>
                 <Card className="divices__bot-card">
-                  <Card.Img
-                    variant="top"
-                    src={Ipad3}
-                    className="divices__bot-card--img mx-auto"
-                  />
+                  {swap3 ? (
+                    <Card.Img
+                      variant="top"
+                      src={Ipad3}
+                      className="divices__bot-card--img mx-auto"
+                    />
+                  ) : (
+                    <Card.Img
+                      variant="top"
+                      src={StandBlack3}
+                      className="divices__bot-card--img mx-auto"
+                    />
+                  )}
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       BEELTA IPAD STAND FOR PRO 12.9 INCH(2015/2017)
                     </Card.Title>
                     <Card.Text className="divices__bot-card--text d-flex justify-content-center">
-                      <div className="divices__bot-card--color bg-info mr-4"></div>
-                      <div className="divices__bot-card--color bg-dark"></div>
+                      <button
+                        className="divices__bot-card--color mr-4"
+                        onClick={() => setSwap3(true)}
+                      ></button>
+                      <button
+                        className="divices__bot-card--color bg-dark"
+                        onClick={() => setSwap3(false)}
+                      ></button>
                     </Card.Text>
                   </Card.Body>
                 </Card>
@@ -317,7 +366,7 @@ export default function DevicesItem() {
               terminal devices
             </h2>
             <hr className="divices__bot-hr" />
-            <Row className="">
+            <Row className="mx-0">
               <CardDeck>
                 <Card className="divices__bot-card">
                   <Card.Img
@@ -393,7 +442,7 @@ export default function DevicesItem() {
               Printer
             </h2>
             <hr className="divices__bot-hr" />
-            <Row className="">
+            <Row className="mx-0">
               <Col
                 xs={12}
                 md={3}

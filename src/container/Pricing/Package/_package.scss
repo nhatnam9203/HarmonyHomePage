@@ -15,11 +15,21 @@
       margin-bottom: 3rem;
     }
   }
+  .package__col {
+    @include mediaQueryMax("xs") {
+      flex-direction: column;
+    }
+  }
 
   &__container {
     max-width: 85.625rem;
     .package__item {
       border-radius: 3px 3px 0px 0px;
+      @include mediaQueryMax("xs") {
+        margin: 0 1.5rem;
+        box-shadow: 0px 3px 10px #00000029;
+        margin-bottom: 1rem;
+      }
       &--title {
         font: normal normal bold 48px/58px Roboto;
         letter-spacing: 0px;
@@ -67,8 +77,13 @@
     letter-spacing: 0px;
     color: #111111;
     padding: 1.25rem;
+    @include mediaQueryMax("xs") {
+      display: none;
+    }
     &--row {
-      // border: 1px solid #CCCCCC;
+      @include mediaQueryMax("xs") {
+        display: none;
+      }
     }
     &--title {
       border: 1px solid #cccccc;

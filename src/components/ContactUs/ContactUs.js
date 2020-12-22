@@ -5,7 +5,7 @@ import { GoMail } from "react-icons/go";
 export default function ContactUs() {
   return (
     <main className="contact m-auto">
-      <Row className="contact__container">
+      <Row className="contact__container mx-0">
         <Col xs={12} md={6} className="contact__form bg-white">
           <h1 className="contact__form-title text-uppercase font-weight-bold">
             contact us

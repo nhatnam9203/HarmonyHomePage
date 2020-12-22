@@ -17,7 +17,10 @@
     height: 30rem;
   }
   @include mediaQueryMax("medium") {
-    height: 27rem;
+    height: 28rem;
+  }
+  @include mediaQueryMax("xs") {
+    height: 21rem;
   }
   &__content {
     padding: 6.5rem 1.5rem;
