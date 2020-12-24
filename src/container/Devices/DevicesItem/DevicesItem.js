@@ -280,7 +280,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       {'BEELTA IPAD STAND FOR 9.7"/10.2 INCH(2018)'}
                     </Card.Title>
-                    <Card.Text className="divices__bot-card--text d-flex justify-content-center">
+                    <Card.Text className="divices__bot-card--text1 d-flex justify-content-center">
                       <button
                         className="divices__bot-card--color mr-4"
                         onClick={() => setSwap(true)}
@@ -310,7 +310,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       {`BEELTA IPAD STAND FOR 11"/12.9 INCH(2018)`}
                     </Card.Title>
-                    <Card.Text className="divices__bot-card--text d-flex justify-content-center">
+                    <Card.Text className="divices__bot-card--text1 d-flex justify-content-center">
                       <button
                         className="divices__bot-card--color mr-4"
                         onClick={() => setSwap2(true)}
@@ -340,7 +340,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       BEELTA IPAD STAND FOR PRO 12.9 INCH(2015/2017)
                     </Card.Title>
-                    <Card.Text className="divices__bot-card--text d-flex justify-content-center">
+                    <Card.Text className="divices__bot-card--text1 d-flex justify-content-center">
                       <button
                         className="divices__bot-card--color mr-4"
                         onClick={() => setSwap3(true)}
