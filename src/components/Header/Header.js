@@ -10,7 +10,7 @@ import {
   NavItem,
   Button,
 } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
 import { FaSignInAlt } from "react-icons/fa";
 
@@ -22,9 +22,15 @@ export default function Header() {
   const { t, i18n } = useTranslation("header");
   const [expanded, setExpanded] = useState(false);
   const [show, setShow] = useState(false);
+  const history = useHistory();
 
   const handleLanguageChange = (lang) => {
     i18n.use(initReactI18next).init({ lng: lang });
+  };
+
+  const handleSubmit = () => {
+    history.push("/account");
+    setShow(false);
   };
 
   return (
@@ -201,8 +207,8 @@ export default function Header() {
             </Form.Group>
             <div className="signin__container-btn d-flex justify-content-between align-items-center">
               <Button
-                type="submit"
                 className="submit_btn text-center font-weight-bold"
+                onClick={handleSubmit}
               >
                 Sign in
               </Button>

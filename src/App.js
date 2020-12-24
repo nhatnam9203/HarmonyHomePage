@@ -27,6 +27,7 @@ function App() {
         <main className="app-main-content">
           <Switch>
             <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/shop" component={Shop} />
             <Route path="/pricing" component={Pricing} />
