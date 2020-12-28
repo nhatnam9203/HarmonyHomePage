@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useTranslation, initReactI18next } from "react-i18next";
 import {
   Navbar,
@@ -17,21 +18,41 @@ import { FaSignInAlt } from "react-icons/fa";
 import Flags from "country-flag-icons/react/3x2";
 import Logo from "../../assets/images/logo_blue.png";
 import Modal from "react-bootstrap/Modal";
+import { ErrorMessage, useFormik } from "formik";
+import * as Yup from "yup";
+import { userLogin } from "../../actions/userActions";
 
 export default function Header() {
   const { t, i18n } = useTranslation("header");
   const [expanded, setExpanded] = useState(false);
   const [show, setShow] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleLanguageChange = (lang) => {
     i18n.use(initReactI18next).init({ lng: lang });
   };
 
-  const handleSubmit = () => {
-    history.push("/account");
-    setShow(false);
-  };
+  const loginUserSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string().required("Required"),
+  });
+  // const handleSubmit = () => {
+  //   history.push("/account");
+  //   setShow(false);
+  // };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginUserSchema,
+    onSubmit: (values) => {
+      const data = values;
+      console.log("data :>> ", data);
+      dispatch(userLogin(data));
+    },
+  });
 
   return (
     <>
@@ -192,23 +213,39 @@ export default function Header() {
           <p className="sigin__text text-center">
             If you have an account, sign in with your email address.
           </p>
-          <Form>
+          <Form onSubmit={formik.handleSubmit}>
             <Form.Group>
               <Form.Label>
-                Username <span className="form_required">*</span>
+                Email <span className="form_required">*</span>
               </Form.Label>
-              <Form.Control type="text" placeholder="Username" />
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                name="email"
+                isInvalid={formik.touched.email && formik.errors.email}
+                onChange={formik.handleChange}
+                value={formik.values.email}
+              />
+              {/* <ErrorMessage name="email" /> */}
             </Form.Group>
             <Form.Group>
               <Form.Label>
                 Password <span className="form_required">*</span>
               </Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                isInvalid={formik.touched.password && formik.errors.password}
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+              {/* <ErrorMessage name="password" /> */}
             </Form.Group>
             <div className="signin__container-btn d-flex justify-content-between align-items-center">
               <Button
+                type="submit"
                 className="submit_btn text-center font-weight-bold"
-                onClick={handleSubmit}
               >
                 Sign in
               </Button>
