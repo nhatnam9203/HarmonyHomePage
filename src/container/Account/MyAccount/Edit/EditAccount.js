@@ -1,25 +1,48 @@
-import React, { useState } from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import React from "react";
+import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import { useFormik } from "formik";
+import { useSelector, useDispatch } from "react-redux";
+import { updateMyAccountActions } from "../../../../actions/userActions";
+import { useParams } from "react-router-dom";
+import PasswordStrengthBar from "react-password-strength-bar";
+
 import * as yup from "yup";
 
 import "./EditAccount.scss";
 
-function EditAccount() {
-  const [checkboxPassword, setCheckboxPassword] = useState(false);
+function EditAccount(props) {
+  const dispatch = useDispatch();
+
+  const {
+    account: { contactInfo },
+  } = useSelector((state) => state.myAccount);
+  const { firstName, lastName, email } = contactInfo;
+
+  const { updateStatus } = useSelector((state) => state.updateMyAccount);
+
+  const isPass = useParams();
+
+  console.log("useParams", isPass);
+  // eslint-disable-next-line no-unneeded-ternary
+  const passwordTab = isPass ? true : false;
+
+  console.log("passwordTab", passwordTab);
+
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      IsChangePassword: passwordTab,
+
+      oldPassword: "",
       newPassword: "",
       confirmPassword: "",
     },
     validationSchema: userSchema,
     onSubmit: (values) => {
       console.log("values", values);
-      alert(JSON.stringify(values, null, 2));
+      dispatch(updateMyAccountActions(values));
     },
   });
 
@@ -49,6 +72,9 @@ function EditAccount() {
                   }
                   name="firstName"
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.firstName}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group>
                 <Form.Label>
@@ -62,6 +88,9 @@ function EditAccount() {
                   isInvalid={formik.touched.lastName && formik.errors.lastName}
                   name="lastName"
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.lastName}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group>
                 <Form.Label>
@@ -75,6 +104,9 @@ function EditAccount() {
                   isInvalid={formik.touched.email && formik.errors.email}
                   name="email"
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.email}
+                </Form.Control.Feedback>
               </Form.Group>
               <Form.Group
                 controlId="changePasswordCheckbox"
@@ -83,14 +115,15 @@ function EditAccount() {
                 <Form.Check
                   type="checkbox"
                   label="Change Password"
-                  onClick={() => setCheckboxPassword(!checkboxPassword)}
+                  name={`IsChangePassword`}
+                  onClick={formik.handleChange}
                 />
               </Form.Group>
             </div>
           </Col>
 
           <Col xs={6}>
-            {checkboxPassword && (
+            {formik.values?.IsChangePassword && (
               <>
                 <h3>Change Password</h3>
                 <hr />
@@ -101,30 +134,43 @@ function EditAccount() {
                       Current Password <span className="form_required">*</span>
                     </Form.Label>
                     <Form.Control
-                      type="text"
+                      type="password"
                       placeholder="Current Password"
-                      value={formik.values.password}
+                      value={formik.values?.oldPassword}
                       onChange={formik.handleChange}
                       isInvalid={
-                        formik.touched.password && formik.errors.password
+                        formik.touched?.oldPassword &&
+                        formik.errors?.oldPassword
                       }
-                      name="password"
+                      name={`passwords.oldPassword`}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors?.oldPassword}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>
                       New Password <span className="form_required">*</span>
                     </Form.Label>
+
                     <Form.Control
                       placeholder="New Password"
-                      type="text"
-                      value={formik.values.newPassword}
+                      type="password"
+                      value={formik.values?.newPassword}
                       onChange={formik.handleChange}
                       isInvalid={
-                        formik.touched.newPassword && formik.errors.newPassword
+                        formik.touched?.newPassword &&
+                        formik.errors?.newPassword
                       }
-                      name="newPassword"
+                      name={`passwords.newPassword`}
                     />
+                    <PasswordStrengthBar
+                      password={formik.values?.newPassword}
+                    />
+
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors?.newPassword}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>
@@ -132,16 +178,20 @@ function EditAccount() {
                       <span className="form_required">*</span>
                     </Form.Label>
                     <Form.Control
+                      autoComplete="new-password"
                       placeholder="Confirm Password"
                       type="password"
-                      value={formik.values.confirmPassword}
+                      value={formik.values?.confirmPassword}
                       onChange={formik.handleChange}
                       isInvalid={
-                        formik.touched.confirmPassword &&
-                        formik.errors.confirmPassword
+                        formik.touched?.confirmPassword &&
+                        formik.errors?.confirmPassword
                       }
-                      name="confirmPassword"
+                      name={`passwords.confirmPassword`}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors?.confirmPassword}
+                    </Form.Control.Feedback>
                   </Form.Group>
                 </div>
               </>
@@ -149,9 +199,22 @@ function EditAccount() {
           </Col>
 
           <Col>
-            <Button type="submit" className="submit_btn mt-3">
-              Save
-            </Button>
+            {updateStatus ? (
+              <Button type="submit" className="submit_btn mt-3" disabled>
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                Loading...
+              </Button>
+            ) : (
+              <Button type="submit" className="submit_btn mt-3">
+                Save
+              </Button>
+            )}
           </Col>
         </Row>
       </Form>
@@ -163,9 +226,22 @@ export default EditAccount;
 
 const userSchema = yup.object({
   firstName: yup.string().required("First Name is required"),
-  lastName: yup.string().required(),
-  email: yup.string().required(),
-  password: yup.string().required(),
-  newPassword: yup.string().required(),
-  confirmPassword: yup.string().required(),
+  lastName: yup.string().required("Last Name is required"),
+  email: yup.string().email().required("Email is required"),
+
+  oldPassword: yup.string().when("IsChangePassword", {
+    is: true,
+    then: yup.string().required("Current Password is required"),
+  }),
+  newPassword: yup.string().when("IsChangePassword", {
+    is: true,
+    then: yup.string().required("New Password is required"),
+  }),
+  confirmPassword: yup.string().when("IsChangePassword", {
+    is: true,
+    then: yup
+      .string()
+      .oneOf([yup.ref("newPassword"), null], "Passwords must match")
+      .required("Confirm Password is required"),
+  }),
 });

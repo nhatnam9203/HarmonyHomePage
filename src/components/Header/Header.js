@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation, initReactI18next } from "react-i18next";
 import {
   Navbar,
@@ -10,17 +10,19 @@ import {
   Form,
   NavItem,
   Button,
+  Spinner,
 } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
-import { FaSignInAlt } from "react-icons/fa";
+
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { userLogin } from "../../actions/userActions";
 
 import Flags from "country-flag-icons/react/3x2";
 import Logo from "../../assets/images/logo_blue.png";
 import Modal from "react-bootstrap/Modal";
-import { ErrorMessage, useFormik } from "formik";
-import * as Yup from "yup";
-import { userLogin } from "../../actions/userActions";
+import LoginIcon from "../../assets/images/login_icon2.png";
 
 export default function Header() {
   const { t, i18n } = useTranslation("header");
@@ -29,18 +31,23 @@ export default function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const { loading, user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user) {
+      setShow(false);
+    }
+  }, [user]);
+
   const handleLanguageChange = (lang) => {
     i18n.use(initReactI18next).init({ lng: lang });
   };
 
   const loginUserSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
   });
-  // const handleSubmit = () => {
-  //   history.push("/account");
-  //   setShow(false);
-  // };
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -49,7 +56,6 @@ export default function Header() {
     validationSchema: loginUserSchema,
     onSubmit: (values) => {
       const data = values;
-      console.log("data :>> ", data);
       dispatch(userLogin(data));
     },
   });
@@ -60,10 +66,20 @@ export default function Header() {
         <Container>
           <Row className="justify-content-end">
             <Col className="pt-1 mx-sm-1 pr-0 pl-0">
-              <div className="singin" onClick={() => setShow(true)}>
-                <FaSignInAlt size={21} className="mr-2" />
-                <span className="text-white">Sign in</span>
-              </div>
+              {user ? (
+                <div
+                  className="singin"
+                  onClick={() => history.push("/account/my-account")}
+                >
+                  <img src={LoginIcon} width={21} className="mr-2" />
+                  <span className="text-white">Manage Account</span>
+                </div>
+              ) : (
+                <div className="singin" onClick={() => setShow(true)}>
+                  <img src={LoginIcon} width={21} className="mr-2" />
+                  <span className="text-white">Sign in</span>
+                </div>
+              )}
             </Col>
             <Col xs="auto" className="pt-1 mx-sm-1 pr-0">
               <div className="telephone">
@@ -226,7 +242,9 @@ export default function Header() {
                 onChange={formik.handleChange}
                 value={formik.values.email}
               />
-              {/* <ErrorMessage name="email" /> */}
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.email}
+              </Form.Control.Feedback>
             </Form.Group>
             <Form.Group>
               <Form.Label>
@@ -240,15 +258,34 @@ export default function Header() {
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />
-              {/* <ErrorMessage name="password" /> */}
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.password}
+              </Form.Control.Feedback>
             </Form.Group>
             <div className="signin__container-btn d-flex justify-content-between align-items-center">
-              <Button
-                type="submit"
-                className="submit_btn text-center font-weight-bold"
-              >
-                Sign in
-              </Button>
+              {loading ? (
+                <Button
+                  className="submit_btn text-center font-weight-bold"
+                  disabled
+                >
+                  <Spinner
+                    as="span"
+                    animation="grow"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                  Loading...
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  className="submit_btn text-center font-weight-bold"
+                >
+                  Sign in
+                </Button>
+              )}
+
               <Link to="#" className="signin__link">
                 Forgot Password?
               </Link>
