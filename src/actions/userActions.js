@@ -17,14 +17,19 @@ export const userLogin = (dataLogin) => async (dispatch) => {
       dispatch({ type: typeUser.LOGIN_REQUEST_FAILURE, payload: data.message });
     }
   } catch (error) {
-    console.log(error.message);
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({ type: typeUser.LOGIN_REQUEST_FAILURE, payload: error.message });
   }
 };
 
+// User logout
+export const userLogoutAction = () => async (dispatch) => {
+  dispatch({ type: typeUser.USER_LOGOUT });
+  history.push("/");
+};
+
 // Get My Account
-export const getMyAccountActions = () => async (dispatch, getState) => {
+export const getMyAccountAction = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: typeUser.GET_MY_ACCOUNT_REQUEST,
@@ -47,7 +52,7 @@ export const getMyAccountActions = () => async (dispatch, getState) => {
 };
 
 // Update My Account
-export const updateMyAccountActions = (payload) => async (
+export const updateMyAccountAction = (payload) => async (
   dispatch,
   getState
 ) => {
@@ -74,6 +79,91 @@ export const updateMyAccountActions = (payload) => async (
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({
       type: typeUser.UPDATE_MY_ACCOUNT_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Newsletter Subscriptions
+export const newsletterSubscriptionAction = (enable) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: typeUser.NEWSLETTER_SUB_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.newsletterSubscription(enable, token);
+
+    dispatch({
+      type: typeUser.NEWSLETTER_SUB_SUCCESS,
+      payload: data?.message,
+    });
+
+    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+
+    history.goBack();
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.NEWSLETTER_SUB_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Get Merchant List Action
+export const getMerchantListAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: typeUser.GET_ALL_MERCHANT_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.getMerchantList(token);
+
+    dispatch({
+      type: typeUser.GET_ALL_MERCHANT_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_ALL_MERCHANT_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Get Merchant By ID
+export const getMerchantByIdAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: typeUser.GET_MERCHANT_BY_ID_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.getMerchantById(id, token);
+
+    dispatch({
+      type: typeUser.GET_MERCHANT_BY_ID_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_MERCHANT_BY_ID_FAILURE,
       payload: error.message,
     });
   }

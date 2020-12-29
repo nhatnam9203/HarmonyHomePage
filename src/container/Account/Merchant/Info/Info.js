@@ -1,275 +1,315 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
-import Collapse from "@kunukn/react-collapse";
+import { useSelector, useDispatch } from "react-redux";
+import { getMerchantByIdAction } from "../../../../actions/userActions";
 
+import Collapse from "@kunukn/react-collapse";
 import BankVoid from "../../../../assets/images/bank_void.png";
 import DriverLicenseImg from "../../../../assets/images/driver_license.jpg";
+import Loading from "../../../../util/Loading";
+import moment from "moment";
 
 import "./Info.scss";
 
 function Info() {
-  const id = useParams();
+  const { id } = useParams();
+
   const history = useHistory();
-  const [general, setGeneral] = useState(false);
-  const [bank, setBank] = useState(false);
-  const [principal, setPrincipal] = useState(false);
+  const dispatch = useDispatch();
+
+  const [general, setGeneral] = useState(true);
+  const [bank, setBank] = useState(true);
+  const [principal, setPrincipal] = useState(true);
+
+  useEffect(() => {
+    dispatch(getMerchantByIdAction(id));
+  }, [dispatch]);
+
+  const { loading, detail } = useSelector((state) => state.merchantDetail);
+
   return (
     <div className="info_content">
-      <h1>{id.id} - Mekira Nails & Spa</h1>
-
-      {/* // General */}
-      <div
-        className="app__toggle d-flex justify-content-between toggle_box mt-4"
-        onClick={() => setGeneral(!general)}
-      >
-        <div
-          className="app__toggle-text"
-          aria-label={general ? "close" : "open"}
-        >
-          <div className="d-flex text-center">
-            <span>1</span>
-            <h3>General Information</h3>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <div className="d-flex justify-content-between">
+            <h1>
+              {id} - {detail?.businessName}
+            </h1>
+            <Button className="btn btn_cancel" onClick={() => history.goBack()}>
+              Back
+            </Button>
           </div>
-        </div>
-        <div className="rotate90 mr-3">
-          <svg
-            className={`icon ${general && "icon--expanded"}`}
-            viewBox="6 0 12 24"
+
+          {/*  General */}
+          <div
+            className="app__toggle d-flex justify-content-between toggle_box mt-4"
+            onClick={() => setGeneral(!general)}
           >
-            <polygon points="8 0 6 1.8 14.4 12 6 22.2 8 24 18 12" />
-          </svg>
-        </div>
-      </div>
-      <Collapse
-        elementType="section"
-        isOpen={general}
-        aria-hidden={general ? "false" : "true"}
-        className="collapse-css-transition app__collapse collapse_info"
-        onClick={() => setGeneral(!general)}
-      >
-        {(collapseState) => (
-          <div className={"app__content " + collapseState}>
-            <p className="title">Business Information</p>
-            <hr className="" />
-            <Row>
-              <Col xs={6} md={4}>
-                <p className="info_label">Legal Business Name</p>
-                <p className="info_text">Mekira Nails & Spa</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Doing Business As (DBA)</p>
-                <p className="info_text">Mekira Nails & Spa</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Federal Tax Id</p>
-                <p className="info_text">12-3445678</p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">DBA Business Address</p>
-                <p className="info_text">
-                  875 E Klosterman Road, Tarpon Springs, Florida
-                </p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">Zip Code</p>
-                <p className="info_text">34684</p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">Business Phone Number</p>
-                <p className="info_text">+17272383454</p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">Contact Email Address</p>
-                <p className="info_text">duongwilliam@gmail.com</p>
-              </Col>
-              <Col xs={12} className="mt-4">
-                <p className="title">Representative Information</p>
+            <div
+              className="app__toggle-text"
+              aria-label={general ? "close" : "open"}
+            >
+              <div className="d-flex text-center">
+                <span>1</span>
+                <h3>General Information</h3>
+              </div>
+            </div>
+            <div className="rotate90 mr-3">
+              <svg
+                className={`icon ${general && "icon--expanded"}`}
+                viewBox="6 0 12 24"
+              >
+                <polygon points="8 0 6 1.8 14.4 12 6 22.2 8 24 18 12" />
+              </svg>
+            </div>
+          </div>
+          <Collapse
+            elementType="section"
+            isOpen={general}
+            aria-hidden={general ? "false" : "true"}
+            className="collapse-css-transition app__collapse collapse_info"
+            onClick={() => setGeneral(!general)}
+          >
+            {(collapseState) => (
+              <div className={"app__content " + collapseState}>
+                <p className="title">Business Information</p>
                 <hr className="" />
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Contact Name</p>
-                <p className="info_text">John Adams</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Position</p>
-                <p className="info_text">Owner</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Phone number</p>
-                <p className="info_text">+1727935005</p>
-              </Col>
-            </Row>
-          </div>
-        )}
-      </Collapse>
+                <Row>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">Legal Business Name</p>
+                    <p className="info_text">
+                      {detail?.general?.legalBusinessName}
+                    </p>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">Doing Business As (DBA)</p>
+                    <p className="info_text">
+                      {detail?.general?.doBusinessName}
+                    </p>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">Federal Tax Id</p>
+                    <p className="info_text">{detail?.general?.tax}</p>
+                  </Col>
+                  <Col xs={6} md={4} className="mt-4">
+                    <p className="info_label">DBA Business Address</p>
+                    <p className="info_text">
+                      {`${detail?.general?.dbaAddress?.Address}, ${detail?.general?.dbaAddress?.City}, ${detail?.general?.dbaAddress?.StateName}`}
+                    </p>
+                  </Col>
+                  <Col xs={6} md={4} className="mt-4">
+                    <p className="info_label">Zip Code</p>
+                    <p className="info_text">
+                      {detail?.general?.dbaAddress?.Zip}
+                    </p>
+                  </Col>
+                  <Col xs={6} md={4} className="mt-4">
+                    <p className="info_label">Business Phone Number</p>
+                    <p className="info_text">
+                      {detail?.general?.phoneBusiness}
+                    </p>
+                  </Col>
+                  <Col xs={6} md={4} className="mt-4">
+                    <p className="info_label">Contact Email Address</p>
+                    <p className="info_text">{detail?.general?.emailContact}</p>
+                  </Col>
+                  <Col xs={12} className="mt-4">
+                    <p className="title">Representative Information</p>
+                    <hr className="" />
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">Contact Name</p>
+                    <p className="info_text">{`${detail?.general?.firstName} ${detail?.general?.lastName}`}</p>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">Position</p>
+                    <p className="info_text">{detail?.general?.title}</p>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">Phone number</p>
+                    <p className="info_text">{detail?.general?.phoneContact}</p>
+                  </Col>
+                </Row>
+              </div>
+            )}
+          </Collapse>
 
-      {/* // Bank */}
-      <div
-        className="app__toggle d-flex justify-content-between toggle_box mt-4"
-        onClick={() => setBank(!bank)}
-      >
-        <div className="app__toggle-text" aria-label={bank ? "close" : "open"}>
-          <div className="d-flex text-center">
-            <span>2</span>
-            <h3>Bank Information</h3>
-          </div>
-        </div>
-        <div className="rotate90 mr-3">
-          <svg
-            className={`icon ${bank && "icon--expanded"}`}
-            viewBox="6 0 12 24"
+          {/* Bank */}
+          <div
+            className="app__toggle d-flex justify-content-between toggle_box mt-4"
+            onClick={() => setBank(!bank)}
           >
-            <polygon points="8 0 6 1.8 14.4 12 6 22.2 8 24 18 12" />
-          </svg>
-        </div>
-      </div>
-      <Collapse
-        elementType="section"
-        isOpen={bank}
-        aria-hidden={bank ? "false" : "true"}
-        className="collapse-css-transition app__collapse collapse_info"
-        onClick={() => setBank(!bank)}
-      >
-        {(collapseState) => (
-          <div className={"app__content " + collapseState}>
-            <Row>
-              <Col xs={6} md={4}>
-                <p className="info_label">Bank Name</p>
-                <p className="info_text">American Express</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">ABA Routing Number</p>
-                <p className="info_text">123456</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Checking Account Number (DDA)</p>
-                <p className="info_text">+1727935005</p>
-              </Col>
-              <Col auto>
-                <p className="info_label mt-4">Void Check</p>
-                <img src={BankVoid} />
-              </Col>
-            </Row>
+            <div
+              className="app__toggle-text"
+              aria-label={bank ? "close" : "open"}
+            >
+              <div className="d-flex text-center">
+                <span>2</span>
+                <h3>Bank Information</h3>
+              </div>
+            </div>
+            <div className="rotate90 mr-3">
+              <svg
+                className={`icon ${bank && "icon--expanded"}`}
+                viewBox="6 0 12 24"
+              >
+                <polygon points="8 0 6 1.8 14.4 12 6 22.2 8 24 18 12" />
+              </svg>
+            </div>
           </div>
-        )}
-      </Collapse>
-
-      {/* // Principal */}
-
-      <div
-        className="app__toggle d-flex justify-content-between toggle_box mt-4"
-        onClick={() => setPrincipal(!principal)}
-      >
-        <div
-          className="app__toggle-text"
-          aria-label={principal ? "close" : "open"}
-        >
-          <div className="d-flex text-center">
-            <span>3</span>
-            <h3>Principal Information</h3>
-          </div>
-        </div>
-        <div className="rotate90 mr-3">
-          <svg
-            className={`icon ${principal && "icon--expanded"}`}
-            viewBox="6 0 12 24"
+          <Collapse
+            elementType="section"
+            isOpen={bank}
+            aria-hidden={bank ? "false" : "true"}
+            className="collapse-css-transition app__collapse collapse_info"
+            onClick={() => setBank(!bank)}
           >
-            <polygon points="8 0 6 1.8 14.4 12 6 22.2 8 24 18 12" />
-          </svg>
-        </div>
-      </div>
-      <Collapse
-        elementType="section"
-        isOpen={principal}
-        aria-hidden={principal ? "false" : "true"}
-        className="collapse-css-transition app__collapse collapse_info"
-        onClick={() => setPrincipal(!principal)}
-      >
-        {(collapseState) => (
-          <div className={"app__content " + collapseState}>
-            <p className="title">Principal 1</p>
-            <hr />
-            <Row>
-              <Col xs={6} md={4}>
-                <p className="info_label">Full Name</p>
-                <p className="info_text">David James</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Title/Position</p>
-                <p className="info_text">Manager</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Ownership (%)</p>
-                <p className="info_text">51</p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">Home Phone</p>
-                <p className="info_text">None</p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">Mobile Phone</p>
-                <p className="info_text">847-570-8048</p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">Email</p>
-                <p className="info_text">JamesMSmit@rhyta.com</p>
-              </Col>
-              <Col xs={12} className="mt-4">
-                <p className="info_label">Date of birth</p>
-                <p className="info_text">December 6, 1949</p>
-              </Col>
-              <Col xs={6} md={4} className="mt-4">
-                <p className="info_label">Address</p>
-                <p className="info_text">
-                  4253 Thomas Street, Evanston, IL 60219
-                </p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Zip Code</p>
-                <p className="info_text">60219</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Year at This Address</p>
-                <p className="info_text">5</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Phone number</p>
-                <p className="info_text">+1727935005</p>
-              </Col>
-
-              <Col xs={6} md={4}>
-                <p className="info_label">Social Security Number (SSN)</p>
-                <p className="info_text">349-20-1234</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">Driver License Number</p>
-                <p className="info_text">B7921995</p>
-              </Col>
-              <Col xs={6} md={4}>
-                <p className="info_label">State Issued</p>
-                <p className="info_text">California (CA)</p>
-              </Col>
-              <Col xs={12}>
-                <p className="info_label">Driver License Number</p>
-                <img src={DriverLicenseImg} />
-              </Col>
-            </Row>
+            {(collapseState) => (
+              <div className={"app__content " + collapseState}>
+                <Row>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">Bank Name</p>
+                    <p className="info_text">{detail?.businessBank?.name}</p>
+                  </Col>
+                  <Col xs={6} md={4}>
+                    <p className="info_label">ABA Routing Number</p>
+                    <p className="info_text">
+                      {detail?.businessBank?.routingNumber}
+                    </p>
+                  </Col>
+                  <Col xs={12} md={4}>
+                    <p className="info_label">Checking Account Number (DDA)</p>
+                    <p className="info_text">
+                      {detail?.businessBank?.accountNumber}
+                    </p>
+                  </Col>
+                  <Col xs={12} md={4}>
+                    <p className="info_label mt-4">Void Check</p>
+                    <img
+                      className="img-fluid"
+                      src={detail?.businessBank?.imageUrl || BankVoid}
+                    />
+                  </Col>
+                </Row>
+              </div>
+            )}
+          </Collapse>
+          {/*  Principal */}
+          <div
+            className="app__toggle d-flex justify-content-between toggle_box mt-4"
+            onClick={() => setPrincipal(!principal)}
+          >
+            <div
+              className="app__toggle-text"
+              aria-label={principal ? "close" : "open"}
+            >
+              <div className="d-flex text-center">
+                <span>3</span>
+                <h3>Principal Information</h3>
+              </div>
+            </div>
+            <div className="rotate90 mr-3">
+              <svg
+                className={`icon ${principal && "icon--expanded"}`}
+                viewBox="6 0 12 24"
+              >
+                <polygon points="8 0 6 1.8 14.4 12 6 22.2 8 24 18 12" />
+              </svg>
+            </div>
           </div>
-        )}
-      </Collapse>
+          <Collapse
+            elementType="section"
+            isOpen={principal}
+            aria-hidden={principal ? "false" : "true"}
+            className="collapse-css-transition app__collapse collapse_info"
+            onClick={() => setPrincipal(!principal)}
+          >
+            {(collapseState) => (
+              <div className={"app__content " + collapseState}>
+                {detail?.principals?.map((e, index) => (
+                  <div key={e?.principalId}>
+                    <p className={index > 1 ? "mt-4 title" : "title"}>
+                      Principal {index + 1}
+                    </p>
+                    <hr />
+                    <Row>
+                      <Col xs={6} md={4}>
+                        <p className="info_label">Full Name</p>
+                        <p className="info_text">{`${e?.firstName} ${e?.lastName}`}</p>
+                      </Col>
+                      <Col xs={6} md={4}>
+                        <p className="info_label">Title/Position</p>
+                        <p className="info_text">{e?.title}</p>
+                      </Col>
+                      <Col xs={6} md={4}>
+                        <p className="info_label">Ownership (%)</p>
+                        <p className="info_text">{e?.ownerShip}</p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">Home Phone</p>
+                        <p className="info_text">{e?.homePhone}</p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">Mobile Phone</p>
+                        <p className="info_text">{e?.mobilePhone}</p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">Email</p>
+                        <p className="info_text">{e?.email}</p>
+                      </Col>
+                      <Col xs={12} className="mt-4">
+                        <p className="info_label">Date of birth</p>
+                        <p className="info_text">
+                          {moment(e?.birthDate).format("MM/DD/YYYY")}
+                        </p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">Address</p>
+                        <p className="info_text">
+                          {`${e?.address}, ${e?.city}, ${e?.state?.name}`}
+                        </p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">Zip Code</p>
+                        <p className="info_text">{e?.zip}</p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">Year at This Address</p>
+                        <p className="info_text">{e?.yearAddress}</p>
+                      </Col>
 
-      <div className="d-flex justify-content-end mt-4">
-        <Button className="btn btn_cancel" onClick={() => history.goBack()}>
-          Back
-        </Button>
-        <Button
-          className="btn btn_save"
-          onClick={() => history.push("/account/merchant/123123/edit")}
-        >
-          Edit
-        </Button>
-      </div>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">
+                          Social Security Number (SSN)
+                        </p>
+                        <p className="info_text">{e?.ssn}</p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">Driver License Number</p>
+                        <p className="info_text">{e?.driverNumber}</p>
+                      </Col>
+                      <Col xs={6} md={4} className="mt-4">
+                        <p className="info_label">State Issued</p>
+                        <p className="info_text">California (CA)</p>
+                      </Col>
+                      <Col xs={12} md={4} className="mt-4">
+                        <p className="info_label">Driver License Picture</p>
+                        <img
+                          className="img-fluid"
+                          src={e?.imageUrl || DriverLicenseImg}
+                        />
+                      </Col>
+                    </Row>
+                  </div>
+                ))}
+              </div>
+            )}
+          </Collapse>
+        </>
+      )}
     </div>
   );
 }

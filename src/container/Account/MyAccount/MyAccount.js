@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getMyAccountActions } from "../../../actions/userActions";
+import { getMyAccountAction } from "../../../actions/userActions";
 
 import Loading from "../../../util/Loading";
 
@@ -13,16 +13,11 @@ function MyAccount() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getMyAccountActions());
+    dispatch(getMyAccountAction());
   }, [dispatch]);
 
-  const {
-    loading,
-    account: { contactInfo },
-  } = useSelector((state) => state.myAccount);
-  const { firstName, lastName, email } = contactInfo;
+  const { loading, account } = useSelector((state) => state.myAccount);
 
-  console.log("loading", loading, contactInfo);
   return (
     <>
       {loading ? (
@@ -39,9 +34,9 @@ function MyAccount() {
           <Col xs={6}>
             <h3>Contact Information</h3>
             <p>
-              {firstName} {lastName}
+              {account?.firstName} {account?.lastName}
             </p>
-            <p>{email}</p>
+            <p>{account?.email}</p>
             <div className="pt-3">
               <button
                 className="text_btn edit_btn"
@@ -51,7 +46,9 @@ function MyAccount() {
               </button>
               <button
                 className="text_btn pl-3"
-                onClick={() => history.push("/account/my-account/edit/pass")}
+                onClick={() =>
+                  history.push("/account/my-account/edit/password")
+                }
               >
                 Change Password
               </button>
@@ -60,7 +57,14 @@ function MyAccount() {
           <Col xs={6}>
             <h3>Newsletter</h3>
             <p>You aren't subscribed to our newsletter.</p>
-            <button className="text_btn pt-3">Edit</button>
+            <button
+              className="text_btn pt-3"
+              onClick={() =>
+                history.push("/account/my-account/edit/newsletter")
+              }
+            >
+              Edit
+            </button>
           </Col>
         </Row>
       )}

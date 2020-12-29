@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
-import { updateMyAccountActions } from "../../../../actions/userActions";
+import { updateMyAccountAction } from "../../../../actions/userActions";
 import { useParams } from "react-router-dom";
 import PasswordStrengthBar from "react-password-strength-bar";
 
@@ -10,30 +10,24 @@ import * as yup from "yup";
 
 import "./EditAccount.scss";
 
-function EditAccount(props) {
+function EditAccount() {
   const dispatch = useDispatch();
 
-  const {
-    account: { contactInfo },
-  } = useSelector((state) => state.myAccount);
-  const { firstName, lastName, email } = contactInfo;
+  const { account } = useSelector((state) => state.myAccount);
+  const { firstName, lastName, email } = account;
 
   const { updateStatus } = useSelector((state) => state.updateMyAccount);
 
-  const isPass = useParams();
+  const { password } = useParams();
 
-  console.log("useParams", isPass);
-  // eslint-disable-next-line no-unneeded-ternary
-  const passwordTab = isPass ? true : false;
-
-  console.log("passwordTab", passwordTab);
+  const isEditPassword = password !== undefined;
 
   const formik = useFormik({
     initialValues: {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      IsChangePassword: passwordTab,
+      IsChangePassword: isEditPassword,
 
       oldPassword: "",
       newPassword: "",
@@ -41,8 +35,7 @@ function EditAccount(props) {
     },
     validationSchema: userSchema,
     onSubmit: (values) => {
-      console.log("values", values);
-      dispatch(updateMyAccountActions(values));
+      dispatch(updateMyAccountAction(values));
     },
   });
 
@@ -116,7 +109,8 @@ function EditAccount(props) {
                   type="checkbox"
                   label="Change Password"
                   name={`IsChangePassword`}
-                  onClick={formik.handleChange}
+                  onChange={formik.handleChange}
+                  checked={formik.values.IsChangePassword}
                 />
               </Form.Group>
             </div>
@@ -142,7 +136,7 @@ function EditAccount(props) {
                         formik.touched?.oldPassword &&
                         formik.errors?.oldPassword
                       }
-                      name={`passwords.oldPassword`}
+                      name="oldPassword"
                     />
                     <Form.Control.Feedback type="invalid">
                       {formik.errors?.oldPassword}
@@ -162,7 +156,7 @@ function EditAccount(props) {
                         formik.touched?.newPassword &&
                         formik.errors?.newPassword
                       }
-                      name={`passwords.newPassword`}
+                      name="newPassword"
                     />
                     <PasswordStrengthBar
                       password={formik.values?.newPassword}
@@ -187,7 +181,7 @@ function EditAccount(props) {
                         formik.touched?.confirmPassword &&
                         formik.errors?.confirmPassword
                       }
-                      name={`passwords.confirmPassword`}
+                      name="confirmPassword"
                     />
                     <Form.Control.Feedback type="invalid">
                       {formik.errors?.confirmPassword}
