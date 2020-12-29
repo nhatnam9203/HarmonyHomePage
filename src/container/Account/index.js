@@ -6,6 +6,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 
 import MyAccount from "./MyAccount/MyAccount";
 import EditAccount from "./MyAccount/Edit/EditAccount";
+import EditNewsletter from "./MyAccount/Edit/EditNewsletter";
 
 import Merchant from "./Merchant/Merchant";
 import Info from "./Merchant/Info/Info";
@@ -27,7 +28,13 @@ function Account() {
           <Switch>
             <Route
               exact
-              path="/account/my-account/edit/:isPass"
+              path="/account/my-account/edit/newsletter"
+              component={EditNewsletter}
+            />
+
+            <Route
+              exact
+              path="/account/my-account/edit/:password"
               component={EditAccount}
             />
             <Route

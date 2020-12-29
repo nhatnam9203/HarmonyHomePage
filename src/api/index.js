@@ -28,3 +28,37 @@ export const updateMyAccount = (payload, token) =>
       },
     }
   );
+
+// Newsletter Subscription
+const newsletterSubscriptionUrl = `${url}/principal/newsletter`;
+
+export const newsletterSubscription = (enable, token) =>
+  axios.put(
+    newsletterSubscriptionUrl,
+    { enable },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+// Get Merchant List
+const getMerchantListUrl = `${url}/principal/merchants`;
+
+export const getMerchantList = (token) =>
+  axios.get(getMerchantListUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+// Get Merchant By ID
+const getMerchantByIdUrl = `${url}/merchant/`;
+
+export const getMerchantById = (id, token) =>
+  axios.get(`${getMerchantByIdUrl}${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

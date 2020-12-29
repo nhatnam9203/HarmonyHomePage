@@ -1,10 +1,14 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { userLogoutAction } from "../../actions/userActions";
+import { useDispatch } from "react-redux";
 
 import "./Sidebar.scss";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Nav
@@ -42,7 +46,8 @@ function Sidebar() {
           <NavLink
             className="nav-NavLink"
             activeClassName="active_link"
-            to="/account/logout"
+            to="/logout"
+            onClick={() => dispatch(userLogoutAction())}
           >
             Log out
           </NavLink>
