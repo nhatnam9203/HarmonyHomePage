@@ -27,10 +27,15 @@ function Account() {
           <Switch>
             <Route
               exact
+              path="/account/my-account/edit/:isPass"
+              component={EditAccount}
+            />
+            <Route
+              exact
               path="/account/my-account/edit"
               component={EditAccount}
             />
-            <Route path="/account/my-account" component={MyAccount} />
+            <Route exact path="/account/my-account" component={MyAccount} />
 
             <Route
               exact

@@ -1,11 +1,67 @@
 import React from "react";
 import { Form, Row, Container, Button, Col } from "react-bootstrap";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 import SignUpSuccess from "../../components/SignUpSuccess/SignUpSuccess";
 
 import "./SignUp.scss";
 
 function SignUp() {
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const RequestSchema = Yup.object().shape({
+    fullname: Yup.string().required(),
+    email: Yup.string().email().required(),
+    phone: Yup.string()
+      .matches(phoneRegExp, "Phone number is not valid")
+      .required(),
+    businessName: Yup.string().required(),
+    suggestCallTimeInfo: Yup.object({
+      morning: Yup.boolean(),
+      afternoon: Yup.boolean(),
+      evening: Yup.boolean(),
+    }),
+  });
+  const schema = RequestSchema.test(
+    // this test is added additional to any other (build-in) tests
+    "myCustomCheckboxTest",
+    null, // we'll return error message ourself if needed
+    (obj) => {
+      // only testing the checkboxes here
+      if (
+        obj.suggestCallTimeInfo.morning ||
+        obj.suggestCallTimeInfo.afternoon ||
+        obj.suggestCallTimeInfo.evening
+      ) {
+        return true; // everything is fine
+      }
+
+      return new Yup.ValidationError(
+        "Check at least one!",
+        null,
+        "myCustomFieldName"
+      );
+    }
+  );
+
+  const formik = useFormik({
+    initialValues: {
+      fullname: "",
+      email: "",
+      phone: "",
+      businessName: "",
+      suggestCallTimeInfo: {
+        morning: false,
+        afternoon: false,
+        evening: false,
+      },
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+      const data = values;
+      console.log("data :>> ", data);
+    },
+  });
   return (
     <div className="sign_up_container">
       <Container>
@@ -29,7 +85,7 @@ function SignUp() {
             <h3>800-531-3126</h3>
           </Col>
 
-          <Col sm={12} lg={6}>
+          <Col className="sign_up_form-container" sm={12} lg={6}>
             {/* <SignUpSuccess /> */}
             <div className="sign_up_form">
               <div className="p-4">
@@ -40,33 +96,75 @@ function SignUp() {
                   system.
                 </p>
 
-                <Form>
+                <Form onSubmit={formik.handleSubmit}>
                   <Form.Group>
                     <Form.Label>
                       Full name <span className="form_required">*</span>
                     </Form.Label>
                     <Form.Control
-                      type="email"
+                      type="text"
                       placeholder="First and Last name"
+                      name="fullname"
+                      isInvalid={
+                        formik.touched.fullname && formik.errors.fullname
+                      }
+                      onChange={formik.handleChange}
+                      value={formik.values.fullname}
                     />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.fullname}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>
                       Email <span className="form_required">*</span>
                     </Form.Label>
-                    <Form.Control type="email" placeholder="Email address" />
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      placeholder="Email address"
+                      isInvalid={formik.touched.email && formik.errors.email}
+                      onChange={formik.handleChange}
+                      value={formik.values.email}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.email}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>
                       Phone number <span className="form_required">*</span>
                     </Form.Label>
-                    <Form.Control type="number" placeholder="Phone number" />
+                    <Form.Control
+                      type="number"
+                      placeholder="Phone number"
+                      name="phone"
+                      isInvalid={formik.touched.phone && formik.errors.phone}
+                      onChange={formik.handleChange}
+                      value={formik.values.phone}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.phone}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>
                       Business name <span className="form_required">*</span>
                     </Form.Label>
-                    <Form.Control type="email" placeholder="Business name" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Business name"
+                      name="businessName"
+                      isInvalid={
+                        formik.touched.businessName &&
+                        formik.errors.businessName
+                      }
+                      onChange={formik.handleChange}
+                      value={formik.values.businessName}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.businessName}
+                    </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>
@@ -74,10 +172,36 @@ function SignUp() {
                       <span className="form_required">*</span>
                     </Form.Label>
                     <div className="form_checkbox">
-                      <Form.Check type="checkbox" label="Morning" checked />
-                      <Form.Check type="checkbox" label="Afternoon" />
-                      <Form.Check type="checkbox" label="Evening" />
+                      <Form.Check
+                        type="checkbox"
+                        label="Morning"
+                        name={`suggestCallTimeInfo.morning`}
+                        // checked
+                        onChange={formik.handleChange}
+                        isInvalid={formik.errors.myCustomFieldName}
+                        // feedback={formik.errors.myCustomFieldName}
+                      />
+                      <Form.Check
+                        type="checkbox"
+                        label="Afternoon"
+                        name={`suggestCallTimeInfo.afternoon`}
+                        onChange={formik.handleChange}
+                        isInvalid={formik.errors.myCustomFieldName}
+                        // feedback={formik.errors.myCustomFieldName}
+                      />
+
+                      <Form.Check
+                        type="checkbox"
+                        label="Evening"
+                        name={`suggestCallTimeInfo.evening`}
+                        onChange={formik.handleChange}
+                        isInvalid={formik.errors.myCustomFieldName}
+                        feedback={formik.errors.myCustomFieldName}
+                      />
                     </div>
+                    {/* <Form.Control.Feedback type="invalid">
+                      {formik.errors.myCustomFieldName}
+                    </Form.Control.Feedback> */}
                   </Form.Group>
                   <Button
                     variant="primary"

@@ -10,6 +10,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { AiFillFacebook } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   const { t } = useTranslation("footer");
@@ -68,10 +69,10 @@ export default function Footer() {
                   </a>
                 </li>
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#" className="text-white">
+                  <Link to="/gift-card-terms" className="text-white">
                     {" "}
                     {t("Gift Card Terms")}{" "}
-                  </a>
+                  </Link>
                 </li>
                 <li className="list-unstyled divider_link-footer">
                   <a href="#" className="text-white">

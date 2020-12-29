@@ -3,7 +3,13 @@
   background-repeat: no-repeat;
   background-position: 100%;
   background-size: cover;
-  padding-bottom: 5em;
+  padding-bottom: 1em;
+  @media screen and (max-width: 576px) {
+    padding-bottom: 8em;
+  }
+  @media screen and (max-width: 375px) {
+    padding-bottom: 11em;
+  }
 
   .sign_up_content {
     padding-top: 3.75rem;
@@ -27,7 +33,7 @@
         margin: 0px;
         border-bottom: 7px solid #00ffe5;
         width: 37%;
-        margin-bottom: 13rem;
+        margin-bottom: 14rem;
         @media screen and (max-width: 1200px) {
           margin-bottom: 11rem;
         }
@@ -63,7 +69,9 @@
       }
     }
   }
-
+  .sign_up_form-container {
+    height: 53.4375rem;
+  }
   .sign_up_form {
     background-color: #ffffff;
     border: 1px solid #ffffff;
