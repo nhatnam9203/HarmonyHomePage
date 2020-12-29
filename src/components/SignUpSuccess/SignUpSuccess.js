@@ -3,6 +3,7 @@ import React from "react";
 import ThankYouImg from "../../assets/images/thank_you.png";
 
 import "./SignUpSuccess.scss";
+import { Link } from "react-router-dom";
 
 function SignUpSuccess() {
   return (
@@ -15,7 +16,7 @@ function SignUpSuccess() {
         <p>We'll be in touch with you soon for next steps</p>
       </div>
       <div className="sing_up_back">
-        <Button>BACK TO HOME</Button>
+        <Link to="/home">BACK TO HOME</Link>
       </div>
     </div>
   );

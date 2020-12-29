@@ -30,9 +30,9 @@ function SignUp() {
           </Col>
 
           <Col sm={12} lg={6}>
-            <SignUpSuccess />
-            {/* <div className="sign_up_form"> */}
-            {/* <div className="p-4">
+            {/* <SignUpSuccess /> */}
+            <div className="sign_up_form">
+              <div className="p-4">
                 <h4>REQUEST MORE INFORMATION</h4>
                 <p>
                   Give us a few details about yourself and {`we'll`} will
@@ -87,8 +87,8 @@ function SignUp() {
                     SUBMIT
                   </Button>
                 </Form>
-              </div> */}
-            {/* </div> */}
+              </div>
+            </div>
           </Col>
         </Row>
       </Container>

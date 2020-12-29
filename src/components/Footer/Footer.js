@@ -53,6 +53,7 @@ export default function Footer() {
               <div className="footer-copyrigh">
                 {new Date().getFullYear()} &copy; {t("Copyright")} -{" "}
                 <a
+                  target="blank"
                   href="https://www.harmonypayment.com/"
                   className="text-white"
                 >
@@ -61,19 +62,19 @@ export default function Footer() {
               </div>
               <ul className="d-flex mb-0 bot_footer-link">
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!" className="text-white">
+                  <a href="#" className="text-white">
                     {" "}
                     {t("Terms & Conditions")}{" "}
                   </a>
                 </li>
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!" className="text-white">
+                  <a href="#" className="text-white">
                     {" "}
                     {t("Gift Card Terms")}{" "}
                   </a>
                 </li>
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!" className="text-white">
+                  <a href="#" className="text-white">
                     {" "}
                     {t("Policy")}{" "}
                   </a>
@@ -82,7 +83,7 @@ export default function Footer() {
                   <a href="#!"> {t("Consumer Policy")} </a>
                 </li> */}
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#!" className="text-white">
+                  <a href="#" className="text-white">
                     {" "}
                     {t("User Guide")}{" "}
                   </a>
@@ -91,6 +92,7 @@ export default function Footer() {
             </Col>
             <Col xs="auto" className="pl-0">
               <a
+                target="blank"
                 href="https://www.facebook.com/harmonypayapp"
                 className="text-white"
               >

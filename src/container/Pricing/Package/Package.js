@@ -246,7 +246,7 @@ export default function Package() {
           centered
           className="video-modal text-center"
         >
-          {/* <Modal.Header closeButton></Modal.Header> */}
+          <Modal.Header className="border-0" closeButton></Modal.Header>
           <Modal.Body>
             <img src={FullFeatures} alt="" className="w-100" />
           </Modal.Body>

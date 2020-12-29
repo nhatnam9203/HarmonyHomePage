@@ -18,7 +18,7 @@ export default function ContactUs() {
               <Form.Label>
                 Full name <span className="form_required">*</span>
               </Form.Label>
-              <Form.Control type="email" placeholder="First and Last name" />
+              <Form.Control type="text" placeholder="First and Last name" />
             </Form.Group>
             <Form.Group>
               <Form.Label>

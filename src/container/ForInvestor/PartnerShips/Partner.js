@@ -62,13 +62,10 @@ export default function Partner() {
               Phase 2: Restaurant and Golf.
             </p>
             <p className="bot_partner-text">
-              Each nail salon will receive a terminal from us and they will
-              recoup money to give back to their cardholder. If they pay $1200
-              for POS system hardware we will provide software for free, we give
-              their customer $5 to use at their store. Within 3 months, they’ll
-              see that amount come back to them. Given each store has about 250
-              merchants, they can get $1250 in the first month. Free monthly
-              service fee for 2019. 4,000 merchants or 1 million users.
+              Same deal with Nail Salon. $1200 for POS system. Golf are
+              corporations that own several hundred golf courses around the
+              country. They will pay for hardware but they will get free
+              software.
             </p>
           </Col>
         </Row>

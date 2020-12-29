@@ -39,7 +39,8 @@
     background-color: #fff;
     padding: 2.5em;
 
-    button {
+    a {
+      border: 1px solid #0764b0;
       padding: 0.8em 3em;
       background-color: #fff;
       color: #0764b0;
@@ -51,7 +52,7 @@
       }
     }
 
-    button:hover {
+    a:hover {
       background-color: #0764b0;
       color: #fff;
     }

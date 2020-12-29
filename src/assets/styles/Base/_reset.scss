@@ -17,6 +17,18 @@ a:hover {
   text-decoration: none !important;
   color: #fff;
 }
+input {
+  box-shadow: none !important;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+button {
+  // box-shadow: none !important;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
 
 body {
   font-family: "Open Sans", sans-serif !important;
