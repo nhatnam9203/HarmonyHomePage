@@ -24,6 +24,6 @@ export const requestInfo = (dataInfo) => async (dispatch) => {
 };
 
 // Reset Form
-// export const resetFormRequest = () => async (dispatch) => {
-//   dispatch({ type: typeRequest.RESET_FORM_REQUEST });
-// };
+export const resetFormRequest = () => async (dispatch) => {
+  dispatch({ type: typeRequest.RESET_FORM_REQUEST });
+};

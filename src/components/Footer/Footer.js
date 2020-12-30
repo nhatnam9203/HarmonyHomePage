@@ -8,7 +8,6 @@ import {
   FormControl,
   InputGroup,
   Row,
-  Spinner,
 } from "react-bootstrap";
 import { AiFillFacebook } from "react-icons/ai";
 import { Link } from "react-router-dom";
@@ -24,6 +23,7 @@ export default function Footer() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(subscibeNewLetter(data));
+    setData({ ...data, email: "" });
   };
   return (
     <footer>

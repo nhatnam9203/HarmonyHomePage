@@ -1,13 +1,14 @@
 import React from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { GoMail } from "react-icons/go";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { requestContact } from "../../actions/requestContactActions";
 
 export default function ContactUs() {
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.contactUs);
 
   const contactSchema = Yup.object().shape({
     fullname: Yup.string().required(),
@@ -22,10 +23,10 @@ export default function ContactUs() {
       message: "",
     },
     validationSchema: contactSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       const data = values;
-      console.log("data :>> ", data);
       dispatch(requestContact(data));
+      resetForm({});
     },
   });
 
@@ -90,12 +91,28 @@ export default function ContactUs() {
                 {formik.errors.message}
               </Form.Control.Feedback>
             </Form.Group>
-            <Button
-              type="submit"
-              className="submit_btn text-center font-weight-bold"
-            >
-              Send message
-            </Button>
+            {loading ? (
+              <Button
+                className="submit_btn text-center font-weight-bold"
+                disabled
+              >
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                Loading...
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                className="submit_btn text-center font-weight-bold"
+              >
+                Send message
+              </Button>
+            )}
           </Form>
         </Col>
         <Col xs={12} md={6} className="contact__info">
