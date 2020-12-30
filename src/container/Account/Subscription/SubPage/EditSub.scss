@@ -14,3 +14,17 @@
     height: 1.1rem;
   }
 }
+
+.sub_info {
+  padding-top: 1rem;
+
+  td:first-child {
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: 0.26px;
+  }
+
+  .price {
+    font-weight: 600;
+  }
+}

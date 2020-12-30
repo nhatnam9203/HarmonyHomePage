@@ -1,23 +1,25 @@
 import React from "react";
-import Spinner from "react-bootstrap/Spinner";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 function Loading() {
   return (
-    <div style={styles.loader}>
-      <Spinner animation="border" variant="primary" />
-    </div>
+    <ScaleLoader
+      css={styles.override}
+      size={150}
+      height={35}
+      color={"#0764b0"}
+      loading={true}
+    />
   );
 }
 
 export default Loading;
 
 const styles = {
-  loader: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+  override: {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
     textAlign: "center",
-    minHeight: "100vh",
   },
 };

@@ -14,6 +14,7 @@ import EditInfo from "./Merchant/EditInfo/EditInfo";
 
 import Subscription from "./Subscription/Subscription";
 import EditSub from "./Subscription/SubPage/EditSub";
+import SubscriptionInfo from "./Subscription/SubPage/SubscriptionInfo";
 
 import "./Account.scss";
 
@@ -31,7 +32,6 @@ function Account() {
               path="/account/my-account/edit/newsletter"
               component={EditNewsletter}
             />
-
             <Route
               exact
               path="/account/my-account/edit/:password"
@@ -49,12 +49,22 @@ function Account() {
               path="/account/subscription"
               component={Subscription}
             />
-            <Route path="/account/subscription/billing" component={EditSub} />
+            <Route
+              exact
+              path="/account/subscription/:id"
+              component={SubscriptionInfo}
+            />
+
+            <Route
+              exact
+              path="/account/subscription/:id/billing"
+              component={EditSub}
+            />
 
             <Route exact path="/account/merchant" component={Merchant} />
             <Route path="/account/merchant/:id/edit" component={EditInfo} />
             <Route path="/account/merchant/:id" component={Info} />
-          </Switch>
+          </Switch>{" "}
         </Col>
       </Row>
     </div>
