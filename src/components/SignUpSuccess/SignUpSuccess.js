@@ -1,11 +1,13 @@
-import { Button } from "react-bootstrap";
 import React from "react";
 import ThankYouImg from "../../assets/images/thank_you.png";
 
 import "./SignUpSuccess.scss";
+// import { resetFormRequest } from "../../actions/requestInfoActions";
 import { Link } from "react-router-dom";
+// import { useDispatch } from "react-redux";
 
 function SignUpSuccess() {
+  // const dispatch = useDispatch();
   return (
     <div className="sign_up_success">
       <div className="sign_up_img">
@@ -21,5 +23,5 @@ function SignUpSuccess() {
     </div>
   );
 }
-
+// onClick={() => dispatch(resetFormRequest())}
 export default SignUpSuccess;

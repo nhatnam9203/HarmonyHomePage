@@ -46,7 +46,7 @@ function Sidebar() {
           <NavLink
             className="nav-NavLink"
             activeClassName="active_link"
-            to="/logout"
+            to="/home"
             onClick={() => dispatch(userLogoutAction())}
           >
             Log out
