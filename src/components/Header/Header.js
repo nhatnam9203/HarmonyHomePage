@@ -178,7 +178,7 @@ export default function Header() {
               </NavItem>
             </Nav>
 
-            <Nav className="align-items-xl-end">
+            <Nav className="align-items-end">
               <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   exact

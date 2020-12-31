@@ -101,6 +101,9 @@
       @include mediaQueryMax("large") {
         letter-spacing: 0rem;
       }
+      @media screen and(max-width:768px) {
+        font-size: 1.35rem;
+      }
     }
     &--title2 {
       font-size: 0.9375rem;

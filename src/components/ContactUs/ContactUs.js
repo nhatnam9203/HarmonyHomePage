@@ -5,6 +5,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { requestContact } from "../../actions/requestContactActions";
+import { FiPhoneCall } from "react-icons/fi";
+import { IoLocationSharp } from "react-icons/io5";
 
 export default function ContactUs() {
   const dispatch = useDispatch();
@@ -129,7 +131,7 @@ export default function ContactUs() {
           <div className="contact__info-item d-flex flex-column justify-content-center align-items-center">
             <span className="p-2 rounded-circle contact__info-icon mb-3">
               {" "}
-              <GoMail className=" " size={30} color="white" />
+              <FiPhoneCall className=" " size={29} color="white" />
             </span>
             <p className="contact__info-text text-center">
               800-531-3126
@@ -143,7 +145,7 @@ export default function ContactUs() {
           <div className="contact__info-item d-flex flex-column justify-content-center align-items-center pb-4">
             <span className="p-2 rounded-circle contact__info-icon mb-3">
               {" "}
-              <GoMail className=" " size={30} color="white" />
+              <IoLocationSharp className=" " size={30} color="white" />
             </span>
             <p className="contact__info-text text-center mb-4">
               Harmony Payment System LLC, 35246 US Hwy 19 N.Suite 189 Palm

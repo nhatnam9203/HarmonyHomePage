@@ -126,7 +126,7 @@ export default function DevicesItem() {
                     <Card.Text className="divices__bot-card--text">
                       <ul className="divices__bot-card--ul">
                         <li className="divices__bot-card--li">
-                          13.5 x 15.2 x 3.9 inches
+                          11.9 x 13.7 x 4 inches
                         </li>
                         <li className="divices__bot-card--li">
                           Removable Tray,5Bill/5Coin,Aluminium Alloy,RJ11/RJ12
@@ -278,7 +278,7 @@ export default function DevicesItem() {
                   )}
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
-                      {'BEELTA IPAD STAND FOR 9.7"/10.2 INCH(2018)'}
+                      {'BEELTA IPAD STAND FOR 9.7"/10.2 INCH'}
                     </Card.Title>
                     <Card.Text className="divices__bot-card--text1 d-flex justify-content-center">
                       <button

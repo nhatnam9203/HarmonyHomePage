@@ -7,6 +7,12 @@
   outline: none !important;
   scroll-behavior: smooth;
 }
+.rocketchat-widget {
+  bottom: 6rem !important;
+  @media screen and(max-width:480px) {
+    bottom: 0 !important;
+  }
+}
 
 a {
   // color: #fff;

@@ -101,10 +101,10 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li className="list-unstyled divider_link-footer">
-                  <a href="#" className="text-white">
+                  <Link to="/policy" className="text-white">
                     {" "}
                     {t("Policy")}{" "}
-                  </a>
+                  </Link>
                 </li>
                 {/* <li className="list-unstyled divider_link-footer">
                   <a href="#!"> {t("Consumer Policy")} </a>

@@ -1,4 +1,4 @@
-.GiftCardTerms {
+.policy {
   padding: 3.75rem 1.5rem;
   &__container {
     max-width: 85.625rem;
@@ -16,6 +16,13 @@
     @media screen and(max-width:700px) {
       font-size: 2rem;
     }
+  }
+  &__update {
+    font-weight: bold;
+    letter-spacing: 0.26px;
+    color: #1a1a1a;
+    text-align: left;
+    margin-bottom: 2rem;
   }
   &__subtitle {
     font-size: 1.125rem;

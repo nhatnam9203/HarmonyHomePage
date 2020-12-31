@@ -24,6 +24,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/main.scss";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Policy from "./components/Policy/Policy";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
             <Route path="/investor" component={ForInvestor} />
             <Route path="/consumer" component={ForConsumer} />
             <Route path="/gift-card-terms" component={GiftCardTerms} />
+            <Route path="/policy" component={Policy} />
             <PrivateRoute path="/account" component={Account} />
           </Switch>
         </main>

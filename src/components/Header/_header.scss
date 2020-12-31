@@ -73,6 +73,9 @@
       padding-bottom: 1.9rem;
       border-bottom: 3px solid #0764b0;
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      @media screen and (max-width: 1200px) {
+        padding-bottom: 0.4rem;
+      }
     }
 
     @media (max-width: 1200px) {
@@ -125,7 +128,7 @@
       // padding-bottom: 0px;
       // border-bottom: 0px;
       &::before {
-        bottom: 0;
+        bottom: -0.5rem;
         height: 0px !important;
         border-bottom: 0px;
       }
@@ -200,4 +203,7 @@
       padding: 0.5rem 1.8rem;
     }
   }
+}
+.navbar-collapse {
+  display: flex;
 }
