@@ -263,3 +263,57 @@ export const getPackageReducer = (
       return state;
   }
 };
+
+export const getRefundMoneyReducer = (
+  state = { loading: false, refundAmount: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.GET_REFUND_MONEY_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.GET_REFUND_MONEY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        refundAmount: payload,
+      };
+    case types.GET_REFUND_MONEY_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const updateSubscriptionReducer = (
+  state = { loading: false, message: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.UPDATE_SUBSCRIPTION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.UPDATE_SUBSCRIPTION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case types.UPDATE_SUBSCRIPTION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+};

@@ -6,7 +6,7 @@ import {
   cancelSubscriptionByIdAction,
 } from "../../../../actions/userActions";
 import { Button, Table } from "react-bootstrap";
-import { useTransition, animated } from "react-spring";
+import { motion, AnimatePresence } from "framer-motion";
 
 import Loading from "../../../../util/Loading";
 import moment from "moment";
@@ -30,28 +30,22 @@ function SubscriptionInfo() {
 
   useEffect(() => {
     dispatch(getMySubscriptionByIdAction(id));
+
+    if (message) {
+      setPopUp(false);
+    }
   }, [dispatch, message]);
 
   const handleCancelSubscription = () => {
     dispatch(cancelSubscriptionByIdAction(id));
   };
 
-  const transitions = useTransition(loading, null, {
-    from: {
-      position: "absolute",
-      opacity: 0,
-      width: "100%",
-    },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
-
   const handleBilling = () => {
     history.push("/account/subscription/billing");
   };
 
-  const handleBillingHistory = subscription?.history?.map((i) => (
-    <tr key={i?.paymentTransactionId}>
+  const handleBillingHistory = subscription?.history?.map((i, idx) => (
+    <tr key={idx}>
       <td style={{ fontWeight: "normal" }}>{i?.paymentTransactionId}</td>
       <td>{moment(i?.createDate).format("MM/DD/YYYY")}</td>
       <td className="price">{i?.packageName}</td>
@@ -70,22 +64,22 @@ function SubscriptionInfo() {
         </Button>
       </div>
       <div>
-        {transitions.map(({ item, key, props }) =>
-          item ? (
-            <animated.div style={props} key={key}>
+        <AnimatePresence exitBeforeEnter>
+          {loading ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+            >
               <Loading />
-            </animated.div>
+            </motion.div>
           ) : (
-            <animated.div
-              style={{
-                from: {
-                  opacity: 0,
-                  width: "100%",
-                },
-                enter: { opacity: 1 },
-                leave: { opacity: 0 },
-              }}
-              key={key}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: "easeIn" }}
             >
               <Table className="mt-4">
                 <tbody>
@@ -112,7 +106,14 @@ function SubscriptionInfo() {
                           </button>
                         </>
                       ) : (
-                        <button className="text_btn" onClick={handleBilling}>
+                        <button
+                          className="text_btn"
+                          onClick={() =>
+                            history.push(
+                              `/account/subscription/${subscription?.subscriptionId}/billing`
+                            )
+                          }
+                        >
                           Renew
                         </button>
                       )}
@@ -148,9 +149,9 @@ function SubscriptionInfo() {
                 </thead>
                 <tbody>{handleBillingHistory}</tbody>
               </Table>
-            </animated.div>
-          )
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <Popup
         show={popUp}

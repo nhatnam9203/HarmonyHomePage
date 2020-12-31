@@ -14,7 +14,6 @@ import {
 } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
-import { useBeforeunload } from "react-beforeunload";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userLogin } from "../../actions/userActions";

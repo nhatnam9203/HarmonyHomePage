@@ -90,12 +90,12 @@ export const cancelSubscriptionById = (id, token) =>
   });
 
 // Update Subscription By Id
-export const updateSubscriptionById = (data, token) => {
-  const { id } = data;
+export const updateSubscriptionById = (value, token) => {
+  const { id } = value;
 
-  axios.put(
+  return axios.put(
     `${getMySubscriptionUrl}/${id}`,
-    { ...data },
+    { ...value },
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -108,6 +108,14 @@ export const updateSubscriptionById = (data, token) => {
 const getPackageUrl = `${url}/package`;
 export const getPackage = (token) =>
   axios.get(getPackageUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+// Get Refund Money
+export const getRefundMoney = (id, token) =>
+  axios.get(`${getMySubscriptionUrl}/refundAmount/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

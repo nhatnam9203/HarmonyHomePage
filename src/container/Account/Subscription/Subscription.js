@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getMySubscriptionAction } from "../../../actions/userActions";
-import { useTransition, animated } from "react-spring";
+import {
+  getMySubscriptionAction,
+  cancelSubscriptionByIdAction,
+} from "../../../actions/userActions";
+import { motion, AnimatePresence } from "framer-motion";
 
 import moment from "moment";
 import Loading from "../../../util/Loading";
 import Table from "react-bootstrap/Table";
+import Popup from "../../../components/Popup/Popup";
 
 import "./Subscription.scss";
 
@@ -18,25 +22,29 @@ function Subscription() {
     (state) => state.mySubscription
   );
 
-  console.log("subscriptionList", subscriptionList);
+  const { loading: cancelStatus, message } = useSelector(
+    (state) => state.cancelSubscription
+  );
+
+  const [popUp, setPopUp] = useState(false);
+  const [cancelSubId, setCancelSubId] = useState("");
+
+  const handleOpenPopup = (id) => {
+    setPopUp(true);
+    setCancelSubId(id);
+  };
+
+  const handleCancelSubscription = () => {
+    dispatch(cancelSubscriptionByIdAction(cancelSubId));
+  };
 
   useEffect(() => {
     dispatch(getMySubscriptionAction());
-  }, [dispatch]);
 
-  const handleBilling = () => {
-    history.push("/account/subscription/billing");
-  };
-
-  const transitions = useTransition(loading, null, {
-    from: {
-      position: "absolute",
-      opacity: 0,
-      width: "100%",
-    },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
+    if (message) {
+      setPopUp(false);
+    }
+  }, [dispatch, message]);
 
   const renderSubscriptionList = subscriptionList?.map((i, idx) => (
     <tr key={idx}>
@@ -61,10 +69,20 @@ function Subscription() {
       <td>
         {Number(i?.isDisabled) === 0 ? (
           <>
-            <button className="text_btn" onClick={handleBilling}>
+            <button
+              className="text_btn"
+              onClick={() =>
+                history.push(
+                  `/account/subscription/${i?.subscriptionId}/billing`
+                )
+              }
+            >
               Edit
             </button>
-            <button className="text_btn  cancel_btn" onClick={handleBilling}>
+            <button
+              className="text_btn  cancel_btn"
+              onClick={() => handleOpenPopup(i?.subscriptionId)}
+            >
               Cancel
             </button>
           </>
@@ -85,23 +103,22 @@ function Subscription() {
   return (
     <div className="sub">
       <h1>My Subscriptions</h1>
-
-      {transitions.map(({ item, key, props }) =>
-        item ? (
-          <animated.div style={props} key={key}>
+      <AnimatePresence exitBeforeEnter>
+        {loading ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+          >
             <Loading />
-          </animated.div>
+          </motion.div>
         ) : (
-          <animated.div
-            style={{
-              from: {
-                opacity: 0,
-                width: "100%",
-              },
-              enter: { opacity: 1 },
-              leave: { opacity: 0 },
-            }}
-            key={key}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeIn" }}
           >
             <Table className="mt-4">
               <thead>
@@ -117,9 +134,15 @@ function Subscription() {
               </thead>
               <tbody>{renderSubscriptionList}</tbody>
             </Table>
-          </animated.div>
-        )
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <Popup
+        show={popUp}
+        isLoading={cancelStatus}
+        handleCancel={handleCancelSubscription}
+        handleClose={() => setPopUp(false)}
+      />
     </div>
   );
 }

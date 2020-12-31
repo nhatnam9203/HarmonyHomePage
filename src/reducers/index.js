@@ -9,6 +9,8 @@ import {
   mySubscriptionReducer,
   cancelSubscriptionReducer,
   getPackageReducer,
+  getRefundMoneyReducer,
+  updateSubscriptionReducer,
 } from "./userReducer";
 import { notifyReducer } from "./notifyReducer";
 
@@ -23,6 +25,8 @@ export default combineReducers({
   mySubscription: mySubscriptionReducer,
   cancelSubscription: cancelSubscriptionReducer,
   package: getPackageReducer,
+  refund: getRefundMoneyReducer,
+  updateSubscription: updateSubscriptionReducer,
   // Notify
   notify: notifyReducer,
 });
