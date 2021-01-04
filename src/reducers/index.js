@@ -28,6 +28,8 @@ export default combineReducers({
   mySubscription: mySubscriptionReducer,
   cancelSubscription: cancelSubscriptionReducer,
   package: getPackageReducer,
+  refund: getRefundMoneyReducer,
+  updateSubscription: updateSubscriptionReducer,
   // Request
   request: requestInfoReducer,
   // Notify

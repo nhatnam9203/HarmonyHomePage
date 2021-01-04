@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Row, Container, Button, Col, Spinner } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useMediaQuery } from "react-responsive";
 
 import SignUpSuccess from "../../components/SignUpSuccess/SignUpSuccess";
 
@@ -13,14 +14,17 @@ function SignUp() {
   const dispatch = useDispatch();
   const { loading, info } = useSelector((state) => state.request);
 
+  const isMobile = useMediaQuery({ query: "(max-width: 576px)" });
+  const isNotMobile = useMediaQuery({ query: "(min-width: 576px)" });
+
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const RequestSchema = Yup.object().shape({
-    fullname: Yup.string().required(),
-    email: Yup.string().email().required(),
+    fullname: Yup.string().required("Fullname is a required field"),
+    email: Yup.string().email().required("Email is a required field"),
     phone: Yup.string()
       .matches(phoneRegExp, "Phone number is not valid")
-      .required(),
-    businessName: Yup.string().required(),
+      .required("Phone is a required field"),
+    businessName: Yup.string().required("BusinessName is a required field"),
     suggestCallTimeInfo: Yup.object({
       morning: Yup.boolean(),
       afternoon: Yup.boolean(),
@@ -145,7 +149,7 @@ function SignUp() {
                       </Form.Label>
                       <Form.Control
                         // defaultValue="+"
-                        type="number"
+                        type="text"
                         placeholder="Phone number"
                         name="phone"
                         isInvalid={formik.touched.phone && formik.errors.phone}
@@ -181,36 +185,51 @@ function SignUp() {
                         <span className="form_required">*</span>
                       </Form.Label>
                       <div className="form_checkbox">
-                        <Form.Check
-                          type="checkbox"
-                          label="Morning"
-                          name={`suggestCallTimeInfo.morning`}
-                          // checked
-                          onChange={formik.handleChange}
-                          isInvalid={formik.errors.myCustomFieldName}
-                          // feedback={formik.errors.myCustomFieldName}
-                        />
+                        {isNotMobile ? (
+                          <Form.Check
+                            type="checkbox"
+                            label="Morning"
+                            name={`suggestCallTimeInfo.morning`}
+                            // checked
+                            onChange={formik.handleChange}
+                            isInvalid={formik.errors.myCustomFieldName}
+                            feedback={formik.errors.myCustomFieldName}
+                          />
+                        ) : (
+                          <Form.Check
+                            type="checkbox"
+                            label="Morning"
+                            name={`suggestCallTimeInfo.morning`}
+                            onChange={formik.handleChange}
+                            isInvalid={formik.errors.myCustomFieldName}
+                          />
+                        )}
                         <Form.Check
                           type="checkbox"
                           label="Afternoon"
                           name={`suggestCallTimeInfo.afternoon`}
                           onChange={formik.handleChange}
                           isInvalid={formik.errors.myCustomFieldName}
-                          // feedback={formik.errors.myCustomFieldName}
                         />
-
-                        <Form.Check
-                          type="checkbox"
-                          label="Evening"
-                          name={`suggestCallTimeInfo.evening`}
-                          onChange={formik.handleChange}
-                          isInvalid={formik.errors.myCustomFieldName}
-                          feedback={formik.errors.myCustomFieldName}
-                        />
+                        {isMobile ? (
+                          <Form.Check
+                            type="checkbox"
+                            label="Evening"
+                            name={`suggestCallTimeInfo.evening`}
+                            onChange={formik.handleChange}
+                            isInvalid={formik.errors.myCustomFieldName}
+                            feedback={formik.errors.myCustomFieldName}
+                          />
+                        ) : (
+                          <Form.Check
+                            type="checkbox"
+                            label="Evening"
+                            name={`suggestCallTimeInfo.evening`}
+                            onChange={formik.handleChange}
+                            isInvalid={formik.errors.myCustomFieldName}
+                          />
+                        )}
                       </div>
-                      {/* <Form.Control.Feedback type="invalid">
-                      {formik.errors.myCustomFieldName}
-                    </Form.Control.Feedback> */}
                     </Form.Group>
                     {loading ? (
                       <Button

@@ -25,11 +25,13 @@ import LoginIcon from "../../assets/images/login_icon2.png";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userLogin } from "../../actions/userActions";
+import ForgotPassword from "../ForgotPassWord/ForgotPassword";
 
 export default function Header() {
   const { t, i18n } = useTranslation("header");
   const [expanded, setExpanded] = useState(false);
   const [show, setShow] = useState(false);
+  const [showForgot, setShowForgot] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -47,8 +49,8 @@ export default function Header() {
   };
 
   const loginUserSchema = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().required(),
+    email: Yup.string().email().required("Email is a required field"),
+    password: Yup.string().required("Password is a required field"),
   });
 
   const formik = useFormik({
@@ -220,100 +222,217 @@ export default function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Modal
-        show={show}
-        onHide={() => setShow(false)}
-        aria-labelledby="package-modal"
-        centered
-        className="modal-sign-in"
-      >
-        <Modal.Header className="border-0 pb-0" closeButton>
-          <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
-            <Modal.Title className="sigin__title text-center font-weight-bold mb-2">
-              Sign In
-            </Modal.Title>
-            <p className="sigin__text text-center mb-0">
-              If you have an account, sign in with your email address.
-            </p>
-          </div>
-        </Modal.Header>
-        <Modal.Body className="modal-body-signin p-4 h-100 border-0">
-          <Form onSubmit={formik.handleSubmit}>
-            <Form.Group>
-              <Form.Label>
-                Email <span className="form_required">*</span>
-              </Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Email"
-                name="email"
-                isInvalid={formik.touched.email && formik.errors.email}
-                onChange={formik.handleChange}
-                value={formik.values.email}
-              />
-              <Form.Control.Feedback type="invalid">
-                {formik.errors.email}
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>
-                Password <span className="form_required">*</span>
-              </Form.Label>
-              <InputGroup>
-                <FormControl
-                  // className="border-right-0"
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                  name="password"
-                  isInvalid={formik.touched.password && formik.errors.password}
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                />
-                <InputGroup.Append className="form__show-password--container">
-                  <button
-                    type="button"
-                    className="form__show-password"
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? <BiHide size={25} /> : <BiShow size={25} />}
-                  </button>
-                </InputGroup.Append>
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.password}
-                </Form.Control.Feedback>
-              </InputGroup>
-            </Form.Group>
-            <div className="signin__container-btn d-flex justify-content-between align-items-center">
-              {loading ? (
-                <Button
-                  className="submit_btn text-center font-weight-bold"
-                  disabled
-                >
-                  <Spinner
-                    as="span"
-                    animation="grow"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                  />
-                  Loading...
-                </Button>
-              ) : (
-                <Button
-                  type="submit"
-                  className="submit_btn text-center font-weight-bold"
-                >
-                  Sign in
-                </Button>
-              )}
-
-              <Link to="#" className="signin__link">
-                Forgot Password?
-              </Link>
+      {showForgot ? (
+        <Modal
+          show={show}
+          onHide={() => setShow(false)}
+          aria-labelledby="package-modal"
+          centered
+          className="modal-sign-in d-none"
+        >
+          <Modal.Header className="border-0 pb-0" closeButton>
+            <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
+              <Modal.Title className="sigin__title text-center font-weight-bold mb-2">
+                Sign In
+              </Modal.Title>
+              <p className="sigin__text text-center mb-0">
+                If you have an account, sign in with your email address.
+              </p>
             </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
+          </Modal.Header>
+          <Modal.Body className="modal-body-signin p-4 h-100 border-0">
+            <Form onSubmit={formik.handleSubmit}>
+              <Form.Group>
+                <Form.Label>
+                  Email <span className="form_required">*</span>
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  isInvalid={formik.touched.email && formik.errors.email}
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.email}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>
+                  Password <span className="form_required">*</span>
+                </Form.Label>
+                <InputGroup>
+                  <FormControl
+                    // className="border-right-0"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    name="password"
+                    isInvalid={
+                      formik.touched.password && formik.errors.password
+                    }
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                  />
+                  <InputGroup.Append className="form__show-password--container">
+                    <button
+                      type="button"
+                      className="form__show-password"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <BiHide size={25} />
+                      ) : (
+                        <BiShow size={25} />
+                      )}
+                    </button>
+                  </InputGroup.Append>
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.password}
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </Form.Group>
+              <div className="signin__container-btn d-flex justify-content-between align-items-center">
+                {loading ? (
+                  <Button className="submit_btn text-center" disabled>
+                    <Spinner
+                      as="span"
+                      animation="grow"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    <span className="loadingBtn">Loading...</span>
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    className="submit_btn text-center font-weight-bold"
+                  >
+                    Sign in
+                  </Button>
+                )}
+
+                <Link
+                  onClick={() => setShowForgot(true)}
+                  className="signin__link"
+                >
+                  Forgot Password?
+                </Link>
+                <ForgotPassword
+                  showForgot={showForgot}
+                  setShowForgot={setShowForgot}
+                />
+              </div>
+            </Form>
+          </Modal.Body>
+        </Modal>
+      ) : (
+        <Modal
+          show={show}
+          onHide={() => setShow(false)}
+          aria-labelledby="package-modal"
+          centered
+          className="modal-sign-in"
+        >
+          <Modal.Header className="border-0 pb-0" closeButton>
+            <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
+              <Modal.Title className="sigin__title text-center font-weight-bold mb-2">
+                Sign In
+              </Modal.Title>
+              <p className="sigin__text text-center mb-0">
+                If you have an account, sign in with your email address.
+              </p>
+            </div>
+          </Modal.Header>
+          <Modal.Body className="modal-body-signin p-4 h-100 border-0">
+            <Form onSubmit={formik.handleSubmit}>
+              <Form.Group>
+                <Form.Label>
+                  Email <span className="form_required">*</span>
+                </Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  isInvalid={formik.touched.email && formik.errors.email}
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.email}
+                </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>
+                  Password <span className="form_required">*</span>
+                </Form.Label>
+                <InputGroup>
+                  <FormControl
+                    // className="border-right-0"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    name="password"
+                    isInvalid={
+                      formik.touched.password && formik.errors.password
+                    }
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                  />
+                  <InputGroup.Append className="form__show-password--container">
+                    <button
+                      type="button"
+                      className="form__show-password"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <BiHide size={25} />
+                      ) : (
+                        <BiShow size={25} />
+                      )}
+                    </button>
+                  </InputGroup.Append>
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.password}
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </Form.Group>
+              <div className="signin__container-btn d-flex justify-content-between align-items-center">
+                {loading ? (
+                  <Button className="submit_btn text-center" disabled>
+                    <Spinner
+                      as="span"
+                      animation="grow"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />
+                    <span className="loadingBtn">Loading...</span>
+                  </Button>
+                ) : (
+                  <Button
+                    type="submit"
+                    className="submit_btn text-center font-weight-bold"
+                  >
+                    Sign in
+                  </Button>
+                )}
+
+                <Link
+                  onClick={() => setShowForgot(true)}
+                  className="signin__link"
+                >
+                  Forgot Password?
+                </Link>
+                <ForgotPassword
+                  showForgot={showForgot}
+                  setShowForgot={setShowForgot}
+                />
+              </div>
+            </Form>
+          </Modal.Body>
+        </Modal>
+      )}
     </>
   );
 }

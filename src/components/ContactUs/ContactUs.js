@@ -13,9 +13,9 @@ export default function ContactUs() {
   const { loading } = useSelector((state) => state.contactUs);
 
   const contactSchema = Yup.object().shape({
-    fullname: Yup.string().required(),
-    email: Yup.string().email().required(),
-    message: Yup.string().required(),
+    fullname: Yup.string().required("Fullname is a required field"),
+    email: Yup.string().email().required("Email is a required field"),
+    message: Yup.string().required("Message is a required field"),
   });
 
   const formik = useFormik({
@@ -83,7 +83,7 @@ export default function ContactUs() {
                 as="textarea"
                 rows={3}
                 placeholder="Message"
-                className="mb-4"
+                // className="mb-4"
                 name="message"
                 isInvalid={formik.touched.message && formik.errors.message}
                 onChange={formik.handleChange}

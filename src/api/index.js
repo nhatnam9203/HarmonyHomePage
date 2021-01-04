@@ -64,22 +64,6 @@ export const getMerchantById = (id, token) =>
     },
   });
 
-// Request Info
-const requestInfoUrl = `${url}/requestinformation`;
-
-export const requestInfo = (dataInfo) => axios.post(requestInfoUrl, dataInfo);
-
-// Subscribe newsletter
-const subscribeURL = `${url}/newsletter`;
-
-export const subscribe = (payload) => axios.post(subscribeURL, payload);
-
-// RequestContact
-const requestContactURL = `${url}/requestcontact`;
-
-export const requestContact = (payload) =>
-  axios.post(requestContactURL, payload);
-
 // Get My Subscription
 const getMySubscriptionUrl = `${url}/subscription`;
 
@@ -137,3 +121,18 @@ export const getRefundMoney = (id, token) =>
       Authorization: `Bearer ${token}`,
     },
   });
+// Request Info
+const requestInfoUrl = `${url}/requestinformation`;
+
+export const requestInfo = (dataInfo) => axios.post(requestInfoUrl, dataInfo);
+
+// Subscribe newsletter
+const subscribeURL = `${url}/newsletter`;
+
+export const subscribe = (payload) => axios.post(subscribeURL, payload);
+
+// RequestContact
+const requestContactURL = `${url}/requestcontact`;
+
+export const requestContact = (payload) =>
+  axios.post(requestContactURL, payload);
