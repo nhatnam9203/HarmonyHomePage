@@ -9,6 +9,7 @@ import EditAccount from "./MyAccount/Edit/EditAccount";
 import EditNewsletter from "./MyAccount/Edit/EditNewsletter";
 
 import Merchant from "./Merchant/Merchant";
+
 import Info from "./Merchant/Info/Info";
 import EditInfo from "./Merchant/EditInfo/EditInfo";
 

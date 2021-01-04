@@ -280,4 +280,61 @@ export const getPackageAction = () => async (dispatch, getState) => {
   }
 };
 
-// Edit & Renew Áction
+// Get Refund Money Action
+export const getRefundMoneyAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: typeUser.GET_REFUND_MONEY_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.getRefundMoney(id, token);
+
+    dispatch({
+      type: typeUser.GET_REFUND_MONEY_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_REFUND_MONEY_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Update Subscription Action
+export const updateSubscriptionAction = (value) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: typeUser.UPDATE_SUBSCRIPTION_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.updateSubscriptionById(value, token);
+
+    dispatch({
+      type: typeUser.UPDATE_SUBSCRIPTION_SUCCESS,
+      payload: data?.data,
+    });
+
+    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+
+    history.goBack();
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.UPDATE_SUBSCRIPTION_FAILURE,
+      payload: error.message,
+    });
+  }
+};
