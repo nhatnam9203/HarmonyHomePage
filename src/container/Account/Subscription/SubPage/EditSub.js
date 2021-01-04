@@ -185,10 +185,10 @@ function EditSub() {
               <th className="p-3 ">
                 <p className="th_name">Packages</p>
               </th>
-              <th className="p-3 text-center-md">
+              <th className="p-3 text-md-center">
                 <p>Billed Monthly</p>
               </th>
-              <th className="p-3 text-center-md">
+              <th className="p-3 text-md-center">
                 <p>Billed Annually</p>
               </th>
             </tr>
