@@ -238,7 +238,7 @@ export const cancelSubscriptionReducer = (
 };
 
 export const getPackageReducer = (
-  state = { loading: false, packageList: "" },
+  state = { loading: false, packageList: [] },
   { type, payload }
 ) => {
   switch (type) {
