@@ -18,6 +18,8 @@ import {
 import { RiErrorWarningLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 
+import Loading from "../../../../util/Loading";
+
 import "./EditSub.scss";
 
 function EditSub() {
@@ -174,22 +176,26 @@ function EditSub() {
   return (
     <div className="sub_edit">
       <h1>Change Subscription</h1>
-      <Table responsive className="mt-4">
-        <thead>
-          <tr>
-            <th className="p-3 ">
-              <p className="th_name">Packages</p>
-            </th>
-            <th className="p-3 ">
-              <p>Billed Monthly</p>
-            </th>
-            <th className="p-3 ">
-              <p>Billed Annually</p>
-            </th>
-          </tr>
-        </thead>
-        <tbody>{renderPackage}</tbody>
-      </Table>
+      {loading && loadingSub ? (
+        <Loading />
+      ) : (
+        <Table responsive className="mt-4">
+          <thead>
+            <tr>
+              <th className="p-3 ">
+                <p className="th_name">Packages</p>
+              </th>
+              <th className="p-3 text-center-md">
+                <p>Billed Monthly</p>
+              </th>
+              <th className="p-3 text-center-md">
+                <p>Billed Annually</p>
+              </th>
+            </tr>
+          </thead>
+          <tbody>{renderPackage}</tbody>
+        </Table>
+      )}
 
       {defaultPackageId !== subscription?.packageId && (
         <motion.div

@@ -40,10 +40,6 @@ function SubscriptionInfo() {
     dispatch(cancelSubscriptionByIdAction(id));
   };
 
-  const handleBilling = () => {
-    history.push("/account/subscription/billing");
-  };
-
   const handleBillingHistory = subscription?.history?.map((i, idx) => (
     <tr key={idx}>
       <td style={{ fontWeight: "normal" }}>{i?.paymentTransactionId}</td>
@@ -105,7 +101,11 @@ function SubscriptionInfo() {
                           <>
                             <button
                               className="text_btn"
-                              onClick={handleBilling}
+                              onClick={() =>
+                                history.push(
+                                  `/account/subscription/${subscription?.subscriptionId}/billing`
+                                )
+                              }
                             >
                               Edit
                             </button>
