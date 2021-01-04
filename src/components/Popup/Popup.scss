@@ -1,0 +1,45 @@
+.modal {
+  .modal_header {
+    border-bottom: 0;
+    display: inline;
+    padding-top: 3.5em;
+  }
+
+  .modal_title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+  }
+
+  .modal_footer {
+    border: 0;
+    text-align: center;
+    padding-bottom: 3.5em;
+    justify-content: center;
+
+    .btn {
+      border-radius: 0px;
+      letter-spacing: 0.32px;
+      background-color: #ffffff;
+      color: #707070;
+      padding: 0.6em 3.3em;
+      border-color: #cccccc;
+    }
+
+    .btn_cancel {
+      &:hover {
+        border-color: #cccccc;
+        background-color: #ececec;
+        font-weight: 600;
+        color: black;
+      }
+    }
+
+    .btn_save {
+      margin-left: 2rem;
+      background-color: #0764b0;
+      color: white;
+    }
+  }
+}

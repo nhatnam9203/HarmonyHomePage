@@ -143,7 +143,7 @@ export const getMerchantListAction = () => async (dispatch, getState) => {
   }
 };
 
-// Get Merchant By ID
+// Get Merchant By ID Action
 export const getMerchantByIdAction = (id) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -168,3 +168,116 @@ export const getMerchantByIdAction = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+// Get My Subscriptions Action
+export const getMySubscriptionAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: typeUser.GET_SUBSCRIPTION_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.getMySubscription(token);
+
+    dispatch({
+      type: typeUser.GET_SUBSCRIPTION_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_SUBSCRIPTION_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Get Subscription By Id Action
+export const getMySubscriptionByIdAction = (id) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: typeUser.GET_SUBSCRIPTION_BY_ID_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.getSubscriptionById(id, token);
+
+    dispatch({
+      type: typeUser.GET_SUBSCRIPTION_BY_ID_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_MERCHANT_BY_ID_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Cancel Subscription Action
+export const cancelSubscriptionByIdAction = (id) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: typeUser.CANCEL_SUBSCRIPTION_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.cancelSubscriptionById(id, token);
+
+    dispatch({
+      type: typeUser.CANCEL_SUBSCRIPTION_SUCCESS,
+      payload: data?.message,
+    });
+    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.CANCEL_SUBSCRIPTION_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Get Package Action
+export const getPackageAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: typeUser.GET_PACKAGE_REQUEST,
+    });
+
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.getPackage(token);
+
+    dispatch({
+      type: typeUser.GET_PACKAGE_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_PACKAGE_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// Edit & Renew Áction

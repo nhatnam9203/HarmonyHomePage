@@ -78,3 +78,53 @@ const requestContactURL = `${url}/requestcontact`;
 
 export const requestContact = (payload) =>
   axios.post(requestContactURL, payload);
+
+// Get My Subscription
+const getMySubscriptionUrl = `${url}/subscription`;
+
+export const getMySubscription = (token) =>
+  axios.get(getMySubscriptionUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+// Get Subscription By Id
+export const getSubscriptionById = (id, token) =>
+  axios.get(`${getMySubscriptionUrl}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+// Cancel Subscription By Id
+export const cancelSubscriptionById = (id, token) =>
+  axios.put(`${getMySubscriptionUrl}/disable/${id}`, null, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+// Update Subscription By Id
+export const updateSubscriptionById = (data, token) => {
+  const { id } = data;
+
+  axios.put(
+    `${getMySubscriptionUrl}/${id}`,
+    { ...data },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+// Get package
+const getPackageUrl = `${url}/package`;
+export const getPackage = (token) =>
+  axios.get(getPackageUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

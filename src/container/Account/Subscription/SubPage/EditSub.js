@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Table, Button } from "react-bootstrap";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getPackageAction } from "../../../../actions/userActions";
 import "./EditSub.scss";
 
 function EditSub() {
@@ -13,10 +15,22 @@ function EditSub() {
     proYearly: false,
   });
 
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const { loading, packageList } = useSelector((state) => state.package);
+
+  console.log("id", packageList);
+
   const handleSubscriptionChange = (e) => {
     // const { name, checked } = e.target;
+    console.log("eee", e.target);
     alert("CHƯA LÀM");
   };
+
+  useEffect(() => {
+    dispatch(getPackageAction(id));
+  }, [dispatch]);
 
   const {
     basicMonthly,
@@ -26,6 +40,36 @@ function EditSub() {
     proMonthly,
     proYearly,
   } = billingPlan;
+
+  const renderPackage = packageList?.reverse()?.map((i) => (
+    <tr key={i?.packageId}>
+      <td className="sub_plan">{i?.packageName}</td>
+      <td className="text-center">
+        <Form.Check type="radio" id="check-api-radio">
+          <Form.Check.Input
+            type="radio"
+            name={i?.packageId}
+            onChange={handleSubscriptionChange}
+            value="monthly"
+          />
+          <Form.Check.Label>${i?.pricing}</Form.Check.Label>
+        </Form.Check>
+      </td>
+      <td className="text-center">
+        <Form.Check type="radio" id="check-api-radio">
+          <Form.Check.Input
+            type="radio"
+            name={i?.packageId}
+            onChange={handleSubscriptionChange}
+            value="annually"
+          />
+          <Form.Check.Label>
+            ${`${(i?.pricing * i?.annually).toFixed(2)} `}
+          </Form.Check.Label>
+        </Form.Check>
+      </td>
+    </tr>
+  ));
 
   return (
     <div className="sub_edit">
@@ -39,7 +83,8 @@ function EditSub() {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          {renderPackage}
+          {/* <tr>
             <td className="sub_plan">Basic - 8 Staffs</td>
             <td className="text-center">
               <Form.Check type="radio" id="check-api-radio">
@@ -113,7 +158,7 @@ function EditSub() {
                 <Form.Check.Label>$949.95</Form.Check.Label>
               </Form.Check>
             </td>
-          </tr>
+          </tr> */}
         </tbody>
       </Table>
       <div className="d-flex justify-content-end pt-4">

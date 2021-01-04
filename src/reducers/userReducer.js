@@ -161,27 +161,104 @@ export const merchantByIdReducer = (
 };
 
 export const mySubscriptionReducer = (
-  state = { loading: false, subscriptionList: [] },
+  state = { loading: false, subscriptionList: [], subscription: "" },
   { type, payload }
 ) => {
   switch (type) {
-    case types.GET_MY_SUBSCRIPTION_REQUEST:
+    case types.GET_SUBSCRIPTION_REQUEST:
       return {
         ...state,
         loading: true,
       };
 
-    case types.GET_MY_SUBSCRIPTION_SUCCESS:
+    case types.GET_SUBSCRIPTION_SUCCESS:
       return {
+        ...state,
         loading: false,
         subscriptionList: payload,
       };
 
-    case types.GET_MY_SUBSCRIPTION_FAILURE:
+    case types.GET_SUBSCRIPTION_FAILURE:
       return {
         ...state,
         loading: false,
       };
+
+    case types.GET_SUBSCRIPTION_BY_ID_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case types.GET_SUBSCRIPTION_BY_ID_SUCCESS:
+      return {
+        ...state,
+        subscription: payload,
+        loading: false,
+      };
+
+    case types.GET_SUBSCRIPTION_BY_ID_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const cancelSubscriptionReducer = (
+  state = { loading: false, message: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.CANCEL_SUBSCRIPTION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        message: "",
+      };
+
+    case types.CANCEL_SUBSCRIPTION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case types.CANCEL_SUBSCRIPTION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const getPackageReducer = (
+  state = { loading: false, packageList: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.GET_PACKAGE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.GET_PACKAGE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        packageList: payload,
+      };
+    case types.GET_PACKAGE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+
     default:
       return state;
   }

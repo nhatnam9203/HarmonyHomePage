@@ -7,6 +7,8 @@ import {
   merchantListReducer,
   merchantByIdReducer,
   mySubscriptionReducer,
+  cancelSubscriptionReducer,
+  getPackageReducer,
 } from "./userReducer";
 import { requestInfoReducer } from "./requestInfoReducer";
 import { notifyReducer } from "./notifyReducer";
@@ -22,8 +24,8 @@ export default combineReducers({
   merchantList: merchantListReducer,
   merchantDetail: merchantByIdReducer,
   mySubscription: mySubscriptionReducer,
-  // Request
-  request: requestInfoReducer,
+  cancelSubscription: cancelSubscriptionReducer,
+  package: getPackageReducer,
   // Notify
   notify: notifyReducer,
   // Subscribe

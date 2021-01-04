@@ -8,6 +8,11 @@
       background-color: #f5f5f5;
     }
   }
+  .table td,
+  .table th {
+    border-top: 0;
+    border-bottom: 1px solid #dee2e6;
+  }
 
   .text_btn {
     color: #0868b0;
@@ -21,9 +26,14 @@
     padding-right: 1em;
   }
 
+  .cancel_btn {
+    border-left: 1px solid #dddddd;
+    padding-left: 0.5em;
+    color: red;
+  }
+
   .sub_plan {
     color: #0868b0;
-    // font-weight: 600;
     cursor: pointer;
   }
 
