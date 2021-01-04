@@ -63,6 +63,10 @@
       border-radius: 0;
       background-color: #0764b0;
       color: #ffffff;
+
+      @media screen and (max-width: 425px) {
+        width: 100%;
+      }
     }
   }
 }

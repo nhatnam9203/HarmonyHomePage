@@ -54,7 +54,7 @@
 
   img {
     width: 10em;
-    margin-right: 1.7em;
+    // margin-right: 1.7em;
   }
 
   .nav-NavLink {
@@ -133,6 +133,10 @@
         border-bottom: 0px;
       }
     }
+  }
+
+  @media screen and (max-width: 425px) {
+    padding: 0 1rem;
   }
 }
 .signin__link {

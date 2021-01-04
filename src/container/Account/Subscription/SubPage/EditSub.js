@@ -174,12 +174,18 @@ function EditSub() {
   return (
     <div className="sub_edit">
       <h1>Change Subscription</h1>
-      <Table className="mt-4">
+      <Table responsive className="mt-4">
         <thead>
           <tr>
-            <th className="p-3">Packages</th>
-            <th className="p-3 text-center">Billed Monthly</th>
-            <th className="p-3 text-center">Billed Annually</th>
+            <th className="p-3 ">
+              <p className="th_name">Packages</p>
+            </th>
+            <th className="p-3 ">
+              <p>Billed Monthly</p>
+            </th>
+            <th className="p-3 ">
+              <p>Billed Annually</p>
+            </th>
           </tr>
         </thead>
         <tbody>{renderPackage}</tbody>
@@ -194,18 +200,25 @@ function EditSub() {
         >
           <div className="mt-4">
             <h1>New Order</h1>
-            <Table>
+            <Table responsive>
               <tbody>
                 <tr>
-                  <td>New Plan</td>
                   <td>
-                    <span className="span_bold">{newPackageName}</span>{" "}
-                    {newPlanText}
+                    <p className="th_new_plan">New Plan</p>
                   </td>
                   <td>
-                    {" "}
-                    Paid{" "}
-                    {defaultPricingType === "monthly" ? "Monthly" : "Annually"}
+                    <p className="th_plan_name">
+                      <span className="span_bold">{newPackageName}</span>{" "}
+                      {newPlanText}
+                    </p>
+                  </td>
+                  <td>
+                    <p className="th_plan_name">
+                      Paid &nbsp;
+                      {defaultPricingType === "monthly"
+                        ? "Monthly"
+                        : "Annually"}
+                    </p>
                   </td>
                   <td>
                     <motion.div
@@ -214,7 +227,9 @@ function EditSub() {
                       exit={{ opacity: 0 }}
                       transition={{ duration: 2 }}
                     >
-                      <span className="span_bold">${totalPackagePrice}</span>
+                      <p className="th_total_price">
+                        <span className="span_bold">${totalPackagePrice}</span>{" "}
+                      </p>
                     </motion.div>
                   </td>
                 </tr>
@@ -224,22 +239,24 @@ function EditSub() {
                     <span className="span_bold">{subscription?.planName}</span>
                   </td>
                   <td>
-                    Paid{" "}
+                    Paid &nbsp;
                     {subscription?.pricingType === "monthly"
                       ? "Monthly"
                       : "Annually"}
                   </td>
                   <td className="refund_money">
-                    <span className="span_bold">${subscription?.price}</span>
-                    &nbsp; (Refund amount:{" "}
-                    <span className="span_bold">&nbsp; ${refundAmount}</span>)
-                    <OverlayTrigger
-                      overlay={
-                        <Tooltip id="tooltip-disabled">Tính tiền?</Tooltip>
-                      }
-                    >
-                      <RiErrorWarningLine size={23} className="info" />
-                    </OverlayTrigger>
+                    <p className="th_total_price">
+                      <span className="span_bold">${subscription?.price}</span>
+                      &nbsp; (Refund amount:{" "}
+                      <span className="span_bold">&nbsp; ${refundAmount}</span>)
+                      <OverlayTrigger
+                        overlay={
+                          <Tooltip id="tooltip-disabled">Tính tiền?</Tooltip>
+                        }
+                      >
+                        <RiErrorWarningLine size={23} className="info" />
+                      </OverlayTrigger>
+                    </p>
                   </td>
                 </tr>
               </tbody>

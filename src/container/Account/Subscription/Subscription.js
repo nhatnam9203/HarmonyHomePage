@@ -57,7 +57,7 @@ function Subscription() {
         {i?.planName}
       </td>
       <td
-        className="sub_plan"
+        className="sub_plan text-center"
         onClick={() => history.push(`/account/merchant/${i?.merchantId}`)}
       >
         {i?.merchantId}
@@ -120,16 +120,30 @@ function Subscription() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeIn" }}
           >
-            <Table className="mt-4">
+            <Table responsive className="mt-4">
               <thead>
                 <tr>
-                  <th>Plan</th>
-                  <th>Merchant ID</th>
-                  <th>Business Name</th>
-                  <th>Next Payment Date</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>
+                    <p className="th_plan">Plan</p>
+                  </th>
+                  <th>
+                    <p className="th_mer_id">Merchant ID</p>
+                  </th>
+                  <th>
+                    <p className="th_name">Business Name</p>
+                  </th>
+                  <th>
+                    <p className="th_pay_date">Next Payment Date</p>
+                  </th>
+                  <th>
+                    <p>Amount</p>
+                  </th>
+                  <th>
+                    <p>Status</p>
+                  </th>
+                  <th>
+                    <p className="th_action">Actions</p>
+                  </th>
                 </tr>
               </thead>
               <tbody>{renderSubscriptionList}</tbody>

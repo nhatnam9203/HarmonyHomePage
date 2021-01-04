@@ -43,80 +43,75 @@ function EditAccount() {
     <>
       <Form noValidate onSubmit={formik.handleSubmit} className="edit_account">
         <Row className="edit_account_form">
-          <Col xs={12}>
+          <Col sm={12}>
             <h1>Edit Account Information</h1>
           </Col>
-          <Col xs={6}>
+          <Col sm={12} md={6}>
             <h3>Account Information</h3>
             <hr />
-
-            <div>
-              <Form.Group>
-                <Form.Label>
-                  First Name <span className="form_required">*</span>
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="First Name"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  isInvalid={
-                    formik.touched.firstName && formik.errors.firstName
-                  }
-                  name="firstName"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.firstName}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>
-                  Last Name <span className="form_required">*</span>
-                </Form.Label>
-                <Form.Control
-                  placeholder="Last Name"
-                  type="text"
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange}
-                  isInvalid={formik.touched.lastName && formik.errors.lastName}
-                  name="lastName"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.lastName}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>
-                  Email <span className="form_required">*</span>
-                </Form.Label>
-                <Form.Control
-                  placeholder="Email"
-                  type="email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  isInvalid={formik.touched.email && formik.errors.email}
-                  name="email"
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.email}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group
-                controlId="changePasswordCheckbox"
-                className="edit_account_checkbox"
-              >
-                <Form.Check
-                  type="checkbox"
-                  label="Change Password"
-                  name={`IsChangePassword`}
-                  onChange={formik.handleChange}
-                  checked={formik.values.IsChangePassword}
-                />
-              </Form.Group>
-            </div>
+            <Form.Group>
+              <Form.Label>
+                First Name <span className="form_required">*</span>
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="First Name"
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                isInvalid={formik.touched.firstName && formik.errors.firstName}
+                name="firstName"
+              />
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.firstName}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>
+                Last Name <span className="form_required">*</span>
+              </Form.Label>
+              <Form.Control
+                placeholder="Last Name"
+                type="text"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                isInvalid={formik.touched.lastName && formik.errors.lastName}
+                name="lastName"
+              />
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.lastName}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>
+                Email <span className="form_required">*</span>
+              </Form.Label>
+              <Form.Control
+                placeholder="Email"
+                type="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                isInvalid={formik.touched.email && formik.errors.email}
+                name="email"
+              />
+              <Form.Control.Feedback type="invalid">
+                {formik.errors.email}
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group
+              controlId="changePasswordCheckbox"
+              className="edit_account_checkbox"
+            >
+              <Form.Check
+                type="checkbox"
+                label="Change Password"
+                name={`IsChangePassword`}
+                onChange={formik.handleChange}
+                checked={formik.values.IsChangePassword}
+              />
+            </Form.Group>
           </Col>
 
-          <Col xs={6}>
+          <Col sm={12} md={6}>
             {formik.values?.IsChangePassword && (
               <>
                 <h3>Change Password</h3>

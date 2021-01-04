@@ -69,7 +69,7 @@ export default function Header() {
     <>
       <div className="text-right align-middle top_header pt-1">
         <Container>
-          <Row className="justify-content-end">
+          <Row className="justify-content-end ">
             <Col className="pt-1 mx-sm-1 pr-0 pl-0">
               {user ? (
                 <div

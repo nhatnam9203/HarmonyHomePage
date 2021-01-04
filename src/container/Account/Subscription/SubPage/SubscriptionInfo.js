@@ -56,7 +56,7 @@ function SubscriptionInfo() {
 
   return (
     <div className="sub_info">
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between content_title">
         <h1>Subscription ID #{id}</h1>
 
         <Button className="btn btn_cancel" onClick={() => history.goBack()}>
@@ -81,42 +81,54 @@ function SubscriptionInfo() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5, ease: "easeIn" }}
             >
-              <Table className="mt-4">
+              <Table responsive className="mt-4">
                 <tbody>
                   <tr>
-                    <td>Subscription Plan</td>
-                    <td>{subscription?.planName}</td>
-                    <td className="">
-                      Paid{" "}
-                      {subscription?.pricingType === "annually"
-                        ? "Yearly"
-                        : "Monthly"}
+                    <td>
+                      <p className="th_plan_name">Subscription Plan</p>
                     </td>
+                    <td>
+                      <p className="th_plan_name">{subscription?.planName}</p>
+                    </td>
+                    <td className="">
+                      <p className="th_paid">
+                        Paid &nbsp;
+                        {subscription?.pricingType === "annually"
+                          ? "Yearly"
+                          : "Monthly"}{" "}
+                      </p>
+                    </td>
+
                     <td className="text-right">
-                      {Number(subscription?.isDisabled) === 0 ? (
-                        <>
-                          <button className="text_btn" onClick={handleBilling}>
-                            Edit
-                          </button>
+                      <p className="th_actions">
+                        {Number(subscription?.isDisabled) === 0 ? (
+                          <>
+                            <button
+                              className="text_btn"
+                              onClick={handleBilling}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="text_btn  cancel_btn"
+                              onClick={() => setPopUp(!popUp)}
+                            >
+                              Cancel
+                            </button>
+                          </>
+                        ) : (
                           <button
-                            className="text_btn  cancel_btn"
-                            onClick={() => setPopUp(!popUp)}
+                            className="text_btn"
+                            onClick={() =>
+                              history.push(
+                                `/account/subscription/${subscription?.subscriptionId}/billing`
+                              )
+                            }
                           >
-                            Cancel
+                            Renew
                           </button>
-                        </>
-                      ) : (
-                        <button
-                          className="text_btn"
-                          onClick={() =>
-                            history.push(
-                              `/account/subscription/${subscription?.subscriptionId}/billing`
-                            )
-                          }
-                        >
-                          Renew
-                        </button>
-                      )}
+                        )}{" "}
+                      </p>
                     </td>
                   </tr>
                   <tr>
@@ -137,12 +149,16 @@ function SubscriptionInfo() {
               </Table>
 
               <h1 className="mt-5">Billing History </h1>
-              <Table className="mt-4">
+              <Table responsive className="mt-4">
                 <thead>
                   <tr>
-                    <th>Transaction ID</th>
+                    <th>
+                      <p className="th_plan_name">Transaction ID</p>
+                    </th>
                     <th>Date</th>
-                    <th>Plan Name</th>
+                    <th>
+                      <p className="th_plan_name">Plan Name</p>
+                    </th>
                     <th>Amount</th>
                     <th>Status</th>
                   </tr>
