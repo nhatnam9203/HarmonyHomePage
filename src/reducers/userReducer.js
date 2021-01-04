@@ -192,7 +192,6 @@ export const mySubscriptionReducer = (
 
     case types.GET_SUBSCRIPTION_BY_ID_SUCCESS:
       return {
-        ...state,
         subscription: payload,
         loading: false,
       };
@@ -244,7 +243,6 @@ export const getPackageReducer = (
   switch (type) {
     case types.GET_PACKAGE_REQUEST:
       return {
-        ...state,
         loading: true,
       };
     case types.GET_PACKAGE_SUCCESS:
