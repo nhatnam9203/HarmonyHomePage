@@ -317,3 +317,32 @@ export const updateSubscriptionReducer = (
       return state;
   }
 };
+
+// ForgotPassword
+
+export const forgotPasswordReducer = (
+  state = { loading: false, message: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.UPDATE_SUBSCRIPTION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.UPDATE_SUBSCRIPTION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case types.UPDATE_SUBSCRIPTION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+};

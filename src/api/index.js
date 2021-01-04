@@ -121,6 +121,7 @@ export const getRefundMoney = (id, token) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
 // Request Info
 const requestInfoUrl = `${url}/requestinformation`;
 
@@ -136,3 +137,8 @@ const requestContactURL = `${url}/requestcontact`;
 
 export const requestContact = (payload) =>
   axios.post(requestContactURL, payload);
+
+// Forgot Password
+const forgotPasswordUrl = `${url}/principal/forgotpassword?email=`;
+export const forgotPassword = (email) =>
+  axios.get(`${forgotPasswordUrl}${email}`);

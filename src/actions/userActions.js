@@ -338,3 +338,28 @@ export const updateSubscriptionAction = (value) => async (
     });
   }
 };
+
+// ForgotPassword
+
+export const forgotPasswordAction = (value) => async (dispatch) => {
+  try {
+    dispatch({
+      type: typeUser.GET_FORGOT_PASSWORD_REQUEST,
+    });
+
+    const { data } = await api.forgotPassword(value.email);
+    console.log("dataForgotAc :>> ", data);
+    dispatch({
+      type: typeUser.GET_FORGOT_PASSWORD_SUCCESS,
+      payload: data?.data,
+    });
+
+    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_FORGOT_PASSWORD_FAILURE,
+      payload: error.message,
+    });
+  }
+};

@@ -11,6 +11,7 @@ import {
   getPackageReducer,
   getRefundMoneyReducer,
   updateSubscriptionReducer,
+  forgotPasswordReducer,
 } from "./userReducer";
 import { requestInfoReducer } from "./requestInfoReducer";
 import { notifyReducer } from "./notifyReducer";
@@ -30,6 +31,7 @@ export default combineReducers({
   package: getPackageReducer,
   refund: getRefundMoneyReducer,
   updateSubscription: updateSubscriptionReducer,
+  forgotPassword: forgotPasswordReducer,
   // Request
   request: requestInfoReducer,
   // Notify

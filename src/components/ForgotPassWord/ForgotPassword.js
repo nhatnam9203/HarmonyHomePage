@@ -3,8 +3,12 @@ import { Modal, Spinner, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { forgotPasswordAction } from "../../actions/userActions";
 
 export default function ForgotPassword({ showForgot, setShowForgot }) {
+  const dispatch = useDispatch();
+
   const forgotPasswordSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is a required field"),
   });
@@ -17,7 +21,7 @@ export default function ForgotPassword({ showForgot, setShowForgot }) {
     onSubmit: (values) => {
       const data = values;
       console.log("data forgot :>> ", data);
-      //   dispatch(userLogin(data));
+      dispatch(forgotPasswordAction(data));
     },
   });
 
