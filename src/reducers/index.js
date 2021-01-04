@@ -26,6 +26,8 @@ export default combineReducers({
   mySubscription: mySubscriptionReducer,
   cancelSubscription: cancelSubscriptionReducer,
   package: getPackageReducer,
+  // Request
+  request: requestInfoReducer,
   // Notify
   notify: notifyReducer,
   // Subscribe
