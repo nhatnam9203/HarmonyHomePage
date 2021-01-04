@@ -363,3 +363,24 @@ export const forgotPasswordAction = (value) => async (dispatch) => {
     });
   }
 };
+
+// Get Package Pricing Action
+export const getPackagePricingAction = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: typeUser.GET_PACKAGE_PRICING_REQUEST,
+    });
+    const { data } = await api.getPackagePricing();
+
+    dispatch({
+      type: typeUser.GET_PACKAGE_PRICING_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.GET_PACKAGE_PRICING_FAILURE,
+      payload: error.message,
+    });
+  }
+};

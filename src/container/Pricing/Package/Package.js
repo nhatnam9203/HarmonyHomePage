@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import Packkage1 from "../../../assets/images/pricing/Group 5867@2x.jpg";
 import Packkage2 from "../../../assets/images/pricing/Group 5868@2x.jpg";
@@ -10,9 +10,26 @@ import { TiTick } from "react-icons/ti";
 import { MdKeyboardArrowRight } from "react-icons/md";
 
 import Modal from "react-bootstrap/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { getPackagePricingAction } from "../../../actions/userActions";
 
 export default function Package() {
   const [show, setShow] = useState(false);
+  const [checked, setchecked] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleChecked = () => {
+    setchecked(!checked);
+  };
+
+  useEffect(() => {
+    dispatch(getPackagePricingAction());
+  }, []);
+  const { packageList } = useSelector((state) => state.pricing);
+  const pricingAnnuallyBasic = packageList[2].pricing * packageList[2].annually;
+  const pricingAnnuallyMedium =
+    packageList[1].pricing * packageList[1].annually;
+  const pricingAnnuallyPro = packageList[0].pricing * packageList[0].annually;
   return (
     <main className="package">
       <h1 className="package__title text-uppercase text-center font-weight-bold">
@@ -34,7 +51,11 @@ export default function Package() {
                   Billed
                   <br /> Monthly
                 </span>
-                <input type="checkbox" className="switch mr-lg-3" />
+                <input
+                  type="checkbox"
+                  className="switch mr-lg-3"
+                  onClick={handleChecked}
+                />
                 <span className="text-center package__features--span">
                   Billed
                   <br /> Annually
@@ -46,7 +67,10 @@ export default function Package() {
             <Card.Img variant="top" src={Packkage2} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
               <Card.Title className="package__item--title text-center font-weight-bold">
-                $49.95<span className="package__item--sub">/month</span>
+                ${checked ? pricingAnnuallyBasic : packageList[2].pricing}
+                <span className="package__item--sub">
+                  /{checked ? "year" : "month"}
+                </span>
               </Card.Title>
               <Link className="package__item--btn text-center" to="/sign-up">
                 Start free trial
@@ -57,7 +81,10 @@ export default function Package() {
             <Card.Img variant="top" src={Packkage3} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
               <Card.Title className="package__item--title text-center font-weight-bold">
-                $89.95<span className="package__item--sub">/month</span>
+                ${checked ? pricingAnnuallyMedium : packageList[1].pricing}
+                <span className="package__item--sub">
+                  /{checked ? "year" : "month"}
+                </span>
               </Card.Title>
               <Link className="package__item--btn text-center" to="/sign-up">
                 Start free trial
@@ -68,7 +95,10 @@ export default function Package() {
             <Card.Img variant="top" src={Packkage4} />
             <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
               <Card.Title className="package__item--title text-center font-weight-bold">
-                $94.95<span className="package__item--sub">/month</span>
+                ${checked ? pricingAnnuallyPro : packageList[0].pricing}
+                <span className="package__item--sub">
+                  /{checked ? "year" : "month"}
+                </span>
               </Card.Title>
               <Link className="package__item--btn text-center" to="/sign-up">
                 Start free trial

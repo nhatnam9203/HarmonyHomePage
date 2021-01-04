@@ -12,6 +12,7 @@ import {
   getRefundMoneyReducer,
   updateSubscriptionReducer,
   forgotPasswordReducer,
+  getPackagePricingReducer,
 } from "./userReducer";
 import { requestInfoReducer } from "./requestInfoReducer";
 import { notifyReducer } from "./notifyReducer";
@@ -40,4 +41,6 @@ export default combineReducers({
   subscribe: subscribeReducer,
   // Contact us
   contactUs: requestContactReducer,
+  // Get Package Pricing
+  pricing: getPackagePricingReducer,
 });

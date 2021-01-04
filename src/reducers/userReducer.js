@@ -346,3 +346,30 @@ export const forgotPasswordReducer = (
       return state;
   }
 };
+
+export const getPackagePricingReducer = (
+  state = { loading: false, packageList: [] },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.GET_PACKAGE_PRICING_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.GET_PACKAGE_PRICING_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        packageList: payload,
+      };
+    case types.GET_PACKAGE_PRICING_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+};
