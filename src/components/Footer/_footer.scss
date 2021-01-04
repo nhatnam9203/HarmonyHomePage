@@ -55,15 +55,32 @@ footer {
     @media screen and (max-width: 992px) {
       padding: 1rem 0;
     }
+    .bot_footer-isMobile {
+      @media screen and (max-width: 760px) {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    // .bot_footer_container{
+    //   @media screen and (max-width: 760px) {
+    //     padding: 0px;
+    //   }
+    // }
     .footer-copyrigh {
       letter-spacing: 0.09rem;
       font-size: 0.9rem;
+      @media screen and (max-width: 760px) {
+        margin-bottom: 1rem;
+      }
     }
     &-link {
       letter-spacing: $text-0;
       font: normal normal normal 1.0625rem Roboto;
       @media screen and (max-width: 991px) {
         flex-direction: column;
+      }
+      @media screen and (max-width: 760px) {
+        align-items: center;
       }
     }
     .divider_link-footer::before {
@@ -84,12 +101,22 @@ footer {
         display: none;
       }
     }
+    .list-unstyled {
+      @media screen and (max-width: 760px) {
+        margin-bottom: 0.5rem;
+      }
+    }
   }
   .bot_footer-right {
+    padding-right: 0px;
     align-items: center;
     @media screen and (max-width: 991px) {
       flex-direction: column;
       align-items: flex-start;
+    }
+    @media screen and (max-width: 760px) {
+      align-items: center;
+      padding: 0;
     }
   }
 }

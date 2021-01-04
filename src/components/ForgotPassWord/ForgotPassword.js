@@ -3,11 +3,12 @@ import { Modal, Spinner, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { forgotPasswordAction } from "../../actions/userActions";
 
 export default function ForgotPassword({ showForgot, setShowForgot }) {
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.forgotPassword);
 
   const forgotPasswordSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is a required field"),
@@ -63,12 +64,25 @@ export default function ForgotPassword({ showForgot, setShowForgot }) {
           </Form.Group>
 
           <div className="signin__container-btn d-flex justify-content-between align-items-center">
-            <Button
-              type="submit"
-              className="submit_btn text-center font-weight-bold"
-            >
-              Submit
-            </Button>
+            {loading ? (
+              <Button className="submit_btn text-center" disabled>
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                <span className="loadingBtn">Loading...</span>
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                className="submit_btn text-center font-weight-bold"
+              >
+                Submit
+              </Button>
+            )}
 
             <Link onClick={() => setShowForgot(false)} className="signin__link">
               Back to sign in

@@ -12,10 +12,16 @@
     float: right;
     cursor: pointer;
   }
+  .isMobile {
+    @media screen and (max-width: 425px) {
+      display: none;
+    }
+  }
   .telephone {
     display: flex;
     align-items: center;
     float: right;
+    color: white;
 
     a {
       color: white;
@@ -135,9 +141,9 @@
     }
   }
 
-  @media screen and (max-width: 425px) {
-    padding: 0 1rem;
-  }
+  // @media screen and (max-width: 425px) {
+  //   padding: 0 1rem;
+  // }
 }
 .signin__link {
   color: #0868b0;
@@ -206,6 +212,9 @@
 
     @include mediaQueryMax("small") {
       padding: 0.5rem 1.8rem;
+    }
+    @media screen and (max-width: 330px) {
+      padding: 0.5rem 1.5rem;
     }
   }
   .loadingBtn {

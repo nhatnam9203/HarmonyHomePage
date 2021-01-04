@@ -325,18 +325,18 @@ export const forgotPasswordReducer = (
   { type, payload }
 ) => {
   switch (type) {
-    case types.UPDATE_SUBSCRIPTION_REQUEST:
+    case types.GET_FORGOT_PASSWORD_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case types.UPDATE_SUBSCRIPTION_SUCCESS:
+    case types.GET_FORGOT_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: false,
         message: payload,
       };
-    case types.UPDATE_SUBSCRIPTION_FAILURE:
+    case types.GET_FORGOT_PASSWORD_FAILURE:
       return {
         ...state,
         loading: false,

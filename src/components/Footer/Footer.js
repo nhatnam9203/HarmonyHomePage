@@ -71,11 +71,11 @@ export default function Footer() {
         </div>
       </div>
       <div className="bot_footer d-flex align-items-center">
-        <Container className="px-0">
-          <Row className="justify-content-between mx-0">
+        <Container className="px-0 bot_footer_container">
+          <Row className="justify-content-between mx-0 bot_footer-isMobile">
             <Col
               xs="auto"
-              className="d-flex justify-content-center bot_footer-right pr-0"
+              className="d-flex justify-content-center bot_footer-right"
             >
               <div className="footer-copyrigh">
                 {new Date().getFullYear()} &copy; {t("Copyright")} -{" "}
@@ -117,7 +117,7 @@ export default function Footer() {
                 </li>
               </ul>
             </Col>
-            <Col xs="auto" className="pl-0">
+            <Col xs="auto" className="p-0">
               <a
                 target="blank"
                 href="https://www.facebook.com/harmonypayapp"

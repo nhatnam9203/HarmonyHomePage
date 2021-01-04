@@ -35,7 +35,7 @@ export default function ForConsumer() {
             <a
               target="blank"
               href="https://apps.apple.com/us/app/harmonypay/id1478098739"
-              className="mr-4"
+              className=" consumer_downicon-a"
             >
               <img src={App1} alt="" className="download--img" />
             </a>

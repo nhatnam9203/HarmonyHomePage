@@ -17,6 +17,7 @@ import {
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
 import { BiShow, BiHide } from "react-icons/bi";
+import { FaQuestionCircle } from "react-icons/fa";
 
 import Flags from "country-flag-icons/react/3x2";
 import Logo from "../../assets/images/logo_blue.png";
@@ -26,6 +27,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userLogin } from "../../actions/userActions";
 import ForgotPassword from "../ForgotPassWord/ForgotPassword";
+import { useMediaQuery } from "react-responsive";
 
 export default function Header() {
   const { t, i18n } = useTranslation("header");
@@ -35,6 +37,8 @@ export default function Header() {
   const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
   const { loading, user } = useSelector((state) => state.user);
 
@@ -67,35 +71,44 @@ export default function Header() {
 
   return (
     <>
-      <div className="text-right align-middle top_header pt-1">
+      <div className="text-right align-middle top_header py-1">
         <Container>
-          <Row className="justify-content-end ">
-            <Col className="pt-1 mx-sm-1 pr-0 pl-0">
+          <Row className="">
+            <Col className="py-1 mx-sm-1 pr-0 pl-0">
               {user ? (
                 <div
                   className="singin"
                   onClick={() => history.push("/account/my-account")}
                 >
                   <img src={LoginIcon} width={21} className="mr-2" />
-                  <span className="text-white">Manage Account</span>
+                  <span className="text-white isMobile">Manage Account</span>
                 </div>
               ) : (
                 <div className="singin" onClick={() => setShow(true)}>
                   <img src={LoginIcon} width={21} className="mr-2" />
-                  <span className="text-white">Sign in</span>
+                  <span className="text-white isMobile">Sign in</span>
                 </div>
               )}
             </Col>
             <Col xs="auto" className="pt-1 mx-sm-1 pr-0">
-              <div className="telephone">
+              <a href="tel:800-531-3126" className="telephone">
                 <FiPhoneCall size={21} />
-                <a href="tel:800-531-3126">800-531-3126</a>
-              </div>
+                <a href="tel:800-531-3126" className="isMobile">
+                  800-531-3126
+                </a>
+              </a>
             </Col>
-            <Col xs="auto" className="pt-1 mx-sm-2">
-              FAQ
-            </Col>
-            <Col xs="auto" className="px-0">
+            {isMobile ? (
+              <Col xs="auto" className=" mx-sm-2">
+                <FaQuestionCircle size={22}></FaQuestionCircle>
+              </Col>
+            ) : (
+              <Col xs="auto" className="pt-1 mx-sm-2">
+                FAQ
+              </Col>
+            )}
+
+            {/* <Col xs="auto" className="px-0">
               {i18n.language === "en" ? (
                 <Flags.US title="United States" className="flag" />
               ) : (
@@ -111,7 +124,7 @@ export default function Header() {
                 <option value="en">EN</option>
                 <option value="vn">VN</option>
               </Form.Control>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>
