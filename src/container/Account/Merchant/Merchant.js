@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMerchantListAction } from "../../../actions/userActions";
-import { useTransition, animated } from "react-spring";
 
 import Loading from "../../../util/Loading";
 import Table from "react-bootstrap/Table";
@@ -37,42 +36,30 @@ function Merchant() {
     </tr>
   ));
 
-  const transitions = useTransition(loading, null, {
-    from: {
-      position: "absolute",
-      opacity: 0,
-      width: "100%",
-    },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
-
   return (
     <div className="merchant">
       <h1>My Merchant</h1>
 
-      {transitions.map(({ item, key, props }) =>
-        item ? (
-          <animated.div style={props} key={key}>
-            <Loading />
-          </animated.div>
-        ) : (
-          <animated.div style={props} key={key}>
-            <Table bordered className="mt-4">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Business name</th>
-                  <th>Email</th>
-                  <th>Contact phone</th>
-                  <th>Status</th>
-                  <th className="text-center">Actions</th>
-                </tr>
-              </thead>
-              <tbody>{renderMerchantTable}</tbody>
-            </Table>
-          </animated.div>
-        )
+      {loading ? (
+        <Loading />
+      ) : (
+        <div>
+          <Table responsive bordered className="mt-4">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>
+                  <p className="th_business_name">Business name</p>
+                </th>
+                <th>Email</th>
+                <th>Contact phone</th>
+                <th>Status</th>
+                <th className="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>{renderMerchantTable}</tbody>
+          </Table>{" "}
+        </div>
       )}
     </div>
   );

@@ -4,6 +4,9 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 33.75rem;
+  @media screen and (max-width: 1640px) {
+    height: 30rem;
+  }
   @include mediaQueryMax("xxl") {
     height: 25.75rem;
   }
@@ -14,6 +17,18 @@
     height: 14.6rem;
   }
   @include mediaQueryMax("medium") {
-    height: 15rem;
+    height: 14rem;
+  }
+  @media screen and (max-width: 576px) {
+    height: 10rem;
+  }
+  @media screen and (max-width: 420px) {
+    height: 13rem;
+  }
+  @media screen and (max-width: 375px) {
+    height: 12rem;
+  }
+  @media screen and (max-width: 375px) {
+    height: 10rem;
   }
 }

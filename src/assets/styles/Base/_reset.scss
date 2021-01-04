@@ -7,6 +7,12 @@
   outline: none !important;
   scroll-behavior: smooth;
 }
+.rocketchat-widget {
+  bottom: 6rem !important;
+  @media screen and(max-width:480px) {
+    bottom: 0 !important;
+  }
+}
 
 a {
   // color: #fff;
@@ -16,6 +22,18 @@ a {
 a:hover {
   text-decoration: none !important;
   color: #fff;
+}
+input {
+  box-shadow: none !important;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+button {
+  // box-shadow: none !important;
+  &:focus {
+    box-shadow: none !important;
+  }
 }
 
 body {

@@ -9,14 +9,17 @@ import {
   Col,
   Form,
   NavItem,
-  Button,
   Spinner,
+  Button,
+  InputGroup,
+  FormControl,
 } from "react-bootstrap";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userLogin } from "../../actions/userActions";
+import { BiShow, BiHide } from "react-icons/bi";
 
 import Flags from "country-flag-icons/react/3x2";
 import Logo from "../../assets/images/logo_blue.png";
@@ -27,6 +30,7 @@ export default function Header() {
   const { t, i18n } = useTranslation("header");
   const [expanded, setExpanded] = useState(false);
   const [show, setShow] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -43,8 +47,8 @@ export default function Header() {
   };
 
   const loginUserSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    password: Yup.string().required("Password is required"),
+    email: Yup.string().email().required(),
+    password: Yup.string().required(),
   });
 
   const formik = useFormik({
@@ -63,7 +67,7 @@ export default function Header() {
     <>
       <div className="text-right align-middle top_header pt-1">
         <Container>
-          <Row className="justify-content-end">
+          <Row className="justify-content-end ">
             <Col className="pt-1 mx-sm-1 pr-0 pl-0">
               {user ? (
                 <div
@@ -87,7 +91,7 @@ export default function Header() {
               </div>
             </Col>
             <Col xs="auto" className="pt-1 mx-sm-2">
-              FAG
+              FAQ
             </Col>
             <Col xs="auto" className="px-0">
               {i18n.language === "en" ? (
@@ -117,8 +121,10 @@ export default function Header() {
         collapseOnSelect
       >
         <Container>
-          <Navbar.Brand href="/home">
-            <img src={Logo} className="d-inline-block align-top" />
+          <Navbar.Brand>
+            <Link to="/home">
+              <img src={Logo} className="d-inline-block align-top" />
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
@@ -172,7 +178,7 @@ export default function Header() {
               </NavItem>
             </Nav>
 
-            <Nav className="align-items-xl-end">
+            <Nav className="align-items-end">
               <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
                   exact
@@ -221,13 +227,17 @@ export default function Header() {
         centered
         className="modal-sign-in"
       >
-        <Modal.Body className="modal-body-signin p-4 h-100">
-          <Modal.Title className="sigin__title text-center font-weight-bold">
-            Sign In
-          </Modal.Title>
-          <p className="sigin__text text-center">
-            If you have an account, sign in with your email address.
-          </p>
+        <Modal.Header className="border-0 pb-0" closeButton>
+          <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
+            <Modal.Title className="sigin__title text-center font-weight-bold mb-2">
+              Sign In
+            </Modal.Title>
+            <p className="sigin__text text-center mb-0">
+              If you have an account, sign in with your email address.
+            </p>
+          </div>
+        </Modal.Header>
+        <Modal.Body className="modal-body-signin p-4 h-100 border-0">
           <Form onSubmit={formik.handleSubmit}>
             <Form.Group>
               <Form.Label>
@@ -249,17 +259,29 @@ export default function Header() {
               <Form.Label>
                 Password <span className="form_required">*</span>
               </Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                name="password"
-                isInvalid={formik.touched.password && formik.errors.password}
-                onChange={formik.handleChange}
-                value={formik.values.password}
-              />
-              <Form.Control.Feedback type="invalid">
-                {formik.errors.password}
-              </Form.Control.Feedback>
+              <InputGroup>
+                <FormControl
+                  // className="border-right-0"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  isInvalid={formik.touched.password && formik.errors.password}
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                />
+                <InputGroup.Append className="form__show-password--container">
+                  <button
+                    type="button"
+                    className="form__show-password"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <BiHide size={25} /> : <BiShow size={25} />}
+                  </button>
+                </InputGroup.Append>
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.password}
+                </Form.Control.Feedback>
+              </InputGroup>
             </Form.Group>
             <div className="signin__container-btn d-flex justify-content-between align-items-center">
               {loading ? (

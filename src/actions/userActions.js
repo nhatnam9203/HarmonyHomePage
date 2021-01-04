@@ -25,7 +25,7 @@ export const userLogin = (dataLogin) => async (dispatch) => {
 // User logout
 export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: typeUser.USER_LOGOUT });
-  history.push("/");
+  history.push("/home");
 };
 
 // Get My Account

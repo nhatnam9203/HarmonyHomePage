@@ -10,6 +10,9 @@
   @include mediaQueryMax("medium") {
     max-height: 70rem;
   }
+  @media screen and (max-width: 345px) {
+    margin-bottom: 31rem;
+  }
   &-item {
     padding-top: 8rem;
     // transform: translateY(50%);

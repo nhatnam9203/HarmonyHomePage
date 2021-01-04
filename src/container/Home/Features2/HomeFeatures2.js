@@ -164,7 +164,7 @@ export default function HomeFeatures2() {
             exactly how much you are paying and pay from the comfort of your
             pedicure chairs. Pay-it-back with peer-2-peer features or
             pay-it-forward with universal gift cards at any participating
-            salons..
+            salons.
           </p>
           <Row>
             <Col

@@ -12,7 +12,10 @@ import {
   getRefundMoneyReducer,
   updateSubscriptionReducer,
 } from "./userReducer";
+import { requestInfoReducer } from "./requestInfoReducer";
 import { notifyReducer } from "./notifyReducer";
+import { subscribeReducer } from "./subscribeReducer";
+import { requestContactReducer } from "./requestContactReducer";
 
 export default combineReducers({
   // User
@@ -27,6 +30,12 @@ export default combineReducers({
   package: getPackageReducer,
   refund: getRefundMoneyReducer,
   updateSubscription: updateSubscriptionReducer,
+  // Request
+  request: requestInfoReducer,
   // Notify
   notify: notifyReducer,
+  // Subscribe
+  subscribe: subscribeReducer,
+  // Contact us
+  contactUs: requestContactReducer,
 });

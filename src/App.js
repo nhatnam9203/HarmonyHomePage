@@ -14,6 +14,7 @@ import Contact from "./container/Contact/Contact";
 import Devices from "./container/Devices/Devices";
 import ForInvestor from "./container/ForInvestor/ForInvestor";
 import ForConsumer from "./container/ForConsumer/ForConsumer";
+import GiftCardTerms from "./components/GiftCardTerms/GiftCardTerms";
 
 import Account from "./container/Account";
 
@@ -22,10 +23,13 @@ import PrivateRoute from "./routes/PrivateRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/main.scss";
 import "react-toastify/dist/ReactToastify.css";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import Policy from "./components/Policy/Policy";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="app">
         <ToastContainer
           position="top-right"
@@ -50,6 +54,8 @@ function App() {
             <Route path="/contact" component={Contact} />
             <Route path="/investor" component={ForInvestor} />
             <Route path="/consumer" component={ForConsumer} />
+            <Route path="/gift-card-terms" component={GiftCardTerms} />
+            <Route path="/policy" component={Policy} />
             <PrivateRoute path="/account" component={Account} />
           </Switch>
         </main>

@@ -22,11 +22,11 @@ import "./Account.scss";
 function Account() {
   return (
     <div className="account">
-      <Row className="pt-md-5 pr-0">
-        <Col sm={5} md={4} lg={3} className="pr-0">
+      <Row className="pr-0">
+        <Col sm={12} md={4} lg={3} className="">
           <Sidebar />
         </Col>
-        <Col sm={7} md={8} lg={9} className="pl-0 pt-2">
+        <Col sm={12} md={8} lg={9} className="pt-2 account_content">
           <Switch>
             <Route
               exact

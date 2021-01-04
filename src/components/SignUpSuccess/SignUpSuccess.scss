@@ -39,7 +39,8 @@
     background-color: #fff;
     padding: 2.5em;
 
-    button {
+    a {
+      border: 1px solid #0764b0;
       padding: 0.8em 3em;
       background-color: #fff;
       color: #0764b0;
@@ -49,9 +50,12 @@
       @media screen and (max-width: 576px) {
         padding: 0.8em 1.8em;
       }
+      @media screen and (max-width: 372px) {
+        padding: 0.8em 0.5em;
+      }
     }
 
-    button:hover {
+    a:hover {
       background-color: #0764b0;
       color: #fff;
     }

@@ -10,4 +10,22 @@
     border-top: 0;
     border-bottom: 1px solid #dee2e6;
   }
+
+  @media screen and (max-width: 425px) {
+    .th_plan {
+      width: 150px;
+    }
+    .th_mer_id {
+      width: 110px;
+    }
+    .th_name {
+      width: 150px;
+    }
+    .th_pay_date {
+      width: 180px;
+    }
+    .th_action {
+      width: 120px;
+    }
+  }
 }
