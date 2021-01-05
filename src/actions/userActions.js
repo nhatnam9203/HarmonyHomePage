@@ -348,7 +348,6 @@ export const forgotPasswordAction = (value) => async (dispatch) => {
     });
 
     const { data } = await api.forgotPassword(value.email);
-    console.log("dataForgotAc :>> ", data);
     dispatch({
       type: typeUser.GET_FORGOT_PASSWORD_SUCCESS,
       payload: data?.data,

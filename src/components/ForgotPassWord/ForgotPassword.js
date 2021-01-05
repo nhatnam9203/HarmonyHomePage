@@ -21,7 +21,6 @@ export default function ForgotPassword({ showForgot, setShowForgot }) {
     validationSchema: forgotPasswordSchema,
     onSubmit: (values) => {
       const data = values;
-      console.log("data forgot :>> ", data);
       dispatch(forgotPasswordAction(data));
     },
   });
