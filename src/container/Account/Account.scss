@@ -1,5 +1,5 @@
 .account {
-  max-width: 1370px;
+  max-width: 1640px;
   margin: 0 auto;
   padding-bottom: 6rem;
 
@@ -85,8 +85,14 @@
     .content_title {
       align-items: center;
 
-      h1 {
-        font-size: 1rem;
+      // h1 {
+      //   font-size: 1rem;
+      // }
+
+      @media screen and (max-width: 425px) {
+        .btn.btn_cancel {
+          display: none;
+        }
       }
     }
 

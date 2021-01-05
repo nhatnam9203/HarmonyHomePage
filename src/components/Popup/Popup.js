@@ -4,8 +4,6 @@ import { Modal, Button, Spinner } from "react-bootstrap";
 import "./Popup.scss";
 
 function Popup(props) {
-  console.log("props", props);
-
   // eslint-disable-next-line react/prop-types
   const { isLoading, show, handleCancel, handleClose } = props;
 

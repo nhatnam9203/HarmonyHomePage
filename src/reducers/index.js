@@ -13,6 +13,7 @@ import {
   updateSubscriptionReducer,
   forgotPasswordReducer,
   getPackagePricingReducer,
+  renewSubscriptionReducer,
 } from "./userReducer";
 import { requestInfoReducer } from "./requestInfoReducer";
 import { notifyReducer } from "./notifyReducer";
@@ -33,6 +34,7 @@ export default combineReducers({
   refund: getRefundMoneyReducer,
   updateSubscription: updateSubscriptionReducer,
   forgotPassword: forgotPasswordReducer,
+  renewSubscription: renewSubscriptionReducer,
   // Request
   request: requestInfoReducer,
   // Notify

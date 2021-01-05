@@ -7,6 +7,7 @@ import {
 } from "../../../../actions/userActions";
 import { Button, Table } from "react-bootstrap";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 
 import Loading from "../../../../util/Loading";
 import moment from "moment";
@@ -20,6 +21,7 @@ function SubscriptionInfo() {
   const dispatch = useDispatch();
 
   const [popUp, setPopUp] = useState(false);
+  const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
   const { loading, subscription } = useSelector(
     (state) => state.mySubscription
@@ -77,76 +79,155 @@ function SubscriptionInfo() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5, ease: "easeIn" }}
             >
-              <Table responsive className="mt-4">
-                <tbody>
-                  <tr>
-                    <td>
-                      <p className="th_plan_name">Subscription Plan</p>
-                    </td>
-                    <td>
-                      <p className="th_plan_name">{subscription?.planName}</p>
-                    </td>
-                    <td className="">
-                      <p className="th_paid">
-                        Paid &nbsp;
-                        {subscription?.pricingType === "annually"
-                          ? "Yearly"
-                          : "Monthly"}{" "}
-                      </p>
-                    </td>
+              {isMobile ? (
+                <div className="sub_mobile">
+                  <p className="title">Subscription Plan</p>
+                  <div className="sub_plan_mobile">
+                    <p className="">{subscription?.planName}</p>
 
-                    <td className="text-right">
-                      <p className="th_actions">
-                        {Number(subscription?.isDisabled) === 0 ? (
-                          <>
-                            <button
-                              className="text_btn"
-                              onClick={() =>
-                                history.push(
-                                  `/account/subscription/${subscription?.subscriptionId}/billing`
-                                )
-                              }
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="text_btn  cancel_btn"
-                              onClick={() => setPopUp(!popUp)}
-                            >
-                              Cancel
-                            </button>
-                          </>
-                        ) : (
+                    <p className="">
+                      Paid &nbsp;
+                      {subscription?.pricingType === "annually"
+                        ? "Yearly"
+                        : "Monthly"}{" "}
+                    </p>
+
+                    <p className="">
+                      {Number(subscription?.isDisabled) === 0 ? (
+                        <>
                           <button
                             className="text_btn"
                             onClick={() =>
-                              history.push(
-                                `/account/subscription/${subscription?.subscriptionId}/billing`
-                              )
+                              history.push({
+                                pathname: `/account/subscription/${subscription?.subscriptionId}/billing`,
+                                state: {
+                                  packageId: subscription?.packageId,
+                                  pricingType: subscription?.pricingType,
+                                },
+                              })
                             }
                           >
-                            Renew
+                            Edit
                           </button>
-                        )}{" "}
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Next Payment Date</td>
-                    <td>
+                          <button
+                            className="text_btn  cancel_btn"
+                            onClick={() => setPopUp(!popUp)}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          className="text_btn"
+                          onClick={() =>
+                            history.push({
+                              pathname: `/account/subscription/${subscription?.subscriptionId}/renew`,
+                              state: {
+                                packageId: subscription?.packageId,
+                                pricingType: subscription?.pricingType,
+                              },
+                            })
+                          }
+                        >
+                          Renew
+                        </button>
+                      )}
+                    </p>
+                  </div>
+                  <hr />
+                  <p className="title">Next Payment Date</p>
+                  <div className="sub_plan_mobile">
+                    <p>
                       {moment(subscription?.expiredDate).format("MM/DD/YYYY")}
-                    </td>
-                    <td className="price">${subscription?.price}</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>Payment Method</td>
-                    <td>{subscription?.paymentMethod}</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </Table>
+                    </p>
+                    <p className="price">${subscription?.price}</p>
+                  </div>
+                  <hr />
+                  <p className="title">Payment Method</p>
+                  <div className="sub_plan_mobile">
+                    <p>{subscription?.paymentMethod}</p>
+                  </div>
+                </div>
+              ) : (
+                <Table responsive className="mt-4">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p className="th_plan_name">Subscription Plan</p>
+                      </td>
+                      <td>
+                        <p className="th_plan_name">{subscription?.planName}</p>
+                      </td>
+                      <td className="">
+                        <p className="th_paid">
+                          Paid &nbsp;
+                          {subscription?.pricingType === "annually"
+                            ? "Yearly"
+                            : "Monthly"}{" "}
+                        </p>
+                      </td>
+
+                      <td className="text-right">
+                        <p className="th_actions">
+                          {Number(subscription?.isDisabled) === 0 ? (
+                            <>
+                              <button
+                                className="text_btn"
+                                onClick={() =>
+                                  history.push({
+                                    pathname: `/account/subscription/${subscription?.subscriptionId}/billing`,
+                                    state: {
+                                      packageId: subscription?.packageId,
+                                      pricingType: subscription?.pricingType,
+                                    },
+                                  })
+                                }
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="text_btn  cancel_btn"
+                                onClick={() => setPopUp(!popUp)}
+                              >
+                                Cancel
+                              </button>
+                            </>
+                          ) : (
+                            <button
+                              className="text_btn"
+                              onClick={() =>
+                                history.push({
+                                  pathname: `/account/subscription/${subscription?.subscriptionId}/renew`,
+                                  state: {
+                                    packageId: subscription?.packageId,
+                                    pricingType: subscription?.pricingType,
+                                  },
+                                })
+                              }
+                            >
+                              Renew
+                            </button>
+                          )}{" "}
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Next Payment Date</td>
+                      <td>
+                        {moment(subscription?.expiredDate).format("MM/DD/YYYY")}
+                      </td>
+                      <td className="price">${subscription?.price}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Payment Method</td>
+                      <td>{subscription?.paymentMethod}</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </Table>
+              )}
 
               <h1 className="mt-5">Billing History </h1>
               <Table responsive className="mt-4">

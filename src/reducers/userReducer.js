@@ -192,7 +192,6 @@ export const mySubscriptionReducer = (
 
     case types.GET_SUBSCRIPTION_BY_ID_SUCCESS:
       return {
-        ...state,
         subscription: payload,
         loading: false,
       };
@@ -244,7 +243,6 @@ export const getPackageReducer = (
   switch (type) {
     case types.GET_PACKAGE_REQUEST:
       return {
-        ...state,
         loading: true,
       };
     case types.GET_PACKAGE_SUCCESS:
@@ -318,8 +316,33 @@ export const updateSubscriptionReducer = (
   }
 };
 
-// ForgotPassword
+export const renewSubscriptionReducer = (
+  state = { loading: false, message: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.RENEW_SUBSCRIPTION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.RENEW_SUBSCRIPTION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case types.RENEW_SUBSCRIPTION_FAILURE:
+      return {
+        ...state,
+        loading: true,
+      };
+    default:
+      return state;
+  }
+};
 
+// ForgotPassword
 export const forgotPasswordReducer = (
   state = { loading: false, message: "" },
   { type, payload }

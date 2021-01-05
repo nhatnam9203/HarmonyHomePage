@@ -339,8 +339,40 @@ export const updateSubscriptionAction = (value) => async (
   }
 };
 
-// ForgotPassword
+// Renew Subscription
+export const renewSubscriptionAction = (value) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: typeUser.RENEW_SUBSCRIPTION_REQUEST,
+    });
 
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.renewSubscriptionById(value, token);
+
+    dispatch({
+      type: typeUser.RENEW_SUBSCRIPTION_SUCCESS,
+      payload: data?.data,
+    });
+
+    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+
+    history.goBack();
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.RENEW_SUBSCRIPTION_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// ForgotPassword
 export const forgotPasswordAction = (value) => async (dispatch) => {
   try {
     dispatch({
@@ -348,12 +380,20 @@ export const forgotPasswordAction = (value) => async (dispatch) => {
     });
 
     const { data } = await api.forgotPassword(value.email);
-    dispatch({
-      type: typeUser.GET_FORGOT_PASSWORD_SUCCESS,
-      payload: data?.data,
-    });
-
-    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+    console.log("data :>> ", data);
+    if (data.codeNumber !== 200) {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+      dispatch({
+        type: typeUser.GET_FORGOT_PASSWORD_FAILURE,
+        payload: data.message,
+      });
+    } else {
+      dispatch({
+        type: typeUser.GET_FORGOT_PASSWORD_SUCCESS,
+        payload: data?.data,
+      });
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+    }
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({

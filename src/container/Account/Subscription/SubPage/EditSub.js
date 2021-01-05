@@ -8,12 +8,13 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import {
   getPackageAction,
   getRefundMoneyAction,
   getMySubscriptionByIdAction,
   updateSubscriptionAction,
+  renewSubscriptionAction,
 } from "../../../../actions/userActions";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { motion } from "framer-motion";
@@ -22,10 +23,14 @@ import Loading from "../../../../util/Loading";
 
 import "./EditSub.scss";
 
-function EditSub() {
+function EditSub(props) {
   const { id } = useParams();
+
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const { packageId, pricingType } = location.state;
 
   const { loading, packageList } = useSelector((state) => state.package);
 
@@ -40,12 +45,9 @@ function EditSub() {
     (state) => state.refund
   );
 
-  const [defaultPackageId, setDefaultPackageId] = useState(
-    subscription?.packageId
-  );
-  const [defaultPricingType, setDefaultPricingType] = useState(
-    subscription?.pricingType
-  );
+  const [defaultPackageId, setDefaultPackageId] = useState(packageId);
+  const [defaultPricingType, setDefaultPricingType] = useState(pricingType);
+
   const [staffNumber, setStaffNumber] = useState("");
   const [additionStaffPrice, setAdditionStaffPrice] = useState("");
   const [newPackageName, setNewPackageName] = useState("");
@@ -55,7 +57,7 @@ function EditSub() {
   useEffect(() => {
     dispatch(getPackageAction(id));
     dispatch(getMySubscriptionByIdAction(id));
-  }, [dispatch]);
+  }, [dispatch, location]);
 
   const handleDefaultChecked = (packageId, pricingType) => {
     if (
@@ -90,7 +92,11 @@ function EditSub() {
       additionStaff: 0,
     };
 
-    dispatch(updateSubscriptionAction(value));
+    if (props?.isRenew) {
+      dispatch(renewSubscriptionAction(value));
+    } else {
+      dispatch(updateSubscriptionAction(value));
+    }
   };
 
   const newPlanText =
@@ -176,7 +182,7 @@ function EditSub() {
   return (
     <div className="sub_edit">
       <h1>Change Subscription</h1>
-      {loading && loadingSub ? (
+      {loadingSub ? (
         <Loading />
       ) : (
         <Table responsive className="mt-4">
@@ -185,10 +191,10 @@ function EditSub() {
               <th className="p-3 ">
                 <p className="th_name">Packages</p>
               </th>
-              <th className="p-3 text-center-md">
+              <th className="p-3 text-md-center">
                 <p>Billed Monthly</p>
               </th>
-              <th className="p-3 text-center-md">
+              <th className="p-3 text-md-center">
                 <p>Billed Annually</p>
               </th>
             </tr>
