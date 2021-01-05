@@ -8,12 +8,13 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import {
   getPackageAction,
   getRefundMoneyAction,
   getMySubscriptionByIdAction,
   updateSubscriptionAction,
+  renewSubscriptionAction,
 } from "../../../../actions/userActions";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { motion } from "framer-motion";
@@ -22,10 +23,14 @@ import Loading from "../../../../util/Loading";
 
 import "./EditSub.scss";
 
-function EditSub() {
+function EditSub(props) {
   const { id } = useParams();
+
   const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const { packageId, pricingType } = location.state;
 
   const { loading, packageList } = useSelector((state) => state.package);
 
@@ -40,16 +45,8 @@ function EditSub() {
     (state) => state.refund
   );
 
-  const [defaultPackageId, setDefaultPackageId] = useState(
-    subscription?.packageId
-  );
-  const [defaultPricingType, setDefaultPricingType] = useState(
-    subscription?.pricingType
-  );
-
-  console.log("subscription", subscription);
-  console.log("defaultPackageId", defaultPackageId);
-  console.log("packageList", packageList);
+  const [defaultPackageId, setDefaultPackageId] = useState(packageId);
+  const [defaultPricingType, setDefaultPricingType] = useState(pricingType);
 
   const [staffNumber, setStaffNumber] = useState("");
   const [additionStaffPrice, setAdditionStaffPrice] = useState("");
@@ -60,7 +57,7 @@ function EditSub() {
   useEffect(() => {
     dispatch(getPackageAction(id));
     dispatch(getMySubscriptionByIdAction(id));
-  }, [dispatch]);
+  }, [dispatch, location]);
 
   const handleDefaultChecked = (packageId, pricingType) => {
     if (
@@ -95,7 +92,11 @@ function EditSub() {
       additionStaff: 0,
     };
 
-    dispatch(updateSubscriptionAction(value));
+    if (props?.isRenew) {
+      dispatch(renewSubscriptionAction(value));
+    } else {
+      dispatch(updateSubscriptionAction(value));
+    }
   };
 
   const newPlanText =
@@ -108,79 +109,75 @@ function EditSub() {
   const totalPackagePrice =
     Number(packagePrice) + Number(staffNumber) * Number(additionStaffPrice);
 
-  const renderPackage =
-    !loadingSub &&
-    packageList
-      ?.map((i, idx) => {
-        return (
-          <tr key={idx}>
-            <td className="sub_plan">
-              {i?.packageName} <br />
-              {Number(i?.packageId === 3)
-                ? Number(defaultPackageId) === 3 && (
-                    <div className="add_staff">
-                      <p>Addition Staff</p>
-                      <input
-                        type="number"
-                        name="additionStaff"
-                        value={staffNumber}
-                        onChange={(e) => handleStaff(e, i?.additionStaffPrice)}
-                      />
-                    </div>
-                  )
-                : null}
-            </td>
-            <td className="text-center">
-              <Form.Check type="radio" id="check-api-radio">
-                <Form.Check.Input
-                  type="radio"
-                  name={i?.packageId}
-                  onChange={(e) =>
-                    handleSubscriptionChange(e, i?.packageName, i?.pricing)
-                  }
-                  value="monthly"
-                  checked={handleDefaultChecked(i?.packageId, "monthly")}
-                />
-                <Form.Check.Label>${i?.pricing}</Form.Check.Label>
-              </Form.Check>
+  const renderPackage = packageList
+    ?.map((i, idx) => {
+      return (
+        <tr key={idx}>
+          <td className="sub_plan">
+            {i?.packageName} <br />
+            {Number(i?.packageId === 3)
+              ? Number(defaultPackageId) === 3 && (
+                  <div className="add_staff">
+                    <p>Addition Staff</p>
+                    <input
+                      type="number"
+                      name="additionStaff"
+                      value={staffNumber}
+                      onChange={(e) => handleStaff(e, i?.additionStaffPrice)}
+                    />
+                  </div>
+                )
+              : null}
+          </td>
+          <td className="text-center">
+            <Form.Check type="radio" id="check-api-radio">
+              <Form.Check.Input
+                type="radio"
+                name={i?.packageId}
+                onChange={(e) =>
+                  handleSubscriptionChange(e, i?.packageName, i?.pricing)
+                }
+                value="monthly"
+                checked={handleDefaultChecked(i?.packageId, "monthly")}
+              />
+              <Form.Check.Label>${i?.pricing}</Form.Check.Label>
+            </Form.Check>
 
-              {Number(i?.packageId === 3)
-                ? Number(defaultPackageId) === 3 && (
-                    <div className="text-center">
-                      <p className="staff_price">
-                        + $
-                        {(Number(staffNumber) * i?.additionStaffPrice).toFixed(
-                          2
-                        )}
-                      </p>
-                    </div>
+            {Number(i?.packageId === 3)
+              ? Number(defaultPackageId) === 3 && (
+                  <div className="text-center">
+                    <p className="staff_price">
+                      + $
+                      {(Number(staffNumber) * i?.additionStaffPrice).toFixed(2)}
+                    </p>
+                  </div>
+                )
+              : null}
+          </td>
+          <td className="text-center">
+            <Form.Check type="radio" id="check-api-radio">
+              <Form.Check.Input
+                type="radio"
+                name={i?.packageId}
+                onChange={(e) =>
+                  handleSubscriptionChange(
+                    e,
+                    i?.packageName,
+                    (i?.pricing * i?.annually).toFixed(2)
                   )
-                : null}
-            </td>
-            <td className="text-center">
-              <Form.Check type="radio" id="check-api-radio">
-                <Form.Check.Input
-                  type="radio"
-                  name={i?.packageId}
-                  onChange={(e) =>
-                    handleSubscriptionChange(
-                      e,
-                      i?.packageName,
-                      (i?.pricing * i?.annually).toFixed(2)
-                    )
-                  }
-                  value="annually"
-                  checked={handleDefaultChecked(i?.packageId, "annually")}
-                />
-                <Form.Check.Label>
-                  ${`${(i?.pricing * i?.annually).toFixed(2)} `}
-                </Form.Check.Label>
-              </Form.Check>
-            </td>
-          </tr>
-        );
-      })
-      .reverse();
+                }
+                value="annually"
+                checked={handleDefaultChecked(i?.packageId, "annually")}
+              />
+              <Form.Check.Label>
+                ${`${(i?.pricing * i?.annually).toFixed(2)} `}
+              </Form.Check.Label>
+            </Form.Check>
+          </td>
+        </tr>
+      );
+    })
+    .reverse();
 
   return (
     <div className="sub_edit">

@@ -339,8 +339,40 @@ export const updateSubscriptionAction = (value) => async (
   }
 };
 
-// ForgotPassword
+// Renew Subscription
+export const renewSubscriptionAction = (value) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: typeUser.RENEW_SUBSCRIPTION_REQUEST,
+    });
 
+    const {
+      user: { token },
+    } = await getState().user;
+
+    const { data } = await api.renewSubscriptionById(value, token);
+
+    dispatch({
+      type: typeUser.RENEW_SUBSCRIPTION_SUCCESS,
+      payload: data?.data,
+    });
+
+    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+
+    history.goBack();
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    dispatch({
+      type: typeUser.RENEW_SUBSCRIPTION_FAILURE,
+      payload: error.message,
+    });
+  }
+};
+
+// ForgotPassword
 export const forgotPasswordAction = (value) => async (dispatch) => {
   try {
     dispatch({

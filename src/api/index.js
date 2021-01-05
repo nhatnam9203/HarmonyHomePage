@@ -105,6 +105,20 @@ export const updateSubscriptionById = (value, token) => {
   );
 };
 
+// Renew Subscription By Id
+export const renewSubscriptionById = (value, token) => {
+  const { id } = value;
+  return axios.put(
+    `${getMySubscriptionUrl}/renew/${id}`,
+    { ...value },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
 // Get package
 const getPackageUrl = `${url}/package`;
 export const getPackage = (token) =>

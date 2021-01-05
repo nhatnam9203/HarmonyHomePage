@@ -72,9 +72,13 @@ function Subscription() {
             <button
               className="text_btn"
               onClick={() =>
-                history.push(
-                  `/account/subscription/${i?.subscriptionId}/billing`
-                )
+                history.push({
+                  pathname: `/account/subscription/${i?.subscriptionId}/billing`,
+                  state: {
+                    packageId: i?.packageId,
+                    pricingType: i?.pricingType,
+                  },
+                })
               }
             >
               Edit
@@ -90,7 +94,10 @@ function Subscription() {
           <button
             className="text_btn"
             onClick={() =>
-              history.push(`/account/subscription/${i?.subscriptionId}/billing`)
+              history.push({
+                pathname: `/account/subscription/${i?.subscriptionId}/renew`,
+                state: { packageId: i?.packageId, pricingType: i?.pricingType },
+              })
             }
           >
             Renew

@@ -62,6 +62,12 @@ function Account() {
               component={EditSub}
             />
 
+            <Route
+              exact
+              path="/account/subscription/:id/renew"
+              render={(props) => <EditSub {...props} isRenew={true} />}
+            />
+
             <Route exact path="/account/merchant" component={Merchant} />
             <Route path="/account/merchant/:id/edit" component={EditInfo} />
             <Route path="/account/merchant/:id" component={Info} />
