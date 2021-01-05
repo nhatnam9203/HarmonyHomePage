@@ -380,7 +380,6 @@ export const forgotPasswordAction = (value) => async (dispatch) => {
     });
 
     const { data } = await api.forgotPassword(value.email);
-    console.log("data :>> ", data);
     if (data.codeNumber !== 200) {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
       dispatch({
