@@ -1,4 +1,2 @@
 export const NOTIFY_SUCCESS = "NOTIFY_SUCCESS";
 export const NOTIFY_FAILURE = "NOTIFY_FAILURE";
-export const NOTIFY_WARNING = "NOTIFY_WARNING";
-export const NOTIFY_INFO = "NOTIFY_INFO";
