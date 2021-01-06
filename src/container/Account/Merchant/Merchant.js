@@ -38,7 +38,7 @@ function Merchant() {
 
   return (
     <div className="merchant">
-      <h1>My Merchant</h1>
+      <h1>My Merchants</h1>
 
       {loading ? (
         <Loading />
