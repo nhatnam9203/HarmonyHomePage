@@ -44,7 +44,7 @@ function Merchant() {
         <Loading />
       ) : (
         <div>
-          <Table responsive bordered className="mt-4">
+          <Table responsive className="mt-4">
             <thead>
               <tr>
                 <th>ID</th>
