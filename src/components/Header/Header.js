@@ -92,13 +92,14 @@ export default function Header() {
             </Col>
             <Col xs="auto" className="pt-1 mx-sm-1 pr-0">
               <a href="tel:800-531-3126" className="telephone">
-                <FiPhoneCall size={21} />
-                <a href="tel:800-531-3126" className="isMobile">
+                {/* add them mr-2 */}
+                <FiPhoneCall size={21} className="mr-2" />
+                <a href="tel:800-531-3126" className="isMobile mr-2">
                   800-531-3126
                 </a>
               </a>
             </Col>
-            {isMobile ? (
+            {/* {isMobile ? (
               <Col xs="auto" className=" mx-sm-2">
                 <FaQuestionCircle size={22}></FaQuestionCircle>
               </Col>
@@ -106,7 +107,7 @@ export default function Header() {
               <Col xs="auto" className="pt-1 mx-sm-2">
                 FAQ
               </Col>
-            )}
+            )} */}
 
             {/* <Col xs="auto" className="px-0">
               {i18n.language === "en" ? (

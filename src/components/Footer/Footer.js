@@ -88,12 +88,12 @@ export default function Footer() {
                 </a>
               </div>
               <ul className="d-flex mb-0 bot_footer-link">
-                <li className="list-unstyled divider_link-footer">
+                {/* <li className="list-unstyled divider_link-footer">
                   <a href="#" className="text-white">
                     {" "}
                     {t("Terms & Conditions")}{" "}
                   </a>
-                </li>
+                </li> */}
                 <li className="list-unstyled divider_link-footer">
                   <Link to="/gift-card-terms" className="text-white">
                     {" "}
@@ -109,12 +109,12 @@ export default function Footer() {
                 {/* <li className="list-unstyled divider_link-footer">
                   <a href="#!"> {t("Consumer Policy")} </a>
                 </li> */}
-                <li className="list-unstyled divider_link-footer">
+                {/* <li className="list-unstyled divider_link-footer">
                   <a href="#" className="text-white">
                     {" "}
                     {t("User Guide")}{" "}
                   </a>
-                </li>
+                </li> */}
               </ul>
             </Col>
             <Col xs="auto" className="p-0">
