@@ -67,14 +67,23 @@ export const updateMyAccountAction = (payload) => async (
 
     const { data } = await api.updateMyAccount(payload, token);
 
-    dispatch({
-      type: typeUser.UPDATE_MY_ACCOUNT_SUCCESS,
-      payload: data?.message,
-    });
+    if (Number(data?.codeNumber) === 200) {
+      dispatch({
+        type: typeUser.UPDATE_MY_ACCOUNT_SUCCESS,
+        payload: data?.message,
+      });
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
 
-    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
-
-    history.goBack();
+      setTimeout(() => {
+        history.goBack();
+      }, 1000);
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+      dispatch({
+        type: typeUser.UPDATE_MY_ACCOUNT_FAILURE,
+        payload: data.message,
+      });
+    }
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({
