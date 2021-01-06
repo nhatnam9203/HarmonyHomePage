@@ -21,7 +21,7 @@ import "./Account.scss";
 
 function Account() {
   return (
-    <div className="account">
+    <div className="account px-2">
       <Row className="pr-0">
         <Col sm={12} md={4} lg={3} className="">
           <Sidebar />
