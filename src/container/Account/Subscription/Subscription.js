@@ -6,6 +6,7 @@ import {
   cancelSubscriptionByIdAction,
 } from "../../../actions/userActions";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 
 import moment from "moment";
 import Loading from "../../../util/Loading";
@@ -17,6 +18,7 @@ import "./Subscription.scss";
 function Subscription() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
   const { loading, subscriptionList } = useSelector(
     (state) => state.mySubscription
@@ -127,34 +129,45 @@ function Subscription() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeIn" }}
           >
-            <Table responsive className="mt-4">
-              <thead>
-                <tr>
-                  <th>
-                    <p className="th_plan">Plan</p>
-                  </th>
-                  <th>
-                    <p className="th_mer_id">Merchant ID</p>
-                  </th>
-                  <th>
-                    <p className="th_name">Business Name</p>
-                  </th>
-                  <th>
-                    <p className="th_pay_date">Next Payment Date</p>
-                  </th>
-                  <th>
-                    <p>Amount</p>
-                  </th>
-                  <th>
-                    <p>Status</p>
-                  </th>
-                  <th>
-                    <p className="th_action">Actions</p>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>{renderSubscriptionList}</tbody>
-            </Table>
+            {isMobile ? (
+              <div className="bg-light">
+                <p className="th_plan">Plan</p>
+                <p className="th_plan">Plan</p>
+                <p className="th_plan">Plan</p>
+                <p className="th_plan">Plan</p>
+                <p className="th_plan">Plan</p>
+                <p className="th_plan">Plan</p>
+              </div>
+            ) : (
+              <Table responsive className="mt-4">
+                <thead>
+                  <tr>
+                    <th>
+                      <p className="th_plan">Plan</p>
+                    </th>
+                    <th>
+                      <p className="th_mer_id">Merchant ID</p>
+                    </th>
+                    <th>
+                      <p className="th_name">Business Name</p>
+                    </th>
+                    <th>
+                      <p className="th_pay_date">Next Payment Date</p>
+                    </th>
+                    <th>
+                      <p>Amount</p>
+                    </th>
+                    <th>
+                      <p>Status</p>
+                    </th>
+                    <th>
+                      <p className="th_action">Actions</p>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>{renderSubscriptionList}</tbody>
+              </Table>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
