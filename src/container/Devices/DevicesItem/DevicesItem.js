@@ -383,7 +383,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal1}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -395,7 +395,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal2}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -407,7 +407,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal3}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -419,7 +419,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal4}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -431,7 +431,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal5}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">

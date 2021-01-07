@@ -82,7 +82,7 @@ export default function Footer() {
                 <a
                   target="blank"
                   href="https://www.harmonypayment.com/"
-                  className="text-white"
+                  className="text-white mr-3"
                 >
                   HarmonyPay Inc
                 </a>
@@ -95,7 +95,10 @@ export default function Footer() {
                   </a>
                 </li> */}
                 <li className="list-unstyled divider_link-footer">
-                  <Link to="/gift-card-terms" className="text-white">
+                  <Link
+                    to="/gift-card-terms"
+                    className="text-white divider__col"
+                  >
                     {" "}
                     {t("Gift Card Terms")}{" "}
                   </Link>
@@ -103,7 +106,7 @@ export default function Footer() {
                 <li className="list-unstyled divider_link-footer">
                   <Link
                     to="/harmony_consumer_app_privacy_info.html"
-                    className="text-white"
+                    className="text-white divider__col"
                   >
                     {" "}
                     {t("Policy")}{" "}

@@ -91,6 +91,12 @@
     &--img {
       max-width: 22.5rem;
     }
+    &--img1 {
+      max-width: 22.5rem;
+      @media screen and(max-width:576px) {
+        max-width: 15rem;
+      }
+    }
     &--title {
       letter-spacing: 0.2rem;
       font-size: 1.4375rem;

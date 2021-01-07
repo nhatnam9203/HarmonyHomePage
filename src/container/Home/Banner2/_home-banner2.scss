@@ -7,20 +7,38 @@
   background-position: center;
   position: relative;
   margin-bottom: 6.25rem;
-  @include mediaQueryMax("xxl") {
-    height: 48rem;
+  // @include mediaQueryMax("xxl") {
+  //   height: 48rem;
+  // }
+  // @include mediaQueryMax("extra-large") {
+  //   height: 40rem;
+  // }
+  // @include mediaQueryMax("large") {
+  //   height: 30rem;
+  // }
+  // @include mediaQueryMax("medium") {
+  //   height: 28rem;
+  // }
+  // @include mediaQueryMax("xs") {
+  //   height: 21rem;
+  // }
+  @media screen and (max-width: 1440px) {
+    height: 42rem;
   }
-  @include mediaQueryMax("extra-large") {
-    height: 40rem;
+  @media screen and (max-width: 1024px) {
+    height: 32rem;
   }
-  @include mediaQueryMax("large") {
-    height: 30rem;
+  @media screen and (max-width: 768px) {
+    height: 26rem;
   }
-  @include mediaQueryMax("medium") {
-    height: 28rem;
+  @media screen and (max-width: 576px) {
+    margin-bottom: 0rem;
   }
-  @include mediaQueryMax("xs") {
-    height: 21rem;
+  @media screen and (max-width: 425px) {
+    height: 14rem;
+  }
+  @media screen and (max-width: 375px) {
+    height: 12rem;
   }
   &__content {
     padding: 6.5rem 1.5rem;
@@ -29,6 +47,9 @@
     }
     @include mediaQueryMax("large") {
       padding: 2rem 1.5rem;
+    }
+    @media screen and (max-width: 576px) {
+      margin-bottom: 4.25rem;
     }
   }
   // &-img {
