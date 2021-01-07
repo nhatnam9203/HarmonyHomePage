@@ -107,12 +107,9 @@ export default function DevicesItem() {
                 md={6}
                 className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
               >
-                <Card.Img
-                  variant="top"
-                  className="divices__item--img"
-                  src={Mpop}
-                  alt=""
-                />
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img className="divices__item--img" src={Mpop} alt="" />
+                </Card>
 
                 {/* <img className="divices__item--img" src={Mpop} alt="" /> */}
               </Col>
@@ -462,7 +459,14 @@ export default function DevicesItem() {
                 md={3}
                 className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
               >
-                <img className="divices__item--img" src={Printer} alt="" />
+                <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                  <Card.Img
+                    className="divices__item--img"
+                    src={Printer}
+                    alt=""
+                  />
+                </Card>
+                {/* <img className="divices__item--img" src={Printer} alt="" /> */}
               </Col>
               <Col
                 xs={12}

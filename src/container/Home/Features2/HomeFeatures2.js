@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import POS1 from "../../../assets/images/elo paypoint calendar.png";
 import POS2 from "../../../assets/images/elo paypoint calendar-1.png";
 import Ipad from "../../../assets/images/SC-102G-A3_3_800x.png";
@@ -37,7 +37,14 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
-              <img className="bot_features2-item--img" src={POS1} alt="POS" />
+              <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                <Card.Img
+                  className="bot_features2-item--img"
+                  src={POS1}
+                  alt="POS"
+                />
+              </Card>
+              {/* <img className="bot_features2-item--img" src={POS1} alt="POS" /> */}
             </Col>
             <Col xs={12} md={6} className="text-center text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
@@ -74,7 +81,14 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <img className="bot_features2-item--img" src={POS2} alt="POS" />
+              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                <Card.Img
+                  className="bot_features2-item--img"
+                  src={POS2}
+                  alt="POS"
+                />
+              </Card>
+              {/* <img className="bot_features2-item--img" src={POS2} alt="POS" /> */}
             </Col>
           </Row>
         </div>
@@ -110,11 +124,18 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <img
+              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                <Card.Img
+                  className="bot_features2-item--img"
+                  src={Ipad}
+                  alt="SIGN IN"
+                />
+              </Card>
+              {/* <img
                 className="bot_features2-item--img"
                 src={Ipad}
                 alt="SIGN IN"
-              />
+              /> */}
             </Col>
           </Row>
         </div>
@@ -136,11 +157,18 @@ export default function HomeFeatures2() {
               md={3}
               className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
-              <img
+              <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                <Card.Img
+                  className="bot_features2-item--phone"
+                  src={Iphone}
+                  alt="Consumer App"
+                />
+              </Card>
+              {/* <img
                 className="bot_features2-item--phone"
                 src={Iphone}
                 alt="Consumer App"
-              />
+              /> */}
             </Col>
             <Col xs={12} md={9} className="text-center text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
@@ -187,11 +215,18 @@ export default function HomeFeatures2() {
               md={3}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <img
+              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                <Card.Img
+                  className="bot_features2-item--phone"
+                  src={Iphone2}
+                  alt="Staff App"
+                />
+              </Card>
+              {/* <img
                 className="bot_features2-item--phone"
                 src={Iphone2}
                 alt="Staff App"
-              />
+              /> */}
             </Col>
           </Row>
         </div>
@@ -230,7 +265,14 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <img className="bot_features2-item--img" src={POS3} alt="POS" />
+              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                <Card.Img
+                  className="bot_features2-item--img"
+                  src={POS3}
+                  alt="POS"
+                />
+              </Card>
+              {/* <img className="bot_features2-item--img" src={POS3} alt="POS" /> */}
             </Col>
           </Row>
           <Row>
@@ -239,7 +281,14 @@ export default function HomeFeatures2() {
               md={6}
               className=" xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
-              <img className="bot_features2-item--img" src={Lap} alt="POS" />
+              <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                <Card.Img
+                  className="bot_features2-item--img"
+                  src={Lap}
+                  alt="POS"
+                />
+              </Card>
+              {/* <img className="bot_features2-item--img" src={Lap} alt="POS" /> */}
             </Col>
             <Col xs={12} md={6} className="text-center text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
