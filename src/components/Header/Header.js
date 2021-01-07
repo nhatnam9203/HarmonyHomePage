@@ -200,7 +200,7 @@ export default function Header() {
                   exact
                   to="/home"
                   className="nav-NavLink merchant_nav"
-                  activeClassName="active_link"
+                  activeClassName="active_link border-0"
                 >
                   FOR MERCHANT
                 </NavLink>
