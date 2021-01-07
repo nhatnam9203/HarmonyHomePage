@@ -28,4 +28,35 @@
       width: 120px;
     }
   }
+
+  .sub_mobile {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 17px;
+
+    &:nth-child(1) {
+      margin-top: 0;
+    }
+
+    p {
+      width: 50%;
+      padding: 4px 0;
+    }
+
+    .sub_name {
+      font-weight: 600;
+    }
+
+    p:nth-child(2n + 2) {
+      text-align: right;
+    }
+
+    .text_btn {
+      background-color: transparent;
+    }
+    .text_btn.cancel_btn {
+      padding-right: 0;
+    }
+  }
 }

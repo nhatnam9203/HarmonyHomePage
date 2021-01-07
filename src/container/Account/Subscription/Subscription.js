@@ -130,14 +130,78 @@ function Subscription() {
             transition={{ duration: 0.8, ease: "easeIn" }}
           >
             {isMobile ? (
-              <div className="bg-light">
-                <p className="th_plan">Plan</p>
-                <p className="th_plan">Plan</p>
-                <p className="th_plan">Plan</p>
-                <p className="th_plan">Plan</p>
-                <p className="th_plan">Plan</p>
-                <p className="th_plan">Plan</p>
-              </div>
+              subscriptionList?.map((i, idx) => (
+                <div className="bg-light sub_mobile" key={idx}>
+                  <p className="sub_name">Plan</p>
+                  <p
+                    className="sub_plan plan_name"
+                    onClick={() =>
+                      history.push(`/account/subscription/${i?.subscriptionId}`)
+                    }
+                  >
+                    {i?.planName}
+                  </p>
+                  <p className="sub_name">Merchant ID</p>
+                  <p
+                    className="sub_plan"
+                    onClick={() =>
+                      history.push(`/account/merchant/${i?.merchantId}`)
+                    }
+                  >
+                    {i?.merchantId}
+                  </p>
+                  <p className="sub_name">Business Name</p>
+                  <p>{i?.businessName}</p>
+                  <p className="sub_name"> Next Payment Date</p>
+                  <p>{moment(i?.expiredDate).format("MM/DD/YYYY")}</p>
+                  <p className="sub_name">Amount</p>
+                  <p>${i?.price}</p>
+                  <p className="sub_name"> Status</p>
+                  <p>{Number(i?.isDisabled) === 0 ? "Active" : "Canceled"}</p>
+                  <p className="sub_name">Actions</p>
+                  <p>
+                    {Number(i?.isDisabled) === 0 ? (
+                      <>
+                        <button
+                          className="text_btn"
+                          onClick={() =>
+                            history.push({
+                              pathname: `/account/subscription/${i?.subscriptionId}/billing`,
+                              state: {
+                                packageId: i?.packageId,
+                                pricingType: i?.pricingType,
+                              },
+                            })
+                          }
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="text_btn  cancel_btn"
+                          onClick={() => handleOpenPopup(i?.subscriptionId)}
+                        >
+                          Cancel
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        className="text_btn"
+                        onClick={() =>
+                          history.push({
+                            pathname: `/account/subscription/${i?.subscriptionId}/renew`,
+                            state: {
+                              packageId: i?.packageId,
+                              pricingType: i?.pricingType,
+                            },
+                          })
+                        }
+                      >
+                        Renew
+                      </button>
+                    )}
+                  </p>
+                </div>
+              ))
             ) : (
               <Table responsive className="mt-4">
                 <thead>
