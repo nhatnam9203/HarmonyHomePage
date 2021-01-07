@@ -10,7 +10,10 @@ export const subscibeNewLetter = (email) => async (dispatch) => {
       type: typesSubs.SUBSCRIBE_REQUEST_SUCCESS,
       payload: data?.data,
     });
-    dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+    dispatch({
+      type: typeNotify.NOTIFY_SUCCESS,
+      payload: "Thanks for subscribing to the Harmonypayment.",
+    });
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({

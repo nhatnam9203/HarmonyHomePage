@@ -4,7 +4,9 @@ import instance from "../helper/axios";
 // const url = "https://dev.harmonypayment.com/api";
 
 // Staging
-const url = "https://admin.stage.harmonypayment.com/api";
+const url = "https://staging.harmonypayment.com/api";
+
+// const url = "https://admin.stage.harmonypayment.com/api";
 
 // Login
 const loginUrl = `${url}/principal/login`;

@@ -6,6 +6,28 @@
   // position: sticky;
   //   top: 0;
   //   z-index: 1020;
+  .col__auto {
+    @media screen and(min-width:426px) {
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+    }
+  }
+  .col__signin {
+    @media screen and(max-width:425px) {
+      display: flex;
+      justify-content: center;
+      border-right: 1px solid #00000026;
+    }
+  }
+  .col__phone {
+    @media screen and(max-width:425px) {
+      display: flex;
+      justify-content: center;
+      border-right: 1px solid #00000026;
+    }
+  }
+
   .singin {
     display: flex;
     align-items: center;
@@ -98,7 +120,7 @@
   .sign_up {
     a {
       color: $white-0 !important;
-      padding: 13px 20px;
+      padding: 13px 18px;
       background-color: $blue-0;
       font-weight: 500;
     }
@@ -106,7 +128,7 @@
     a:hover {
       height: 0px !important;
       border-bottom: 0px;
-      padding: 13px 20px;
+      padding: 13px 18px;
     }
   }
 

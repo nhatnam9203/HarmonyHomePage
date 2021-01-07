@@ -101,10 +101,21 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li className="list-unstyled divider_link-footer">
-                  <Link to="/policy" className="text-white">
+                  <Link
+                    to="/harmony_consumer_app_privacy_info.html"
+                    className="text-white"
+                  >
                     {" "}
                     {t("Policy")}{" "}
                   </Link>
+                  {/* <a
+                    href="/harmony_consumer_app_privacy_info.html"
+                    target="blank"
+                    className="text-white"
+                  >
+                    {" "}
+                    {t("Policy")}{" "}
+                  </a> */}
                 </li>
                 {/* <li className="list-unstyled divider_link-footer">
                   <a href="#!"> {t("Consumer Policy")} </a>
