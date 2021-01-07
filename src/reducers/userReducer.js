@@ -240,6 +240,8 @@ export const getPackageReducer = (
   state = { loading: false, packageList: [] },
   { type, payload }
 ) => {
+  const data = payload === "" ? [] : payload;
+
   switch (type) {
     case types.GET_PACKAGE_REQUEST:
       return {
@@ -249,7 +251,7 @@ export const getPackageReducer = (
       return {
         ...state,
         loading: false,
-        packageList: payload,
+        packageList: data,
       };
     case types.GET_PACKAGE_FAILURE:
       return {

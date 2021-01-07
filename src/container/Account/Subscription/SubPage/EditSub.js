@@ -284,7 +284,7 @@ function EditSub(props) {
           </div>
         </motion.div>
       )}
-      <div className="d-flex justify-content-end pt-4">
+      <div className="d-flex flex-wrap justify-content-end pt-4 ">
         <Button className="btn btn_cancel" onClick={() => history.goBack()}>
           Cancel
         </Button>
