@@ -1,0 +1,48 @@
+.top_footer {
+  background-color: $blue-0;
+  height: 18rem;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  -webkit-background-clip: padding-box; /* for Safari */
+  background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+  &-title {
+    padding-top: 6.25rem;
+    margin-bottom: $m-7;
+    font-size: $fs-title;
+    font-weight: $fw-2;
+    letter-spacing: $title-0;
+    @include mediaQueryMax("large") {
+      font-size: 2rem;
+    }
+  }
+  &-form {
+    max-width: 50rem !important;
+    height: 3.25rem;
+    margin-bottom: $m-7 !important;
+    border: 1px solid $white-0;
+    outline: none;
+    &--button {
+      max-width: 12.5rem;
+      padding-top: auto;
+      padding-bottom: auto;
+      padding-left: 3.3125rem;
+      padding-right: 3.3125rem;
+      // padding: auto 53px;
+      font-size: 1.125rem;
+      font-weight: $fw-bold;
+      letter-spacing: 0.9px;
+      background-color: $blue-0;
+      @include mediaQueryMax("small") {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        font-size: 1rem;
+      }
+
+      // background: $blue-0 0% 0% no-repeat padding-box;
+      &:hover {
+        background-color: $blue-1;
+        transition: $transition-0;
+      }
+    }
+  }
+}

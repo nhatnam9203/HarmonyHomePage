@@ -1,4 +1,5 @@
 import React from "react";
+import Topfooter from "../../components/Footer/TopFooter";
 import HomeBanner2 from "./Banner2/HomeBanner2";
 import HomeFeatures2 from "./Features2/HomeFeatures2";
 
@@ -14,6 +15,7 @@ function Home() {
       <StarterKit /> */}
       <HomeBanner2 />
       <HomeFeatures2 />
+      <Topfooter />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import Topfooter from "../../components/Footer/TopFooter";
 import Carousel from "./Carousel/Carousel";
 import Package from "./Package/Package";
 
@@ -7,6 +8,7 @@ function Pricing() {
     <>
       <Package />
       <Carousel />
+      <Topfooter />
     </>
   );
 }

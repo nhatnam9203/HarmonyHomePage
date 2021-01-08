@@ -1,4 +1,5 @@
 import React from "react";
+import Topfooter from "../../components/Footer/TopFooter";
 import ContactUsInvestor from "./Contact/ContactUsInvestor";
 import Investorbanner from "./InvestorBanner/InvestorBanner";
 import Partner from "./PartnerShips/Partner";
@@ -13,6 +14,7 @@ export default function ForInvestor() {
       <Team />
       <Partner />
       <ContactUsInvestor />
+      <Topfooter />
     </>
   );
 }
