@@ -36,13 +36,15 @@ function App() {
         <Header />
         <main className="app-main-content">
           <Switch>
-            <Route exact path="/home" component={Home} />
             <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
+            <Route path="/home/pricing" component={Pricing} />
+            <Route path="/home/devices" component={Devices} />
+            <Route path="/home/contact" component={Contact} />
+
             <Route path="/sign-up" component={SignUp} />
             <Route path="/shop" component={Shop} />
-            <Route path="/pricing" component={Pricing} />
-            <Route path="/devices" component={Devices} />
-            <Route path="/contact" component={Contact} />
+
             <Route path="/investor" component={ForInvestor} />
             <Route path="/consumer" component={ForConsumer} />
             <Route path="/gift-card-terms" component={GiftCardTerms} />

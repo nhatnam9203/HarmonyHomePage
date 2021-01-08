@@ -167,7 +167,7 @@ export default function Header() {
               </NavItem>
               <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
-                  to="/pricing"
+                  to="/home/pricing"
                   className="nav-NavLink"
                   activeClassName="active_link"
                 >
@@ -176,7 +176,7 @@ export default function Header() {
               </NavItem>
               <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
-                  to="/devices"
+                  to="/home/devices"
                   className="nav-NavLink"
                   activeClassName="active_link"
                 >
@@ -185,7 +185,7 @@ export default function Header() {
               </NavItem>
               <NavItem onClick={() => setExpanded(false)} className="py-md-2">
                 <NavLink
-                  to="/contact"
+                  to="/home/contact"
                   className="nav-NavLink"
                   activeClassName="active_link"
                 >
@@ -201,6 +201,11 @@ export default function Header() {
                   to="/home"
                   className="nav-NavLink merchant_nav"
                   activeClassName="active_link"
+                  isActive={(match, location) => {
+                    if (location?.pathname?.includes("/home")) {
+                      return true;
+                    }
+                  }}
                 >
                   FOR MERCHANT
                 </NavLink>
