@@ -74,7 +74,7 @@ export default function Header() {
       <div className="text-right align-middle top_header py-1">
         <Container>
           <Row className="">
-            <Col className="py-1 mx-sm-1 pr-0 pl-0">
+            <Col className="py-1 mx-sm-1 pr-0 pl-0 col__signin">
               {user ? (
                 <div
                   className="singin"
@@ -90,7 +90,7 @@ export default function Header() {
                 </div>
               )}
             </Col>
-            <Col xs="auto" className="pt-1 mx-sm-1 pr-0">
+            <Col className="pt-1 mx-sm-1 pr-0 col__auto col__phone">
               <a href="tel:800-531-3126" className="telephone">
                 {/* add them mr-2 */}
                 <FiPhoneCall size={21} className="mr-2" />
@@ -100,23 +100,23 @@ export default function Header() {
               </a>
             </Col>
             {/* {isMobile ? (
-              <Col xs="auto" className=" mx-sm-2">
+              <Col  className=" mx-sm-2 col__auto">
                 <FaQuestionCircle size={22}></FaQuestionCircle>
               </Col>
             ) : (
-              <Col xs="auto" className="pt-1 mx-sm-2">
+              <Col  className="pt-1 mx-sm-2">
                 FAQ
               </Col>
             )} */}
 
-            {/* <Col xs="auto" className="px-0">
+            {/* <Col  className="px-0 col__auto">
               {i18n.language === "en" ? (
                 <Flags.US title="United States" className="flag" />
               ) : (
                 <Flags.VN title="Vietnamese" className="flag" />
               )}
             </Col>
-            <Col xs="auto" className="px-0 pb-1">
+            <Col  className="px-0 pb-1 col__auto">
               <Form.Control
                 size="sm"
                 as="select"

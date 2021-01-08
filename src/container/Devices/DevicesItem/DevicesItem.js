@@ -39,7 +39,14 @@ export default function DevicesItem() {
                 md={6}
                 className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
               >
-                <img className="divices__item--img" src={PayPoint} alt="" />
+                <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                  <Card.Img
+                    className="divices__item--img"
+                    src={PayPoint}
+                    alt=""
+                  />
+                </Card>
+                {/* <img className="divices__item--img" src={PayPoint} alt="" /> */}
               </Col>
               <Col xs={12} md={6} className="text-center text-md-left p-0">
                 <h1 className="text-uppercase font-weight-bold divices__item--title2">
@@ -100,7 +107,11 @@ export default function DevicesItem() {
                 md={6}
                 className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
               >
-                <img className="divices__item--img" src={Mpop} alt="" />
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img className="divices__item--img" src={Mpop} alt="" />
+                </Card>
+
+                {/* <img className="divices__item--img" src={Mpop} alt="" /> */}
               </Col>
             </Row>
           </div>
@@ -372,7 +383,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal1}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -384,7 +395,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal2}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -396,7 +407,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal3}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -408,7 +419,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal4}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -420,7 +431,7 @@ export default function DevicesItem() {
                   <Card.Img
                     variant="top"
                     src={Terminal5}
-                    className="divices__bot-card--img mx-auto"
+                    className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
@@ -448,7 +459,14 @@ export default function DevicesItem() {
                 md={3}
                 className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
               >
-                <img className="divices__item--img" src={Printer} alt="" />
+                <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                  <Card.Img
+                    className="divices__item--img"
+                    src={Printer}
+                    alt=""
+                  />
+                </Card>
+                {/* <img className="divices__item--img" src={Printer} alt="" /> */}
               </Col>
               <Col
                 xs={12}

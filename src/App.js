@@ -48,7 +48,10 @@ function App() {
             <Route path="/investor" component={ForInvestor} />
             <Route path="/consumer" component={ForConsumer} />
             <Route path="/gift-card-terms" component={GiftCardTerms} />
-            <Route path="/policy" component={Policy} />
+            <Route
+              path="/harmony_consumer_app_privacy_info.html"
+              component={Policy}
+            />
             <PrivateRoute path="/account" component={Account} />
           </Switch>
         </main>
