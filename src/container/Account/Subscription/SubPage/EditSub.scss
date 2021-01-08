@@ -86,6 +86,9 @@
     width: 220px;
   }
 
+  .new_order_mobile {
+  }
+
   @media screen and (max-width: 425px) {
     .th_name {
       width: 160px;
@@ -99,9 +102,7 @@
     .th_total_price {
       width: 290px;
     }
-  }
 
-  @media screen and (max-width: 375px) {
     .btn {
       width: 100%;
     }
