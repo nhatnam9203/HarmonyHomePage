@@ -24,16 +24,24 @@ export const getMyAccount = (token) =>
   });
 
 // Update My Account
-export const updateMyAccount = (payload, token) =>
-  axios.put(
+export const updateMyAccount = (payload, token) => {
+  console.log("payload", payload);
+
+  const passwords = {
+    newPassword: payload?.newPassword,
+    oldPassword: payload?.oldPassword,
+  };
+
+  return axios.put(
     myAccountUrl,
-    { ...payload },
+    { ...payload, passwords },
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
   );
+};
 
 // Newsletter Subscription
 const newsletterSubscriptionUrl = `${url}/principal/newsletter`;
