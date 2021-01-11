@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useMediaQuery } from "react-responsive";
 
 import SignUpSuccess from "../../components/SignUpSuccess/SignUpSuccess";
+import LoadingIcon from "../../assets/images/loading-icon.gif";
 
 import "./SignUp.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -102,7 +103,7 @@ function SignUp() {
               <SignUpSuccess />
             ) : (
               <div className="sign_up_form">
-                <div className="p-4">
+                <div className={`p-4 ${loading && "loading_signup"}`}>
                   <h4>REQUEST MORE INFORMATION</h4>
                   <p>
                     Give us a few details about yourself and {`we'll`} will
@@ -110,6 +111,7 @@ function SignUp() {
                     system.
                   </p>
 
+                  {loading && <img src={LoadingIcon} className="loading_gif" />}
                   <Form onSubmit={formik.handleSubmit}>
                     <Form.Group>
                       <Form.Label>
@@ -233,7 +235,7 @@ function SignUp() {
                         )}
                       </div>
                     </Form.Group>
-                    {loading ? (
+                    {/* {loading ? (
                       <Button
                         className="submit_btn text-center font-weight-bold"
                         disabled
@@ -255,14 +257,16 @@ function SignUp() {
                       >
                         SUBMIT
                       </Button>
-                    )}
-                    {/* <Button
+                    )} */}
+
+                    <Button
                       variant="primary"
                       type="submit"
                       className="submit_btn"
+                      disabled={loading}
                     >
                       SUBMIT
-                    </Button> */}
+                    </Button>
                   </Form>
                 </div>
               </div>
