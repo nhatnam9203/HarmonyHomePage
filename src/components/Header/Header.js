@@ -235,7 +235,11 @@ export default function Header() {
                 className="sign_up py-md-2"
                 onClick={() => setExpanded(false)}
               >
-                <NavLink to="/sign-up" className="nav-NavLink ">
+                <NavLink
+                  to="/home/sign-up"
+                  className="nav-NavLink"
+                  // activeClassName="active_link"
+                >
                   START FREE TRIAL
                 </NavLink>
               </NavItem>

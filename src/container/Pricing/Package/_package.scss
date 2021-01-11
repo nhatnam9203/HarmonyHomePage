@@ -125,6 +125,7 @@
       margin: 1.5rem;
       &:hover {
         color: $blue-1;
+        text-decoration: underline !important;
         .package__rightArr {
           transform: translate(5px);
           transition: $transition-0;

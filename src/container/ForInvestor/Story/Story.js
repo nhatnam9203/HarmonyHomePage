@@ -56,12 +56,12 @@ export default function Story() {
             <ul className="vision_link font-weight-light">
               <li className="vision_link-item">
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy
+                diam nonumy.
               </li>
               <li className="vision_link-item">
                 {" "}
                 Labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-                eos et accusam et
+                eos et accusam et.
               </li>
               <li className="vision_link-item">
                 Dolores et ea rebum. Stet clita kasd gubergren, no sea takimata

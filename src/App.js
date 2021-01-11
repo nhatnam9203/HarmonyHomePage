@@ -42,7 +42,7 @@ function App() {
             <Route path="/home/devices" component={Devices} />
             <Route path="/home/contact" component={Contact} />
 
-            <Route path="/sign-up" component={SignUp} />
+            <Route path="/home/sign-up" component={SignUp} />
             <Route path="/shop" component={Shop} />
 
             <Route path="/investor" component={ForInvestor} />

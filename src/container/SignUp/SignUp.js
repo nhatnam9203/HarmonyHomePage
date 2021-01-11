@@ -62,7 +62,7 @@ function SignUp() {
       phone: "",
       businessName: "",
       suggestCallTimeInfo: {
-        morning: false,
+        morning: true,
         afternoon: false,
         evening: false,
       },
@@ -70,6 +70,7 @@ function SignUp() {
     validationSchema: schema,
     onSubmit: (values) => {
       const data = values;
+      console.log("data", data);
       dispatch(requestInfo(data));
     },
   });
@@ -191,7 +192,7 @@ function SignUp() {
                             type="checkbox"
                             label="Morning"
                             name={`suggestCallTimeInfo.morning`}
-                            // checked
+                            defaultChecked={true}
                             onChange={formik.handleChange}
                             isInvalid={formik.errors.myCustomFieldName}
                             feedback={formik.errors.myCustomFieldName}

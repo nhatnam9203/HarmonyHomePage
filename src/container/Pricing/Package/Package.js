@@ -33,6 +33,10 @@ export default function Package() {
     packageList[1]?.pricing * packageList[1]?.annually;
   const pricingAnnuallyPro = packageList[0]?.pricing * packageList[0]?.annually;
 
+  const pricingAnnuallyBasic1 = pricingAnnuallyBasic.toFixed(2);
+  const pricingAnnuallyMedium1 = pricingAnnuallyMedium.toFixed(2);
+  const pricingAnnuallyPro1 = pricingAnnuallyPro.toFixed(2);
+
   return (
     <>
       {loading ? (
@@ -89,7 +93,7 @@ export default function Package() {
                 <Card.Img variant="top" src={Packkage2} />
                 <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
                   <Card.Title className="package__item--title text-center font-weight-bold">
-                    ${checked ? pricingAnnuallyBasic : packageList[2]?.pricing}
+                    ${checked ? pricingAnnuallyBasic1 : packageList[2]?.pricing}
                     <span className="package__item--sub">
                       /{checked ? "year" : "month"}
                     </span>
@@ -106,7 +110,8 @@ export default function Package() {
                 <Card.Img variant="top" src={Packkage3} />
                 <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
                   <Card.Title className="package__item--title text-center font-weight-bold">
-                    ${checked ? pricingAnnuallyMedium : packageList[1]?.pricing}
+                    $
+                    {checked ? pricingAnnuallyMedium1 : packageList[1]?.pricing}
                     <span className="package__item--sub">
                       /{checked ? "year" : "month"}
                     </span>
@@ -123,7 +128,7 @@ export default function Package() {
                 <Card.Img variant="top" src={Packkage4} />
                 <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center">
                   <Card.Title className="package__item--title text-center font-weight-bold">
-                    ${checked ? pricingAnnuallyPro : packageList[0]?.pricing}
+                    ${checked ? pricingAnnuallyPro1 : packageList[0]?.pricing}
                     <span className="package__item--sub">
                       /{checked ? "year" : "month"}
                     </span>

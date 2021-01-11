@@ -1,14 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  FormControl,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { AiFillFacebook } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -78,7 +70,7 @@ export default function Footer() {
                 </li> */}
               </ul>
             </Col>
-            <Col xs="auto" className="p-0">
+            <Col xs="auto" className="p-0 facebook__icon">
               <a
                 target="blank"
                 href="https://www.facebook.com/harmonypayapp"

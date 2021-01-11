@@ -67,6 +67,12 @@ footer {
       }
     }
   }
+  .facebook__icon {
+    margin-right: 15px;
+    @media screen and (max-width: 767px) {
+      margin-right: 0;
+    }
+  }
   .bot_footer-right {
     padding-right: 0px;
     align-items: center;

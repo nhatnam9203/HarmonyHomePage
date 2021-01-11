@@ -483,7 +483,7 @@ export default function Policy() {
           In cases where we have asked for, and you have given, your consent to
           our processing of your personal data, you have the right to withdraw
           such consent at any time. You can do this by contacting our DPO at
-          ________@Harmony Payments.com.
+          ________@HarmonyPayments.com.
         </p>
         <h5 className="policy__subtitle">
           DO YOU HAVE TO GIVE US YOUR INFORMATION?
