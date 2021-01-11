@@ -54,19 +54,34 @@ export default function Package() {
                     Pricing model
                   </Card.Title>
                   <div className="d-flex align-items-center">
-                    <span className="text-center mr-lg-3 package__features--span">
-                      Billed
-                      <br /> Monthly
-                    </span>
+                    {checked ? (
+                      <span className="text-center mr-lg-3 package__features--span">
+                        Billed
+                        <br /> Monthly
+                      </span>
+                    ) : (
+                      <span className="text-center mr-lg-3 package__features--span checked">
+                        Billed
+                        <br /> Monthly
+                      </span>
+                    )}
+
                     <input
                       type="checkbox"
                       className="switch mr-lg-3"
                       onClick={handleChecked}
                     />
-                    <span className="text-center package__features--span">
-                      Billed
-                      <br /> Annually
-                    </span>
+                    {checked ? (
+                      <span className="text-center package__features--span checked">
+                        Billed
+                        <br /> Annually
+                      </span>
+                    ) : (
+                      <span className="text-center package__features--span">
+                        Billed
+                        <br /> Annually
+                      </span>
+                    )}
                   </div>
                 </Card.Body>
               </Card>

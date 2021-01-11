@@ -20,7 +20,9 @@ function SignUp() {
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const RequestSchema = Yup.object().shape({
     fullname: Yup.string().required("Fullname is a required field"),
-    email: Yup.string().email().required("Email is a required field"),
+    email: Yup.string()
+      .email("Email must be a valid email")
+      .required("Email is a required field"),
     phone: Yup.string()
       .matches(phoneRegExp, "Phone number is not valid")
       .required("Phone is a required field"),

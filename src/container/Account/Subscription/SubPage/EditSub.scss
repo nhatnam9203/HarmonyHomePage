@@ -72,6 +72,9 @@
   .refund_money {
     display: flex;
     align-items: center;
+    @media screen and (max-width: 425px) {
+      font-size: 15px;
+    }
 
     .info {
       color: #0764b0;

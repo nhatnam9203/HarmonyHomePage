@@ -14,7 +14,9 @@ export default function ContactUs() {
 
   const contactSchema = Yup.object().shape({
     fullname: Yup.string().required("Fullname is a required field"),
-    email: Yup.string().email().required("Email is a required field"),
+    email: Yup.string()
+      .email("Email must be a valid email")
+      .required("Email is a required field"),
     message: Yup.string().required("Message is a required field"),
   });
 

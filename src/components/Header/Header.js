@@ -53,7 +53,9 @@ export default function Header() {
   };
 
   const loginUserSchema = Yup.object().shape({
-    email: Yup.string().email().required("Email is a required field"),
+    email: Yup.string()
+      .email("Email must be a valid email")
+      .required("Email is a required field"),
     password: Yup.string().required("Password is a required field"),
   });
 
