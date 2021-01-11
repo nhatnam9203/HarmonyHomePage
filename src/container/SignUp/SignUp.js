@@ -71,7 +71,6 @@ function SignUp() {
     validationSchema: schema,
     onSubmit: (values) => {
       const data = values;
-      console.log("data", data);
       dispatch(requestInfo(data));
     },
   });
