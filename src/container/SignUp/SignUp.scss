@@ -79,6 +79,8 @@
     box-shadow: 0px 3px 10px #0000001a;
     border-radius: 5px;
     width: 82%;
+    z-index: 1;
+
     @media screen and (max-width: 1200px) {
       width: 100%;
     }
@@ -139,6 +141,22 @@
       color: rgba(250, 244, 244, 0.938);
       font-size: 1.3rem;
       letter-spacing: 1.2px;
+    }
+
+    .loading_gif {
+      left: 40%;
+      top: 41%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+
+      @media screen and (max-width: 768px) {
+        left: 50%;
+      }
+
+      @media screen and (max-width: 425px) {
+        top: 50%;
+      }
     }
   }
 }

@@ -11,11 +11,16 @@ function Popup(props) {
     <Modal show={show} size="lg" centered className="modal">
       <Modal.Header className="modal_header">
         <Modal.Title className="modal_title">
-          Subscription Cancellation Confirmation
+          {props?.isEdit
+            ? "Change Subscription Confirmation"
+            : "Subscription Cancellation Confirmation"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="text-center">
-        <p>Do you really want to Cancel this subscription?</p>
+        <p>
+          Do you really want to {props?.isEdit ? "change" : "Cancel"} this
+          subscription?
+        </p>
       </Modal.Body>
       <Modal.Footer className="modal_footer">
         <Button className="btn btn_cancel" onClick={handleClose}>

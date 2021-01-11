@@ -45,7 +45,7 @@ function SubscriptionInfo() {
   const handleBillingHistory = subscription?.history?.map((i, idx) => (
     <tr key={idx}>
       <td style={{ fontWeight: "normal" }}>{i?.paymentTransactionId}</td>
-      <td>{moment(i?.createDate).format("MM/DD/YYYY")}</td>
+      <td>{moment(i?.createDate).format("MMMM D, YYYY hh:mm A")}</td>
       <td className="price">{i?.packageName}</td>
       <td>${i?.totalPrice}</td>
       <td>{i?.status}</td>
@@ -138,7 +138,7 @@ function SubscriptionInfo() {
                   <p className="title">Next Payment Date</p>
                   <div className="sub_plan_mobile">
                     <p>
-                      {moment(subscription?.expiredDate).format("MM/DD/YYYY")}
+                      {moment(subscription?.expiredDate).format("MMM D, YYYY")}
                     </p>
                     <p className="price">${subscription?.price}</p>
                   </div>
@@ -168,7 +168,7 @@ function SubscriptionInfo() {
                       </td>
 
                       <td className="text-right">
-                        <p className="th_actions">
+                        <p>
                           {Number(subscription?.isDisabled) === 0 ? (
                             <>
                               <button
@@ -214,7 +214,9 @@ function SubscriptionInfo() {
                     <tr>
                       <td>Next Payment Date</td>
                       <td>
-                        {moment(subscription?.expiredDate).format("MM/DD/YYYY")}
+                        {moment(subscription?.expiredDate).format(
+                          "MMM D, YYYY"
+                        )}
                       </td>
                       <td className="price">${subscription?.price}</td>
                       <td></td>
@@ -232,16 +234,16 @@ function SubscriptionInfo() {
               <h1 className="mt-5">Billing History </h1>
               <Table responsive className="mt-4">
                 <thead>
-                  <tr>
+                  <tr className="thead_billing">
                     <th>
-                      <p className="th_plan_name">Transaction ID</p>
+                      <p className="trans_id">Transaction ID</p>
                     </th>
                     <th>Date</th>
                     <th>
-                      <p className="th_plan_name">Plan Name</p>
+                      <p className="name">Plan Name</p>
                     </th>
                     <th>Amount</th>
-                    <th>Status</th>
+                    <th className="pr-md-4">Status</th>
                   </tr>
                 </thead>
                 <tbody>{handleBillingHistory}</tbody>
