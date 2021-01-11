@@ -66,7 +66,7 @@ function Subscription() {
       </td>
       <td>{i?.businessName}</td>
       <td>{moment(i?.expiredDate).format("MM/DD/YYYY")}</td>
-      <td>${i?.price}</td>
+      <td>${i?.totalPrice}</td>
       <td>{Number(i?.isDisabled) === 0 ? "Active" : "Canceled"}</td>
       <td>
         {Number(i?.isDisabled) === 0 ? (
@@ -155,7 +155,7 @@ function Subscription() {
                   <p className="sub_name"> Next Payment Date</p>
                   <p>{moment(i?.expiredDate).format("MM/DD/YYYY")}</p>
                   <p className="sub_name">Amount</p>
-                  <p>${i?.price}</p>
+                  <p>${i?.totalPrice}</p>
                   <p className="sub_name"> Status</p>
                   <p>{Number(i?.isDisabled) === 0 ? "Active" : "Canceled"}</p>
                   <p className="sub_name">Actions</p>
