@@ -51,7 +51,7 @@ function EditSub(props) {
   const [defaultPackageId, setDefaultPackageId] = useState(packageId);
   const [defaultPricingType, setDefaultPricingType] = useState(pricingType);
 
-  const [staffNumber, setStaffNumber] = useState("");
+  const [staffNumber, setStaffNumber] = useState(0);
   const [additionStaffPrice, setAdditionStaffPrice] = useState("");
   const [newPackageName, setNewPackageName] = useState("");
   const [packagePrice, setPackagePrice] = useState(0);
@@ -92,7 +92,7 @@ function EditSub(props) {
       id,
       packageId: defaultPackageId,
       pricingType: defaultPricingType,
-      additionStaff: 0,
+      additionStaff: staffNumber,
     };
 
     if (props?.isRenew) {

@@ -140,7 +140,7 @@ function SubscriptionInfo() {
                     <p>
                       {moment(subscription?.expiredDate).format("MMM D, YYYY")}
                     </p>
-                    <p className="price">${subscription?.price}</p>
+                    <p className="price">${subscription?.totalPrice}</p>
                   </div>
                   <hr />
                   <p className="title">Payment Method</p>
@@ -218,7 +218,7 @@ function SubscriptionInfo() {
                           "MMM D, YYYY"
                         )}
                       </td>
-                      <td className="price">${subscription?.price}</td>
+                      <td className="price">${subscription?.totalPrice}</td>
                       <td></td>
                     </tr>
                     <tr>
