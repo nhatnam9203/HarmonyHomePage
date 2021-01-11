@@ -59,7 +59,7 @@ function Subscription() {
         {i?.planName}
       </td>
       <td
-        className="sub_plan text-center"
+        className="sub_plan"
         onClick={() => history.push(`/account/merchant/${i?.merchantId}`)}
       >
         {i?.merchantId}

@@ -72,6 +72,7 @@
   .refund_money {
     display: flex;
     align-items: center;
+
     @media screen and (max-width: 425px) {
       font-size: 15px;
     }
@@ -86,10 +87,7 @@
     width: 12em;
   }
   .th_plan_name {
-    width: 220px;
-  }
-
-  .new_order_mobile {
+    width: 225px;
   }
 
   @media screen and (max-width: 425px) {
@@ -134,8 +132,9 @@
   .th_paid {
     width: 130px;
   }
-  .th_actions {
-    width: 120px;
+
+  .thead_billing th {
+    width: 25%;
   }
 
   .sub_mobile {
@@ -161,6 +160,17 @@
   @media screen and (max-width: 425px) {
     .btn.btn_cancel {
       display: none;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .thead_billing {
+      .trans_id {
+        width: 130px;
+      }
+      .name {
+        width: 190px;
+      }
     }
   }
 }

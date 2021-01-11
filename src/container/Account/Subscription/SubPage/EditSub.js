@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
 import Loading from "../../../../util/Loading";
+import Popup from "../../../../components/Popup/Popup";
 
 import "./EditSub.scss";
 
@@ -36,10 +37,10 @@ function EditSub(props) {
 
   const { loading, packageList } = useSelector((state) => state.package);
 
+  const [popUp, setPopUp] = useState(false);
   const { loading: loadingSub, subscription } = useSelector(
     (state) => state.mySubscription
   );
-
   const { loading: loadingUpdateSub } = useSelector(
     (state) => state.updateSubscription
   );
@@ -108,8 +109,10 @@ function EditSub(props) {
       <sup className="upgrade">Upgrade</sup>
     );
 
-  const totalPackagePrice =
-    Number(packagePrice) + Number(staffNumber) * Number(additionStaffPrice);
+  const totalPackagePrice = (
+    Number(packagePrice) +
+    Number(staffNumber) * Number(additionStaffPrice)
+  ).toFixed(2);
 
   const renderPackage = packageList
     ?.map((i, idx) => {
@@ -281,7 +284,7 @@ function EditSub(props) {
               <h1>New Order</h1>
               <Table responsive>
                 <tbody>
-                  <tr>
+                  <tr className="thead_billing">
                     <td>
                       <p className="th_new_plan">New Plan</p>
                     </td>
@@ -366,29 +369,23 @@ function EditSub(props) {
         <Button className="btn btn_cancel" onClick={() => history.goBack()}>
           Cancel
         </Button>
-        {defaultPackageId !== subscription?.packageId ? (
-          loadingUpdateSub ? (
-            <Button className="btn btn_save" disabled>
-              <Spinner
-                as="span"
-                animation="grow"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-              Loading...
-            </Button>
-          ) : (
-            <Button
-              onClick={updateSubscription}
-              disabled={policy}
-              className="btn btn_save"
-            >
-              Submit
-            </Button>
-          )
-        ) : null}
+        {defaultPackageId !== subscription?.packageId && (
+          <Button
+            onClick={() => setPopUp(true)}
+            disabled={policy}
+            className="btn btn_save"
+          >
+            Submit
+          </Button>
+        )}
       </div>
+      <Popup
+        show={popUp}
+        isEdit={true}
+        isLoading={loadingUpdateSub}
+        handleCancel={updateSubscription}
+        handleClose={() => setPopUp(false)}
+      />
     </div>
   );
 }
