@@ -18,7 +18,7 @@ function SignUp() {
   const isMobile = useMediaQuery({ query: "(max-width: 576px)" });
   const isNotMobile = useMediaQuery({ query: "(min-width: 576px)" });
 
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const phoneRegExp = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/;
   const RequestSchema = Yup.object().shape({
     fullname: Yup.string().required("Fullname is a required field"),
     email: Yup.string()

@@ -79,13 +79,11 @@ export default function Carousell() {
             <Card.Img variant="top" src={template0} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Tittle
+                Website template Title
               </Card.Title>
-              <Card.Text className="carousel__card-text">
-                Descrtiption
-              </Card.Text>
+              <Card.Text className="carousel__card-text">Description</Card.Text>
               <Card.Text className="carousel__card-pricing">
-                From $ 49.00/year
+                From $49.00/year
               </Card.Text>
             </Card.Body>
           </a>
@@ -99,13 +97,11 @@ export default function Carousell() {
             <Card.Img variant="top" src={template1} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Tittle
+                Website template Title
               </Card.Title>
-              <Card.Text className="carousel__card-text">
-                Descrtiption
-              </Card.Text>
+              <Card.Text className="carousel__card-text">Description</Card.Text>
               <Card.Text className="carousel__card-pricing">
-                From $ 49.00/year
+                From $49.00/year
               </Card.Text>
             </Card.Body>
           </a>
@@ -119,13 +115,11 @@ export default function Carousell() {
             <Card.Img variant="top" src={template2} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Tittle
+                Website template Title
               </Card.Title>
-              <Card.Text className="carousel__card-text">
-                Descrtiption
-              </Card.Text>
+              <Card.Text className="carousel__card-text">Description</Card.Text>
               <Card.Text className="carousel__card-pricing">
-                From $ 49.00/year
+                From $49.00/year
               </Card.Text>
             </Card.Body>
           </a>
@@ -139,13 +133,11 @@ export default function Carousell() {
             <Card.Img variant="top" src={template3} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Tittle
+                Website template Title
               </Card.Title>
-              <Card.Text className="carousel__card-text">
-                Descrtiption
-              </Card.Text>
+              <Card.Text className="carousel__card-text">Description</Card.Text>
               <Card.Text className="carousel__card-pricing">
-                From $ 49.00/year
+                From $49.00/year
               </Card.Text>
             </Card.Body>
           </a>
@@ -159,13 +151,11 @@ export default function Carousell() {
             <Card.Img variant="top" src={template4} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Tittle
+                Website template Title
               </Card.Title>
-              <Card.Text className="carousel__card-text">
-                Descrtiption
-              </Card.Text>
+              <Card.Text className="carousel__card-text">Description</Card.Text>
               <Card.Text className="carousel__card-pricing">
-                From $ 49.00/year
+                From $49.00/year
               </Card.Text>
             </Card.Body>
           </a>
@@ -179,13 +169,11 @@ export default function Carousell() {
           >
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Tittle
+                Website template Title
               </Card.Title>
-              <Card.Text className="carousel__card-text">
-                Descrtiption
-              </Card.Text>
+              <Card.Text className="carousel__card-text">Description</Card.Text>
               <Card.Text className="carousel__card-pricing">
-                From $ 49.00/year
+                From $49.00/year
               </Card.Text>
             </Card.Body>
           </a>

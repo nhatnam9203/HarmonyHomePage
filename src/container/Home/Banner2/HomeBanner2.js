@@ -61,7 +61,7 @@ export default function HomeBanner2() {
               <h1 className="home_banner2-title text-uppercase font-weight-bold text-center ">
                 salon 4-in-1 pos system
               </h1>
-              <p className="home_banner2-text1 text-center mb-2 ">
+              <p className="home_banner2-text1 text-center mb-1 ">
                 HarmonyPay is a module POS system which included many Apps
                 working with each other through an API (Application Programing
                 Interface), allowing for mobile interactive booking, On-demand
@@ -81,7 +81,7 @@ export default function HomeBanner2() {
             <h1 className="home_banner2-title text-uppercase font-weight-bold text-center ">
               salon 4-in-1 pos system
             </h1>
-            <p className="home_banner2-text text-center mb-1 ">
+            <p className="home_banner2-text text-center mb-2 ">
               HarmonyPay is a module POS system which included many Apps working
               with each other through an API (Application Programing Interface),
               allowing for mobile interactive booking, On-demand marketing, and
