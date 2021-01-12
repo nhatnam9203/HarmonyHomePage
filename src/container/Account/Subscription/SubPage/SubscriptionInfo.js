@@ -45,7 +45,7 @@ function SubscriptionInfo() {
   const handleBillingHistory = subscription?.history?.map((i, idx) => (
     <tr key={idx}>
       <td style={{ fontWeight: "normal" }}>{i?.paymentTransactionId}</td>
-      <td>{moment(i?.createDate).format("MMMM D, YYYY hh:mm A")}</td>
+      <td>{moment(i?.createdDate).format("MMMM D, YYYY hh:mm A")}</td>
       <td className="price">{i?.packageName}</td>
       <td>${i?.totalPrice}</td>
       <td>{i?.status}</td>
@@ -167,7 +167,7 @@ function SubscriptionInfo() {
                         </p>
                       </td>
 
-                      <td className="text-right">
+                      <td className="text-right pr-0">
                         <p>
                           {Number(subscription?.isDisabled) === 0 ? (
                             <>
@@ -186,7 +186,7 @@ function SubscriptionInfo() {
                                 Edit
                               </button>
                               <button
-                                className="text_btn  cancel_btn"
+                                className="text_btn  cancel_btn pr-md-0"
                                 onClick={() => setPopUp(!popUp)}
                               >
                                 Cancel
