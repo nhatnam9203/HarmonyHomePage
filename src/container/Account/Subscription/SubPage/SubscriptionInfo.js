@@ -167,7 +167,7 @@ function SubscriptionInfo() {
                         </p>
                       </td>
 
-                      <td className="text-right pr-0">
+                      <td className="text-right pr-md-0 action-btn">
                         <p>
                           {Number(subscription?.isDisabled) === 0 ? (
                             <>
