@@ -111,6 +111,10 @@
       margin-top: 15px;
       margin-left: 0;
     }
+
+    .staff_price {
+      margin-left: 2rem;
+    }
   }
 }
 
@@ -171,6 +175,15 @@
       .name {
         width: 190px;
       }
+    }
+    .action-btn p {
+      width: 140px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .action-btn {
+      width: 140px;
     }
   }
 }
