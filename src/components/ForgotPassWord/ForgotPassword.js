@@ -85,7 +85,11 @@ export default function ForgotPassword({ showForgot, setShowForgot }) {
               </Button>
             )}
 
-            <Link onClick={() => setShowForgot(false)} className="signin__link">
+            <Link
+              to={"#"}
+              onClick={() => setShowForgot(false)}
+              className="signin__link"
+            >
               Back to sign in
             </Link>
           </div>

@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyAccountAction } from "../../../actions/userActions";
 import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet";
 
 import Loading from "../../../util/Loading";
 
@@ -21,6 +22,10 @@ function MyAccount() {
 
   return (
     <div className="my_account">
+      <Helmet>
+        <title>Harmony | My Account</title>
+        <meta name="My Account" content="Harmony My Account" />
+      </Helmet>
       <Row sm={12}>
         <h1>My Account</h1>
       </Row>

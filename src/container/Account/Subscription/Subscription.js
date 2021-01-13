@@ -12,6 +12,7 @@ import moment from "moment";
 import Loading from "../../../util/Loading";
 import Table from "react-bootstrap/Table";
 import Popup from "../../../components/Popup/Popup";
+import { Helmet } from "react-helmet";
 
 import "./Subscription.scss";
 
@@ -111,6 +112,10 @@ function Subscription() {
 
   return (
     <div className="sub">
+      <Helmet>
+        <title>Harmony | My Subscriptions</title>
+        <meta name="My Subscriptions" content="Harmony My Subscriptions" />
+      </Helmet>
       <h1>My Subscriptions</h1>
       <AnimatePresence exitBeforeEnter>
         {loading ? (

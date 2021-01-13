@@ -100,7 +100,7 @@ export default function Package() {
                   </Card.Title>
                   <Link
                     className="package__item--btn text-center"
-                    to="/sign-up"
+                    to="/home/sign-up"
                   >
                     Start free trial
                   </Link>
@@ -118,7 +118,7 @@ export default function Package() {
                   </Card.Title>
                   <Link
                     className="package__item--btn text-center"
-                    to="/sign-up"
+                    to="/home/sign-up"
                   >
                     Start free trial
                   </Link>
@@ -135,7 +135,7 @@ export default function Package() {
                   </Card.Title>
                   <Link
                     className="package__item--btn text-center"
-                    to="/sign-up"
+                    to="/home/sign-up"
                   >
                     Start free trial
                   </Link>

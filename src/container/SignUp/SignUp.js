@@ -10,6 +10,7 @@ import LoadingIcon from "../../assets/images/loading-icon.gif";
 import "./SignUp.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { requestInfo } from "../../actions/requestInfoActions";
+import { Helmet } from "react-helmet";
 
 function SignUp() {
   const dispatch = useDispatch();
@@ -76,6 +77,10 @@ function SignUp() {
   });
   return (
     <div className="sign_up_container">
+      <Helmet>
+        <title>Harmony | Sign Up</title>
+        <meta name="Sign Up" content="Harmony Sign Up" />
+      </Helmet>
       <Container>
         <Row className="sign_up_content mx-0">
           <Col className="sign_up_left" sm={12} lg={6}>

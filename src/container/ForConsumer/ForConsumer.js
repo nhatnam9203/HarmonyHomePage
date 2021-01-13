@@ -5,10 +5,15 @@ import consumerAppImg from "../../assets/images/For Consumer/consumer app.png";
 import App1 from "../../assets/images/For Consumer/Mask Group 187.svg";
 import App2 from "../../assets/images/For Consumer/Mask Group 186.svg";
 import Topfooter from "../../components/Footer/TopFooter";
+import { Helmet } from "react-helmet";
 
 export default function ForConsumer() {
   return (
     <>
+      <Helmet>
+        <title>Harmony | For Consumer</title>
+        <meta name="For Consume" content="Harmony For Consume" />
+      </Helmet>
       <main className="consumer">
         <Row className="mx-0">
           <Col xs={12} md={6} className="consumer__right">

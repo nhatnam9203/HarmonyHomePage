@@ -1,8 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 export default function Policy() {
   return (
     <div className="policy">
+      <Helmet>
+        <title>Harmony | Policy</title>
+        <meta name="Policy" content="Harmony Policy" />
+      </Helmet>
       <div className="policy__container">
         <h1 className="policy__title">
           HARMONY PAY, INC.
