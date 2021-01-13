@@ -129,7 +129,11 @@ function EditSub(props) {
               : null}
           </td>
           <td className="text-center">
-            <Form.Check type="radio" id="check-api-radio" className="mb-2">
+            <Form.Check
+              type="radio"
+              id={`check-api-radio ${i?.packageId}`}
+              className="mb-2"
+            >
               <Form.Check.Input
                 type="radio"
                 name={i?.packageId}
@@ -154,7 +158,7 @@ function EditSub(props) {
               : null}
           </td>
           <td className="text-center">
-            <Form.Check type="radio" id="check-api-radio">
+            <Form.Check type="radio" id={`check-api-radio ${i?.packageId}`}>
               <Form.Check.Input
                 type="radio"
                 name={i?.packageId}
