@@ -6,9 +6,12 @@ import * as typeNotify from "../constants/notifyConstants";
 
 export const requestInfo = (dataInfo) => async (dispatch) => {
   try {
+    console.log("222", dataInfo);
+
     dispatch({ type: typeRequest.REQUEST_INFO_REQUEST });
+
     const { data } = await api.requestInfo(dataInfo);
-    console.log("data :>> ", data);
+
     dispatch({
       type: typeRequest.REQUEST_INFO_REQUEST_SUCCESS,
       payload: data?.data,

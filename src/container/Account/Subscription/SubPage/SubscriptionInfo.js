@@ -32,14 +32,14 @@ function SubscriptionInfo() {
 
   useEffect(() => {
     dispatch(getMySubscriptionByIdAction(id));
-
-    if (message) {
-      setPopUp(false);
-    }
-  }, [dispatch, message]);
+  }, [dispatch]);
 
   const handleCancelSubscription = () => {
     dispatch(cancelSubscriptionByIdAction(id));
+    setPopUp(false);
+    setTimeout(() => {
+      dispatch(getMySubscriptionByIdAction(id));
+    }, 1000);
   };
 
   const handleBillingHistory = subscription?.history?.map((i, idx) => (

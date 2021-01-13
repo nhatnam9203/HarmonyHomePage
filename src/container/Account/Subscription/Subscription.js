@@ -38,15 +38,16 @@ function Subscription() {
 
   const handleCancelSubscription = () => {
     dispatch(cancelSubscriptionByIdAction(cancelSubId));
+    setPopUp(false);
+
+    setTimeout(() => {
+      dispatch(getMySubscriptionAction());
+    }, 1000);
   };
 
   useEffect(() => {
     dispatch(getMySubscriptionAction());
-
-    if (message) {
-      setPopUp(false);
-    }
-  }, [dispatch, message]);
+  }, [dispatch]);
 
   const renderSubscriptionList = subscriptionList?.map((i, idx) => (
     <tr key={idx}>

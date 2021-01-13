@@ -253,6 +253,7 @@ export const cancelSubscriptionByIdAction = (id) => async (
       type: typeUser.CANCEL_SUBSCRIPTION_SUCCESS,
       payload: data?.message,
     });
+
     dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });

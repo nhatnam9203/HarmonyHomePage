@@ -97,8 +97,7 @@ export default function PopupAfterLoad() {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      const data = values;
-      dispatch(requestInfo(...data));
+      dispatch(requestInfo(values));
     },
   });
 
