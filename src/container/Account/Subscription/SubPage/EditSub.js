@@ -38,6 +38,9 @@ function EditSub(props) {
     (state) => state.updateSubscription
   );
   const { refundAmount } = useSelector((state) => state.refund);
+  const { loading: loadingRenew } = useSelector(
+    (state) => state.renewSubscription
+  );
 
   const [defaultPackageId, setDefaultPackageId] = useState(packageId);
   const [defaultPricingType, setDefaultPricingType] = useState(pricingType);
@@ -373,7 +376,7 @@ function EditSub(props) {
       <Popup
         show={popUp}
         isEdit={true}
-        isLoading={loadingUpdateSub}
+        isLoading={loadingUpdateSub || loadingRenew}
         handleCancel={updateSubscription}
         handleClose={() => setPopUp(false)}
       />

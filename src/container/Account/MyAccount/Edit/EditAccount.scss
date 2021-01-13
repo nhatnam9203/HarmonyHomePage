@@ -70,3 +70,14 @@
     }
   }
 }
+.show_password-container {
+  position: relative;
+}
+.show_password-btn {
+  position: absolute;
+  top: 20%;
+  right: 1%;
+  border: none;
+  background: #fff;
+  color: gray;
+}
