@@ -170,5 +170,4 @@ export const forgotPassword = (email) =>
   axios.get(`${forgotPasswordUrl}${email}`);
 
 // Get PackagePricing
-const getPackagePricingUrl = `${url}/package`;
 export const getPackagePricing = () => axios.get(getPackageUrl);

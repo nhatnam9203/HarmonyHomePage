@@ -12,13 +12,13 @@ export default function Partner() {
     <main className="partner">
       <div className="top_partner d-flex flex-column justify-content-center align-items-center text-center ">
         <h1 className="top_partner-title text-uppercase font-weight-bold">
-          PARTNERSHIPs
+          PARTNERSHIPS
         </h1>
-        <p className="top_partner-text px-4 px-lg-0">
+        {/* <p className="top_partner-text px-4 px-lg-0">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry&apos;s standard dummy text
           ever since the
-        </p>
+        </p> */}
         <Row className="top_partner-icon d-flex justify-content-between m-0">
           <Col xs={12} md={6} lg={3}>
             <img src={logo1} alt="" className="top_partner-icon--item" />

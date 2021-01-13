@@ -11,11 +11,15 @@ import i18n from "./language/i18n";
 
 import { store, persistor } from "./store";
 
+import { CookiesProvider } from "react-cookie";
+
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <CookiesProvider>
+          <App />
+        </CookiesProvider>
       </PersistGate>
     </Provider>
   </I18nextProvider>,

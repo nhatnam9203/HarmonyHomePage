@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   Navbar,
   Nav,
@@ -17,9 +17,9 @@ import {
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { FiPhoneCall } from "react-icons/fi";
 import { BiShow, BiHide } from "react-icons/bi";
-import { FaQuestionCircle } from "react-icons/fa";
+// import { FaQuestionCircle } from "react-icons/fa";
 
-import Flags from "country-flag-icons/react/3x2";
+// import Flags from "country-flag-icons/react/3x2";
 import Logo from "../../assets/images/logo_blue.png";
 import Modal from "react-bootstrap/Modal";
 import LoginIcon from "../../assets/images/login_icon2.png";
@@ -27,10 +27,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userLogin } from "../../actions/userActions";
 import ForgotPassword from "../ForgotPassWord/ForgotPassword";
-import { useMediaQuery } from "react-responsive";
+
+// import { useMediaQuery } from "react-responsive";
 
 export default function Header() {
-  const { t, i18n } = useTranslation("header");
+  const { t } = useTranslation("header");
   const [expanded, setExpanded] = useState(false);
   const [show, setShow] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
@@ -38,7 +39,7 @@ export default function Header() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
+  // const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
   const { loading, user } = useSelector((state) => state.user);
 
@@ -48,9 +49,9 @@ export default function Header() {
     }
   }, [user]);
 
-  const handleLanguageChange = (lang) => {
-    i18n.use(initReactI18next).init({ lng: lang });
-  };
+  // const handleLanguageChange = (lang) => {
+  //   i18n.use(initReactI18next).init({ lng: lang });
+  // };
 
   const loginUserSchema = Yup.object().shape({
     email: Yup.string()

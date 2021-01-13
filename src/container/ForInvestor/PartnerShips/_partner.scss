@@ -8,6 +8,8 @@
       letter-spacing: $title-0;
       font-size: $fs-title;
       margin-bottom: $m-6;
+      //margin text
+      margin-bottom: 3.75rem;
       @include mediaQueryMax("large") {
         font-size: 2rem;
       }

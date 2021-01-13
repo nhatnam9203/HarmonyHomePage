@@ -1,0 +1,151 @@
+.popup__bodyLeft {
+  padding: 2.5rem 5.5rem;
+  height: 100%;
+  @media screen and (max-width: 1200px) {
+    padding: 1rem 2.5rem;
+  }
+  @media screen and (max-width: 576px) {
+    padding: 1rem 3rem;
+  }
+  @media screen and (max-width: 375px) {
+    padding: 1rem 2rem;
+  }
+  &-start {
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+  }
+  &-title {
+    font-weight: bold;
+    letter-spacing: 0.1025rem;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    @media screen and (max-width: 992px) {
+      // margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+    @media screen and (max-width: 576px) {
+      letter-spacing: 0;
+    }
+  }
+  &-subtitle {
+    color: #888888;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.32px;
+    margin-bottom: 2rem;
+  }
+  &-text {
+    color: #888888;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.32px;
+    margin-bottom: 1rem;
+  }
+  &-list {
+    padding-left: 1rem;
+    &--item {
+    }
+  }
+}
+
+.sign_up_form {
+  // background-color: #ffffff;
+  // border: 1px solid #ffffff;
+  // // box-shadow: 0px 3px 10px #0000001a;
+  // border-radius: 5px;
+  // width: 100%;
+  // z-index: 1;
+
+  // @media screen and (max-width: 1200px) {
+  //   width: 100%;
+  // }
+  &-container {
+    padding: 5rem;
+    @media screen and (max-width: 1200px) {
+      padding: 2rem 2rem;
+    }
+    @media screen and (max-width: 576px) {
+      padding: 2rem 1.75rem;
+    }
+    @media screen and (max-width: 375px) {
+      padding: 2rem 1.25rem;
+    }
+  }
+  h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 8px;
+  }
+
+  p {
+    color: #888888;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.32px;
+  }
+
+  label {
+    font-weight: 600;
+  }
+  .form_required {
+    color: red;
+  }
+
+  .form-control {
+    padding: 15px;
+    height: auto;
+    border-radius: 0px;
+  }
+
+  .form_checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    @media screen and (max-width: 576px) {
+      flex-direction: column;
+    }
+
+    .form-check-input {
+      width: 1.5em;
+      height: 1.5em;
+      background-color: #0764b0;
+    }
+
+    label {
+      margin-top: 0.2rem;
+      margin-left: 0.5em;
+      font-size: 1.1rem;
+      font-weight: 300;
+      text-align: center;
+    }
+  }
+  .submit_btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    border-radius: 0px;
+    padding: 10px;
+    background-color: #0764b0;
+    color: rgba(250, 244, 244, 0.938);
+    font-size: 1.3rem;
+    letter-spacing: 1.2px;
+  }
+
+  .loading_gif {
+    left: 40%;
+    top: 41%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+
+    @media screen and (max-width: 768px) {
+      left: 50%;
+    }
+
+    @media screen and (max-width: 425px) {
+      top: 50%;
+    }
+  }
+}
+.height__video {
+  height: 20rem;
+}

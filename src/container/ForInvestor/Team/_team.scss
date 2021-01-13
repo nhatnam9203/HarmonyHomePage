@@ -7,7 +7,9 @@
     color: $black-2;
     letter-spacing: $title-0;
     font-size: $fs-title;
-    margin-bottom: $m-6;
+    // margin-bottom: $m-6;
+    //margin text
+    margin-bottom: 3.8125rem;
     @include mediaQueryMax("large") {
       font-size: 2rem;
     }

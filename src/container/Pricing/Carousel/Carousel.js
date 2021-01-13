@@ -2,14 +2,14 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import template0 from "../../../assets/images/Website-templates/template-0.jpg";
 import template1 from "../../../assets/images/Website-templates/template-1.jpg";
 import template2 from "../../../assets/images/Website-templates/template-2.jpg";
-import template3 from "../../../assets/images/Website-templates/template-3.jpg";
-import template4 from "../../../assets/images/Website-templates/template-4.jpg";
-import template5 from "../../../assets/images/Website-templates/template-5.jpg";
+import template3 from "../../../assets/images/Website-templates/template-4.jpg";
+import template4 from "../../../assets/images/Website-templates/template-5.jpg";
+import template5 from "../../../assets/images/Website-templates/template-6.jpg";
 
 export default function Carousell() {
   return (
@@ -17,10 +17,10 @@ export default function Carousell() {
       <h1 className="carousel__title text-uppercase font-weight-bold text-center">
         Digital Web Marketing
       </h1>
-      <p className="carousel__text text-center">
+      {/* <p className="carousel__text text-center">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
-      </p>
+      </p> */}
 
       <Carousel
         additionalTransfrom={0}
@@ -79,9 +79,9 @@ export default function Carousell() {
             <Card.Img variant="top" src={template0} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Title
+                The Modis Salon
               </Card.Title>
-              <Card.Text className="carousel__card-text">Description</Card.Text>
+              {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
               <Card.Text className="carousel__card-pricing">
                 From $49.00/year
               </Card.Text>
@@ -97,9 +97,9 @@ export default function Carousell() {
             <Card.Img variant="top" src={template1} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Title
+                Tre Nails
               </Card.Title>
-              <Card.Text className="carousel__card-text">Description</Card.Text>
+              {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
               <Card.Text className="carousel__card-pricing">
                 From $49.00/year
               </Card.Text>
@@ -115,9 +115,9 @@ export default function Carousell() {
             <Card.Img variant="top" src={template2} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Title
+                Beauty Salon
               </Card.Title>
-              <Card.Text className="carousel__card-text">Description</Card.Text>
+              {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
               <Card.Text className="carousel__card-pricing">
                 From $49.00/year
               </Card.Text>
@@ -133,9 +133,9 @@ export default function Carousell() {
             <Card.Img variant="top" src={template3} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Title
+                Pets Land
               </Card.Title>
-              <Card.Text className="carousel__card-text">Description</Card.Text>
+              {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
               <Card.Text className="carousel__card-pricing">
                 From $49.00/year
               </Card.Text>
@@ -151,9 +151,9 @@ export default function Carousell() {
             <Card.Img variant="top" src={template4} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Title
+                EUROTAS
               </Card.Title>
-              <Card.Text className="carousel__card-text">Description</Card.Text>
+              {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
               <Card.Text className="carousel__card-pricing">
                 From $49.00/year
               </Card.Text>
@@ -169,9 +169,9 @@ export default function Carousell() {
           >
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Website template Title
+                VEERA
               </Card.Title>
-              <Card.Text className="carousel__card-text">Description</Card.Text>
+              {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
               <Card.Text className="carousel__card-pricing">
                 From $49.00/year
               </Card.Text>

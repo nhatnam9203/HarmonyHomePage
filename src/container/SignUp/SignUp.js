@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Row, Container, Button, Col, Spinner } from "react-bootstrap";
+import { Form, Row, Container, Button, Col } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMediaQuery } from "react-responsive";

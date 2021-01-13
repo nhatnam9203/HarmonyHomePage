@@ -77,11 +77,11 @@
     letter-spacing: 0px;
     color: #111111;
     padding: 1.25rem;
-    @media screen and (max-width: 415px) {
+    @media screen and (max-width: 425px) {
       display: none;
     }
     &--row {
-      @media screen and (max-width: 415px) {
+      @media screen and (max-width: 425px) {
         display: none;
       }
     }

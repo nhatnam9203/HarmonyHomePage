@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Form,
-  Table,
-  Button,
-  Spinner,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+import { Form, Table, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import {
@@ -35,7 +28,7 @@ function EditSub(props) {
 
   const { packageId, pricingType } = location.state;
 
-  const { loading, packageList } = useSelector((state) => state.package);
+  const { packageList } = useSelector((state) => state.package);
 
   const [popUp, setPopUp] = useState(false);
   const { loading: loadingSub, subscription } = useSelector(
@@ -44,9 +37,7 @@ function EditSub(props) {
   const { loading: loadingUpdateSub } = useSelector(
     (state) => state.updateSubscription
   );
-  const { loading: loadingRefundAmount, refundAmount } = useSelector(
-    (state) => state.refund
-  );
+  const { refundAmount } = useSelector((state) => state.refund);
 
   const [defaultPackageId, setDefaultPackageId] = useState(packageId);
   const [defaultPricingType, setDefaultPricingType] = useState(pricingType);

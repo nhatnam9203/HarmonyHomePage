@@ -26,6 +26,7 @@ import "./assets/styles/main.scss";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Policy from "./components/Policy/Policy";
+import PopupAfterLoad from "./components/PopupAfterLoad/PopupAfterLoad";
 
 function App() {
   return (
@@ -55,7 +56,7 @@ function App() {
             <PrivateRoute path="/account" component={Account} />
           </Switch>
         </main>
-
+        <PopupAfterLoad />
         <Footer />
       </div>
     </Router>

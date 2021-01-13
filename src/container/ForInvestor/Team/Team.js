@@ -12,11 +12,11 @@ export default function Team() {
         <h1 className="team_title text-uppercase font-weight-bold text-center">
           Our Team
         </h1>
-        <p className="team_text text-center">
+        {/* <p className="team_text text-center">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry&apos;s standard dummy text
           ever since the
-        </p>
+        </p> */}
         <Row className="mx-0">
           <Col md={6} xs={12} xl={3} className="mt-4">
             <Card className="shadow team_card h-100">
@@ -33,8 +33,7 @@ export default function Team() {
                   Chief Technology Officer
                 </Card.Title>
                 <Card.Text className="team_card-text">
-                  He is a seasoned developer. Lorem Ipsum is simply dummy text
-                  of the printing and typesetting industry.
+                  He is a seasoned developer.
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -78,9 +77,7 @@ export default function Team() {
                   Executive Vice President
                 </Card.Title>
                 <Card.Text className="team_card-text">
-                  Vinh is an electrical engineer for over 20 years. Lorem Ipsum
-                  has been the industry&apos;s standard dummy text ever since
-                  the
+                  Vinh is an electrical engineer for over 20 years.
                 </Card.Text>
               </Card.Body>
             </Card>

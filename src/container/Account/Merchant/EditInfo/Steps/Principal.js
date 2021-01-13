@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Row, Col, Tab, Tabs } from "react-bootstrap";
+import { Tab, Tabs } from "react-bootstrap";
 
 import PrincipalDetail from "./PrincipalDetail";
 
