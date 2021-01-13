@@ -202,6 +202,7 @@ function SignUp() {
                           <Form.Check
                             type="checkbox"
                             label="Morning"
+                            defaultChecked={true}
                             name={`suggestCallTimeInfo.morning`}
                             onChange={formik.handleChange}
                             isInvalid={formik.errors.myCustomFieldName}

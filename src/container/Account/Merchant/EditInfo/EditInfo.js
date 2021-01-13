@@ -34,7 +34,6 @@ function EditInfo() {
     },
     // validationSchema: userSchema,
     onSubmit: (values) => {
-      console.log("values", values);
       alert(JSON.stringify(values, null, 2));
     },
   });

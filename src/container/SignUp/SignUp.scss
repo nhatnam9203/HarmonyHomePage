@@ -5,6 +5,9 @@
   background-size: cover;
   padding-bottom: 1em;
   min-height: 83vh;
+  // @media screen and (max-width: 1024px) {
+  //   min-height: 70vh;
+  // }
   @media screen and (max-width: 576px) {
     padding-bottom: 8em;
   }
@@ -149,7 +152,9 @@
       position: absolute;
       transform: translate(-50%, -50%);
       z-index: 2;
-
+      @media screen and (max-width: 1200px) {
+        left: 50%;
+      }
       @media screen and (max-width: 768px) {
         left: 50%;
       }
