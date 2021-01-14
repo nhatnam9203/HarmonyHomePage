@@ -1,8 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 export default function GiftCardTerms() {
   return (
     <div className="GiftCardTerms">
+      <Helmet>
+        <title>Harmony | Gift Card Terms</title>
+        <meta name="Gift Card Terms" content="Harmony Gift Card Terms" />
+      </Helmet>
       <div className="GiftCardTerms__container">
         <h1 className="GiftCardTerms__title">
           Harmony Pay Gift Card

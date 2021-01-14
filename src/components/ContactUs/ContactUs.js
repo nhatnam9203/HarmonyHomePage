@@ -79,7 +79,7 @@ export default function ContactUs() {
             </Form.Group>
             <Form.Group>
               <Form.Label>
-                Mesage <span className="form_required">*</span>
+                Message <span className="form_required">*</span>
               </Form.Label>
               <Form.Control
                 as="textarea"

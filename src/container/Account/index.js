@@ -16,12 +16,17 @@ import EditInfo from "./Merchant/EditInfo/EditInfo";
 import Subscription from "./Subscription/Subscription";
 import EditSub from "./Subscription/SubPage/EditSub";
 import SubscriptionInfo from "./Subscription/SubPage/SubscriptionInfo";
+import { Helmet } from "react-helmet";
 
 import "./Account.scss";
 
 function Account() {
   return (
     <div className="account px-2">
+      <Helmet>
+        <title>Harmony | Account</title>
+        <meta name="Account" content="Harmony Account" />
+      </Helmet>
       <Row className="pr-0">
         <Col sm={12} md={4} lg={3} className="">
           <Sidebar />

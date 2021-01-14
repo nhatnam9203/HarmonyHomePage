@@ -8,9 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { requestInfo } from "../../api";
 import "./PopupAfterLoad.scss";
-import toast from "react-hot-toast";
+import { requestInfo } from "../../actions/requestInfoActions";
 
 export default function PopupAfterLoad() {
   const [show, setShow] = useState(false);
@@ -97,7 +96,8 @@ export default function PopupAfterLoad() {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(requestInfo(values));
+      const data = values;
+      dispatch(requestInfo(data));
     },
   });
 
@@ -146,11 +146,9 @@ export default function PopupAfterLoad() {
             </ul>
           </Col>
           <Col xl={6} xs={12} className="h-100">
-            <div className="sign_up_form">
+            <div className="sign_up_form1">
               <div
-                className={`sign_up_form-container ${
-                  loading && "loading_signup"
-                }`}
+                className={`sign_up_form1-popup ${loading && "loading_signup"}`}
               >
                 <h4>REQUEST MORE INFORMATION</h4>
                 <p>
@@ -251,6 +249,7 @@ export default function PopupAfterLoad() {
                         <Form.Check
                           type="checkbox"
                           label="Morning"
+                          defaultChecked={true}
                           name={`suggestCallTimeInfo.morning`}
                           onChange={formik.handleChange}
                           isInvalid={formik.errors.myCustomFieldName}
@@ -317,7 +316,6 @@ export default function PopupAfterLoad() {
                   </Button>
                 </Form>
               </div>
-              <button onClick={() => toast.success("sssssss")}> toast</button>
             </div>
           </Col>
         </Row>

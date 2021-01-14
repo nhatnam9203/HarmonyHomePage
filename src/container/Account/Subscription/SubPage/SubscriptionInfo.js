@@ -26,7 +26,7 @@ function SubscriptionInfo() {
   const { loading, subscription } = useSelector(
     (state) => state.mySubscription
   );
-  const { loading: cancelStatus, message } = useSelector(
+  const { loading: cancelStatus } = useSelector(
     (state) => state.cancelSubscription
   );
 

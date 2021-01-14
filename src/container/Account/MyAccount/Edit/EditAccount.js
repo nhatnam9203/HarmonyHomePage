@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { updateMyAccountAction } from "../../../../actions/userActions";
 import { useParams } from "react-router-dom";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { BiShow, BiHide } from "react-icons/bi";
 
 import * as yup from "yup";
 
@@ -12,6 +13,9 @@ import "./EditAccount.scss";
 
 function EditAccount() {
   const dispatch = useDispatch();
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { account } = useSelector((state) => state.myAccount);
   const { firstName, lastName, email } = account;
@@ -122,17 +126,32 @@ function EditAccount() {
                     <Form.Label>
                       Current Password <span className="form_required">*</span>
                     </Form.Label>
-                    <Form.Control
-                      type="password"
-                      placeholder="Current Password"
-                      value={formik.values?.oldPassword}
-                      onChange={formik.handleChange}
-                      isInvalid={
-                        formik.touched?.oldPassword &&
-                        formik.errors?.oldPassword
-                      }
-                      name="oldPassword"
-                    />
+                    <div className="show_password-container">
+                      <Form.Control
+                        type={showCurrentPassword ? "text" : "password"}
+                        placeholder="Current Password"
+                        value={formik.values?.oldPassword}
+                        onChange={formik.handleChange}
+                        isInvalid={
+                          formik.touched?.oldPassword &&
+                          formik.errors?.oldPassword
+                        }
+                        name="oldPassword"
+                      />
+                      <button
+                        type="button"
+                        className="show_password-btn"
+                        onClick={() =>
+                          setShowCurrentPassword(!showCurrentPassword)
+                        }
+                      >
+                        {showCurrentPassword ? (
+                          <BiHide size={25} />
+                        ) : (
+                          <BiShow size={25} />
+                        )}
+                      </button>
+                    </div>
                     <Form.Control.Feedback type="invalid">
                       {formik.errors?.oldPassword}
                     </Form.Control.Feedback>
@@ -142,17 +161,30 @@ function EditAccount() {
                       New Password <span className="form_required">*</span>
                     </Form.Label>
 
-                    <Form.Control
-                      placeholder="New Password"
-                      type="password"
-                      value={formik.values?.newPassword}
-                      onChange={formik.handleChange}
-                      isInvalid={
-                        formik.touched?.newPassword &&
-                        formik.errors?.newPassword
-                      }
-                      name="newPassword"
-                    />
+                    <div className="show_password-container">
+                      <Form.Control
+                        placeholder="New Password"
+                        type={showNewPassword ? "text" : "password"}
+                        value={formik.values?.newPassword}
+                        onChange={formik.handleChange}
+                        isInvalid={
+                          formik.touched?.newPassword &&
+                          formik.errors?.newPassword
+                        }
+                        name="newPassword"
+                      />
+                      <button
+                        type="button"
+                        className="show_password-btn"
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                      >
+                        {showNewPassword ? (
+                          <BiHide size={25} />
+                        ) : (
+                          <BiShow size={25} />
+                        )}
+                      </button>
+                    </div>
                     <PasswordStrengthBar
                       password={formik.values?.newPassword}
                     />
@@ -166,18 +198,33 @@ function EditAccount() {
                       Confirm New Password &nbsp;
                       <span className="form_required">*</span>
                     </Form.Label>
-                    <Form.Control
-                      autoComplete="new-password"
-                      placeholder="Confirm Password"
-                      type="password"
-                      value={formik.values?.confirmPassword}
-                      onChange={formik.handleChange}
-                      isInvalid={
-                        formik.touched?.confirmPassword &&
-                        formik.errors?.confirmPassword
-                      }
-                      name="confirmPassword"
-                    />
+                    <div className="show_password-container">
+                      <Form.Control
+                        autoComplete="new-password"
+                        placeholder="Confirm Password"
+                        type={showConfirmPassword ? "text" : "password"}
+                        value={formik.values?.confirmPassword}
+                        onChange={formik.handleChange}
+                        isInvalid={
+                          formik.touched?.confirmPassword &&
+                          formik.errors?.confirmPassword
+                        }
+                        name="confirmPassword"
+                      />
+                      <button
+                        type="button"
+                        className="show_password-btn"
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
+                      >
+                        {showConfirmPassword ? (
+                          <BiHide size={25} />
+                        ) : (
+                          <BiShow size={25} />
+                        )}
+                      </button>
+                    </div>
                     <Form.Control.Feedback type="invalid">
                       {formik.errors?.confirmPassword}
                     </Form.Control.Feedback>

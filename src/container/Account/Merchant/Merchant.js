@@ -5,6 +5,7 @@ import { getMerchantListAction } from "../../../actions/userActions";
 
 import Loading from "../../../util/Loading";
 import Table from "react-bootstrap/Table";
+import { Helmet } from "react-helmet";
 
 import "./Merchant.scss";
 
@@ -38,6 +39,10 @@ function Merchant() {
 
   return (
     <div className="merchant">
+      <Helmet>
+        <title>Harmony | My Merchants</title>
+        <meta name="My Merchants" content="Harmony My Merchants" />
+      </Helmet>
       <h1>My Merchants</h1>
 
       {loading ? (

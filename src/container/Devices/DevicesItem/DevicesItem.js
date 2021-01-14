@@ -70,7 +70,7 @@ export default function DevicesItem() {
 
                 <Link
                   className="divices__item--btn text-uppercase font-weight-bold text-center"
-                  to="/sign-up"
+                  to="/home/sign-up"
                 >
                   contact sale
                 </Link>
@@ -97,7 +97,7 @@ export default function DevicesItem() {
                 </p>
                 <Link
                   className="divices__item--btn text-uppercase font-weight-bold text-center"
-                  to="/sign-up"
+                  to="/home/sign-up"
                 >
                   contact sale
                 </Link>
@@ -261,7 +261,7 @@ export default function DevicesItem() {
             </Row>{" "}
             <Link
               className="divices__item--btn text-uppercase font-weight-bold text-center mt-4"
-              to="/sign-up"
+              to="/home/sign-up"
             >
               contact sale
             </Link>
@@ -367,7 +367,7 @@ export default function DevicesItem() {
             </Row>{" "}
             <Link
               className="divices__item--btn text-uppercase font-weight-bold text-center mt-4"
-              to="/sign-up"
+              to="/home/sign-up"
             >
               contact sale
             </Link>
@@ -443,7 +443,7 @@ export default function DevicesItem() {
             </Row>{" "}
             <Link
               className="divices__item--btn text-uppercase font-weight-bold text-center mt-4"
-              to="/sign-up"
+              to="/home/sign-up"
             >
               contact sale
             </Link>
@@ -490,7 +490,7 @@ export default function DevicesItem() {
                 </p>
                 <Link
                   className="divices__item--btn text-uppercase font-weight-bold text-center"
-                  to="/sign-up"
+                  to="/home/sign-up"
                 >
                   contact sale
                 </Link>
