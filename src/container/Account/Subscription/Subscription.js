@@ -70,7 +70,7 @@ function Subscription() {
       <td>{moment(i?.expiredDate).format("MM/DD/YYYY")}</td>
       <td>${i?.totalPrice}</td>
       <td>{Number(i?.isDisabled) === 0 ? "Active" : "Canceled"}</td>
-      <td>
+      {/* <td>
         {Number(i?.isDisabled) === 0 ? (
           <>
             <button
@@ -107,7 +107,7 @@ function Subscription() {
             Renew
           </button>
         )}
-      </td>
+      </td> */}
     </tr>
   ));
 
@@ -164,8 +164,8 @@ function Subscription() {
                   <p>${i?.totalPrice}</p>
                   <p className="sub_name"> Status</p>
                   <p>{Number(i?.isDisabled) === 0 ? "Active" : "Canceled"}</p>
-                  <p className="sub_name">Actions</p>
-                  <p>
+                  {/* <p className="sub_name">Actions</p> */}
+                  {/* <p>
                     {Number(i?.isDisabled) === 0 ? (
                       <>
                         <button
@@ -205,7 +205,7 @@ function Subscription() {
                         Renew
                       </button>
                     )}
-                  </p>
+                  </p> */}
                 </div>
               ))
             ) : (
@@ -230,9 +230,7 @@ function Subscription() {
                     <th>
                       <p>Status</p>
                     </th>
-                    <th>
-                      <p className="th_action">Actions</p>
-                    </th>
+                    <th>{/* <p className="th_action">Actions</p> */}</th>
                   </tr>
                 </thead>
                 <tbody>{renderSubscriptionList}</tbody>

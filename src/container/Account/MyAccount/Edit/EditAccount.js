@@ -152,7 +152,10 @@ function EditAccount() {
                         )}
                       </button>
                     </div>
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback
+                      type="invalid-feedback"
+                      className="error-feedback"
+                    >
                       {formik.errors?.oldPassword}
                     </Form.Control.Feedback>
                   </Form.Group>
@@ -185,11 +188,12 @@ function EditAccount() {
                         )}
                       </button>
                     </div>
-                    <PasswordStrengthBar
-                      password={formik.values?.newPassword}
-                    />
+                    <PasswordStrengthBar password={formik.values.newPassword} />
 
-                    <Form.Control.Feedback type="invalid">
+                    <Form.Control.Feedback
+                      type="invalid-feedback"
+                      className="error-feedback"
+                    >
                       {formik.errors?.newPassword}
                     </Form.Control.Feedback>
                   </Form.Group>
@@ -225,8 +229,11 @@ function EditAccount() {
                         )}
                       </button>
                     </div>
-                    <Form.Control.Feedback type="invalid">
-                      {formik.errors?.confirmPassword}
+                    <Form.Control.Feedback
+                      type="invalid-feedback"
+                      className="error-feedback"
+                    >
+                      {formik.errors.confirmPassword}
                     </Form.Control.Feedback>
                   </Form.Group>
                 </div>
@@ -269,6 +276,7 @@ const userSchema = yup.object({
     is: true,
     then: yup.string().required("Current Password is required"),
   }),
+
   newPassword: yup.string().when("IsChangePassword", {
     is: true,
     then: yup.string().required("New Password is required"),

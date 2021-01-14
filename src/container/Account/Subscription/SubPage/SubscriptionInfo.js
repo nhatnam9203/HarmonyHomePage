@@ -88,11 +88,11 @@ function SubscriptionInfo() {
                     <p className="">
                       Paid &nbsp;
                       {subscription?.pricingType === "annually"
-                        ? "Yearly"
+                        ? "Annually"
                         : "Monthly"}{" "}
                     </p>
 
-                    <p className="">
+                    {/* <p className="">
                       {Number(subscription?.isDisabled) === 0 ? (
                         <>
                           <button
@@ -132,7 +132,7 @@ function SubscriptionInfo() {
                           Renew
                         </button>
                       )}
-                    </p>
+                    </p> */}
                   </div>
                   <hr />
                   <p className="title">Next Payment Date</p>
@@ -162,11 +162,11 @@ function SubscriptionInfo() {
                         <p className="th_paid">
                           Paid &nbsp;
                           {subscription?.pricingType === "annually"
-                            ? "Yearly"
+                            ? "Annually"
                             : "Monthly"}{" "}
                         </p>
                       </td>
-
+                      {/* 
                       <td className="text-right pr-md-0 action-btn">
                         <p>
                           {Number(subscription?.isDisabled) === 0 ? (
@@ -208,8 +208,8 @@ function SubscriptionInfo() {
                               Renew
                             </button>
                           )}{" "}
-                        </p>
-                      </td>
+                        </p> 
+                      </td> */}
                     </tr>
                     <tr>
                       <td>Next Payment Date</td>
@@ -219,13 +219,13 @@ function SubscriptionInfo() {
                         )}
                       </td>
                       <td className="price">${subscription?.totalPrice}</td>
-                      <td></td>
+                      {/* <td></td> */}
                     </tr>
                     <tr>
                       <td>Payment Method</td>
                       <td>{subscription?.paymentMethod}</td>
                       <td></td>
-                      <td></td>
+                      {/* <td></td> */}
                     </tr>
                   </tbody>
                 </Table>
