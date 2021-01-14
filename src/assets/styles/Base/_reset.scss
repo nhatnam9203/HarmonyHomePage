@@ -16,6 +16,10 @@
 // .app-main-content {
 //   min-height: 85vh;
 // }
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
 
 a {
   // color: #fff;
