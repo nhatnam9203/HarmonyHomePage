@@ -1,12 +1,12 @@
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
-import POS1 from "../../../assets/images/elo paypoint calendar.png";
-import POS2 from "../../../assets/images/elo paypoint calendar-1.png";
+import POS1 from "../../../assets/images/elopaypointcalendar.png";
+import POS2 from "../../../assets/images/elopaypointcalendar-1.png";
 import Ipad from "../../../assets/images/SC-102G-A3_3_800x.png";
-import Iphone from "../../../assets/images/feature 3.png";
-import Iphone2 from "../../../assets/images/Staff app home page.png";
+import Iphone from "../../../assets/images/feature3.png";
+import Iphone2 from "../../../assets/images/Staffapphomepage.png";
 import POS3 from "../../../assets/images/pos-screen-with-691.png";
-import Lap from "../../../assets/images/Smart website.png";
+import Lap from "../../../assets/images/Smartwebsite.png";
 
 export default function HomeFeatures2() {
   return (

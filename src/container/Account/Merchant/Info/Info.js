@@ -27,7 +27,7 @@ function Info() {
   }, [dispatch]);
 
   const { loading, detail } = useSelector((state) => state.merchantDetail);
-
+  console.log("detail :>> ", detail);
   return (
     <div className="info_content">
       <div className="d-flex justify-content-between content_title">

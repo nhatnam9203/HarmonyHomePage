@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import team1 from "../../../assets/images/investor/Rectangle 539.png";
-import team2 from "../../../assets/images/investor/Rectangle 542.png";
-import team3 from "../../../assets/images/investor/Rectangle 545.png";
-import team4 from "../../../assets/images/investor/Rectangle 548.png";
+import team1 from "../../../assets/images/investor/Rectangle539.png";
+import team2 from "../../../assets/images/investor/Rectangle542.png";
+import team3 from "../../../assets/images/investor/Rectangle545.png";
+import team4 from "../../../assets/images/investor/Rectangle548.png";
 
 export default function Team() {
   return (

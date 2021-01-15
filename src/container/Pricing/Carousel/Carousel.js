@@ -82,9 +82,7 @@ export default function Carousell() {
                 The Modis Salon
               </Card.Title>
               {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
-              <Card.Text className="carousel__card-pricing">
-                From $49.00/year
-              </Card.Text>
+              <Card.Text className="carousel__card-pricing">Free</Card.Text>
             </Card.Body>
           </a>
         </Card>
@@ -100,9 +98,7 @@ export default function Carousell() {
                 Tre Nails
               </Card.Title>
               {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
-              <Card.Text className="carousel__card-pricing">
-                From $49.00/year
-              </Card.Text>
+              <Card.Text className="carousel__card-pricing">Free</Card.Text>
             </Card.Body>
           </a>
         </Card>
@@ -118,9 +114,7 @@ export default function Carousell() {
                 Beauty Salon
               </Card.Title>
               {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
-              <Card.Text className="carousel__card-pricing">
-                From $49.00/year
-              </Card.Text>
+              <Card.Text className="carousel__card-pricing">Free</Card.Text>
             </Card.Body>
           </a>
         </Card>
@@ -136,9 +130,7 @@ export default function Carousell() {
                 Pets Land
               </Card.Title>
               {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
-              <Card.Text className="carousel__card-pricing">
-                From $49.00/year
-              </Card.Text>
+              <Card.Text className="carousel__card-pricing">Free</Card.Text>
             </Card.Body>
           </a>
         </Card>
@@ -154,9 +146,7 @@ export default function Carousell() {
                 EUROTAS
               </Card.Title>
               {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
-              <Card.Text className="carousel__card-pricing">
-                From $49.00/year
-              </Card.Text>
+              <Card.Text className="carousel__card-pricing">Free</Card.Text>
             </Card.Body>
           </a>
         </Card>
@@ -172,9 +162,7 @@ export default function Carousell() {
                 VEERA
               </Card.Title>
               {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
-              <Card.Text className="carousel__card-pricing">
-                From $49.00/year
-              </Card.Text>
+              <Card.Text className="carousel__card-pricing">Free</Card.Text>
             </Card.Body>
           </a>
         </Card>

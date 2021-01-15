@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
-import Packkage1 from "../../../assets/images/pricing/Group 5867@2x.jpg";
-import Packkage2 from "../../../assets/images/pricing/Group 5868@2x.jpg";
-import Packkage3 from "../../../assets/images/pricing/Group 5869@2x.jpg";
-import Packkage4 from "../../../assets/images/pricing/Group 1185@2x.jpg";
+import Packkage1 from "../../../assets/images/pricing/Group5867@2x.jpg";
+import Packkage2 from "../../../assets/images/pricing/Group5868@2x.jpg";
+import Packkage3 from "../../../assets/images/pricing/Group5869@2x.jpg";
+import Packkage4 from "../../../assets/images/pricing/Group1185@2x.jpg";
 import FullFeatures from "../../../assets/images/pricing/imgpsh_fullsize_anim.jpeg";
 import { Link } from "react-router-dom";
 import { TiTick } from "react-icons/ti";

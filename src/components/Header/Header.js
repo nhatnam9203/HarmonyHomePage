@@ -36,6 +36,8 @@ export default function Header() {
   const [show, setShow] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isConsumer, setIsConsumer] = useState(false);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -49,6 +51,22 @@ export default function Header() {
     }
   }, [user]);
 
+  const handleConsumer = () => {
+    setExpanded(false);
+    setIsConsumer(true);
+  };
+  const handleNotConsumer = () => {
+    setExpanded(false);
+    setIsConsumer(false);
+  };
+  const handleAccount = () => {
+    history.push("/account/my-account");
+    setIsConsumer(false);
+  };
+  const handleShowLogin = () => {
+    setShow(true);
+    // setIsConsumer(false);
+  };
   // const handleLanguageChange = (lang) => {
   //   i18n.use(initReactI18next).init({ lng: lang });
   // };
@@ -79,15 +97,12 @@ export default function Header() {
           <Row className="">
             <Col className="py-1 mx-sm-1 pr-0 pl-0 col__signin">
               {user ? (
-                <div
-                  className="singin"
-                  onClick={() => history.push("/account/my-account")}
-                >
+                <div className="singin" onClick={handleAccount}>
                   <img src={LoginIcon} width={21} className="mr-2" />
                   <span className="text-white isMobile">Manage Account</span>
                 </div>
               ) : (
-                <div className="singin" onClick={() => setShow(true)}>
+                <div className="singin" onClick={handleShowLogin}>
                   <img src={LoginIcon} width={21} className="mr-2" />
                   <span className="text-white isMobile">Sign in</span>
                 </div>
@@ -132,122 +147,241 @@ export default function Header() {
           </Row>
         </Container>
       </div>
-      <Navbar
-        expanded={expanded}
-        expand="xl"
-        className="nav_header shadow-sm bg-white"
-        sticky="top"
-        collapseOnSelect
-      >
-        <Container>
-          <Navbar.Brand>
-            <Link to="/home">
-              <img src={Logo} className="d-inline-block align-top" />
-            </Link>
-          </Navbar.Brand>
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            onClick={() =>
-              setTimeout(() => {
-                setExpanded(!expanded);
-              }, 150)
-            }
-          />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <NavItem
-                onClick={() => setExpanded(false)}
-                className="py-md-2 py-xs-4"
-              >
-                <NavLink
-                  to="/home"
-                  className="nav-NavLink"
-                  activeClassName="active_link"
-                  exact
+      {isConsumer ? (
+        <Navbar
+          expanded={expanded}
+          expand="xl"
+          className="nav_header shadow-sm bg-white"
+          sticky="top"
+          collapseOnSelect
+        >
+          <Container>
+            <Navbar.Brand>
+              <Link to="/home" onClick={handleNotConsumer}>
+                <img src={Logo} className="d-inline-block align-top" />
+              </Link>
+            </Navbar.Brand>
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              onClick={() =>
+                setTimeout(() => {
+                  setExpanded(!expanded);
+                }, 150)
+              }
+            />
+            <Navbar.Collapse id="basic-navbar-nav">
+              {/* <Nav className="mr-auto">
+                <NavItem
+                  onClick={() => setExpanded(false)}
+                  className="py-md-2 py-xs-4"
                 >
-                  {t("Home")}
-                </NavLink>
-              </NavItem>
-              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                <NavLink
-                  to="/home/pricing"
-                  className="nav-NavLink"
-                  activeClassName="active_link"
-                >
-                  {t("Pricing")}
-                </NavLink>
-              </NavItem>
-              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                <NavLink
-                  to="/home/devices"
-                  className="nav-NavLink"
-                  activeClassName="active_link"
-                >
-                  {t("Devices")}
-                </NavLink>
-              </NavItem>
-              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                <NavLink
-                  to="/home/contact"
-                  className="nav-NavLink"
-                  activeClassName="active_link"
-                >
-                  {t("Contact")}
-                </NavLink>
-              </NavItem>
-            </Nav>
+                  <NavLink
+                    to="/home"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                    exact
+                  >
+                    {t("Home")}
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    to="/home/pricing"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    {t("Pricing")}
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    to="/home/devices"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    {t("Devices")}
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    to="/home/contact"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    {t("Contact")}
+                  </NavLink>
+                </NavItem>
+              </Nav> */}
 
-            <Nav className="align-items-end">
-              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                <NavLink
-                  exact
-                  to="/home"
-                  className="nav-NavLink merchant_nav"
-                  activeClassName="active_link border-0"
-                  isActive={(match, location) => {
-                    if (location?.pathname?.includes("/home")) {
-                      return true;
-                    }
-                  }}
-                >
-                  FOR MERCHANT
-                </NavLink>
-              </NavItem>
-              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                <NavLink
-                  to="/investor"
-                  className="nav-NavLink"
-                  activeClassName="active_link"
-                >
-                  FOR INVESTOR
-                </NavLink>
-              </NavItem>
-              <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                <NavLink
-                  to="/consumer"
-                  className="nav-NavLink"
-                  activeClassName="active_link"
-                >
-                  FOR CONSUMER
-                </NavLink>
-              </NavItem>
+              <Nav className="align-items-end ml-auto">
+                <NavItem onClick={handleNotConsumer} className="py-md-2">
+                  <NavLink
+                    exact
+                    to="/home"
+                    className="nav-NavLink merchant_nav"
+                    activeClassName="active_link border-0"
+                    isActive={(match, location) => {
+                      if (location?.pathname?.includes("/home")) {
+                        return true;
+                      }
+                    }}
+                  >
+                    FOR MERCHANT
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={handleNotConsumer} className="py-md-2">
+                  <NavLink
+                    to="/investor"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    FOR INVESTOR
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={handleConsumer} className="py-md-2">
+                  <NavLink
+                    to="/consumer"
+                    className="nav-NavLink"
+                    activeClassName="active_link border-0"
+                  >
+                    FOR CONSUMER
+                  </NavLink>
+                </NavItem>
 
-              <NavItem
-                className="sign_up py-md-2"
-                onClick={() => setExpanded(false)}
-              >
-                <NavLink
-                  to="/home/sign-up"
-                  className="nav-NavLink"
-                  // activeClassName="active_link"
+                {/* <NavItem
+                  className="sign_up py-md-2"
+                  onClick={() => setExpanded(false)}
                 >
-                  START FREE TRIAL
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+                  <NavLink
+                    to="/home/sign-up"
+                    className="nav-NavLink"
+                    // activeClassName="active_link"
+                  >
+                    START FREE TRIAL
+                  </NavLink>
+                </NavItem> */}
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      ) : (
+        <Navbar
+          expanded={expanded}
+          expand="xl"
+          className="nav_header shadow-sm bg-white"
+          sticky="top"
+          collapseOnSelect
+        >
+          <Container>
+            <Navbar.Brand>
+              <Link to="/home">
+                <img src={Logo} className="d-inline-block align-top" />
+              </Link>
+            </Navbar.Brand>
+            <Navbar.Toggle
+              aria-controls="basic-navbar-nav"
+              onClick={() =>
+                setTimeout(() => {
+                  setExpanded(!expanded);
+                }, 150)
+              }
+            />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <NavItem
+                  onClick={() => setExpanded(false)}
+                  className="py-md-2 py-xs-4"
+                >
+                  <NavLink
+                    to="/home"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                    exact
+                  >
+                    {t("Home")}
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    to="/home/pricing"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    {t("Pricing")}
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    to="/home/devices"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    {t("Devices")}
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    to="/home/contact"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    {t("Contact")}
+                  </NavLink>
+                </NavItem>
+              </Nav>
+
+              <Nav className="align-items-end">
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    exact
+                    to="/home"
+                    className="nav-NavLink merchant_nav"
+                    activeClassName="active_link border-0"
+                    isActive={(match, location) => {
+                      if (location?.pathname?.includes("/home")) {
+                        return true;
+                      }
+                    }}
+                  >
+                    FOR MERCHANT
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                  <NavLink
+                    to="/investor"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    FOR INVESTOR
+                  </NavLink>
+                </NavItem>
+                <NavItem onClick={handleConsumer} className="py-md-2">
+                  <NavLink
+                    to="/consumer"
+                    className="nav-NavLink"
+                    activeClassName="active_link"
+                  >
+                    FOR CONSUMER
+                  </NavLink>
+                </NavItem>
+
+                <NavItem
+                  className="sign_up py-md-2"
+                  onClick={() => setExpanded(false)}
+                >
+                  <NavLink
+                    to="/home/sign-up"
+                    className="nav-NavLink"
+                    // activeClassName="active_link"
+                  >
+                    START FREE TRIAL
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      )}
       {showForgot ? (
         <Modal
           show={show}

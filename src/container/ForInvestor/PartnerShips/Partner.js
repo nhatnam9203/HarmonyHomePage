@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import partner2 from "../../../assets/images/investor/Rectangle 549.png";
-import partner1 from "../../../assets/images/investor/about us 2.png";
+import partner2 from "../../../assets/images/investor/Rectangle-549.png";
+import partner1 from "../../../assets/images/investor/about-us2.png";
 import logo1 from "../../../assets/images/investor/1.png";
 import logo2 from "../../../assets/images/investor/2.png";
 import logo3 from "../../../assets/images/investor/3.png";

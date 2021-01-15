@@ -1,9 +1,9 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import consumerApp from "../../assets/images/For Consumer/consumerApp.svg";
-import consumerAppImg from "../../assets/images/For Consumer/consumer app.png";
-import App1 from "../../assets/images/For Consumer/Mask Group 187.svg";
-import App2 from "../../assets/images/For Consumer/Mask Group 186.svg";
+import consumerApp from "../../assets/images/ForConsumer/consumerApp.svg";
+import consumerAppImg from "../../assets/images/ForConsumer/consumerapp.png";
+import App1 from "../../assets/images/ForConsumer/MaskGroup187.svg";
+import App2 from "../../assets/images/ForConsumer/MaskGroup186.svg";
 import Topfooter from "../../components/Footer/TopFooter";
 import { Helmet } from "react-helmet";
 

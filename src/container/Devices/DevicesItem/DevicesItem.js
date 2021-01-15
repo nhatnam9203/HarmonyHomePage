@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Card, CardDeck, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import PayPoint from "../../../assets/images/Devices/elo paypoint calendar-1.png";
-import Mpop from "../../../assets/images/Devices/elo paypoint calendar.png";
+import PayPoint from "../../../assets/images/Devices/elopaypointcalendar-1.png";
+import Mpop from "../../../assets/images/Devices/elopaypointcalendar.png";
 import Drawer1 from "../../../assets/images/Devices/CX-300_2_800x-1.png";
 import Drawer2 from "../../../assets/images/Devices/CX-350_1_800x.png";
 import Drawer3 from "../../../assets/images/Devices/CX-410_1_800x.png";

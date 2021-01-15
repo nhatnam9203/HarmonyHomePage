@@ -30,12 +30,12 @@ function Subscription() {
   );
 
   const [popUp, setPopUp] = useState(false);
-  const [cancelSubId, setCancelSubId] = useState("");
+  const [cancelSubId] = useState("");
 
-  const handleOpenPopup = (id) => {
-    setPopUp(true);
-    setCancelSubId(id);
-  };
+  // const handleOpenPopup = (id) => {
+  //   setPopUp(true);
+  //   setCancelSubId(id);
+  // };
 
   const handleCancelSubscription = () => {
     dispatch(cancelSubscriptionByIdAction(cancelSubId));

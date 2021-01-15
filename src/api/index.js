@@ -7,6 +7,8 @@ import instance from "../helper/axios";
 const url = "https://staging.harmonypayment.com/api";
 
 // const url = "https://admin.stage.harmonypayment.com/api";
+// Prod
+// const url = "https://api.harmonypayment.com/api";
 
 // Login
 const loginUrl = `${url}/principal/login`;
