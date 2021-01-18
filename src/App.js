@@ -27,6 +27,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import Policy from "./components/Policy/Policy";
 import PopupAfterLoad from "./components/PopupAfterLoad/PopupAfterLoad";
+import PasswordReset from "./components/PassWordReset/PasswordReset";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
               path="/harmony_consumer_app_privacy_info.html"
               component={Policy}
             />
+            <Route path="/password-reset" component={PasswordReset} />
             <PrivateRoute path="/account" component={Account} />
           </Switch>
         </main>
