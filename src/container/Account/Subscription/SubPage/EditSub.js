@@ -13,7 +13,7 @@ import { RiErrorWarningLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
-import Loading from "../../../../util/Loading";
+// import Loading from "../../../../util/Loading";
 import Popup from "../../../../components/Popup/Popup";
 
 import "./EditSub.scss";
@@ -31,9 +31,7 @@ function EditSub(props) {
   const { packageList } = useSelector((state) => state.package);
 
   const [popUp, setPopUp] = useState(false);
-  const { loading: loadingSub, subscription } = useSelector(
-    (state) => state.mySubscription
-  );
+  const { subscription } = useSelector((state) => state.mySubscription);
   const { loading: loadingUpdateSub } = useSelector(
     (state) => state.updateSubscription
   );
@@ -185,26 +183,26 @@ function EditSub(props) {
   return (
     <div className="sub_edit">
       <h1>Change Subscription</h1>
-      {loadingSub ? (
+      {/* {loadingSub ? (
         <Loading />
-      ) : (
-        <Table responsive className="mt-4">
-          <thead>
-            <tr>
-              <th className="p-3 ">
-                <p className="th_name">Packages</p>
-              </th>
-              <th className="p-3 text-md-center">
-                <p>Billed Monthly</p>
-              </th>
-              <th className="p-3 text-md-center">
-                <p>Billed Annually</p>
-              </th>
-            </tr>
-          </thead>
-          <tbody>{renderPackage}</tbody>
-        </Table>
-      )}
+      ) : ( */}
+      <Table responsive className="mt-4">
+        <thead>
+          <tr>
+            <th className="p-3 ">
+              <p className="th_name">Packages</p>
+            </th>
+            <th className="p-3 text-md-center">
+              <p>Billed Monthly</p>
+            </th>
+            <th className="p-3 text-md-center">
+              <p>Billed Annually</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>{renderPackage}</tbody>
+      </Table>
+      {/* )} */}
 
       {isMobile && defaultPackageId !== subscription?.packageId ? (
         <motion.div

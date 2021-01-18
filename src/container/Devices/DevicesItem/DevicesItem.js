@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Card, CardDeck, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import PayPoint from "../../../assets/images/Devices/elopaypointcalendar-1.png";
-import Mpop from "../../../assets/images/Devices/elopaypointcalendar.png";
-import Drawer1 from "../../../assets/images/Devices/CX-300_2_800x-1.png";
-import Drawer2 from "../../../assets/images/Devices/CX-350_1_800x.png";
-import Drawer3 from "../../../assets/images/Devices/CX-410_1_800x.png";
-import Ipad1 from "../../../assets/images/Devices/CX-300_2_800x.png";
-import Ipad2 from "../../../assets/images/Devices/SC-102G-A3_1_800x-1.png";
-import Ipad3 from "../../../assets/images/Devices/SC-102B-A4_1_800x.png";
-import StandBlack1 from "../../../assets/images/Devices/stand-black1.jpeg";
-import StandBlack2 from "../../../assets/images/Devices/stand-black2.jpeg";
-import StandBlack3 from "../../../assets/images/Devices/stand-black3.jpeg";
-import Terminal1 from "../../../assets/images/Devices/A80-for-USCA3_3000x.png";
-import Terminal2 from "../../../assets/images/Devices/a920-4-3_1800x.png";
-import Terminal3 from "../../../assets/images/Devices/423350_57691.png";
-import Terminal4 from "../../../assets/images/Devices/dejavoo-z1.png";
-import Terminal5 from "../../../assets/images/Devices/SC-102G-A3_1_800x.png";
-import Printer from "../../../assets/images/Devices/41OssYDWNRL.png";
+import PayPoint from "../../../assets/images/device/paypoint.png";
+import Mpop from "../../../assets/images/device/mpop.png";
+import Drawer1 from "../../../assets/images/device/drawer_1.jpg";
+import Drawer2 from "../../../assets/images/device/drawer_2.jpg";
+import Drawer3 from "../../../assets/images/device/drawer_3.jpg";
+import Ipad2 from "../../../assets/images/device/ipad1w.jpg";
+import Ipad1 from "../../../assets/images/device/ipad2w.jpg";
+import Ipad3 from "../../../assets/images/device/ipad3w.jpg";
+import StandBlack1 from "../../../assets/images/device/ipad1.jpg";
+import StandBlack2 from "../../../assets/images/device/ipad2.jpg";
+import StandBlack3 from "../../../assets/images/device/ipad3.jpg";
+import Terminal1 from "../../../assets/images/device/terminal1.png";
+import Terminal2 from "../../../assets/images/device/terminal2.png";
+import Terminal3 from "../../../assets/images/device/terminal3.png";
+import Terminal4 from "../../../assets/images/device/terminal4.png";
+import Terminal5 from "../../../assets/images/device/terminal5.png";
+import Printer from "../../../assets/images/device/printer.png";
 
 export default function DevicesItem() {
   const [swap, setSwap] = useState(true);
@@ -46,7 +46,6 @@ export default function DevicesItem() {
                     alt=""
                   />
                 </Card>
-                {/* <img className="divices__item--img" src={PayPoint} alt="" /> */}
               </Col>
               <Col xs={12} md={6} className="text-center text-md-left p-0">
                 <h1 className="text-uppercase font-weight-bold divices__item--title2">
@@ -134,7 +133,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       POS CASH DRAWER 12 INCH, BX1214S
                     </Card.Title>
-                    <Card.Text className="divices__bot-card--text">
+                    <div className="divices__bot-card--text">
                       <ul className="divices__bot-card--ul">
                         <li className="divices__bot-card--li">
                           11.9 x 13.7 x 4 inches
@@ -166,7 +165,7 @@ export default function DevicesItem() {
                           products
                         </li>
                       </ul>
-                    </Card.Text>
+                    </div>
                   </Card.Body>
                 </Card>
                 <Card className="divices__bot-card">
@@ -179,7 +178,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       POS CASH DRAWER 13 INCH, BX1315W
                     </Card.Title>
-                    <Card.Text className="divices__bot-card--text">
+                    <div className="divices__bot-card--text">
                       <ul className="divices__bot-card--ul">
                         <li className="divices__bot-card--li">
                           13.5 x 15.2 x 3.9 inches
@@ -210,7 +209,7 @@ export default function DevicesItem() {
                           products
                         </li>
                       </ul>
-                    </Card.Text>
+                    </div>
                   </Card.Body>
                 </Card>
                 <Card className="divices__bot-card">
@@ -223,7 +222,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
                       POS CASH DRAWER 16 INCH, BX1618W
                     </Card.Title>
-                    <Card.Text className="divices__bot-card--text">
+                    <div className="divices__bot-card--text">
                       <ul className="divices__bot-card--ul">
                         <li className="divices__bot-card--li">
                           16.1 x 18.1 x 4.3 inches
@@ -254,7 +253,7 @@ export default function DevicesItem() {
                           products
                         </li>
                       </ul>
-                    </Card.Text>
+                    </div>
                   </Card.Body>
                 </Card>
               </CardDeck>

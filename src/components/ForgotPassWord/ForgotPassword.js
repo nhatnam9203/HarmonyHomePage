@@ -37,10 +37,10 @@ export default function ForgotPassword({ showForgot, setShowForgot }) {
     >
       <Modal.Header className="border-0 pb-0" closeButton>
         <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
-          <Modal.Title className="sigin__title text-center font-weight-bold mb-2">
+          <Modal.Title className="sign_in__title text-center font-weight-bold mb-2">
             Forgot Password
           </Modal.Title>
-          <p className="sigin__text text-center mb-0">
+          <p className="sign_in__text text-center mb-0">
             Enter your registered email, we will send you a password reset link
           </p>
         </div>
@@ -88,7 +88,7 @@ export default function ForgotPassword({ showForgot, setShowForgot }) {
             <Link
               to={"#"}
               onClick={() => setShowForgot(false)}
-              className="signin__link"
+              className="sign_in_link"
             >
               Back to sign in
             </Link>

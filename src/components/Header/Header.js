@@ -97,13 +97,18 @@ export default function Header() {
           <Row className="">
             <Col className="py-1 mx-sm-1 pr-0 pl-0 col__signin">
               {user ? (
-                <div className="singin" onClick={handleAccount}>
+                <div className="sign_in" onClick={handleAccount}>
                   <img src={LoginIcon} width={21} className="mr-2" />
                   <span className="text-white isMobile">Manage Account</span>
                 </div>
               ) : (
-                <div className="singin" onClick={handleShowLogin}>
-                  <img src={LoginIcon} width={21} className="mr-2" />
+                <div className="sign_in" onClick={handleShowLogin}>
+                  <img
+                    src={LoginIcon}
+                    width={21}
+                    height="auto"
+                    className="mr-2"
+                  />
                   <span className="text-white isMobile">Sign in</span>
                 </div>
               )}
@@ -170,49 +175,6 @@ export default function Header() {
               }
             />
             <Navbar.Collapse id="basic-navbar-nav">
-              {/* <Nav className="mr-auto">
-                <NavItem
-                  onClick={() => setExpanded(false)}
-                  className="py-md-2 py-xs-4"
-                >
-                  <NavLink
-                    to="/home"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                    exact
-                  >
-                    {t("Home")}
-                  </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/home/pricing"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    {t("Pricing")}
-                  </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/home/devices"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    {t("Devices")}
-                  </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/home/contact"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    {t("Contact")}
-                  </NavLink>
-                </NavItem>
-              </Nav> */}
-
               <Nav className="align-items-end ml-auto">
                 <NavItem onClick={handleNotConsumer} className="py-md-2">
                   <NavLink
@@ -247,19 +209,6 @@ export default function Header() {
                     FOR CONSUMER
                   </NavLink>
                 </NavItem>
-
-                {/* <NavItem
-                  className="sign_up py-md-2"
-                  onClick={() => setExpanded(false)}
-                >
-                  <NavLink
-                    to="/home/sign-up"
-                    className="nav-NavLink"
-                    // activeClassName="active_link"
-                  >
-                    START FREE TRIAL
-                  </NavLink>
-                </NavItem> */}
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -369,11 +318,7 @@ export default function Header() {
                   className="sign_up py-md-2"
                   onClick={() => setExpanded(false)}
                 >
-                  <NavLink
-                    to="/home/sign-up"
-                    className="nav-NavLink"
-                    // activeClassName="active_link"
-                  >
+                  <NavLink to="/home/sign-up" className="nav-NavLink">
                     START FREE TRIAL
                   </NavLink>
                 </NavItem>
@@ -386,16 +331,16 @@ export default function Header() {
         <Modal
           show={show}
           onHide={() => setShow(false)}
-          aria-labelledby="package-modal"
+          aria-labelledby="package-modal1"
           centered
           className="modal-sign-in d-none"
         >
           <Modal.Header className="border-0 pb-0" closeButton>
             <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
-              <Modal.Title className="sigin__title text-center font-weight-bold mb-2">
+              <Modal.Title className="sign_in__title text-center font-weight-bold mb-2">
                 Sign In
               </Modal.Title>
-              <p className="sigin__text text-center mb-0">
+              <p className="sign_in__text text-center mb-0">
                 If you have an account, sign in with your email address.
               </p>
             </div>
@@ -473,12 +418,12 @@ export default function Header() {
                   </Button>
                 )}
 
-                <Link
+                <span
                   onClick={() => setShowForgot(true)}
-                  className="signin__link"
+                  className="sign_in_link"
                 >
                   Forgot Password?
-                </Link>
+                </span>
                 <ForgotPassword
                   showForgot={showForgot}
                   setShowForgot={setShowForgot}
@@ -497,10 +442,10 @@ export default function Header() {
         >
           <Modal.Header className="border-0 pb-0" closeButton>
             <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
-              <Modal.Title className="sigin__title text-center font-weight-bold mb-2">
+              <Modal.Title className="sign_in__title text-center font-weight-bold mb-2">
                 Sign In
               </Modal.Title>
-              <p className="sigin__text text-center mb-0">
+              <p className="sign_in__text text-center mb-0">
                 If you have an account, sign in with your email address.
               </p>
             </div>
@@ -578,12 +523,12 @@ export default function Header() {
                   </Button>
                 )}
 
-                <Link
+                <span
                   onClick={() => setShowForgot(true)}
-                  className="signin__link"
+                  className="sign_in_link"
                 >
                   Forgot Password?
-                </Link>
+                </span>
                 <ForgotPassword
                   showForgot={showForgot}
                   setShowForgot={setShowForgot}

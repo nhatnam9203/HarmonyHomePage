@@ -1,12 +1,13 @@
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
-import POS1 from "../../../assets/images/elopaypointcalendar.png";
-import POS2 from "../../../assets/images/elopaypointcalendar-1.png";
-import Ipad from "../../../assets/images/SC-102G-A3_3_800x.png";
-import Iphone from "../../../assets/images/feature3.png";
-import Iphone2 from "../../../assets/images/Staffapphomepage.png";
-import POS3 from "../../../assets/images/pos-screen-with-691.png";
-import Lap from "../../../assets/images/Smartwebsite.png";
+import LazyLoad from "react-lazyload";
+import POS1 from "../../../assets/images/home/pos1.png";
+import POS2 from "../../../assets/images/home/pos2.png";
+import Ipad from "../../../assets/images/home/ipad.png";
+import Iphone from "../../../assets/images/home/iphone.png";
+import Iphone2 from "../../../assets/images/home/iphone2.png";
+import POS3 from "../../../assets/images/home/pos3.png";
+import Lap from "../../../assets/images/home/laptop.png";
 
 export default function HomeFeatures2() {
   return (
@@ -37,14 +38,15 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
-              <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
-                <Card.Img
-                  className="bot_features2-item--img"
-                  src={POS1}
-                  alt="POS"
-                />
-              </Card>
-              {/* <img className="bot_features2-item--img" src={POS1} alt="POS" /> */}
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--img"
+                    src={POS1}
+                    alt="POS"
+                  />
+                </Card>
+              </LazyLoad>
             </Col>
             <Col xs={12} md={6} className="text-center text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
@@ -81,14 +83,15 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
-                <Card.Img
-                  className="bot_features2-item--img"
-                  src={POS2}
-                  alt="POS"
-                />
-              </Card>
-              {/* <img className="bot_features2-item--img" src={POS2} alt="POS" /> */}
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--img"
+                    src={POS2}
+                    alt="POS"
+                  />
+                </Card>
+              </LazyLoad>
             </Col>
           </Row>
         </div>
@@ -124,18 +127,15 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
-                <Card.Img
-                  className="bot_features2-item--img"
-                  src={Ipad}
-                  alt="SIGN IN"
-                />
-              </Card>
-              {/* <img
-                className="bot_features2-item--img"
-                src={Ipad}
-                alt="SIGN IN"
-              /> */}
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--img"
+                    src={Ipad}
+                    alt="SIGN IN"
+                  />
+                </Card>
+              </LazyLoad>
             </Col>
           </Row>
         </div>
@@ -157,18 +157,15 @@ export default function HomeFeatures2() {
               md={3}
               className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
-              <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
-                <Card.Img
-                  className="bot_features2-item--phone"
-                  src={Iphone}
-                  alt="Consumer App"
-                />
-              </Card>
-              {/* <img
-                className="bot_features2-item--phone"
-                src={Iphone}
-                alt="Consumer App"
-              /> */}
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--phone"
+                    src={Iphone}
+                    alt="Consumer App"
+                  />
+                </Card>
+              </LazyLoad>
             </Col>
             <Col xs={12} md={9} className="text-center text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
@@ -215,18 +212,15 @@ export default function HomeFeatures2() {
               md={3}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
-                <Card.Img
-                  className="bot_features2-item--phone"
-                  src={Iphone2}
-                  alt="Staff App"
-                />
-              </Card>
-              {/* <img
-                className="bot_features2-item--phone"
-                src={Iphone2}
-                alt="Staff App"
-              /> */}
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--phone"
+                    src={Iphone2}
+                    alt="Staff App"
+                  />
+                </Card>
+              </LazyLoad>
             </Col>
           </Row>
         </div>
@@ -265,14 +259,15 @@ export default function HomeFeatures2() {
               md={6}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
-              <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
-                <Card.Img
-                  className="bot_features2-item--img"
-                  src={POS3}
-                  alt="POS"
-                />
-              </Card>
-              {/* <img className="bot_features2-item--img" src={POS3} alt="POS" /> */}
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--img"
+                    src={POS3}
+                    alt="POS"
+                  />
+                </Card>{" "}
+              </LazyLoad>
             </Col>
           </Row>
           <Row>
@@ -281,14 +276,15 @@ export default function HomeFeatures2() {
               md={6}
               className=" xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
-              <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
-                <Card.Img
-                  className="bot_features2-item--img"
-                  src={Lap}
-                  alt="POS"
-                />
-              </Card>
-              {/* <img className="bot_features2-item--img" src={Lap} alt="POS" /> */}
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--img"
+                    src={Lap}
+                    alt="POS"
+                  />
+                </Card>
+              </LazyLoad>
             </Col>
             <Col xs={12} md={6} className="text-center text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">

@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import team1 from "../../../assets/images/investor/Rectangle539.png";
-import team2 from "../../../assets/images/investor/Rectangle542.png";
-import team3 from "../../../assets/images/investor/Rectangle545.png";
-import team4 from "../../../assets/images/investor/Rectangle548.png";
+import team1 from "../../../assets/images/about/team1.jpg";
+import team2 from "../../../assets/images/about/team2.jpg";
+import team3 from "../../../assets/images/about/team3.jpg";
+import team4 from "../../../assets/images/about/team4.jpg";
 
 export default function Team() {
   return (
@@ -12,11 +12,7 @@ export default function Team() {
         <h1 className="team_title text-uppercase font-weight-bold text-center">
           Our Team
         </h1>
-        {/* <p className="team_text text-center">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-          ever since the
-        </p> */}
+
         <Row className="mx-0">
           <Col md={6} xs={12} xl={3} className="mt-4">
             <Card className="shadow team_card h-100">

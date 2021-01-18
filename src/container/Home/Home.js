@@ -1,31 +1,20 @@
-import React from "react";
-import Topfooter from "../../components/Footer/TopFooter";
-// import PopupAfterLoad from "../../components/PopupAfterLoad/PopupAfterLoad";
-import HomeBanner2 from "./Banner2/HomeBanner2";
-import HomeFeatures2 from "./Features2/HomeFeatures2";
+import React, { lazy } from "react";
 import { Helmet } from "react-helmet";
 
-// import HomeBanner from "./Banner/HomeBanner";
-// import HomeFeatures from "./Features/HomeFeatures";
-// import StarterKit from "./StarterKit/StarterKit";
+const HomeBanner = lazy(() => import("./Banner2/HomeBanner2"));
+const HomeFeatures = lazy(() => import("./Features2/HomeFeatures2"));
+const TopFooter = lazy(() => import("../../components/Footer/TopFooter"));
 
 function Home() {
-  // useEffect(() => {
-
-  // }, [])
   return (
     <>
       <Helmet>
         <title>Harmony | Home</title>
-        <meta name="Home" content="Harmony HomePage" />
+        <meta name="description" content="Harmony HomePage" />
       </Helmet>
-      {/* <HomeBanner />
+      <HomeBanner />
       <HomeFeatures />
-      <StarterKit /> */}
-      {/* <PopupAfterLoad /> */}
-      <HomeBanner2 />
-      <HomeFeatures2 />
-      <Topfooter />
+      <TopFooter />
     </>
   );
 }

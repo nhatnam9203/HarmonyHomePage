@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import visionIMG from "../../../assets/images/investor/shutterstock_554418190.png";
+import visionIMG from "../../../assets/images/about/about2.jpg";
 
 export default function Story() {
   return (
@@ -18,20 +18,6 @@ export default function Story() {
           nation-wide also gave an enthusiastic welcome when the Team demoed the
           apps at Premiere Orlando 19.
         </p>
-        {/* <p className="story_text m-0">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-          et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-          amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-          invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et.
-        </p> */}
       </div>
       <div className="vision">
         <Row className="mx-0">
@@ -51,26 +37,6 @@ export default function Story() {
               Inventory, and Customer relations. HarmonyPay is a one-stop app
               that takes the struggle out of the juggle.
             </p>
-            {/* <ul className="vision_link font-weight-light">
-              <li className="vision_link-item">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy.
-              </li>
-              <li className="vision_link-item">
-                {" "}
-                Labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-                eos et accusam et.
-              </li>
-              <li className="vision_link-item">
-                Dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                sanctus est.
-              </li>
-            </ul>
-            <p className="vision_text">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam.
-            </p> */}
           </Col>
         </Row>
       </div>

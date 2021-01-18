@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import partner2 from "../../../assets/images/investor/Rectangle-549.png";
-import partner1 from "../../../assets/images/investor/about-us2.png";
+import partner2 from "../../../assets/images/about/about_us3.jpg";
+import partner1 from "../../../assets/images/about/about_us2.jpg";
 import logo1 from "../../../assets/images/investor/1.png";
 import logo2 from "../../../assets/images/investor/2.png";
 import logo3 from "../../../assets/images/investor/3.png";
@@ -14,11 +14,7 @@ export default function Partner() {
         <h1 className="top_partner-title text-uppercase font-weight-bold">
           PARTNERSHIPS
         </h1>
-        {/* <p className="top_partner-text px-4 px-lg-0">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-          ever since the
-        </p> */}
+
         <Row className="top_partner-icon d-flex justify-content-between m-0">
           <Col xs={12} md={6} lg={3}>
             <img src={logo1} alt="" className="top_partner-icon--item" />

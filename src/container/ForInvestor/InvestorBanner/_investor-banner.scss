@@ -1,6 +1,6 @@
 .investor_banner {
   height: 30rem;
-  background-image: url("../../../assets/images/img/AboutUs/aboutus.jpg");
+  background-image: url("../../../assets/images/about/about_us.jpg");
   background-size: cover;
   background-position: right;
   border: 1px solid #707070;
@@ -28,7 +28,6 @@
     letter-spacing: $title-0;
     font-size: $fs-title;
     position: relative;
-    // margin-bottom: 1rem;
     @include mediaQueryMax("large") {
       font-size: 2rem;
     }

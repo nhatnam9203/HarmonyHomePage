@@ -1,31 +1,32 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Switch, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 
-import MyAccount from "./MyAccount/MyAccount";
-import EditAccount from "./MyAccount/Edit/EditAccount";
-import EditNewsletter from "./MyAccount/Edit/EditNewsletter";
-
-import Merchant from "./Merchant/Merchant";
-
-import Info from "./Merchant/Info/Info";
-import EditInfo from "./Merchant/EditInfo/EditInfo";
-
-import Subscription from "./Subscription/Subscription";
-import EditSub from "./Subscription/SubPage/EditSub";
-import SubscriptionInfo from "./Subscription/SubPage/SubscriptionInfo";
-import { Helmet } from "react-helmet";
-
 import "./Account.scss";
+
+const Merchant = lazy(() => import("./Merchant/Merchant"));
+const Info = lazy(() => import("./Merchant/Info/Info"));
+const EditInfo = lazy(() => import("./Merchant/EditInfo/EditInfo"));
+
+const MyAccount = lazy(() => import("./MyAccount/MyAccount"));
+const EditAccount = lazy(() => import("./MyAccount/Edit/EditAccount"));
+const EditNewsletter = lazy(() => import("./MyAccount/Edit/EditNewsletter"));
+
+const Subscription = lazy(() => import("./Subscription/Subscription"));
+const EditSub = lazy(() => import("./Subscription/SubPage/EditSub"));
+const SubscriptionInfo = lazy(() =>
+  import("./Subscription/SubPage/SubscriptionInfo")
+);
 
 function Account() {
   return (
     <div className="account px-2">
       <Helmet>
         <title>Harmony | Account</title>
-        <meta name="Account" content="Harmony Account" />
+        <meta name="description" content="Harmony Account" />
       </Helmet>
       <Row className="pr-0">
         <Col sm={12} md={4} lg={3} className="">
@@ -76,7 +77,7 @@ function Account() {
             <Route exact path="/account/merchant" component={Merchant} />
             <Route path="/account/merchant/:id/edit" component={EditInfo} />
             <Route path="/account/merchant/:id" component={Info} />
-          </Switch>{" "}
+          </Switch>
         </Col>
       </Row>
     </div>

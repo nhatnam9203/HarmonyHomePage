@@ -1,19 +1,20 @@
-import React from "react";
-import Topfooter from "../../components/Footer/TopFooter";
-import DevicesBanner from "./DevicesBanner/DevicesBanner";
-import DevicesItem from "./DevicesItem/DevicesItem";
+import React, { lazy } from "react";
 import { Helmet } from "react-helmet";
+
+const TopFooter = lazy(() => import("../../components/Footer/TopFooter"));
+const DevicesBanner = lazy(() => import("./DevicesBanner/DevicesBanner"));
+const DevicesItem = lazy(() => import("./DevicesItem/DevicesItem"));
 
 export default function Devices() {
   return (
     <>
       <Helmet>
-        <title>Harmony | Divices</title>
-        <meta name="Divices" content="Harmony Divices" />
+        <title>Harmony | Devices</title>
+        <meta name="description" content="Harmony Devices" />
       </Helmet>
       <DevicesBanner />
       <DevicesItem />
-      <Topfooter />
+      <TopFooter />
     </>
   );
 }

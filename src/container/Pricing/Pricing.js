@@ -1,19 +1,20 @@
-import React from "react";
-import Topfooter from "../../components/Footer/TopFooter";
-import Carousel from "./Carousel/Carousel";
-import Package from "./Package/Package";
+import React, { lazy } from "react";
 import { Helmet } from "react-helmet";
+
+const TopFooter = lazy(() => import("../../components/Footer/TopFooter"));
+const Carousel = lazy(() => import("./Carousel/Carousel"));
+const Package = lazy(() => import("./Package/Package"));
 
 function Pricing() {
   return (
     <>
       <Helmet>
         <title>Harmony | Pricing</title>
-        <meta name="Pricing" content="Harmony Pricing" />
+        <meta name="description" content="Harmony Pricing" />
       </Helmet>
       <Package />
       <Carousel />
-      <Topfooter />
+      <TopFooter />
     </>
   );
 }
