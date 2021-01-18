@@ -112,9 +112,9 @@ export default function Header() {
               <a href="tel:800-531-3126" className="telephone">
                 {/* add them mr-2 */}
                 <FiPhoneCall size={21} className="mr-2" />
-                <a href="tel:800-531-3126" className="isMobile mr-2">
+                <span href="tel:800-531-3126" className="isMobile mr-2">
                   800-531-3126
-                </a>
+                </span>
               </a>
             </Col>
             {/* {isMobile ? (

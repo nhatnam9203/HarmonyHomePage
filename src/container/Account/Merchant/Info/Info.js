@@ -95,17 +95,31 @@ function Info() {
                     <p className="info_text">{detail?.general?.tax}</p>
                   </Col>
                   <Col sm={12} md={4} className="mt-4">
-                    <p className="info_label">DBA Business Address</p>
+                    <p className="info_label">
+                      Business Address* (no P.O. Boxes)
+                    </p>
                     <p className="info_text">
-                      {`${detail?.general?.dbaAddress?.Address}, ${detail?.general?.dbaAddress?.City}, ${detail?.general?.dbaAddress?.StateName}`}
+                      {`${detail?.general?.address}, ${detail?.general?.city}, ${detail?.general?.stateName}`}
+                    </p>
+                  </Col>
+                  <Col sm={12} md={4} className="mt-4">
+                    <p className="info_label">Zip Code</p>
+                    <p className="info_text">{detail?.general?.zip}</p>
+                  </Col>
+                  <div className="w-100"></div>
+                  <Col sm={12} md={4} className="mt-4">
+                    <p className="info_label">DBA Business Number</p>
+                    <p className="info_text">
+                      {`${detail?.general?.dbaAddress?.address}, ${detail?.general?.dbaAddress?.city}, ${detail?.general?.dbaAddress?.stateName}`}
                     </p>
                   </Col>
                   <Col sm={12} md={4} className="mt-4">
                     <p className="info_label">Zip Code</p>
                     <p className="info_text">
-                      {detail?.general?.dbaAddress?.Zip}
+                      {detail?.general?.dbaAddress?.zip}
                     </p>
                   </Col>
+                  <div className="w-100"></div>
                   <Col sm={12} md={4} className="mt-4">
                     <p className="info_label">Business Phone Number</p>
                     <p className="info_text">
