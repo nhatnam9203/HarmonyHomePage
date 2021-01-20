@@ -28,11 +28,15 @@
     }
   }
 
-  .singin {
+  .sign_in {
     display: flex;
     align-items: center;
     float: right;
     cursor: pointer;
+
+    img {
+      height: auto;
+    }
   }
   .isMobile {
     @media screen and (max-width: 425px) {
@@ -82,7 +86,7 @@
 
   img {
     width: 10em;
-    // margin-right: 1.7em;
+    height: auto;
   }
 
   .nav-NavLink {
@@ -169,8 +173,10 @@
     border-bottom: none;
   }
 }
-.signin__link {
+.sign_in_link {
   color: #0868b0;
+  cursor: pointer;
+
   &:hover {
     color: $blue-1;
     text-decoration: underline;
@@ -185,7 +191,7 @@
   }
 }
 .modal-body-signin {
-  .sigin__title {
+  .sign_in__title {
     font-size: 1.625rem;
     letter-spacing: 0.65px;
     color: #000000;

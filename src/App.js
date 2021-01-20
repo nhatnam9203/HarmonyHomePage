@@ -1,62 +1,77 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import { ToastContainer } from "react-toastify";
+import React, { lazy, Suspense } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
+import PageLoader from "./util/PageLoader";
+import PrivateRoute from "./routes/PrivateRoute";
+import Home from "./container/Home/Home";
+import PopupAfterLoad from "./components/PopupAfterLoad/PopupAfterLoad";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-
-// # Routes
-import Home from "./container/Home/Home";
-import SignUp from "./container/SignUp/SignUp";
-import Shop from "./container/Shop/Shop";
-import Pricing from "./container/Pricing/Pricing";
-import Contact from "./container/Contact/Contact";
-import Devices from "./container/Devices/Devices";
-import ForInvestor from "./container/ForInvestor/ForInvestor";
-import ForConsumer from "./container/ForConsumer/ForConsumer";
-import GiftCardTerms from "./components/GiftCardTerms/GiftCardTerms";
-
-import Account from "./container/Account";
-
-import PrivateRoute from "./routes/PrivateRoute";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/main.scss";
 import "react-toastify/dist/ReactToastify.css";
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import Policy from "./components/Policy/Policy";
-import PopupAfterLoad from "./components/PopupAfterLoad/PopupAfterLoad";
 import PasswordReset from "./components/PassWordReset/PasswordReset";
+
+// # Routes
+const SignUp = lazy(() => import("./container/SignUp/SignUp"));
+const Shop = lazy(() => import("./container/Shop/Shop"));
+const Pricing = lazy(() => import("./container/Pricing/Pricing"));
+const Contact = lazy(() => import("./container/Contact/Contact"));
+const Devices = lazy(() => import("./container/Devices/Devices"));
+const Blogs = lazy(() => import("./container/Blogs/Blogs"));
+
+const ForInvestor = lazy(() => import("./container/ForInvestor/ForInvestor"));
+const ForConsumer = lazy(() => import("./container/ForConsumer/ForConsumer"));
+const GiftCardTerms = lazy(() =>
+  import("./components/GiftCardTerms/GiftCardTerms")
+);
+const Policy = lazy(() => import("./components/Policy/Policy"));
+const Account = lazy(() => import("./container/Account"));
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
       <div className="app">
-        <Toaster position="top-right" reverseOrder={false} />
         <Header />
+        <Toaster position="top-right" reverseOrder={false} />
         <main className="app-main-content">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/home" component={Home} />
-            <Route path="/home/pricing" component={Pricing} />
-            <Route path="/home/devices" component={Devices} />
-            <Route path="/home/contact" component={Contact} />
+          <Suspense fallback={<PageLoader />}>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+              <Route exact path="/home" component={Home} />
+              <Route path="/home/pricing" component={Pricing} />
+              <Route path="/home/devices" component={Devices} />
+              <Route path="/home/blogs" component={Blogs} />
+              <Route path="/home/contact" component={Contact} />
 
-            <Route path="/home/sign-up" component={SignUp} />
-            <Route path="/shop" component={Shop} />
+              <Route path="/home/sign-up" component={SignUp} />
+              <Route path="/shop" component={Shop} />
 
-            <Route path="/investor" component={ForInvestor} />
-            <Route path="/consumer" component={ForConsumer} />
-            <Route path="/gift-card-terms" component={GiftCardTerms} />
-            <Route
-              path="/harmony_consumer_app_privacy_info.html"
-              component={Policy}
-            />
-            <Route path="/password-reset" component={PasswordReset} />
-            <PrivateRoute path="/account" component={Account} />
-          </Switch>
+              <Route path="/investor" component={ForInvestor} />
+              <Route path="/consumer" component={ForConsumer} />
+              <Route path="/gift-card-terms" component={GiftCardTerms} />
+              <Route
+                path="/harmony_consumer_app_privacy_info.html"
+                component={Policy}
+              />
+              <Route
+                path="/principal/resetpassword/:id"
+                component={PasswordReset}
+              />
+              <PrivateRoute path="/account" component={Account} />
+            </Switch>
+          </Suspense>
         </main>
         <PopupAfterLoad />
         <Footer />

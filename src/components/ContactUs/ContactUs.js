@@ -8,7 +8,7 @@ import { requestContact } from "../../actions/requestContactActions";
 import { FiPhoneCall } from "react-icons/fi";
 import { IoLocationSharp } from "react-icons/io5";
 
-export default function ContactUs() {
+export default function ContactUs({ isContact }) {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.contactUs);
 
@@ -126,7 +126,9 @@ export default function ContactUs() {
               <GoMail className=" " size={30} color="white" />
             </span>
             <p className="contact__info-text text-center">
-              djnguyen@harmonypayment.com
+              {isContact
+                ? `team@harmonypayment.com`
+                : `djnguyen@harmonypayment.com`}
             </p>
             <div className="contact__info-divider"></div>
           </div>

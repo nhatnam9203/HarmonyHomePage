@@ -1,0 +1,66 @@
+.blogs_banner {
+  height: 30rem;
+  background-image: url("../../../assets/images/img/Blogs/Group377@2x.png");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #707070;
+  @include mediaQueryMax("xxl") {
+    height: 26rem;
+  }
+  @include mediaQueryMax("extra-large") {
+    height: 20rem;
+  }
+  @include mediaQueryMax("large") {
+    height: 15rem;
+  }
+  @include mediaQueryMax("medium") {
+    height: 12rem;
+  }
+  &-overlay {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 45, 83, 0.85) 0%
+    );
+  }
+  &-title {
+    letter-spacing: $title-0;
+    font-size: $fs-title;
+    position: relative;
+    transform: translateY(-3.5rem);
+    @include mediaQueryMax("large") {
+      font-size: 2rem;
+    }
+    @media screen and (max-width: 768px) {
+      transform: translateY(-2.5rem);
+    }
+    @media screen and (max-width: 425px) {
+      transform: translateY(-2rem);
+    }
+    &::after {
+      content: "";
+      width: 160%;
+      height: 5px;
+      position: absolute;
+      background-color: $blue-4;
+      left: -30%;
+      bottom: -1rem;
+    }
+  }
+  &-video {
+    // position: absolute;
+    max-width: 1200px;
+    margin: 0 auto;
+    transform: translateY(-8rem);
+    @media screen and (max-width: 768px) {
+      transform: translateY(-4rem);
+    }
+    @media screen and (max-width: 425px) {
+      transform: translateY(-3rem);
+    }
+  }
+}
+//   .blogs_banner-container{
+//       min-height: 60vh;
+//   }

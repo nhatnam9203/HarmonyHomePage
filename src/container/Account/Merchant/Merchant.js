@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMerchantListAction } from "../../../actions/userActions";
-
-import Loading from "../../../util/Loading";
-import Table from "react-bootstrap/Table";
 import { Helmet } from "react-helmet";
+
+import Table from "react-bootstrap/Table";
 
 import "./Merchant.scss";
 
@@ -17,7 +16,7 @@ function Merchant() {
     dispatch(getMerchantListAction());
   }, [dispatch]);
 
-  const { loading, list } = useSelector((state) => state.merchantList);
+  const { list } = useSelector((state) => state.merchantList);
 
   const renderMerchantTable = list?.map((i) => (
     <tr key={i?.merchantId}>
@@ -41,31 +40,31 @@ function Merchant() {
     <div className="merchant">
       <Helmet>
         <title>Harmony | My Merchants</title>
-        <meta name="My Merchants" content="Harmony My Merchants" />
+        <meta name="description" content="Harmony My Merchants" />
       </Helmet>
       <h1>My Merchants</h1>
 
-      {loading ? (
+      {/* {loading ? (
         <Loading />
-      ) : (
-        <div>
-          <Table responsive className="mt-4">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>
-                  <p className="th_business_name">Business name</p>
-                </th>
-                <th>Email</th>
-                <th>Contact phone</th>
-                <th>Status</th>
-                <th className="text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>{renderMerchantTable}</tbody>
-          </Table>{" "}
-        </div>
-      )}
+      ) : ( */}
+      <div>
+        <Table responsive className="mt-4">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>
+                <p className="th_business_name">Business name</p>
+              </th>
+              <th>Email</th>
+              <th>Contact phone</th>
+              <th>Status</th>
+              <th className="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>{renderMerchantTable}</tbody>
+        </Table>{" "}
+      </div>
+      {/* )} */}
     </div>
   );
 }

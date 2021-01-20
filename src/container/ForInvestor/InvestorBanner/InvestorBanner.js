@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Investorbanner() {
+export default function InvestorBanner() {
   return (
     <main className="investor_banner w-100 text-uppercase">
       <div className="investor_banner-overlay w-100 h-100 d-flex justify-content-center align-items-center px-4">

@@ -9,7 +9,7 @@ import { Button, Table } from "react-bootstrap";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
-import Loading from "../../../../util/Loading";
+// import Loading from "../../../../util/Loading";
 import moment from "moment";
 import Popup from "../../../../components/Popup/Popup";
 
@@ -23,9 +23,7 @@ function SubscriptionInfo() {
   const [popUp, setPopUp] = useState(false);
   const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
-  const { loading, subscription } = useSelector(
-    (state) => state.mySubscription
-  );
+  const { subscription } = useSelector((state) => state.mySubscription);
   const { loading: cancelStatus } = useSelector(
     (state) => state.cancelSubscription
   );
@@ -63,7 +61,7 @@ function SubscriptionInfo() {
       </div>
       <div>
         <AnimatePresence exitBeforeEnter>
-          {loading ? (
+          {/* {loading ? (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -72,27 +70,27 @@ function SubscriptionInfo() {
             >
               <Loading />
             </motion.div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeIn" }}
-            >
-              {isMobile ? (
-                <div className="sub_mobile">
-                  <p className="title">Subscription Plan</p>
-                  <div className="sub_plan_mobile">
-                    <p className="">{subscription?.planName}</p>
+          ) : ( */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeIn" }}
+          >
+            {isMobile ? (
+              <div className="sub_mobile">
+                <p className="title">Subscription Plan</p>
+                <div className="sub_plan_mobile">
+                  <p className="">{subscription?.planName}</p>
 
-                    <p className="">
-                      Paid &nbsp;
-                      {subscription?.pricingType === "annually"
-                        ? "Annually"
-                        : "Monthly"}{" "}
-                    </p>
+                  <p className="">
+                    Paid &nbsp;
+                    {subscription?.pricingType === "annually"
+                      ? "Annually"
+                      : "Monthly"}{" "}
+                  </p>
 
-                    {/* <p className="">
+                  {/* <p className="">
                       {Number(subscription?.isDisabled) === 0 ? (
                         <>
                           <button
@@ -133,40 +131,40 @@ function SubscriptionInfo() {
                         </button>
                       )}
                     </p> */}
-                  </div>
-                  <hr />
-                  <p className="title">Next Payment Date</p>
-                  <div className="sub_plan_mobile">
-                    <p>
-                      {moment(subscription?.expiredDate).format("MMM D, YYYY")}
-                    </p>
-                    <p className="price">${subscription?.totalPrice}</p>
-                  </div>
-                  <hr />
-                  <p className="title">Payment Method</p>
-                  <div className="sub_plan_mobile">
-                    <p>{subscription?.paymentMethod}</p>
-                  </div>
                 </div>
-              ) : (
-                <Table responsive className="mt-4">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p className="th_plan_name">Subscription Plan</p>
-                      </td>
-                      <td>
-                        <p className="th_plan_name">{subscription?.planName}</p>
-                      </td>
-                      <td className="">
-                        <p className="th_paid">
-                          Paid &nbsp;
-                          {subscription?.pricingType === "annually"
-                            ? "Annually"
-                            : "Monthly"}{" "}
-                        </p>
-                      </td>
-                      {/* 
+                <hr />
+                <p className="title">Next Payment Date</p>
+                <div className="sub_plan_mobile">
+                  <p>
+                    {moment(subscription?.expiredDate).format("MMM D, YYYY")}
+                  </p>
+                  <p className="price">${subscription?.totalPrice}</p>
+                </div>
+                <hr />
+                <p className="title">Payment Method</p>
+                <div className="sub_plan_mobile">
+                  <p>{subscription?.paymentMethod}</p>
+                </div>
+              </div>
+            ) : (
+              <Table responsive className="mt-4">
+                <tbody>
+                  <tr>
+                    <td>
+                      <p className="th_plan_name">Subscription Plan</p>
+                    </td>
+                    <td>
+                      <p className="th_plan_name">{subscription?.planName}</p>
+                    </td>
+                    <td className="">
+                      <p className="th_paid">
+                        Paid &nbsp;
+                        {subscription?.pricingType === "annually"
+                          ? "Annually"
+                          : "Monthly"}{" "}
+                      </p>
+                    </td>
+                    {/* 
                       <td className="text-right pr-md-0 action-btn">
                         <p>
                           {Number(subscription?.isDisabled) === 0 ? (
@@ -210,46 +208,44 @@ function SubscriptionInfo() {
                           )}{" "}
                         </p> 
                       </td> */}
-                    </tr>
-                    <tr>
-                      <td>Next Payment Date</td>
-                      <td>
-                        {moment(subscription?.expiredDate).format(
-                          "MMM D, YYYY"
-                        )}
-                      </td>
-                      <td className="price">${subscription?.totalPrice}</td>
-                      {/* <td></td> */}
-                    </tr>
-                    <tr>
-                      <td>Payment Method</td>
-                      <td>{subscription?.paymentMethod}</td>
-                      <td></td>
-                      {/* <td></td> */}
-                    </tr>
-                  </tbody>
-                </Table>
-              )}
-
-              <h1 className="mt-5">Billing History </h1>
-              <Table responsive className="mt-4">
-                <thead>
-                  <tr className="thead_billing">
-                    <th>
-                      <p className="trans_id">Transaction ID</p>
-                    </th>
-                    <th>Date</th>
-                    <th>
-                      <p className="name">Plan Name</p>
-                    </th>
-                    <th>Amount</th>
-                    <th className="pr-md-4">Status</th>
                   </tr>
-                </thead>
-                <tbody>{handleBillingHistory}</tbody>
+                  <tr>
+                    <td>Next Payment Date</td>
+                    <td>
+                      {moment(subscription?.expiredDate).format("MMM D, YYYY")}
+                    </td>
+                    <td className="price">${subscription?.totalPrice}</td>
+                    {/* <td></td> */}
+                  </tr>
+                  <tr>
+                    <td>Payment Method</td>
+                    <td>{subscription?.paymentMethod}</td>
+                    <td></td>
+                    {/* <td></td> */}
+                  </tr>
+                </tbody>
               </Table>
-            </motion.div>
-          )}
+            )}
+
+            <h1 className="mt-5">Billing History </h1>
+            <Table responsive className="mt-4">
+              <thead>
+                <tr className="thead_billing">
+                  <th>
+                    <p className="trans_id">Transaction ID</p>
+                  </th>
+                  <th>Date</th>
+                  <th>
+                    <p className="name">Plan Name</p>
+                  </th>
+                  <th>Amount</th>
+                  <th className="pr-md-4">Status</th>
+                </tr>
+              </thead>
+              <tbody>{handleBillingHistory}</tbody>
+            </Table>
+          </motion.div>
+          {/* )} */}
         </AnimatePresence>
       </div>
       <Popup

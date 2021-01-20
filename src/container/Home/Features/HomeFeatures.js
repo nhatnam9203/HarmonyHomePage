@@ -14,7 +14,7 @@ export default function HomeFeatures() {
           features
         </h1>
         <p className="top_features-text text-white text-center my-0">
-          It was popularised in the 1960s with the release of Letraset sheets
+          It was popularized in the 1960s with the release of Letraset sheets
           containing Lorem Ipsum passages, and more recently with desktop
         </p>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import visionIMG from "../../../assets/images/investor/shutterstock_554418190.png";
+import visionIMG from "../../../assets/images/about/about2.jpg";
 
 export default function Story() {
   return (
@@ -10,28 +10,17 @@ export default function Story() {
           our story
         </h1>
         <p className="story_text">
-          Harmony Payment Systems, the sister company of HarmonyPay, has a
-          portfolio of over 600 merchants in a unique vertical market of salons.
-          The HarmonyPay Team attended the ETA Transact 19 in Las Vegas and were
-          delighted by the extremely positive reception and excitement about the
-          HarmonyPay app from peers in the Fin Tech world. Salon owners
-          nation-wide also gave an enthusiastic welcome when the Team demoed the
-          apps at Premiere Orlando 19.
+          As a serial entrepreneur and a small business owner, our CEO Dat Jerry
+          Nguyen experiences firsthand the long hours and the struggle of salon
+          owner, as his wife and himself operated several successful salons. The
+          thought of how can we provide a solution to salon owners to operate
+          more efficiently? Become a serial of questions. With the combined
+          minds of our management team and the help of LeVinci Team, we created
+          several powerful tools in software and services for salon owners to
+          operate more efficiently, work less, and earn more. In the coming
+          year, we will continue to create and provide more solutions for small
+          businesses and medium businesses in other verticals.
         </p>
-        {/* <p className="story_text m-0">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-          sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-          dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-          et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-          takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-          amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-          invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-          At vero eos et.
-        </p> */}
       </div>
       <div className="vision">
         <Row className="mx-0">
@@ -47,30 +36,9 @@ export default function Story() {
               Vision & Missions
             </h1>
             <p className="vision_text">
-              Business owners juggle with many types of management: Staff,
-              Inventory, and Customer relations. HarmonyPay is a one-stop app
-              that takes the struggle out of the juggle.
+              "To innovate, create and provide solutions to small and medium
+              businesses."
             </p>
-            {/* <ul className="vision_link font-weight-light">
-              <li className="vision_link-item">
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                diam nonumy.
-              </li>
-              <li className="vision_link-item">
-                {" "}
-                Labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-                eos et accusam et.
-              </li>
-              <li className="vision_link-item">
-                Dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-                sanctus est.
-              </li>
-            </ul>
-            <p className="vision_text">
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam.
-            </p> */}
           </Col>
         </Row>
       </div>

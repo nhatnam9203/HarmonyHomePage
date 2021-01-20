@@ -398,3 +398,33 @@ export const getPackagePricingReducer = (
       return state;
   }
 };
+
+// Reset Password
+
+export const resetPasswordReducer = (
+  state = { loading: false, message: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case types.RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+    case types.RESET_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        message: payload,
+      };
+
+    default:
+      return state;
+  }
+};

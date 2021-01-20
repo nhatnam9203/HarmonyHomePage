@@ -89,7 +89,8 @@ function SignUp() {
 
             <h4> {`Let's get started !`}</h4>
             <h3>
-              HARMONYPAY <br /> SALON POS SYSTEM
+              HARMONY POS
+              {/* <br /> SALON POS SYSTEM */}
             </h3>
             <p>Made for salon owners by salon owners</p>
             <hr />

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Col, Row } from "react-bootstrap";
+import { Helmet } from "react-helmet";
+
 import consumerApp from "../../assets/images/ForConsumer/consumerApp.svg";
 import consumerAppImg from "../../assets/images/ForConsumer/consumerapp.png";
 import App1 from "../../assets/images/ForConsumer/MaskGroup187.svg";
 import App2 from "../../assets/images/ForConsumer/MaskGroup186.svg";
-import Topfooter from "../../components/Footer/TopFooter";
-import { Helmet } from "react-helmet";
+
+const TopFooter = lazy(() => import("../../components/Footer/TopFooter"));
 
 export default function ForConsumer() {
   return (
@@ -57,7 +59,7 @@ export default function ForConsumer() {
           </Col>
         </Row>
       </main>
-      <Topfooter />
+      <TopFooter />
     </>
   );
 }

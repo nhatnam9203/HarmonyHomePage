@@ -23,14 +23,6 @@ export default function PopupAfterLoad() {
         setShow(true);
       }, 3000);
     }
-    // else {
-    //   console.log(moment(cookies?.timeExpired));
-    //   console.log(moment(cookies?.time));
-    //   console.log(
-    //     "cookie :>> ",
-    //     moment(cookies?.time) > moment(cookies?.timeExpired)
-    //   );
-    // }
     if (moment(cookies?.time) > moment(cookies?.timeExpired)) {
       setShow(true);
       setCookie("time", moment(new Date()));

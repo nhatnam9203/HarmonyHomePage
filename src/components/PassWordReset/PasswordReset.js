@@ -6,13 +6,24 @@ import {
   Form,
   FormControl,
   InputGroup,
+  Spinner,
 } from "react-bootstrap";
 import * as Yup from "yup";
 import { BiShow, BiHide } from "react-icons/bi";
+import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
+import { useDispatch, useSelector } from "react-redux";
+import { resetPasswordAction } from "../../actions/userActions";
 
 export default function PasswordReset() {
+  const dispatch = useDispatch();
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { loading } = useSelector((state) => state.resetPassword);
+
+  const { id } = useParams();
+  const token = location.search;
 
   const passwordReserSchema = Yup.object().shape({
     newPassword: Yup.string().required("New Password is required"),
@@ -29,11 +40,16 @@ export default function PasswordReset() {
     validationSchema: passwordReserSchema,
     onSubmit: (values) => {
       const data = values;
-      console.log("data :>> ", data);
+      delete data.confirmNewPassword;
+      dispatch(resetPasswordAction(id, token, data));
     },
   });
   return (
     <main className="passwordReset">
+      <Helmet>
+        <title>Harmony | Password Reset</title>
+        <meta name="Password Resetr" content="Harmony Password Reset" />
+      </Helmet>
       <Container>
         <h1 className="passwordReset__title">Password Reset</h1>
         <h3 className="passwordReset__subtitle">
@@ -110,25 +126,25 @@ export default function PasswordReset() {
             </InputGroup>
           </Form.Group>
           <div className="">
-            {/* {loading ? (
-            <Button className="submit_btn text-center" disabled>
-              <Spinner
-                as="span"
-                animation="grow"
-                size="sm"
-                role="status"
-                aria-hidden="true"
-              />
-              <span className="loadingBtn">Loading...</span>
-            </Button>
-          ) : ( */}
-            <Button
-              type="submit"
-              className="submit_btn text-center font-weight-bold"
-            >
-              Submit
-            </Button>
-            {/* )} */}
+            {loading ? (
+              <Button className="submit_btn text-center" disabled>
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                <span className="loadingBtn">Loading...</span>
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                className="submit_btn text-center font-weight-bold"
+              >
+                Submit
+              </Button>
+            )}
           </div>
         </Form>
       </Container>

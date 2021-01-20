@@ -14,6 +14,7 @@ import {
   forgotPasswordReducer,
   getPackagePricingReducer,
   renewSubscriptionReducer,
+  resetPasswordReducer,
 } from "./userReducer";
 import { requestInfoReducer } from "./requestInfoReducer";
 import { notifyReducer } from "./notifyReducer";
@@ -45,4 +46,6 @@ export default combineReducers({
   contactUs: requestContactReducer,
   // Get Package Pricing
   pricing: getPackagePricingReducer,
+  // Reset Password
+  resetPassword: resetPasswordReducer,
 });

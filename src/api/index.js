@@ -1,12 +1,11 @@
 import axios from "axios";
 import instance from "../helper/axios";
 
-const url = "https://dev.harmonypayment.com/api";
+// const url = "https://dev.harmonypayment.com/api";
 
 // Staging
-// const url = "https://staging.harmonypayment.com/api";
+const url = "https://staging.harmonypayment.com/api";
 
-// const url = "https://admin.stage.harmonypayment.com/api";
 // Prod
 // const url = "https://api.harmonypayment.com/api";
 
@@ -173,3 +172,9 @@ export const forgotPassword = (email) =>
 
 // Get PackagePricing
 export const getPackagePricing = () => axios.get(getPackageUrl);
+
+// Reset Password
+const resetPasswordUrl = `${url}/principal/savenewpassword`;
+
+export const resetPassword = (id, token, payload) =>
+  axios.post(`${resetPasswordUrl}/${id}${token}`, payload);

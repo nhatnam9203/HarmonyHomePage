@@ -1,27 +1,13 @@
 .home_banner2 {
   height: 51.625rem;
   width: 100%;
-  background: transparent url("../../../assets/images/img/Home/Banner2.jpg") 0%
-    0% no-repeat padding-box;
+  background: transparent url("../../../assets/images/home/banner.jpg") 0% 0%
+    no-repeat padding-box;
   background-size: cover;
   background-position: center;
   position: relative;
   margin-bottom: 6.25rem;
-  // @include mediaQueryMax("xxl") {
-  //   height: 48rem;
-  // }
-  // @include mediaQueryMax("extra-large") {
-  //   height: 40rem;
-  // }
-  // @include mediaQueryMax("large") {
-  //   height: 30rem;
-  // }
-  // @include mediaQueryMax("medium") {
-  //   height: 28rem;
-  // }
-  // @include mediaQueryMax("xs") {
-  //   height: 21rem;
-  // }
+
   @media screen and (max-width: 1440px) {
     height: 42rem;
   }
@@ -52,11 +38,6 @@
       margin-bottom: 4.25rem;
     }
   }
-  // &-img {
-  //   @include mediaQueryMax("small"){
-
-  //   }
-  // }
   &-title {
     color: $blue-0;
     letter-spacing: $title-0;
@@ -85,13 +66,9 @@
     width: 2rem;
     height: 2rem;
     color: $blue-0;
-    // border: 1px solid $blue-0;
-    //   border-radius: 50%;
 
     cursor: pointer;
     &:hover {
-      // border: 1px solid $blue-0;
-      // border-radius: 50%;
       transform: scale(1.1);
       transition: $transition-0;
     }

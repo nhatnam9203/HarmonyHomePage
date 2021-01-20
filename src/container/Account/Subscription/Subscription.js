@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useMediaQuery } from "react-responsive";
 
 import moment from "moment";
-import Loading from "../../../util/Loading";
+// import Loading from "../../../util/Loading";
 import Table from "react-bootstrap/Table";
 import Popup from "../../../components/Popup/Popup";
 import { Helmet } from "react-helmet";
@@ -21,9 +21,7 @@ function Subscription() {
   const dispatch = useDispatch();
   const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
-  const { loading, subscriptionList } = useSelector(
-    (state) => state.mySubscription
-  );
+  const { subscriptionList } = useSelector((state) => state.mySubscription);
 
   const { loading: cancelStatus } = useSelector(
     (state) => state.cancelSubscription
@@ -119,7 +117,7 @@ function Subscription() {
       </Helmet>
       <h1>My Subscriptions</h1>
       <AnimatePresence exitBeforeEnter>
-        {loading ? (
+        {/* {loading ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -128,44 +126,44 @@ function Subscription() {
           >
             <Loading />
           </motion.div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeIn" }}
-          >
-            {isMobile ? (
-              subscriptionList?.map((i, idx) => (
-                <div className="bg-light sub_mobile" key={idx}>
-                  <p className="sub_name">Plan</p>
-                  <p
-                    className="sub_plan plan_name"
-                    onClick={() =>
-                      history.push(`/account/subscription/${i?.subscriptionId}`)
-                    }
-                  >
-                    {i?.planName}
-                  </p>
-                  <p className="sub_name">Merchant ID</p>
-                  <p
-                    className="sub_plan"
-                    onClick={() =>
-                      history.push(`/account/merchant/${i?.merchantId}`)
-                    }
-                  >
-                    {i?.merchantId}
-                  </p>
-                  <p className="sub_name">Business Name</p>
-                  <p>{i?.businessName}</p>
-                  <p className="sub_name"> Next Payment Date</p>
-                  <p>{moment(i?.expiredDate).format("MM/DD/YYYY")}</p>
-                  <p className="sub_name">Amount</p>
-                  <p>${i?.totalPrice}</p>
-                  <p className="sub_name"> Status</p>
-                  <p>{Number(i?.isDisabled) === 0 ? "Active" : "Canceled"}</p>
-                  {/* <p className="sub_name">Actions</p> */}
-                  {/* <p>
+        ) : ( */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: "easeIn" }}
+        >
+          {isMobile ? (
+            subscriptionList?.map((i, idx) => (
+              <div className="bg-light sub_mobile" key={idx}>
+                <p className="sub_name">Plan</p>
+                <p
+                  className="sub_plan plan_name"
+                  onClick={() =>
+                    history.push(`/account/subscription/${i?.subscriptionId}`)
+                  }
+                >
+                  {i?.planName}
+                </p>
+                <p className="sub_name">Merchant ID</p>
+                <p
+                  className="sub_plan"
+                  onClick={() =>
+                    history.push(`/account/merchant/${i?.merchantId}`)
+                  }
+                >
+                  {i?.merchantId}
+                </p>
+                <p className="sub_name">Business Name</p>
+                <p>{i?.businessName}</p>
+                <p className="sub_name"> Next Payment Date</p>
+                <p>{moment(i?.expiredDate).format("MM/DD/YYYY")}</p>
+                <p className="sub_name">Amount</p>
+                <p>${i?.totalPrice}</p>
+                <p className="sub_name"> Status</p>
+                <p>{Number(i?.isDisabled) === 0 ? "Active" : "Canceled"}</p>
+                {/* <p className="sub_name">Actions</p> */}
+                {/* <p>
                     {Number(i?.isDisabled) === 0 ? (
                       <>
                         <button
@@ -206,38 +204,38 @@ function Subscription() {
                       </button>
                     )}
                   </p> */}
-                </div>
-              ))
-            ) : (
-              <Table responsive className="mt-4">
-                <thead>
-                  <tr>
-                    <th>
-                      <p className="th_plan">Plan</p>
-                    </th>
-                    <th>
-                      <p className="th_mer_id">Merchant ID</p>
-                    </th>
-                    <th>
-                      <p className="th_name">Business Name</p>
-                    </th>
-                    <th>
-                      <p className="th_pay_date">Next Payment Date</p>
-                    </th>
-                    <th>
-                      <p>Amount</p>
-                    </th>
-                    <th>
-                      <p>Status</p>
-                    </th>
-                    <th>{/* <p className="th_action">Actions</p> */}</th>
-                  </tr>
-                </thead>
-                <tbody>{renderSubscriptionList}</tbody>
-              </Table>
-            )}
-          </motion.div>
-        )}
+              </div>
+            ))
+          ) : (
+            <Table responsive className="mt-4">
+              <thead>
+                <tr>
+                  <th>
+                    <p className="th_plan">Plan</p>
+                  </th>
+                  <th>
+                    <p className="th_mer_id">Merchant ID</p>
+                  </th>
+                  <th>
+                    <p className="th_name">Business Name</p>
+                  </th>
+                  <th>
+                    <p className="th_pay_date">Next Payment Date</p>
+                  </th>
+                  <th>
+                    <p>Amount</p>
+                  </th>
+                  <th>
+                    <p>Status</p>
+                  </th>
+                  <th>{/* <p className="th_action">Actions</p> */}</th>
+                </tr>
+              </thead>
+              <tbody>{renderSubscriptionList}</tbody>
+            </Table>
+          )}
+        </motion.div>
+        {/* )} */}
       </AnimatePresence>
       <Popup
         show={popUp}
