@@ -96,11 +96,11 @@ function SignUp() {
             <hr />
             <p>
               Give us a few details about yourself and {`we'll`} contact you
-              with more information about HarmonyPay Salon POS system.
+              with more information about Harmony Salon POS system.
             </p>
-
             <h4 className="py-2">Call us</h4>
             <h3>800-531-3126</h3>
+            <h3>813-534-0055</h3>
           </Col>
 
           <Col className="sign_up_form-container" sm={12} lg={6}>
@@ -112,7 +112,7 @@ function SignUp() {
                   <h4>REQUEST MORE INFORMATION</h4>
                   <p>
                     Give us a few details about yourself and {`we'll`} will
-                    contact you with more information about HarmonyPay Salon POS
+                    contact you with more information about Harmony Salon POS
                     system.
                   </p>
 
