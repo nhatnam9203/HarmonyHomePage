@@ -4,10 +4,10 @@ import instance from "../helper/axios";
 // const url = "https://dev.harmonypayment.com/api";
 
 // Staging
-const url = "https://staging.harmonypayment.com/api";
+// const url = "https://staging.harmonypayment.com/api";
 
 // Prod
-// const url = "https://api.harmonypayment.com/api";
+const url = "https://api.harmonypayment.com/api";
 
 // Login
 const loginUrl = `${url}/principal/login`;

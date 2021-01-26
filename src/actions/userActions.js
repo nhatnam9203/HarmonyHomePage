@@ -445,12 +445,12 @@ export const resetPasswordAction = (id, tokenid, payload) => async (
       type: typeUser.RESET_PASSWORD_REQUEST,
     });
     const { data } = await api.resetPassword(id, tokenid, payload);
-    console.log("data :>> ", data);
     dispatch({
       type: typeUser.RESET_PASSWORD_SUCCESS,
       payload: data?.data,
     });
     dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+    history.push("/home");
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({

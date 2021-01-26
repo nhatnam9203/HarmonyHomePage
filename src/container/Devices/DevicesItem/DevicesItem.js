@@ -12,10 +12,10 @@ import Ipad3 from "../../../assets/images/device/ipad3w.jpg";
 import StandBlack1 from "../../../assets/images/device/ipad1.jpg";
 import StandBlack2 from "../../../assets/images/device/ipad2.jpg";
 import StandBlack3 from "../../../assets/images/device/ipad3.jpg";
-import Terminal1 from "../../../assets/images/device/terminal1.png";
-import Terminal2 from "../../../assets/images/device/terminal2.png";
-import Terminal3 from "../../../assets/images/device/terminal3.png";
-import Terminal4 from "../../../assets/images/device/terminal4.png";
+import Terminal1 from "../../../assets/images/img/Device/divice1.png";
+import Terminal2 from "../../../assets/images/img/Device/divice4.png";
+import Terminal3 from "../../../assets/images/img/Device/divice3.png";
+import Terminal4 from "../../../assets/images/img/Device/divice2.png";
 import Terminal5 from "../../../assets/images/device/terminal5.png";
 import Printer from "../../../assets/images/device/printer.png";
 
@@ -381,6 +381,18 @@ export default function DevicesItem() {
                 <Card className="divices__bot-card">
                   <Card.Img
                     variant="top"
+                    src={Terminal5}
+                    className="divices__bot-card--img1 mx-auto"
+                  />
+                  <Card.Body>
+                    <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
+                      S300 Integrated Retail PIN Pad
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+                <Card className="divices__bot-card">
+                  <Card.Img
+                    variant="top"
                     src={Terminal1}
                     className="divices__bot-card--img1 mx-auto"
                   />
@@ -423,18 +435,6 @@ export default function DevicesItem() {
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
                       Dejavoo Z1 MPOS Terminal
-                    </Card.Title>
-                  </Card.Body>
-                </Card>
-                <Card className="divices__bot-card">
-                  <Card.Img
-                    variant="top"
-                    src={Terminal5}
-                    className="divices__bot-card--img1 mx-auto"
-                  />
-                  <Card.Body>
-                    <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
-                      S300 Integrated Retail PIN Pad
                     </Card.Title>
                   </Card.Body>
                 </Card>

@@ -42,12 +42,12 @@ export default function Package() {
         <h1 className="package__title text-uppercase text-center font-weight-bold">
           Package & Pricing
         </h1>
-        <p className="package__text text-center">
+        {/* <p className="package__text text-center">
           Try HarmonyPay Merchants free for 30 days, no credit card required
-        </p>
+        </p> */}
         <Row className="package__container mx-auto ">
-          <Col className="package__col d-flex justify-content-center align-items-center px-0">
-            <Card className="package__item h-100">
+          <div className="package__col d-flex justify-content-center align-items-center px-0">
+            <Card className="package__item">
               <Card.Img variant="top" src={Packkage1} />
               <Card.Body className="package__item--cardbody d-flex flex-column justify-content-center align-items-center">
                 <Card.Title className="package__features--title1 text-left border-0">
@@ -85,7 +85,7 @@ export default function Package() {
                 </div>
               </Card.Body>
             </Card>
-            <Card className="package__item h-100">
+            <Card className="package__item">
               <Card.Img variant="top" src={Packkage2} />
               <Card.Body className="package__item--cardbody d-flex flex-column">
                 <Card.Title className="package__item--title text-center font-weight-bold">
@@ -107,7 +107,7 @@ export default function Package() {
                 </Card.Text>
               </Card.Body>
             </Card>
-            <Card className="package__item h-100">
+            <Card className="package__item">
               <Card.Img variant="top" src={Packkage3} />
               <Card.Body className="package__item--cardbody d-flex flex-column">
                 <Card.Title className="package__item--title text-center font-weight-bold">
@@ -129,7 +129,7 @@ export default function Package() {
                 </Card.Text>
               </Card.Body>
             </Card>
-            <Card className="package__item h-100">
+            <Card className="package__item">
               <Card.Img variant="top" src={Packkage4} />
               <Card.Body className="package__item--cardbody d-flex flex-column">
                 <Card.Title className="package__item--title text-center font-weight-bold">
@@ -152,7 +152,7 @@ export default function Package() {
                 </Card.Text>
               </Card.Body>
             </Card>
-          </Col>
+          </div>
         </Row>
         <div className="package__features package__container mx-auto text-center font-weight-bold">
           Features

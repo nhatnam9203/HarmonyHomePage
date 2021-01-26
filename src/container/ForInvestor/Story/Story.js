@@ -36,8 +36,8 @@ export default function Story() {
               Vision & Missions
             </h1>
             <p className="vision_text">
-              "To innovate, create and provide solutions to small and medium
-              businesses."
+              To innovate, create and provide solutions to small and medium
+              businesses.
             </p>
           </Col>
         </Row>

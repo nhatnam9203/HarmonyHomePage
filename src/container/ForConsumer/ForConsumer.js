@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 
 import consumerApp from "../../assets/images/ForConsumer/consumerApp.svg";
-import consumerAppImg from "../../assets/images/ForConsumer/consumerapp.png";
+import consumerAppImg from "../../assets/images/ForConsumer/imgpsh_fullsize_anim1.png";
 import App1 from "../../assets/images/ForConsumer/MaskGroup187.svg";
 import App2 from "../../assets/images/ForConsumer/MaskGroup186.svg";
 

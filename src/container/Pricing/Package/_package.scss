@@ -3,10 +3,13 @@
   &__title {
     letter-spacing: $title-0;
     font-size: $fs-title;
-    margin-bottom: $m-6;
+    // margin-bottom: $m-6;
+    //margin__text:
+    margin-bottom: 3.75rem;
+
     @include mediaQueryMax("large") {
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 3rem;
     }
   }
   &__text {
@@ -25,16 +28,18 @@
     max-width: 85.625rem;
     .package__item {
       border-radius: 3px 3px 0px 0px;
+      height: 100%;
       @media screen and (max-width: 425px) {
         margin: 0 1.5rem;
         box-shadow: 0px 3px 10px #00000029;
         margin-bottom: 1rem;
+        height: auto;
       }
       &--title {
         font: normal normal bold 48px/58px Roboto;
         letter-spacing: 0px;
         color: #11a54c;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         @include mediaQueryMax("large") {
           font-size: 1.8rem;
         }
