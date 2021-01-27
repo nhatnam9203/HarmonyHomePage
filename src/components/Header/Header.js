@@ -328,7 +328,7 @@ export default function Header() {
                   onClick={() => setExpanded(false)}
                 >
                   <NavLink to="/home/sign-up" className="nav-NavLink">
-                    START FREE TRIAL
+                    JOIN NOW
                   </NavLink>
                 </NavItem>
               </Nav>

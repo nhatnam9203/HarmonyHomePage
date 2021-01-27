@@ -1,14 +1,14 @@
 .popup__bodyLeft {
-  padding: 2.5rem 5.5rem;
+  padding: 2.5rem 5.5rem !important;
   height: 100%;
   @media screen and (max-width: 1200px) {
-    padding: 1rem 2.5rem;
+    padding: 1rem 2.5rem !important;
   }
   @media screen and (max-width: 576px) {
-    padding: 1rem 3rem;
+    padding: 1rem 3rem !important;
   }
   @media screen and (max-width: 375px) {
-    padding: 1rem 2rem;
+    padding: 1rem 2rem !important;
   }
   &-start {
     font-weight: 500;

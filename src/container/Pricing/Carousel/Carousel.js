@@ -111,7 +111,7 @@ export default function Carousell() {
             <Card.Img variant="top" src={template2} />
             <Card.Body className="p-4">
               <Card.Title className="carousel__card-title text-capitalize font-weight-bold">
-                Restaurant Store
+                Restaurant
               </Card.Title>
               {/* <Card.Text className="carousel__card-text">Description</Card.Text> */}
               {/* <Card.Text className="carousel__card-pricing">Free</Card.Text> */}

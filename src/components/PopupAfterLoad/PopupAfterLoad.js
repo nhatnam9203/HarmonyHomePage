@@ -108,14 +108,14 @@ export default function PopupAfterLoad() {
           <Col xl={6} xs={12} className="popup__bodyLeft">
             <h2 className="popup__bodyLeft-start">Let's get started !</h2>
             <h1 className="popup__bodyLeft-title text-uppercase">
-              HarmonyPay Salon POS system
+              Harmony Salon POS system
             </h1>
             <h4 className="popup__bodyLeft-subtitle">
               "Made for salon owners by salon owners"
             </h4>
             <iframe
               className="mb-3 height__video"
-              title="HarmonyPay Salon POS"
+              title="Harmony Salon POS"
               width="100%"
               src="https://www.youtube.com/embed/UgJuD4ZC1Lk"
               frameBorder="0"
@@ -126,7 +126,7 @@ export default function PopupAfterLoad() {
               We offer a wide range of softwares that fit your vision and
               budget. Answer a few questions and we will give you a quote for
               our solutions. Besides, you will have the opportunity to get a
-              free set of HarmonyPay POS in our lucky draw.
+              free set of Harmony POS in our lucky draw.
             </p>
             <ul className="popup__bodyLeft-list">
               <li className="popup__bodyLeft-list--item">
@@ -145,7 +145,7 @@ export default function PopupAfterLoad() {
                 <h4>REQUEST MORE INFORMATION</h4>
                 <p>
                   Give us a few details about yourself and {`we'll`} will
-                  contact you with more information about HarmonyPay Salon POS
+                  contact you with more information about Harmony Salon POS
                   system.
                 </p>
 
