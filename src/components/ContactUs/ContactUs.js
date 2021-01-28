@@ -29,6 +29,11 @@ export default function ContactUs({ isContact }) {
     validationSchema: contactSchema,
     onSubmit: (values, { resetForm }) => {
       const data = values;
+      if (isContact) {
+        data.contactType = "contact";
+      } else {
+        data.contactType = "investor";
+      }
       dispatch(requestContact(data));
       resetForm({});
     },
