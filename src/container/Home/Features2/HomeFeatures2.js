@@ -7,6 +7,8 @@ import Ipad from "../../../assets/images/home/ipad.png";
 import Iphone from "../../../assets/images/home/iphone4.png";
 import Iphone2 from "../../../assets/images/home/iphone2.png";
 import POS3 from "../../../assets/images/home/pos3.png";
+import POS4 from "../../../assets/images/home/pos4.png";
+
 import Lap from "../../../assets/images/home/laptop.png";
 import Carousell from "../../Pricing/Carousel/Carousel";
 
@@ -282,7 +284,7 @@ export default function HomeFeatures2() {
                 <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
                   <Card.Img
                     className="bot_features2-item--img"
-                    src={Lap}
+                    src={POS4}
                     alt="POS"
                   />
                 </Card>
@@ -290,16 +292,49 @@ export default function HomeFeatures2() {
             </Col>
             <Col xs={12} md={6} className="text-center text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
-                online booking plugin
+                gift card
               </h1>
               <p className="bot_features2-item--text2 ">
-                Salon Iris has customizable options and a large selection of
+                HARMONY has customizable options and a large selection of
                 pre-designed cards to choose from. Work with our talented
                 designers to develop gift cards with your own logo, photo, and
                 customized text. Looking for something quick and easy? Choose
                 from one of our ready-made designs and our team will have them
                 shipped to your business in no time!
               </p>
+            </Col>
+          </Row>
+          <Row style={{ display: "none" }}>
+            <Col
+              xs={12}
+              md={6}
+              className="text-center text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
+            >
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+                online booking plugin
+              </h1>
+              <p className="bot_features2-item--text2 ">
+                Integrated credit card processing simplifies checkout – no more
+                switching between systems as your client waits. Consolidated
+                reporting means no more reconciling bank statements with closed
+                tickets to determine if you’ve been paid for all your work.
+                “Meet or beat rates” means you save on every swipe!
+              </p>
+            </Col>
+            <Col
+              xs={12}
+              md={6}
+              className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
+            >
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--img"
+                    src={Lap}
+                    alt="POS"
+                  />
+                </Card>{" "}
+              </LazyLoad>
             </Col>
           </Row>
         </div>

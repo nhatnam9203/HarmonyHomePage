@@ -12,11 +12,12 @@ import Ipad3 from "../../../assets/images/device/ipad3w.jpg";
 import StandBlack1 from "../../../assets/images/device/ipad1.jpg";
 import StandBlack2 from "../../../assets/images/device/ipad2.jpg";
 import StandBlack3 from "../../../assets/images/device/ipad3.jpg";
-import Terminal1 from "../../../assets/images/img/Device/divice1.png";
-import Terminal2 from "../../../assets/images/img/Device/divice4.png";
-import Terminal3 from "../../../assets/images/img/Device/divice3.png";
-import Terminal4 from "../../../assets/images/img/Device/divice2.png";
-import Terminal5 from "../../../assets/images/device/terminal5.png";
+import Terminal1 from "../../../assets/images/img/Device/device1Notext.png";
+import Terminal2 from "../../../assets/images/img/Device/device2Notext.png";
+// import Terminal3 from "../../../assets/images/img/Device/divice3.png";
+import Terminal4 from "../../../assets/images/img/Device/device4Notext.png";
+// import Terminal5 from "../../../assets/images/device/terminal5.png";
+import Terminal5 from "../../../assets/images/img/Device/device5Notext.png";
 import Printer from "../../../assets/images/device/printer.png";
 
 export default function DevicesItem() {
@@ -386,7 +387,7 @@ export default function DevicesItem() {
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
-                      S300 Integrated Retail PIN Pad
+                      A60
                     </Card.Title>
                   </Card.Body>
                 </Card>
@@ -414,7 +415,7 @@ export default function DevicesItem() {
                     </Card.Title>
                   </Card.Body>
                 </Card>
-                <Card className="divices__bot-card">
+                {/* <Card className="divices__bot-card">
                   <Card.Img
                     variant="top"
                     src={Terminal3}
@@ -425,7 +426,7 @@ export default function DevicesItem() {
                       S920 Mobile Payment Terminal
                     </Card.Title>
                   </Card.Body>
-                </Card>
+                </Card> */}
                 <Card className="divices__bot-card">
                   <Card.Img
                     variant="top"
