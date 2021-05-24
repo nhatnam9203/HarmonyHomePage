@@ -23,7 +23,7 @@ export default function PasswordReset() {
   const { loading } = useSelector((state) => state.resetPassword);
 
   const { id } = useParams();
-  const token = location.search;
+  const token = window.location?.search || "";
 
   const passwordReserSchema = Yup.object().shape({
     newPassword: Yup.string().required("New Password is required"),
