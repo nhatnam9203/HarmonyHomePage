@@ -5,6 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { getMerchantByIdAction } from "../../../../actions/userActions";
 
 import BusinessInformation from "./BusinessInformation";
+import Inventory from "./Inventory";
+import Customer from "./Customer";
+import Report from "./Report";
+import Orders from "./Orders";
 import Tabs from "./Tabs";
 
 import "./Info.scss";
@@ -26,6 +30,24 @@ function Info() {
 
   const { detail } = useSelector((state) => state.merchantDetail);
 
+  const renderTabItem = () => {
+    switch (tabActive) {
+      case "Business Information":
+        return <BusinessInformation />;
+      case "Orders":
+        return <Orders />;
+      case "Inventory":
+        return <Inventory />;
+      case "Customer":
+        return <Customer />;
+      case "Report":
+        return <Report />;
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="info_content">
       <div className="d-flex justify-content-between">
@@ -37,7 +59,7 @@ function Info() {
         </Button>
       </div>
       <Tabs tabActive={tabActive} changeTab={changeTab} />
-      <BusinessInformation />
+      {renderTabItem()}
     </div>
   );
 }

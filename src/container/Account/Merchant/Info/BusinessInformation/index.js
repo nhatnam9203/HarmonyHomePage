@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getMerchantByIdAction } from "../../../../actions/userActions";
+import { getMerchantByIdAction } from "../../../../../actions/userActions";
 
 import Collapse from "@kunukn/react-collapse";
-import BankVoid from "../../../../assets/images/bank_void.png";
-import DriverLicenseImg from "../../../../assets/images/driver_license.jpg";
+import BankVoid from "../../../../../assets/images/bank_void.png";
+import DriverLicenseImg from "../../../../../assets/images/driver_license.jpg";
 import moment from "moment";
-import "./Info.scss";
+import Fade from "react-reveal/Fade";
+import "../Info.scss";
+import "./style.scss";
 
-function Info() {
+function Index() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [general, setGeneral] = useState(true);
@@ -24,7 +26,7 @@ function Info() {
   const { detail } = useSelector((state) => state.merchantDetail);
 
   return (
-    <>
+    <Fade>
       <div className="info_merchant_title">Business Information</div>
       <div
         className="app__toggle d-flex justify-content-between toggle_box mt-4"
@@ -35,8 +37,8 @@ function Info() {
           aria-label={general ? "close" : "open"}
         >
           <div className="d-flex text-center">
-            <span>1</span>
-            <h3>General Information</h3>
+            <div className="qty_business">1</div>
+            <div className="title_business">General Information</div>
           </div>
         </div>
         <div className="rotate90 mr-3">
@@ -131,8 +133,8 @@ function Info() {
       >
         <div className="app__toggle-text" aria-label={bank ? "close" : "open"}>
           <div className="d-flex text-center">
-            <span>2</span>
-            <h3>Bank Information</h3>
+            <div className="qty_business">2</div>
+            <div className="title_business">Bank Information</div>
           </div>
         </div>
         <div className="rotate90 mr-3">
@@ -192,8 +194,8 @@ function Info() {
           aria-label={principal ? "close" : "open"}
         >
           <div className="d-flex text-center">
-            <span>3</span>
-            <h3>Principal Information</h3>
+            <div className="qty_business">3</div>
+            <div className="title_business">Principal Information</div>
           </div>
         </div>
         <div className="rotate90 mr-3">
@@ -291,8 +293,8 @@ function Info() {
           </div>
         )}
       </Collapse>
-    </>
+    </Fade>
   );
 }
 
-export default Info;
+export default Index;
