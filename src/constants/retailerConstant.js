@@ -1,0 +1,8 @@
+export const RETAILER_REQUEST = "RETAILER_REQUEST";
+export const RETAILER_FAILED = "RETAILER_FAILED";
+
+export const GET_ORDERS = "GET_ORDERS";
+export const SET_ORDERS = "SET_ORDERS";
+
+export const GET_INVENTORY = "GET_INVENTORY";
+export const SET_INVENTORY = "SET_INVENTORY";

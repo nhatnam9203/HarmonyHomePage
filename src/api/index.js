@@ -178,3 +178,10 @@ const resetPasswordUrl = `${url}/principal/savenewpassword`;
 
 export const resetPassword = (id, token, payload) =>
   axios.post(`${resetPasswordUrl}/${id}${token}`, payload);
+
+export const getByPage = (requestUrl, token) =>
+  axios.get(`${url}/${requestUrl}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

@@ -20,6 +20,7 @@ import { requestInfoReducer } from "./requestInfoReducer";
 import { notifyReducer } from "./notifyReducer";
 import { subscribeReducer } from "./subscribeReducer";
 import { requestContactReducer } from "./requestContactReducer";
+import { retailerReducer } from "./retailerReducer";
 
 export default combineReducers({
   // User
@@ -48,4 +49,5 @@ export default combineReducers({
   pricing: getPackagePricingReducer,
   // Reset Password
   resetPassword: resetPasswordReducer,
+  retailer: retailerReducer,
 });
