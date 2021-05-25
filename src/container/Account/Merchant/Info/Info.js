@@ -25,9 +25,9 @@ function Info() {
   const [tabActive, setTabActive] = React.useState("Business Information");
 
   /* Orders */
-  const [sortOrders] = React.useState("");
+  const [sortOrders, setSortOrders] = React.useState("");
+  const [pageOrders, setPageOrders] = React.useState(1);
   const [keySearchOrders] = React.useState("");
-  const [pageOrders] = React.useState(1);
 
   /* Inventory */
   const [sortInventory] = React.useState("");
@@ -49,6 +49,14 @@ function Info() {
     dispatch(getInventory(url, token));
   };
 
+  const changePageOrders = (page) => {
+    setPageOrders(page);
+  };
+
+  const changeSortOrders = (sort) => {
+    setSortOrders(sort);
+  };
+
   const changeTab = (tabName) => {
     setTabActive(tabName);
   };
@@ -58,7 +66,12 @@ function Info() {
       case "Business Information":
         return <BusinessInformation />;
       case "Orders":
-        return <Orders />;
+        return (
+          <Orders
+            changePageOrders={changePageOrders}
+            changeSortOrders={changeSortOrders}
+          />
+        );
       case "Inventory":
         return <Inventory />;
       case "Customer":

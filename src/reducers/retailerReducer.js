@@ -4,6 +4,7 @@ export const retailerReducer = (
   state = {
     loading: false,
     orders: [],
+    orderPages: 0,
     inventory: [],
     customer: [],
     report: [],
@@ -12,7 +13,7 @@ export const retailerReducer = (
 ) => {
   switch (type) {
     case types.SET_ORDERS:
-      return { ...state, orders: payload };
+      return { ...state, orders: payload.data, orderPages: payload.pages };
 
     case types.SET_INVENTORY:
       return { ...state, inventory: payload };

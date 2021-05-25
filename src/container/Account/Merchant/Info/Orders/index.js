@@ -4,12 +4,19 @@ import ReactTable from "react-table";
 import columns from "./columns";
 import Search from "../../../../../components/Search";
 import Pagination from "../../../../../components/Pagination";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 import "react-table/react-table.css";
 import "../Info.scss";
 
 const Index = () => {
   const [activePage, changeActivePage] = React.useState(1);
+
+  const { orders, orderPages } = useSelector((state) => state.retailer);
+  const totalItem = parseInt(orders.length) * parseInt(orderPages);
+
+  console.log({ orders });
 
   return (
     <Fade>
@@ -21,7 +28,7 @@ const Index = () => {
         <ReactTable
           manual
           sortable={false}
-          data={[]}
+          data={orders}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => <div />}
@@ -32,6 +39,8 @@ const Index = () => {
         <Pagination
           activePage={activePage}
           handlePageChange={changeActivePage}
+          pages={orderPages}
+          totalItem={totalItem}
         />
       </div>
     </Fade>

@@ -9,7 +9,10 @@ export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
     if (parseInt(data.codeNumber) === 200) {
-      dispatch({ type: typeRetailer.SET_ORDERS, payload: data.data });
+      dispatch({
+        type: typeRetailer.SET_ORDERS,
+        payload: { data: data.data, pages: data.pages },
+      });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
@@ -25,7 +28,10 @@ export const getInventory = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
     if (parseInt(data.codeNumber) == 200) {
-      dispatch({ type: typeRetailer.SET_INVENTORY, payload: data.data });
+      dispatch({
+        type: typeRetailer.SET_INVENTORY,
+        payload: { data: data.data, pages: data.pages },
+      });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
