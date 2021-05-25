@@ -9,6 +9,8 @@ import "react-table/react-table.css";
 import "../Info.scss";
 
 const Index = () => {
+  const [activePage, changeActivePage] = React.useState(1);
+
   return (
     <Fade>
       <div className="info_merchant_title">
@@ -27,7 +29,10 @@ const Index = () => {
           columns={columns}
           PaginationComponent={() => <div />}
         />
-        <Pagination />
+        <Pagination
+          activePage={activePage}
+          handlePageChange={changeActivePage}
+        />
       </div>
     </Fade>
   );

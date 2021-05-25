@@ -5,10 +5,12 @@
 .page-item.active .page-link {
   background-color: #1366ae !important;
   border-color: #1366ae !important;
+  color: white !important;
 }
 
 .page-item a.page-link {
   color: #333 !important;
+  box-shadow: none !important;
 }
 
 a {

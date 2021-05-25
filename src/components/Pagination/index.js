@@ -1,27 +1,23 @@
 import React from "react";
-import Pagination from "react-bootstrap/Pagination";
+import Pagination from "react-js-pagination";
 import "./style.scss";
 
-const Index = () => {
+const Index = ({ activePage = 5, handlePageChange = () => {} }) => {
   return (
     <div className="pagination_container">
-      <Pagination>
-        <Pagination.First />
-        <Pagination.Prev />
-        <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Ellipsis />
-
-        <Pagination.Item>{10}</Pagination.Item>
-        <Pagination.Item>{11}</Pagination.Item>
-        <Pagination.Item active>{12}</Pagination.Item>
-        <Pagination.Item>{13}</Pagination.Item>
-        <Pagination.Item disabled>{14}</Pagination.Item>
-
-        <Pagination.Ellipsis />
-        <Pagination.Item>{20}</Pagination.Item>
-        <Pagination.Next />
-        <Pagination.Last />
-      </Pagination>
+      <Pagination
+        activePage={activePage}
+        itemsCountPerPage={10}
+        totalItemsCount={450}
+        pageRangeDisplayed={5}
+        onChange={handlePageChange}
+        itemClass="page-item"
+        linkClass="page-link"
+        prevPageText="<"
+        nextPageText=">"
+        firstPageText="<<"
+        lastPageText=">>"
+      />
     </div>
   );
 };
