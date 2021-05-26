@@ -5,24 +5,28 @@ import columns from "./columns";
 import Search from "../../../../../components/Search";
 import Pagination from "../../../../../components/Pagination";
 import { useSelector } from "react-redux";
-import moment from "moment";
 
 import "react-table/react-table.css";
 import "../Info.scss";
 
-const Index = () => {
-  const [activePage, changeActivePage] = React.useState(1);
-
+const Index = ({
+  pageOrders = 1,
+  changePageOrders = () => {},
+  valueSearch,
+  onChangeSearch,
+  searchOrder,
+}) => {
   const { orders, orderPages } = useSelector((state) => state.retailer);
-  const totalItem = parseInt(orders.length) * parseInt(orderPages);
-
-  console.log({ orders });
 
   return (
     <Fade>
       <div className="info_merchant_title">
         Orders
-        <Search />
+        <Search
+          value={valueSearch}
+          onChange={onChangeSearch}
+          onSubmit={searchOrder}
+        />
       </div>
       <div className="table-container">
         <ReactTable
@@ -37,10 +41,9 @@ const Index = () => {
           PaginationComponent={() => <div />}
         />
         <Pagination
-          activePage={activePage}
-          handlePageChange={changeActivePage}
-          pages={orderPages}
-          totalItem={totalItem}
+          activePage={pageOrders}
+          handlePageChange={changePageOrders}
+          totalItem={Math.ceil(orderPages / 2)}
         />
       </div>
     </Fade>

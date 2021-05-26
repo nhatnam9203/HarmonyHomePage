@@ -2,12 +2,19 @@ import React from "react";
 import searchIcon from "../../assets/images/searchIconGrey.png";
 import "./style.scss";
 
-const Index = () => {
+const Index = ({ value = "", onChange = () => {}, onSubmit = () => {} }) => {
+  const submit = (e) => {
+    e && e.preventDefault();
+    onSubmit();
+  };
+
   return (
-    <div className="search_container">
-      <input placeholder="Search..." />
-      <img src={searchIcon} />
-    </div>
+    <form onSubmit={submit}>
+      <div className="search_container">
+        <input value={value} onChange={onChange} placeholder="Search..." />
+        <img src={searchIcon} onClick={submit} />
+      </div>
+    </form>
   );
 };
 

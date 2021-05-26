@@ -11,7 +11,7 @@ export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_ORDERS,
-        payload: { data: data.data, pages: data.pages },
+        payload: { data: data.data, count: data.count },
       });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -30,7 +30,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) == 200) {
       dispatch({
         type: typeRetailer.SET_INVENTORY,
-        payload: { data: data.data, pages: data.pages },
+        payload: { data: data.data, count: data.count },
       });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });

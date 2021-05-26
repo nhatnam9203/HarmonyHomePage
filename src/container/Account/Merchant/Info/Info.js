@@ -27,7 +27,7 @@ function Info() {
   /* Orders */
   const [sortOrders, setSortOrders] = React.useState("");
   const [pageOrders, setPageOrders] = React.useState(1);
-  const [keySearchOrders] = React.useState("");
+  const [keySearchOrders, setKeySearchOrders] = React.useState("");
 
   /* Inventory */
   const [sortInventory] = React.useState("");
@@ -35,26 +35,36 @@ function Info() {
 
   React.useEffect(() => {
     dispatch(getMerchantByIdAction(id));
-    getOrdersData();
+    getOrdersData(1);
     getInventoryData();
   }, [dispatch]);
 
-  const getOrdersData = () => {
-    const url = `retailer/appointment?page=${pageOrders}&key=${keySearchOrders}&sorts=${sortOrders}&merchantId=${detail.merchantId}`;
+  const getOrdersData = (page) => {
+    const url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=${sortOrders}&merchantId=${detail.merchantId}`;
     dispatch(getOrders(url, token));
   };
 
   const getInventoryData = () => {
-    const url = `product/key=${keySearchInventory}&sorts=${sortInventory}&merchantId=${detail.merchantId}`;
+    const url = `product?key=${keySearchInventory}&sorts=${sortInventory}&merchantId=${detail.merchantId}`;
     dispatch(getInventory(url, token));
   };
 
-  const changePageOrders = (page) => {
-    setPageOrders(page);
+  const changePageOrders = async (page) => {
+    await setPageOrders(page);
+    await getOrdersData(page);
   };
 
   const changeSortOrders = (sort) => {
     setSortOrders(sort);
+  };
+
+  const onChangeSearchOrder = (e) => {
+    const value = e.target.value;
+    setKeySearchOrders(value);
+  };
+
+  const searchOrder = () => {
+    getOrdersData(pageOrders);
   };
 
   const changeTab = (tabName) => {
@@ -70,6 +80,10 @@ function Info() {
           <Orders
             changePageOrders={changePageOrders}
             changeSortOrders={changeSortOrders}
+            pageOrders={pageOrders}
+            searchOrder={searchOrder}
+            valueSearch={keySearchOrders}
+            onChangeSearch={onChangeSearchOrder}
           />
         );
       case "Inventory":

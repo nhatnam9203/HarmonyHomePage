@@ -1,4 +1,5 @@
 import "../Info.scss";
+import "./style.scss";
 
 const CustomTableHeader = ({ value }) => {
   return <div className="headerTable">{value}</div>;
@@ -7,38 +8,42 @@ const CustomTableHeader = ({ value }) => {
 const columns = [
   {
     Header: <CustomTableHeader value="Image" />,
-    id: "image",
-    accessor: (row) => <div className="tr">{`${row.image}`}</div>,
+    id: "imageUrl",
+    accessor: (row) => (
+      <div className="table-tr">
+        <img className="img-inventory" src={row.imageUr} />
+      </div>
+    ),
   },
   {
     Header: <CustomTableHeader value="Product name" />,
-    id: "productName",
-    accessor: (row) => <div className="tr">{`${row.productName}`}</div>,
+    id: "name",
+    accessor: (row) => <div className="table-tr">{`${row.name}`}</div>,
   },
   {
     Header: <CustomTableHeader value="Category" />,
-    id: "category",
-    accessor: (row) => <div className="tr">{`${row.categoryName}`}</div>,
+    id: "categoryName",
+    accessor: (row) => <div className="table-tr">{`${row.categoryName}`}</div>,
   },
   {
     Header: <CustomTableHeader value="SKU" />,
     id: "sku",
-    accessor: (row) => <div className="tr">{`${row.sku}`}</div>,
+    accessor: (row) => <div className="table-tr">{`${row.sku}`}</div>,
   },
   {
     Header: <CustomTableHeader value="Price" />,
     id: "price",
-    accessor: (row) => <div className="tr">{`${row.price}`}</div>,
+    accessor: (row) => <div className="table-tr">{`${row.price}`}</div>,
   },
   {
     Header: <CustomTableHeader value="Qty" />,
-    id: "qty",
-    accessor: (row) => <div className="tr">{`${row.status}`}</div>,
+    id: "quantity",
+    accessor: (row) => <div className="table-tr">{`${row.quantity}`}</div>,
   },
   {
     Header: <CustomTableHeader value="Need to order" />,
-    id: "needToOrder",
-    accessor: (row) => <div className="tr">{`${row.needOrder}`}</div>,
+    id: "needToorDer",
+    accessor: (row) => <div className="table-tr">{`${row.needToorDer}`}</div>,
   },
 ];
 
