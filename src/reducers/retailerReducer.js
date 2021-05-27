@@ -13,6 +13,12 @@ export const retailerReducer = (
   { type, payload }
 ) => {
   switch (type) {
+    case types.RETAILER_REQUEST:
+      return { ...state, loading: true };
+
+    case types.STOP_RETAILER_REQUEST:
+      return { ...state, loading: false };
+
     case types.SET_ORDERS:
       return { ...state, orders: payload.data, orderPages: payload.count };
 

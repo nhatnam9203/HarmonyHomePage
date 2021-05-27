@@ -5,6 +5,7 @@ import columns from "./columns";
 import Search from "../../../../../components/Search";
 import Pagination from "../../../../../components/Pagination";
 import { useSelector } from "react-redux";
+import Loading from "../../../../../components/Loading";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -15,8 +16,16 @@ const Index = ({
   valueSearch,
   onChangeSearch,
   searchOrder,
+  valueSort,
+  changeSortOrders,
 }) => {
-  const { orders, orderPages } = useSelector((state) => state.retailer);
+  const { orders, orderPages, loading } = useSelector(
+    (state) => state.retailer
+  );
+
+  const onClickSort = (status) => {
+    changeSortOrders(status);
+  };
 
   return (
     <Fade>
@@ -35,9 +44,16 @@ const Index = ({
           data={orders}
           minRows={1}
           noDataText="NO DATA!"
+          LoadingComponent={() =>
+            loading && (
+              <div style={{ marginTop: 100 }}>
+                <Loading />
+              </div>
+            )
+          }
           NoDataComponent={() => <div />}
-          loading={false}
-          columns={columns}
+          loading={loading}
+          columns={columns(valueSort, onClickSort)}
           PaginationComponent={() => <div />}
         />
         <Pagination

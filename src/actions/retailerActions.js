@@ -2,8 +2,6 @@ import * as api from "../api/index";
 import * as typeRetailer from "../constants/retailerConstant";
 import * as typeNotify from "../constants/notifyConstants";
 
-import { history } from "../History/history";
-
 export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
@@ -18,6 +16,8 @@ export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };
 
@@ -37,5 +37,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
     }
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };

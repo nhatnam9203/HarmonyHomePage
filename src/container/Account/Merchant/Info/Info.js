@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getMerchantByIdAction } from "../../../../actions/userActions";
 import { getOrders, getInventory } from "../../../../actions/retailerActions";
+import Loading from "../../../../util/Loading";
 
 import BusinessInformation from "./BusinessInformation";
 import Inventory from "./Inventory";
@@ -19,13 +20,16 @@ function Info() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { detail } = useSelector((state) => state.merchantDetail);
+  const merchantId = detail.merchantId;
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+  const [firstLoading, setFirstLoading] = React.useState(false);
 
   /* tab active */
   const [tabActive, setTabActive] = React.useState("Business Information");
 
   /* Orders */
-  const [sortOrders, setSortOrders] = React.useState("");
+  const [sortOrders, setSortOrders] = React.useState("ASC");
   const [pageOrders, setPageOrders] = React.useState(1);
   const [keySearchOrders, setKeySearchOrders] = React.useState("");
 
@@ -34,13 +38,21 @@ function Info() {
   const [keySearchInventory] = React.useState("");
 
   React.useEffect(() => {
-    dispatch(getMerchantByIdAction(id));
-    getOrdersData(1);
-    getInventoryData();
-  }, [dispatch]);
+    setFirstLoading(true);
+    setTimeout(() => {
+      setFirstLoading(false);
+    }, 500);
+  }, []);
 
-  const getOrdersData = (page) => {
-    const url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=${sortOrders}&merchantId=${detail.merchantId}`;
+  React.useEffect(() => {
+    dispatch(getMerchantByIdAction(id));
+    getOrdersData(1, sortOrders);
+    getInventoryData();
+  }, [merchantId]);
+
+  const getOrdersData = (page, sort) => {
+    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"code":"${sort}"}&merchantId=${detail.merchantId}`;
+    url = encodeURI(url);
     dispatch(getOrders(url, token));
   };
 
@@ -51,11 +63,12 @@ function Info() {
 
   const changePageOrders = async (page) => {
     await setPageOrders(page);
-    await getOrdersData(page);
+    await getOrdersData(page, sortOrders);
   };
 
-  const changeSortOrders = (sort) => {
-    setSortOrders(sort);
+  const changeSortOrders = async (sort) => {
+    await setSortOrders(sort);
+    await getOrdersData(pageOrders, sort);
   };
 
   const onChangeSearchOrder = (e) => {
@@ -64,7 +77,7 @@ function Info() {
   };
 
   const searchOrder = () => {
-    getOrdersData(pageOrders);
+    getOrdersData(pageOrders, sortOrders);
   };
 
   const changeTab = (tabName) => {
@@ -83,6 +96,7 @@ function Info() {
             pageOrders={pageOrders}
             searchOrder={searchOrder}
             valueSearch={keySearchOrders}
+            valueSort={sortOrders}
             onChangeSearch={onChangeSearchOrder}
           />
         );
@@ -100,16 +114,26 @@ function Info() {
 
   return (
     <div className="info_content">
-      <div className="d-flex justify-content-between">
-        <span className="info_businessName">
-          {id} - {detail?.businessName}
-        </span>
-        <Button className="btn btn_cancel" onClick={() => history.goBack()}>
-          Back
-        </Button>
-      </div>
-      <Tabs tabActive={tabActive} changeTab={changeTab} />
-      {renderTabItem()}
+      {firstLoading ? (
+        <div style={{ marginTop: 200 }}>
+          <Loading />
+        </div>
+      ) : (
+        <>
+          <div className="d-flex justify-content-between">
+            <span className="info_businessName">
+              {id} - {detail?.businessName}
+            </span>
+            <Button className="btn btn_cancel" onClick={() => history.goBack()}>
+              Back
+            </Button>
+          </div>
+          {detail.type == "Retailer" && (
+            <Tabs tabActive={tabActive} changeTab={changeTab} />
+          )}
+          {renderTabItem()}
+        </>
+      )}
     </div>
   );
 }
