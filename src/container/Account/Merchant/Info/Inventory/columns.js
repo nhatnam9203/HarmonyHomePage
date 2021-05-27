@@ -1,24 +1,51 @@
 import "../Info.scss";
 import "./style.scss";
+import sortIcon from "../../../../../assets/images/sort.png";
 
-const CustomTableHeader = ({ value }) => {
-  return <div className="headerTable">{value}</div>;
+const CustomTableHeader = ({
+  value,
+  valueSort,
+  onClickSort = () => {},
+  isSort = false,
+}) => {
+  return (
+    <div className="headerTable" onClick={onClickSort}>
+      {value}
+      {isSort && (
+        <img
+          src={sortIcon}
+          alt={"image sort"}
+          style={{
+            transform: valueSort == "ASC" ? "rotate(180deg)" : "rotate(0deg)",
+          }}
+        />
+      )}
+    </div>
+  );
 };
 
-const columns = [
+const columns = (valueSort, onClickSort) => [
   {
     Header: <CustomTableHeader value="Image" />,
     id: "imageUrl",
     accessor: (row) => (
       <div className="table-tr">
-        <img className="img-inventory" src={row.imageUr} />
+        <img className="img-inventory" src={row.imageUrl} />
       </div>
     ),
   },
   {
-    Header: <CustomTableHeader value="Product name" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Product name"
+        valueSort={valueSort}
+        onClickSort={() => onClickSort(valueSort == "DESC" ? "ASC" : "DESC")}
+      />
+    ),
     id: "name",
     accessor: (row) => <div className="table-tr">{`${row.name}`}</div>,
+    width: 200,
   },
   {
     Header: <CustomTableHeader value="Category" />,

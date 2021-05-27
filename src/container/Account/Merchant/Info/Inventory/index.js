@@ -4,21 +4,38 @@ import ReactTable from "react-table";
 import columns from "./columns";
 import Search from "../../../../../components/Search";
 import Pagination from "../../../../../components/Pagination";
+import Loading from "../../../../../components/Loading";
 import { useSelector } from "react-redux";
 
 import "react-table/react-table.css";
 import "../Info.scss";
 
-const Index = () => {
-  const [activePage, changeActivePage] = React.useState(1);
+const Index = ({
+  pageInventory = 1,
+  changePageInventory = () => {},
+  valueSearch,
+  onChangeSearch,
+  searchInventory,
+  valueSort,
+  changeSortInventory,
+}) => {
+  const { inventory, inventoryPages, loading } = useSelector(
+    (state) => state.retailer
+  );
 
-  const { inventory, inventoryPages } = useSelector((state) => state.retailer);
+  const onClickSort = (status) => {
+    changeSortInventory(status);
+  };
 
   return (
     <Fade>
       <div className="info_merchant_title">
         Inventory
-        <Search />
+        <Search
+          value={valueSearch}
+          onChange={onChangeSearch}
+          onSubmit={searchInventory}
+        />
       </div>
       <div className="table-container">
         <ReactTable
@@ -27,14 +44,23 @@ const Index = () => {
           data={inventory}
           minRows={1}
           noDataText="NO DATA!"
-          NoDataComponent={() => <div />}
-          loading={false}
-          columns={columns}
+          LoadingComponent={() =>
+            loading && (
+              <div style={{ marginTop: 100 }}>
+                <Loading />
+              </div>
+            )
+          }
+          NoDataComponent={() => (
+            <div className="retailer_nodata">NO DATA!</div>
+          )}
+          loading={loading}
+          columns={columns(valueSort, onClickSort)}
           PaginationComponent={() => <div />}
         />
         <Pagination
-          activePage={activePage}
-          handlePageChange={changeActivePage}
+          activePage={pageInventory}
+          handlePageChange={changePageInventory}
           totalItem={Math.ceil(inventoryPages / 2)}
         />
       </div>

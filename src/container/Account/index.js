@@ -29,10 +29,10 @@ function Account() {
         <meta name="description" content="Harmony Account" />
       </Helmet>
       <Row className="pr-0">
-        <Col sm={12} md={4} lg={3} className="">
+        <Col sm={12} md={4} className="">
           <Sidebar />
         </Col>
-        <Col sm={12} md={8} lg={9} className="pt-2 account_content">
+        <Col sm={12} md={8} className="pt-2 account_content">
           <Switch>
             <Route
               exact

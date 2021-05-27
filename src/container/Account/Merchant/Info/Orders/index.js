@@ -51,7 +51,9 @@ const Index = ({
               </div>
             )
           }
-          NoDataComponent={() => <div />}
+          NoDataComponent={() => (
+            <div className="retailer_nodata">NO DATA!</div>
+          )}
           loading={loading}
           columns={columns(valueSort, onClickSort)}
           PaginationComponent={() => <div />}

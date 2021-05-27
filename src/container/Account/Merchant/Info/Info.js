@@ -34,8 +34,9 @@ function Info() {
   const [keySearchOrders, setKeySearchOrders] = React.useState("");
 
   /* Inventory */
-  const [sortInventory] = React.useState("");
-  const [keySearchInventory] = React.useState("");
+  const [sortInventory, setSortInventory] = React.useState("ASC");
+  const [pageInventory, setPageInventory] = React.useState(1);
+  const [keySearchInventory, setKeySearchInventory] = React.useState("");
 
   React.useEffect(() => {
     setFirstLoading(true);
@@ -47,7 +48,7 @@ function Info() {
   React.useEffect(() => {
     dispatch(getMerchantByIdAction(id));
     getOrdersData(1, sortOrders);
-    getInventoryData();
+    getInventoryData(1, sortInventory);
   }, [merchantId]);
 
   const getOrdersData = (page, sort) => {
@@ -56,8 +57,10 @@ function Info() {
     dispatch(getOrders(url, token));
   };
 
-  const getInventoryData = () => {
-    const url = `product?key=${keySearchInventory}&sorts=${sortInventory}&merchantId=${detail.merchantId}`;
+  const getInventoryData = (page, sort) => {
+    let url = `product?page=${page}&key=${keySearchInventory}&sorts={"name":"${sort}"}&merchantId=${detail.merchantId}`;
+    url = encodeURI(url);
+    console.log({ url });
     dispatch(getInventory(url, token));
   };
 
@@ -66,9 +69,19 @@ function Info() {
     await getOrdersData(page, sortOrders);
   };
 
+  const changePageInventory = async (page) => {
+    await setPageInventory(page);
+    await getInventoryData(page, sortInventory);
+  };
+
   const changeSortOrders = async (sort) => {
     await setSortOrders(sort);
     await getOrdersData(pageOrders, sort);
+  };
+
+  const changeSortInventory = async (sort) => {
+    await setSortInventory(sort);
+    await getInventoryData(pageInventory, sort);
   };
 
   const onChangeSearchOrder = (e) => {
@@ -76,8 +89,17 @@ function Info() {
     setKeySearchOrders(value);
   };
 
+  const onChangeSearchInventory = (e) => {
+    const value = e.target.value;
+    setKeySearchInventory(value);
+  };
+
   const searchOrder = () => {
     getOrdersData(pageOrders, sortOrders);
+  };
+
+  const searchInventory = () => {
+    getInventoryData(pageInventory, sortInventory);
   };
 
   const changeTab = (tabName) => {
@@ -101,7 +123,17 @@ function Info() {
           />
         );
       case "Inventory":
-        return <Inventory />;
+        return (
+          <Inventory
+            changePageInventory={changePageInventory}
+            changeSortInventory={changeSortInventory}
+            pageInventory={pageInventory}
+            searchInventory={searchInventory}
+            valueSearch={keySearchInventory}
+            valueSort={sortInventory}
+            onChangeSearch={onChangeSearchInventory}
+          />
+        );
       case "Customer":
         return <Customer />;
       case "Report":
