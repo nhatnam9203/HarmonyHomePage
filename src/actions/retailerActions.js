@@ -27,7 +27,6 @@ export const getInventory = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
-    console.log({ data });
     if (parseInt(data.codeNumber) == 200) {
       dispatch({
         type: typeRetailer.SET_INVENTORY,

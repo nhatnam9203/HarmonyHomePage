@@ -39,6 +39,7 @@ function Info() {
   const [keySearchInventory, setKeySearchInventory] = React.useState("");
 
   React.useEffect(() => {
+    dispatch(getMerchantByIdAction(id));
     setFirstLoading(true);
     setTimeout(() => {
       setFirstLoading(false);
@@ -46,9 +47,10 @@ function Info() {
   }, []);
 
   React.useEffect(() => {
-    dispatch(getMerchantByIdAction(id));
-    getOrdersData(1, sortOrders);
-    getInventoryData(1, sortInventory);
+    if (merchantId) {
+      getOrdersData(1, sortOrders);
+      getInventoryData(1, sortInventory);
+    }
   }, [merchantId]);
 
   const getOrdersData = (page, sort) => {
