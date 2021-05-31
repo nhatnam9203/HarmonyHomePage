@@ -53,6 +53,22 @@ const columns = (valueSort, onClickSort) => [
     Header: (
       <CustomTableHeader
         isSort={true}
+        value="Group"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "isVip")
+        }
+      />
+    ),
+    id: "isVip",
+    accessor: (row) => (
+      <div className="table-tr">{`${convertIsVip(row.isVip)}`}</div>
+    ),
+  },
+  {
+    Header: (
+      <CustomTableHeader
+        isSort={true}
         value="Customer since"
         valueSort={valueSort}
         onClickSort={() =>
@@ -70,3 +86,25 @@ const columns = (valueSort, onClickSort) => [
 ];
 
 export default columns;
+
+const convertIsVip = (isVip) => {
+  let value = "InValid";
+  switch (parseInt(isVip)) {
+    case 0:
+      value = "normal";
+      break;
+
+    case 1:
+      value = "vip";
+      break;
+
+    case 2:
+      value = "blacklist";
+      break;
+
+    default:
+      break;
+  }
+
+  return value;
+};

@@ -120,6 +120,7 @@ const columns = (valueSort, onClickSort) => [
     ),
     id: "purchasePoint",
     accessor: (row) => <div className="table-tr">{`${row.purchasePoint}`}</div>,
+    width: 170,
   },
   {
     Header: (
@@ -138,7 +139,7 @@ const columns = (valueSort, onClickSort) => [
         "MMMM DD, YYYY hh:mm A"
       )}`}</div>
     ),
-    width: 250,
+    width: 210,
   },
   {
     Header: (
@@ -167,6 +168,7 @@ const columns = (valueSort, onClickSort) => [
     ),
     id: "shipToName",
     accessor: (row) => <div className="table-tr">{`${row.shipToName}`}</div>,
+    width: 150,
   },
   {
     Header: (
@@ -181,6 +183,7 @@ const columns = (valueSort, onClickSort) => [
     ),
     id: "status",
     accessor: (row) => <CustomStatus status={row.status} />,
+    width: 120,
   },
   {
     Header: (

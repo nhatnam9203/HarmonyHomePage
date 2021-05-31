@@ -96,6 +96,7 @@ const columns = (valueSort, onClickSort) => [
     ),
     id: "needToorDer",
     accessor: (row) => <div className="table-tr">{`${row.needToorDer}`}</div>,
+    width: 170,
   },
 ];
 
