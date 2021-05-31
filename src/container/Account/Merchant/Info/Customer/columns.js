@@ -1,29 +1,7 @@
+import CustomTableHeader from "../CustomTableHeader";
+import moment from "moment";
 import "../Info.scss";
 import "./style.scss";
-import sortIcon from "../../../../../assets/images/sort.png";
-import moment from "moment";
-
-const CustomTableHeader = ({
-  value,
-  valueSort,
-  onClickSort = () => {},
-  isSort = false,
-}) => {
-  return (
-    <div className="headerTable" onClick={onClickSort}>
-      {value}
-      {isSort && (
-        <img
-          src={sortIcon}
-          alt={"image sort"}
-          style={{
-            transform: valueSort == "ASC" ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        />
-      )}
-    </div>
-  );
-};
 
 const columns = (valueSort, onClickSort) => [
   {
@@ -32,7 +10,9 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Name"
         valueSort={valueSort}
-        onClickSort={() => onClickSort(valueSort == "DESC" ? "ASC" : "DESC")}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "firstName")
+        }
       />
     ),
     id: "name",
@@ -42,17 +22,44 @@ const columns = (valueSort, onClickSort) => [
     width: 200,
   },
   {
-    Header: <CustomTableHeader value="Phone number" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Phone number"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "phone")
+        }
+      />
+    ),
     id: "phone",
     accessor: (row) => <div className="table-tr">{`${row.phone}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Email" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Email"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "email")
+        }
+      />
+    ),
     id: "email",
     accessor: (row) => <div className="table-tr">{`${row.email}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Customer since" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Customer since"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "createdDate")
+        }
+      />
+    ),
     id: "createdDate",
     accessor: (row) => (
       <div className="table-tr">{`${moment(row.createdDate).format(

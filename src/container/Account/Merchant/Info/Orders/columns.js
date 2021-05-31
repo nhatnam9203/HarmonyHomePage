@@ -1,29 +1,7 @@
+import CustomTableHeader from "../CustomTableHeader";
 import moment from "moment";
 import "../Info.scss";
 import "./style.scss";
-import sortIcon from "../../../../../assets/images/sort.png";
-
-const CustomTableHeader = ({
-  value,
-  valueSort,
-  onClickSort = () => {},
-  isSort = false,
-}) => {
-  return (
-    <div className="headerTable" onClick={onClickSort}>
-      {value}
-      {isSort && (
-        <img
-          src={sortIcon}
-          alt={"image sort"}
-          style={{
-            transform: valueSort == "ASC" ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        />
-      )}
-    </div>
-  );
-};
 
 const CustomStatus = ({ status }) => {
   const convertColor = (status) => {
@@ -121,19 +99,39 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="ID"
         valueSort={valueSort}
-        onClickSort={() => onClickSort(valueSort == "DESC" ? "ASC" : "DESC")}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "code")
+        }
       />
     ),
     id: "code",
     accessor: (row) => <div className="table-tr">{`${row.code}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Purchase Point" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Purchase point"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "purchasePoint")
+        }
+      />
+    ),
     id: "purchasePoint",
     accessor: (row) => <div className="table-tr">{`${row.purchasePoint}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Purchase Date" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Purchase date"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "createdDate")
+        }
+      />
+    ),
     id: "createdDate",
     accessor: (row) => (
       <div className="table-tr">{`${moment(row.createdDate).format(
@@ -143,22 +141,58 @@ const columns = (valueSort, onClickSort) => [
     width: 250,
   },
   {
-    Header: <CustomTableHeader value="Bill-to Name" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Bill-to Name"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "billToName")
+        }
+      />
+    ),
     id: "billToName",
     accessor: (row) => <div className="table-tr">{`${row.billToName}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Ship-to Name" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Ship-to Name"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "shipToName")
+        }
+      />
+    ),
     id: "shipToName",
     accessor: (row) => <div className="table-tr">{`${row.shipToName}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Status" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Status"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "status")
+        }
+      />
+    ),
     id: "status",
     accessor: (row) => <CustomStatus status={row.status} />,
   },
   {
-    Header: <CustomTableHeader value="Grand total" />,
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Grand total"
+        valueSort={valueSort}
+        onClickSort={() =>
+          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "total")
+        }
+      />
+    ),
     id: "total",
     accessor: (row) => <div className="table-tr">{`${row.total}`}</div>,
   },

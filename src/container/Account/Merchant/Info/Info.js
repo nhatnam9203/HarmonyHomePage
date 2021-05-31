@@ -2,13 +2,13 @@ import React from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getMerchantByIdAction } from "../../../../actions/userActions";
+import { getMerchantByIdAction } from "@/actions/userActions";
 import {
   getOrders,
   getInventory,
   getCustomer,
-} from "../../../../actions/retailerActions";
-import Loading from "../../../../util/Loading";
+} from "@/actions/retailerActions";
+import Loading from "@/util/Loading";
 
 import BusinessInformation from "./BusinessInformation";
 import Inventory from "./Inventory";
@@ -34,16 +34,19 @@ function Info() {
 
   /* Orders */
   const [sortOrders, setSortOrders] = React.useState("ASC");
+  const [sortTypeOrders, setSortTypeOrders] = React.useState("code");
   const [pageOrders, setPageOrders] = React.useState(1);
   const [keySearchOrders, setKeySearchOrders] = React.useState("");
 
   /* Inventory */
   const [sortInventory, setSortInventory] = React.useState("ASC");
+  const [sortTypeInventory, setSortTypeInventory] = React.useState("name");
   const [pageInventory, setPageInventory] = React.useState(1);
   const [keySearchInventory, setKeySearchInventory] = React.useState("");
 
-  /* Custoer */
-  const [sortCustomer, setSortCustomer] = React.useState("ASC");
+  /* Customer */
+  const [sortCustomer, setSortCustomer] = React.useState("DESC");
+  const [sortTypeCustomer, setSortTypeCustomer] = React.useState("email");
   const [pageCustomer, setPageCustomer] = React.useState(1);
   const [keySearchCustomer, setKeySearchCustomer] = React.useState("");
 
@@ -57,58 +60,61 @@ function Info() {
 
   React.useEffect(() => {
     if (merchantId) {
-      getOrdersData(1, sortOrders);
-      getInventoryData(1, sortInventory);
-      getCustomerData(1, sortCustomer);
+      getOrdersData(1, sortOrders, sortTypeOrders);
+      getInventoryData(1, sortInventory, sortTypeInventory);
+      getCustomerData(1, sortCustomer, sortTypeCustomer);
     }
   }, [merchantId]);
 
-  const getOrdersData = (page, sort) => {
-    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"code":"${sort}"}&merchantId=${detail.merchantId}`;
+  const getOrdersData = (page, sort, sortType) => {
+    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
     url = encodeURI(url);
     dispatch(getOrders(url, token));
   };
 
-  const getInventoryData = (page, sort) => {
-    let url = `product?page=${page}&key=${keySearchInventory}&sorts={"name":"${sort}"}&merchantId=${detail.merchantId}`;
+  const getInventoryData = (page, sort, sortType) => {
+    let url = `product?page=${page}&key=${keySearchInventory}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
     url = encodeURI(url);
     dispatch(getInventory(url, token));
   };
 
-  const getCustomerData = (page, sort) => {
-    let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts={"firstName":"${sort}"}&merchantId=${detail.merchantId}`;
+  const getCustomerData = (page, sort, sortType) => {
+    let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
     url = encodeURI(url);
     dispatch(getCustomer(url, token));
   };
 
   const changePageOrders = async (page) => {
     await setPageOrders(page);
-    await getOrdersData(page, sortOrders);
+    await getOrdersData(page, sortOrders, sortTypeOrders);
   };
 
   const changePageInventory = async (page) => {
     await setPageInventory(page);
-    await getInventoryData(page, sortInventory);
+    await getInventoryData(page, sortInventory, sortTypeInventory);
   };
 
   const changePageCustomer = async (page) => {
     await setPageCustomer(page);
-    await getCustomerData(page, sortCustomer);
+    await getCustomerData(page, sortCustomer, sortTypeCustomer);
   };
 
-  const changeSortOrders = async (sort) => {
+  const changeSortOrders = async (sort, sortType) => {
     await setSortOrders(sort);
-    await getOrdersData(pageOrders, sort);
+    await setSortTypeOrders(sortType);
+    await getOrdersData(pageOrders, sort, sortType);
   };
 
-  const changeSortInventory = async (sort) => {
+  const changeSortInventory = async (sort, sortType) => {
     await setSortInventory(sort);
-    await getInventoryData(pageInventory, sort);
+    await setSortTypeInventory(sortType);
+    await getInventoryData(pageInventory, sort, sortType);
   };
 
-  const changeSortCustomer = async (sort) => {
+  const changeSortCustomer = async (sort, sortType) => {
     await setSortCustomer(sort);
-    await getCustomerData(pageCustomer, sort);
+    await setSortTypeCustomer(sortType);
+    await getCustomerData(pageCustomer, sort, sortType);
   };
 
   const onChangeSearchOrder = (e) => {
@@ -126,16 +132,19 @@ function Info() {
     setKeySearchCustomer(value);
   };
 
-  const searchOrder = () => {
-    getOrdersData(pageOrders, sortOrders);
+  const searchOrder = async () => {
+    await setPageOrders(1);
+    getOrdersData(1, sortOrders, sortTypeOrders);
   };
 
-  const searchInventory = () => {
-    getInventoryData(pageInventory, sortInventory);
+  const searchInventory = async () => {
+    await setPageInventory(1);
+    getInventoryData(1, sortInventory, sortTypeInventory);
   };
 
-  const searchCustomer = () => {
-    getCustomerData(pageCustomer, sortCustomer);
+  const searchCustomer = async () => {
+    await setPageCustomer(1);
+    getCustomerData(1, sortCustomer, sortTypeCustomer);
   };
 
   const changeTab = (tabName) => {

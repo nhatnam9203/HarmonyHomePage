@@ -2,10 +2,10 @@ import React from "react";
 import Fade from "react-reveal/Fade";
 import ReactTable from "react-table";
 import columns from "./columns";
-import Search from "../../../../../components/Search";
-import Pagination from "../../../../../components/Pagination";
+import Search from "@/components/Search";
+import Pagination from "@/components/Pagination";
 import { useSelector } from "react-redux";
-import Loading from "../../../../../components/Loading";
+import Loading from "@/components/Loading";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -23,8 +23,8 @@ const Index = ({
     (state) => state.retailer
   );
 
-  const onClickSort = (status) => {
-    changeSortOrders(status);
+  const onClickSort = (status, sortType) => {
+    changeSortOrders(status, sortType);
   };
 
   return (
