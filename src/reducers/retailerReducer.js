@@ -8,6 +8,7 @@ export const retailerReducer = (
     inventory: [],
     inventoryPages: 0,
     customer: [],
+    customerPages: 0,
     report: [],
   },
   { type, payload }
@@ -27,6 +28,13 @@ export const retailerReducer = (
         ...state,
         inventory: payload.data,
         inventoryPages: payload.count,
+      };
+
+    case types.SET_CUSTOMER:
+      return {
+        ...state,
+        customer: payload.data,
+        customerPages: payload.count,
       };
 
     default:

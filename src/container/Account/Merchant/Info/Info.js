@@ -3,7 +3,11 @@ import { useParams, useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getMerchantByIdAction } from "../../../../actions/userActions";
-import { getOrders, getInventory } from "../../../../actions/retailerActions";
+import {
+  getOrders,
+  getInventory,
+  getCustomer,
+} from "../../../../actions/retailerActions";
 import Loading from "../../../../util/Loading";
 
 import BusinessInformation from "./BusinessInformation";
@@ -38,6 +42,11 @@ function Info() {
   const [pageInventory, setPageInventory] = React.useState(1);
   const [keySearchInventory, setKeySearchInventory] = React.useState("");
 
+  /* Custoer */
+  const [sortCustomer, setSortCustomer] = React.useState("ASC");
+  const [pageCustomer, setPageCustomer] = React.useState(1);
+  const [keySearchCustomer, setKeySearchCustomer] = React.useState("");
+
   React.useEffect(() => {
     dispatch(getMerchantByIdAction(id));
     setFirstLoading(true);
@@ -50,6 +59,7 @@ function Info() {
     if (merchantId) {
       getOrdersData(1, sortOrders);
       getInventoryData(1, sortInventory);
+      getCustomerData(1, sortCustomer);
     }
   }, [merchantId]);
 
@@ -62,8 +72,13 @@ function Info() {
   const getInventoryData = (page, sort) => {
     let url = `product?page=${page}&key=${keySearchInventory}&sorts={"name":"${sort}"}&merchantId=${detail.merchantId}`;
     url = encodeURI(url);
-    console.log({ url });
     dispatch(getInventory(url, token));
+  };
+
+  const getCustomerData = (page, sort) => {
+    let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts={"firstName":"${sort}"}&merchantId=${detail.merchantId}`;
+    url = encodeURI(url);
+    dispatch(getCustomer(url, token));
   };
 
   const changePageOrders = async (page) => {
@@ -76,6 +91,11 @@ function Info() {
     await getInventoryData(page, sortInventory);
   };
 
+  const changePageCustomer = async (page) => {
+    await setPageCustomer(page);
+    await getCustomerData(page, sortCustomer);
+  };
+
   const changeSortOrders = async (sort) => {
     await setSortOrders(sort);
     await getOrdersData(pageOrders, sort);
@@ -84,6 +104,11 @@ function Info() {
   const changeSortInventory = async (sort) => {
     await setSortInventory(sort);
     await getInventoryData(pageInventory, sort);
+  };
+
+  const changeSortCustomer = async (sort) => {
+    await setSortCustomer(sort);
+    await getCustomerData(pageCustomer, sort);
   };
 
   const onChangeSearchOrder = (e) => {
@@ -96,12 +121,21 @@ function Info() {
     setKeySearchInventory(value);
   };
 
+  const onChangeSearchCustomer = (e) => {
+    const value = e.target.value;
+    setKeySearchCustomer(value);
+  };
+
   const searchOrder = () => {
     getOrdersData(pageOrders, sortOrders);
   };
 
   const searchInventory = () => {
     getInventoryData(pageInventory, sortInventory);
+  };
+
+  const searchCustomer = () => {
+    getCustomerData(pageCustomer, sortCustomer);
   };
 
   const changeTab = (tabName) => {
@@ -137,7 +171,17 @@ function Info() {
           />
         );
       case "Customer":
-        return <Customer />;
+        return (
+          <Customer
+            changePageCustomer={changePageCustomer}
+            changeSortCustomer={changeSortCustomer}
+            pageCustomer={pageCustomer}
+            searchCustomer={searchCustomer}
+            valueSearch={keySearchCustomer}
+            valueSort={sortCustomer}
+            onChangeSearch={onChangeSearchCustomer}
+          />
+        );
       case "Report":
         return <Report />;
 

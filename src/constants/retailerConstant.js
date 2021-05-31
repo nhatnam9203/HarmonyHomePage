@@ -7,3 +7,6 @@ export const SET_ORDERS = "SET_ORDERS";
 
 export const GET_INVENTORY = "GET_INVENTORY";
 export const SET_INVENTORY = "SET_INVENTORY";
+
+export const GET_CUSTOMER = "GET_CUSTOMER";
+export const SET_CUSTOMER = "SET_CUSTOMER";

@@ -1,6 +1,7 @@
 .account {
   max-width: 1640px;
   margin: 0 auto;
+  margin-top: 1rem;
   padding-bottom: 6rem;
   min-height: 85vh;
 
@@ -110,4 +111,9 @@
       font-size: 0.7rem;
     }
   }
+}
+
+.container-account {
+  display: flex;
+  flex-direction: row;
 }

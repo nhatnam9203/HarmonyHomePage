@@ -85,6 +85,11 @@ const CustomStatus = ({ status }) => {
         backgroundColor = "transparent";
         break;
 
+      case "Return":
+        color = "white";
+        backgroundColor = "#B73B36";
+        break;
+
       default:
         break;
     }
