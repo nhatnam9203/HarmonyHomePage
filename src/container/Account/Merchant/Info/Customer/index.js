@@ -44,25 +44,21 @@ const Index = ({
           data={customer}
           minRows={1}
           noDataText="NO DATA!"
-          LoadingComponent={() =>
-            loading && (
-              <div style={{ marginTop: 100 }}>
-                <Loading />
-              </div>
-            )
-          }
           NoDataComponent={() => (
             <div className="retailer_nodata">NO DATA!</div>
           )}
           loading={loading}
+          LoadingComponent={() => loading && <Loading />}
           columns={columns(valueSort, onClickSort)}
           PaginationComponent={() => <div />}
         />
-        <Pagination
-          activePage={pageCustomer}
-          handlePageChange={changePageCustomer}
-          totalItem={Math.ceil(customerPages / 2)}
-        />
+        {customer.length > 0 && (
+          <Pagination
+            activePage={pageCustomer}
+            handlePageChange={changePageCustomer}
+            totalItem={Math.ceil(customerPages / 2)}
+          />
+        )}
       </div>
     </Fade>
   );

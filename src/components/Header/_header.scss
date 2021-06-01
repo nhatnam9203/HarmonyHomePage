@@ -91,13 +91,14 @@
 
   .nav-NavLink {
     font-size: 1rem;
-    margin-left: 1em;
+    margin-left: 1rem;
     color: #707070;
-    letter-spacing: 0.9px;
+    letter-spacing: 0.6px;
     font-weight: 500;
     transition: clip-path 275ms ease;
-    @media only screen and (max-width: 1378px) and (min-width: 1200px) {
-      font-size: 0.94rem;
+    @media only screen and (max-width: 1400px) and (min-width: 1200px) {
+      font-size: 0.95rem;
+      letter-spacing: 0.2px;
     }
 
     &:hover {
@@ -118,15 +119,17 @@
   .sign_up {
     a {
       color: $white-0 !important;
-      padding: 13px 30px;
       background-color: $blue-0;
       font-weight: 500;
+      display: inline;
+      padding: 13px 30px;
     }
 
     a:hover {
       height: 0px !important;
       border-bottom: 0px;
       padding: 13px 30px;
+      background-color: #0d7cdb;
     }
   }
 

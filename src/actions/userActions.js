@@ -35,9 +35,7 @@ export const getMyAccountAction = () => async (dispatch, getState) => {
       type: typeUser.GET_MY_ACCOUNT_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getMyAccount(token);
 
@@ -61,9 +59,7 @@ export const updateMyAccountAction = (payload) => async (
       type: typeUser.UPDATE_MY_ACCOUNT_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.updateMyAccount(payload, token);
 
@@ -103,9 +99,7 @@ export const newsletterSubscriptionAction = (enable) => async (
       type: typeUser.NEWSLETTER_SUB_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.newsletterSubscription(enable, token);
 
@@ -133,9 +127,7 @@ export const getMerchantListAction = () => async (dispatch, getState) => {
       type: typeUser.GET_ALL_MERCHANT_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getMerchantList(token);
 
@@ -159,9 +151,7 @@ export const getMerchantByIdAction = (id) => async (dispatch, getState) => {
       type: typeUser.GET_MERCHANT_BY_ID_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getMerchantById(id, token);
 
@@ -185,9 +175,7 @@ export const getMySubscriptionAction = () => async (dispatch, getState) => {
       type: typeUser.GET_SUBSCRIPTION_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getMySubscription(token);
 
@@ -214,9 +202,7 @@ export const getMySubscriptionByIdAction = (id) => async (
       type: typeUser.GET_SUBSCRIPTION_BY_ID_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getSubscriptionById(id, token);
 
@@ -243,9 +229,7 @@ export const cancelSubscriptionByIdAction = (id) => async (
       type: typeUser.CANCEL_SUBSCRIPTION_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.cancelSubscriptionById(id, token);
 
@@ -271,9 +255,7 @@ export const getPackageAction = () => async (dispatch, getState) => {
       type: typeUser.GET_PACKAGE_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getPackage(token);
 
@@ -297,9 +279,7 @@ export const getRefundMoneyAction = (id) => async (dispatch, getState) => {
       type: typeUser.GET_REFUND_MONEY_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getRefundMoney(id, token);
 
@@ -326,9 +306,7 @@ export const updateSubscriptionAction = (value) => async (
       type: typeUser.UPDATE_SUBSCRIPTION_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.updateSubscriptionById(value, token);
 
@@ -359,9 +337,7 @@ export const renewSubscriptionAction = (value) => async (
       type: typeUser.RENEW_SUBSCRIPTION_REQUEST,
     });
 
-    const {
-      user: { token },
-    } = await getState().user;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.renewSubscriptionById(value, token);
 

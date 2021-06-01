@@ -23,6 +23,7 @@ export const userLoginReducer = (state = initialState, { type, payload }) => {
       };
 
     case types.USER_LOGOUT:
+      localStorage.removeItem("user");
       return {
         loading: false,
         user: "",
