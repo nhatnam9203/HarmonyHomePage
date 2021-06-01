@@ -1,0 +1,41 @@
+.button_select_date {
+  background: white !important;
+  color: #585858;
+  position: relative;
+  & > img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    margin-left: 10px;
+  }
+}
+
+.popupDate {
+  position: absolute;
+  background: white;
+  width: 200px;
+  padding-bottom: 1rem;
+  z-index: 99999;
+  left: -5px;
+  top: 57px;
+  box-shadow: 0 3px 12px rgba(65, 11, 16, 0.15);
+  &_rowSelect {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    color: #585858;
+    font-weight: 400;
+  }
+}
+
+.popupDate:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid white;
+  top: -12px;
+  left: 27px;
+}

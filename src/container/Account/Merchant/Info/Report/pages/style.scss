@@ -1,0 +1,47 @@
+@mixin row() {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row_button_report {
+  @include row();
+}
+
+.report_button {
+  @include row();
+  justify-content: center;
+  width: 8.7rem;
+  height: 2.5rem;
+  background: #1366ae;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  & > :hover {
+    background: #154d7d;
+  }
+}
+
+.report_button_icon {
+  @include row();
+  width: 8.7rem;
+  height: 2.5rem;
+  background: #f9f9f9;
+  color: #1366ae;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0px 0.7rem;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+  & > img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+}
+
+.top20 {
+  margin-top: 20px;
+}
