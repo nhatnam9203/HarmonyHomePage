@@ -13,12 +13,14 @@ const data = [
   "Custom",
 ];
 
-const PopupSelectDate = ({}) => {
+const PopupSelectDate = ({ closePopupDate, onChangeDate }) => {
   const [dateSelected, setDateSelected] = React.useState("This Week");
 
-  const onChangeDate = (e, date) => {
+  const changeDate = (e, date) => {
     e.stopPropagation();
     setDateSelected(date);
+    onChangeDate(date);
+    date !== "Custom" && closePopupDate();
   };
 
   return (
@@ -36,16 +38,12 @@ const PopupSelectDate = ({}) => {
           <ItemDate
             key={obj}
             obj={obj}
-            onChangeDate={onChangeDate}
+            onChangeDate={changeDate}
             dateSelected={dateSelected}
           />
         ))}
       </div>
-      {dateSelected === "Custom" && (
-        <Fade>
-          <PopupCustom />
-        </Fade>
-      )}
+      {dateSelected === "Custom" && <PopupCustom />}
     </div>
   );
 };

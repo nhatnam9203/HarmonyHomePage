@@ -1,3 +1,9 @@
+@mixin row() {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .button_select_date {
   background: white !important;
   color: #585858 !important;
@@ -14,7 +20,6 @@
 .popupDate {
   width: 200px;
   padding-bottom: 1rem;
-  border: 1px solid #dddddd;
   border-radius: 5px;
   &_rowSelect {
     margin-left: 1rem;
@@ -30,6 +35,7 @@
     left: -5px;
     top: 57px;
     background: white;
+    border: 1px solid #dddddd;
   }
   &_custom {
     width: 400px;
@@ -42,15 +48,111 @@
   }
 }
 
-.popupDate_container:after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 12px solid white;
-  top: -12px;
-  left: 27px;
+.DayPicker-Caption > div {
+  display: none;
+}
+
+.daypicker-container {
+  background: #fafafa;
+}
+
+.daypicker-renderDay {
+  font-size: 0.7rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  &-picked {
+    position: absolute;
+    color: white;
+    background: #1366ae;
+    width: 30px;
+    height: 30px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 300px;
+  }
+}
+
+.daypicker-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.6rem;
+  padding: 0px 15px;
+  & > span {
+    font-weight: 600;
+    color: #1366ae;
+    font-size: 0.9rem;
+  }
+  & > img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.DayPicker-Weekdays {
+  border-top: 1px solid #eeeeee !important;
+  border-bottom: 1px solid #eeeeee !important;
+  margin-top: -1rem !important;
+}
+
+.DayPicker-Month {
+  margin-top: 0.5em !important;
+}
+
+.DayPicker-Weekday {
+  color: #333 !important;
+  font-size: 0.7rem !important;
+}
+
+.popupCustom_container {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.daypicker-input {
+  width: 100px;
+  border: 1px solid #dddddd;
+  display: flex;
+  padding: 8px 10px;
+  & > input {
+    width: 60px;
+    border: 0px !important;
+    font-size: 0.7rem;
+  }
+  &-container {
+    @include row();
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    & > span {
+      background: transparent;
+      margin: 0px 15px;
+    }
+  }
+}
+
+.daypicker-btn-apply {
+  width: 110px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white !important;
+  background: #1366ae !important;
+  border-radius: 3px !important;
+  &-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
 }
