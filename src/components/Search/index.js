@@ -12,7 +12,7 @@ const Index = ({ value = "", onChange = () => {}, onSubmit = () => {} }) => {
     <form onSubmit={submit}>
       <div className="search_container">
         <input value={value} onChange={onChange} placeholder="Search..." />
-        <img src={searchIcon} onClick={submit} />
+        <img src={searchIcon} onClick={submit} alt="img" />
       </div>
     </form>
   );

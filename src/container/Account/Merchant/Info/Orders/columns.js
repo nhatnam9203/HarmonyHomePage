@@ -81,7 +81,7 @@ const CustomStatus = ({ status }) => {
         color: convertColor(status).color,
         borderWidth: 1,
         borderColor:
-          status == "shipped" || status == "Shipped"
+          status === "shipped" || status === "Shipped"
             ? "#53D769"
             : "transparent",
       }}
@@ -100,7 +100,7 @@ const columns = (valueSort, onClickSort) => [
         value="ID"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "code")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "code")
         }
       />
     ),
@@ -114,7 +114,7 @@ const columns = (valueSort, onClickSort) => [
         value="Purchase point"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "purchasePoint")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "purchasePoint")
         }
       />
     ),
@@ -129,7 +129,7 @@ const columns = (valueSort, onClickSort) => [
         value="Purchase date"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "createdDate")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "createdDate")
         }
       />
     ),
@@ -148,7 +148,7 @@ const columns = (valueSort, onClickSort) => [
         value="Bill-to Name"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "billToName")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "billToName")
         }
       />
     ),
@@ -162,7 +162,7 @@ const columns = (valueSort, onClickSort) => [
         value="Ship-to Name"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "shipToName")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "shipToName")
         }
       />
     ),
@@ -177,7 +177,7 @@ const columns = (valueSort, onClickSort) => [
         value="Status"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "status")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "status")
         }
       />
     ),
@@ -192,7 +192,7 @@ const columns = (valueSort, onClickSort) => [
         value="Grand total"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "total")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "total")
         }
       />
     ),

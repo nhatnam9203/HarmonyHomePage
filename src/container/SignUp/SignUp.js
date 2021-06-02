@@ -116,7 +116,9 @@ function SignUp() {
                     system.
                   </p>
 
-                  {loading && <img src={LoadingIcon} className="loading_gif" />}
+                  {loading && (
+                    <img src={LoadingIcon} className="loading_gif" alt="img" />
+                  )}
                   <Form onSubmit={formik.handleSubmit}>
                     <Form.Group>
                       <Form.Label>
@@ -241,29 +243,6 @@ function SignUp() {
                         )}
                       </div>
                     </Form.Group>
-                    {/* {loading ? (
-                      <Button
-                        className="submit_btn text-center font-weight-bold"
-                        disabled
-                      >
-                        <Spinner
-                          as="span"
-                          animation="grow"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                        />
-                        Loading...
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="primary"
-                        type="submit"
-                        className="submit_btn"
-                      >
-                        SUBMIT
-                      </Button>
-                    )} */}
 
                     <Button
                       variant="primary"

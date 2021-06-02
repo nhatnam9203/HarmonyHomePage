@@ -11,7 +11,7 @@ function SignUpSuccess() {
   return (
     <div className="sign_up_success">
       <div className="sign_up_img">
-        <img src={ThankYouImg} />
+        <img src={ThankYouImg} alt="img" />
       </div>
       <div className="sign_up_message">
         <h1> THANKS!</h1>

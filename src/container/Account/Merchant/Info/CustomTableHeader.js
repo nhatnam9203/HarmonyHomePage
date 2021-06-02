@@ -15,7 +15,7 @@ const CustomTableHeader = ({
           src={sortIcon}
           alt={"image sort"}
           style={{
-            transform: valueSort == "ASC" ? "rotate(180deg)" : "rotate(0deg)",
+            transform: valueSort === "ASC" ? "rotate(180deg)" : "rotate(0deg)",
           }}
         />
       )}

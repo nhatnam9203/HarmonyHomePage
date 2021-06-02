@@ -30,6 +30,7 @@ const Index = ({
           <img
             className="icon-pagination"
             src={activePage !== 1 ? prevPage : prevPage_disable}
+            alt="img"
           />
         }
         nextPageText={
@@ -40,12 +41,14 @@ const Index = ({
                 ? nextPage
                 : nextPage_disable
             }
+            alt="img"
           />
         }
         firstPageText={
           <img
             className="icon-pagination"
             src={activePage !== 1 ? firstPage : firstPage_disable}
+            alt="img"
           />
         }
         lastPageText={
@@ -56,6 +59,7 @@ const Index = ({
                 ? lastPage
                 : lastPage_disable
             }
+            alt="img"
           />
         }
       />

@@ -8,7 +8,7 @@ const columns = (valueSort, onClickSort) => [
     id: "imageUrl",
     accessor: (row) => (
       <div className="table-tr">
-        <img className="img-inventory" src={row.imageUrl} />
+        <img className="img-inventory" src={row.imageUrl} alt="img" />
       </div>
     ),
   },
@@ -19,7 +19,7 @@ const columns = (valueSort, onClickSort) => [
         value="Product name"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "name")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
         }
       />
     ),
@@ -34,7 +34,7 @@ const columns = (valueSort, onClickSort) => [
         value="Category"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "categoryName")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "categoryName")
         }
       />
     ),
@@ -48,7 +48,7 @@ const columns = (valueSort, onClickSort) => [
         value="SKU"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "sku")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "sku")
         }
       />
     ),
@@ -62,7 +62,7 @@ const columns = (valueSort, onClickSort) => [
         value="Price"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "price")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "price")
         }
       />
     ),
@@ -76,7 +76,7 @@ const columns = (valueSort, onClickSort) => [
         value="Quantity"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "quantity")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "quantity")
         }
       />
     ),
@@ -90,7 +90,7 @@ const columns = (valueSort, onClickSort) => [
         value="Need to order"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
         }
       />
     ),

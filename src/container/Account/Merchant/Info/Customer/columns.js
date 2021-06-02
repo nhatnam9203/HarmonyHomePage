@@ -11,7 +11,7 @@ const columns = (valueSort, onClickSort) => [
         value="Name"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "firstName")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "firstName")
         }
       />
     ),
@@ -28,7 +28,7 @@ const columns = (valueSort, onClickSort) => [
         value="Phone number"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "phone")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "phone")
         }
       />
     ),
@@ -42,7 +42,7 @@ const columns = (valueSort, onClickSort) => [
         value="Email"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "email")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "email")
         }
       />
     ),
@@ -56,7 +56,7 @@ const columns = (valueSort, onClickSort) => [
         value="Group"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "isVip")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "isVip")
         }
       />
     ),
@@ -72,7 +72,7 @@ const columns = (valueSort, onClickSort) => [
         value="Customer since"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort == "DESC" ? "ASC" : "DESC", "createdDate")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "createdDate")
         }
       />
     ),

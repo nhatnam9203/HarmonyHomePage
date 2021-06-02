@@ -226,7 +226,7 @@ function PrincipalDetail(formik) {
             Driver License Picture <span className="form_required">*</span>
           </Form.Label>
           <br />
-          <img src={DriverLicenseImg} width="350" heigh="350" />
+          <img src={DriverLicenseImg} width="350" heigh="350" alt="img" />
 
           <p className="btn_upload">Change picture</p>
         </Form.Group>

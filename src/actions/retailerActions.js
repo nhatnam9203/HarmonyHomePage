@@ -27,7 +27,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
-    if (parseInt(data.codeNumber) == 200) {
+    if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_INVENTORY,
         payload: { data: data.data, count: data.count },
@@ -48,7 +48,7 @@ export const getCustomer = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
-    if (parseInt(data.codeNumber) == 200) {
+    if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_CUSTOMER,
         payload: { data: data.data, count: data.count },

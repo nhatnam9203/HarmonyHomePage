@@ -16,7 +16,7 @@ const Tabs = ({ tabActive, changeTab }) => {
         <div
           onClick={() => changeTab(tab)}
           key={"tab" + index}
-          className={tab == tabActive ? "infoTab_item_active" : "infoTab_item"}
+          className={tab === tabActive ? "infoTab_item_active" : "infoTab_item"}
         >
           {tab}
         </div>

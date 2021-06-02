@@ -83,7 +83,7 @@ function Bank(formik) {
                 Void Check <span className="form_required">*</span>
               </Form.Label>
               <br />
-              <img src={BankVoid} />
+              <img src={BankVoid} alt="img" />
 
               <p className="btn_upload">Change picture</p>
             </Form.Group>

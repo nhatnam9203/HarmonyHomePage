@@ -28,6 +28,7 @@ export default function HomeFeatures() {
                     variant="top"
                     src={fea1}
                     className="bot_features--img"
+                    alt="img"
                   />
                 </div>
                 <Card.Body className="d-flex flex-column justify-content-between p-0">
@@ -42,7 +43,11 @@ export default function HomeFeatures() {
                   <Button className="bot_features-button">
                     Learn more{" "}
                     <span>
-                      <img src={more} className="learn-more" />
+                      <img
+                        src={more}
+                        className="learn-more"
+                        alt="image-learn-more"
+                      />
                     </span>
                   </Button>
                 </Card.Body>
@@ -55,6 +60,7 @@ export default function HomeFeatures() {
                     variant="top"
                     src={fea2}
                     className="bot_features--img"
+                    alt="img"
                   />
                 </div>
                 <Card.Body className="d-flex flex-column justify-content-between p-0">
@@ -69,7 +75,7 @@ export default function HomeFeatures() {
                   <Button className="bot_features-button">
                     Learn more{" "}
                     <span>
-                      <img src={more} className="learn-more" />
+                      <img src={more} className="learn-more" alt="img" />
                     </span>
                   </Button>
                 </Card.Body>
@@ -82,6 +88,7 @@ export default function HomeFeatures() {
                     variant="top"
                     src={fea3}
                     className="bot_features--img"
+                    alt="img"
                   />
                 </div>
                 <Card.Body className="d-flex flex-column justify-content-between p-0">
@@ -110,6 +117,7 @@ export default function HomeFeatures() {
                     variant="top"
                     src={fea4}
                     className="bot_features--img"
+                    alt="img"
                   />
                 </div>
                 <Card.Body className="d-flex flex-column justify-content-between p-0">
@@ -125,7 +133,7 @@ export default function HomeFeatures() {
                   <Button className="bot_features-button">
                     Learn more{" "}
                     <span>
-                      <img src={more} className="learn-more" />
+                      <img src={more} className="learn-more" alt="img" />
                     </span>
                   </Button>
                 </Card.Body>

@@ -98,7 +98,7 @@ export default function Header() {
             <Col className="py-1 mx-sm-1 pr-0 pl-0 col__signin">
               {user ? (
                 <div className="sign_in" onClick={handleAccount}>
-                  <img src={LoginIcon} width={21} className="mr-2" />
+                  <img src={LoginIcon} width={21} className="mr-2" alt="img" />
                   <span className="text-white isMobile">Manage Account</span>
                 </div>
               ) : (
@@ -108,6 +108,7 @@ export default function Header() {
                     width={21}
                     height="auto"
                     className="mr-2"
+                    alt="img"
                   />
                   <span className="text-white isMobile">Sign in</span>
                 </div>
@@ -163,7 +164,11 @@ export default function Header() {
           <Container>
             <Navbar.Brand>
               <Link to="/home" onClick={handleNotConsumer}>
-                <img src={Logo} className="d-inline-block align-top" />
+                <img
+                  src={Logo}
+                  className="d-inline-block align-top"
+                  alt="img"
+                />
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle
@@ -224,7 +229,11 @@ export default function Header() {
           <Container>
             <Navbar.Brand>
               <Link to="/home">
-                <img src={Logo} className="d-inline-block align-top" />
+                <img
+                  src={Logo}
+                  className="d-inline-block align-top"
+                  alt="img"
+                />
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle

@@ -37,6 +37,9 @@ const Policy = lazy(() => import("./components/Policy/Policy"));
 const Account = lazy(() => import("./container/Account"));
 
 function App() {
+  const url = window.location.href;
+  const isNotPopup = url.toString().includes("account/my-account");
+
   return (
     <Router>
       <ScrollToTop />
@@ -73,7 +76,7 @@ function App() {
             </Switch>
           </Suspense>
         </main>
-        <PopupAfterLoad />
+        {!isNotPopup && <PopupAfterLoad />}
         <Footer />
       </div>
     </Router>
