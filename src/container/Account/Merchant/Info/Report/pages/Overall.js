@@ -10,10 +10,18 @@ const Overall = () => {
     setValueDate(date);
   };
 
+  const updateValueCustom = (start, end) => {
+    setValueDate(`${start} - ${end}`);
+  };
+
   return (
     <>
       <div className="info_merchant_title">Overall</div>
-      <SelectDate value={valueDate} onChangeDate={onChangeDate} />
+      <SelectDate
+        value={valueDate}
+        onChangeDate={onChangeDate}
+        updateValueCustom={updateValueCustom}
+      />
       <div className="row_button_report top20">
         <div className="report_button">Show report</div>
         <div className="report_button_icon">

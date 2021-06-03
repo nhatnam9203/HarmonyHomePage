@@ -5,7 +5,11 @@ import OutsideClickHandler from "react-outside-click-handler";
 
 import "./style.scss";
 
-const SelectDate = ({ value = "This week", onChangeDate }) => {
+const SelectDate = ({
+  value = "This week",
+  onChangeDate,
+  updateValueCustom,
+}) => {
   const [isPopupDate, setPopupDate] = React.useState(false);
 
   const togglePopupDate = () => {
@@ -16,11 +20,26 @@ const SelectDate = ({ value = "This week", onChangeDate }) => {
     setPopupDate(false);
   };
 
+  const checkValue = () => {
+    if (
+      value === "Today" ||
+      value === "Yesterday" ||
+      value === "This Week" ||
+      value === "Last Week" ||
+      value === "This Month" ||
+      value === "Last Month" ||
+      value === "Custom"
+    )
+      return "button_select_date";
+
+    return "button_select_date_expand";
+  };
+
   return (
     <div className="selectDate-button">
       <div
         onClick={togglePopupDate}
-        className="report_button_icon top20 button_select_date"
+        className={"report_button_icon top20 " + checkValue()}
         style={{ borderColor: isPopupDate ? "#1366AE" : "#dddddd" }}
       >
         {value}
@@ -31,6 +50,7 @@ const SelectDate = ({ value = "This week", onChangeDate }) => {
             onChangeDate={onChangeDate}
             isPopupDate={isPopupDate}
             dateSelected={value}
+            updateValueCustom={updateValueCustom}
           />
         </OutsideClickHandler>
       </div>

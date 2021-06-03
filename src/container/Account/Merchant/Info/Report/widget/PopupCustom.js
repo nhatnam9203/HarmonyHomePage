@@ -11,43 +11,52 @@ import * as Yup from "yup";
 import "react-day-picker/lib/style.css";
 import "./style.scss";
 
-const PopupCustom = ({}) => {
-  const schema = Yup.object().shape({
-    start: Yup.string()
-      .required("required")
-      .test("check-date", "Invalid date", function (value) {
-        return moment(value, "MM/DD/YYYY", true).isValid();
-      })
-      .nullable(),
-    end: Yup.string()
-      .required("required")
-      .test("check-date", "Invalid date", function (value) {
-        return moment(value, "MM/DD/YYYY", true).isValid();
-      })
-      .nullable(),
-  });
+const PopupCustom = ({ updateValueCustom }) => {
+  const [pickedStart, setPickedStart] = React.useState(moment());
+  const [pickedEnd, setPickedEnd] = React.useState(moment());
+
+  const refPickerStart = React.useRef();
+  const refPickerEnd = React.useRef();
 
   const formik = useFormik({
     initialValues: {
       start: moment().format("MM/DD/YYYY"),
       end: moment().format("MM/DD/YYYY"),
     },
+
     validationSchema: schema,
+
     onSubmit: (values) => {
-      console.log({ values });
+      const { start, end } = values;
+      updateValueCustom(start, end);
     },
   });
 
   return (
     <div onClick={(e) => e.stopPropagation()} className="popupCustom_container">
       <div>
-        <Picker />
+        <Picker
+          refPicker={refPickerStart}
+          value={pickedStart}
+          onPicked={(date) => {
+            setPickedStart(date);
+            formik.setFieldValue("start", moment(date).format("MM/DD/YYYY"));
+          }}
+        />
         <div className="daypicker-input-container">
           <Input
             value={formik.values.start}
             onChange={formik.handleChange}
             name="start"
             error={formik.errors.start}
+            onBlur={() => {
+              if (isEmpty(formik.errors.start)) {
+                setPickedStart(formik.values.start);
+                refPickerStart.current.showMonth(
+                  moment(formik.values.start, ["MM/DD/YYYY"])._d
+                );
+              }
+            }}
           />
           <span>-</span>
           <Input
@@ -55,13 +64,28 @@ const PopupCustom = ({}) => {
             onChange={formik.handleChange}
             name="end"
             error={formik.errors.end}
+            onBlur={() => {
+              if (isEmpty(formik.errors.end)) {
+                setPickedEnd(formik.values.end);
+                refPickerEnd.current.showMonth(
+                  moment(formik.values.end, ["MM/DD/YYYY"])._d
+                );
+              }
+            }}
           />
         </div>
       </div>
 
       <div>
         <div style={{ marginLeft: 15 }}>
-          <Picker />
+          <Picker
+            refPicker={refPickerEnd}
+            value={pickedEnd}
+            onPicked={(date) => {
+              setPickedEnd(date);
+              formik.setFieldValue("end", moment(date).format("MM/DD/YYYY"));
+            }}
+          />
         </div>
         <div className="daypicker-btn-apply-container">
           <Button
@@ -81,15 +105,14 @@ const PopupCustom = ({}) => {
   );
 };
 
-const Picker = () => {
-  const [daySelected, setDaySelected] = React.useState(moment());
-
+const Picker = ({ onPicked, value, refPicker }) => {
   const onChangeDay = (date) => {
-    setDaySelected(date);
+    onPicked(date);
   };
 
   return (
     <DayPicker
+      ref={refPicker}
       firstDayOfWeek={1}
       navbarElement={(event) => {
         const { month, onNextClick, onPreviousClick } = event;
@@ -107,7 +130,7 @@ const Picker = () => {
           <Day
             day={day}
             isPicked={
-              moment(daySelected).format("MMDDYYYY") ===
+              moment(value).format("MMDDYYYY") ===
               moment(day).format("MMDDYYYY")
             }
             onClick={onChangeDay}
@@ -155,3 +178,19 @@ const Input = ({ value = "", onChange = () => {}, error, ...other }) => {
 };
 
 export default PopupCustom;
+
+const schema = Yup.object().shape({
+  start: Yup.string()
+    .required("required")
+    .test("check-date", "Invalid date", function (value) {
+      return moment(value, "MM/DD/YYYY", true).isValid();
+    })
+    .nullable(),
+
+  end: Yup.string()
+    .required("required")
+    .test("check-date", "Invalid date", function (value) {
+      return moment(value, "MM/DD/YYYY", true).isValid();
+    })
+    .nullable(),
+});

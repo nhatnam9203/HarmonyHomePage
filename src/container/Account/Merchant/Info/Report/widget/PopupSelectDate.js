@@ -10,7 +10,7 @@ const data = [
   "This Week",
   "Last Week",
   "This Month",
-  "Lats Month",
+  "Last Month",
   "Custom",
 ];
 
@@ -19,6 +19,7 @@ const PopupSelectDate = ({
   onChangeDate,
   isPopupDate,
   dateSelected,
+  updateValueCustom,
 }) => {
   const changeDate = (e, date) => {
     e.stopPropagation();
@@ -51,7 +52,9 @@ const PopupSelectDate = ({
           </div>
         )}
       </SlideDown>
-      {dateSelected === "Custom" && isPopupDate && <PopupCustom />}
+      {dateSelected === "Custom" && isPopupDate && (
+        <PopupCustom updateValueCustom={updateValueCustom} />
+      )}
     </div>
   );
 };
