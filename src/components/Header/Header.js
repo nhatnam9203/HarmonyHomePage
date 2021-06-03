@@ -345,6 +345,7 @@ export default function Header() {
           </Container>
         </Navbar>
       )}
+
       {showForgot ? (
         <Modal
           show={show}

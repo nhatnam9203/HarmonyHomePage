@@ -177,6 +177,7 @@ function Index() {
                 <img
                   className="img-fluid"
                   src={detail?.businessBank?.imageUrl || BankVoid}
+                  alt="img"
                 />
               </Col>
             </Row>
@@ -285,6 +286,7 @@ function Index() {
                     <img
                       className="img-fluid"
                       src={e?.imageUrl || DriverLicenseImg}
+                      alt="img"
                     />
                   </Col>
                 </Row>

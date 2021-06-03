@@ -4,18 +4,58 @@ import { Button } from "react-bootstrap";
 import prev from "@/assets/images/retailer/prev.png";
 import next from "@/assets/images/retailer/next.png";
 import moment from "moment";
+import InputMask from "react-input-mask";
+import { useFormik } from "formik";
+import { isEmpty } from "lodash";
+import * as Yup from "yup";
 import "react-day-picker/lib/style.css";
 import "./style.scss";
 
 const PopupCustom = ({}) => {
+  const schema = Yup.object().shape({
+    start: Yup.string()
+      .required("required")
+      .test("check-date", "Invalid date", function (value) {
+        return moment(value, "MM/DD/YYYY", true).isValid();
+      })
+      .nullable(),
+    end: Yup.string()
+      .required("required")
+      .test("check-date", "Invalid date", function (value) {
+        return moment(value, "MM/DD/YYYY", true).isValid();
+      })
+      .nullable(),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      start: moment().format("MM/DD/YYYY"),
+      end: moment().format("MM/DD/YYYY"),
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+      console.log({ values });
+    },
+  });
+
   return (
     <div onClick={(e) => e.stopPropagation()} className="popupCustom_container">
       <div>
         <Picker />
         <div className="daypicker-input-container">
-          <Input />
+          <Input
+            value={formik.values.start}
+            onChange={formik.handleChange}
+            name="start"
+            error={formik.errors.start}
+          />
           <span>-</span>
-          <Input />
+          <Input
+            value={formik.values.end}
+            onChange={formik.handleChange}
+            name="end"
+            error={formik.errors.end}
+          />
         </div>
       </div>
 
@@ -24,7 +64,15 @@ const PopupCustom = ({}) => {
           <Picker />
         </div>
         <div className="daypicker-btn-apply-container">
-          <Button className="daypicker-btn-apply" variant="primary">
+          <Button
+            onClick={formik.handleSubmit}
+            className={
+              !isEmpty(formik.errors)
+                ? "daypicker-btn-apply-disabled"
+                : "daypicker-btn-apply"
+            }
+            variant="primary"
+          >
             Apply
           </Button>
         </div>
@@ -91,10 +139,17 @@ const NavbarPicker = ({ month, onNextClick, onPreviousClick }) => (
   </div>
 );
 
-const Input = () => {
+const Input = ({ value = "", onChange = () => {}, error, ...other }) => {
   return (
     <div className="daypicker-input">
-      <input placeholder="date ..." />
+      <InputMask
+        mask="99/99/9999"
+        placeholder="MM/DD/YYYY"
+        value={value}
+        onChange={onChange}
+        {...other}
+      />
+      {error && <div className="error-input-date">{error}</div>}
     </div>
   );
 };

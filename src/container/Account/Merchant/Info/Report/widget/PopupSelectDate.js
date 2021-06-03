@@ -1,6 +1,7 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import PopupCustom from "./PopupCustom";
+import { SlideDown } from "react-slidedown";
+import "react-slidedown/lib/slidedown.css";
 import "./style.scss";
 
 const data = [
@@ -13,37 +14,44 @@ const data = [
   "Custom",
 ];
 
-const PopupSelectDate = ({ closePopupDate, onChangeDate }) => {
-  const [dateSelected, setDateSelected] = React.useState("This Week");
-
+const PopupSelectDate = ({
+  closePopupDate,
+  onChangeDate,
+  isPopupDate,
+  dateSelected,
+}) => {
   const changeDate = (e, date) => {
     e.stopPropagation();
-    setDateSelected(date);
     onChangeDate(date);
     date !== "Custom" && closePopupDate();
   };
 
   return (
     <div className="popupDate_container">
-      <div
-        className="popupDate"
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          borderTopRightRadius: dateSelected === "Custom" ? "0px" : "5px",
-          borderBottomRightRadius: dateSelected === "Custom" ? "0px" : "5px",
-          borderRightWidth: dateSelected === "Custom" ? "0px" : "1px",
-        }}
-      >
-        {data.map((obj) => (
-          <ItemDate
-            key={obj}
-            obj={obj}
-            onChangeDate={changeDate}
-            dateSelected={dateSelected}
-          />
-        ))}
-      </div>
-      {dateSelected === "Custom" && <PopupCustom />}
+      <SlideDown>
+        {isPopupDate && (
+          <div
+            className="popupDate"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              borderTopRightRadius: dateSelected === "Custom" ? "0px" : "5px",
+              borderBottomRightRadius:
+                dateSelected === "Custom" ? "0px" : "5px",
+              borderRightWidth: dateSelected === "Custom" ? "0px" : "1px",
+            }}
+          >
+            {data.map((obj) => (
+              <ItemDate
+                key={obj}
+                obj={obj}
+                onChangeDate={changeDate}
+                dateSelected={dateSelected}
+              />
+            ))}
+          </div>
+        )}
+      </SlideDown>
+      {dateSelected === "Custom" && isPopupDate && <PopupCustom />}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import icon_calendar from "@/assets/images/retailer/icon_calendar.png";
 import PopupSelectDate from "./PopupSelectDate";
 import OutsideClickHandler from "react-outside-click-handler";
+
 import "./style.scss";
 
 const SelectDate = ({ value = "This week", onChangeDate }) => {
@@ -25,12 +26,12 @@ const SelectDate = ({ value = "This week", onChangeDate }) => {
         {value}
         <img src={icon_calendar} alt="img" />
         <OutsideClickHandler onOutsideClick={closePopupDate}>
-          {isPopupDate && (
-            <PopupSelectDate
-              closePopupDate={closePopupDate}
-              onChangeDate={onChangeDate}
-            />
-          )}
+          <PopupSelectDate
+            closePopupDate={closePopupDate}
+            onChangeDate={onChangeDate}
+            isPopupDate={isPopupDate}
+            dateSelected={value}
+          />
         </OutsideClickHandler>
       </div>
     </div>

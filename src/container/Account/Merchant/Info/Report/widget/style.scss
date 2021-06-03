@@ -4,6 +4,19 @@
   align-items: center;
 }
 
+@mixin btn-apply() {
+  width: 110px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white !important;
+  background: #1366ae !important;
+  border-radius: 3px !important;
+}
+
 .button_select_date {
   background: white !important;
   color: #585858 !important;
@@ -35,7 +48,7 @@
     left: -5px;
     top: 57px;
     background: white;
-    border: 1px solid #dddddd;
+    border: 0.3px solid #dddddd;
   }
   &_custom {
     width: 400px;
@@ -45,6 +58,12 @@
     border-radius: 5px;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
+  }
+  &_show {
+    height: auto;
+  }
+  &_hide {
+    height: 0px;
   }
 }
 
@@ -122,8 +141,9 @@
   border: 1px solid #dddddd;
   display: flex;
   padding: 8px 10px;
+  position: relative;
   & > input {
-    width: 60px;
+    width: 80px;
     border: 0px !important;
     font-size: 0.7rem;
   }
@@ -139,20 +159,40 @@
 }
 
 .daypicker-btn-apply {
-  width: 110px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: white !important;
-  background: #1366ae !important;
-  border-radius: 3px !important;
+  @include btn-apply();
   &-container {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
     margin-top: 1rem;
   }
+  &-disabled {
+    @include btn-apply();
+    background: #f1f3f4 !important;
+    color: #585858 !important;
+    border: 0px !important;
+  }
+}
+
+.react-slidedown.my-dropdown-slidedown {
+  transition-duration: 0.5s !important;
+  transition-timing-function: cubic-bezier(0.1, 0.7, 1, 0.1);
+}
+
+.react-slidedown {
+  transition-duration: 0.2s !important;
+  transition-timing-function: ease-in-out;
+}
+
+.react-slidedown.transitioning {
+  overflow-x: hidden !important;
+}
+
+.error-input-date {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  position: absolute;
+  left: 0px;
+  top: 29px;
 }
