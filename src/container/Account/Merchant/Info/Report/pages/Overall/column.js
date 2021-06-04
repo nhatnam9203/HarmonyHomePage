@@ -1,8 +1,9 @@
 import CustomTableHeader from "../../../CustomTableHeader";
+import moment from "moment";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort) => [
+const columns = (valueSort, onClickSort = () => {}) => [
   {
     Header: (
       <CustomTableHeader
@@ -10,12 +11,16 @@ const columns = (valueSort, onClickSort) => [
         value="Date"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "date")
         }
       />
     ),
-    id: "createdDate",
-    accessor: (row) => <div className="table-tr">{`${row.createdDate}`}</div>,
+    id: "date",
+    accessor: (row) => (
+      <div className="table-tr">{`${moment(row.date).format(
+        "MMMM DD, YYYY"
+      )}`}</div>
+    ),
   },
   {
     Header: (
@@ -24,7 +29,7 @@ const columns = (valueSort, onClickSort) => [
         value="Total Orders"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalOrder")
         }
       />
     ),
@@ -38,12 +43,12 @@ const columns = (valueSort, onClickSort) => [
         value="Total Revenue"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "revenue")
         }
       />
     ),
-    id: "totalRevenue",
-    accessor: (row) => <div className="table-tr">{`${row.totalRevenue}`}</div>,
+    id: "revenue",
+    accessor: (row) => <div className="table-tr">{`$ ${row.revenue}`}</div>,
   },
   {
     Header: (
@@ -52,12 +57,12 @@ const columns = (valueSort, onClickSort) => [
         value="Total Cost"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "cost")
         }
       />
     ),
-    id: "totalCost",
-    accessor: (row) => <div className="table-tr">{`${row.totalCost}`}</div>,
+    id: "cost",
+    accessor: (row) => <div className="table-tr">{`$ ${row.cost}`}</div>,
   },
   {
     Header: (
@@ -66,12 +71,12 @@ const columns = (valueSort, onClickSort) => [
         value="Total Tax"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "tax")
         }
       />
     ),
-    id: "totalTax",
-    accessor: (row) => <div className="table-tr">{`${row.totalTax}`}</div>,
+    id: "tax",
+    accessor: (row) => <div className="table-tr">{`${row.tax}`}</div>,
   },
   {
     Header: (
@@ -80,12 +85,12 @@ const columns = (valueSort, onClickSort) => [
         value="Total Profit"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "profit")
         }
       />
     ),
-    id: "totalProfit",
-    accessor: (row) => <div className="table-tr">{`${row.totalProfit}`}</div>,
+    id: "profit",
+    accessor: (row) => <div className="table-tr">{`$ ${row.profit}`}</div>,
   },
   {
     Header: (
@@ -94,12 +99,14 @@ const columns = (valueSort, onClickSort) => [
         value="Average Order"
         valueSort={valueSort}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "averageOrder")
         }
       />
     ),
     id: "averageOrder",
-    accessor: (row) => <div className="table-tr">{`${row.averageOrder}`}</div>,
+    accessor: (row) => (
+      <div className="table-tr">{`$ ${row.averageOrder}`}</div>
+    ),
   },
 ];
 

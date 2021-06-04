@@ -10,6 +10,9 @@ export const retailerReducer = (
     customer: [],
     customerPages: 0,
     report: [],
+
+    reportOverall: [],
+    summaryOverall: {},
   },
   { type, payload }
 ) => {
@@ -35,6 +38,13 @@ export const retailerReducer = (
         ...state,
         customer: payload.data,
         customerPages: payload.count,
+      };
+
+    case types.SET_OVERALL:
+      return {
+        ...state,
+        reportOverall: payload?.data || [],
+        summaryOverall: payload?.summary || {},
       };
 
     default:

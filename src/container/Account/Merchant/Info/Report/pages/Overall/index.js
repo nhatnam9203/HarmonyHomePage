@@ -2,15 +2,33 @@ import React from "react";
 import { SelectDate, ButtonReport } from "../../widget";
 import columns from "./column";
 import ReactTable from "react-table";
-import Pagination from "@/components/Pagination";
 import Loading from "@/components/Loading";
-import { useSelector } from "react-redux";
+import { getOverall } from "@/actions/retailerActions";
+import { useSelector, useDispatch } from "react-redux";
+import { isEmpty } from "lodash";
 import "react-table/react-table.css";
 import "../style.scss";
 
 const Overall = () => {
+  const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("This Week");
-  const { loading } = useSelector((state) => state.retailer);
+  const { loading, reportOverall, summaryOverall } = useSelector(
+    (state) => state.retailer
+  );
+  const {
+    detail: { merchantId },
+  } = useSelector((state) => state.merchantDetail);
+  const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+  React.useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    let url = `retailer/Appointment/report/sale/overall?quickFilter=lastMonth&timeStart=&timeEnd=&merchantId=${merchantId}`;
+    url = encodeURI(url);
+    dispatch(getOverall(url, token));
+  };
 
   const onChangeDate = (date) => {
     setValueDate(date);
@@ -51,7 +69,7 @@ const Overall = () => {
         <ReactTable
           manual
           sortable={false}
-          data={[]}
+          data={reportOverall || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -61,12 +79,6 @@ const Overall = () => {
           loading={loading}
           columns={columns()}
           PaginationComponent={() => <div />}
-        />
-
-        <Pagination
-          activePage={1}
-          handlePageChange={() => {}}
-          totalItem={Math.ceil(10 / 2)}
         />
       </div>
     </>

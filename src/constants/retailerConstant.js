@@ -10,3 +10,6 @@ export const SET_INVENTORY = "SET_INVENTORY";
 
 export const GET_CUSTOMER = "GET_CUSTOMER";
 export const SET_CUSTOMER = "SET_CUSTOMER";
+
+export const GET_OVERALL = "GET_OVERALL";
+export const SET_OVERALL = "SET_OVERALL";
