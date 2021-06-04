@@ -4,7 +4,11 @@ import icon_download from "@/assets/images/retailer/icon_download.png";
 import "react-slidedown/lib/slidedown.css";
 import "./style.scss";
 
-const ButtonReport = ({ isNotReport = false, onClickExport = () => {} }) => {
+const ButtonReport = ({
+  isNotReport = false,
+  onClickExport = () => {},
+  onClickShowReport = () => {},
+}) => {
   const [isPopupExport, setPopupExport] = React.useState(false);
 
   const openPopupReport = () => {
@@ -17,7 +21,9 @@ const ButtonReport = ({ isNotReport = false, onClickExport = () => {} }) => {
 
   return (
     <div className="row_button_report top20">
-      <div className="report_button">Show report</div>
+      <div onClick={onClickShowReport} className="report_button">
+        Show report
+      </div>
       {!isNotReport && (
         <OutsideClickHandler onOutsideClick={closePopupReport}>
           <div onClick={openPopupReport} className="report_button_icon">
