@@ -42,25 +42,27 @@ const PopupExport = ({ isPopupExport, onClickExport }) => {
   return (
     <div className="popupExport">
       <div>
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            onClickExport("PDF");
-          }}
-        >
-          PDF
-        </div>
-
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-            onClickExport("Excel");
-          }}
-          style={{ marginTop: 13 }}
-        >
-          Excel
-        </div>
+        <ItemExport onClick={onClickExport} title="PDF" />
+        <ItemExport
+          onClick={onClickExport}
+          title="Excel"
+          style={{ marginTop: 15 }}
+        />
       </div>
+    </div>
+  );
+};
+
+const ItemExport = ({ onClick, title, style }) => {
+  return (
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick(title);
+      }}
+      style={style}
+    >
+      {title}
     </div>
   );
 };
