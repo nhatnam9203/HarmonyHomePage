@@ -189,7 +189,7 @@
 }
 
 .react-slidedown {
-  transition-duration: 0.2s !important;
+  transition-duration: 0.16s !important;
   transition-timing-function: ease-in-out;
 }
 
@@ -204,4 +204,70 @@
   position: absolute;
   left: 0px;
   top: 29px;
+}
+
+@mixin row() {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row_button_report {
+  @include row();
+}
+
+.report_button {
+  @include row();
+  justify-content: center;
+  width: 8.7rem;
+  height: 2.5rem;
+  background: #1366ae;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  & > :hover {
+    background: #154d7d;
+  }
+}
+
+.report_button_icon {
+  @include row();
+  width: 8.7rem;
+  height: 2.5rem;
+  background: #f9f9f9;
+  color: #1366ae;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0px 0.7rem;
+  border: 1px solid #dddddd;
+  position: relative;
+  cursor: pointer;
+  & > img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+}
+
+.top20 {
+  margin-top: 20px;
+}
+
+.popupExport {
+  position: absolute;
+  background: white;
+  border: 1px solid #dddddd;
+  top: 45px;
+  left: 0px;
+  right: 0px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  color: #585858;
+  font-weight: 400;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(65, 11, 16, 0.15);
 }

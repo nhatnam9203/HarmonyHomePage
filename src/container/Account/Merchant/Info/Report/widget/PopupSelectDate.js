@@ -1,6 +1,7 @@
 import React from "react";
 import PopupCustom from "./PopupCustom";
 import { SlideDown } from "react-slidedown";
+import OutsideClickHandler from "react-outside-click-handler";
 import "react-slidedown/lib/slidedown.css";
 import "./style.scss";
 
@@ -21,52 +22,78 @@ const PopupSelectDate = ({
   dateSelected,
   updateValueCustom,
 }) => {
+  const [isCustom, setCustom] = React.useState(false);
+
   const changeDate = (e, date) => {
     e.stopPropagation();
-    onChangeDate(date);
-    date !== "Custom" && closePopupDate();
+    if (date !== "Custom") {
+      onChangeDate(date);
+      closePopupDate();
+      setCustom(false);
+    } else {
+      setCustom(true);
+    }
+  };
+
+  const handleClickOutSide = () => {
+    closePopupDate();
+    setCustom(false);
   };
 
   return (
-    <div className="popupDate_container">
-      <SlideDown>
-        {isPopupDate && (
-          <div
-            className="popupDate"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              borderTopRightRadius: dateSelected === "Custom" ? "0px" : "5px",
-              borderBottomRightRadius:
-                dateSelected === "Custom" ? "0px" : "5px",
-              borderRightWidth: dateSelected === "Custom" ? "0px" : "1px",
+    <OutsideClickHandler onOutsideClick={handleClickOutSide}>
+      <div className="popupDate_container">
+        <SlideDown>
+          {isPopupDate && (
+            <div
+              className="popupDate"
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                borderTopRightRadius: dateSelected === "Custom" ? "0px" : "5px",
+                borderBottomRightRadius:
+                  dateSelected === "Custom" ? "0px" : "5px",
+                borderRightWidth: dateSelected === "Custom" ? "0px" : "1px",
+              }}
+            >
+              {data.map((obj) => (
+                <ItemDate
+                  key={obj}
+                  obj={obj}
+                  onChangeDate={changeDate}
+                  dateSelected={dateSelected}
+                  isActive={
+                    (dateSelected === obj &&
+                      isCustom === false &&
+                      dateSelected !== "Custom") ||
+                    (isCustom === true && obj === "Custom")
+                  }
+                />
+              ))}
+            </div>
+          )}
+        </SlideDown>
+        {isCustom && isPopupDate && (
+          <PopupCustom
+            updateValueCustom={(start, end) => {
+              updateValueCustom(start, end);
+              setCustom(false);
+              closePopupDate();
             }}
-          >
-            {data.map((obj) => (
-              <ItemDate
-                key={obj}
-                obj={obj}
-                onChangeDate={changeDate}
-                dateSelected={dateSelected}
-              />
-            ))}
-          </div>
+          />
         )}
-      </SlideDown>
-      {dateSelected === "Custom" && isPopupDate && (
-        <PopupCustom updateValueCustom={updateValueCustom} />
-      )}
-    </div>
+      </div>
+    </OutsideClickHandler>
   );
 };
 
-const ItemDate = ({ onChangeDate, dateSelected, obj }) => (
+const ItemDate = ({ onChangeDate, isActive, obj }) => (
   <div
     onClick={(e) => onChangeDate(e, obj)}
     className="popupDate_rowSelect"
     key={obj}
     style={{
-      color: dateSelected === obj ? "#1366AE" : "#585858",
-      fontWeight: dateSelected === obj ? "600" : "400",
+      color: isActive ? "#1366AE" : "#585858",
+      fontWeight: isActive ? "600" : "400",
     }}
   >
     {obj}
