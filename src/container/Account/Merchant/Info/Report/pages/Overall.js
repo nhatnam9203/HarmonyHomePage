@@ -13,6 +13,19 @@ const Overall = () => {
     setValueDate(`${start} - ${end}`);
   };
 
+  const onClickExport = (reportType) => {
+    switch (reportType) {
+      case "PDF":
+        break;
+
+      case "Excel":
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <div className="info_merchant_title">Overall</div>
@@ -21,7 +34,7 @@ const Overall = () => {
         onChangeDate={onChangeDate}
         updateValueCustom={updateValueCustom}
       />
-      <ButtonReport />
+      <ButtonReport onClickExport={onClickExport} />
     </>
   );
 };
