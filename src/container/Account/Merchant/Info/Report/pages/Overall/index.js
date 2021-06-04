@@ -20,6 +20,8 @@ const Overall = () => {
   } = useSelector((state) => state.merchantDetail);
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
+  console.log({ summaryOverall });
+
   React.useEffect(() => {
     getData();
   }, []);

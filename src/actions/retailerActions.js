@@ -66,12 +66,14 @@ export const getCustomer = (requestUrl = "", token = "") => async (
 export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    const { data } = await api.getByPage(requestUrl, token);
-    console.log({ data, token, requestUrl });
+    let { data } = await api.getByPage(requestUrl, token);
+
     if (parseInt(data.codeNumber) === 200) {
+      let result = [...data.data, summary(data.summary)];
+
       dispatch({
         type: typeRetailer.SET_OVERALL,
-        payload: { data: data.data, summary: data.summary },
+        payload: { data: result, summary: data.summary },
       });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -81,4 +83,16 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   } finally {
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
+};
+
+const summary = (value) => {
+  return {
+    total_averageOrder: value.averageOrder,
+    total_date: value.date,
+    total_tax: value.tax,
+    total_revenue: value.revenue,
+    total_totalOrder: value.totalOrder,
+    total_cost: value.cost,
+    total_profit: value.profit,
+  };
 };
