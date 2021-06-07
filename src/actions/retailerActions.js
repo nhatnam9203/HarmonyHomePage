@@ -67,7 +67,6 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
-    console.log({ data, requestUrl });
 
     if (parseInt(data.codeNumber) === 200) {
       let result = [];
@@ -87,10 +86,37 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   }
 };
 
+export const exportRetailer = (requestUrl = "", token = "") => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: typeRetailer.RETAILER_EXPORT_REQUEST });
+    let { data } = await api.getByPage(requestUrl, token);
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.EXPORT_SUCCESS,
+        payload: data.data,
+      });
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+  }
+};
+
 export const sortOverAll = (payload) => {
   return {
     type: typeRetailer.SORT_OVRERALL,
     payload,
+  };
+};
+
+export const closeExport = () => {
+  return {
+    type: typeRetailer.CLOSE_EXPORT,
   };
 };
 

@@ -3,8 +3,14 @@ import { SelectDate, ButtonReport } from "../../widget";
 import columns from "./column";
 import ReactTable from "react-table";
 import Loading from "@/components/Loading";
-import { getOverall, sortOverAll } from "@/actions/retailerActions";
+import {
+  getOverall,
+  sortOverAll,
+  exportRetailer,
+  closeExport,
+} from "@/actions/retailerActions";
 import { useSelector, useDispatch } from "react-redux";
+import PopupExport from "../../../../../../../components/PopupExport";
 import { convertDateData } from "../../../../../../../util";
 import "react-table/react-table.css";
 import "../style.scss";
@@ -12,11 +18,14 @@ import "../style.scss";
 const Overall = () => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("Last Month");
+  const [isVisibleExport, setVisibileExport] = React.useState(false);
+
   const {
     loading,
     reportOverall,
     typeSortOverall,
     directionSortOverall,
+    linkExport,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -32,6 +41,12 @@ const Overall = () => {
     let url = `retailer/Appointment/report/sale/overall?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getOverall(url, token));
+  };
+
+  const exportData = (quickFilter = "", start = "", end = "", type = "") => {
+    let url = `retailer/Appointment/report/sale/overall/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    url = encodeURI(url);
+    dispatch(exportRetailer(url, token));
   };
 
   const onChangeDate = (date) => {
@@ -57,7 +72,7 @@ const Overall = () => {
       let start = temps[0],
         end = temps[1];
       try {
-        getData("", start, end);
+        getData("custom", start, end);
       } catch (error) {
         alert(error);
       }
@@ -65,16 +80,36 @@ const Overall = () => {
   };
 
   const onClickExport = (reportType) => {
-    switch (reportType) {
-      case "PDF":
-        break;
-
-      case "Excel":
-        break;
-
-      default:
-        break;
+    setVisibileExport(true);
+    if (
+      valueDate === "Today" ||
+      valueDate === "Yesterday" ||
+      valueDate === "This Week" ||
+      valueDate === "Last Week" ||
+      valueDate === "This Month" ||
+      valueDate === "Last Month"
+    ) {
+      exportData(
+        convertDateData(valueDate),
+        "",
+        "",
+        reportType.toString().toLowerCase()
+      );
+    } else {
+      let temps = valueDate.toString().split(" - ");
+      let start = temps[0],
+        end = temps[1];
+      try {
+        exportData("custom", start, end, reportType.toString().toLowerCase());
+      } catch (error) {
+        alert(error);
+      }
     }
+  };
+
+  const onCloseExport = () => {
+    setVisibileExport(false);
+    dispatch(closeExport());
   };
 
   const onClickSort = (direction, type) => {
@@ -109,6 +144,11 @@ const Overall = () => {
           PaginationComponent={() => <div />}
         />
       </div>
+      <PopupExport
+        isVisible={isVisibleExport}
+        linkExport={linkExport}
+        closeExport={onCloseExport}
+      />
     </>
   );
 };

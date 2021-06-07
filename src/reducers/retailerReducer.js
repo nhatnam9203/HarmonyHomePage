@@ -4,6 +4,7 @@ import sortArray from "sort-array";
 export const retailerReducer = (
   state = {
     loading: false,
+    loadingExport: false,
     orders: [],
     orderPages: 0,
     inventory: [],
@@ -16,6 +17,7 @@ export const retailerReducer = (
     summaryOverall: {},
     typeSortOverall: "",
     directionSortOverall: "ASC",
+    linkExport: "",
   },
   { type, payload }
 ) => {
@@ -25,6 +27,19 @@ export const retailerReducer = (
 
     case types.STOP_RETAILER_REQUEST:
       return { ...state, loading: false };
+
+    case types.RETAILER_EXPORT_REQUEST:
+      return { ...state, loadingExport: true };
+
+    case types.STOP_RETAILER_EXPORT_REQUEST:
+      return { ...state, loadingExport: false };
+
+    case types.EXPORT_SUCCESS:
+      return { ...state, loadingExport: false, linkExport: payload };
+
+    case types.CLOSE_EXPORT:
+      console.log("close export reducer");
+      return { ...state, loadingExport: false, linkExport: "" };
 
     case types.SET_ORDERS:
       return { ...state, orders: payload.data, orderPages: payload.count };

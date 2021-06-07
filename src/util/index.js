@@ -9,7 +9,7 @@ export const convertDateData = (date) => {
       temp = "yesterday";
       break;
     case "This Week":
-      temp = "this week";
+      temp = "thisWeek";
       break;
     case "Last Week":
       temp = "lastWeek";
