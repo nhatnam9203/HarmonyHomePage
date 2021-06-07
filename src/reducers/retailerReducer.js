@@ -1,4 +1,5 @@
 import * as types from "../constants/retailerConstant";
+import sortArray from "sort-array";
 
 export const retailerReducer = (
   state = {
@@ -13,6 +14,8 @@ export const retailerReducer = (
 
     reportOverall: [],
     summaryOverall: {},
+    typeSortOverall: "",
+    directionSortOverall: "ASC",
   },
   { type, payload }
 ) => {
@@ -47,7 +50,29 @@ export const retailerReducer = (
         summaryOverall: payload?.summary || {},
       };
 
+    case types.SORT_OVRERALL:
+      return {
+        ...state,
+        directionSortOverall:
+          state.directionSortOverall === "ASC" ? "DESC" : "ASC",
+        typeSortOverall: payload.type,
+        reportOverall: sortTable(
+          payload.type,
+          state.reportOverall,
+          state.directionSortOverall === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
     default:
       return state;
   }
+};
+
+const sortTable = (sortType, data, direction) => {
+  let temptData = JSON.parse(JSON.stringify(data));
+  temptData = sortArray(temptData, {
+    by: sortType,
+    order: direction.toString().toLowerCase(),
+  });
+  return temptData;
 };

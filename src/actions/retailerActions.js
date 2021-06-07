@@ -67,9 +67,11 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
+    console.log({ data, requestUrl });
 
     if (parseInt(data.codeNumber) === 200) {
-      let result = [...data.data, summary(data.summary)];
+      let result = [];
+      if (data.data.length > 0) result = [...data.data, summary(data.summary)];
 
       dispatch({
         type: typeRetailer.SET_OVERALL,
@@ -83,6 +85,13 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   } finally {
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
+};
+
+export const sortOverAll = (payload) => {
+  return {
+    type: typeRetailer.SORT_OVRERALL,
+    payload,
+  };
 };
 
 const summary = (value) => {

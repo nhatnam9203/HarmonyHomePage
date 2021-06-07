@@ -30,7 +30,7 @@ const Index = ({
   return (
     <Fade>
       <div className="info_merchant_title">
-        Inventory
+        Customer
         <Search
           value={valueSearch}
           onChange={onChangeSearch}

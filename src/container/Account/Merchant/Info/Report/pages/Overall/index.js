@@ -3,31 +3,33 @@ import { SelectDate, ButtonReport } from "../../widget";
 import columns from "./column";
 import ReactTable from "react-table";
 import Loading from "@/components/Loading";
-import { getOverall } from "@/actions/retailerActions";
+import { getOverall, sortOverAll } from "@/actions/retailerActions";
 import { useSelector, useDispatch } from "react-redux";
-import { isEmpty } from "lodash";
+import { convertDateData } from "../../../../../../../util";
 import "react-table/react-table.css";
 import "../style.scss";
 
 const Overall = () => {
   const dispatch = useDispatch();
-  const [valueDate, setValueDate] = React.useState("This Week");
-  const { loading, reportOverall, summaryOverall } = useSelector(
-    (state) => state.retailer
-  );
+  const [valueDate, setValueDate] = React.useState("Last Month");
+  const {
+    loading,
+    reportOverall,
+    typeSortOverall,
+    directionSortOverall,
+  } = useSelector((state) => state.retailer);
+
   const {
     detail: { merchantId },
   } = useSelector((state) => state.merchantDetail);
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-  console.log({ summaryOverall });
-
   React.useEffect(() => {
-    getData();
+    getData(convertDateData(valueDate));
   }, []);
 
-  const getData = () => {
-    let url = `retailer/Appointment/report/sale/overall?quickFilter=lastMonth&timeStart=&timeEnd=&merchantId=${merchantId}`;
+  const getData = (quickFilter = "", start = "", end = "") => {
+    let url = `retailer/Appointment/report/sale/overall?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getOverall(url, token));
   };
@@ -40,7 +42,27 @@ const Overall = () => {
     setValueDate(`${start} - ${end}`);
   };
 
-  const onClickShowReport = () => {};
+  const onClickShowReport = () => {
+    if (
+      valueDate === "Today" ||
+      valueDate === "Yesterday" ||
+      valueDate === "This Week" ||
+      valueDate === "Last Week" ||
+      valueDate === "This Month" ||
+      valueDate === "Last Month"
+    ) {
+      getData(convertDateData(valueDate));
+    } else {
+      let temps = valueDate.toString().split(" - ");
+      let start = temps[0],
+        end = temps[1];
+      try {
+        getData("", start, end);
+      } catch (error) {
+        alert(error);
+      }
+    }
+  };
 
   const onClickExport = (reportType) => {
     switch (reportType) {
@@ -53,6 +75,10 @@ const Overall = () => {
       default:
         break;
     }
+  };
+
+  const onClickSort = (direction, type) => {
+    dispatch(sortOverAll({ type }));
   };
 
   return (
@@ -79,7 +105,7 @@ const Overall = () => {
           )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
-          columns={columns()}
+          columns={columns(directionSortOverall, onClickSort)}
           PaginationComponent={() => <div />}
         />
       </div>
