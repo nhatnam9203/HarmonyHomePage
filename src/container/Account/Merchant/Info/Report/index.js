@@ -7,6 +7,7 @@ import {
   SalesByProduct,
   SalesByCategory,
   TopProduct,
+  TopCategory,
 } from "./pages";
 import Fade from "react-reveal/Fade";
 
@@ -38,6 +39,9 @@ const Index = () => {
 
       case "Top Products":
         return <TopProduct />;
+
+      case "Top Categories":
+        return <TopCategory />;
 
       default:
         return (
