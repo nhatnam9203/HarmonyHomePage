@@ -1,6 +1,12 @@
 import React from "react";
 import { ColumnReport, dataColumnReport as data } from "./widget";
-import { Overall, SalesByOrder, SalesByPayment, SalesByProduct } from "./pages";
+import {
+  Overall,
+  SalesByOrder,
+  SalesByPayment,
+  SalesByProduct,
+  TopProduct,
+} from "./pages";
 import Fade from "react-reveal/Fade";
 
 import "../Info.scss";
@@ -25,6 +31,9 @@ const Index = () => {
 
       case "Sales by Product":
         return <SalesByProduct />;
+
+      case "Top Products":
+        return <TopProduct />;
 
       default:
         return (
