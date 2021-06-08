@@ -144,6 +144,34 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
   }
 };
 
+export const getSalesByCategory = (requestUrl = "", token = "") => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: typeRetailer.RETAILER_REQUEST });
+    let { data } = await api.getByPage(requestUrl, token);
+
+    console.log({ data, requestUrl });
+
+    if (parseInt(data.codeNumber) === 200) {
+      let result = [];
+      if (data.data.length > 0)
+        result = [...data.data, summary_sales_by_product(data.summary)];
+
+      dispatch({
+        type: "SET_SALES_BY_CATEGORY",
+        payload: { data: result, summary: data.summary },
+      });
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+  }
+};
+
 export const getTopProduct = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
@@ -235,6 +263,13 @@ export const sort_sales_by_order = (payload) => {
 export const sort_sales_by_product = (payload) => {
   return {
     type: typeRetailer.SORT_SALES_BY_PRODUCT,
+    payload,
+  };
+};
+
+export const sort_sales_by_category = (payload) => {
+  return {
+    type: typeRetailer.SORT_SALES_BY_CATEGORY,
     payload,
   };
 };
