@@ -6,7 +6,7 @@
 
 @mixin btn-apply() {
   width: 110px;
-  height: 35px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,11 +27,14 @@
 
 .button_select_date {
   @include btn-date();
+  position: relative;
   & > img {
     width: 24px !important;
     height: 24px !important;
     object-fit: contain;
-    margin-left: 10px;
+    position: absolute;
+    right: 12px;
+    top: 6px;
   }
   &_expand {
     @include btn-date();
@@ -40,7 +43,7 @@
 }
 
 .popupDate {
-  width: 200px;
+  width: 180px;
   padding-bottom: 1rem;
   border-radius: 5px;
   &_rowSelect {
@@ -87,7 +90,7 @@
   background: #fafafa;
 }
 
-.daypicker-renderDay {
+@mixin renderDay() {
   font-size: 0.7rem;
   width: 20px;
   height: 20px;
@@ -95,6 +98,11 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  color: #333;
+}
+
+.daypicker-renderDay {
+  @include renderDay();
   &-picked {
     position: absolute;
     color: white;
@@ -107,6 +115,10 @@
     justify-content: center;
     align-items: center;
     border-radius: 300px;
+  }
+  &-disabled {
+    @include renderDay();
+    color: #dddddd !important;
   }
 }
 
@@ -157,7 +169,7 @@
   & > input {
     width: 80px;
     border: 0px !important;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   &-container {
     @include row();

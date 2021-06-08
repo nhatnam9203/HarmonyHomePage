@@ -26,7 +26,11 @@ const ButtonReport = ({
       </div>
       {!isNotReport && (
         <OutsideClickHandler onOutsideClick={closePopupReport}>
-          <div onClick={openPopupReport} className="report_button_icon">
+          <div
+            onClick={openPopupReport}
+            className="report_button_icon"
+            style={{ borderColor: isPopupExport ? "#1366AE" : "#dddddd" }}
+          >
             Export
             <img src={icon_download} />
             <PopupExport

@@ -1,3 +1,4 @@
 import Overall from "./Overall";
+import SalesByOrder from "./SalesByOrder";
 
-export { Overall };
+export { Overall, SalesByOrder };

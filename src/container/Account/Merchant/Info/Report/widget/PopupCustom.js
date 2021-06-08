@@ -38,6 +38,8 @@ const PopupCustom = ({ updateValueCustom }) => {
         <Picker
           refPicker={refPickerStart}
           value={pickedStart}
+          isStart={true}
+          validDate={pickedEnd}
           onPicked={(date) => {
             setPickedStart(date);
             formik.setFieldValue("start", moment(date).format("MM/DD/YYYY"));
@@ -81,6 +83,8 @@ const PopupCustom = ({ updateValueCustom }) => {
           <Picker
             refPicker={refPickerEnd}
             value={pickedEnd}
+            isStart={false}
+            validDate={pickedStart}
             onPicked={(date) => {
               setPickedEnd(date);
               formik.setFieldValue("end", moment(date).format("MM/DD/YYYY"));
@@ -105,7 +109,7 @@ const PopupCustom = ({ updateValueCustom }) => {
   );
 };
 
-const Picker = ({ onPicked, value, refPicker }) => {
+const Picker = ({ onPicked, value, refPicker, isStart, validDate }) => {
   const onChangeDay = (date) => {
     onPicked(date);
   };
@@ -126,6 +130,13 @@ const Picker = ({ onPicked, value, refPicker }) => {
       }}
       className="daypicker-container"
       renderDay={(day) => {
+        let isDisabled;
+        if (!isStart) {
+          isDisabled = moment(day).isBefore(validDate);
+        } else {
+          isDisabled = moment(day).isAfter(validDate);
+        }
+
         return (
           <Day
             day={day}
@@ -134,6 +145,7 @@ const Picker = ({ onPicked, value, refPicker }) => {
               moment(day).format("MMDDYYYY")
             }
             onClick={onChangeDay}
+            isDisabled={isDisabled}
           />
         );
       }}
@@ -141,18 +153,39 @@ const Picker = ({ onPicked, value, refPicker }) => {
   );
 };
 
-const Day = ({ day, isPicked, onClick }) =>
-  !isPicked ? (
-    <div onClick={() => onClick(day)} className={"daypicker-renderDay"}>
-      {moment(day).format("DD")}
-    </div>
-  ) : (
-    <div onClick={() => onClick(day)} className={"daypicker-renderDay"}>
-      <div className="daypicker-renderDay-picked">
+const Day = ({ day, isPicked, onClick, isDisabled }) => {
+  if (isDisabled) {
+    if (isPicked) {
+      return (
+        <div onClick={() => onClick(day)} className={"daypicker-renderDay"}>
+          <div className="daypicker-renderDay-picked">
+            {moment(day).format("DD")}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className={"daypicker-renderDay-disabled"}>
+          {moment(day).format("DD")}
+        </div>
+      );
+    }
+  } else if (isPicked)
+    return (
+      <div onClick={() => onClick(day)} className={"daypicker-renderDay"}>
+        <div className="daypicker-renderDay-picked">
+          {moment(day).format("DD")}
+        </div>
+      </div>
+    );
+  else {
+    return (
+      <div onClick={() => onClick(day)} className={"daypicker-renderDay"}>
         {moment(day).format("DD")}
       </div>
-    </div>
-  );
+    );
+  }
+};
 
 const NavbarPicker = ({ month, onNextClick, onPreviousClick }) => (
   <div className="daypicker-nav">
@@ -185,12 +218,36 @@ const schema = Yup.object().shape({
     .test("check-date", "Invalid date", function (value) {
       return moment(value, "MM/DD/YYYY", true).isValid();
     })
+    .test("check-date-range", "Over 60 days", function (value) {
+      const { end } = this.parent;
+      if (
+        moment(value, ["MM/DD/YYYY"]).diff(
+          moment(end, ["MM/DD/YYYY"]),
+          "days"
+        ) > -60
+      ) {
+        return true;
+      }
+      return false;
+    })
     .nullable(),
 
   end: Yup.string()
     .required("required")
     .test("check-date", "Invalid date", function (value) {
       return moment(value, "MM/DD/YYYY", true).isValid();
+    })
+    .test("check-date-range", "Over 60 days", function (value) {
+      const { start } = this.parent;
+      if (
+        moment(start, ["MM/DD/YYYY"]).diff(
+          moment(value, ["MM/DD/YYYY"]),
+          "days"
+        ) > -60
+      ) {
+        return true;
+      }
+      return false;
     })
     .nullable(),
 });

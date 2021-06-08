@@ -20,3 +20,7 @@ export const SET_CUSTOMER = "SET_CUSTOMER";
 export const GET_OVERALL = "GET_OVERALL";
 export const SET_OVERALL = "SET_OVERALL";
 export const SORT_OVRERALL = "SORT_OVERALL";
+
+export const GET_SALES_BY_ORDER = "GET_SALES_BY_ORDER";
+export const SET_SALES_BY_ORDER = "SET_SALES_BY_ORDER";
+export const SORT_SALES_BY_ORDER = "SORT_SALES_BY_ORDER";

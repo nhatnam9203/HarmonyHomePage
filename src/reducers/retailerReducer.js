@@ -17,6 +17,12 @@ export const retailerReducer = (
     summaryOverall: {},
     typeSortOverall: "",
     directionSortOverall: "ASC",
+
+    sales_by_order: [],
+    summary_sales_by_order: {},
+    typeSort_sales_by_order: "",
+    directionSort_sales_by_order: "ASC",
+
     linkExport: "",
   },
   { type, payload }
@@ -38,7 +44,6 @@ export const retailerReducer = (
       return { ...state, loadingExport: false, linkExport: payload };
 
     case types.CLOSE_EXPORT:
-      console.log("close export reducer");
       return { ...state, loadingExport: false, linkExport: "" };
 
     case types.SET_ORDERS:
@@ -58,6 +63,7 @@ export const retailerReducer = (
         customerPages: payload.count,
       };
 
+    /* OVERALL */
     case types.SET_OVERALL:
       return {
         ...state,
@@ -75,6 +81,27 @@ export const retailerReducer = (
           payload.type,
           state.reportOverall,
           state.directionSortOverall === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    /* SALES BY ORDER */
+    case types.SET_SALES_BY_ORDER:
+      return {
+        ...state,
+        sales_by_order: payload?.data || [],
+        summary_sales_by_order: payload?.summary || {},
+      };
+
+    case types.SORT_SALES_BY_ORDER:
+      return {
+        ...state,
+        directionSort_sales_by_order:
+          state.directionSort_sales_by_order === "ASC" ? "DESC" : "ASC",
+        typeSort_sales_by_order: payload.type,
+        sales_by_order: sortTable(
+          payload.type,
+          state.sales_by_order,
+          state.directionSort_sales_by_order === "ASC" ? "DESC" : "ASC"
         ),
       };
 

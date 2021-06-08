@@ -1,6 +1,6 @@
 import React from "react";
 import { ColumnReport, dataColumnReport as data } from "./widget";
-import { Overall } from "./pages";
+import { Overall, SalesByOrder } from "./pages";
 import Fade from "react-reveal/Fade";
 
 import "../Info.scss";
@@ -8,10 +8,17 @@ import "../Info.scss";
 const Index = () => {
   const [pageVisibile, setPageVisible] = React.useState("");
 
+  const onClickItemColumn = (page) => {
+    setPageVisible(page);
+  };
+
   const renderPages = () => {
     switch (pageVisibile) {
       case "Overall":
         return <Overall />;
+
+      case "Sales by Order":
+        return <SalesByOrder />;
 
       default:
         return (
@@ -31,10 +38,6 @@ const Index = () => {
           </>
         );
     }
-  };
-
-  const onClickItemColumn = (page) => {
-    setPageVisible(page);
   };
 
   return (

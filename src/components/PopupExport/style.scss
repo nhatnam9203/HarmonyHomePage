@@ -17,6 +17,7 @@
     font-weight: 500;
     font-size: 1rem;
     margin-top: 0.8rem;
+    text-align: center;
     &:link {
       text-decoration: underline;
     }
@@ -27,6 +28,9 @@
   & > img {
     width: 55px;
     height: 55px;
+  }
+  & > p {
+    margin-top: 0.3rem;
   }
 }
 

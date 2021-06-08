@@ -4,10 +4,10 @@ import columns from "./column";
 import ReactTable from "react-table";
 import Loading from "@/components/Loading";
 import {
-  getOverall,
-  sortOverAll,
+  sort_sales_by_order,
   exportRetailer,
   closeExport,
+  getSalesByOrder,
 } from "@/actions/retailerActions";
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
@@ -22,10 +22,12 @@ const Overall = () => {
 
   const {
     loading,
-    reportOverall,
-    directionSortOverall,
+    directionSort_sales_by_order,
     linkExport,
+    sales_by_order,
   } = useSelector((state) => state.retailer);
+
+  console.log({ sales_by_order });
 
   const {
     detail: { merchantId },
@@ -37,13 +39,13 @@ const Overall = () => {
   }, []);
 
   const getData = (quickFilter = "", start = "", end = "") => {
-    let url = `retailer/Appointment/report/sale/overall?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
+    let url = `retailer/Appointment/report/sale/order?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
-    dispatch(getOverall(url, token));
+    dispatch(getSalesByOrder(url, token));
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `retailer/Appointment/report/sale/overall/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    let url = `retailer/Appointment/report/sale/order/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -112,12 +114,12 @@ const Overall = () => {
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sortOverAll({ type }));
+    dispatch(sort_sales_by_order({ type }));
   };
 
   return (
     <>
-      <div className="info_merchant_title">Overall</div>
+      <div className="info_merchant_title">Sales by Orders</div>
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}
@@ -131,7 +133,7 @@ const Overall = () => {
         <ReactTable
           manual
           sortable={false}
-          data={reportOverall || []}
+          data={sales_by_order || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -139,7 +141,7 @@ const Overall = () => {
           )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
-          columns={columns(directionSortOverall, onClickSort)}
+          columns={columns(directionSort_sales_by_order, onClickSort)}
           PaginationComponent={() => <div />}
         />
       </div>

@@ -16,6 +16,7 @@ const Index = ({ isVisible, linkExport, closeExport = () => {} }) => {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        // onHide={() => loadingExport ? () => { } : closeExport()}
       >
         <div className="modalExport">
           {!loadingExport && (
@@ -35,7 +36,7 @@ const Index = ({ isVisible, linkExport, closeExport = () => {} }) => {
                 loading={true}
               />
               <h3>Please wait ...</h3>
-              <p>Your link is exporting.</p>
+              <p>Your link is exporting</p>
             </>
           ) : (
             <>
