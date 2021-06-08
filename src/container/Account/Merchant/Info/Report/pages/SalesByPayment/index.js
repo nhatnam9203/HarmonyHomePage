@@ -15,7 +15,7 @@ import { convertDateData } from "@/util";
 import "react-table/react-table.css";
 import "../style.scss";
 
-const Overall = () => {
+const Index = () => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("Last Month");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
@@ -117,7 +117,7 @@ const Overall = () => {
 
   return (
     <>
-      <div className="info_merchant_title">Sales by Orders</div>
+      <div className="info_merchant_title">Sales by Payment method</div>
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}
@@ -152,4 +152,4 @@ const Overall = () => {
   );
 };
 
-export default Overall;
+export default Index;

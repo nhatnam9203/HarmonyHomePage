@@ -23,6 +23,11 @@ export const retailerReducer = (
     typeSort_sales_by_order: "",
     directionSort_sales_by_order: "ASC",
 
+    sales_by_product: [],
+    summary_sales_by_product: {},
+    typeSort_sales_by_product: "",
+    directionSort_sales_by_product: "ASC",
+
     linkExport: "",
   },
   { type, payload }
@@ -102,6 +107,27 @@ export const retailerReducer = (
           payload.type,
           state.sales_by_order,
           state.directionSort_sales_by_order === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    /* SALES BY PRODUCT */
+    case types.SET_SALES_BY_PRODUCT:
+      return {
+        ...state,
+        sales_by_product: payload?.data || [],
+        summary_sales_by_product: payload?.summary || {},
+      };
+
+    case types.SORT_SALES_BY_PRODUCT:
+      return {
+        ...state,
+        directionSort_sales_by_product:
+          state.directionSort_sales_by_product === "ASC" ? "DESC" : "ASC",
+        typeSort_sales_by_product: payload.type,
+        sales_by_product: sortTable(
+          payload.type,
+          state.sales_by_product,
+          state.directionSort_sales_by_product === "ASC" ? "DESC" : "ASC"
         ),
       };
 

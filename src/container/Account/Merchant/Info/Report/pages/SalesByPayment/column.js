@@ -58,9 +58,9 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "unCompleted",
     accessor: (row) =>
       row.unCompleted?.toString() ? (
-        <div className="table-tr">{`${row.unCompleted}`}</div>
+        <div className="table-tr">{`$ ${row.unCompleted}`}</div>
       ) : (
-        <div className="table-tr-last">{`${row.total_unCompleted}`}</div>
+        <div className="table-tr-last">{`$ ${row.total_unCompleted}`}</div>
       ),
   },
   {
@@ -77,9 +77,9 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "canceled",
     accessor: (row) =>
       row.canceled?.toString() ? (
-        <div className="table-tr">{`${row.canceled}`}</div>
+        <div className="table-tr">{`$ ${row.canceled}`}</div>
       ) : (
-        <div className="table-tr-last">{`${row.total_canceled}`}</div>
+        <div className="table-tr-last">{`$ ${row.total_canceled}`}</div>
       ),
   },
   {
@@ -115,9 +115,9 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "total",
     accessor: (row) =>
       row.total?.toString() ? (
-        <div className="table-tr">{`${row.total}`}</div>
+        <div className="table-tr">{`$ ${row.total}`}</div>
       ) : (
-        <div className="table-tr-last">{`${row.total_total}`}</div>
+        <div className="table-tr-last">{`$ ${row.total_total}`}</div>
       ),
   },
 ];

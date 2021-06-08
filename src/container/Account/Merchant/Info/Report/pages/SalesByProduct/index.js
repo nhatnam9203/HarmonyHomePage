@@ -4,10 +4,10 @@ import columns from "./column";
 import ReactTable from "react-table";
 import Loading from "@/components/Loading";
 import {
-  sort_sales_by_order,
+  sort_sales_by_product,
   exportRetailer,
   closeExport,
-  getSalesByOrder,
+  getSalesByProduct,
 } from "@/actions/retailerActions";
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
@@ -15,16 +15,16 @@ import { convertDateData } from "@/util";
 import "react-table/react-table.css";
 import "../style.scss";
 
-const Overall = () => {
+const Index = () => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("Last Month");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
   const {
     loading,
-    directionSort_sales_by_order,
+    directionSort_sales_by_product,
     linkExport,
-    sales_by_order,
+    sales_by_product,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -37,13 +37,13 @@ const Overall = () => {
   }, []);
 
   const getData = (quickFilter = "", start = "", end = "") => {
-    let url = `retailer/Appointment/report/sale/order?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
+    let url = `product/report/saleByProduct?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
-    dispatch(getSalesByOrder(url, token));
+    dispatch(getSalesByProduct(url, token));
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `retailer/Appointment/report/sale/order/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    let url = `product/report/saleByProduct/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -112,12 +112,12 @@ const Overall = () => {
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_sales_by_order({ type }));
+    dispatch(sort_sales_by_product({ type }));
   };
 
   return (
     <>
-      <div className="info_merchant_title">Sales by Orders</div>
+      <div className="info_merchant_title">Sales by Product</div>
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}
@@ -131,7 +131,7 @@ const Overall = () => {
         <ReactTable
           manual
           sortable={false}
-          data={sales_by_order || []}
+          data={sales_by_product || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -139,7 +139,7 @@ const Overall = () => {
           )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
-          columns={columns(directionSort_sales_by_order, onClickSort)}
+          columns={columns(directionSort_sales_by_product, onClickSort)}
           PaginationComponent={() => <div />}
         />
       </div>
@@ -152,4 +152,4 @@ const Overall = () => {
   );
 };
 
-export default Overall;
+export default Index;
