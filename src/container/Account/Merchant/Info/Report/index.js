@@ -6,8 +6,11 @@ import {
   SalesByPayment,
   SalesByProduct,
   SalesByCategory,
+  SalesByCustomer,
   TopProduct,
   TopCategory,
+  StaffReport,
+  MarketingEfficiency,
 } from "./pages";
 import Fade from "react-reveal/Fade";
 
@@ -37,11 +40,20 @@ const Index = () => {
       case "Sales by Category":
         return <SalesByCategory />;
 
+      case "Sales by Customer":
+        return <SalesByCustomer />;
+
       case "Top Products":
         return <TopProduct />;
 
       case "Top Categories":
         return <TopCategory />;
+
+      case "Staff reports":
+        return <StaffReport />;
+
+      case "Marketing Efficiency":
+        return <MarketingEfficiency />;
 
       default:
         return (
@@ -58,9 +70,21 @@ const Index = () => {
                 data={data.columnProducts}
                 onClickItem={onClickItemColumn}
               />
-              <ColumnReport title="Customers" data={data.columnCustomers} />
-              <ColumnReport title="Marketing" data={data.columnMarketing} />
-              <ColumnReport title="Staffs" data={data.columnStaffs} />
+              <ColumnReport
+                title="Customers"
+                data={data.columnCustomers}
+                onClickItem={onClickItemColumn}
+              />
+              <ColumnReport
+                title="Marketing"
+                data={data.columnMarketing}
+                onClickItem={onClickItemColumn}
+              />
+              <ColumnReport
+                title="Staffs"
+                data={data.columnStaffs}
+                onClickItem={onClickItemColumn}
+              />
             </div>
           </>
         );

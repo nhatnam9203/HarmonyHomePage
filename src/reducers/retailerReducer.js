@@ -18,30 +18,53 @@ export const retailerReducer = (
     typeSortOverall: "",
     directionSortOverall: "ASC",
 
+    /* SALES BY ORDER */
     sales_by_order: [],
     summary_sales_by_order: {},
     typeSort_sales_by_order: "",
     directionSort_sales_by_order: "ASC",
 
+    /* SALES BY PRODUCT */
     sales_by_product: [],
     summary_sales_by_product: {},
     typeSort_sales_by_product: "",
     directionSort_sales_by_product: "ASC",
 
+    /* SALES BY CATEGORY */
     sales_by_categoryt: [],
     summary_sales_by_categoryt: {},
     typeSort_sales_by_categoryt: "",
     directionSort_sales_by_categoryt: "ASC",
 
+    /* SALES BY CUSTOMER */
+    sales_by_customer: [],
+    summary_sales_by_customer: {},
+    typeSort_sales_by_customer: "",
+    directionSort_sales_by_customer: "ASC",
+
+    /* SALES BY PRODUCT */
     top_product: [],
     summary_top_product: {},
     typeSort_top_product: "",
     directionSort_top_product: "ASC",
 
+    /* SALES BY CATEGORY */
     top_category: [],
     summary_top_category: {},
     typeSort_top_category: "",
     directionSort_top_category: "ASC",
+
+    /* STAFF REPORT */
+    staff_report: [],
+    summary_staff_report: {},
+    typeSort_staff_report: "",
+    directionSort_staff_report: "ASC",
+
+    /* MARKING EFFICIENCY */
+    marketing_efficiency: [],
+    summary_marketing_efficiency: {},
+    typeSort_marketing_efficiency: "",
+    directionSort_marketing_efficiency: "ASC",
 
     linkExport: "",
   },
@@ -167,6 +190,27 @@ export const retailerReducer = (
         ),
       };
 
+    /* SALES BY CUSTOMER */
+    case types.SET_SALES_BY_CUSTOMER:
+      return {
+        ...state,
+        sales_by_customer: payload?.data || [],
+        summary_sales_by_customer: payload?.summary || {},
+      };
+
+    case types.SORT_SALES_BY_CUSTOMER:
+      return {
+        ...state,
+        directionSort_sales_by_customer:
+          state.directionSort_sales_by_customer === "ASC" ? "DESC" : "ASC",
+        typeSort_sales_by_customer: payload.type,
+        sales_by_customer: sortTable(
+          payload.type,
+          state.sales_by_customer,
+          state.directionSort_sales_by_customer === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
     /* TOP PRODUCT */
     case types.SET_TOP_PRODUCT:
       return {
@@ -206,6 +250,48 @@ export const retailerReducer = (
           payload.type,
           state.top_category,
           state.directionSort_top_category === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    /* STAFF REPORT */
+    case types.SET_STAFF_REPORT:
+      return {
+        ...state,
+        staff_report: payload?.data || [],
+        summary_staff_report: payload?.summary || {},
+      };
+
+    case types.SORT_STAFF_REPORT:
+      return {
+        ...state,
+        directionSort_staff_report:
+          state.directionSort_staff_report === "ASC" ? "DESC" : "ASC",
+        typeSort_staff_report: payload.type,
+        staff_report: sortTable(
+          payload.type,
+          state.staff_report,
+          state.directionSort_staff_report === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    /* MARKETING EFFICIENCY */
+    case types.SET_STAFF_REPORT:
+      return {
+        ...state,
+        marketing_efficiency: payload?.data || [],
+        summary_marketing_efficiency: payload?.summary || {},
+      };
+
+    case types.SORT_MARKETING_EFFICIENCY:
+      return {
+        ...state,
+        directionSort_marketing_efficiency:
+          state.directionSort_marketing_efficiency === "ASC" ? "DESC" : "ASC",
+        typeSort_marketing_efficiency: payload.type,
+        marketing_efficiency: sortTable(
+          payload.type,
+          state.marketing_efficiency,
+          state.directionSort_marketing_efficiency === "ASC" ? "DESC" : "ASC"
         ),
       };
 

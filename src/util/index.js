@@ -63,6 +63,29 @@ export const summary_sales_by_product = (value) => {
   };
 };
 
+export const summary_sales_by_customer = (value) => {
+  return {
+    total_name: value.name,
+    total_appointmentCount: value.appointmentCount,
+    total_lastVisitSale: value.lastVisitSale,
+    total_lastVisitDate: value.lastVisitDate,
+    total_total: value.total,
+  };
+};
+
+export const summary_staff_report = (value) => {
+  return {
+    total_name: value.name,
+    total_productSales: value.productSales,
+    total_productSplit: value.productSplit,
+    total_workingHour: value.workingHour,
+    total_salaryWage: value.salaryWage,
+    total_refundAmount: value.refundAmount,
+    total_discountByStaff: value.discountByStaff,
+    total_salary: value.salary,
+  };
+};
+
 export const summary_payment_by_method = (value) => {
   return {
     total_canceled: value.canceled,
@@ -71,5 +94,13 @@ export const summary_payment_by_method = (value) => {
     total_returned: value.returned,
     total_total: value.total,
     total_unCompleted: value.unCompleted,
+  };
+};
+
+export const summary_marketing_efficiency = (value) => {
+  return {
+    total_name: value.name,
+    total_discount: value.discount,
+    total_revenue: value.revenue,
   };
 };
