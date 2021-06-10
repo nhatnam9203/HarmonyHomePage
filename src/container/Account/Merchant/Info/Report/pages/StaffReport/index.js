@@ -2,7 +2,9 @@ import React from "react";
 import { SelectDate, ButtonReport } from "../../widget";
 import columns from "./column";
 import ReactTable from "react-table";
+import { Button } from "react-bootstrap";
 import Loading from "@/components/Loading";
+import PopupExport from "@/components/PopupExport";
 import {
   sort_staff_report,
   exportRetailer,
@@ -10,12 +12,11 @@ import {
   getStaffReport,
 } from "@/actions/retailerActions";
 import { useSelector, useDispatch } from "react-redux";
-import PopupExport from "@/components/PopupExport";
 import { convertDateData } from "@/util";
 import "react-table/react-table.css";
 import "../style.scss";
 
-const Index = () => {
+const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("Last Month");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
@@ -79,6 +80,10 @@ const Index = () => {
   };
 
   const onClickExport = (reportType) => {
+    if (reportType === "PDF") {
+      alert("chưa có api");
+      return;
+    }
     setVisibileExport(true);
     if (
       valueDate === "Today" ||
@@ -117,7 +122,12 @@ const Index = () => {
 
   return (
     <>
-      <div className="info_merchant_title">Sales by Customer</div>
+      <div className="info_merchant_title">
+        Staff reports
+        <Button className="btn btn_cancel" onClick={onBack}>
+          Back
+        </Button>
+      </div>
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}

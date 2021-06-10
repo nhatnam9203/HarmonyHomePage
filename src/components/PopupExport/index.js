@@ -42,7 +42,9 @@ const Index = ({ isVisible, linkExport, closeExport = () => {} }) => {
             <>
               <img src={check} />
               <h3>Click below link to download</h3>
-              <a href={linkExport}>{linkExport}</a>
+              {linkExport && linkExport !== "" && (
+                <a href={linkExport}>{linkExport}</a>
+              )}
             </>
           )}
         </div>

@@ -66,6 +66,12 @@ export const retailerReducer = (
     typeSort_marketing_efficiency: "",
     directionSort_marketing_efficiency: "ASC",
 
+    /* PAYMENT METHOD */
+    payment_method: [],
+    summary_payment_method: {},
+    typeSort_payment_method: "",
+    directionSort_payment_method: "ASC",
+
     linkExport: "",
   },
   { type, payload }
@@ -84,6 +90,7 @@ export const retailerReducer = (
       return { ...state, loadingExport: false };
 
     case types.EXPORT_SUCCESS:
+      console.log({ payload });
       return { ...state, loadingExport: false, linkExport: payload };
 
     case types.CLOSE_EXPORT:
@@ -292,6 +299,27 @@ export const retailerReducer = (
           payload.type,
           state.marketing_efficiency,
           state.directionSort_marketing_efficiency === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    /* PAYMENT METHOD */
+    case types.SET_PAYMENT_BY_METHOD:
+      return {
+        ...state,
+        payment_method: payload?.data || [],
+        summary_payment_method: payload?.summary || {},
+      };
+
+    case types.SORT_PAYMENT_BY_METHOD:
+      return {
+        ...state,
+        directionSort_payment_method:
+          state.directionSort_payment_method === "ASC" ? "DESC" : "ASC",
+        typeSort_payment_method: payload.type,
+        payment_method: sortTable(
+          payload.type,
+          state.payment_method,
+          state.directionSort_payment_method === "ASC" ? "DESC" : "ASC"
         ),
       };
 

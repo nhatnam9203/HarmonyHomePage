@@ -56,11 +56,11 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "lastVisitDate",
     accessor: (row) =>
       row.lastVisitDate?.toString() ? (
-        <div className="table-tr">{`$ ${moment(row.lastVisitDate).format(
+        <div className="table-tr">{`${moment(row.lastVisitDate).format(
           "MMMM DD, YYYY"
         )}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${moment(
+        <div className="table-tr-last">{`${moment(
           row.total_lastVisitDate
         ).format("MMMM DD, YYYY")}`}</div>
       ),

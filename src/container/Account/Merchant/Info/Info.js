@@ -211,9 +211,9 @@ function Info() {
             <span className="info_businessName">
               {id} - {detail?.businessName}
             </span>
-            <Button className="btn btn_cancel" onClick={() => history.goBack()}>
+            {/* <Button className="btn btn_cancel" onClick={() => history.goBack()}>
               Back
-            </Button>
+            </Button> */}
           </div>
           {detail.type == "Retailer" && (
             <Tabs tabActive={tabActive} changeTab={changeTab} />

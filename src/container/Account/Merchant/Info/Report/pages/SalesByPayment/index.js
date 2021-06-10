@@ -1,30 +1,31 @@
 import React from "react";
 import { SelectDate, ButtonReport } from "../../widget";
-import columns from "./column";
-import ReactTable from "react-table";
-import Loading from "@/components/Loading";
 import {
-  sort_sales_by_order,
+  sort_payment_method,
   exportRetailer,
   closeExport,
-  getSalesByOrder,
+  getPaymentByMethod,
 } from "@/actions/retailerActions";
+import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
 import { convertDateData } from "@/util";
+import TablePayment from "./TablePayment";
+import Loading from "@/components/Loading";
 import "react-table/react-table.css";
 import "../style.scss";
 
-const Index = () => {
+const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("Last Month");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
   const {
     loading,
-    directionSort_sales_by_order,
+    directionSort_payment_method,
     linkExport,
-    sales_by_order,
+    payment_method,
+    summary_payment_method,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -37,13 +38,13 @@ const Index = () => {
   }, []);
 
   const getData = (quickFilter = "", start = "", end = "") => {
-    let url = `retailer/Appointment/report/sale/order?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
+    let url = `retailer/Appointment/report/sale/paymentMethod?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
-    dispatch(getSalesByOrder(url, token));
+    dispatch(getPaymentByMethod(url, token));
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `retailer/Appointment/report/sale/order/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    let url = `retailer/Appointment/report/sale/paymentMethod/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -79,6 +80,8 @@ const Index = () => {
   };
 
   const onClickExport = (reportType) => {
+    alert("chưa có api !!!!!!!!!!");
+    return;
     setVisibileExport(true);
     if (
       valueDate === "Today" ||
@@ -112,12 +115,17 @@ const Index = () => {
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_sales_by_order({ type }));
+    dispatch(sort_payment_method({ type }));
   };
 
   return (
     <>
-      <div className="info_merchant_title">Sales by Payment method</div>
+      <div className="info_merchant_title">
+        Sales by Payment method
+        <Button className="btn btn_cancel" onClick={onBack}>
+          Back
+        </Button>
+      </div>
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}
@@ -127,21 +135,14 @@ const Index = () => {
         onClickShowReport={onClickShowReport}
         onClickExport={onClickExport}
       />
-      <div className="table-container">
-        <ReactTable
-          manual
-          sortable={false}
-          data={sales_by_order || []}
-          minRows={1}
-          noDataText="NO DATA!"
-          NoDataComponent={() => (
-            <div className="retailer_nodata">NO DATA!</div>
-          )}
-          LoadingComponent={() => loading && <Loading />}
-          loading={loading}
-          columns={columns(directionSort_sales_by_order, onClickSort)}
-          PaginationComponent={() => <div />}
+      <div className="table-container" style={{ position: "relative" }}>
+        <TablePayment
+          data={payment_method}
+          onClickSort={onClickSort}
+          valueSort={directionSort_payment_method}
+          summary={summary_payment_method}
         />
+        {loading && <Loading />}
       </div>
       <PopupExport
         isVisible={isVisibleExport}

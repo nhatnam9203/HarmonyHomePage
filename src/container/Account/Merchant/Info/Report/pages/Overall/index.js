@@ -3,6 +3,8 @@ import { SelectDate, ButtonReport } from "../../widget";
 import columns from "./column";
 import ReactTable from "react-table";
 import Loading from "@/components/Loading";
+import { Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import {
   getOverall,
   sortOverAll,
@@ -15,7 +17,8 @@ import { convertDateData } from "@/util";
 import "react-table/react-table.css";
 import "../style.scss";
 
-const Overall = () => {
+const Overall = ({ onBack = () => {} }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("Last Month");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
@@ -117,7 +120,12 @@ const Overall = () => {
 
   return (
     <>
-      <div className="info_merchant_title">Overall</div>
+      <div className="info_merchant_title">
+        Overall
+        <Button className="btn btn_cancel" onClick={onBack}>
+          Back
+        </Button>
+      </div>
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}

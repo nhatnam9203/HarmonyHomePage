@@ -26,34 +26,34 @@ const Index = () => {
   const renderPages = () => {
     switch (pageVisibile) {
       case "Overall":
-        return <Overall />;
+        return <Overall onBack={() => onClickItemColumn("")} />;
 
       case "Sales by Order":
-        return <SalesByOrder />;
+        return <SalesByOrder onBack={() => onClickItemColumn("")} />;
 
       case "Sales by Payment method":
-        return <SalesByPayment />;
+        return <SalesByPayment onBack={() => onClickItemColumn("")} />;
 
       case "Sales by Product":
-        return <SalesByProduct />;
+        return <SalesByProduct onBack={() => onClickItemColumn("")} />;
 
       case "Sales by Category":
-        return <SalesByCategory />;
+        return <SalesByCategory onBack={() => onClickItemColumn("")} />;
 
       case "Sales by Customer":
-        return <SalesByCustomer />;
+        return <SalesByCustomer onBack={() => onClickItemColumn("")} />;
 
       case "Top Products":
-        return <TopProduct />;
+        return <TopProduct onBack={() => onClickItemColumn("")} />;
 
       case "Top Categories":
-        return <TopCategory />;
+        return <TopCategory onBack={() => onClickItemColumn("")} />;
 
       case "Staff reports":
-        return <StaffReport />;
+        return <StaffReport onBack={() => onClickItemColumn("")} />;
 
       case "Marketing Efficiency":
-        return <MarketingEfficiency />;
+        return <MarketingEfficiency onBack={() => onClickItemColumn("")} />;
 
       default:
         return (
