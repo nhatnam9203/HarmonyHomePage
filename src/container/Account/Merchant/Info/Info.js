@@ -1,12 +1,17 @@
 import React from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMerchantByIdAction } from "@/actions/userActions";
 import {
   getOrders,
   getInventory,
   getCustomer,
+  sort_inventory,
+  sort_orders,
+  sort_customer,
+  reset_sort_orders,
+  reset_sort_inventory,
+  reset_sort_customer,
 } from "@/actions/retailerActions";
 import Loading from "@/util/Loading";
 
@@ -21,9 +26,14 @@ import "./Info.scss";
 
 function Info() {
   const { id } = useParams();
-  const history = useHistory();
   const dispatch = useDispatch();
   const { detail } = useSelector((state) => state.merchantDetail);
+  const {
+    directionSort_inventory,
+    directionSort_orders,
+    directionSort_customer,
+  } = useSelector((state) => state.retailer);
+
   const merchantId = detail.merchantId;
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
@@ -67,19 +77,19 @@ function Info() {
   }, [merchantId]);
 
   const getOrdersData = (page, sort, sortType) => {
-    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
+    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}`;
     url = encodeURI(url);
     dispatch(getOrders(url, token));
   };
 
   const getInventoryData = (page, sort, sortType) => {
-    let url = `product?page=${page}&key=${keySearchInventory}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
+    let url = `product?page=${page}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}`;
     url = encodeURI(url);
     dispatch(getInventory(url, token));
   };
 
   const getCustomerData = (page, sort, sortType) => {
-    let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
+    let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts=&merchantId=${detail.merchantId}`;
     url = encodeURI(url);
     dispatch(getCustomer(url, token));
   };
@@ -102,19 +112,22 @@ function Info() {
   const changeSortOrders = async (sort, sortType) => {
     await setSortOrders(sort);
     await setSortTypeOrders(sortType);
-    await getOrdersData(pageOrders, sort, sortType);
+    await dispatch(sort_orders({ type: sortType }));
+    // await getOrdersData(pageOrders, sort, sortType);
   };
 
   const changeSortInventory = async (sort, sortType) => {
     await setSortInventory(sort);
     await setSortTypeInventory(sortType);
-    await getInventoryData(pageInventory, sort, sortType);
+    await dispatch(sort_inventory({ type: sortType }));
+    // await getInventoryData(pageInventory, sort, sortType);
   };
 
   const changeSortCustomer = async (sort, sortType) => {
     await setSortCustomer(sort);
     await setSortTypeCustomer(sortType);
-    await getCustomerData(pageCustomer, sort, sortType);
+    await dispatch(sort_customer({ type: sortType }));
+    // await getCustomerData(pageCustomer, sort, sortType);
   };
 
   const onChangeSearchOrder = (e) => {
@@ -134,16 +147,19 @@ function Info() {
 
   const searchOrder = async () => {
     await setPageOrders(1);
+    await dispatch(reset_sort_orders());
     getOrdersData(1, sortOrders, sortTypeOrders);
   };
 
   const searchInventory = async () => {
     await setPageInventory(1);
+    await dispatch(reset_sort_inventory());
     getInventoryData(1, sortInventory, sortTypeInventory);
   };
 
   const searchCustomer = async () => {
     await setPageCustomer(1);
+    await dispatch(reset_sort_customer());
     getCustomerData(1, sortCustomer, sortTypeCustomer);
   };
 
@@ -163,7 +179,7 @@ function Info() {
             pageOrders={pageOrders}
             searchOrder={searchOrder}
             valueSearch={keySearchOrders}
-            valueSort={sortOrders}
+            valueSort={directionSort_orders}
             onChangeSearch={onChangeSearchOrder}
           />
         );
@@ -175,7 +191,7 @@ function Info() {
             pageInventory={pageInventory}
             searchInventory={searchInventory}
             valueSearch={keySearchInventory}
-            valueSort={sortInventory}
+            valueSort={directionSort_inventory}
             onChangeSearch={onChangeSearchInventory}
           />
         );
@@ -187,7 +203,7 @@ function Info() {
             pageCustomer={pageCustomer}
             searchCustomer={searchCustomer}
             valueSearch={keySearchCustomer}
-            valueSort={sortCustomer}
+            valueSort={directionSort_customer}
             onChangeSearch={onChangeSearchCustomer}
           />
         );

@@ -1,4 +1,5 @@
 import CustomTableHeader from "../../../CustomTableHeader";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
@@ -55,7 +56,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "totalRevenue",
     accessor: (row) =>
       row.totalRevenue?.toString() ? (
-        <div className="table-tr">{`$ ${row.totalRevenue}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.totalRevenue)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_totalRevenue}`}</div>
       ),
@@ -74,7 +75,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "totalCost",
     accessor: (row) =>
       row.totalCost?.toString() ? (
-        <div className="table-tr">{`$ ${row.totalCost}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.totalCost)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_totalCost}`}</div>
       ),
@@ -112,7 +113,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "totalProfit",
     accessor: (row) =>
       row.totalProfit?.toString() ? (
-        <div className="table-tr">{`$ ${row.totalProfit}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.totalProfit)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_totalProfit}`}</div>
       ),

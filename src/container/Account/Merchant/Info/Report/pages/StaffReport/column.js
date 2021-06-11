@@ -1,4 +1,5 @@
 import CustomTableHeader from "../../../CustomTableHeader";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
@@ -36,7 +37,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "productSales",
     accessor: (row) =>
       row.productSales?.toString() ? (
-        <div className="table-tr">{`$ ${row.productSales}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.productSales)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_productSales}`}</div>
       ),
@@ -55,7 +56,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "productSplit",
     accessor: (row) =>
       row.productSplit?.toString() ? (
-        <div className="table-tr">{`$ ${row.productSplit}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.productSplit)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_productSplit}`}</div>
       ),
@@ -93,7 +94,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "salaryWage",
     accessor: (row) =>
       row.salaryWage?.toString() ? (
-        <div className="table-tr">{`$ ${row.salaryWage}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.salaryWage)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_salaryWage}`}</div>
       ),
@@ -112,7 +113,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "refundAmount",
     accessor: (row) =>
       row.refundAmount?.toString() ? (
-        <div className="table-tr">{`$ ${row.refundAmount}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.refundAmount)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_refundAmount}`}</div>
       ),
@@ -131,7 +132,9 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "discountByStaff",
     accessor: (row) =>
       row.discountByStaff?.toString() ? (
-        <div className="table-tr">{`$ ${row.discountByStaff}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(
+          row.discountByStaff
+        )}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_discountByStaff}`}</div>
       ),
@@ -150,7 +153,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "salary",
     accessor: (row) =>
       row.salary?.toString() ? (
-        <div className="table-tr">{`$ ${row.salary}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.salary)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_salary}`}</div>
       ),

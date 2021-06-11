@@ -1,4 +1,5 @@
 import CustomTableHeader from "../../../CustomTableHeader";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
@@ -36,7 +37,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "discount",
     accessor: (row) =>
       row.discount?.toString() ? (
-        <div className="table-tr">{row.discount}</div>
+        <div className="table-tr">{formatMoney(row.discount)}</div>
       ) : (
         <div className="table-tr-last">{row.total_discount}</div>
       ),
@@ -55,7 +56,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "revenue",
     accessor: (row) =>
       row.revenue?.toString() ? (
-        <div className="table-tr">{`$ ${row.revenue}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.revenue)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_revenue}`}</div>
       ),

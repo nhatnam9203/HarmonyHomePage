@@ -9,18 +9,23 @@ import {
   summary_payment_by_method,
   summary_staff_report,
   summary_marketing_efficiency,
+  FormatPrice,
 } from "@/util";
-
-import { isEmpty } from "lodash";
 
 export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
+    let orders = data.data
+      ? data.data.map((obj) => {
+          return { ...obj, total: FormatPrice(obj.total) };
+        })
+      : [];
+
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_ORDERS,
-        payload: { data: data.data, count: data.count },
+        payload: { data: orders, count: data.count },
       });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -38,10 +43,15 @@ export const getInventory = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
+    let inventory = data.data
+      ? data.data.map((obj) => {
+          return { ...obj, price: FormatPrice(obj.price) };
+        })
+      : [];
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_INVENTORY,
-        payload: { data: data.data, count: data.count },
+        payload: { data: inventory, count: data.count },
       });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -80,8 +90,20 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              revenue: FormatPrice(obj.revenue),
+              profit: FormatPrice(obj.profit),
+              averageOrder: FormatPrice(obj.averageOrder),
+              cost: FormatPrice(obj.cost),
+            };
+          })
+        : [];
+
       let result = [];
-      if (data.data.length > 0) result = [...data.data, summary(data.summary)];
+      if (temptData.length > 0) result = [...temptData, summary(data.summary)];
 
       dispatch({
         type: typeRetailer.SET_OVERALL,
@@ -131,9 +153,19 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              totalRevenue: FormatPrice(obj.totalRevenue),
+              totalProfit: FormatPrice(obj.totalProfit),
+              totalCost: FormatPrice(obj.totalCost),
+            };
+          })
+        : [];
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_sales_by_product(data.summary)];
+      if (temptData.length > 0)
+        result = [...temptData, summary_sales_by_product(data.summary)];
 
       dispatch({
         type: "SET_SALES_BY_PRODUCT",
@@ -157,9 +189,19 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              totalrevenue: FormatPrice(obj.totalrevenue),
+              totalProfit: FormatPrice(obj.totalProfit),
+              totalCost: FormatPrice(obj.totalCost),
+            };
+          })
+        : [];
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_sales_by_product(data.summary)];
+      if (temptData.length > 0)
+        result = [...temptData, summary_sales_by_product(data.summary)];
 
       dispatch({
         type: "SET_SALES_BY_CATEGORY",
@@ -182,12 +224,19 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
 
-    console.log({ data, requestUrl });
-
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              lastVisitSale: FormatPrice(obj.lastVisitSale),
+              total: FormatPrice(obj.total),
+            };
+          })
+        : [];
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_sales_by_customer(data.summary)];
+      if (temptData.length > 0)
+        result = [...temptData, summary_sales_by_customer(data.summary)];
 
       dispatch({
         type: "SET_SALES_BY_CUSTOMER",
@@ -211,9 +260,19 @@ export const getTopProduct = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              totalRevenue: FormatPrice(obj.totalRevenue),
+              totalProfit: FormatPrice(obj.totalProfit),
+              totalCost: FormatPrice(obj.totalCost),
+            };
+          })
+        : [];
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_sales_by_product(data.summary)];
+      if (temptData.length > 0)
+        result = [...temptData, summary_sales_by_product(data.summary)];
 
       dispatch({
         type: "SET_TOP_PRODUCT",
@@ -237,9 +296,19 @@ export const getTopCategory = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              totalrevenue: FormatPrice(obj.totalrevenue),
+              totalProfit: FormatPrice(obj.totalProfit),
+              totalCost: FormatPrice(obj.totalCost),
+            };
+          })
+        : [];
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_sales_by_product(data.summary)];
+      if (temptData.length > 0)
+        result = [...temptData, summary_sales_by_product(data.summary)];
 
       dispatch({
         type: "SET_TOP_CATEGORY",
@@ -261,11 +330,6 @@ export const getPaymentByMethod = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
-
-    console.log({
-      data,
-      requestUrl,
-    });
 
     if (parseInt(data.codeNumber) === 200) {
       let result = [];
@@ -294,9 +358,22 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              productSales: FormatPrice(obj.productSales),
+              productSplit: FormatPrice(obj.productSplit),
+              salaryWage: FormatPrice(obj.salaryWage),
+              refundAmount: FormatPrice(obj.refundAmount),
+              discountByStaff: FormatPrice(obj.discountByStaff),
+              salary: FormatPrice(obj.salary),
+            };
+          })
+        : [];
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_staff_report(data.summary)];
+      if (temptData.length > 0)
+        result = [...temptData, summary_staff_report(data.summary)];
 
       dispatch({
         type: "SET_STAFF_REPORT",
@@ -320,9 +397,18 @@ export const getMarketingEfficiency = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      let temptData = data.data
+        ? data.data.map((obj) => {
+            return {
+              ...obj,
+              discount: FormatPrice(obj.discount),
+              revenue: FormatPrice(obj.revenue),
+            };
+          })
+        : [];
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_marketing_efficiency(data.summary)];
+      if (temptData.length > 0)
+        result = [...temptData, summary_marketing_efficiency(data.summary)];
 
       dispatch({
         type: "SET_MARKETING_EFFICIENCY",
@@ -428,6 +514,48 @@ export const sort_payment_method = (payload) => {
 export const sort_marketing_efficiency = (payload) => {
   return {
     type: typeRetailer.SORT_MARKETING_EFFICIENCY,
+    payload,
+  };
+};
+
+export const sort_inventory = (payload) => {
+  return {
+    type: typeRetailer.SORT_INVENTORY,
+    payload,
+  };
+};
+
+export const sort_customer = (payload) => {
+  return {
+    type: typeRetailer.SORT_CUSTOMER,
+    payload,
+  };
+};
+
+export const sort_orders = (payload) => {
+  return {
+    type: typeRetailer.SORT_ORDERS,
+    payload,
+  };
+};
+
+export const reset_sort_orders = (payload) => {
+  return {
+    type: typeRetailer.RESET_SORT_ORDERS,
+    payload,
+  };
+};
+
+export const reset_sort_inventory = (payload) => {
+  return {
+    type: typeRetailer.RESET_SORT_INVENTORY,
+    payload,
+  };
+};
+
+export const reset_sort_customer = (payload) => {
+  return {
+    type: typeRetailer.RESET_SORT_CUSTOMER,
     payload,
   };
 };

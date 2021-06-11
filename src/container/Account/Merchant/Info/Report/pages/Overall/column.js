@@ -1,5 +1,6 @@
 import CustomTableHeader from "../../../CustomTableHeader";
 import moment from "moment";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
@@ -58,7 +59,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "revenue",
     accessor: (row) =>
       row.revenue ? (
-        <div className="table-tr">{`$ ${row.revenue}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.revenue)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_revenue}`}</div>
       ),
@@ -77,7 +78,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "cost",
     accessor: (row) =>
       row.cost ? (
-        <div className="table-tr">{`$ ${row.cost}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.cost)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_cost}`}</div>
       ),
@@ -115,9 +116,11 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "profit",
     accessor: (row) =>
       row.profit ? (
-        <div className="table-tr">{`$ ${row.profit}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.profit)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_profit}`}</div>
+        <div className="table-tr-last">{`$ ${formatMoney(
+          row.total_profit
+        )}`}</div>
       ),
   },
   {
@@ -134,9 +137,11 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "averageOrder",
     accessor: (row) =>
       row.averageOrder ? (
-        <div className="table-tr">{`$ ${row.averageOrder}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.averageOrder)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_averageOrder}`}</div>
+        <div className="table-tr-last">{`$ ${formatMoney(
+          row.total_averageOrder
+        )}`}</div>
       ),
   },
 ];

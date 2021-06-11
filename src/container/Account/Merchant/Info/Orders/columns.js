@@ -2,6 +2,7 @@ import CustomTableHeader from "../CustomTableHeader";
 import moment from "moment";
 import "../Info.scss";
 import "./style.scss";
+import { formatMoney } from "@/util";
 
 const CustomStatus = ({ status }) => {
   const convertColor = (status) => {
@@ -197,7 +198,9 @@ const columns = (valueSort, onClickSort) => [
       />
     ),
     id: "total",
-    accessor: (row) => <div className="table-tr">{`${row.total}`}</div>,
+    accessor: (row) => (
+      <div className="table-tr">{`${formatMoney(row.total)}`}</div>
+    ),
   },
 ];
 

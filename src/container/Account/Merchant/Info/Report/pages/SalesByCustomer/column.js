@@ -1,5 +1,6 @@
 import CustomTableHeader from "../../../CustomTableHeader";
 import moment from "moment";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
@@ -81,7 +82,9 @@ const columns = (valueSort, onClickSort = () => {}) => [
       row.lastVisitSale?.toString() ? (
         <div className="table-tr">{`$ ${row.lastVisitSale}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_lastVisitSale}`}</div>
+        <div className="table-tr-last">{`$ ${formatMoney(
+          row.total_lastVisitSale
+        )}`}</div>
       ),
   },
   {
@@ -98,7 +101,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     id: "total",
     accessor: (row) =>
       row.total?.toString() ? (
-        <div className="table-tr">{`$ ${row.total}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.total)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_total}`}</div>
       ),

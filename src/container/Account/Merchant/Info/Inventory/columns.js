@@ -1,4 +1,5 @@
 import CustomTableHeader from "../CustomTableHeader";
+import { formatMoney } from "@/util";
 import "../Info.scss";
 import "./style.scss";
 
@@ -67,7 +68,9 @@ const columns = (valueSort, onClickSort) => [
       />
     ),
     id: "price",
-    accessor: (row) => <div className="table-tr">{`${row.price}`}</div>,
+    accessor: (row) => (
+      <div className="table-tr">{`${formatMoney(row.price)}`}</div>
+    ),
   },
   {
     Header: (

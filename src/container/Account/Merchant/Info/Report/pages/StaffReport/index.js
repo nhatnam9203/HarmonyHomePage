@@ -123,7 +123,7 @@ const Index = ({ onBack }) => {
   return (
     <>
       <div className="info_merchant_title">
-        Staff reports
+        Staffs reports
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>

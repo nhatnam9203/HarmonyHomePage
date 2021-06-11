@@ -13,6 +13,15 @@ export const retailerReducer = (
     customerPages: 0,
     report: [],
 
+    typeSort_inventory: "",
+    directionSort_inventory: "ASC",
+
+    typeSort_orders: "",
+    directionSort_orders: "ASC",
+
+    typeSort_customer: "",
+    directionSort_customer: "ASC",
+
     reportOverall: [],
     summaryOverall: {},
     typeSortOverall: "",
@@ -90,27 +99,102 @@ export const retailerReducer = (
       return { ...state, loadingExport: false };
 
     case types.EXPORT_SUCCESS:
-      console.log({ payload });
       return { ...state, loadingExport: false, linkExport: payload };
 
     case types.CLOSE_EXPORT:
       return { ...state, loadingExport: false, linkExport: "" };
 
     case types.SET_ORDERS:
-      return { ...state, orders: payload.data, orderPages: payload.count };
+      return {
+        ...state,
+        orders: sortTable(
+          state.typeSort_orders,
+          payload.data,
+          state.directionSort_orders
+        ),
+        orderPages: payload.count,
+      };
 
     case types.SET_INVENTORY:
       return {
         ...state,
-        inventory: payload.data,
+        inventory: sortTable(
+          state.typeSort_inventory,
+          payload.data,
+          state.directionSort_inventory
+        ),
         inventoryPages: payload.count,
       };
 
     case types.SET_CUSTOMER:
       return {
         ...state,
-        customer: payload.data,
+        customer: sortTable(
+          state.typeSort_customer,
+          payload.data,
+          state.directionSort_customer
+        ),
         customerPages: payload.count,
+      };
+
+    case types.SORT_INVENTORY:
+      return {
+        ...state,
+        directionSort_inventory:
+          state.directionSort_inventory === "ASC" ? "DESC" : "ASC",
+        typeSort_inventory: payload.type,
+        inventory: sortTable(
+          payload.type,
+          state.inventory,
+          state.directionSort_inventory === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case types.SORT_ORDERS:
+      return {
+        ...state,
+        directionSort_orders:
+          state.directionSort_orders === "ASC" ? "DESC" : "ASC",
+        typeSort_orders: payload.type,
+        orders: sortTable(
+          payload.type,
+          state.orders,
+          state.directionSort_orders === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case types.SORT_CUSTOMER:
+      return {
+        ...state,
+        directionSort_customer:
+          state.directionSort_customer === "ASC" ? "DESC" : "ASC",
+        typeSort_customer: payload.type,
+        customer: sortTable(
+          payload.type,
+          state.customer,
+          state.directionSort_customer === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case types.RESET_SORT_ORDERS:
+      return {
+        ...state,
+        directionSort_orders: "ASC",
+        typeSort_orders: "",
+      };
+
+    case types.RESET_SORT_INVENTORY:
+      return {
+        ...state,
+        directionSort_inventory: "ASC",
+        typeSort_inventory: "",
+      };
+
+    case types.RESET_SORT_CUSTOMER:
+      return {
+        ...state,
+        directionSort_customer: "ASC",
+        typeSort_customer: "",
       };
 
     /* OVERALL */
