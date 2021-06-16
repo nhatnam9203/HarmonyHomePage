@@ -80,8 +80,6 @@ const Index = ({ onBack }) => {
   };
 
   const onClickExport = (reportType) => {
-    alert("chưa có api !!!!!!!!!!");
-    return;
     setVisibileExport(true);
     if (
       valueDate === "Today" ||

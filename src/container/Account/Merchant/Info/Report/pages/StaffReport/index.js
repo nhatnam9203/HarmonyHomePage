@@ -80,10 +80,6 @@ const Index = ({ onBack }) => {
   };
 
   const onClickExport = (reportType) => {
-    if (reportType === "PDF") {
-      alert("chưa có api");
-      return;
-    }
     setVisibileExport(true);
     if (
       valueDate === "Today" ||

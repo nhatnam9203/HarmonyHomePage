@@ -18,7 +18,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     ),
     id: "date",
     accessor: (row) =>
-      row.date ? (
+      row.date?.toString() ? (
         <div className="table-tr">
           {`${moment(row.date).format("MMMM DD, YYYY")}`}
         </div>
@@ -39,7 +39,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     ),
     id: "totalOrder",
     accessor: (row) =>
-      row.totalOrder ? (
+      row.totalOrder?.toString() ? (
         <div className="table-tr">{row.totalOrder}</div>
       ) : (
         <div className="table-tr-last">{row.total_totalOrder}</div>
@@ -58,7 +58,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     ),
     id: "revenue",
     accessor: (row) =>
-      row.revenue ? (
+      row.revenue?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.revenue)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_revenue}`}</div>
@@ -77,7 +77,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     ),
     id: "cost",
     accessor: (row) =>
-      row.cost ? (
+      row.cost?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.cost)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_cost}`}</div>
@@ -96,7 +96,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     ),
     id: "tax",
     accessor: (row) =>
-      row.tax ? (
+      row.tax?.toString() ? (
         <div className="table-tr">{row.tax}</div>
       ) : (
         <div className="table-tr-last">{row.total_tax}</div>
@@ -115,7 +115,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     ),
     id: "profit",
     accessor: (row) =>
-      row.profit ? (
+      row.profit?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.profit)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${formatMoney(
@@ -136,7 +136,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
     ),
     id: "averageOrder",
     accessor: (row) =>
-      row.averageOrder ? (
+      row.averageOrder?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.averageOrder)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${formatMoney(
