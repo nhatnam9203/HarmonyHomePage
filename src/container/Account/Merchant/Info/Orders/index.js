@@ -6,6 +6,7 @@ import Search from "@/components/Search";
 import Pagination from "@/components/Pagination";
 import { useSelector } from "react-redux";
 import Loading from "@/components/Loading";
+import OrderDetail from "../OrderDetail";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -23,9 +24,23 @@ const Index = ({
     (state) => state.retailer
   );
 
+  const [isDetail, setVisibileDetail] = React.useState(false);
+
   const onClickSort = (status, sortType) => {
     changeSortOrders(status, sortType);
   };
+
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        setVisibileDetail(true);
+      },
+    };
+  };
+
+  if (isDetail) {
+    return <OrderDetail onBack={() => setVisibileDetail(false)} />;
+  }
 
   return (
     <Fade>
@@ -51,6 +66,7 @@ const Index = ({
           loading={loading}
           columns={columns(valueSort, onClickSort)}
           PaginationComponent={() => <div />}
+          getTdProps={onRowClick}
         />
 
         {orders.length > 0 && (

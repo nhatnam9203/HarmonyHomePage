@@ -10,8 +10,6 @@ const TablePayment = ({
   valueSort = "ASC",
   summary,
 }) => {
-  console.log({ summary });
-
   let tbodies = null;
 
   if (data.length > 0) {

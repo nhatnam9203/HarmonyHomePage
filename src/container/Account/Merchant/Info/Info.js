@@ -20,6 +20,7 @@ import Inventory from "./Inventory";
 import Customer from "./Customer";
 import Report from "./Report";
 import Orders from "./Orders";
+import OrderDetail from "./OrderDetail";
 import Tabs from "./Tabs";
 
 import "./Info.scss";
@@ -193,6 +194,7 @@ function Info() {
             valueSearch={keySearchInventory}
             valueSort={directionSort_inventory}
             onChangeSearch={onChangeSearchInventory}
+            changeTab={changeTab}
           />
         );
       case "Customer":
