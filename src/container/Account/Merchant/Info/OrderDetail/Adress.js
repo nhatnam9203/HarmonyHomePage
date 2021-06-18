@@ -1,38 +1,50 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import Title from "./Title";
+import Title from "@/components/Title";
 import "./style.scss";
 
-const Address = () => {
+const Address = ({ billingAddress, shippingAddress }) => {
   return (
     <>
-      <Title>Order & Account Information</Title>
+      <Title>Address Information</Title>
       <Row style={{ marginTop: "1rem" }}>
-        <Col>
+        <Col lg={6}>
           <div className="title">Billing address</div>
           <div className="orderAccount_container_info">
             <div className="rowInfo">
-              <p>Phan Nhat Nam</p>
+              <p>{`${billingAddress?.addressFirstName || ""} ${
+                billingAddress?.addressLastName || ""
+              }`}</p>
             </div>
             <div className="rowInfo">
-              <p>134 bui minh truc f6 q8</p>
+              <p>{`${billingAddress?.stateName || ""} ${
+                billingAddress?.street || ""
+              } ${billingAddress?.city || ""} ${
+                billingAddress?.zipCode || ""
+              }`}</p>
             </div>
             <div className="rowInfo">
-              <p>0355140858</p>
+              <p>{`${billingAddress?.addressPhone || ""}`}</p>
             </div>
           </div>
         </Col>
-        <Col>
+        <Col lg={6}>
           <div className="title">Shipping address</div>
           <div className="orderAccount_container_info">
             <div className="rowInfo">
-              <p>Phan Nhat Nam</p>
+              <p>{`${shippingAddress?.addressFirstName || ""} ${
+                shippingAddress?.addressLastName || ""
+              }`}</p>
             </div>
             <div className="rowInfo">
-              <p>134 bui minh truc f6 q8</p>
+              <p>{`${shippingAddress?.stateName || ""} ${
+                shippingAddress?.street || ""
+              } ${shippingAddress?.city || ""} ${
+                shippingAddress?.zipCode || ""
+              }`}</p>
             </div>
             <div className="rowInfo">
-              <p>0355140858</p>
+              <p>{`${shippingAddress?.addressPhone || ""}`}</p>
             </div>
           </div>
         </Col>

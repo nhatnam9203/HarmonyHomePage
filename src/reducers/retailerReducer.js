@@ -5,9 +5,12 @@ export const retailerReducer = (
   state = {
     loading: false,
     loadingExport: false,
+    loadingDetail: false,
     orders: [],
+    orderDetail: {},
     orderPages: 0,
     inventory: [],
+    inventoryDetail: {},
     inventoryPages: 0,
     customer: [],
     customerPages: 0,
@@ -65,6 +68,7 @@ export const retailerReducer = (
 
     /* STAFF REPORT */
     staff_report: [],
+    staff_report_pages: 0,
     summary_staff_report: {},
     typeSort_staff_report: "",
     directionSort_staff_report: "ASC",
@@ -92,6 +96,12 @@ export const retailerReducer = (
     case types.STOP_RETAILER_REQUEST:
       return { ...state, loading: false };
 
+    case types.RETAILER_DETAIL_REQUEST:
+      return { ...state, loadingDetail: true };
+
+    case types.STOP_RETAILER_DETAIL_REQUEST:
+      return { ...state, loadingDetail: false };
+
     case types.RETAILER_EXPORT_REQUEST:
       return { ...state, loadingExport: true };
 
@@ -113,6 +123,18 @@ export const retailerReducer = (
           state.directionSort_orders
         ),
         orderPages: payload.count,
+      };
+
+    case types.SET_ORDER_DETAIL:
+      return {
+        ...state,
+        orderDetail: payload,
+      };
+
+    case types.SET_INVENTORY_DETAIL:
+      return {
+        ...state,
+        inventoryDetail: payload,
       };
 
     case types.SET_INVENTORY:
@@ -195,6 +217,13 @@ export const retailerReducer = (
         ...state,
         directionSort_customer: "ASC",
         typeSort_customer: "",
+      };
+
+    case types.RESET_SORT_STAFF:
+      return {
+        ...state,
+        typeSort_staff_report: "",
+        directionSort_staff_report: "ASC",
       };
 
     /* OVERALL */
@@ -349,7 +378,7 @@ export const retailerReducer = (
       return {
         ...state,
         staff_report: payload?.data || [],
-        summary_staff_report: payload?.summary || {},
+        staff_report_pages: payload?.count,
       };
 
     case types.SORT_STAFF_REPORT:

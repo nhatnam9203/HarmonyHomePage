@@ -1,52 +1,64 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import Title from "./Title";
+import Title from "@/components/Title";
+import moment from "moment";
 import "./style.scss";
 
-const OrderAccount = () => {
+const OrderAccount = ({
+  appointmentId,
+  purchasePoint,
+  createdDate,
+  status,
+  customerName,
+  phone,
+  email,
+  address,
+}) => {
   return (
     <>
       <Title>Order & Account Information</Title>
       <Row style={{ marginTop: "1rem" }}>
-        <Col>
+        <Col lg={6}>
           <div className="title">Order Information</div>
           <div className="orderAccount_container_info">
             <div className="rowInfo">
               <p>ID</p>
-              <p>#68787789</p>
+              <p>{`# ${appointmentId}`}</p>
             </div>
             <div className="rowInfo">
               <p>Purchase Point</p>
-              <p>store</p>
+              <p>{`${purchasePoint}`}</p>
             </div>
             <div className="rowInfo">
               <p>Order Date</p>
-              <p>March 23 , 2021 8:35 AM</p>
+              <p>{`${moment(createdDate).format("MMMM DD, YYYY hh:mm A")}`}</p>
             </div>
             <div className="rowInfo">
               <p>Order status</p>
-              <p>Complete</p>
+              <p>{`${status}`}</p>
             </div>
           </div>
         </Col>
-        <Col>
+        <Col lg={6}>
           <div className="title">Account Information</div>
           <div className="orderAccount_container_info">
             <div className="rowInfo">
               <p>Customer name</p>
-              <p style={{ color: "#1B68AC", fontWeight: "600" }}>#68787789</p>
+              <p
+                style={{ color: "#1B68AC", fontWeight: "600" }}
+              >{`${customerName}`}</p>
             </div>
             <div className="rowInfo">
               <p>Phone number</p>
-              <p>store</p>
+              <p>{`${phone}`}</p>
             </div>
             <div className="rowInfo">
               <p>Email</p>
-              <p>March 23 , 2021 8:35 AM</p>
+              <p>{`${email}`}</p>
             </div>
             <div className="rowInfo">
               <p>Address</p>
-              <p>Complete</p>
+              <p>{`${address}`}</p>
             </div>
           </div>
         </Col>

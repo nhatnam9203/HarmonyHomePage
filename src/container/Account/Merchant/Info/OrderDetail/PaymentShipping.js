@@ -1,14 +1,14 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import Title from "./Title";
+import Title from "@/components/Title";
 import "./style.scss";
 
-const Address = () => {
+const PaymentShipping = ({ payment, shipping }) => {
   return (
     <>
       <Title>Payment & Shipping method</Title>
       <Row style={{ marginTop: "1rem" }}>
-        <Col>
+        <Col lg={6}>
           <div className="title">Payment Informations</div>
           <div className="orderAccount_container_info">
             <div className="rowInfo">
@@ -16,14 +16,20 @@ const Address = () => {
             </div>
           </div>
         </Col>
-        <Col>
+        <Col lg={6}>
           <div className="title">Shipping & Handling Information</div>
           <div className="orderAccount_container_info">
             <div className="rowInfo">
               <p>Shipping carrier</p>
             </div>
             <div className="rowInfo">
-              <p>UPS : 23132545646</p>
+              {shipping.shippingCarrier && (
+                <p>
+                  {`${shipping?.shippingCarrier || ""} : ${
+                    shipping.trackingNumber || ""
+                  }`}
+                </p>
+              )}
             </div>
             <div
               className="rowInfo"
@@ -33,7 +39,13 @@ const Address = () => {
               <p>Shipping method</p>
             </div>
             <div>
-              <p>flat rate : 1-2 days</p>
+              {shipping.shippingMethodGroup && (
+                <p>
+                  {`${shipping?.shippingMethodGroup || ""} : ${
+                    shipping.shippingMethodLabel || ""
+                  }`}
+                </p>
+              )}
             </div>
           </div>
         </Col>
@@ -42,4 +54,4 @@ const Address = () => {
   );
 };
 
-export default Address;
+export default PaymentShipping;

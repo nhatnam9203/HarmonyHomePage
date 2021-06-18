@@ -5,11 +5,14 @@ import ReactTable from "react-table";
 import { Button } from "react-bootstrap";
 import Loading from "@/components/Loading";
 import PopupExport from "@/components/PopupExport";
+import Pagination from "@/components/Pagination";
+import Search from "@/components/Search";
 import {
   sort_staff_report,
   exportRetailer,
   closeExport,
   getStaffReport,
+  resetSortStaff,
 } from "@/actions/retailerActions";
 import { useSelector, useDispatch } from "react-redux";
 import { convertDateData } from "@/util";
@@ -21,11 +24,15 @@ const Index = ({ onBack }) => {
   const [valueDate, setValueDate] = React.useState("Last Month");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
+  const [page, setPage] = React.useState(1);
+  const [keySearch, setKeySearch] = React.useState("");
+
   const {
     loading,
     directionSort_staff_report,
     linkExport,
     staff_report,
+    staff_report_pages,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -34,11 +41,11 @@ const Index = ({ onBack }) => {
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   React.useEffect(() => {
-    getData(convertDateData(valueDate));
+    getData(convertDateData(valueDate), "", "", page);
   }, []);
 
-  const getData = (quickFilter = "", start = "", end = "") => {
-    let url = `staff/salary?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
+  const getData = (quickFilter = "", start = "", end = "", pageStaff = 1) => {
+    let url = `staff/salary?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&page=${pageStaff}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getStaffReport(url, token));
   };
@@ -57,7 +64,12 @@ const Index = ({ onBack }) => {
     setValueDate(`${start} - ${end}`);
   };
 
-  const onClickShowReport = () => {
+  const changePage = async (pageStaff) => {
+    await setPage(pageStaff);
+    onClickShowReport(pageStaff);
+  };
+
+  const onClickShowReport = (pageStaff) => {
     if (
       valueDate === "Today" ||
       valueDate === "Yesterday" ||
@@ -66,13 +78,13 @@ const Index = ({ onBack }) => {
       valueDate === "This Month" ||
       valueDate === "Last Month"
     ) {
-      getData(convertDateData(valueDate));
+      getData(convertDateData(valueDate), "", "", pageStaff ? pageStaff : page);
     } else {
       let temps = valueDate.toString().split(" - ");
       let start = temps[0],
         end = temps[1];
       try {
-        getData("custom", start, end);
+        getData("custom", start, end, pageStaff ? pageStaff : page);
       } catch (error) {
         alert(error);
       }
@@ -116,6 +128,17 @@ const Index = ({ onBack }) => {
     dispatch(sort_staff_report({ type }));
   };
 
+  const onChangeSearch = (e) => {
+    const value = e.target.value;
+    setKeySearch(value);
+  };
+
+  const searchSubmit = async () => {
+    await setPage(1);
+    dispatch(resetSortStaff());
+    onClickShowReport();
+  };
+
   return (
     <>
       <div className="info_merchant_title">
@@ -124,6 +147,7 @@ const Index = ({ onBack }) => {
           Back
         </Button>
       </div>
+
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}
@@ -133,6 +157,16 @@ const Index = ({ onBack }) => {
         onClickShowReport={onClickShowReport}
         onClickExport={onClickExport}
       />
+
+      <div style={{ marginTop: 50 }} className="info_merchant_title">
+        <div />
+        <Search
+          value={keySearch}
+          onChange={onChangeSearch}
+          onSubmit={searchSubmit}
+        />
+      </div>
+
       <div className="table-container">
         <ReactTable
           manual
@@ -149,6 +183,14 @@ const Index = ({ onBack }) => {
           PaginationComponent={() => <div />}
         />
       </div>
+
+      {staff_report.length > 0 && (
+        <Pagination
+          activePage={page}
+          handlePageChange={changePage}
+          totalItem={Math.ceil(staff_report_pages) / 2}
+        />
+      )}
       <PopupExport
         isVisible={isVisibleExport}
         linkExport={linkExport}

@@ -1,0 +1,52 @@
+.inventory {
+  &_info_detail {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    & > div {
+      & > p {
+        font-size: 0.92rem;
+        line-height: 1.6rem;
+        margin-left: 1rem;
+        color: #404040;
+        letter-spacing: 0.6px;
+      }
+    }
+  }
+  &_img_big_product {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+.inventory_img_small_product {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 0.5rem;
+}
+
+.table-inventoryDetail .rt-td {
+  border-right: 0px !important;
+  height: 3rem !important;
+}
+
+.table-inventoryDetail .rt-tr-group {
+  border-bottom: 0px !important;
+}
+
+.table-inventoryDetail {
+  border: 0px !important;
+}
+
+.table-inventoryDetail .table-tr {
+  font-size: 0.9rem !important;
+  color: #585858 !important;
+  letter-spacing: 0.3px;
+}
+
+.table-tr-red {
+  font-size: 0.9rem !important;
+  color: red !important;
+  letter-spacing: 0.3px;
+  margin-top: 0.71em;
+}

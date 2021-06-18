@@ -4,9 +4,10 @@ import ReactTable from "react-table";
 import columns from "./columns";
 import Search from "@/components/Search";
 import Pagination from "@/components/Pagination";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loading from "@/components/Loading";
 import OrderDetail from "../OrderDetail";
+import { getOrderDetail } from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -20,11 +21,15 @@ const Index = ({
   valueSort,
   changeSortOrders,
 }) => {
-  const { orders, orderPages, loading } = useSelector(
+  const dispatch = useDispatch();
+
+  const { orders, orderPages, loading, loadingDetail } = useSelector(
     (state) => state.retailer
   );
 
   const [isDetail, setVisibileDetail] = React.useState(false);
+
+  const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const onClickSort = (status, sortType) => {
     changeSortOrders(status, sortType);
@@ -33,9 +38,15 @@ const Index = ({
   const onRowClick = (state, rowInfo, column, instance) => {
     return {
       onClick: (e) => {
-        setVisibileDetail(true);
+        const { appointmentId } = rowInfo.original;
+        const url = `retailer/appointment/${appointmentId}`;
+        dispatch(getOrderDetail(url, token, showDetail));
       },
     };
+  };
+
+  const showDetail = () => {
+    setVisibileDetail(true);
   };
 
   if (isDetail) {
@@ -43,41 +54,45 @@ const Index = ({
   }
 
   return (
-    <Fade>
-      <div className="info_merchant_title">
-        Orders
-        <Search
-          value={valueSearch}
-          onChange={onChangeSearch}
-          onSubmit={searchOrder}
-        />
-      </div>
-      <div className="table-container">
-        <ReactTable
-          manual
-          sortable={false}
-          data={orders}
-          minRows={1}
-          noDataText="NO DATA!"
-          NoDataComponent={() => (
-            <div className="retailer_nodata">NO DATA!</div>
-          )}
-          LoadingComponent={() => loading && <Loading />}
-          loading={loading}
-          columns={columns(valueSort, onClickSort)}
-          PaginationComponent={() => <div />}
-          getTdProps={onRowClick}
-        />
-
-        {orders.length > 0 && (
-          <Pagination
-            activePage={pageOrders}
-            handlePageChange={changePageOrders}
-            totalItem={Math.ceil(orderPages / 2)}
+    <div style={{ position: "relative" }}>
+      <Fade>
+        <div className="info_merchant_title">
+          Orders
+          <Search
+            value={valueSearch}
+            onChange={onChangeSearch}
+            onSubmit={searchOrder}
           />
-        )}
-      </div>
-    </Fade>
+        </div>
+        <div className="table-container">
+          <ReactTable
+            className="table_order"
+            manual
+            sortable={false}
+            data={orders}
+            minRows={1}
+            noDataText="NO DATA!"
+            NoDataComponent={() => (
+              <div className="retailer_nodata">NO DATA!</div>
+            )}
+            LoadingComponent={() => loading && <Loading />}
+            loading={loading}
+            columns={columns(valueSort, onClickSort)}
+            PaginationComponent={() => <div />}
+            getTdProps={onRowClick}
+          />
+
+          {orders.length > 0 && (
+            <Pagination
+              activePage={pageOrders}
+              handlePageChange={changePageOrders}
+              totalItem={Math.ceil(orderPages / 2)}
+            />
+          )}
+        </div>
+      </Fade>
+      {loadingDetail && <Loading />}
+    </div>
   );
 };
 

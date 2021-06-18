@@ -16,6 +16,7 @@ export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
+
     let orders = data.data
       ? data.data.map((obj) => {
           return { ...obj, total: FormatPrice(obj.total) };
@@ -371,14 +372,11 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
             };
           })
         : [];
-      let result = [];
       if (temptData.length > 0)
-        result = [...temptData, summary_staff_report(data.summary)];
-
-      dispatch({
-        type: "SET_STAFF_REPORT",
-        payload: { data: result, summary: data.summary },
-      });
+        dispatch({
+          type: "SET_STAFF_REPORT",
+          payload: { data: temptData, count: data.count },
+        });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
@@ -445,6 +443,54 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
   } finally {
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+  }
+};
+
+export const getOrderDetail = (requestUrl = "", token = "", callBack) => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
+    let { data } = await api.getByPage(requestUrl, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.SET_ORDER_DETAIL,
+        payload: data.data,
+      });
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
+  }
+};
+
+export const getInventoryDetail = (
+  requestUrl = "",
+  token = "",
+  callBack
+) => async (dispatch) => {
+  try {
+    dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
+    let { data } = await api.getByPage(requestUrl, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.SET_INVENTORY_DETAIL,
+        payload: data.data,
+      });
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
   }
 };
 
@@ -557,6 +603,12 @@ export const reset_sort_customer = (payload) => {
   return {
     type: typeRetailer.RESET_SORT_CUSTOMER,
     payload,
+  };
+};
+
+export const resetSortStaff = () => {
+  return {
+    type: typeRetailer.RESET_SORT_STAFF,
   };
 };
 
