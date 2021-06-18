@@ -102,12 +102,14 @@ const columns = () => [
   {
     Header: <CustomTableHeader value="Staff" />,
     id: "staffName",
-    accessor: (row) => <div className="table-tr">{`${row.staffName}`}</div>,
+    accessor: (row) => (
+      <div className="table-tr">{`${row.staffName || ""}`}</div>
+    ),
   },
   {
     Header: <CustomTableHeader value="Reason" />,
     id: "reason",
-    accessor: (row) => <div className="table-tr">{`${row.reason}`}</div>,
+    accessor: (row) => <div className="table-tr">{`${row.reason || ""}`}</div>,
   },
   {
     Header: <CustomTableHeader value="Adjusted qty" />,
@@ -125,6 +127,8 @@ const columns = () => [
   {
     Header: <CustomTableHeader value="Items in restock" />,
     id: "quantity",
-    accessor: (row) => <div className="table-tr">{`${row.quantity}`}</div>,
+    accessor: (row) => (
+      <div className="table-tr">{`${row.quantity || ""}`}</div>
+    ),
   },
 ];

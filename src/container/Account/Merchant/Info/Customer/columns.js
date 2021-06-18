@@ -1,5 +1,6 @@
 import CustomTableHeader from "../CustomTableHeader";
 import moment from "moment";
+import { convertIsVip } from "@/util";
 import "../Info.scss";
 import "./style.scss";
 
@@ -86,25 +87,3 @@ const columns = (valueSort, onClickSort) => [
 ];
 
 export default columns;
-
-const convertIsVip = (isVip) => {
-  let value = "InValid";
-  switch (parseInt(isVip)) {
-    case 0:
-      value = "normal";
-      break;
-
-    case 1:
-      value = "vip";
-      break;
-
-    case 2:
-      value = "blacklist";
-      break;
-
-    default:
-      break;
-  }
-
-  return value;
-};

@@ -7,7 +7,6 @@ import {
   summary_sales_by_product,
   summary_sales_by_customer,
   summary_payment_by_method,
-  summary_staff_report,
   summary_marketing_efficiency,
   FormatPrice,
 } from "@/util";
@@ -494,6 +493,60 @@ export const getInventoryDetail = (
   }
 };
 
+export const getCustomerDetail = (
+  requestUrl = "",
+  token = "",
+  callBack
+) => async (dispatch) => {
+  try {
+    dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
+    let { data } = await api.getByPage(requestUrl, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.SET_CUSTOMER_DETAIL,
+        payload: data.data,
+      });
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
+  }
+};
+
+export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
+    let { data } = await api.getByPage(requestUrl, token);
+    let temptData = data.data
+      ? data.data.map((obj) => {
+          return {
+            ...obj,
+            total: FormatPrice(obj.total),
+          };
+        })
+      : [];
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.SET_APPOINTMENT_CUSTOMER_DETAIL,
+        payload: { data: temptData, count: data.count },
+      });
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
+  }
+};
+
 export const sortOverAll = (payload) => {
   return {
     type: typeRetailer.SORT_OVRERALL,
@@ -615,5 +668,39 @@ export const resetSortStaff = () => {
 export const closeExport = () => {
   return {
     type: typeRetailer.CLOSE_EXPORT,
+  };
+};
+
+export const setVisibleOrderDetail = (payload) => {
+  return {
+    type: typeRetailer.SET_VISIBLE_ORDER_DETAIL,
+    payload,
+  };
+};
+export const setVisibleInventoryDetail = (payload) => {
+  return {
+    type: typeRetailer.SET_VISIBLE_INVENTORY_DETAIL,
+    payload,
+  };
+};
+
+export const setVisibleCustomerDetail = (payload) => {
+  return {
+    type: typeRetailer.SET_VISIBLE_CUSTOMER_DETAIL,
+    payload,
+  };
+};
+
+export const sortCustomerAppointment = (payload) => {
+  return {
+    type: typeRetailer.SORT_CUSTOMER_APPOINTMENT,
+    payload,
+  };
+};
+
+export const resetSortCustomerAppointment = (payload) => {
+  return {
+    type: typeRetailer.RESET_SORT_CUSTOMER_APPOINTMENT,
+    payload,
   };
 };

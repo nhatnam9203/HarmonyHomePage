@@ -136,7 +136,7 @@ const Index = ({ onBack }) => {
   const searchSubmit = async () => {
     await setPage(1);
     dispatch(resetSortStaff());
-    onClickShowReport();
+    onClickShowReport(1);
   };
 
   return (
@@ -158,14 +158,14 @@ const Index = ({ onBack }) => {
         onClickExport={onClickExport}
       />
 
-      <div style={{ marginTop: 50 }} className="info_merchant_title">
+      {/*       <div style={{ marginTop: 50 }} className="info_merchant_title">
         <div />
         <Search
           value={keySearch}
           onChange={onChangeSearch}
           onSubmit={searchSubmit}
         />
-      </div>
+      </div> */}
 
       <div className="table-container">
         <ReactTable

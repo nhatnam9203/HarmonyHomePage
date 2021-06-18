@@ -3,18 +3,22 @@ import { Row, Col } from "react-bootstrap";
 import Title from "@/components/Title";
 import "./style.scss";
 
-const PaymentShipping = ({ payment, shipping }) => {
+const PaymentShipping = ({ payment = [], shipping }) => {
   return (
     <>
       <Title>Payment & Shipping method</Title>
       <Row style={{ marginTop: "1rem" }}>
         <Col lg={6}>
           <div className="title">Payment Informations</div>
-          <div className="orderAccount_container_info">
-            <div className="rowInfo">
-              <p>Harmony Pay</p>
+          {payment.length > 0 && (
+            <div className="orderAccount_container_info">
+              {payment.map((p, index) => (
+                <div key={"paypemnt" + index} className="rowInfo">
+                  <p>{`${p.paymentMethod} - $${p.amount}`}</p>
+                </div>
+              ))}
             </div>
-          </div>
+          )}
         </Col>
         <Col lg={6}>
           <div className="title">Shipping & Handling Information</div>

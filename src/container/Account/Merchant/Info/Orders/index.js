@@ -7,7 +7,10 @@ import Pagination from "@/components/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "@/components/Loading";
 import OrderDetail from "../OrderDetail";
-import { getOrderDetail } from "@/actions/retailerActions";
+import {
+  getOrderDetail,
+  setVisibleOrderDetail,
+} from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -23,11 +26,17 @@ const Index = ({
 }) => {
   const dispatch = useDispatch();
 
-  const { orders, orderPages, loading, loadingDetail } = useSelector(
-    (state) => state.retailer
-  );
+  const {
+    orders,
+    orderPages,
+    loading,
+    loadingDetail,
+    isVisibleOrderDetail,
+  } = useSelector((state) => state.retailer);
 
-  const [isDetail, setVisibileDetail] = React.useState(false);
+  console.log({
+    isVisibleOrderDetail,
+  });
 
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
@@ -46,11 +55,13 @@ const Index = ({
   };
 
   const showDetail = () => {
-    setVisibileDetail(true);
+    dispatch(setVisibleOrderDetail(true));
   };
 
-  if (isDetail) {
-    return <OrderDetail onBack={() => setVisibileDetail(false)} />;
+  if (isVisibleOrderDetail) {
+    return (
+      <OrderDetail onBack={() => dispatch(setVisibleOrderDetail(false))} />
+    );
   }
 
   return (

@@ -24,6 +24,7 @@ const Index = ({ isVisible, linkExport, closeExport = () => {} }) => {
               onClick={closeExport}
               src={close_black}
               className="icon_close_export"
+              alt="img"
             />
           )}
 
@@ -40,7 +41,7 @@ const Index = ({ isVisible, linkExport, closeExport = () => {} }) => {
             </>
           ) : (
             <>
-              <img src={check} />
+              <img src={check} alt="img" />
               <h3>Click below link to download</h3>
               {linkExport && linkExport !== "" && (
                 <a href={linkExport}>{linkExport}</a>

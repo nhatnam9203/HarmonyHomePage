@@ -29,6 +29,117 @@ export const convertDateData = (date) => {
   return temp;
 };
 
+export const convertIsVip = (isVip) => {
+  let value = "InValid";
+  switch (parseInt(isVip)) {
+    case 0:
+      value = "Normal";
+      break;
+
+    case 1:
+      value = "Vip";
+      break;
+
+    case 2:
+      value = "Blacklist";
+      break;
+
+    default:
+      break;
+  }
+
+  return value;
+};
+
+export const CustomStatus = ({ status }) => {
+  const convertColor = (status) => {
+    let color = "#FEDC32",
+      backgroundColor = "#404040";
+    switch (status) {
+      case "checkin":
+        color = "white";
+        backgroundColor = "#1366AE";
+        break;
+
+      case "Processing":
+        color = "white";
+        backgroundColor = "#1366AE";
+        break;
+
+      case "confirm":
+        color = "#404040";
+        backgroundColor = "#C8EDFB";
+        break;
+
+      case "unconfirm":
+        color = "#404040";
+        backgroundColor = "#FEDC32";
+        break;
+
+      case "Pending":
+        color = "#404040";
+        backgroundColor = "#FEDC32";
+        break;
+
+      case "paid":
+        color = "white";
+        backgroundColor = "#53D769";
+        break;
+
+      case "Complete":
+        color = "white";
+        backgroundColor = "#53D769";
+        break;
+
+      case "cancel":
+        color = "#404040";
+        backgroundColor = "#E5E5E5";
+        break;
+
+      case "Canceled":
+        color = "#404040";
+        backgroundColor = "#E5E5E5";
+        break;
+
+      case "shipped":
+        color = "#404040";
+        backgroundColor = "transparent";
+        break;
+
+      case "Shipped":
+        color = "#404040";
+        backgroundColor = "transparent";
+        break;
+
+      case "Return":
+        color = "white";
+        backgroundColor = "#B73B36";
+        break;
+
+      default:
+        break;
+    }
+    return { backgroundColor, color };
+  };
+
+  return (
+    <div
+      style={{
+        backgroundColor: convertColor(status).backgroundColor,
+        color: convertColor(status).color,
+        borderWidth: 1,
+        borderColor:
+          status === "shipped" || status === "Shipped"
+            ? "#53D769"
+            : "transparent",
+      }}
+      className="table_row_status"
+    >
+      {status}
+    </div>
+  );
+};
+
 export const summary = (value) => {
   return {
     total_averageOrder: value.averageOrder,

@@ -13,8 +13,15 @@ export const retailerReducer = (
     inventoryDetail: {},
     inventoryPages: 0,
     customer: [],
+    customerDetail: {},
     customerPages: 0,
+    customerAppointments: [],
+    countCustomerAppointments: 0,
     report: [],
+
+    isVisibleCustomerDetail: false,
+    isVisibleInventoryDetail: false,
+    isVisibleOrderDetail: false,
 
     typeSort_inventory: "",
     directionSort_inventory: "ASC",
@@ -24,6 +31,9 @@ export const retailerReducer = (
 
     typeSort_customer: "",
     directionSort_customer: "ASC",
+
+    typeSort_customerAppointments: "",
+    directionSort_customerAppointments: "ASC",
 
     reportOverall: [],
     summaryOverall: {},
@@ -114,6 +124,24 @@ export const retailerReducer = (
     case types.CLOSE_EXPORT:
       return { ...state, loadingExport: false, linkExport: "" };
 
+    case types.SET_VISIBLE_ORDER_DETAIL:
+      return {
+        ...state,
+        isVisibleOrderDetail: payload,
+      };
+
+    case types.SET_VISIBLE_INVENTORY_DETAIL:
+      return {
+        ...state,
+        isVisibleInventoryDetail: payload,
+      };
+
+    case types.SET_VISIBLE_CUSTOMER_DETAIL:
+      return {
+        ...state,
+        isVisibleCustomerDetail: payload,
+      };
+
     case types.SET_ORDERS:
       return {
         ...state,
@@ -129,6 +157,13 @@ export const retailerReducer = (
       return {
         ...state,
         orderDetail: payload,
+      };
+
+    case types.SET_APPOINTMENT_CUSTOMER_DETAIL:
+      return {
+        ...state,
+        customerAppointments: payload.data,
+        countCustomerAppointments: payload.count,
       };
 
     case types.SET_INVENTORY_DETAIL:
@@ -157,6 +192,12 @@ export const retailerReducer = (
           state.directionSort_customer
         ),
         customerPages: payload.count,
+      };
+
+    case types.SET_CUSTOMER_DETAIL:
+      return {
+        ...state,
+        customerDetail: payload,
       };
 
     case types.SORT_INVENTORY:
@@ -224,6 +265,13 @@ export const retailerReducer = (
         ...state,
         typeSort_staff_report: "",
         directionSort_staff_report: "ASC",
+      };
+
+    case types.RESET_SORT_CUSTOMER_APPOINTMENT:
+      return {
+        ...state,
+        typeSort_customerAppointments: "",
+        directionSort_customerAppointments: "ASC",
       };
 
     /* OVERALL */
@@ -433,6 +481,19 @@ export const retailerReducer = (
           payload.type,
           state.payment_method,
           state.directionSort_payment_method === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case types.SORT_CUSTOMER_APPOINTMENT:
+      return {
+        ...state,
+        directionSort_customerAppointments:
+          state.directionSort_customerAppointments === "ASC" ? "DESC" : "ASC",
+        typeSort_customerAppointments: payload.type,
+        customerAppointments: sortTable(
+          payload.type,
+          state.customerAppointments,
+          state.directionSort_customerAppointments === "ASC" ? "DESC" : "ASC"
         ),
       };
 

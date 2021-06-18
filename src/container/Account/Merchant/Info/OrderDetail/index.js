@@ -19,8 +19,6 @@ const Index = ({ onBack }) => {
     document.documentElement.scrollTop = 0;
   }, []);
 
-  console.log({ orderDetail });
-
   return (
     <Fade>
       <div className="info_merchant_title">

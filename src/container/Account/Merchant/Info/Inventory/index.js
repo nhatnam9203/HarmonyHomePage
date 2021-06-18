@@ -7,7 +7,10 @@ import Pagination from "@/components/Pagination";
 import Loading from "@/components/Loading";
 import InventoryDetail from "../InventoryDetail";
 import { useSelector, useDispatch } from "react-redux";
-import { getInventoryDetail } from "@/actions/retailerActions";
+import {
+  getInventoryDetail,
+  setVisibleInventoryDetail,
+} from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -23,11 +26,13 @@ const Index = ({
 }) => {
   const dispatch = useDispatch();
 
-  const [isDetail, setVisibileDetail] = React.useState(false);
-
-  const { inventory, inventoryPages, loading, loadingDetail } = useSelector(
-    (state) => state.retailer
-  );
+  const {
+    inventory,
+    inventoryPages,
+    loading,
+    loadingDetail,
+    isVisibleInventoryDetail,
+  } = useSelector((state) => state.retailer);
 
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
@@ -46,11 +51,15 @@ const Index = ({
   };
 
   const showDetail = () => {
-    setVisibileDetail(true);
+    dispatch(setVisibleInventoryDetail(true));
   };
 
-  if (isDetail) {
-    return <InventoryDetail onBack={() => setVisibileDetail(false)} />;
+  if (isVisibleInventoryDetail) {
+    return (
+      <InventoryDetail
+        onBack={() => dispatch(setVisibleInventoryDetail(false))}
+      />
+    );
   }
 
   return (
