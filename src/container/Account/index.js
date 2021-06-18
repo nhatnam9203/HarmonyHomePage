@@ -5,6 +5,9 @@ import { Helmet } from "react-helmet";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 
+import next_blue from "../../assets/images/retailer/next_blue.png";
+import prev_blue from "../../assets/images/retailer/prev_blue.png";
+
 import "./Account.scss";
 
 const Merchant = lazy(() => import("./Merchant/Merchant"));
@@ -22,17 +25,53 @@ const SubscriptionInfo = lazy(() =>
 );
 
 function Account() {
+  const [isVisibleMenu, setVisbleMenu] = React.useState(true);
+
+  const showMenu = () => {
+    setVisbleMenu(true);
+  };
+
+  const hideMenu = () => {
+    setVisbleMenu(false);
+  };
+
   return (
     <div className="account px-2">
       <Helmet>
         <title>Harmony | Account</title>
         <meta name="description" content="Harmony Account" />
       </Helmet>
-      <Row className="pr-0">
-        <Col sm={12} md={3} className="">
-          <Sidebar />
-        </Col>
-        <Col sm={12} md={9} className="pt-2 account_content">
+      <Row className="pr-0 container-account-right ">
+        {!isVisibleMenu && (
+          <img
+            onClick={showMenu}
+            src={next_blue}
+            alt={"img"}
+            className="img_arrow_hide"
+            style={{ left: 0 }}
+          />
+        )}
+        {isVisibleMenu && (
+          <Col sm={12} md={3}>
+            <Sidebar />
+          </Col>
+        )}
+        <Col
+          sm={12}
+          md={{
+            span: isVisibleMenu ? 9 : 10,
+            offset: isVisibleMenu ? 0 : 1,
+          }}
+          className="pt-2 account_content"
+        >
+          {isVisibleMenu && (
+            <img
+              onClick={hideMenu}
+              src={prev_blue}
+              alt={"img"}
+              className="img_arrow_hide img_prev_blue"
+            />
+          )}
           <Switch>
             <Route
               exact
