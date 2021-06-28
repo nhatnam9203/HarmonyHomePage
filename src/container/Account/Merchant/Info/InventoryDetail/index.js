@@ -39,7 +39,11 @@ const Index = ({ onBack }) => {
         </div>
 
         <div style={{ marginLeft: "2.5rem" }}>
-          <p>{inventoryDetail.categoryName || "null"}</p>
+          {inventoryDetail.categoryName ? (
+            <p>{inventoryDetail.categoryName}</p>
+          ) : (
+            <div>&nbsp;</div>
+          )}
           <p>{inventoryDetail.sku}</p>
           <p>{inventoryDetail.barCode}</p>
           <p style={{ fontWeight: "600" }}>{`$ ${inventoryDetail.price}`}</p>

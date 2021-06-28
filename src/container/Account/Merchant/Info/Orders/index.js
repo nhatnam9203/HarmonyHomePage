@@ -34,10 +34,6 @@ const Index = ({
     isVisibleOrderDetail,
   } = useSelector((state) => state.retailer);
 
-  console.log({
-    isVisibleOrderDetail,
-  });
-
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const onClickSort = (status, sortType) => {
