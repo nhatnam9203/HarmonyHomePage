@@ -69,7 +69,7 @@ const columns = (valueSort, onClickSort) => [
     ),
     id: "price",
     accessor: (row) => (
-      <div className="table-tr">{`${formatMoney(row.price)}`}</div>
+      <div className="table-tr">{`$ ${formatMoney(row.price)}`}</div>
     ),
   },
   {
