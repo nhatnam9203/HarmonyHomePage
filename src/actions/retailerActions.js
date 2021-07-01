@@ -547,6 +547,47 @@ export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
   }
 };
 
+export const changeImageProduct = (formData, productId, callBack) => async (
+  dispatch
+) => {
+  try {
+    const urlUpload = "file?category=product";
+    const urlUpdateProduct = `product/changeImage/${productId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
+    let { data } = await api.uploadFile(urlUpload, formData);
+
+    if (parseInt(data.codeNumber) === 200) {
+      const { fileId, url } = data.data;
+      const body = { fileId };
+      const response = await api.updateImageProduct(
+        urlUpdateProduct,
+        body,
+        token
+      );
+
+      if (parseInt(response.data.codeNumber) === 200) {
+        dispatch({
+          type: typeRetailer.CHANGE_IMAGE_PRODUCT_SUCCESS,
+          payload: { productId, fileId, url },
+        });
+        dispatch({
+          type: typeNotify.NOTIFY_SUCCESS,
+          payload: response.data.message,
+        });
+        callBack();
+      }
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_UPLOAD_FILE_REQUEST });
+  }
+};
+
 export const sortOverAll = (payload) => {
   return {
     type: typeRetailer.SORT_OVRERALL,

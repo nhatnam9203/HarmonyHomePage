@@ -1,10 +1,10 @@
 import axios from "axios";
 import instance from "../helper/axios";
 
-// const url = "https://dev.harmonypayment.com/api";
+const url = "https://dev.harmonypayment.com/api";
 
 // Staging
-const url = "https://staging.harmonypayment.com/api";
+// const url = "https://staging.harmonypayment.com/api";
 
 // Prod
 // const url = "https://api.harmonypayment.com/api";
@@ -185,3 +185,18 @@ export const getByPage = (requestUrl, token) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const uploadFile = (requestUrl, formData) => {
+  const config = {
+    headers: { "content-type": "multipart/form-data" },
+  };
+  return axios.post(`${url}/${requestUrl}`, formData, config);
+};
+
+export const updateImageProduct = (requestUrl, payload, token) => {
+  return axios.put(`${url}/${requestUrl}`, payload, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

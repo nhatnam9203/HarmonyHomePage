@@ -1,11 +1,13 @@
 import * as types from "../constants/retailerConstant";
 import sortArray from "sort-array";
+import { actions } from "react-table";
 
 export const retailerReducer = (
   state = {
     loading: false,
     loadingExport: false,
     loadingDetail: false,
+    loadingUpfile: false,
     orders: [],
     orderDetail: {},
     orderPages: 0,
@@ -118,11 +120,38 @@ export const retailerReducer = (
     case types.STOP_RETAILER_EXPORT_REQUEST:
       return { ...state, loadingExport: false };
 
+    case types.UPLOAD_FILE_REQUEST:
+      return { ...state, loadingUpfile: true };
+
+    case types.STOP_UPLOAD_FILE_REQUEST:
+      return { ...state, loadingUpfile: false };
+
     case types.EXPORT_SUCCESS:
       return { ...state, loadingExport: false, linkExport: payload };
 
     case types.CLOSE_EXPORT:
       return { ...state, loadingExport: false, linkExport: "" };
+
+    case types.CHANGE_IMAGE_PRODUCT_SUCCESS:
+      let inventoryDetail = {
+        ...state.inventoryDetail,
+        fileId: payload.fileId,
+        imageUrl: payload.url,
+      };
+
+      let inventory = state.inventory;
+      let _productIndex = inventory.findIndex(
+        (i) => parseInt(i.productId) === parseInt(payload.productId)
+      );
+      if (_productIndex !== -1) {
+        inventory[_productIndex].fileId = payload.fileId;
+        inventory[_productIndex].imageUrl = payload.url;
+      }
+      return {
+        ...state,
+        inventoryDetail,
+        inventory,
+      };
 
     case types.SET_VISIBLE_ORDER_DETAIL:
       return {

@@ -3,14 +3,32 @@ import Fade from "react-reveal/Fade";
 import { Button } from "react-bootstrap";
 import ReactTable from "react-table";
 import Title from "@/components/Title";
+import PopupUpload from "@/components/PopupUpload";
 import { useSelector } from "react-redux";
 import CustomTableHeader from "../CustomTableHeader";
 import moment from "moment";
+import { isEmpty } from "lodash";
+import { useDispatch } from "react-redux";
+import { changeImageProduct } from "@/actions/retailerActions";
 import "../Info.scss";
 import "./style.scss";
 
 const Index = ({ onBack }) => {
+  const dispatch = useDispatch();
+  const [visibleUpload, setVisibleUpload] = React.useState(false);
   const { inventoryDetail } = useSelector((state) => state.retailer);
+
+  const changeImage = (files = [], callBack) => {
+    if (!isEmpty(files) && files.length > 0) {
+      let fileUpload = files[0];
+      let formData = new FormData();
+      formData.append("Filename3", fileUpload);
+
+      const productId = inventoryDetail?.productId;
+
+      dispatch(changeImageProduct(formData, productId, callBack));
+    }
+  };
 
   return (
     <Fade>
@@ -61,6 +79,11 @@ const Index = ({ onBack }) => {
           </p>
         </div>
       </div>
+
+      <div onClick={() => setVisibleUpload(true)} className="text_change_image">
+        Change default image
+      </div>
+
       <img
         src={inventoryDetail.imageUrl}
         className="inventory_img_small_product"
@@ -86,6 +109,11 @@ const Index = ({ onBack }) => {
         NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
         columns={columns()}
         PaginationComponent={() => <div />}
+      />
+      <PopupUpload
+        isVisible={visibleUpload}
+        close={() => setVisibleUpload(false)}
+        upload={changeImage}
       />
     </Fade>
   );
