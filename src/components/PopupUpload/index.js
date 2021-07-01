@@ -31,30 +31,47 @@ const Index = ({ isVisible = false, close, upload }) => {
       >
         <div className="upload_container">
           {/* ------------------ DROP ZONE IMAGE ------------------  */}
-          <Dropzone
-            accept={"image/jpeg, image/png , image/gif"}
-            multiple={false}
-            maxFiles={1}
-            onDrop={(acceptedFiles) => setFiles(acceptedFiles)}
-          >
-            {({ getRootProps, getInputProps, isDragActive }) => (
-              <div className="upload_container_dropZone" {...getRootProps()}>
-                <input {...getInputProps()} />
-                {isDragActive ? (
-                  <p>Drop the file here ...</p>
-                ) : (
-                  <p>Drag and drop file here, or click to select file</p>
-                )}
-              </div>
-            )}
-          </Dropzone>
+          <div>
+            <Dropzone
+              accept={"image/jpeg, image/png , image/gif"}
+              multiple={false}
+              maxFiles={1}
+              maxSize={10485760}
+              onDrop={(acceptedFiles) => setFiles(acceptedFiles)}
+            >
+              {({ getRootProps, getInputProps, isDragActive }) => (
+                <div className="upload_container_dropZone" {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {isDragActive ? (
+                    <p>Drop the file here ...</p>
+                  ) : (
+                    <p>Drag and drop file here, or click to select file</p>
+                  )}
+                </div>
+              )}
+            </Dropzone>
 
-          {/* ------------------ SHOW FILE UPLOAD ------------------  */}
-          <div className="files_list">
-            <h4>File</h4>
-            {files.map((f, key) => (
-              <p key={f.name + key}>{f.name}</p>
-            ))}
+            {/* ------------------ SHOW FILE UPLOAD ------------------  */}
+            <div className="files_list">
+              <h4>File</h4>
+              {files.map((f, key) => (
+                <p key={f.name + key}>{f.name}</p>
+              ))}
+            </div>
+          </div>
+
+          {/* ------------------BUTTON ------------------  */}
+          <div className="upload_container_button_group">
+            <div className="button_cancel_upload" onClick={closePopup}>
+              Cancel
+            </div>
+            <div
+              className="upload_container_button button_upload"
+              variant="primary"
+              onClick={isEmpty(files) ? () => {} : onUpload}
+            >
+              Upload
+            </div>
           </div>
 
           {/* ------------------ LOADING ------------------  */}
@@ -63,20 +80,6 @@ const Index = ({ isVisible = false, close, upload }) => {
               <Loading />
             </div>
           )}
-        </div>
-
-        {/* ------------------BUTTON ------------------  */}
-        <div className="upload_container_button_group">
-          <div className="button_cancel_upload" onClick={closePopup}>
-            Cancel
-          </div>
-          <div
-            className="upload_container_button button_upload"
-            variant="primary"
-            onClick={isEmpty(files) ? () => {} : onUpload}
-          >
-            Upload
-          </div>
         </div>
       </Modal>
     </>
