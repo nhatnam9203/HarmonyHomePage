@@ -53,7 +53,7 @@ const Index = ({ isVisible = false, close, upload }) => {
 
             {/* ------------------ SHOW FILE UPLOAD ------------------  */}
             <div className="files_list">
-              <h4>File</h4>
+              <h4>File Upload</h4>
               {files.map((f, key) => (
                 <p key={f.name + key}>{f.name}</p>
               ))}
