@@ -32,6 +32,7 @@ const Index = ({
     loading,
     loadingDetail,
     isVisibleOrderDetail,
+    typeSort_orders,
   } = useSelector((state) => state.retailer);
 
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
@@ -84,7 +85,7 @@ const Index = ({
             )}
             LoadingComponent={() => loading && <Loading />}
             loading={loading}
-            columns={columns(valueSort, onClickSort)}
+            columns={columns(valueSort, onClickSort, typeSort_orders)}
             PaginationComponent={() => <div />}
             getTdProps={onRowClick}
           />

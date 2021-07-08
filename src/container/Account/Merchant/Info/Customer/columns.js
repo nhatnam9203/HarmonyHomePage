@@ -4,13 +4,14 @@ import { convertIsVip } from "@/util";
 import "../Info.scss";
 import "./style.scss";
 
-const columns = (valueSort, onClickSort) => [
+const columns = (valueSort, onClickSort, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
         value="Name"
         valueSort={valueSort}
+        isActiveSort={sortType == "firstName"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "firstName")
         }
@@ -28,6 +29,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Phone number"
         valueSort={valueSort}
+        isActiveSort={sortType == "phone"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "phone")
         }
@@ -42,6 +44,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Email"
         valueSort={valueSort}
+        isActiveSort={sortType == "email"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "email")
         }
@@ -56,6 +59,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Group"
         valueSort={valueSort}
+        isActiveSort={sortType == "isVip"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "isVip")
         }
@@ -72,6 +76,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Customer since"
         valueSort={valueSort}
+        isActiveSort={sortType == "createdDate"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "createdDate")
         }

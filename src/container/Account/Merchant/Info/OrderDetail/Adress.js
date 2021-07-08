@@ -17,9 +17,9 @@ const Address = ({ billingAddress, shippingAddress }) => {
               }`}</p>
             </div>
             <div className="rowInfo">
-              <p>{`${billingAddress?.stateName || ""} ${
-                billingAddress?.street || ""
-              } ${billingAddress?.city || ""} ${
+              <p>{`${billingAddress?.street || ""} ${
+                billingAddress?.city || ""
+              } ${billingAddress?.stateName || ""} ${
                 billingAddress?.zipCode || ""
               }`}</p>
             </div>
@@ -37,9 +37,9 @@ const Address = ({ billingAddress, shippingAddress }) => {
               }`}</p>
             </div>
             <div className="rowInfo">
-              <p>{`${shippingAddress?.stateName || ""} ${
-                shippingAddress?.street || ""
-              } ${shippingAddress?.city || ""} ${
+              <p>{`${shippingAddress?.street || ""} ${
+                shippingAddress?.city || ""
+              } ${shippingAddress?.stateName || ""} ${
                 shippingAddress?.zipCode || ""
               }`}</p>
             </div>

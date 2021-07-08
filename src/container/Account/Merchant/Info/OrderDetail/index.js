@@ -23,7 +23,7 @@ const Index = ({ onBack }) => {
     <Fade>
       <div className="info_merchant_title">
         <div>
-          Order <span style={{ color: "#333" }}>#1234566</span>
+          Order <span style={{ color: "#333" }}>#{orderDetail?.code}</span>
         </div>
         <Button className="btn btn_cancel" onClick={onBack}>
           Back

@@ -22,6 +22,8 @@ import Report from "./Report";
 import Orders from "./Orders";
 import Tabs from "./Tabs";
 
+import { isEmpty } from "lodash";
+
 import "./Info.scss";
 
 function Info() {
@@ -70,26 +72,35 @@ function Info() {
 
   React.useEffect(() => {
     if (merchantId) {
-      getOrdersData(1, sortOrders, sortTypeOrders);
-      getInventoryData(1, sortInventory, sortTypeInventory);
-      getCustomerData(1, sortCustomer, sortTypeCustomer);
+      getOrdersData(1);
+      getInventoryData(1);
+      getCustomerData(1);
     }
   }, [merchantId]);
 
   const getOrdersData = (page, sort, sortType) => {
-    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}`;
+    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
+    if (isEmpty(sort) || isEmpty(sortType)) {
+      url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}`;
+    }
     url = encodeURI(url);
     dispatch(getOrders(url, token));
   };
 
   const getInventoryData = (page, sort, sortType) => {
-    let url = `product?page=${page}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}`;
+    let url = `product?page=${page}&key=${keySearchInventory}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
+    if (isEmpty(sort) || isEmpty(sortType)) {
+      url = `product?page=${page}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}`;
+    }
     url = encodeURI(url);
     dispatch(getInventory(url, token));
   };
 
   const getCustomerData = (page, sort, sortType) => {
-    let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts=&merchantId=${detail.merchantId}`;
+    let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
+    if (isEmpty(sort) || isEmpty(sortType)) {
+      url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts=&merchantId=${detail.merchantId}`;
+    }
     url = encodeURI(url);
     dispatch(getCustomer(url, token));
   };
@@ -113,21 +124,21 @@ function Info() {
     await setSortOrders(sort);
     await setSortTypeOrders(sortType);
     await dispatch(sort_orders({ type: sortType }));
-    // await getOrdersData(pageOrders, sort, sortType);
+    await getOrdersData(pageOrders, sort, sortType);
   };
 
   const changeSortInventory = async (sort, sortType) => {
     await setSortInventory(sort);
     await setSortTypeInventory(sortType);
     await dispatch(sort_inventory({ type: sortType }));
-    // await getInventoryData(pageInventory, sort, sortType);
+    await getInventoryData(pageInventory, sort, sortType);
   };
 
   const changeSortCustomer = async (sort, sortType) => {
     await setSortCustomer(sort);
     await setSortTypeCustomer(sortType);
     await dispatch(sort_customer({ type: sortType }));
-    // await getCustomerData(pageCustomer, sort, sortType);
+    await getCustomerData(pageCustomer, sort, sortType);
   };
 
   const onChangeSearchOrder = (e) => {
@@ -148,19 +159,19 @@ function Info() {
   const searchOrder = async () => {
     await setPageOrders(1);
     await dispatch(reset_sort_orders());
-    getOrdersData(1, sortOrders, sortTypeOrders);
+    getOrdersData(1);
   };
 
   const searchInventory = async () => {
     await setPageInventory(1);
     await dispatch(reset_sort_inventory());
-    getInventoryData(1, sortInventory, sortTypeInventory);
+    getInventoryData(1);
   };
 
   const searchCustomer = async () => {
     await setPageCustomer(1);
     await dispatch(reset_sort_customer());
-    getCustomerData(1, sortCustomer, sortTypeCustomer);
+    getCustomerData(1);
   };
 
   const changeTab = (tabName) => {

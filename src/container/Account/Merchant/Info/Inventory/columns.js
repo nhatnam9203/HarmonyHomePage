@@ -1,15 +1,20 @@
 import CustomTableHeader from "../CustomTableHeader";
 import { formatMoney } from "@/util";
+import product_default from "@/assets/images/product_default.png";
 import "../Info.scss";
 import "./style.scss";
 
-const columns = (valueSort, onClickSort) => [
+const columns = (valueSort, onClickSort, sortType) => [
   {
     Header: <CustomTableHeader value="Image" />,
     id: "imageUrl",
     accessor: (row) => (
       <div className="table-tr">
-        <img className="img-inventory" src={row.imageUrl} alt="img" />
+        <img
+          className="img-inventory"
+          src={row.imageUrl ? row.imageUrl : product_default}
+          alt="img"
+        />
       </div>
     ),
   },
@@ -19,6 +24,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Product name"
         valueSort={valueSort}
+        isActiveSort={sortType == "name"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
         }
@@ -34,6 +40,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Category"
         valueSort={valueSort}
+        isActiveSort={sortType == "categoryName"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "categoryName")
         }
@@ -48,6 +55,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="SKU"
         valueSort={valueSort}
+        isActiveSort={sortType == "sku"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "sku")
         }
@@ -62,6 +70,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Price"
         valueSort={valueSort}
+        isActiveSort={sortType == "price"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "price")
         }
@@ -78,6 +87,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Quantity"
         valueSort={valueSort}
+        isActiveSort={sortType == "quantity"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "quantity")
         }
@@ -92,6 +102,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Need to order"
         valueSort={valueSort}
+        isActiveSort={sortType == "needToorDer"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
         }

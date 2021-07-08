@@ -1,6 +1,5 @@
 import * as types from "../constants/retailerConstant";
 import sortArray from "sort-array";
-import { actions } from "react-table";
 
 export const retailerReducer = (
   state = {
@@ -235,11 +234,6 @@ export const retailerReducer = (
         directionSort_inventory:
           state.directionSort_inventory === "ASC" ? "DESC" : "ASC",
         typeSort_inventory: payload.type,
-        inventory: sortTable(
-          payload.type,
-          state.inventory,
-          state.directionSort_inventory === "ASC" ? "DESC" : "ASC"
-        ),
       };
 
     case types.SORT_ORDERS:
@@ -248,11 +242,6 @@ export const retailerReducer = (
         directionSort_orders:
           state.directionSort_orders === "ASC" ? "DESC" : "ASC",
         typeSort_orders: payload.type,
-        orders: sortTable(
-          payload.type,
-          state.orders,
-          state.directionSort_orders === "ASC" ? "DESC" : "ASC"
-        ),
       };
 
     case types.SORT_CUSTOMER:
@@ -261,11 +250,6 @@ export const retailerReducer = (
         directionSort_customer:
           state.directionSort_customer === "ASC" ? "DESC" : "ASC",
         typeSort_customer: payload.type,
-        customer: sortTable(
-          payload.type,
-          state.customer,
-          state.directionSort_customer === "ASC" ? "DESC" : "ASC"
-        ),
       };
 
     case types.RESET_SORT_ORDERS:

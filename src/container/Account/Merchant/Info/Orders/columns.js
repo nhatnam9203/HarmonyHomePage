@@ -4,13 +4,14 @@ import "../Info.scss";
 import "./style.scss";
 import { formatMoney, CustomStatus } from "@/util";
 
-const columns = (valueSort, onClickSort) => [
+const columns = (valueSort, onClickSort, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
         value="ID"
         valueSort={valueSort}
+        isActiveSort={sortType == "code"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "code")
         }
@@ -25,6 +26,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Purchase point"
         valueSort={valueSort}
+        isActiveSort={sortType == "purchasePoint"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "purchasePoint")
         }
@@ -40,6 +42,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Purchase date"
         valueSort={valueSort}
+        isActiveSort={sortType == "createdDate"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "createdDate")
         }
@@ -59,6 +62,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Bill-to Name"
         valueSort={valueSort}
+        isActiveSort={sortType == "billToName"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "billToName")
         }
@@ -73,6 +77,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Ship-to Name"
         valueSort={valueSort}
+        isActiveSort={sortType == "shipToName"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "shipToName")
         }
@@ -88,6 +93,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Status"
         valueSort={valueSort}
+        isActiveSort={sortType == "status"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "status")
         }
@@ -103,6 +109,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Grand total"
         valueSort={valueSort}
+        isActiveSort={sortType == "total"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "total")
         }

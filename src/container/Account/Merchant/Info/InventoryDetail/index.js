@@ -10,6 +10,7 @@ import moment from "moment";
 import { isEmpty } from "lodash";
 import { useDispatch } from "react-redux";
 import { changeImageProduct } from "@/actions/retailerActions";
+import product_default from "@/assets/images/product_default.png";
 import "../Info.scss";
 import "./style.scss";
 
@@ -42,7 +43,11 @@ const Index = ({ onBack }) => {
       <Title>General Details</Title>
       <div className="inventory_info_detail">
         <img
-          src={inventoryDetail.imageUrl}
+          src={
+            inventoryDetail.imageUrl
+              ? inventoryDetail.imageUrl
+              : product_default
+          }
           className="inventory_img_big_product"
           alt="img"
         />
@@ -85,7 +90,9 @@ const Index = ({ onBack }) => {
       </div>
 
       <img
-        src={inventoryDetail.imageUrl}
+        src={
+          inventoryDetail.imageUrl ? inventoryDetail.imageUrl : product_default
+        }
         className="inventory_img_small_product"
         alt="img"
       />

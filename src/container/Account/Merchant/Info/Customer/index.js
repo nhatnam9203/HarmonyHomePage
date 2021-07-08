@@ -33,6 +33,7 @@ const Index = ({
     loading,
     loadingDetail,
     isVisibleCustomerDetail,
+    typeSort_customer,
   } = useSelector((state) => state.retailer);
 
   const { detail } = useSelector((state) => state.merchantDetail);
@@ -90,7 +91,7 @@ const Index = ({
             )}
             loading={loading}
             LoadingComponent={() => loading && <Loading />}
-            columns={columns(valueSort, onClickSort)}
+            columns={columns(valueSort, onClickSort, typeSort_customer)}
             PaginationComponent={() => <div />}
             getTdProps={onRowClick}
           />

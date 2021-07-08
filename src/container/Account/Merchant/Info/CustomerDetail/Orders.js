@@ -28,9 +28,11 @@ const Orders = ({
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const { detail } = useSelector((state) => state.merchantDetail);
-  const { loading, directionSort_customerAppointments } = useSelector(
-    (state) => state.retailer
-  );
+  const {
+    loading,
+    directionSort_customerAppointments,
+    typeSort_customerAppointments,
+  } = useSelector((state) => state.retailer);
 
   const [page, setPage] = React.useState(1);
   const [key, setKey] = React.useState("");
@@ -86,7 +88,11 @@ const Orders = ({
         minRows={1}
         noDataText="NO DATA!"
         NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
-        columns={columns(directionSort_customerAppointments, onClickSort)}
+        columns={columns(
+          directionSort_customerAppointments,
+          onClickSort,
+          typeSort_customerAppointments
+        )}
         LoadingComponent={() => loading && <Loading />}
         loading={loading}
         PaginationComponent={() => <div />}
@@ -105,22 +111,21 @@ const Orders = ({
 
 export default Orders;
 
-const columns = (valueSort, onClickSort) => [
+const columns = (valueSort, onClickSort, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
         value="ID"
         valueSort={valueSort}
+        isActiveSort={sortType == "code"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "appointmentId")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "code")
         }
       />
     ),
-    id: "appointmentId",
-    accessor: (row) => (
-      <div className="table-tr">{`${row?.appointmentId || ""}`}</div>
-    ),
+    id: "code",
+    accessor: (row) => <div className="table-tr">{`${row?.code || ""}`}</div>,
   },
   {
     Header: (
@@ -128,6 +133,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Purchase Point"
         valueSort={valueSort}
+        isActiveSort={sortType == "purchasePoint"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "purchasePoint")
         }
@@ -144,6 +150,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Purchase Date"
         valueSort={valueSort}
+        isActiveSort={sortType == "createdDate"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "createdDate")
         }
@@ -162,6 +169,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Bill-to Name"
         valueSort={valueSort}
+        isActiveSort={sortType == "billToName"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "billToName")
         }
@@ -178,6 +186,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Ship-to Name"
         valueSort={valueSort}
+        isActiveSort={sortType == "shipToName"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "shipToName")
         }
@@ -194,6 +203,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Status"
         valueSort={valueSort}
+        isActiveSort={sortType == "status"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "status")
         }
@@ -208,6 +218,7 @@ const columns = (valueSort, onClickSort) => [
         isSort={true}
         value="Grand total"
         valueSort={valueSort}
+        isActiveSort={sortType == "total"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "total")
         }

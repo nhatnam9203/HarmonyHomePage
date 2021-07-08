@@ -24,6 +24,8 @@ const Index = ({ onBack }) => {
     loadingDetail,
   } = useSelector((state) => state.retailer);
 
+  console.log({ customerDetail });
+
   const showDetail = () => {
     setDetail(true);
   };
@@ -48,8 +50,8 @@ const Index = ({ onBack }) => {
           birthdate={customerDetail.birthdate}
           isVip={customerDetail.isVip}
           createdDate={customerDetail.createdDate}
-          defaultBillingAddress={customerDetail.defaultAddress}
-          defaultShippingAddress={customerDetail.defaultAddress}
+          defaultBillingAddress={customerDetail.defaultBillingAddress}
+          defaultShippingAddress={customerDetail.defaultShippingAddress}
         />
 
         <Address addresses={customerDetail.addresses} />
