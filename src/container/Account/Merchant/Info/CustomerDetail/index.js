@@ -24,8 +24,6 @@ const Index = ({ onBack }) => {
     loadingDetail,
   } = useSelector((state) => state.retailer);
 
-  console.log({ customerDetail });
-
   const showDetail = () => {
     setDetail(true);
   };

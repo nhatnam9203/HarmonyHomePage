@@ -503,11 +503,11 @@ export const retailerReducer = (
         directionSort_customerAppointments:
           state.directionSort_customerAppointments === "ASC" ? "DESC" : "ASC",
         typeSort_customerAppointments: payload.type,
-        customerAppointments: sortTable(
-          payload.type,
-          state.customerAppointments,
-          state.directionSort_customerAppointments === "ASC" ? "DESC" : "ASC"
-        ),
+        // customerAppointments: sortTable(
+        //   payload.type,
+        //   state.customerAppointments,
+        //   state.directionSort_customerAppointments === "ASC" ? "DESC" : "ASC"
+        // ),
       };
 
     default:

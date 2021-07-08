@@ -26,8 +26,6 @@ export const getMyAccount = (token) =>
 
 // Update My Account
 export const updateMyAccount = (payload, token) => {
-  console.log("payload", payload);
-
   const passwords = {
     newPassword: payload?.newPassword,
     oldPassword: payload?.oldPassword,

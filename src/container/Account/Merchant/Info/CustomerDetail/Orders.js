@@ -14,8 +14,10 @@ import {
   getOrderDetail,
 } from "@/actions/retailerActions";
 import { formatMoney, CustomStatus } from "@/util";
+import { isEmpty } from "lodash";
 import "../Info.scss";
 import "./style.scss";
+import { isElement } from "react-dom/cjs/react-dom-test-utils.development";
 
 const Orders = ({
   customerAppointments = [],
@@ -39,7 +41,12 @@ const Orders = ({
 
   const changePage = (index) => {
     setPage(index);
-    getData(index, key);
+    getData(
+      index,
+      key,
+      typeSort_customerAppointments,
+      directionSort_customerAppointments
+    );
   };
 
   const onChangeSearch = (e) => {
@@ -52,13 +59,17 @@ const Orders = ({
     getData(1, key);
   };
 
-  const getData = (index, keySearch) => {
-    const subUrl = `retailer/appointment/getByCustomer/${customerId}?merchantId=${detail.merchantId}&page=${index}&key=${keySearch}`;
+  const getData = (index, keySearch, sortType, sort) => {
+    let subUrl = `retailer/appointment/getByCustomer/${customerId}?merchantId=${detail.merchantId}&sorts={"${sortType}":"${sort}"}&page=${index}&key=${keySearch}`;
+    if (isElement(sortType) || isEmpty(sort)) {
+      subUrl = `retailer/appointment/getByCustomer/${customerId}?merchantId=${detail.merchantId}&page=${index}&key=${keySearch}`;
+    }
     dispatch(getAppointmentCustomer(subUrl, token));
   };
 
-  const onClickSort = (status, sortType) => {
+  const onClickSort = (sort, sortType) => {
     dispatch(sortCustomerAppointment({ type: sortType }));
+    getData(page, key, sortType, sort);
   };
 
   const onRowClick = (state, rowInfo, column, instance) => {

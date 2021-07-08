@@ -535,7 +535,7 @@ export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_APPOINTMENT_CUSTOMER_DETAIL,
-        payload: { data: temptData, count: data.count },
+        payload: { data: temptData, count: data.pages },
       });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
