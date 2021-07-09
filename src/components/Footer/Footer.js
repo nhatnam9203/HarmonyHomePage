@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Col, Container, Row } from "react-bootstrap";
 import { AiFillFacebook } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import instagramIcon from "@/assets/images/instagram.png";
 
 export default function Footer() {
   const { t } = useTranslation("footer");
@@ -75,9 +76,19 @@ export default function Footer() {
                 target="blank"
                 href="https://www.facebook.com/harmonypayapp"
                 className="text-white"
+                style={{ marginRight: 16 }}
               >
                 <AiFillFacebook size={48} />
               </a>
+              <img
+                src={instagramIcon}
+                style={{ width: 43, height: 43, cursor: "pointer" }}
+                alt="instagram"
+                onClick={() =>
+                  (window.location.href =
+                    "https://instagram.com/harmonypay_salon_pos?utm_medium=copy_link")
+                }
+              />
             </Col>
           </Row>
         </Container>
