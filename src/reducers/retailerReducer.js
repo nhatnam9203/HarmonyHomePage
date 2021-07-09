@@ -56,7 +56,7 @@ export const retailerReducer = (
     /* SALES BY CATEGORY */
     sales_by_categoryt: [],
     summary_sales_by_categoryt: {},
-    typeSort_sales_by_categoryt: "",
+    typeSort_sales_by_category: "",
     directionSort_sales_by_categoryt: "ASC",
 
     /* SALES BY CUSTOMER */

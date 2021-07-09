@@ -28,6 +28,7 @@ const Overall = ({ onBack = () => {} }) => {
     reportOverall,
     directionSortOverall,
     linkExport,
+    typeSortOverall,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -147,7 +148,7 @@ const Overall = ({ onBack = () => {} }) => {
           )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
-          columns={columns(directionSortOverall, onClickSort)}
+          columns={columns(directionSortOverall, onClickSort, typeSortOverall)}
           PaginationComponent={() => <div />}
         />
       </div>

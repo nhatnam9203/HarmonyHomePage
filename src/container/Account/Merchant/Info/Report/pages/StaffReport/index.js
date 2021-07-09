@@ -29,10 +29,11 @@ const Index = ({ onBack }) => {
 
   const {
     loading,
-    directionSort_staff_report,
     linkExport,
     staff_report,
     staff_report_pages,
+    directionSort_staff_report,
+    typeSort_staff_report,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -44,7 +45,14 @@ const Index = ({ onBack }) => {
     getData(convertDateData(valueDate), "", "", page);
   }, []);
 
-  const getData = (quickFilter = "", start = "", end = "", pageStaff = 1) => {
+  const getData = (
+    quickFilter = "",
+    start = "",
+    end = "",
+    pageStaff = 1,
+    sortType,
+    sort
+  ) => {
     let url = `staff/salary?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&page=${pageStaff}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getStaffReport(url, token));
@@ -179,7 +187,11 @@ const Index = ({ onBack }) => {
           )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
-          columns={columns(directionSort_staff_report, onClickSort)}
+          columns={columns(
+            directionSort_staff_report,
+            onClickSort,
+            typeSort_staff_report
+          )}
           PaginationComponent={() => <div />}
         />
       </div>

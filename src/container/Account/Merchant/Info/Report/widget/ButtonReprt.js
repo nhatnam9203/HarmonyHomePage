@@ -52,7 +52,7 @@ const PopupExport = ({ isPopupExport, onClickExport }) => {
   return (
     <div className="popupExport">
       <div>
-        <ItemExport onClick={onClickExport} title="PDF" />
+        <ItemExport onClick={onClickExport} title="CSV" />
         <ItemExport
           onClick={onClickExport}
           title="Excel"

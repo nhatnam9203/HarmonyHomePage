@@ -3,13 +3,14 @@ import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => {}) => [
+const columns = (valueSort, onClickSort = () => {}, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
         value="Campaign Name"
         valueSort={valueSort}
+        isActiveSort={sortType == "name"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
         }
@@ -29,6 +30,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Discount Amount"
         valueSort={valueSort}
+        isActiveSort={sortType == "discount"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "discount")
         }
@@ -48,6 +50,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Revenue"
         valueSort={valueSort}
+        isActiveSort={sortType == "revenue"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "revenue")
         }

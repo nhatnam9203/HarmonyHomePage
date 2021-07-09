@@ -3,13 +3,14 @@ import moment from "moment";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => {}) => [
+const columns = (valueSort, onClickSort = () => {}, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
         value="Date"
         valueSort={valueSort}
+        isActiveSort={sortType == "date"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "date")
         }
@@ -31,6 +32,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Completed Orders"
         valueSort={valueSort}
+        isActiveSort={sortType == "completed"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "completed")
         }
@@ -50,6 +52,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Uncompleted Orders"
         valueSort={valueSort}
+        isActiveSort={sortType == "unCompleted"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "unCompleted")
         }
@@ -69,6 +72,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Canceled Orders"
         valueSort={valueSort}
+        isActiveSort={sortType == "canceled"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "canceled")
         }
@@ -88,6 +92,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Returned Orders"
         valueSort={valueSort}
+        isActiveSort={sortType == "returned"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "returned")
         }
@@ -107,6 +112,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Total Orders"
         valueSort={valueSort}
+        isActiveSort={sortType == "total"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "total")
         }

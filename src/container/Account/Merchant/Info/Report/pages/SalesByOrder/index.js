@@ -27,6 +27,7 @@ const Overall = ({ onBack }) => {
     directionSort_sales_by_order,
     linkExport,
     sales_by_order,
+    typeSort_sales_by_order,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -146,7 +147,11 @@ const Overall = ({ onBack }) => {
           )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
-          columns={columns(directionSort_sales_by_order, onClickSort)}
+          columns={columns(
+            directionSort_sales_by_order,
+            onClickSort,
+            typeSort_sales_by_order
+          )}
           PaginationComponent={() => <div />}
         />
       </div>

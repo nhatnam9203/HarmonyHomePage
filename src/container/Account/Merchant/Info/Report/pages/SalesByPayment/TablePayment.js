@@ -9,6 +9,7 @@ const TablePayment = ({
   onClickSort = () => {},
   valueSort = "ASC",
   summary,
+  typeSort_payment_method,
 }) => {
   let tbodies = null;
 

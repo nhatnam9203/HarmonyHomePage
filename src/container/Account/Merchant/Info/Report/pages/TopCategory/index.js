@@ -26,6 +26,7 @@ const Index = ({ onBack }) => {
     directionSort_top_category,
     linkExport,
     top_category,
+    typeSort_top_category,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -145,7 +146,11 @@ const Index = ({ onBack }) => {
           )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
-          columns={columns(directionSort_top_category, onClickSort)}
+          columns={columns(
+            directionSort_top_category,
+            onClickSort,
+            typeSort_top_category
+          )}
           PaginationComponent={() => <div />}
         />
       </div>

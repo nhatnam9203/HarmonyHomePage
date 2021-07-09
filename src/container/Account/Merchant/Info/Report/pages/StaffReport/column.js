@@ -3,13 +3,14 @@ import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => {}) => [
+const columns = (valueSort, onClickSort = () => {}, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
         value="Customer name"
         valueSort={valueSort}
+        isActiveSort={sortType == "name"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
         }
@@ -29,6 +30,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Product Sales"
         valueSort={valueSort}
+        isActiveSort={sortType == "productSales"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "productSales")
         }
@@ -48,6 +50,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Product Split"
         valueSort={valueSort}
+        isActiveSort={sortType == "productSplit"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "productSplit")
         }
@@ -67,6 +70,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Working Hour"
         valueSort={valueSort}
+        isActiveSort={sortType == "workingHour"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "workingHour")
         }
@@ -86,6 +90,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Salary Wage"
         valueSort={valueSort}
+        isActiveSort={sortType == "salaryWage"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "salaryWage")
         }
@@ -105,6 +110,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Refund Amount"
         valueSort={valueSort}
+        isActiveSort={sortType == "refundAmount"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "refundAmount")
         }
@@ -124,6 +130,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Discount By Staff"
         valueSort={valueSort}
+        isActiveSort={sortType == "discountByStaff"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "discountByStaff")
         }
@@ -145,6 +152,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Salary"
         valueSort={valueSort}
+        isActiveSort={sortType == "salary"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "salary")
         }

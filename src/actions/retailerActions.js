@@ -441,6 +441,7 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
   } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_EXPORT_REQUEST });
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };

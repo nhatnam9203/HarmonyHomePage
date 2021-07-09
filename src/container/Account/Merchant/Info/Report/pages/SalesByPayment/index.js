@@ -26,6 +26,7 @@ const Index = ({ onBack }) => {
     linkExport,
     payment_method,
     summary_payment_method,
+    typeSort_payment_method,
   } = useSelector((state) => state.retailer);
 
   const {
@@ -139,6 +140,7 @@ const Index = ({ onBack }) => {
           onClickSort={onClickSort}
           valueSort={directionSort_payment_method}
           summary={summary_payment_method}
+          typeSort_payment_method={typeSort_payment_method}
         />
         {loading && <Loading />}
       </div>

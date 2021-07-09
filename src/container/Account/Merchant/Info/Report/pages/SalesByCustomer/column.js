@@ -4,13 +4,14 @@ import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => {}) => [
+const columns = (valueSort, onClickSort = () => {}, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
         value="Customer name"
         valueSort={valueSort}
+        isActiveSort={sortType == "name"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
         }
@@ -30,6 +31,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Orders"
         valueSort={valueSort}
+        isActiveSort={sortType == "appointmentCount"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "appointmentCount")
         }
@@ -49,6 +51,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Last Order"
         valueSort={valueSort}
+        isActiveSort={sortType == "lastVisitDate"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "lastVisitDate")
         }
@@ -72,6 +75,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Last Order Sales"
         valueSort={valueSort}
+        isActiveSort={sortType == "lastVisitSale"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "lastVisitSale")
         }
@@ -93,6 +97,7 @@ const columns = (valueSort, onClickSort = () => {}) => [
         isSort={true}
         value="Total Sales"
         valueSort={valueSort}
+        isActiveSort={sortType == "total"}
         onClickSort={() =>
           onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "total")
         }
