@@ -6,7 +6,6 @@ import Title from "@/components/Title";
 import PopupUpload from "@/components/PopupUpload";
 import { useSelector } from "react-redux";
 import CustomTableHeader from "../CustomTableHeader";
-import moment from "moment";
 import { isEmpty } from "lodash";
 import { useDispatch } from "react-redux";
 import { changeImageProduct } from "@/actions/retailerActions";
@@ -104,13 +103,13 @@ const Index = ({ onBack }) => {
           marginBottom: "0.5rem",
         }}
       >
-        Restock History
+        Product Versions
       </Title>
       <ReactTable
         className="table-inventoryDetail"
         manual
         sortable={false}
-        data={inventoryDetail.restockHistory || []}
+        data={inventoryDetail.quantities || []}
         minRows={1}
         noDataText="NO DATA!"
         NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
@@ -130,44 +129,28 @@ export default Index;
 
 const columns = () => [
   {
-    Header: <CustomTableHeader value="Date time" />,
-    id: "createdDate",
+    Header: <CustomTableHeader value="Versions" />,
+    id: "label",
+    accessor: (row) => <div className="table-tr">{row.label}</div>,
+    width: 400,
+  },
+  {
+    Header: <CustomTableHeader value="Price" />,
+    id: "price",
+    accessor: (row) => <div className="table-tr">{`$ ${row.price}`}</div>,
+  },
+  {
+    Header: <CustomTableHeader value="Need to order" />,
+    id: "needToOrder",
     accessor: (row) => (
-      <div className="table-tr">
-        {`${moment(row.createdDate).format("MMMM DD, YYYY hh:mm A")}`}
-      </div>
+      <div className="table-tr">{`${row.needToOrder || "0"}`}</div>
     ),
   },
   {
-    Header: <CustomTableHeader value="Staff" />,
-    id: "staffName",
-    accessor: (row) => (
-      <div className="table-tr">{`${row.staffName || ""}`}</div>
-    ),
-  },
-  {
-    Header: <CustomTableHeader value="Reason" />,
-    id: "reason",
-    accessor: (row) => <div className="table-tr">{`${row.reason || ""}`}</div>,
-  },
-  {
-    Header: <CustomTableHeader value="Adjusted qty" />,
-    id: "adjustQuantity",
-    accessor: (row) => (
-      <div
-        className={
-          parseInt(row.adjustQuantity) >= 0 ? "table-tr" : "table-tr-red"
-        }
-      >
-        {`${row.adjustQuantity}`}
-      </div>
-    ),
-  },
-  {
-    Header: <CustomTableHeader value="Items in restock" />,
+    Header: <CustomTableHeader value="Items in stock" />,
     id: "quantity",
     accessor: (row) => (
-      <div className="table-tr">{`${row.quantity || ""}`}</div>
+      <div className="table-tr">{`${row.quantity || "0"}`}</div>
     ),
   },
 ];
