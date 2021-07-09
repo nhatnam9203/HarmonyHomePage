@@ -130,10 +130,7 @@ export default function PopupAfterLoad() {
             </p>
             <ul className="popup__bodyLeft-list">
               <li className="popup__bodyLeft-list--item">
-                Begin from 2/2020, we will have live stream weekly drawing.
-              </li>
-              <li className="popup__bodyLeft-list--item">
-                The reward included a mPOP and a PAX S300 Terminal.
+                Plese check out current special in our Promotion page
               </li>
             </ul>
           </Col>
