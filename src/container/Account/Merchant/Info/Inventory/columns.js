@@ -102,14 +102,14 @@ const columns = (valueSort, onClickSort, sortType) => [
         isSort={true}
         value="Need to order"
         valueSort={valueSort}
-        isActiveSort={sortType == "needToorDer"}
+        isActiveSort={sortType == "needToOrder"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToorDer")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "needToOrder")
         }
       />
     ),
-    id: "needToorDer",
-    accessor: (row) => <div className="table-tr">{`${row.needToorDer}`}</div>,
+    id: "needToOrder",
+    accessor: (row) => <div className="table-tr">{`${row.needToOrder}`}</div>,
     width: 170,
   },
 ];

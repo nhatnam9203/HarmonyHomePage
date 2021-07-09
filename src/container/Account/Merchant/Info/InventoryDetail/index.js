@@ -79,7 +79,7 @@ const Index = ({ onBack }) => {
               : 0}
           </p>
           <p style={{ color: "red", fontWeight: "600" }}>
-            {inventoryDetail.needToorDer}
+            {inventoryDetail.needToOrder}
           </p>
         </div>
       </div>
