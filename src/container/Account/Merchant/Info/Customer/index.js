@@ -72,7 +72,7 @@ const Index = ({
     <div style={{ position: "relative" }}>
       <Fade>
         <div className="info_merchant_title">
-          Customer teststst
+          Customer
           <Search
             value={valueSearch}
             onChange={onChangeSearch}

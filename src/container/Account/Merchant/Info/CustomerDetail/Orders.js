@@ -17,7 +17,6 @@ import { formatMoney, CustomStatus } from "@/util";
 import { isEmpty } from "lodash";
 import "../Info.scss";
 import "./style.scss";
-import { isElement } from "react-dom/cjs/react-dom-test-utils.development";
 
 const Orders = ({
   customerAppointments = [],
@@ -61,7 +60,7 @@ const Orders = ({
 
   const getData = (index, keySearch, sortType, sort) => {
     let subUrl = `retailer/appointment/getByCustomer/${customerId}?merchantId=${detail.merchantId}&sorts={"${sortType}":"${sort}"}&page=${index}&key=${keySearch}`;
-    if (isElement(sortType) || isEmpty(sort)) {
+    if (isEmpty(sortType) || isEmpty(sort)) {
       subUrl = `retailer/appointment/getByCustomer/${customerId}?merchantId=${detail.merchantId}&page=${index}&key=${keySearch}`;
     }
     dispatch(getAppointmentCustomer(subUrl, token));
