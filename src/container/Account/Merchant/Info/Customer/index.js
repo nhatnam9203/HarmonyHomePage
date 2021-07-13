@@ -47,11 +47,13 @@ const Index = ({
   const onRowClick = (state, rowInfo, column, instance) => {
     return {
       onClick: (e) => {
-        const { customerId } = rowInfo.original;
-        const url = `customer/${customerId}?merchantId=${detail.merchantId}`;
-        const subUrl = `retailer/appointment/getByCustomer/${customerId}?merchantId=${detail.merchantId}&page=1&key=`;
-        dispatch(getAppointmentCustomer(subUrl, token));
-        dispatch(getCustomerDetail(url, token, showDetail));
+        if (rowInfo) {
+          const { customerId } = rowInfo.original;
+          const url = `customer/${customerId}?merchantId=${detail.merchantId}`;
+          const subUrl = `retailer/appointment/getByCustomer/${customerId}?merchantId=${detail.merchantId}&page=1&key=`;
+          dispatch(getAppointmentCustomer(subUrl, token));
+          dispatch(getCustomerDetail(url, token, showDetail));
+        }
       },
     };
   };

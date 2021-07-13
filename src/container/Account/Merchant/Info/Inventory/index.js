@@ -44,9 +44,11 @@ const Index = ({
   const onRowClick = (state, rowInfo, column, instance) => {
     return {
       onClick: (e) => {
-        const { productId } = rowInfo.original;
-        const url = `product/${productId}`;
-        dispatch(getInventoryDetail(url, token, showDetail));
+        if (rowInfo) {
+          const { productId } = rowInfo.original;
+          const url = `product/${productId}`;
+          dispatch(getInventoryDetail(url, token, showDetail));
+        }
       },
     };
   };

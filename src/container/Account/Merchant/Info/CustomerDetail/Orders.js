@@ -74,9 +74,11 @@ const Orders = ({
   const onRowClick = (state, rowInfo, column, instance) => {
     return {
       onClick: (e) => {
-        const { appointmentId } = rowInfo.original;
-        const url = `retailer/appointment/${appointmentId}`;
-        dispatch(getOrderDetail(url, token, showDetail));
+        if (rowInfo) {
+          const { appointmentId } = rowInfo.original;
+          const url = `retailer/appointment/${appointmentId}`;
+          dispatch(getOrderDetail(url, token, showDetail));
+        }
       },
     };
   };
