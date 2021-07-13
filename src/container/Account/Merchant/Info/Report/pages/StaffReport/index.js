@@ -21,7 +21,7 @@ import "../style.scss";
 
 const Index = ({ onBack }) => {
   const dispatch = useDispatch();
-  const [valueDate, setValueDate] = React.useState("Last Month");
+  const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
   const [page, setPage] = React.useState(1);
@@ -77,7 +77,7 @@ const Index = ({ onBack }) => {
     onClickShowReport(pageStaff);
   };
 
-  const onClickShowReport = (pageStaff) => {
+  const onClickShowReport = (pageStaff = null) => {
     if (
       valueDate === "Today" ||
       valueDate === "Yesterday" ||
@@ -162,7 +162,7 @@ const Index = ({ onBack }) => {
         updateValueCustom={updateValueCustom}
       />
       <ButtonReport
-        onClickShowReport={onClickShowReport}
+        onClickShowReport={() => onClickShowReport(null)}
         onClickExport={onClickExport}
       />
 

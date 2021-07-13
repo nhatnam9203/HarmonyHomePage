@@ -19,7 +19,7 @@ import "../style.scss";
 
 const Overall = ({ onBack }) => {
   const dispatch = useDispatch();
-  const [valueDate, setValueDate] = React.useState("Last Month");
+  const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
   const {

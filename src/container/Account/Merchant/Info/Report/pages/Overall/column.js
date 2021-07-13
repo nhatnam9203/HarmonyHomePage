@@ -102,7 +102,7 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     id: "tax",
     accessor: (row) =>
       row.tax?.toString() ? (
-        <div className="table-tr">{row.tax}</div>
+        <div className="table-tr">{`${formatMoney(row.tax)}`}</div>
       ) : (
         <div className="table-tr-last">{row.total_tax}</div>
       ),

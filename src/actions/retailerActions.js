@@ -98,6 +98,7 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
               profit: FormatPrice(obj.profit),
               averageOrder: FormatPrice(obj.averageOrder),
               cost: FormatPrice(obj.cost),
+              tax: FormatPrice(obj.tax),
             };
           })
         : [];
@@ -333,8 +334,10 @@ export const getPaymentByMethod = (requestUrl = "", token = "") => async (
 
     if (parseInt(data.codeNumber) === 200) {
       let result = [];
-      if (data.data.length > 0)
-        result = [...data.data, summary_payment_by_method(data.summary)];
+      if (data.data.length > 0) {
+        let temptData = [...data.data].reverse();
+        result = [...temptData, summary_payment_by_method(data.summary)];
+      }
 
       dispatch({
         type: "SET_PAYMENT_BY_METHOD",
