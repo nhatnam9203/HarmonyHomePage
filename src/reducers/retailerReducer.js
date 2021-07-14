@@ -24,6 +24,8 @@ export const retailerReducer = (
     isVisibleInventoryDetail: false,
     isVisibleOrderDetail: false,
 
+    isVisibleInventoryEdit: false,
+
     typeSort_inventory: "",
     directionSort_inventory: "ASC",
 
@@ -162,6 +164,12 @@ export const retailerReducer = (
       return {
         ...state,
         isVisibleInventoryDetail: payload,
+      };
+
+    case types.SET_VISIBLE_INVENTORY_EDIT:
+      return {
+        ...state,
+        isVisibleInventoryEdit: payload,
       };
 
     case types.SET_VISIBLE_CUSTOMER_DETAIL:

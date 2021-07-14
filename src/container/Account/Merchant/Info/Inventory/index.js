@@ -6,6 +6,7 @@ import Search from "@/components/Search";
 import Pagination from "@/components/Pagination";
 import Loading from "@/components/Loading";
 import InventoryDetail from "../InventoryDetail";
+import InventoryEdit from "../InventoryEdit";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getInventoryDetail,
@@ -32,6 +33,7 @@ const Index = ({
     loading,
     loadingDetail,
     isVisibleInventoryDetail,
+    isVisibleInventoryEdit,
     typeSort_inventory,
   } = useSelector((state) => state.retailer);
 
@@ -56,6 +58,10 @@ const Index = ({
   const showDetail = () => {
     dispatch(setVisibleInventoryDetail(true));
   };
+
+  if (isVisibleInventoryEdit) {
+    return <InventoryEdit />;
+  }
 
   if (isVisibleInventoryDetail) {
     return (

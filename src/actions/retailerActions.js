@@ -729,6 +729,13 @@ export const setVisibleInventoryDetail = (payload) => {
   };
 };
 
+export const setVisibleInventoryEdit = (payload) => {
+  return {
+    type: typeRetailer.SET_VISIBLE_INVENTORY_EDIT,
+    payload,
+  };
+};
+
 export const setVisibleCustomerDetail = (payload) => {
   return {
     type: typeRetailer.SET_VISIBLE_CUSTOMER_DETAIL,

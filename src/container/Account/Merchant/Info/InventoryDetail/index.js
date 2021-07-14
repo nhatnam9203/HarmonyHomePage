@@ -10,6 +10,7 @@ import { isEmpty } from "lodash";
 import { useDispatch } from "react-redux";
 import { changeImageProduct } from "@/actions/retailerActions";
 import product_default from "@/assets/images/product_default.png";
+import icon_edit from "@/assets/images/retailer/icon_edit.png";
 import "../Info.scss";
 import "./style.scss";
 
@@ -38,8 +39,16 @@ const Index = ({ onBack }) => {
           Back
         </Button>
       </div>
-
-      <Title>General Details</Title>
+      <div
+        style={{ borderBottom: "1px solid #dddddd" }}
+        className="info_merchant_title"
+      >
+        <Title style={{ borderBottomWidth: 0 }}>General Details</Title>
+        <div className="row_edit_retailer">
+          <img src={icon_edit} />
+          <p>Edit</p>
+        </div>
+      </div>
       <div className="inventory_info_detail">
         <img
           src={
@@ -83,10 +92,10 @@ const Index = ({ onBack }) => {
           </p>
         </div>
       </div>
-
+      {/* 
       <div onClick={() => setVisibleUpload(true)} className="text_change_image">
         Change default image
-      </div>
+      </div> */}
 
       <img
         src={
