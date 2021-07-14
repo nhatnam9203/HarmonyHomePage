@@ -6,6 +6,7 @@ import "./style.scss";
 
 const ButtonReport = ({
   isNotReport = false,
+  isNotShowReport = false,
   onClickExport = () => {},
   onClickShowReport = () => {},
 }) => {
@@ -21,9 +22,11 @@ const ButtonReport = ({
 
   return (
     <div className="row_button_report top20">
-      <div onClick={onClickShowReport} className="report_button">
-        Show report
-      </div>
+      {!isNotShowReport && (
+        <div onClick={onClickShowReport} className="report_button">
+          Show report
+        </div>
+      )}
       {!isNotReport && (
         <OutsideClickHandler onOutsideClick={closePopupReport}>
           <div
