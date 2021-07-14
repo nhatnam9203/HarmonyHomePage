@@ -8,7 +8,10 @@ import { useSelector } from "react-redux";
 import CustomTableHeader from "../CustomTableHeader";
 import { isEmpty } from "lodash";
 import { useDispatch } from "react-redux";
-import { changeImageProduct } from "@/actions/retailerActions";
+import {
+  changeImageProduct,
+  setVisibleInventoryEdit,
+} from "@/actions/retailerActions";
 import product_default from "@/assets/images/product_default.png";
 import icon_edit from "@/assets/images/retailer/icon_edit.png";
 import "../Info.scss";
@@ -31,6 +34,10 @@ const Index = ({ onBack }) => {
     }
   };
 
+  const editInventory = () => {
+    dispatch(setVisibleInventoryEdit(true));
+  };
+
   return (
     <Fade>
       <div className="info_merchant_title" style={{ color: "#404040" }}>
@@ -44,7 +51,7 @@ const Index = ({ onBack }) => {
         className="info_merchant_title"
       >
         <Title style={{ borderBottomWidth: 0 }}>General Details</Title>
-        <div className="row_edit_retailer">
+        <div onClick={editInventory} className="row_edit_retailer">
           <img src={icon_edit} />
           <p>Edit</p>
         </div>

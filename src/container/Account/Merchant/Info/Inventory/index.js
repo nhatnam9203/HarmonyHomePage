@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getInventoryDetail,
   setVisibleInventoryDetail,
+  setVisibleInventoryEdit,
 } from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
@@ -60,7 +61,9 @@ const Index = ({
   };
 
   if (isVisibleInventoryEdit) {
-    return <InventoryEdit />;
+    return (
+      <InventoryEdit onBack={() => dispatch(setVisibleInventoryEdit(false))} />
+    );
   }
 
   if (isVisibleInventoryDetail) {
