@@ -75,7 +75,7 @@ const Index = ({
 
   const onClickExport = (reportType) => {
     setVisibileExport(true);
-    exportCustomer(reportType);
+    exportCustomer(reportType.toString().toLowerCase());
   };
 
   if (isVisibleCustomerDetail) {

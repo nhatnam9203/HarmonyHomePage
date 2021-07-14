@@ -70,7 +70,7 @@ const Index = ({
 
   const onClickExport = (reportType) => {
     setVisibileExport(true);
-    exportInventory(reportType);
+    exportInventory(reportType.toString().toLowerCase());
   };
 
   if (isVisibleInventoryDetail) {

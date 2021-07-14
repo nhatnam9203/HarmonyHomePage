@@ -120,9 +120,7 @@ function Info() {
     if (isEmpty(sortCustomer) || isEmpty(sortTypeCustomer)) {
       url = `customer/export?page=${pageCustomer}&key=${keySearchCustomer}&sorts=&merchantId=${detail.merchantId}}&type=${exportType}`;
     }
-    console.log({ url });
     url = encodeURI(url);
-    console.log({ url });
     dispatch(exportRetailer(url, token));
   };
 
