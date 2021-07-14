@@ -12,6 +12,7 @@ import {
   getInventoryDetail,
   setVisibleInventoryDetail,
   setVisibleInventoryEdit,
+  getSubCategory,
 } from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
@@ -37,7 +38,7 @@ const Index = ({
     isVisibleInventoryEdit,
     typeSort_inventory,
   } = useSelector((state) => state.retailer);
-
+  const { detail } = useSelector((state) => state.merchantDetail);
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const onClickSort = (status, sortType) => {
@@ -50,7 +51,9 @@ const Index = ({
         if (rowInfo) {
           const { productId } = rowInfo.original;
           const url = `product/${productId}`;
+          const urlSubCategory = `category/search?status=ACTIVE&merchantId=${detail.merchantId}`;
           dispatch(getInventoryDetail(url, token, showDetail));
+          dispatch(getSubCategory(urlSubCategory, token));
         }
       },
     };

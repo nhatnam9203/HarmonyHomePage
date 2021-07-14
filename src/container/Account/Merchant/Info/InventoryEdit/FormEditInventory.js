@@ -1,9 +1,9 @@
 import React from "react";
-import { Col, Form, Row, Button } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import "../Info.scss";
 import "./style.scss";
 
-const FormEditInventory = ({}) => {
+const FormEditInventory = ({ formik }) => {
   return (
     <Row style={{ marginTop: 22, width: "90%" }}>
       <Col xl={6} xs={12} className="h-100">
@@ -14,19 +14,21 @@ const FormEditInventory = ({}) => {
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="First and Last name"
-              name="fullname"
+              placeholder="Name"
+              name="name"
+              value={formik.values.name}
             />
           </Form.Group>
           <Form.Group>
             <Form.Label>
               Subcategory <span className="form_required">*</span>
             </Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              placeholder="Email address"
-            />
+            <Form.Select aria-label="Default select example">
+              <option>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </Form.Select>
             {/* <Form.Control.Feedback type="invalid">
                   {formik.errors.email}
                 </Form.Control.Feedback> */}
@@ -35,7 +37,12 @@ const FormEditInventory = ({}) => {
             <Form.Label>
               SKU <span className="form_required">*</span>
             </Form.Label>
-            <Form.Control type="text" placeholder="Phone number" name="phone" />
+            <Form.Control
+              type="text"
+              placeholder="SKU"
+              name="sku"
+              value={formik.values.sku}
+            />
           </Form.Group>
           <Form.Group>
             <Form.Label>
@@ -43,8 +50,9 @@ const FormEditInventory = ({}) => {
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="Business name"
-              name="businessName"
+              placeholder="Bar code"
+              name="barCode"
+              value={formik.values.barCode}
             />
           </Form.Group>
 
@@ -54,8 +62,9 @@ const FormEditInventory = ({}) => {
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="Business name"
-              name="businessName"
+              placeholder="Price"
+              name="price"
+              value={formik.values.price}
             />
           </Form.Group>
 
@@ -65,18 +74,12 @@ const FormEditInventory = ({}) => {
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="Business name"
-              name="businessName"
+              placeholder="Cost Price"
+              name="costPrice"
+              value={formik.values.costPrice}
             />
           </Form.Group>
           <Form.Group></Form.Group>
-          {/* <Button
-                            variant="primary"
-                            type="submit"
-                            className="submit_btn"
-                        >
-                            SUBMIT
-                        </Button> */}
         </div>
       </Col>
       <Col xl={6} xs={12} className="h-100">
@@ -87,8 +90,9 @@ const FormEditInventory = ({}) => {
             </Form.Label>
             <Form.Control
               type="text"
-              placeholder="First and Last name"
-              name="fullname"
+              placeholder="Quantity"
+              name="quantity"
+              value={formik.values.quantity}
             />
           </Form.Group>
           <Row>
@@ -99,8 +103,9 @@ const FormEditInventory = ({}) => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="First and Last name"
-                  name="fullname"
+                  placeholder="Min Threshold"
+                  name="minThreshold"
+                  value={formik.values.minThreshold}
                 />
               </Form.Group>
             </Col>
@@ -111,8 +116,9 @@ const FormEditInventory = ({}) => {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="First and Last name"
-                  name="fullname"
+                  placeholder="Max Threshold"
+                  name="maxThreshold"
+                  value={formik.values.maxThreshold}
                 />
               </Form.Group>
             </Col>

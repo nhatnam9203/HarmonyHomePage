@@ -551,6 +551,26 @@ export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
   }
 };
 
+export const getSubCategory = (requestUrl = "", token = "") => async (
+  dispatch
+) => {
+  try {
+    let { data } = await api.getByPage(requestUrl, token);
+    console.log("sub category : ", { data });
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.SET_SUB_CATEGORY,
+        payload: data.data,
+      });
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+  }
+};
+
 export const changeImageProduct = (formData, productId, callBack) => async (
   dispatch
 ) => {

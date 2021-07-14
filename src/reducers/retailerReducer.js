@@ -19,6 +19,7 @@ export const retailerReducer = (
     customerAppointments: [],
     countCustomerAppointments: 0,
     report: [],
+    subCategory: [],
 
     isVisibleCustomerDetail: false,
     isVisibleInventoryDetail: false,
@@ -206,6 +207,12 @@ export const retailerReducer = (
       return {
         ...state,
         inventoryDetail: payload,
+      };
+
+    case types.SET_SUB_CATEGORY:
+      return {
+        ...state,
+        subCategory: payload ? payload : [],
       };
 
     case types.SET_INVENTORY:
