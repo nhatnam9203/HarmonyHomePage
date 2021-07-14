@@ -1,5 +1,4 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import ReactTable from "react-table";
 import columns from "./columns";
 import Search from "@/components/Search";
@@ -26,6 +25,7 @@ const Index = ({
   searchInventory,
   valueSort,
   changeSortInventory,
+  exportInventory,
 }) => {
   const dispatch = useDispatch();
 
@@ -68,54 +68,9 @@ const Index = ({
     dispatch(closeExport());
   };
 
-  const onClickShowReport = () => {
-    // if (
-    //   valueDate === "Today" ||
-    //   valueDate === "Yesterday" ||
-    //   valueDate === "This Week" ||
-    //   valueDate === "Last Week" ||
-    //   valueDate === "This Month" ||
-    //   valueDate === "Last Month"
-    // ) {
-    //   getData(convertDateData(valueDate));
-    // } else {
-    //   let temps = valueDate.toString().split(" - ");
-    //   let start = temps[0],
-    //     end = temps[1];
-    //   try {
-    //     getData("custom", start, end);
-    //   } catch (error) {
-    //     alert(error);
-    //   }
-    // }
-  };
-
   const onClickExport = (reportType) => {
     setVisibileExport(true);
-    // if (
-    //   valueDate === "Today" ||
-    //   valueDate === "Yesterday" ||
-    //   valueDate === "This Week" ||
-    //   valueDate === "Last Week" ||
-    //   valueDate === "This Month" ||
-    //   valueDate === "Last Month"
-    // ) {
-    //   exportData(
-    //     convertDateData(valueDate),
-    //     "",
-    //     "",
-    //     reportType.toString().toLowerCase()
-    //   );
-    // } else {
-    //   let temps = valueDate.toString().split(" - ");
-    //   let start = temps[0],
-    //     end = temps[1];
-    //   try {
-    //     exportData("custom", start, end, reportType.toString().toLowerCase());
-    //   } catch (error) {
-    //     alert(error);
-    //   }
-    // }
+    exportInventory(reportType);
   };
 
   if (isVisibleInventoryDetail) {
@@ -128,10 +83,10 @@ const Index = ({
 
   return (
     <>
-      <div style={{ position: "relative" }}>
-        <Fade>
-          <div className="info_merchant_title">
-            Inventory
+      <>
+        <div className="info_merchant_title">Inventory</div>
+        <div className="info_merchant_title" style={{ marginTop: -3 }}>
+          <div style={{ marginTop: 15 }}>
             <Search
               value={valueSearch}
               onChange={onChangeSearch}
@@ -139,37 +94,37 @@ const Index = ({
             />
           </div>
           <ButtonReport
-            onClickShowReport={onClickShowReport}
+            onClickShowReport={() => {}}
             onClickExport={onClickExport}
             isNotShowReport
           />
-          <div className="table-container">
-            <ReactTable
-              manual
-              sortable={false}
-              data={inventory}
-              minRows={1}
-              noDataText="NO DATA!"
-              NoDataComponent={() => (
-                <div className="retailer_nodata">NO DATA!</div>
-              )}
-              LoadingComponent={() => loading && <Loading />}
-              loading={loading}
-              columns={columns(valueSort, onClickSort, typeSort_inventory)}
-              PaginationComponent={() => <div />}
-              getTdProps={onRowClick}
-            />
-            {inventory.length > 0 && (
-              <Pagination
-                activePage={pageInventory}
-                handlePageChange={changePageInventory}
-                totalItem={Math.ceil(inventoryPages / 2)}
-              />
+        </div>
+        <div className="table-container">
+          <ReactTable
+            manual
+            sortable={false}
+            data={inventory}
+            minRows={1}
+            noDataText="NO DATA!"
+            NoDataComponent={() => (
+              <div className="retailer_nodata">NO DATA!</div>
             )}
-          </div>
-        </Fade>
+            LoadingComponent={() => loading && <Loading />}
+            loading={loading}
+            columns={columns(valueSort, onClickSort, typeSort_inventory)}
+            PaginationComponent={() => <div />}
+            getTdProps={onRowClick}
+          />
+          {inventory.length > 0 && (
+            <Pagination
+              activePage={pageInventory}
+              handlePageChange={changePageInventory}
+              totalItem={Math.ceil(inventoryPages / 2)}
+            />
+          )}
+        </div>
         {loadingDetail && <Loading />}
-      </div>
+      </>
       <PopupExport
         isVisible={isVisibleExport}
         linkExport={linkExport}

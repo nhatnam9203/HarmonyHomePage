@@ -12,6 +12,7 @@ import {
   reset_sort_orders,
   reset_sort_inventory,
   reset_sort_customer,
+  exportRetailer,
 } from "@/actions/retailerActions";
 import Loading from "@/util/Loading";
 
@@ -96,6 +97,15 @@ function Info() {
     dispatch(getInventory(url, token));
   };
 
+  const exportInventory = (exportType) => {
+    let url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts={"${sortTypeInventory}":"${sortInventory}"}&merchantId=${detail.merchantId}&type=${exportType}`;
+    if (isEmpty(sortInventory) || isEmpty(sortTypeInventory)) {
+      url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}}&type=${exportType}`;
+    }
+    url = encodeURI(url);
+    dispatch(exportRetailer(url, token));
+  };
+
   const getCustomerData = (page, sort, sortType) => {
     let url = `customer/search?page=${page}&key=${keySearchCustomer}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
     if (isEmpty(sort) || isEmpty(sortType)) {
@@ -103,6 +113,15 @@ function Info() {
     }
     url = encodeURI(url);
     dispatch(getCustomer(url, token));
+  };
+
+  const exportCustomer = (exportType) => {
+    let url = `customer/export?page=${pageCustomer}&key=${keySearchCustomer}&sorts={"${sortTypeCustomer}":"${sortCustomer}"}&merchantId=${detail.merchantId}&type=${exportType}`;
+    if (isEmpty(sortCustomer) || isEmpty(sortTypeCustomer)) {
+      url = `customer/export?page=${pageCustomer}&key=${keySearchCustomer}&sorts=&merchantId=${detail.merchantId}}&type=${exportType}`;
+    }
+    url = encodeURI(url);
+    dispatch(exportRetailer(url, token));
   };
 
   const changePageOrders = async (page) => {
@@ -205,6 +224,7 @@ function Info() {
             valueSort={directionSort_inventory}
             onChangeSearch={onChangeSearchInventory}
             changeTab={changeTab}
+            exportInventory={exportInventory}
           />
         );
       case "Customer":
@@ -217,6 +237,7 @@ function Info() {
             valueSearch={keySearchCustomer}
             valueSort={directionSort_customer}
             onChangeSearch={onChangeSearchCustomer}
+            exportCustomer={exportCustomer}
           />
         );
       case "Report":

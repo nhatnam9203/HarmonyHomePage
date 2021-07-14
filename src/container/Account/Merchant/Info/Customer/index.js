@@ -1,16 +1,18 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import ReactTable from "react-table";
 import columns from "./columns";
 import Search from "@/components/Search";
 import Pagination from "@/components/Pagination";
 import Loading from "@/components/Loading";
+import PopupExport from "@/components/PopupExport";
 import CustomerDetail from "../CustomerDetail";
+import { ButtonReport } from "../Report/widget";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getCustomerDetail,
   getAppointmentCustomer,
   setVisibleCustomerDetail,
+  closeExport,
 } from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
@@ -24,6 +26,7 @@ const Index = ({
   searchCustomer,
   valueSort,
   changeSortCustomer,
+  exportCustomer,
 }) => {
   const dispatch = useDispatch();
 
@@ -34,11 +37,14 @@ const Index = ({
     loadingDetail,
     isVisibleCustomerDetail,
     typeSort_customer,
+    linkExport,
   } = useSelector((state) => state.retailer);
 
   const { detail } = useSelector((state) => state.merchantDetail);
 
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+  const [isVisibleExport, setVisibileExport] = React.useState(false);
 
   const onClickSort = (status, sortType) => {
     changeSortCustomer(status, sortType);
@@ -62,6 +68,16 @@ const Index = ({
     dispatch(setVisibleCustomerDetail(true));
   };
 
+  const onCloseExport = () => {
+    setVisibileExport(false);
+    dispatch(closeExport());
+  };
+
+  const onClickExport = (reportType) => {
+    setVisibileExport(true);
+    exportCustomer(reportType);
+  };
+
   if (isVisibleCustomerDetail) {
     return (
       <CustomerDetail
@@ -71,14 +87,22 @@ const Index = ({
   }
 
   return (
-    <div style={{ position: "relative" }}>
-      <Fade>
-        <div className="info_merchant_title">
-          Customer
-          <Search
-            value={valueSearch}
-            onChange={onChangeSearch}
-            onSubmit={searchCustomer}
+    <>
+      <div style={{ position: "relative" }}>
+        <div className="info_merchant_title">Customer</div>
+
+        <div className="info_merchant_title" style={{ marginTop: -3 }}>
+          <div style={{ marginTop: 15 }}>
+            <Search
+              value={valueSearch}
+              onChange={onChangeSearch}
+              onSubmit={searchCustomer}
+            />
+          </div>
+          <ButtonReport
+            onClickShowReport={() => {}}
+            onClickExport={onClickExport}
+            isNotShowReport
           />
         </div>
         <div className="table-container">
@@ -105,9 +129,14 @@ const Index = ({
             />
           )}
         </div>
-      </Fade>
-      {loadingDetail && <Loading />}
-    </div>
+        {loadingDetail && <Loading />}
+      </div>
+      <PopupExport
+        isVisible={isVisibleExport}
+        linkExport={linkExport}
+        closeExport={onCloseExport}
+      />
+    </>
   );
 };
 
