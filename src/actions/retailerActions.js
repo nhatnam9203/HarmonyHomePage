@@ -556,7 +556,6 @@ export const getSubCategory = (requestUrl = "", token = "") => async (
 ) => {
   try {
     let { data } = await api.getByPage(requestUrl, token);
-    console.log("sub category : ", { data });
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_SUB_CATEGORY,
@@ -609,6 +608,46 @@ export const changeImageProduct = (formData, productId, callBack) => async (
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
   } finally {
     dispatch({ type: typeRetailer.STOP_UPLOAD_FILE_REQUEST });
+  }
+};
+
+export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
+  try {
+    const url = "file?category=product";
+    dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
+    let { data } = await api.uploadFile(url, formData);
+    if (parseInt(data.codeNumber) === 200) {
+      callBack(data.data);
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_UPLOAD_FILE_REQUEST });
+  }
+};
+
+export const addNewCategory = (body, callBack) => async (dispatch) => {
+  try {
+    const url = "category";
+    const urlSubCategory = `category/search?status=ACTIVE&merchantId=${body.merchantId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
+    let { data } = await api.postApi(url, body, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+      dispatch(getSubCategory(urlSubCategory, token));
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_LOADING_NEW_CATEGORY });
   }
 };
 

@@ -3,7 +3,6 @@ import Fade from "react-reveal/Fade";
 import { Button } from "react-bootstrap";
 import ReactTable from "react-table";
 import Title from "@/components/Title";
-import PopupUpload from "@/components/PopupUpload";
 import { useSelector } from "react-redux";
 import CustomTableHeader from "../CustomTableHeader";
 import { isEmpty } from "lodash";
@@ -19,8 +18,8 @@ import "./style.scss";
 
 const Index = ({ onBack }) => {
   const dispatch = useDispatch();
-  const [visibleUpload, setVisibleUpload] = React.useState(false);
   const { inventoryDetail } = useSelector((state) => state.retailer);
+  const { images } = inventoryDetail;
 
   const changeImage = (files = [], callBack) => {
     if (!isEmpty(files) && files.length > 0) {
@@ -92,25 +91,25 @@ const Index = ({ onBack }) => {
             {inventoryDetail.restockHistory &&
             typeof Array.isArray(inventoryDetail.restockHistory)
               ? inventoryDetail.restockHistory?.length
-              : 0}
+              : "0"}
           </p>
           <p style={{ color: "red", fontWeight: "600" }}>
             {inventoryDetail.needToOrder}
           </p>
         </div>
       </div>
-      {/* 
-      <div onClick={() => setVisibleUpload(true)} className="text_change_image">
-        Change default image
-      </div> */}
 
-      <img
-        src={
-          inventoryDetail.imageUrl ? inventoryDetail.imageUrl : product_default
-        }
-        className="inventory_img_small_product"
-        alt="img"
-      />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        {images &&
+          images.map((image) => (
+            <img
+              key={image.id + "small_img"}
+              src={image.imageUrl ? image.imageUrl : product_default}
+              className="inventory_img_small_product"
+              alt="img"
+            />
+          ))}
+      </div>
 
       <Title
         style={{
@@ -131,11 +130,6 @@ const Index = ({ onBack }) => {
         NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
         columns={columns()}
         PaginationComponent={() => <div />}
-      />
-      <PopupUpload
-        isVisible={visibleUpload}
-        close={() => setVisibleUpload(false)}
-        upload={changeImage}
       />
     </Fade>
   );

@@ -198,3 +198,11 @@ export const updateImageProduct = (requestUrl, payload, token) => {
     },
   });
 };
+
+export const postApi = (requestUrl, body, token) => {
+  return axios.post(`${url}/${requestUrl}`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

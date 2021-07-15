@@ -7,6 +7,7 @@ export const retailerReducer = (
     loadingExport: false,
     loadingDetail: false,
     loadingUpfile: false,
+    loadingNewCategory: false,
     orders: [],
     orderDetail: {},
     orderPages: 0,
@@ -104,6 +105,12 @@ export const retailerReducer = (
   { type, payload }
 ) => {
   switch (type) {
+    case types.LOADING_NEW_CATEGORY:
+      return { ...state, loadingNewCategory: true };
+
+    case types.STOP_LOADING_NEW_CATEGORY:
+      return { ...state, loadingNewCategory: false };
+
     case types.RETAILER_REQUEST:
       return { ...state, loading: true };
 
