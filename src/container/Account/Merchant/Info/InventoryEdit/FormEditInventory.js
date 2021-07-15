@@ -9,8 +9,10 @@ import { isEmpty } from "lodash";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import icon_trash from "@/assets/images/retailer/trash.png";
 import icon_eye from "@/assets/images/retailer/eye.png";
+import { formarMoney } from "@/util";
 import "../Info.scss";
 import "./style.scss";
+import { formatMoney } from "../../../../../util";
 
 const FormEditInventory = ({
   subCategory = [],
@@ -29,6 +31,8 @@ const FormEditInventory = ({
   selectImage = () => {},
   openNewCategory = () => {},
   deleteImage = () => {},
+  refPrice,
+  refCostPrice,
 }) => {
   return (
     <Row className="formEditInventory" style={{ marginTop: 22, width: "90%" }}>
@@ -106,15 +110,19 @@ const FormEditInventory = ({
               Price ($) <span className="form_required">*</span>
             </Form.Label>
             <CurrencyInput
+              ref={refPrice}
               name="price"
               id="price"
+              type="text"
               className="currentInput"
               onChange={(e) => handleChange("price", e.target.value)}
               defaultValue={price}
               placeholder="0.00"
-              style={{ borderColor: isEmpty(price) ? "red" : "#ced4da" }}
+              style={{
+                borderColor: isEmpty(formatMoney(price)) ? "red" : "#ced4da",
+              }}
             />
-            {isEmpty(price) && <Error />}
+            {isEmpty(formatMoney(price)) && <Error />}
           </Form.Group>
 
           {/******************** COST PRICE ********************/}
@@ -124,15 +132,21 @@ const FormEditInventory = ({
             </Form.Label>
             <br />
             <CurrencyInput
+              ref={refCostPrice}
               name="costPrice"
               id="costPrice"
+              type="text"
               className="currentInput"
               onChange={(e) => handleChange("costPrice", e.target.value)}
               defaultValue={costPrice}
               placeholder="0.00"
-              style={{ borderColor: isEmpty(costPrice) ? "red" : "#ced4da" }}
+              style={{
+                borderColor: isEmpty(formatMoney(costPrice))
+                  ? "red"
+                  : "#ced4da",
+              }}
             />
-            {isEmpty(costPrice) && <Error />}
+            {isEmpty(formatMoney(costPrice)) && <Error />}
           </Form.Group>
           <Form.Group></Form.Group>
         </div>
@@ -213,7 +227,7 @@ const FormEditInventory = ({
             <div className="images_inventory">
               {images.map((image) => (
                 <div
-                  key={image.id + "image"}
+                  key={image.fileId + "image"}
                   className="images_inventory_container_images"
                 >
                   <img
@@ -233,8 +247,8 @@ const FormEditInventory = ({
               {/******************** BUTTON UPLOAD ********************/}
               <Dropzone
                 accept={"image/jpeg, image/png , image/gif"}
-                multiple={false}
-                maxFiles={1}
+                multiple={true}
+                // maxFiles={1}
                 maxSize={10485760}
                 noDrag={true}
                 onDrop={(acceptedFiles) => {

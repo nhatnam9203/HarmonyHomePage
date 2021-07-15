@@ -5,10 +5,15 @@ import FormEditInventory from "./FormEditInventory";
 import Loading from "@/components/Loading";
 import PopupDefaultImage from "./PopupDefaultImage";
 import PopupNewCategory from "./PopupNewCategory";
-import { uploadImageProduct, addNewCategory } from "@/actions/retailerActions";
-import { Form, Button } from "react-bootstrap";
+import {
+  uploadImageProduct,
+  addNewCategory,
+  editProduct,
+} from "@/actions/retailerActions";
+import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
+import { FormatPrice, formatMoney } from "@/util";
 
 import "../Info.scss";
 import "./style.scss";
@@ -39,6 +44,11 @@ const Index = ({ onBack }) => {
 
   const [isVisibleNewCategory, setVisibleNewCategory] = React.useState(false);
 
+  const [fileUpload, setFileUpload] = React.useState([]);
+
+  const refPrice = React.useRef();
+  const refCostPrice = React.useRef();
+
   React.useEffect(() => {
     setTimeout(async () => {
       await setData();
@@ -50,8 +60,8 @@ const Index = ({ onBack }) => {
     setName(inventoryDetail.name);
     setSku(inventoryDetail.sku);
     setBarCode(inventoryDetail.barCode);
-    setPrice(inventoryDetail.price);
-    setCostPrice(inventoryDetail.costPrice);
+    setPrice(FormatPrice(inventoryDetail.price));
+    setCostPrice(FormatPrice(inventoryDetail.costPrice));
     setQuantity(inventoryDetail.quantity);
     setMinThreshold(inventoryDetail.minThreshold);
     setMaxThreshold(inventoryDetail.maxThreshold);
@@ -100,8 +110,8 @@ const Index = ({ onBack }) => {
       isEmpty(name) ||
       isEmpty(sku) ||
       isEmpty(barCode) ||
-      isEmpty(price) ||
-      isEmpty(costPrice) ||
+      isEmpty(formatMoney(price)) ||
+      isEmpty(formatMoney(costPrice)) ||
       (isEmpty(quantity) && typeof quantity !== "number") ||
       (isEmpty(minThreshold) && typeof minThreshold !== "number") ||
       (isEmpty(maxThreshold) && typeof maxThreshold !== "number") ||
@@ -110,15 +120,39 @@ const Index = ({ onBack }) => {
       alert("error");
     } else {
       //submit
+      const body = {
+        ...inventoryDetail,
+        images,
+        name,
+        sku,
+        barCode,
+        price: formatMoney(refPrice.current.value),
+        costPrice: formatMoney(refCostPrice.current.value),
+        quantity,
+        minThreshold,
+        maxThreshold,
+        categoryId,
+      };
+      dispatch(editProduct(body, inventoryDetail.productId, back));
     }
   };
 
-  const uploadImage = (files = [], callBack) => {
-    if (!isEmpty(files) && files.length > 0) {
-      let fileUpload = files[0];
+  const back = () => {
+    onBack();
+  };
+
+  React.useEffect(() => {
+    if (fileUpload.length > 0) {
+      let file = fileUpload[0];
       let formData = new FormData();
-      formData.append("Filename3", fileUpload);
+      formData.append("Filename3", file);
       dispatch(uploadImageProduct(formData, callBackUploadImage));
+    }
+  }, [fileUpload]);
+
+  const uploadImage = async (files = [], callBack) => {
+    if (!isEmpty(files) && files.length > 0) {
+      setFileUpload(files);
     }
   };
 
@@ -127,10 +161,15 @@ const Index = ({ onBack }) => {
       ...images,
       {
         ...data,
-        isDefault: false,
+        isDefault: images.length === 0 ? true : false,
         imageUrl: data.url,
+        id: 0,
+        position: images.length + 1,
       },
     ]);
+    let temptFileUpload = [...fileUpload];
+    temptFileUpload.shift();
+    setFileUpload(temptFileUpload);
   };
 
   const selectImage = (image) => {
@@ -138,7 +177,7 @@ const Index = ({ onBack }) => {
   };
 
   const deleteImage = (image) => {
-    const temptImages = images.filter((im) => im.id !== image.id);
+    const temptImages = images.filter((im) => im.fileId !== image.fileId);
     if (image.isDefault && temptImages.length > 0) {
       temptImages[0].isDefault = true;
     }
@@ -182,38 +221,39 @@ const Index = ({ onBack }) => {
           {inventoryDetail.name} - Edit details
         </Title>
 
-        <Form onSubmit={handleSubmit}>
-          <FormEditInventory
-            subCategory={subCategory.filter((s) => parseInt(s.parentId) > 0)}
-            name={name}
-            sku={sku}
-            barCode={barCode}
-            price={price}
-            costPrice={costPrice}
-            quantity={quantity}
-            minThreshold={minThreshold}
-            maxThreshold={maxThreshold}
-            categoryId={categoryId}
-            handleChange={handleChange}
-            images={images}
-            uploadImage={uploadImage}
-            selectImage={selectImage}
-            openNewCategory={() => setVisibleNewCategory(true)}
-            deleteImage={deleteImage}
-          />
-          <div className="btn_group_edit_inventory">
-            <Button variant="primary" style={{ marginRight: 10 }}>
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              type="submit"
-              style={{ background: "#1366AE", color: "white" }}
-            >
-              Save
-            </Button>
-          </div>
-        </Form>
+        <FormEditInventory
+          subCategory={subCategory.filter((s) => parseInt(s.parentId) > 0)}
+          name={name}
+          sku={sku}
+          barCode={barCode}
+          price={price}
+          costPrice={costPrice}
+          quantity={quantity}
+          minThreshold={minThreshold}
+          maxThreshold={maxThreshold}
+          categoryId={categoryId}
+          handleChange={handleChange}
+          images={images}
+          uploadImage={uploadImage}
+          selectImage={selectImage}
+          openNewCategory={() => setVisibleNewCategory(true)}
+          deleteImage={deleteImage}
+          refPrice={refPrice}
+          refCostPrice={refCostPrice}
+          handleSubmit={handleSubmit}
+        />
+        <div className="btn_group_edit_inventory">
+          <Button variant="primary" style={{ marginRight: 10 }}>
+            Cancel
+          </Button>
+          <Button
+            variant="primary"
+            style={{ background: "#1366AE", color: "white" }}
+            onClick={handleSubmit}
+          >
+            Save
+          </Button>
+        </div>
       </Fade>
 
       {loadingUpfile && <Loading />}
@@ -232,6 +272,7 @@ const Index = ({ onBack }) => {
         addNewCategory={actionAddNewCategory}
         loadingNewCategory={loadingNewCategory}
       />
+      {loadingNewCategory && <Loading />}
     </>
   );
 };

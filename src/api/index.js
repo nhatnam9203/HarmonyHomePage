@@ -206,3 +206,11 @@ export const postApi = (requestUrl, body, token) => {
     },
   });
 };
+
+export const putApi = (requestUrl, body, token) => {
+  return axios.put(`${url}/${requestUrl}`, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

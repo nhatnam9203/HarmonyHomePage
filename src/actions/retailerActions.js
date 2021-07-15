@@ -486,7 +486,7 @@ export const getInventoryDetail = (
         type: typeRetailer.SET_INVENTORY_DETAIL,
         payload: data.data,
       });
-      callBack();
+      if (callBack) callBack();
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
@@ -640,6 +640,30 @@ export const addNewCategory = (body, callBack) => async (dispatch) => {
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
       dispatch(getSubCategory(urlSubCategory, token));
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_LOADING_NEW_CATEGORY });
+  }
+};
+
+export const editProduct = (body, productId, callBack) => async (dispatch) => {
+  try {
+    const url = `product/${productId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
+    let { data } = await api.putApi(url, body, token);
+
+    console.log("edit product : ", { data });
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+      dispatch(getInventoryDetail(url, token, () => {}));
       callBack();
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
