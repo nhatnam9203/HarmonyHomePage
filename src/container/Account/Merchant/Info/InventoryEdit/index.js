@@ -211,12 +211,6 @@ const Index = ({ onBack }) => {
   return (
     <>
       <Fade>
-        <div className="info_merchant_title">
-          {" "}
-          <Button className="btn btn_cancel" onClick={onBack}>
-            Back
-          </Button>
-        </div>
         <Title style={{ color: "#333" }}>
           {inventoryDetail.name} - Edit details
         </Title>
@@ -243,7 +237,7 @@ const Index = ({ onBack }) => {
           handleSubmit={handleSubmit}
         />
         <div className="btn_group_edit_inventory">
-          <Button variant="primary" style={{ marginRight: 10 }}>
+          <Button onClick={back} variant="primary" style={{ marginRight: 10 }}>
             Cancel
           </Button>
           <Button

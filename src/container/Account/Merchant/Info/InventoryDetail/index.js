@@ -88,10 +88,7 @@ const Index = ({ onBack }) => {
             style={{ fontWeight: "600" }}
           >{`$ ${inventoryDetail.costPrice}`}</p>
           <p style={{ color: "red", fontWeight: "600" }}>
-            {inventoryDetail.restockHistory &&
-            typeof Array.isArray(inventoryDetail.restockHistory)
-              ? inventoryDetail.restockHistory?.length
-              : "0"}
+            {inventoryDetail.quantity}
           </p>
           <p style={{ color: "red", fontWeight: "600" }}>
             {inventoryDetail.needToOrder}

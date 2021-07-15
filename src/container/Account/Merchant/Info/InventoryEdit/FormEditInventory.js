@@ -164,7 +164,8 @@ const FormEditInventory = ({
               placeholder="Quantity"
               name="quantity"
               value={quantity}
-              onChange={(e) => handleChange("quantity", e.target.value)}
+              onChange={(e) => {}}
+              disabled
               style={{
                 borderColor:
                   typeof quantity !== "number" && isEmpty(quantity)
@@ -199,6 +200,7 @@ const FormEditInventory = ({
                 )}
               </Form.Group>
             </Col>
+
             <Col xs={6} xl={6} className="h-100">
               {/******************** HIGH THRESHOLD ********************/}
               <Form.Group>

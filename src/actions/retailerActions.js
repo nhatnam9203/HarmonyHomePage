@@ -658,8 +658,6 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
     dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
     let { data } = await api.putApi(url, body, token);
 
-    console.log("edit product : ", { data });
-
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
       dispatch(getInventoryDetail(url, token, () => {}));
