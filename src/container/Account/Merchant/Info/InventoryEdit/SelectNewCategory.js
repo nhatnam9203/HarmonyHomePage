@@ -38,6 +38,7 @@ export default class SelectNewCategory extends Component {
         } = this.props;
         const selected = subCategory.find((s) => s.categoryId === categoryId);
         const { isPopup } = this.state;
+        
         return (
             <OutsideClickHandler onOutsideClick={this.close}>
                 <div
