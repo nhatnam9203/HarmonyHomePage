@@ -5,10 +5,8 @@ import ReactTable from "react-table";
 import Title from "@/components/Title";
 import { useSelector } from "react-redux";
 import CustomTableHeader from "../CustomTableHeader";
-import { isEmpty } from "lodash";
 import { useDispatch } from "react-redux";
 import {
-  changeImageProduct,
   setVisibleInventoryEdit,
 } from "@/actions/retailerActions";
 import product_default from "@/assets/images/product_default.png";
@@ -21,21 +19,20 @@ const Index = ({ onBack }) => {
   const { inventoryDetail } = useSelector((state) => state.retailer);
   const { images } = inventoryDetail;
 
-  const changeImage = (files = [], callBack) => {
-    if (!isEmpty(files) && files.length > 0) {
-      let fileUpload = files[0];
-      let formData = new FormData();
-      formData.append("Filename3", fileUpload);
-
-      const productId = inventoryDetail?.productId;
-
-      dispatch(changeImageProduct(formData, productId, callBack));
-    }
-  };
-
   const editInventory = () => {
     dispatch(setVisibleInventoryEdit(true));
   };
+
+  const imageDefault = () => {
+    for (let i = 0; i < images.length; i++) {
+      if (images[i].isDefault) {
+        return images[i].imageUrl
+      }
+    }
+    return inventoryDetail?.image?.imageUrl;
+  }
+
+  const imgDefault = imageDefault();
 
   return (
     <Fade>
@@ -57,11 +54,7 @@ const Index = ({ onBack }) => {
       </div>
       <div className="inventory_info_detail">
         <img
-          src={
-            inventoryDetail.imageUrl
-              ? inventoryDetail.imageUrl
-              : product_default
-          }
+          src={imgDefault ? imgDefault : product_default}
           className="inventory_img_big_product"
           alt="img"
         />
@@ -79,8 +72,8 @@ const Index = ({ onBack }) => {
           {inventoryDetail.categoryName ? (
             <p>{inventoryDetail.categoryName}</p>
           ) : (
-            <div>&nbsp;</div>
-          )}
+              <div>&nbsp;</div>
+            )}
           <p>{inventoryDetail.sku}</p>
           <p>{inventoryDetail.barCode}</p>
           <p style={{ fontWeight: "600" }}>{`$ ${inventoryDetail.price}`}</p>

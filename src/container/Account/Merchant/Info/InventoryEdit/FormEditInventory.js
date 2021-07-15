@@ -145,7 +145,6 @@ const FormEditInventory = ({
                         />
                         {isEmpty(formatMoney(costPrice)) && <Error />}
                     </Form.Group>
-                    <Form.Group></Form.Group>
                 </div>
             </Col>
 
