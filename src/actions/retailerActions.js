@@ -17,10 +17,7 @@ export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
     const { data } = await api.getByPage(requestUrl, token);
 
     let orders = data.data
-      ? data.data.map((obj) => {
-          return { ...obj, total: FormatPrice(obj.total) };
-        })
-      : [];
+      ? data.data.map((obj) => { return { ...obj, total: FormatPrice(obj.total) }; }) : [];
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -43,11 +40,10 @@ export const getInventory = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     const { data } = await api.getByPage(requestUrl, token);
+
     let inventory = data.data
-      ? data.data.map((obj) => {
-          return { ...obj, price: FormatPrice(obj.price) };
-        })
-      : [];
+      ? data.data.map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
+      
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_INVENTORY,
@@ -92,15 +88,15 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              revenue: FormatPrice(obj.revenue),
-              profit: FormatPrice(obj.profit),
-              averageOrder: FormatPrice(obj.averageOrder),
-              cost: FormatPrice(obj.cost),
-              tax: FormatPrice(obj.tax),
-            };
-          })
+          return {
+            ...obj,
+            revenue: FormatPrice(obj.revenue),
+            profit: FormatPrice(obj.profit),
+            averageOrder: FormatPrice(obj.averageOrder),
+            cost: FormatPrice(obj.cost),
+            tax: FormatPrice(obj.tax),
+          };
+        })
         : [];
 
       let result = [];
@@ -156,13 +152,13 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              totalRevenue: FormatPrice(obj.totalRevenue),
-              totalProfit: FormatPrice(obj.totalProfit),
-              totalCost: FormatPrice(obj.totalCost),
-            };
-          })
+          return {
+            ...obj,
+            totalRevenue: FormatPrice(obj.totalRevenue),
+            totalProfit: FormatPrice(obj.totalProfit),
+            totalCost: FormatPrice(obj.totalCost),
+          };
+        })
         : [];
       let result = [];
       if (temptData.length > 0)
@@ -192,13 +188,13 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              totalrevenue: FormatPrice(obj.totalrevenue),
-              totalProfit: FormatPrice(obj.totalProfit),
-              totalCost: FormatPrice(obj.totalCost),
-            };
-          })
+          return {
+            ...obj,
+            totalrevenue: FormatPrice(obj.totalrevenue),
+            totalProfit: FormatPrice(obj.totalProfit),
+            totalCost: FormatPrice(obj.totalCost),
+          };
+        })
         : [];
       let result = [];
       if (temptData.length > 0)
@@ -228,12 +224,12 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              lastVisitSale: FormatPrice(obj.lastVisitSale),
-              total: FormatPrice(obj.total),
-            };
-          })
+          return {
+            ...obj,
+            lastVisitSale: FormatPrice(obj.lastVisitSale),
+            total: FormatPrice(obj.total),
+          };
+        })
         : [];
       let result = [];
       if (temptData.length > 0)
@@ -263,13 +259,13 @@ export const getTopProduct = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              totalRevenue: FormatPrice(obj.totalRevenue),
-              totalProfit: FormatPrice(obj.totalProfit),
-              totalCost: FormatPrice(obj.totalCost),
-            };
-          })
+          return {
+            ...obj,
+            totalRevenue: FormatPrice(obj.totalRevenue),
+            totalProfit: FormatPrice(obj.totalProfit),
+            totalCost: FormatPrice(obj.totalCost),
+          };
+        })
         : [];
       let result = [];
       if (temptData.length > 0)
@@ -299,13 +295,13 @@ export const getTopCategory = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              totalrevenue: FormatPrice(obj.totalrevenue),
-              totalProfit: FormatPrice(obj.totalProfit),
-              totalCost: FormatPrice(obj.totalCost),
-            };
-          })
+          return {
+            ...obj,
+            totalrevenue: FormatPrice(obj.totalrevenue),
+            totalProfit: FormatPrice(obj.totalProfit),
+            totalCost: FormatPrice(obj.totalCost),
+          };
+        })
         : [];
       let result = [];
       if (temptData.length > 0)
@@ -363,16 +359,16 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              productSales: FormatPrice(obj.productSales),
-              productSplit: FormatPrice(obj.productSplit),
-              salaryWage: FormatPrice(obj.salaryWage),
-              refundAmount: FormatPrice(obj.refundAmount),
-              discountByStaff: FormatPrice(obj.discountByStaff),
-              salary: FormatPrice(obj.salary),
-            };
-          })
+          return {
+            ...obj,
+            productSales: FormatPrice(obj.productSales),
+            productSplit: FormatPrice(obj.productSplit),
+            salaryWage: FormatPrice(obj.salaryWage),
+            refundAmount: FormatPrice(obj.refundAmount),
+            discountByStaff: FormatPrice(obj.discountByStaff),
+            salary: FormatPrice(obj.salary),
+          };
+        })
         : [];
       if (temptData.length > 0)
         dispatch({
@@ -399,12 +395,12 @@ export const getMarketingEfficiency = (requestUrl = "", token = "") => async (
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
-            return {
-              ...obj,
-              discount: FormatPrice(obj.discount),
-              revenue: FormatPrice(obj.revenue),
-            };
-          })
+          return {
+            ...obj,
+            discount: FormatPrice(obj.discount),
+            revenue: FormatPrice(obj.revenue),
+          };
+        })
         : [];
       let result = [];
       if (temptData.length > 0)
@@ -529,11 +525,11 @@ export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
     let temptData = data.data
       ? data.data.map((obj) => {
-          return {
-            ...obj,
-            total: FormatPrice(obj.total),
-          };
-        })
+        return {
+          ...obj,
+          total: FormatPrice(obj.total),
+        };
+      })
       : [];
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -660,7 +656,7 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
-      dispatch(getInventoryDetail(url, token, () => {}));
+      dispatch(getInventoryDetail(url, token, () => { }));
       callBack();
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
