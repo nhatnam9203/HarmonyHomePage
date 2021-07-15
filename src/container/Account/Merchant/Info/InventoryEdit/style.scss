@@ -100,6 +100,14 @@
       right: 10px;
       cursor: pointer;
     }
+    & > img:nth-child(3) {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      bottom: 15px;
+      left: 5px;
+      cursor: pointer;
+    }
   }
   &_dropzone {
     width: 90px;
@@ -155,4 +163,12 @@
     font-size: 1.4rem;
     font-weight: 600;
   }
+}
+
+.error-required {
+  position: absolute;
+  right: 0px;
+  bottom: -25px;
+  color: red;
+  font-weight: 600;
 }

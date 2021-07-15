@@ -8,6 +8,7 @@ const PopupDefaultImage = ({
   isVisible = false,
   imageDefault,
   close = () => {},
+  setDefaultImage,
 }) => {
   const imageUrl = imageDefault?.imageUrl || product_default;
 
@@ -46,6 +47,7 @@ const PopupDefaultImage = ({
                 width: 140,
                 borderRadius: 0,
               }}
+              onClick={() => setDefaultImage(imageDefault)}
             >
               Set as default
             </Button>

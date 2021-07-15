@@ -4,6 +4,7 @@ import SelectOption from "./SelectOption";
 import InputMask from "react-input-mask";
 import CurrencyInput from "react-currency-masked-input";
 import Dropzone from "react-dropzone";
+import Error from "./Error";
 import { isEmpty } from "lodash";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import icon_trash from "@/assets/images/retailer/trash.png";
@@ -33,7 +34,8 @@ const FormEditInventory = ({
     <Row className="formEditInventory" style={{ marginTop: 22, width: "90%" }}>
       <Col xl={6} xs={12} className="h-100">
         <div className="sign_up_form1">
-          <Form.Group>
+          {/******************** PRODUCT NAME ********************/}
+          <Form.Group style={{ position: "relative" }}>
             <Form.Label>
               Product name <span className="form_required">*</span>
             </Form.Label>
@@ -45,6 +47,7 @@ const FormEditInventory = ({
               onChange={(e) => handleChange("name", e.target.value)}
               style={{ borderColor: isEmpty(name) ? "red" : "#ced4da" }}
             />
+            {isEmpty(name) && <Error />}
           </Form.Group>
           <Form.Group>
             <Form.Label>
@@ -63,12 +66,10 @@ const FormEditInventory = ({
                 New category
               </div>
             </div>
-
-            {/* <Form.Control.Feedback type="invalid">
-                  {formik.errors.email}
-                </Form.Control.Feedback> */}
           </Form.Group>
-          <Form.Group>
+
+          {/******************** SKU ********************/}
+          <Form.Group style={{ position: "relative" }}>
             <Form.Label>
               SKU <span className="form_required">*</span>
             </Form.Label>
@@ -80,8 +81,11 @@ const FormEditInventory = ({
               onChange={(e) => handleChange("sku", e.target.value)}
               style={{ borderColor: isEmpty(sku) ? "red" : "#ced4da" }}
             />
+            {isEmpty(sku) && <Error />}
           </Form.Group>
-          <Form.Group>
+
+          {/******************** BARCODE ********************/}
+          <Form.Group style={{ position: "relative" }}>
             <Form.Label>
               Barcode <span className="form_required">*</span>
             </Form.Label>
@@ -93,25 +97,28 @@ const FormEditInventory = ({
               onChange={(e) => handleChange("barCode", e.target.value)}
               style={{ borderColor: isEmpty(barCode) ? "red" : "#ced4da" }}
             />
+            {isEmpty(barCode) && <Error />}
           </Form.Group>
 
-          <Form.Group>
+          {/******************** PRICE ********************/}
+          <Form.Group style={{ position: "relative" }}>
             <Form.Label>
               Price ($) <span className="form_required">*</span>
             </Form.Label>
             <CurrencyInput
               name="price"
               id="price"
-              type="text"
               className="currentInput"
               onChange={(e) => handleChange("price", e.target.value)}
               defaultValue={price}
               placeholder="0.00"
               style={{ borderColor: isEmpty(price) ? "red" : "#ced4da" }}
             />
+            {isEmpty(price) && <Error />}
           </Form.Group>
 
-          <Form.Group>
+          {/******************** COST PRICE ********************/}
+          <Form.Group style={{ position: "relative" }}>
             <Form.Label>
               Cost Price ($) <span className="form_required">*</span>
             </Form.Label>
@@ -119,20 +126,22 @@ const FormEditInventory = ({
             <CurrencyInput
               name="costPrice"
               id="costPrice"
-              type="text"
               className="currentInput"
               onChange={(e) => handleChange("costPrice", e.target.value)}
               defaultValue={costPrice}
               placeholder="0.00"
               style={{ borderColor: isEmpty(costPrice) ? "red" : "#ced4da" }}
             />
+            {isEmpty(costPrice) && <Error />}
           </Form.Group>
           <Form.Group></Form.Group>
         </div>
       </Col>
+
       <Col xl={6} xs={12} className="h-100">
         <div className="sign_up_form1">
-          <Form.Group>
+          {/******************** QUANTITY ********************/}
+          <Form.Group style={{ position: "relative" }}>
             <Form.Label>
               Items in stock <span className="form_required">*</span>
             </Form.Label>
@@ -149,15 +158,17 @@ const FormEditInventory = ({
                     : "#ced4da",
               }}
             />
+            {typeof quantity !== "number" && isEmpty(quantity) && <Error />}
           </Form.Group>
+
           <Row>
             <Col xs={6} xl={6} className="h-100">
+              {/******************** MIN THRESHOLD ********************/}
               <Form.Group>
                 <Form.Label>
                   Low threshold <span className="form_required">*</span>
                 </Form.Label>
                 <MaskInput
-                  type="text"
                   placeholder="Low Threshold"
                   name="minThreshold"
                   value={minThreshold}
@@ -169,15 +180,18 @@ const FormEditInventory = ({
                         : "#ced4da",
                   }}
                 />
+                {typeof minThreshold !== "number" && isEmpty(minThreshold) && (
+                  <Error />
+                )}
               </Form.Group>
             </Col>
             <Col xs={6} xl={6} className="h-100">
+              {/******************** HIGH THRESHOLD ********************/}
               <Form.Group>
                 <Form.Label>
                   High threshold <span className="form_required">*</span>
                 </Form.Label>
                 <MaskInput
-                  type="text"
                   placeholder="High Threshold"
                   name="maxThreshold"
                   value={maxThreshold}
@@ -189,8 +203,13 @@ const FormEditInventory = ({
                         : "#ced4da",
                   }}
                 />
+                {typeof maxThreshold !== "number" && isEmpty(maxThreshold) && (
+                  <Error />
+                )}
               </Form.Group>
             </Col>
+
+            {/******************** IMAGES LIST ********************/}
             <div className="images_inventory">
               {images.map((image) => (
                 <div
@@ -207,9 +226,11 @@ const FormEditInventory = ({
                     src={icon_trash}
                     alt="image"
                   />
+                  {image.isDefault && <img src={icon_eye} alt="image" />}
                 </div>
               ))}
 
+              {/******************** BUTTON UPLOAD ********************/}
               <Dropzone
                 accept={"image/jpeg, image/png , image/gif"}
                 multiple={false}

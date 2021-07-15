@@ -139,7 +139,24 @@ const Index = ({ onBack }) => {
 
   const deleteImage = (image) => {
     const temptImages = images.filter((im) => im.id !== image.id);
+    if (image.isDefault && temptImages.length > 0) {
+      temptImages[0].isDefault = true;
+    }
     setImages(temptImages);
+  };
+
+  const setDefaultImage = async (image) => {
+    const temptImages = JSON.parse(JSON.stringify(images));
+    for (let i = 0; i < temptImages.length; i++) {
+      if (temptImages[i].id === image.id) {
+        temptImages[i].isDefault = true;
+      } else {
+        temptImages[i].isDefault = false;
+      }
+    }
+
+    await setImages(temptImages);
+    setImageDefault("");
   };
 
   const actionAddNewCategory = (body, callBack) => {
@@ -205,6 +222,7 @@ const Index = ({ onBack }) => {
         isVisible={!isEmpty(imageDefault)}
         imageDefault={imageDefault}
         close={() => setImageDefault("")}
+        setDefaultImage={setDefaultImage}
       />
 
       <PopupNewCategory

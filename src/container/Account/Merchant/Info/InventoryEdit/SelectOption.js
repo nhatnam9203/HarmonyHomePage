@@ -40,6 +40,7 @@ export default class Selectoption extends Component {
         <div onClick={this.toggle} className="select_subcategory">
           <div>{selected ? selected.name : ""}</div>
           <img src={arrow_down} alt="imn" />
+
           {isPopup && (
             <div className="select_subcategory_popup">
               {subCategory.map((cate) => (
