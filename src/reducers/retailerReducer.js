@@ -7,6 +7,7 @@ export const retailerReducer = (
     loadingExport: false,
     loadingDetail: false,
     loadingUpfile: false,
+    loadingNewCategory: false,
     orders: [],
     orderDetail: {},
     orderPages: 0,
@@ -19,10 +20,13 @@ export const retailerReducer = (
     customerAppointments: [],
     countCustomerAppointments: 0,
     report: [],
+    subCategory: [],
 
     isVisibleCustomerDetail: false,
     isVisibleInventoryDetail: false,
     isVisibleOrderDetail: false,
+
+    isVisibleInventoryEdit: false,
 
     typeSort_inventory: "",
     directionSort_inventory: "ASC",
@@ -101,6 +105,12 @@ export const retailerReducer = (
   { type, payload }
 ) => {
   switch (type) {
+    case types.LOADING_NEW_CATEGORY:
+      return { ...state, loadingNewCategory: true };
+
+    case types.STOP_LOADING_NEW_CATEGORY:
+      return { ...state, loadingNewCategory: false };
+
     case types.RETAILER_REQUEST:
       return { ...state, loading: true };
 
@@ -164,6 +174,12 @@ export const retailerReducer = (
         isVisibleInventoryDetail: payload,
       };
 
+    case types.SET_VISIBLE_INVENTORY_EDIT:
+      return {
+        ...state,
+        isVisibleInventoryEdit: payload,
+      };
+
     case types.SET_VISIBLE_CUSTOMER_DETAIL:
       return {
         ...state,
@@ -198,6 +214,12 @@ export const retailerReducer = (
       return {
         ...state,
         inventoryDetail: payload,
+      };
+
+    case types.SET_SUB_CATEGORY:
+      return {
+        ...state,
+        subCategory: payload ? payload : [],
       };
 
     case types.SET_INVENTORY:

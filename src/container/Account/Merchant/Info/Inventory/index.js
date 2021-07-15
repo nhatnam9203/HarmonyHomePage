@@ -7,11 +7,14 @@ import Loading from "@/components/Loading";
 import PopupExport from "@/components/PopupExport";
 import InventoryDetail from "../InventoryDetail";
 import { ButtonReport } from "../Report/widget";
+import InventoryEdit from "../InventoryEdit";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getInventoryDetail,
   setVisibleInventoryDetail,
   closeExport,
+  setVisibleInventoryEdit,
+  getSubCategory,
 } from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
@@ -35,10 +38,11 @@ const Index = ({
     loading,
     loadingDetail,
     isVisibleInventoryDetail,
+    isVisibleInventoryEdit,
     typeSort_inventory,
     linkExport,
   } = useSelector((state) => state.retailer);
-
+  const { detail } = useSelector((state) => state.merchantDetail);
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const [isVisibleExport, setVisibileExport] = React.useState(false);
@@ -53,7 +57,9 @@ const Index = ({
         if (rowInfo) {
           const { productId } = rowInfo.original;
           const url = `product/${productId}`;
+          const urlSubCategory = `category/search?status=ACTIVE&merchantId=${detail.merchantId}`;
           dispatch(getInventoryDetail(url, token, showDetail));
+          dispatch(getSubCategory(urlSubCategory, token));
         }
       },
     };
@@ -72,6 +78,12 @@ const Index = ({
     setVisibileExport(true);
     exportInventory(reportType.toString().toLowerCase());
   };
+
+  if (isVisibleInventoryEdit) {
+    return (
+      <InventoryEdit onBack={() => dispatch(setVisibleInventoryEdit(false))} />
+    );
+  }
 
   if (isVisibleInventoryDetail) {
     return (

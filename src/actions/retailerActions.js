@@ -485,7 +485,7 @@ export const getInventoryDetail = (
         type: typeRetailer.SET_INVENTORY_DETAIL,
         payload: data.data,
       });
-      callBack();
+      if (callBack) callBack();
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
@@ -550,6 +550,25 @@ export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
   }
 };
 
+export const getSubCategory = (requestUrl = "", token = "") => async (
+  dispatch
+) => {
+  try {
+    let { data } = await api.getByPage(requestUrl, token);
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.SET_SUB_CATEGORY,
+        payload: data.data,
+      });
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+  }
+};
+
 export const changeImageProduct = (formData, productId, callBack) => async (
   dispatch
 ) => {
@@ -588,6 +607,70 @@ export const changeImageProduct = (formData, productId, callBack) => async (
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
   } finally {
     dispatch({ type: typeRetailer.STOP_UPLOAD_FILE_REQUEST });
+  }
+};
+
+export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
+  try {
+    const url = "file?category=product";
+    dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
+    let { data } = await api.uploadFile(url, formData);
+    if (parseInt(data.codeNumber) === 200) {
+      callBack(data.data);
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_UPLOAD_FILE_REQUEST });
+  }
+};
+
+export const addNewCategory = (body, callBack) => async (dispatch) => {
+  try {
+    const url = "category";
+    const urlSubCategory = `category/search?status=ACTIVE&merchantId=${body.merchantId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
+    let { data } = await api.postApi(url, body, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+      dispatch(getSubCategory(urlSubCategory, token));
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_LOADING_NEW_CATEGORY });
+  }
+};
+
+export const editProduct = (body, productId, callBack) => async (dispatch) => {
+  try {
+    const url = `product/${productId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
+    let { data } = await api.putApi(url, body, token);
+
+    console.log("edit product : ", { data });
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+      dispatch(getInventoryDetail(url, token, () => {}));
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_LOADING_NEW_CATEGORY });
   }
 };
 
@@ -724,6 +807,13 @@ export const setVisibleOrderDetail = (payload) => {
 export const setVisibleInventoryDetail = (payload) => {
   return {
     type: typeRetailer.SET_VISIBLE_INVENTORY_DETAIL,
+    payload,
+  };
+};
+
+export const setVisibleInventoryEdit = (payload) => {
+  return {
+    type: typeRetailer.SET_VISIBLE_INVENTORY_EDIT,
     payload,
   };
 };
