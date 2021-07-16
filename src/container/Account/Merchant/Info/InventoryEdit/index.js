@@ -28,6 +28,8 @@ const Index = ({ onBack }) => {
   } = useSelector((state) => state.retailer);
   const { detail } = useSelector((state) => state.merchantDetail);
 
+  console.log({ inventoryDetail })
+
   const [isVisible, setVisible] = React.useState(false);
   const [name, setName] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
@@ -38,6 +40,7 @@ const Index = ({ onBack }) => {
   const [quantity, setQuantity] = React.useState("0");
   const [minThreshold, setMinThreshold] = React.useState("0");
   const [maxThreshold, setMaxThreshold] = React.useState("0");
+  const [description, setDescription] = React.useState("");
   const [images, setImages] = React.useState([]);
 
   const [imageDefault, setImageDefault] = React.useState("");
@@ -67,6 +70,7 @@ const Index = ({ onBack }) => {
     setMaxThreshold(inventoryDetail.maxThreshold);
     setCategoryId(inventoryDetail.categoryId);
     setImages(inventoryDetail.images);
+    setDescription(inventoryDetail.description);
   };
 
   const handleChange = (type, value) => {
@@ -97,6 +101,9 @@ const Index = ({ onBack }) => {
         break;
       case "categoryId":
         setCategoryId(value);
+        break;
+      case "description":
+        setDescription(value);
         break;
 
       default:
@@ -132,6 +139,7 @@ const Index = ({ onBack }) => {
         minThreshold,
         maxThreshold,
         categoryId,
+        description,
         fileId: findImageDefault() ? findImageDefault().fileId : inventoryDetail.fileId
       };
       dispatch(editProduct(body, inventoryDetail.productId, back));
@@ -232,6 +240,7 @@ const Index = ({ onBack }) => {
           minThreshold={minThreshold}
           maxThreshold={maxThreshold}
           categoryId={categoryId}
+          description={description}
           handleChange={handleChange}
           images={images}
           uploadImage={uploadImage}

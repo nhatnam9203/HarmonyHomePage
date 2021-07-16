@@ -19,10 +19,10 @@ const Index = ({ onBack }) => {
   const { inventoryDetail } = useSelector((state) => state.retailer);
   const { images } = inventoryDetail;
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-  },[]);
+  }, []);
 
   const editInventory = () => {
     dispatch(setVisibleInventoryEdit(true));
@@ -39,8 +39,10 @@ const Index = ({ onBack }) => {
 
   const imgDefault = imageDefault();
 
+  console.log({ inventoryDetail });
+
   return (
-    <Fade>
+    <>
       <div className="info_merchant_title" style={{ color: "#404040" }}>
         {inventoryDetail.name}
         <Button className="btn btn_cancel" onClick={onBack}>
@@ -63,34 +65,49 @@ const Index = ({ onBack }) => {
           className="inventory_img_big_product"
           alt="img"
         />
-        <div>
-          <p>Category</p>
-          <p>SKU</p>
-          <p>Barcode</p>
-          <p>Price</p>
-          <p>Cost price</p>
-          <p>Total items in stock</p>
-          <p>Total items need to order</p>
-        </div>
 
-        <div style={{ marginLeft: "2.5rem" }}>
-          {inventoryDetail.categoryName ? (
-            <p>{inventoryDetail.categoryName}</p>
-          ) : (
-              <div>&nbsp;</div>
-            )}
-          <p>{inventoryDetail.sku}</p>
-          <p>{inventoryDetail.barCode}</p>
-          <p style={{ fontWeight: "600" }}>{`$ ${inventoryDetail.price}`}</p>
-          <p
-            style={{ fontWeight: "600" }}
-          >{`$ ${inventoryDetail.costPrice}`}</p>
-          <p style={{ color: "red", fontWeight: "600" }}>
-            {inventoryDetail.quantity}
-          </p>
-          <p style={{ color: "red", fontWeight: "600" }}>
-            {inventoryDetail.needToOrder}
-          </p>
+        <div style={{ marginLeft: 15 }}>
+          <div className="item_inventory_detail">
+            <div>Category</div>
+            <div>{inventoryDetail.categoryName}</div>
+          </div>
+          <div className="item_inventory_detail">
+            <div>SKU</div>
+            <div>{inventoryDetail.sku}</div>
+          </div>
+          <div className="item_inventory_detail">
+            <div>Barcode</div>
+            <div>{inventoryDetail.barCode}</div>
+          </div>
+          <div className="item_inventory_detail">
+            <div>Price</div>
+            <div style={{ fontWeight: '600' }}>{inventoryDetail.price}</div>
+          </div>
+          <div className="item_inventory_detail">
+            <div>Cost price</div>
+            <div
+              style={{ fontWeight: '600' }}>
+              {inventoryDetail.costPrice}
+            </div>
+          </div>
+          <div className="item_inventory_detail">
+            <div>Total items in stock</div>
+            <div
+              style={{ fontWeight: '600', color: (parseInt(inventoryDetail.quantity) < parseInt(inventoryDetail.minThreshold)) ? "red" : "#404040", }}>
+              {inventoryDetail.quantity}
+            </div>
+          </div>
+          <div className="item_inventory_detail">
+            <div>Total items need to order</div>
+            <div
+              style={{ fontWeight: '600', color: parseInt(inventoryDetail.needToOrder) > 0 ? "red" : "#333", fontWeight: "600" }}>
+              {inventoryDetail.needToOrder}
+            </div>
+          </div>
+          <div className="item_inventory_detail">
+            <div>Description</div>
+            <div style={{ width : 300 }}>{inventoryDetail.description}</div>
+          </div>
         </div>
       </div>
 
@@ -126,7 +143,7 @@ const Index = ({ onBack }) => {
         columns={columns()}
         PaginationComponent={() => <div />}
       />
-    </Fade>
+    </>
   );
 };
 
@@ -140,19 +157,19 @@ const columns = () => [
     width: 400,
   },
   {
-    Header: <CustomTableHeader value="Price" />,
-    id: "price",
-    accessor: (row) => <div className="table-tr">{`$ ${row.price}`}</div>,
+    Header: <CustomTableHeader value="Cost price" />,
+    id: "costPrice",
+    accessor: (row) => <div className="table-tr">{`$ ${row.costPrice}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Need to order" />,
-    id: "needToOrder",
+    Header: <CustomTableHeader value="Additional price" />,
+    id: "additionalPrice",
     accessor: (row) => (
-      <div className="table-tr">{`${row.needToOrder || "0"}`}</div>
+      <div className="table-tr">{`${row.additionalPrice || "0"}`}</div>
     ),
   },
   {
-    Header: <CustomTableHeader value="Items in stock" />,
+    Header: <CustomTableHeader value="Qty" />,
     id: "quantity",
     accessor: (row) => (
       <div className="table-tr">{`${row.quantity || "0"}`}</div>

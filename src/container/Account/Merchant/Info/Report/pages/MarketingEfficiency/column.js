@@ -39,9 +39,9 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     id: "discount",
     accessor: (row) =>
       row.discount?.toString() ? (
-        <div className="table-tr">{formatMoney(row.discount)}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.discount)}`}</div>
       ) : (
-        <div className="table-tr-last">{row.total_discount}</div>
+        <div className="table-tr-last">{`$ ${row.total_discount}`}</div>
       ),
   },
   {

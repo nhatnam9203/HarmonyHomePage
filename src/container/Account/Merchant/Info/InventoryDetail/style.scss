@@ -1,7 +1,6 @@
 .inventory {
   &_info_detail {
     display: flex;
-    align-items: center;
     margin-top: 1rem;
     & > div {
       & > p {
@@ -16,6 +15,19 @@
     width: 10rem;
     height: 10rem;
   }
+}
+
+.item_inventory_detail{
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  color: #404040;
+  margin-bottom: 8px;
+  &>div:nth-child(1){
+    width: 15rem;
+  }
+  // background : blue;
 }
 
 .inventory_img_small_product {

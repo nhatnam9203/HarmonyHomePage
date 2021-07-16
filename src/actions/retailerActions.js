@@ -168,6 +168,7 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
             totalRevenue: FormatPrice(obj.totalRevenue),
             totalProfit: FormatPrice(obj.totalProfit),
             totalCost: FormatPrice(obj.totalCost),
+            totalTax: FormatPrice(obj.totalTax),
           };
         })
         : [];
@@ -208,6 +209,7 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
             totalrevenue: FormatPrice(obj.totalrevenue),
             totalProfit: FormatPrice(obj.totalProfit),
             totalCost: FormatPrice(obj.totalCost),
+            totalTax: FormatPrice(obj.totalTax),
           };
         })
         : [];
@@ -282,6 +284,7 @@ export const getTopProduct = (requestUrl = "", token = "") => async (
             totalRevenue: FormatPrice(obj.totalRevenue),
             totalProfit: FormatPrice(obj.totalProfit),
             totalCost: FormatPrice(obj.totalCost),
+            totalTax: FormatPrice(obj.totalTax),
           };
         })
         : [];
@@ -319,6 +322,7 @@ export const getTopCategory = (requestUrl = "", token = "") => async (
             totalrevenue: FormatPrice(obj.totalrevenue),
             totalProfit: FormatPrice(obj.totalProfit),
             totalCost: FormatPrice(obj.totalCost),
+            totalTax:  FormatPrice(obj.totalTax),
           };
         })
         : [];

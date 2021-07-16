@@ -25,6 +25,7 @@ const FormEditInventory = ({
     maxThreshold,
     categoryId,
     images,
+    description,
     handleChange = () => { },
     uploadImage = () => { },
     selectImage = () => { },
@@ -52,6 +53,21 @@ const FormEditInventory = ({
                             style={{ borderColor: isEmpty(name) ? "red" : "#ced4da" }}
                         />
                         {isEmpty(name) && <Error />}
+                    </Form.Group>
+
+                    {/******************** DESCRIPTION ********************/}
+                    <Form.Group style={{ position: "relative" }}>
+                        <Form.Label>
+                            Description
+                        </Form.Label>
+                        <Form.Control
+                            type="text"
+                            as="textarea"
+                            placeholder="Description"
+                            name="description"
+                            value={description}
+                            onChange={(e) => handleChange("description", e.target.value)}
+                        />
                     </Form.Group>
 
                     {/******************** SUB CATEGORY ********************/}
@@ -151,7 +167,7 @@ const FormEditInventory = ({
 
             <Col xl={6} xs={12} className="h-100">
                 <div className="sign_up_form1">
-                
+
                     {/******************** QUANTITY ********************/}
                     <Form.Group style={{ position: "relative" }}>
                         <Form.Label>
