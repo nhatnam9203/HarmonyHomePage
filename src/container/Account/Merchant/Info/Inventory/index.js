@@ -22,13 +22,14 @@ import "../Info.scss";
 
 const Index = ({
   pageInventory = 1,
-  changePageInventory = () => {},
+  changePageInventory = () => { },
   valueSearch,
   onChangeSearch,
   searchInventory,
   valueSort,
   changeSortInventory,
   exportInventory,
+  getInventoryData,
 }) => {
   const dispatch = useDispatch();
 
@@ -79,6 +80,11 @@ const Index = ({
     exportInventory(reportType.toString().toLowerCase());
   };
 
+  const backToInventory = () => {
+    dispatch(setVisibleInventoryDetail(false));
+    getInventoryData();
+  }
+
   if (isVisibleInventoryEdit) {
     return (
       <InventoryEdit onBack={() => dispatch(setVisibleInventoryEdit(false))} />
@@ -88,7 +94,7 @@ const Index = ({
   if (isVisibleInventoryDetail) {
     return (
       <InventoryDetail
-        onBack={() => dispatch(setVisibleInventoryDetail(false))}
+        onBack={backToInventory}
       />
     );
   }
@@ -106,7 +112,7 @@ const Index = ({
             />
           </div>
           <ButtonReport
-            onClickShowReport={() => {}}
+            onClickShowReport={() => { }}
             onClickExport={onClickExport}
             isNotShowReport
           />

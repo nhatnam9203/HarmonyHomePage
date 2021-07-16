@@ -27,6 +27,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { userLogin } from "../../actions/userActions";
 import ForgotPassword from "../ForgotPassWord/ForgotPassword";
+import { isEmpty } from "lodash";
 
 // import { useMediaQuery } from "react-responsive";
 
@@ -55,14 +56,17 @@ export default function Header() {
     setExpanded(false);
     setIsConsumer(true);
   };
+
   const handleNotConsumer = () => {
     setExpanded(false);
     setIsConsumer(false);
   };
+
   const handleAccount = () => {
     history.push("/account/my-account");
     setIsConsumer(false);
   };
+
   const handleShowLogin = () => {
     setShow(true);
     // setIsConsumer(false);
@@ -96,23 +100,23 @@ export default function Header() {
         <Container>
           <Row className="">
             <Col className="py-1 mx-sm-1 pr-0 pl-0 col__signin">
-              {user ? (
+              {!isEmpty(user) ? (
                 <div className="sign_in" onClick={handleAccount}>
                   <img src={LoginIcon} width={21} className="mr-2" alt="img" />
                   <span className="text-white isMobile">Manage Account</span>
                 </div>
               ) : (
-                <div className="sign_in" onClick={handleShowLogin}>
-                  <img
-                    src={LoginIcon}
-                    width={21}
-                    height="auto"
-                    className="mr-2"
-                    alt="img"
-                  />
-                  <span className="text-white isMobile">Sign in</span>
-                </div>
-              )}
+                  <div className="sign_in" onClick={handleShowLogin}>
+                    <img
+                      src={LoginIcon}
+                      width={21}
+                      height="auto"
+                      className="mr-2"
+                      alt="img"
+                    />
+                    <span className="text-white isMobile">Sign in</span>
+                  </div>
+                )}
             </Col>
             <Col className="pt-1 mx-sm-1 pr-0 col__auto col__phone">
               <a href="tel:800-531-3126" className="telephone">
@@ -219,132 +223,132 @@ export default function Header() {
           </Container>
         </Navbar>
       ) : (
-        <Navbar
-          expanded={expanded}
-          expand="xl"
-          className="nav_header shadow-sm bg-white"
-          sticky="top"
-          collapseOnSelect
-        >
-          <Container>
-            <Navbar.Brand>
-              <Link to="/home">
-                <img
-                  src={Logo}
-                  className="d-inline-block align-top"
-                  alt="img"
-                />
-              </Link>
-            </Navbar.Brand>
-            <Navbar.Toggle
-              aria-controls="basic-navbar-nav"
-              onClick={() =>
-                setTimeout(() => {
-                  setExpanded(!expanded);
-                }, 150)
-              }
-            />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <NavItem
-                  onClick={() => setExpanded(false)}
-                  className="py-md-2 py-xs-4"
-                >
-                  <NavLink
-                    to="/home"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                    exact
+          <Navbar
+            expanded={expanded}
+            expand="xl"
+            className="nav_header shadow-sm bg-white"
+            sticky="top"
+            collapseOnSelect
+          >
+            <Container>
+              <Navbar.Brand>
+                <Link to="/home">
+                  <img
+                    src={Logo}
+                    className="d-inline-block align-top"
+                    alt="img"
+                  />
+                </Link>
+              </Navbar.Brand>
+              <Navbar.Toggle
+                aria-controls="basic-navbar-nav"
+                onClick={() =>
+                  setTimeout(() => {
+                    setExpanded(!expanded);
+                  }, 150)
+                }
+              />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                  <NavItem
+                    onClick={() => setExpanded(false)}
+                    className="py-md-2 py-xs-4"
                   >
-                    {t("Home")}
+                    <NavLink
+                      to="/home"
+                      className="nav-NavLink"
+                      activeClassName="active_link"
+                      exact
+                    >
+                      {t("Home")}
+                    </NavLink>
+                  </NavItem>
+                  <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                    <NavLink
+                      to="/home/pricing"
+                      className="nav-NavLink"
+                      activeClassName="active_link"
+                    >
+                      {t("Pricing")}
+                    </NavLink>
+                  </NavItem>
+                  <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                    <NavLink
+                      to="/home/devices"
+                      className="nav-NavLink"
+                      activeClassName="active_link"
+                    >
+                      {t("Devices")}
+                    </NavLink>
+                  </NavItem>
+                  <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                    <NavLink
+                      to="/home/blogs"
+                      className="nav-NavLink"
+                      activeClassName="active_link"
+                    >
+                      BLOGS
                   </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/home/pricing"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    {t("Pricing")}
-                  </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/home/devices"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    {t("Devices")}
-                  </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/home/blogs"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    BLOGS
-                  </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/home/contact"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    {t("Contact")}
-                  </NavLink>
-                </NavItem>
-              </Nav>
+                  </NavItem>
+                  <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                    <NavLink
+                      to="/home/contact"
+                      className="nav-NavLink"
+                      activeClassName="active_link"
+                    >
+                      {t("Contact")}
+                    </NavLink>
+                  </NavItem>
+                </Nav>
 
-              <Nav className="align-items-end">
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    exact
-                    to="/home"
-                    className="nav-NavLink merchant_nav"
-                    activeClassName="active_link border-0"
-                    isActive={(match, location) => {
-                      if (location?.pathname?.includes("/home")) {
-                        return true;
-                      }
-                    }}
-                  >
-                    FOR MERCHANT
+                <Nav className="align-items-end">
+                  <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                    <NavLink
+                      exact
+                      to="/home"
+                      className="nav-NavLink merchant_nav"
+                      activeClassName="active_link border-0"
+                      isActive={(match, location) => {
+                        if (location?.pathname?.includes("/home")) {
+                          return true;
+                        }
+                      }}
+                    >
+                      FOR MERCHANT
                   </NavLink>
-                </NavItem>
-                <NavItem onClick={() => setExpanded(false)} className="py-md-2">
-                  <NavLink
-                    to="/investor"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    FOR INVESTOR
+                  </NavItem>
+                  <NavItem onClick={() => setExpanded(false)} className="py-md-2">
+                    <NavLink
+                      to="/investor"
+                      className="nav-NavLink"
+                      activeClassName="active_link"
+                    >
+                      FOR INVESTOR
                   </NavLink>
-                </NavItem>
-                <NavItem onClick={handleConsumer} className="py-md-2">
-                  <NavLink
-                    to="/consumer"
-                    className="nav-NavLink"
-                    activeClassName="active_link"
-                  >
-                    FOR CONSUMER
+                  </NavItem>
+                  <NavItem onClick={handleConsumer} className="py-md-2">
+                    <NavLink
+                      to="/consumer"
+                      className="nav-NavLink"
+                      activeClassName="active_link"
+                    >
+                      FOR CONSUMER
                   </NavLink>
-                </NavItem>
+                  </NavItem>
 
-                <NavItem
-                  className="sign_up py-md-2"
-                  onClick={() => setExpanded(false)}
-                >
-                  <NavLink to="/home/sign-up" className="nav-NavLink">
-                    JOIN NOW
+                  <NavItem
+                    className="sign_up py-md-2"
+                    onClick={() => setExpanded(false)}
+                  >
+                    <NavLink to="/home/sign-up" className="nav-NavLink">
+                      JOIN NOW
                   </NavLink>
-                </NavItem>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      )}
+                  </NavItem>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+        )}
 
       {showForgot ? (
         <Modal
@@ -407,8 +411,8 @@ export default function Header() {
                       {showPassword ? (
                         <BiHide size={25} />
                       ) : (
-                        <BiShow size={25} />
-                      )}
+                          <BiShow size={25} />
+                        )}
                     </button>
                   </InputGroup.Append>
                   <Form.Control.Feedback type="invalid">
@@ -429,13 +433,13 @@ export default function Header() {
                     <span className="loadingBtn">Loading...</span>
                   </Button>
                 ) : (
-                  <Button
-                    type="submit"
-                    className="submit_btn text-center font-weight-bold"
-                  >
-                    Sign in
-                  </Button>
-                )}
+                    <Button
+                      type="submit"
+                      className="submit_btn text-center font-weight-bold"
+                    >
+                      Sign in
+                    </Button>
+                  )}
 
                 <span
                   onClick={() => setShowForgot(true)}
@@ -452,111 +456,111 @@ export default function Header() {
           </Modal.Body>
         </Modal>
       ) : (
-        <Modal
-          show={show}
-          onHide={() => setShow(false)}
-          aria-labelledby="package-modal"
-          centered
-          className="modal-sign-in"
-        >
-          <Modal.Header className="border-0 pb-0" closeButton>
-            <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
-              <Modal.Title className="sign_in__title text-center font-weight-bold mb-2">
-                Sign In
+          <Modal
+            show={show}
+            onHide={() => setShow(false)}
+            aria-labelledby="package-modal"
+            centered
+            className="modal-sign-in"
+          >
+            <Modal.Header className="border-0 pb-0" closeButton>
+              <div className="border-0 d-flex flex-column align-items-center justify-content-center pt-3 pl-3 h-100">
+                <Modal.Title className="sign_in__title text-center font-weight-bold mb-2">
+                  Sign In
               </Modal.Title>
-              <p className="sign_in__text text-center mb-0">
-                If you have an account, sign in with your email address.
+                <p className="sign_in__text text-center mb-0">
+                  If you have an account, sign in with your email address.
               </p>
-            </div>
-          </Modal.Header>
-          <Modal.Body className="modal-body-signin p-4 h-100 border-0">
-            <Form onSubmit={formik.handleSubmit}>
-              <Form.Group>
-                <Form.Label>
-                  Email <span className="form_required">*</span>
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  isInvalid={formik.touched.email && formik.errors.email}
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {formik.errors.email}
-                </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>
-                  Password <span className="form_required">*</span>
-                </Form.Label>
-                <InputGroup>
-                  <FormControl
-                    // className="border-right-0"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
-                    isInvalid={
-                      formik.touched.password && formik.errors.password
-                    }
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                  />
-                  <InputGroup.Append className="form__show-password--container">
-                    <button
-                      type="button"
-                      className="form__show-password"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? (
-                        <BiHide size={25} />
-                      ) : (
-                        <BiShow size={25} />
-                      )}
-                    </button>
-                  </InputGroup.Append>
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.password}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </Form.Group>
-              <div className="signin__container-btn d-flex justify-content-between align-items-center">
-                {loading ? (
-                  <Button className="submit_btn text-center" disabled>
-                    <Spinner
-                      as="span"
-                      animation="grow"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />
-                    <span className="loadingBtn">Loading...</span>
-                  </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    className="submit_btn text-center font-weight-bold"
-                  >
-                    Sign in
-                  </Button>
-                )}
-
-                <span
-                  onClick={() => setShowForgot(true)}
-                  className="sign_in_link"
-                >
-                  Forgot Password?
-                </span>
-                <ForgotPassword
-                  showForgot={showForgot}
-                  setShowForgot={setShowForgot}
-                />
               </div>
-            </Form>
-          </Modal.Body>
-        </Modal>
-      )}
+            </Modal.Header>
+            <Modal.Body className="modal-body-signin p-4 h-100 border-0">
+              <Form onSubmit={formik.handleSubmit}>
+                <Form.Group>
+                  <Form.Label>
+                    Email <span className="form_required">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Email"
+                    name="email"
+                    isInvalid={formik.touched.email && formik.errors.email}
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {formik.errors.email}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>
+                    Password <span className="form_required">*</span>
+                  </Form.Label>
+                  <InputGroup>
+                    <FormControl
+                      // className="border-right-0"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Password"
+                      name="password"
+                      isInvalid={
+                        formik.touched.password && formik.errors.password
+                      }
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
+                    />
+                    <InputGroup.Append className="form__show-password--container">
+                      <button
+                        type="button"
+                        className="form__show-password"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <BiHide size={25} />
+                        ) : (
+                            <BiShow size={25} />
+                          )}
+                      </button>
+                    </InputGroup.Append>
+                    <Form.Control.Feedback type="invalid">
+                      {formik.errors.password}
+                    </Form.Control.Feedback>
+                  </InputGroup>
+                </Form.Group>
+                <div className="signin__container-btn d-flex justify-content-between align-items-center">
+                  {loading ? (
+                    <Button className="submit_btn text-center" disabled>
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                      <span className="loadingBtn">Loading...</span>
+                    </Button>
+                  ) : (
+                      <Button
+                        type="submit"
+                        className="submit_btn text-center font-weight-bold"
+                      >
+                        Sign in
+                      </Button>
+                    )}
+
+                  <span
+                    onClick={() => setShowForgot(true)}
+                    className="sign_in_link"
+                  >
+                    Forgot Password?
+                </span>
+                  <ForgotPassword
+                    showForgot={showForgot}
+                    setShowForgot={setShowForgot}
+                  />
+                </div>
+              </Form>
+            </Modal.Body>
+          </Modal>
+        )}
     </>
   );
 }

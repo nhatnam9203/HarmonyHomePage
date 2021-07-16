@@ -60,8 +60,8 @@ const Index = ({ onBack }) => {
     setName(inventoryDetail.name);
     setSku(inventoryDetail.sku);
     setBarCode(inventoryDetail.barCode);
-    setPrice(FormatPrice(inventoryDetail.price));
-    setCostPrice(FormatPrice(inventoryDetail.costPrice));
+    setPrice(FormatPrice(inventoryDetail.price).toFixed(2));
+    setCostPrice(FormatPrice(inventoryDetail.costPrice).toFixed(2));
     setQuantity(inventoryDetail.quantity);
     setMinThreshold(inventoryDetail.minThreshold);
     setMaxThreshold(inventoryDetail.maxThreshold);
@@ -132,10 +132,16 @@ const Index = ({ onBack }) => {
         minThreshold,
         maxThreshold,
         categoryId,
+        fileId: findImageDefault() ? findImageDefault().fileId : inventoryDetail.fileId
       };
       dispatch(editProduct(body, inventoryDetail.productId, back));
     }
   };
+
+  const findImageDefault = () => {
+    const imgeDefault = images.find(i => i.isDefault);
+    return imgeDefault;
+  }
 
   const back = () => {
     onBack();

@@ -14,6 +14,7 @@ import {
 export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
+    
     const { data } = await api.getByPage(requestUrl, token);
 
     let orders = data.data
@@ -34,16 +35,18 @@ export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   }
 };
 
+
 export const getInventory = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
+
     const { data } = await api.getByPage(requestUrl, token);
 
     let inventory = data.data
       ? data.data.map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
-      
+
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_INVENTORY,
@@ -58,6 +61,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };
+
 
 export const getCustomer = (requestUrl = "", token = "") => async (
   dispatch
@@ -80,12 +84,14 @@ export const getCustomer = (requestUrl = "", token = "") => async (
   }
 };
 
+
 export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+
       let temptData = data.data
         ? data.data.map((obj) => {
           return {
@@ -106,6 +112,7 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
         type: typeRetailer.SET_OVERALL,
         payload: { data: result, summary: data.summary },
       });
+
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
@@ -115,6 +122,7 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };
+
 
 export const getSalesByOrder = (requestUrl = "", token = "") => async (
   dispatch
@@ -132,6 +140,7 @@ export const getSalesByOrder = (requestUrl = "", token = "") => async (
         type: "SET_SALES_BY_ORDER",
         payload: { data: result, summary: data.summary },
       });
+
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
@@ -142,6 +151,7 @@ export const getSalesByOrder = (requestUrl = "", token = "") => async (
   }
 };
 
+
 export const getSalesByProduct = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
@@ -150,6 +160,7 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+
       let temptData = data.data
         ? data.data.map((obj) => {
           return {
@@ -160,7 +171,9 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
           };
         })
         : [];
+
       let result = [];
+
       if (temptData.length > 0)
         result = [...temptData, summary_sales_by_product(data.summary)];
 
@@ -178,6 +191,7 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
   }
 };
 
+
 export const getSalesByCategory = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
@@ -186,6 +200,7 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
+      
       let temptData = data.data
         ? data.data.map((obj) => {
           return {
@@ -196,6 +211,7 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
           };
         })
         : [];
+        
       let result = [];
       if (temptData.length > 0)
         result = [...temptData, summary_sales_by_product(data.summary)];
@@ -213,6 +229,7 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };
+
 
 export const getSalesByCustomer = (requestUrl = "", token = "") => async (
   dispatch
@@ -248,6 +265,7 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };
+
 
 export const getTopProduct = (requestUrl = "", token = "") => async (
   dispatch
@@ -285,6 +303,7 @@ export const getTopProduct = (requestUrl = "", token = "") => async (
   }
 };
 
+
 export const getTopCategory = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
@@ -321,6 +340,7 @@ export const getTopCategory = (requestUrl = "", token = "") => async (
   }
 };
 
+
 export const getPaymentByMethod = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
@@ -348,6 +368,7 @@ export const getPaymentByMethod = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };
+
 
 export const getStaffReport = (requestUrl = "", token = "") => async (
   dispatch
@@ -385,6 +406,7 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
   }
 };
 
+
 export const getMarketingEfficiency = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
@@ -420,6 +442,7 @@ export const getMarketingEfficiency = (requestUrl = "", token = "") => async (
   }
 };
 
+
 export const exportRetailer = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
@@ -443,6 +466,7 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
   }
 };
+
 
 export const getOrderDetail = (requestUrl = "", token = "", callBack) => async (
   dispatch
@@ -492,6 +516,7 @@ export const getInventoryDetail = (
   }
 };
 
+
 export const getCustomerDetail = (
   requestUrl = "",
   token = "",
@@ -516,6 +541,7 @@ export const getCustomerDetail = (
     dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
   }
 };
+
 
 export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
   dispatch
@@ -545,6 +571,7 @@ export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
   }
 };
+
 
 export const getSubCategory = (requestUrl = "", token = "") => async (
   dispatch

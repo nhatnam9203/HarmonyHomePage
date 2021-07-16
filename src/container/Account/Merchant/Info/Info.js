@@ -52,8 +52,8 @@ function Info() {
   const [keySearchOrders, setKeySearchOrders] = React.useState("");
 
   /* Inventory */
-  const [sortInventory, setSortInventory] = React.useState("ASC");
-  const [sortTypeInventory, setSortTypeInventory] = React.useState("name");
+  const [sortInventory, setSortInventory] = React.useState("");
+  const [sortTypeInventory, setSortTypeInventory] = React.useState("");
   const [pageInventory, setPageInventory] = React.useState(1);
   const [keySearchInventory, setKeySearchInventory] = React.useState("");
 
@@ -93,6 +93,7 @@ function Info() {
     if (isEmpty(sort) || isEmpty(sortType)) {
       url = `product?page=${page}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}`;
     }
+    console.log({ url });
     url = encodeURI(url);
     dispatch(getInventory(url, token));
   };
@@ -225,6 +226,7 @@ function Info() {
             onChangeSearch={onChangeSearchInventory}
             changeTab={changeTab}
             exportInventory={exportInventory}
+            getInventoryData={()=>getInventoryData(pageInventory,sortInventory,sortTypeInventory)}
           />
         );
       case "Customer":

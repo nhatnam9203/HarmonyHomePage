@@ -31,7 +31,7 @@ export const userLogin = (dataLogin) => async (dispatch) => {
 // User logout
 export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: typeUser.USER_LOGOUT });
-  history.push("/home");
+  // history.push("/home");
   const x = window.location.href;
   const url = new URL(x).origin;
   setTimeout(() => {
@@ -42,6 +42,7 @@ export const userLogoutAction = () => async (dispatch) => {
 // Get My Account
 export const getMyAccountAction = () => async (dispatch, getState) => {
   try {
+
     dispatch({
       type: typeUser.GET_MY_ACCOUNT_REQUEST,
     });
@@ -61,6 +62,9 @@ export const getMyAccountAction = () => async (dispatch, getState) => {
       payload: data?.data,
     });
   } catch (error) {
+    // if (error.message.includes("401")) {
+    //   dispatch(userLogoutAction());
+    // }
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({ type: typeUser.GET_MY_ACCOUNT_FAILURE, payload: error.message });
   }
@@ -317,6 +321,8 @@ export const getPackageAction = () => async (dispatch, getState) => {
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     const { data } = await api.getPackage(token);
+
+    console.log('get package : ', data)
 
     if (data.codeNumber === 401) {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });

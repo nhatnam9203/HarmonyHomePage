@@ -478,7 +478,7 @@ export const retailerReducer = (
       };
 
     /* MARKETING EFFICIENCY */
-    case types.SET_STAFF_REPORT:
+    case types.SET_MARKETING_EFFICIENCY:
       return {
         ...state,
         marketing_efficiency: payload?.data || [],

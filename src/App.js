@@ -38,7 +38,7 @@ const Account = lazy(() => import("./container/Account"));
 
 function App() {
   const url = window.location.href;
-  const isNotPopup = url.toString().includes("account/my-account");
+  const isNotPopup = url.toString().includes("account");
 
   return (
     <Router>
