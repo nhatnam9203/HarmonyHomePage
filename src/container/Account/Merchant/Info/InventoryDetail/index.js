@@ -19,6 +19,8 @@ const Index = ({ onBack }) => {
   const { inventoryDetail } = useSelector((state) => state.retailer);
   const { images } = inventoryDetail;
 
+  const [isMore, showMore] = React.useState(false);
+
   React.useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -39,7 +41,7 @@ const Index = ({ onBack }) => {
 
   const imgDefault = imageDefault();
 
-  console.log({ inventoryDetail });
+  const length = inventoryDetail.description.length;
 
   return (
     <>
@@ -106,7 +108,24 @@ const Index = ({ onBack }) => {
           </div>
           <div className="item_inventory_detail">
             <div>Description</div>
-            <div style={{ width : 300 }}>{inventoryDetail.description}</div>
+            <div style={{ width: 300 }}>
+              {
+                length > 60 ?
+                  !isMore ?
+                  inventoryDetail.description.slice(0, 60) + "..." :
+                  inventoryDetail.description : inventoryDetail.description
+              }
+              {
+                length > 60 &&
+                <span
+                  onClick={() => {
+                    showMore(isMore => !isMore)
+                  }}
+                  style={{ color: '#1366AE', fontWeight: '600', cursor: 'pointer' }}>
+                  {isMore ? "less" : "more"}
+                </span>
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -174,5 +193,14 @@ const columns = () => [
     accessor: (row) => (
       <div className="table-tr">{`${row.quantity || "0"}`}</div>
     ),
+  },
+  {
+    Header: <CustomTableHeader value="Image" />,
+    id: "imageUrl",
+    accessor: (row) => row.imageUrl ? (
+      <img style={{ width: 43, height: 43, marginTop: 5 }} src={row.imageUrl} alt="imgjj" />
+    ) : (
+        <img style={{ width: 43, height: 43, marginTop: 5 }} src={product_default} alt="imgjj" />
+      )
   },
 ];

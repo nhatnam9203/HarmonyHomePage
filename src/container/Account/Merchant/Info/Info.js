@@ -46,8 +46,8 @@ function Info() {
   const [tabActive, setTabActive] = React.useState("Business Information");
 
   /* Orders */
-  const [sortOrders, setSortOrders] = React.useState("ASC");
-  const [sortTypeOrders, setSortTypeOrders] = React.useState("code");
+  const [sortOrders, setSortOrders] = React.useState("");
+  const [sortTypeOrders, setSortTypeOrders] = React.useState("");
   const [pageOrders, setPageOrders] = React.useState(1);
   const [keySearchOrders, setKeySearchOrders] = React.useState("");
 
@@ -58,8 +58,8 @@ function Info() {
   const [keySearchInventory, setKeySearchInventory] = React.useState("");
 
   /* Customer */
-  const [sortCustomer, setSortCustomer] = React.useState("DESC");
-  const [sortTypeCustomer, setSortTypeCustomer] = React.useState("email");
+  const [sortCustomer, setSortCustomer] = React.useState("");
+  const [sortTypeCustomer, setSortTypeCustomer] = React.useState("");
   const [pageCustomer, setPageCustomer] = React.useState(1);
   const [keySearchCustomer, setKeySearchCustomer] = React.useState("");
 
@@ -98,9 +98,9 @@ function Info() {
   };
 
   const exportInventory = (exportType) => {
-    let url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts={"${sortTypeInventory}":"${sortInventory}"}&merchantId=${detail.merchantId}&type=${exportType}`;
+    let url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts={"${sortTypeInventory}":"${sortInventory}"&merchantId=${detail.merchantId}&type=${exportType}`;
     if (isEmpty(sortInventory) || isEmpty(sortTypeInventory)) {
-      url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}}&type=${exportType}`;
+      url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}&type=${exportType}`;
     }
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
