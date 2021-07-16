@@ -41,7 +41,7 @@ const Index = ({ onBack }) => {
 
   const imgDefault = imageDefault();
 
-  const length = inventoryDetail.description.length;
+  const length = inventoryDetail?.description?.length || 0;
 
   return (
     <>

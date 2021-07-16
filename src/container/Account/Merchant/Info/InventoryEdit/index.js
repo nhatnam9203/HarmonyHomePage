@@ -9,11 +9,13 @@ import {
   uploadImageProduct,
   addNewCategory,
   editProduct,
+  uploadImageOptions,
 } from "@/actions/retailerActions";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
 import { FormatPrice, formatMoney } from "@/util";
+import ProductTable from "./ProductTable";
 
 import "../Info.scss";
 import "./style.scss";
@@ -28,8 +30,6 @@ const Index = ({ onBack }) => {
   } = useSelector((state) => state.retailer);
   const { detail } = useSelector((state) => state.merchantDetail);
 
-  console.log({ inventoryDetail })
-
   const [isVisible, setVisible] = React.useState(false);
   const [name, setName] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
@@ -42,6 +42,7 @@ const Index = ({ onBack }) => {
   const [maxThreshold, setMaxThreshold] = React.useState("0");
   const [description, setDescription] = React.useState("");
   const [images, setImages] = React.useState([]);
+  const [quantities, setQuantities] = React.useState([]);
 
   const [imageDefault, setImageDefault] = React.useState("");
 
@@ -71,6 +72,7 @@ const Index = ({ onBack }) => {
     setCategoryId(inventoryDetail.categoryId);
     setImages(inventoryDetail.images);
     setDescription(inventoryDetail.description);
+    setQuantities(inventoryDetail.quantities);
   };
 
   const handleChange = (type, value) => {
@@ -140,6 +142,7 @@ const Index = ({ onBack }) => {
         maxThreshold,
         categoryId,
         description,
+        quantities,
         fileId: findImageDefault() ? findImageDefault().fileId : inventoryDetail.fileId
       };
       dispatch(editProduct(body, inventoryDetail.productId, back));
@@ -220,6 +223,24 @@ const Index = ({ onBack }) => {
     dispatch(addNewCategory(payload, callBack));
   };
 
+  const uploadImagesOption = (files = [], optionId) => {
+    let file = files[0];
+    let formData = new FormData();
+    formData.append("Filename3", file);
+    dispatch(uploadImageOptions(formData, optionId, callBackUploadImagesOption));
+  }
+
+  const callBackUploadImagesOption = (data, optionId) => {
+    const temptQuantities = JSON.parse(JSON.stringify(quantities));
+    for (let i = 0; i < temptQuantities.length; i++) {
+      if (parseInt(temptQuantities[i].id) === parseInt(optionId)) {
+        temptQuantities[i].fileId = data.fileId;
+        temptQuantities[i].imageUrl = data.url;
+      }
+    }
+    setQuantities(temptQuantities);
+  }
+
   if (!isVisible) return null;
 
   return (
@@ -251,6 +272,12 @@ const Index = ({ onBack }) => {
           refCostPrice={refCostPrice}
           handleSubmit={handleSubmit}
         />
+
+        <ProductTable
+          quantities={quantities}
+          uploadImagesOption={uploadImagesOption}
+        />
+
         <div className="btn_group_edit_inventory">
           <Button onClick={back} variant="primary" style={{ marginRight: 10 }}>
             Cancel

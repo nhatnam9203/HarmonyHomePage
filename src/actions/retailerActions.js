@@ -14,7 +14,7 @@ import {
 export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    
+
     const { data } = await api.getByPage(requestUrl, token);
 
     let orders = data.data
@@ -201,7 +201,7 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
     let { data } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
-      
+
       let temptData = data.data
         ? data.data.map((obj) => {
           return {
@@ -213,7 +213,7 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
           };
         })
         : [];
-        
+
       let result = [];
       if (temptData.length > 0)
         result = [...temptData, summary_sales_by_product(data.summary)];
@@ -322,7 +322,7 @@ export const getTopCategory = (requestUrl = "", token = "") => async (
             totalrevenue: FormatPrice(obj.totalrevenue),
             totalProfit: FormatPrice(obj.totalProfit),
             totalCost: FormatPrice(obj.totalCost),
-            totalTax:  FormatPrice(obj.totalTax),
+            totalTax: FormatPrice(obj.totalTax),
           };
         })
         : [];
@@ -644,6 +644,24 @@ export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
     let { data } = await api.uploadFile(url, formData);
     if (parseInt(data.codeNumber) === 200) {
       callBack(data.data);
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_UPLOAD_FILE_REQUEST });
+  }
+};
+
+
+export const uploadImageOptions = (formData, optionId, callBack) => async (dispatch) => {
+  try {
+    const url = "file?category=product";
+    dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
+    let { data } = await api.uploadFile(url, formData);
+    if (parseInt(data.codeNumber) === 200) {
+      callBack(data.data, optionId);
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
