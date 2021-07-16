@@ -117,10 +117,6 @@ const Index = ({ onBack }) => {
     dispatch(sort_sales_by_product({ type }));
   };
 
-  console.log({
-    sales_by_product,
-  });
-
   return (
     <>
       <div className="info_merchant_title">

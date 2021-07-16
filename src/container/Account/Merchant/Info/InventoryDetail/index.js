@@ -19,6 +19,11 @@ const Index = ({ onBack }) => {
   const { inventoryDetail } = useSelector((state) => state.retailer);
   const { images } = inventoryDetail;
 
+  React.useEffect(()=>{
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  },[]);
+
   const editInventory = () => {
     dispatch(setVisibleInventoryEdit(true));
   };

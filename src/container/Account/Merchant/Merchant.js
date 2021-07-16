@@ -2,6 +2,12 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMerchantListAction } from "../../../actions/userActions";
+import { 
+  setVisibleInventoryEdit, 
+  setVisibleInventoryDetail,
+  setVisibleOrderDetail,
+  setVisibleCustomerDetail
+ } from "../../../actions/retailerActions";
 import { Helmet } from "react-helmet";
 
 import Table from "react-bootstrap/Table";
@@ -28,7 +34,13 @@ function Merchant() {
       <td className="text-center">
         <button
           className="text_btn"
-          onClick={() => history.push(`/account/merchant/${i?.merchantId}`)}
+          onClick={() => {
+            dispatch(setVisibleInventoryDetail(false));
+            dispatch(setVisibleInventoryEdit(false));
+            dispatch(setVisibleOrderDetail(false));
+            dispatch(setVisibleCustomerDetail(false));
+            history.push(`/account/merchant/${i?.merchantId}`);
+          }}
         >
           View
         </button>

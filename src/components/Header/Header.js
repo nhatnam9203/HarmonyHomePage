@@ -39,7 +39,6 @@ export default function Header() {
   const [showPassword, setShowPassword] = useState(false);
   const [isConsumer, setIsConsumer] = useState(false);
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   // const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
@@ -63,7 +62,12 @@ export default function Header() {
   };
 
   const handleAccount = () => {
-    history.push("/account/my-account");
+
+    const x = window.location.href;
+    const url = new URL(x).origin;
+    setTimeout(() => {
+      window.location.href = `${url}/account/my-account`;
+    }, 300);
     setIsConsumer(false);
   };
 

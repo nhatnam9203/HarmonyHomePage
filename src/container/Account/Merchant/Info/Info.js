@@ -93,7 +93,6 @@ function Info() {
     if (isEmpty(sort) || isEmpty(sortType)) {
       url = `product?page=${page}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}`;
     }
-    console.log({ url });
     url = encodeURI(url);
     dispatch(getInventory(url, token));
   };

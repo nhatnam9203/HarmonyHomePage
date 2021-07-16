@@ -37,6 +37,7 @@ const FormEditInventory = ({
         <Row className="formEditInventory" style={{ marginTop: 22, width: "90%" }}>
             <Col xl={6} xs={12} className="h-100">
                 <div className="sign_up_form1">
+
                     {/******************** PRODUCT NAME ********************/}
                     <Form.Group style={{ position: "relative" }}>
                         <Form.Label>
@@ -150,6 +151,7 @@ const FormEditInventory = ({
 
             <Col xl={6} xs={12} className="h-100">
                 <div className="sign_up_form1">
+                
                     {/******************** QUANTITY ********************/}
                     <Form.Group style={{ position: "relative" }}>
                         <Form.Label>

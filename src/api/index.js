@@ -9,12 +9,10 @@ const url = "https://staging.harmonypayment.com/api";
 // Prod
 // const url = "https://api.harmonypayment.com/api";
 
-// Login
 const loginUrl = `${url}/principal/login`;
 
 export const login = (dataLogin) => instance.post(loginUrl, dataLogin);
 
-// Get My Account
 const myAccountUrl = `${url}/principal/myaccount`;
 
 export const getMyAccount = (token) =>
