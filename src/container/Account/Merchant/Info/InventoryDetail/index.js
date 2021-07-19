@@ -53,15 +53,15 @@ const columns = () => [
     width: 400,
   },
   {
-    Header: <CustomTableHeader value="Cost price" />,
-    id: "costPrice",
-    accessor: (row) => <div className="table-tr">{`$ ${row.costPrice}`}</div>,
+    Header: <CustomTableHeader value="Price" />,
+    id: "price",
+    accessor: (row) => <div className="table-tr">{`$ ${row.price}`}</div>,
   },
   {
-    Header: <CustomTableHeader value="Additional price" />,
-    id: "additionalPrice",
+    Header: <CustomTableHeader value="Cost" />,
+    id: "costPrice",
     accessor: (row) => (
-      <div className="table-tr">{`$ ${row.additionalPrice || "0"}`}</div>
+      <div className="table-tr">{`$ ${row.costPrice || "0.00"}`}</div>
     ),
   },
   {
