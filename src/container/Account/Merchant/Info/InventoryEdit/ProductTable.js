@@ -2,12 +2,20 @@ import React from 'react'
 import ReactTable from "react-table";
 import Title from "@/components/Title";
 import CustomTableHeader from "../../Info/CustomTableHeader";
+import InputProductTable from "./widget/InputPrice";
 import product_default from "@/assets/images/product_default.png";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import Dropzone from "react-dropzone";
+import InputPrice from "./widget/InputPrice";
+import InputQuantity from "./widget/InputQuantity";
 import "./style.scss";
 
-const ProductTable = ({ quantities = [], uploadImagesOption = () => { } }) => {
+const ProductTable = ({
+    quantities = [],
+    uploadImagesOption = () => { },
+    handleChangeInput = () => { },
+}) => {
+
     return (
         <>
             <Title
@@ -27,7 +35,7 @@ const ProductTable = ({ quantities = [], uploadImagesOption = () => { } }) => {
                 minRows={1}
                 noDataText="NO DATA!"
                 NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
-                columns={columns(uploadImagesOption)}
+                columns={columns(uploadImagesOption, handleChangeInput)}
                 PaginationComponent={() => <div />}
             />
         </>
@@ -37,7 +45,7 @@ const ProductTable = ({ quantities = [], uploadImagesOption = () => { } }) => {
 export default ProductTable;
 
 
-const columns = (uploadImagesOption) => [
+const columns = (uploadImagesOption, handleChangeInput) => [
     {
         Header: <CustomTableHeader value="Versions" />,
         id: "label",
@@ -47,20 +55,31 @@ const columns = (uploadImagesOption) => [
     {
         Header: <CustomTableHeader value="Cost price" />,
         id: "costPrice",
-        accessor: (row) => <div className="table-tr">{`$ ${row.costPrice}`}</div>,
+        accessor: (row) => (
+            <InputPrice
+                value={row.costPrice}
+                handleChange={(value) => handleChangeInput(value, "costPrice", row.id)}
+            />
+        )
     },
     {
         Header: <CustomTableHeader value="Additional price" />,
         id: "additionalPrice",
         accessor: (row) => (
-            <div className="table-tr">{`${row.additionalPrice || "0"}`}</div>
-        ),
+            <InputPrice
+                value={row.additionalPrice}
+                handleChange={(value) => handleChangeInput(value, "additionalPrice", row.id)}
+            />
+        )
     },
     {
         Header: <CustomTableHeader value="Qty" />,
         id: "quantity",
         accessor: (row) => (
-            <div className="table-tr">{`${row.quantity || "0"}`}</div>
+            <InputQuantity
+                value={row.quantity}
+                handleChange={(value) => handleChangeInput(value, "quantity", row.id)}
+            />
         ),
     },
     {

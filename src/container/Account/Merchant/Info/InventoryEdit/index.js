@@ -128,24 +128,25 @@ const Index = ({ onBack }) => {
     ) {
       alert("error");
     } else {
-      //submit
-      const body = {
-        ...inventoryDetail,
-        images,
-        name,
-        sku,
-        barCode,
-        price: formatMoney(refPrice.current.value),
-        costPrice: formatMoney(refCostPrice.current.value),
-        quantity,
-        minThreshold,
-        maxThreshold,
-        categoryId,
-        description,
-        quantities,
-        fileId: findImageDefault() ? findImageDefault().fileId : inventoryDetail.fileId
-      };
-      dispatch(editProduct(body, inventoryDetail.productId, back));
+      setTimeout(() => {
+        const body = {
+          ...inventoryDetail,
+          images,
+          name,
+          sku,
+          barCode,
+          price: formatMoney(refPrice.current.value),
+          costPrice: formatMoney(refCostPrice.current.value),
+          quantity,
+          minThreshold,
+          maxThreshold,
+          categoryId,
+          description,
+          quantities,
+          fileId: findImageDefault() ? findImageDefault().fileId : inventoryDetail.fileId
+        };
+        dispatch(editProduct(body, inventoryDetail.productId, back));
+      }, 200);
     }
   };
 
@@ -241,6 +242,40 @@ const Index = ({ onBack }) => {
     setQuantities(temptQuantities);
   }
 
+  const handleChangeInputTable = (value, type, optionId) => {
+    let tempt = JSON.parse(JSON.stringify(quantities))
+    switch (type) {
+      case "costPrice":
+        for (let i = 0; i < tempt.length; i++) {
+          if (tempt[i].id === optionId) {
+            tempt[i].costPrice = value;
+          }
+        }
+        break;
+
+      case "additionalPrice":
+        for (let i = 0; i < tempt.length; i++) {
+          if (tempt[i].id === optionId) {
+            tempt[i].additionalPrice = value;
+          }
+        }
+        break;
+
+      case "quantity":
+        for (let i = 0; i < tempt.length; i++) {
+          if (tempt[i].id === optionId) {
+            tempt[i].quantity = value;
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
+
+    setQuantities(tempt);
+  }
+
   if (!isVisible) return null;
 
   return (
@@ -276,6 +311,7 @@ const Index = ({ onBack }) => {
         <ProductTable
           quantities={quantities}
           uploadImagesOption={uploadImagesOption}
+          handleChangeInput={handleChangeInputTable}
         />
 
         <div className="btn_group_edit_inventory">
