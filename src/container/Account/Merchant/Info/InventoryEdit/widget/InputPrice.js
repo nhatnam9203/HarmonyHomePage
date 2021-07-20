@@ -6,13 +6,15 @@ import { isEmpty } from "lodash";
 const InputPrice = ({
     placeholder = "0.00",
     value = "",
-    handleChange = () => { }
+    handleChange = () => { },
+    style,
 }) => {
     return (
         <div style={{ position: 'relative' }}>
             <CurrencyInput
                 type="text"
                 className="input_price"
+
                 value={value}
                 onChangeEvent={(e, maskedValule, floatValue) => {
                     handleChange(maskedValule)
@@ -20,6 +22,7 @@ const InputPrice = ({
                 placeholder={placeholder}
                 style={{
                     borderColor: isEmpty(formatMoney(value)) ? "red" : "#ced4da",
+                    ...style
                 }}
             />
         </div>

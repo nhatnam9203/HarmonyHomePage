@@ -80,10 +80,10 @@ const InventoryInfo = ({ onBack }) => {
             <div style={{ fontWeight: '600' }}>{inventoryDetail.price}</div>
           </div>
           <div className="item_inventory_detail">
-            <div>Cost price</div>
+            <div>Range</div>
             <div
               style={{ fontWeight: '600' }}>
-              {inventoryDetail.costPrice}
+              {inventoryDetail.priceRange}
             </div>
           </div>
           <div className="item_inventory_detail">

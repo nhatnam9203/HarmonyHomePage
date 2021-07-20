@@ -269,6 +269,14 @@ const Index = ({ onBack }) => {
         }
         break;
 
+      case "description":
+        for (let i = 0; i < tempt.length; i++) {
+          if (tempt[i].id === optionId) {
+            tempt[i].description = value;
+          }
+        }
+        break;
+
       default:
         break;
     }
@@ -276,17 +284,17 @@ const Index = ({ onBack }) => {
     setQuantities(tempt);
   }
 
-  const deleteOption = (optionId) =>{
+  const deleteOption = (optionId) => {
     let tempt = JSON.parse(JSON.stringify(quantities));
-    tempt = tempt.filter(t=>t.id !== optionId);
-    setQuantities(tempt); 
+    tempt = tempt.filter(t => t.id !== optionId);
+    setQuantities(tempt);
   }
 
   if (!isVisible) return null;
 
   return (
     <>
-      <Fade>
+      <>
         <Title style={{ color: "#333" }}>
           {inventoryDetail.name} - Edit details
         </Title>
@@ -333,7 +341,7 @@ const Index = ({ onBack }) => {
             Save
           </Button>
         </div>
-      </Fade>
+      </>
 
       {loadingUpfile && <Loading />}
 
