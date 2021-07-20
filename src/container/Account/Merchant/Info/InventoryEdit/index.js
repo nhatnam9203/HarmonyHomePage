@@ -58,12 +58,30 @@ const Index = ({ onBack }) => {
   const refPrice = React.useRef();
   const refCostPrice = React.useRef();
 
+  const checkIsExist = (arr, at) => {
+    let flag = false;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].attributeValueId === at.id) {
+            flag = true;
+        }
+    }
+    return flag;
+}
   const callBackGetOption = (data) => {
+    let tempt = [...temptOption];
     setOptions([
       ...options,
-      { ...data }
+      {
+        ...data,
+        attributeId: data.id,
+        values: data.values.map((dt) => {
+          return ({
+            ...dt,
+            checked: checkIsExist(tempt[0].values,dt)
+          })
+        })
+      }
     ]);
-    let tempt = [...temptOption];
     tempt.shift();
     setTemptOption(tempt);
   }
@@ -78,8 +96,8 @@ const Index = ({ onBack }) => {
   React.useEffect(() => {
     if (temptOption.length > 0) {
       dispatch(
-        getAttributeById(temptOption[0].attributeId , callBackGetOption)
-        );
+        getAttributeById(temptOption[0].attributeId, callBackGetOption)
+      );
     }
   }, [temptOption]);
 
@@ -300,7 +318,7 @@ const Index = ({ onBack }) => {
     setQuantities(tempt);
   }
 
-  const deleteOption = (optionId) => {
+  const deleteQuantities = (optionId) => {
     let tempt = JSON.parse(JSON.stringify(quantities));
     tempt = tempt.filter(t => t.id !== optionId);
     setQuantities(tempt);
@@ -313,6 +331,12 @@ const Index = ({ onBack }) => {
         ...data,
       },
     ]);
+  }
+
+  const deleteOption = (attributeId) => {
+    let tempt = [...options];
+    tempt = tempt.filter(t => t.attributeId !== attributeId);
+    setOptions(tempt);
   }
 
   if (!isVisible) return null;
@@ -350,13 +374,14 @@ const Index = ({ onBack }) => {
         <ProductOptions
           openAddOption={() => showOption(true)}
           options={options}
+          deleteOption={deleteOption}
         />
 
         <ProductTable
           quantities={quantities}
           uploadImagesOption={uploadImagesOption}
           handleChangeInput={handleChangeInputTable}
-          deleteOption={deleteOption}
+          deleteOption={deleteQuantities}
         />
 
         <div className="btn_group_edit_inventory">

@@ -257,3 +257,61 @@ export const formatMoney = (
     );
   } catch (e) {}
 };
+
+
+const createOptionsValuesQty = (optionValues) => {
+  if (!optionValues || optionValues?.length <= 0) return null;
+
+  return optionValues?.map((item) => ({
+    id: 0,
+    label: item.label,
+    attributeIds: [item.attributeValueId],
+    quantity: 0,
+    costPrice: 0,
+    additionalPrice: 0,
+  }));
+};
+
+export const combineOptionsValuesQty = (qtyArr, optionValues) => {
+  if (!qtyArr || !optionValues || optionValues?.length <= 0) return qtyArr;
+
+  var resultArray = [];
+
+  for (var i = 0; i < optionValues?.length; i++) {
+    const item = optionValues[i];
+
+    const qtyArrOfOptions = qtyArr?.map((x) =>
+      Object.assign({}, x, {
+        label: `${x.label ?? ""} - ${item.label ?? ""}`,
+        attributeIds: [...x.attributeIds, item.attributeValueId],
+      })
+    );
+
+    resultArray = resultArray.concat(qtyArrOfOptions);
+  }
+
+  return resultArray;
+};
+
+export const createQuantitiesItem = (product, options) => {
+  if (!options || options?.length < 0) return null;
+
+  const quantities = options?.reduce((accumulator, currentValue, index) => {
+    if (index === 0)
+      return createOptionsValuesQty(
+        currentValue?.values?.filter((x) => x.checked)
+      );
+
+    return combineOptionsValuesQty(
+      accumulator,
+      currentValue?.values?.filter((x) => x.checked)
+    );
+  }, []);
+
+  return quantities?.map((quantity) =>
+    Object.assign({}, quantity, {
+      label: `${product?.name ?? "New product"} - ${quantity.label ?? ""}`,
+      price: product?.price,
+    })
+  );
+};

@@ -3,15 +3,16 @@ import ReactTable from "react-table";
 import Title from "@/components/Title";
 import icon_add from "@/assets/images/retailer/icon_add.png";
 import tick_active from "@/assets/images/retailer/tick_active.png";
+import tick_inactive from "@/assets/images/retailer/tick_inactive.png";
 import icon_trash from "@/assets/images/retailer/trash.png";
 import CustomTableHeader from "../../Info/CustomTableHeader";
 import "./style.scss";
 
 const ProductOptions = ({
     options,
-    openAddOption = () => { }
+    openAddOption = () => { },
+    deleteOption = () => { },
 }) => {
-    console.log({ options });
     return (
         <>
             <Title
@@ -30,19 +31,28 @@ const ProductOptions = ({
             </Title>
             {
                 options.map(opt => (
-                    <OptionItem key={opt.id +'option'} item={opt} />
+                    <OptionItem
+                        key={opt.id + 'option' + Math.random()}
+                        item={opt}
+                        deleteOption={deleteOption}
+                    />
                 ))
             }
         </>
     )
 }
 
-const OptionItem = ({ item }) => {
+const OptionItem = ({ item, deleteOption }) => {
     return (
         <div className="optionItem">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h6>{item.label}</h6>
-                <img src={icon_trash} alt="delete" style={{ width: 35, height: 35, cursor: 'pointer' }} />
+                <img
+                    onClick={() => deleteOption(item.attributeId)}
+                    src={icon_trash}
+                    alt="delete"
+                    style={{ width: 35, height: 35, cursor: 'pointer' }}
+                />
             </div>
             <ReactTable
                 className="table-inventoryDetail"
@@ -63,7 +73,10 @@ const columns = () => [
     {
         Header: <CustomTableHeader value="Active" />,
         id: "tick",
-        accessor: (row) => <img src={tick_active} style={{ width: 20, height: 20, marginTop: 12, marginLeft: 10 }} />,
+        accessor: (row) =>
+            <img src={row.checked ? tick_active : tick_inactive}
+                style={{ width: 20, height: 20, marginTop: 12, marginLeft: 10 }}
+            />,
         width: 80,
     },
     {
@@ -84,7 +97,10 @@ const columnVisualSwatch = () => [
     {
         Header: <CustomTableHeader value="Active" />,
         id: "tick",
-        accessor: (row) => <img src={tick_active} style={{ width: 20, height: 20, marginTop: 12, marginLeft: 10 }} />,
+        accessor: (row) =>
+            <img src={row.checked ? tick_active : tick_inactive}
+                style={{ width: 20, height: 20, marginTop: 12, marginLeft: 10 }}
+            />,
         width: 80,
     },
     {
