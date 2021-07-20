@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
   setVisibleInventoryEdit,
+  getAttribute
 } from "@/actions/retailerActions";
 import product_default from "@/assets/images/product_default.png";
 import icon_edit from "@/assets/images/retailer/icon_edit.png";
@@ -14,12 +15,14 @@ import "./style.scss";
 const InventoryInfo = ({ onBack }) => {
   const dispatch = useDispatch();
   const { inventoryDetail } = useSelector((state) => state.retailer);
+  const { detail } = useSelector((state) => state.merchantDetail);
   const { images } = inventoryDetail;
 
   const [isMore, showMore] = React.useState(false);
 
   const editInventory = () => {
     dispatch(setVisibleInventoryEdit(true));
+    dispatch(getAttribute(detail.merchantId));
   };
 
   const imageDefault = () => {
@@ -78,13 +81,6 @@ const InventoryInfo = ({ onBack }) => {
           <div className="item_inventory_detail">
             <div>Price</div>
             <div style={{ fontWeight: '600' }}>{inventoryDetail.price}</div>
-          </div>
-          <div className="item_inventory_detail">
-            <div>Cost price</div>
-            <div
-              style={{ fontWeight: '600' }}>
-              {inventoryDetail.costPrice}
-            </div>
           </div>
           <div className="item_inventory_detail">
             <div>Total items in stock</div>

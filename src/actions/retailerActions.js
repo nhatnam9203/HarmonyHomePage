@@ -717,6 +717,47 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
   }
 };
 
+export const getAttribute = (merchantId) => async (dispatch) => {
+  try {
+    const url = `attribute/search?key=&page=1&row=20&sorts=&merchantId=${merchantId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    let { data } = await api.getApi(url, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({ type: typeRetailer.SET_ATTRIBUTES, payload: data?.data || [] })
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+  }
+};
+
+export const getAttributeById = (attributeId, callBack) => async (dispatch) => {
+  try {
+    console.log({ attributeId,callBack });
+    dispatch({ type: typeRetailer.LOADING_ATTRIBUTE });
+
+    const url = `attribute/${attributeId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    let { data } = await api.getApi(url, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      callBack(data.data);
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_LOADING_ATTRIBUTE });
+  }
+};
+
+
 export const sortOverAll = (payload) => {
   return {
     type: typeRetailer.SORT_OVRERALL,

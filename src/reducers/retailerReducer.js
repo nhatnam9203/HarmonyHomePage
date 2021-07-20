@@ -7,6 +7,7 @@ export const retailerReducer = (
     loadingExport: false,
     loadingDetail: false,
     loadingUpfile: false,
+    loadingAttribute: false,
     loadingNewCategory: false,
     orders: [],
     orderDetail: {},
@@ -21,6 +22,7 @@ export const retailerReducer = (
     countCustomerAppointments: 0,
     report: [],
     subCategory: [],
+    attributes: [],
 
     isVisibleCustomerDetail: false,
     isVisibleInventoryDetail: false,
@@ -117,6 +119,12 @@ export const retailerReducer = (
     case types.STOP_RETAILER_REQUEST:
       return { ...state, loading: false };
 
+    case types.LOADING_ATTRIBUTE:
+      return { ...state, loadingAttribute: true };
+
+    case types.STOP_LOADING_ATTRIBUTE:
+      return { ...state, loadingAttribute: false };
+
     case types.RETAILER_DETAIL_REQUEST:
       return { ...state, loadingDetail: true };
 
@@ -201,6 +209,12 @@ export const retailerReducer = (
       return {
         ...state,
         orderDetail: payload,
+      };
+
+    case types.SET_ATTRIBUTES:
+      return {
+        ...state,
+        attributes: payload || [],
       };
 
     case types.SET_APPOINTMENT_CUSTOMER_DETAIL:

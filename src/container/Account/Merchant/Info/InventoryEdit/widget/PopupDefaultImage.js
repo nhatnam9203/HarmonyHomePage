@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import product_default from "@/assets/images/product_default.png";
-import "./style.scss";
+import "../style.scss";
 
 const PopupDefaultImage = ({
     isVisible = false,

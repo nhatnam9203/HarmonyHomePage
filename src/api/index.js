@@ -212,3 +212,10 @@ export const putApi = (requestUrl, body, token) => {
     },
   });
 };
+
+export const getApi = (requestUrl, token) =>
+  axios.get(`${url}/${requestUrl}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

@@ -1,21 +1,20 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import Title from "@/components/Title";
 import FormEditInventory from "./FormEditInventory";
 import Loading from "@/components/Loading";
-import PopupDefaultImage from "./PopupDefaultImage";
-import PopupNewCategory from "./PopupNewCategory";
 import {
   uploadImageProduct,
   addNewCategory,
   editProduct,
   uploadImageOptions,
+  getAttributeById,
 } from "@/actions/retailerActions";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
 import { FormatPrice, formatMoney } from "@/util";
-import ProductTable from "./ProductTable";
+import { PopupNewCategory, PopupDefaultImage, PopupAddOption, ProductTable } from "./widget"
+import ProductOptions from "./ProductOptions";
 
 import "../Info.scss";
 import "./style.scss";
@@ -27,6 +26,7 @@ const Index = ({ onBack }) => {
     subCategory,
     loadingUpfile,
     loadingNewCategory,
+    attributes,
   } = useSelector((state) => state.retailer);
   const { detail } = useSelector((state) => state.merchantDetail);
 
@@ -43,6 +43,9 @@ const Index = ({ onBack }) => {
   const [description, setDescription] = React.useState("");
   const [images, setImages] = React.useState([]);
   const [quantities, setQuantities] = React.useState([]);
+  const [options, setOptions] = React.useState([]);
+
+  const [temptOption, setTemptOption] = React.useState([]);
 
   const [imageDefault, setImageDefault] = React.useState("");
 
@@ -50,8 +53,20 @@ const Index = ({ onBack }) => {
 
   const [fileUpload, setFileUpload] = React.useState([]);
 
+  const [isShowAddOption, showOption] = React.useState(false);
+
   const refPrice = React.useRef();
   const refCostPrice = React.useRef();
+
+  const callBackGetOption = (data) => {
+    setOptions([
+      ...options,
+      { ...data }
+    ]);
+    let tempt = [...temptOption];
+    tempt.shift();
+    setTemptOption(tempt);
+  }
 
   React.useEffect(() => {
     setTimeout(async () => {
@@ -59,6 +74,14 @@ const Index = ({ onBack }) => {
       setVisible(true);
     }, 300);
   }, []);
+
+  React.useEffect(() => {
+    if (temptOption.length > 0) {
+      dispatch(
+        getAttributeById(temptOption[0].attributeId , callBackGetOption)
+        );
+    }
+  }, [temptOption]);
 
   const setData = () => {
     setName(inventoryDetail.name);
@@ -73,6 +96,7 @@ const Index = ({ onBack }) => {
     setImages(inventoryDetail.images);
     setDescription(inventoryDetail.description);
     setQuantities(inventoryDetail.quantities);
+    setTemptOption(inventoryDetail.options);
   };
 
   const handleChange = (type, value) => {
@@ -276,17 +300,26 @@ const Index = ({ onBack }) => {
     setQuantities(tempt);
   }
 
-  const deleteOption = (optionId) =>{
+  const deleteOption = (optionId) => {
     let tempt = JSON.parse(JSON.stringify(quantities));
-    tempt = tempt.filter(t=>t.id !== optionId);
-    setQuantities(tempt); 
+    tempt = tempt.filter(t => t.id !== optionId);
+    setQuantities(tempt);
+  }
+
+  const mergeOption = async (data) => {
+    setOptions([
+      ...options,
+      {
+        ...data,
+      },
+    ]);
   }
 
   if (!isVisible) return null;
 
   return (
     <>
-      <Fade>
+      <>
         <Title style={{ color: "#333" }}>
           {inventoryDetail.name} - Edit details
         </Title>
@@ -314,6 +347,11 @@ const Index = ({ onBack }) => {
           handleSubmit={handleSubmit}
         />
 
+        <ProductOptions
+          openAddOption={() => showOption(true)}
+          options={options}
+        />
+
         <ProductTable
           quantities={quantities}
           uploadImagesOption={uploadImagesOption}
@@ -333,9 +371,17 @@ const Index = ({ onBack }) => {
             Save
           </Button>
         </div>
-      </Fade>
+      </>
 
       {loadingUpfile && <Loading />}
+
+      <PopupAddOption
+        isVisible={isShowAddOption}
+        close={() => showOption(false)}
+        attributes={attributes}
+        mergeOption={mergeOption}
+        options={options}
+      />
 
       <PopupDefaultImage
         isVisible={!isEmpty(imageDefault)}

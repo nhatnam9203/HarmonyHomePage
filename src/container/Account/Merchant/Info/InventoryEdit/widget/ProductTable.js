@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactTable from "react-table";
 import Title from "@/components/Title";
-import CustomTableHeader from "../../Info/CustomTableHeader";
+import CustomTableHeader from "../../CustomTableHeader";
 import product_default from "@/assets/images/product_default.png";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import icon_trash from "@/assets/images/retailer/trash.png";
 import Dropzone from "react-dropzone";
-import InputPrice from "./widget/InputPrice";
-import InputQuantity from "./widget/InputQuantity";
-import "./style.scss";
+import InputPrice from "./InputPrice";
+import InputQuantity from "./InputQuantity";
+import "../style.scss";
 
 const ProductTable = ({
     quantities = [],
@@ -24,6 +24,8 @@ const ProductTable = ({
                     borderBottomWidth: 0,
                     marginTop: "2.5rem",
                     marginBottom: "0.5rem",
+                    display: 'flex',
+                    justifyContent: 'space-between',
                 }}
             >
                 Product Versions
@@ -89,7 +91,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteOption) => [
         accessor: (row) => (
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <img
-                    style={{ width: 43, height: 43, marginTop: 5 }}
+                    style={{ width: 43, height: 43, marginTop: 5 , cursor:'auto' }}
                     src={row.imageUrl ? row.imageUrl : product_default} alt="imgjj"
                 />
                 <Dropzone

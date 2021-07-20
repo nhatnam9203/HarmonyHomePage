@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Modal from "react-bootstrap/Modal";
-import SelectNewCategory from "./SelectNewCategory";
+import SelectNewCategory from "../SelectNewCategory";
 import ToggleButton from "react-toggle-button";
 import Loading from "@/components/Loading";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { isEmpty } from "lodash";
-import "./style.scss";
+import "../style.scss";
 
 const initialState = {
     categoryName: "",
