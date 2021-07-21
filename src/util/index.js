@@ -297,8 +297,8 @@ export const createQuantitiesItem = (product, options, name = null) => {
   if (!options || options?.length < 0) return null;
 
   const quantities = options?.reduce((accumulator, currentValue, index) => {
-    if (index === 0)
-      return createOptionsValuesQty(
+    if (!accumulator || accumulator?.length <= 0)      
+    return createOptionsValuesQty(
         currentValue?.values?.filter((x) => x.checked)
       );
 
