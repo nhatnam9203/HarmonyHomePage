@@ -52,8 +52,16 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
     {
         Header: <CustomTableHeader value="Versions" />,
         id: "label",
-        accessor: (row) => <div className="table-tr">{row.label}</div>,
+        accessor: (row) => <div className="table-tr row-label">{row.label}</div>,
         width: 260,
+    },
+    {
+        Header: <CustomTableHeader value="&nbsp;" />,
+        id: "no-comment",
+        accessor: (row) => (
+            <div />
+        ),
+        width: 40
     },
     {
         Header: <CustomTableHeader value="Description" />,
@@ -83,7 +91,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         accessor: (row) => (
             <InputPrice
                 value={row.price}
-                handleChange={(value) => handleChangeInput(value, "price", row.id)}
+                handleChange={(value) => handleChangeInput(value, "price", row)}
             />
         )
     },
@@ -94,6 +102,16 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
             <InputQuantity
                 value={row.quantity}
                 handleChange={(value) => handleChangeInput(value, "quantity", row)}
+            />
+        ),
+    },
+    {
+        Header: <CustomTableHeader value="Temp qty" />,
+        id: "tempQuantity",
+        accessor: (row) => (
+            <InputQuantity
+                value={row.tempQuantity}
+                handleChange={(value) => handleChangeInput(value, "tempQuantity", row)}
             />
         ),
     },

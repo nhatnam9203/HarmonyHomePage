@@ -453,6 +453,7 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_EXPORT_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
+    console.log({ requestUrl, data })
     let path = typeof data.data === "object" ? data.data.path : data.data;
 
     if (parseInt(data.codeNumber) === 200) {

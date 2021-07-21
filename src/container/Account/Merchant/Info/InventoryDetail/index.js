@@ -53,6 +53,13 @@ const columns = () => [
     width: 400,
   },
   {
+    Header: <CustomTableHeader value="Sku" />,
+    id: "sku",
+    accessor: (row) => (
+      <div className="table-tr">{`${row.sku || ""}`}</div>
+    ),
+  },
+  {
     Header: <CustomTableHeader value="Description" />,
     id: "description",
     accessor: (row) => (
@@ -76,6 +83,13 @@ const columns = () => [
     id: "quantity",
     accessor: (row) => (
       <div className="table-tr">{`${row.quantity || "0"}`}</div>
+    ),
+  },
+  {
+    Header: <CustomTableHeader value="Temp qty" />,
+    id: "tempQuantity",
+    accessor: (row) => (
+      <div className="table-tr">{`${row.tempQuantity || "0"}`}</div>
     ),
   },
   {

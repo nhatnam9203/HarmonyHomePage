@@ -339,6 +339,14 @@ const Index = ({ onBack }) => {
         }
         break;
 
+      case "tempQuantity":
+        for (let i = 0; i < tempt.length; i++) {
+          if (tempt[i].label === row.label) {
+            tempt[i].tempQuantity = value;
+          }
+        }
+        break;
+
       case "description":
         for (let i = 0; i < tempt.length; i++) {
           if (tempt[i].label === row.label) {

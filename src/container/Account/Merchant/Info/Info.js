@@ -118,8 +118,9 @@ function Info() {
   const exportCustomer = (exportType) => {
     let url = `customer/export?page=${pageCustomer}&key=${keySearchCustomer}&sorts={"${sortTypeCustomer}":"${sortCustomer}"}&merchantId=${detail.merchantId}&type=${exportType}`;
     if (isEmpty(sortCustomer) || isEmpty(sortTypeCustomer)) {
-      url = `customer/export?page=${pageCustomer}&key=${keySearchCustomer}&sorts=&merchantId=${detail.merchantId}}&type=${exportType}`;
+      url = `customer/export?page=${pageCustomer}&key=${keySearchCustomer}&sorts=&merchantId=${detail.merchantId}&type=${exportType}`;
     }
+
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
