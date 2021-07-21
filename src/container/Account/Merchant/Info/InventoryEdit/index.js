@@ -295,6 +295,7 @@ const Index = ({ onBack }) => {
 
   /***************** CHANGE VALUE INPUT PRODUCT VERSION *****************/
   const handleChangeInputTable = (value, type, row) => {
+
     let tempt = JSON.parse(JSON.stringify(quantities))
     switch (type) {
       case "costPrice":
@@ -317,6 +318,14 @@ const Index = ({ onBack }) => {
         for (let i = 0; i < tempt.length; i++) {
           if (tempt[i].label === row.label) {
             tempt[i].quantity = value;
+          }
+        }
+        break;
+
+      case "description":
+        for (let i = 0; i < tempt.length; i++) {
+          if (tempt[i].label === row.label) {
+            tempt[i].description = value;
           }
         }
         break;
@@ -393,6 +402,7 @@ const Index = ({ onBack }) => {
           fileId: isExistItem.fileId,
           position: isExistItem.position ?? 0,
           id: isExistItem.id ?? 0,
+          description: isExistItem.description ?? "",
         });
       }
       return x;
@@ -417,6 +427,7 @@ const Index = ({ onBack }) => {
           quantity: isExistItem.quantity,
           costPrice: isExistItem.costPrice,
           price : isExistItem.costPrice,
+          description : isExistItem.description,
           additionalPrice: isExistItem.additionalPrice,
         });
       }
@@ -430,7 +441,7 @@ const Index = ({ onBack }) => {
     const qtys = createQuantitiesItem(inventoryDetail, optionMerge);
     setQuantities(qtys);
   }
-
+  
   if (!isVisible) return null;
 
   return (

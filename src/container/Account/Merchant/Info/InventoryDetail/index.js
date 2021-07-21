@@ -11,6 +11,8 @@ import "./style.scss";
 const Index = ({ onBack }) => {
   const { inventoryDetail } = useSelector((state) => state.retailer);
 
+  console.log({ inventoryDetail });
+
   React.useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
@@ -53,16 +55,23 @@ const columns = () => [
     width: 400,
   },
   {
-    Header: <CustomTableHeader value="Price" />,
-    id: "price",
-    accessor: (row) => <div className="table-tr">{`$ ${row.price}`}</div>,
+    Header: <CustomTableHeader value="Description" />,
+    id: "description",
+    accessor: (row) => (
+      <div className="table-tr">{`${row.description || ""}`}</div>
+    ),
   },
   {
-    Header: <CustomTableHeader value="Cost" />,
+    Header: <CustomTableHeader value="Cost price" />,
     id: "costPrice",
     accessor: (row) => (
       <div className="table-tr">{`$ ${row.costPrice || "0.00"}`}</div>
     ),
+  },
+  {
+    Header: <CustomTableHeader value="Price" />,
+    id: "price",
+    accessor: (row) => <div className="table-tr">{`$ ${row.price}`}</div>,
   },
   {
     Header: <CustomTableHeader value="Qty" />,

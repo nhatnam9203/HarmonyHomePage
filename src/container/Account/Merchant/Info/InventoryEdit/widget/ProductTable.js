@@ -53,15 +53,17 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         Header: <CustomTableHeader value="Versions" />,
         id: "label",
         accessor: (row) => <div className="table-tr">{row.label}</div>,
-        width: 400,
+        width: 280,
     },
     {
-        Header: <CustomTableHeader value="Price" />,
-        id: "price",
+        Header: <CustomTableHeader value="Description" />,
+        id: "description",
         accessor: (row) => (
-            <InputPrice
-                value={row.price}
-                handleChange={(value) => handleChangeInput(value, "price", row)}
+            <input
+                className="input_price"
+                value={row.description}
+                onChange={(e) => handleChangeInput(e.target.value, "description", row)}
+                placeholder=""
             />
         )
     },
@@ -72,6 +74,16 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
             <InputPrice
                 value={row.costPrice}
                 handleChange={(value) => handleChangeInput(value, "costPrice", row)}
+            />
+        )
+    },
+    {
+        Header: <CustomTableHeader value="Price" />,
+        id: "price",
+        accessor: (row) => (
+            <InputPrice
+                value={row.price}
+                handleChange={(value) => handleChangeInput(value, "price", row.id)}
             />
         )
     },
@@ -91,7 +103,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         accessor: (row) => (
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <img
-                    style={{ width: 43, height: 43, marginTop: 5 , cursor:'auto' }}
+                    style={{ width: 43, height: 43, marginTop: 5, cursor: 'auto' }}
                     src={row.imageUrl ? row.imageUrl : product_default} alt="imgjj"
                 />
                 <Dropzone

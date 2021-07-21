@@ -312,6 +312,7 @@ export const createQuantitiesItem = (product, options, name = null) => {
     Object.assign({}, quantity, {
       label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
       price: product?.price,
+      description: "",
     })
   );
 };
