@@ -267,8 +267,8 @@ const createOptionsValuesQty = (optionValues) => {
     label: item.label,
     attributeIds: [item.attributeValueId],
     quantity: 0,
-    costPrice: 0,
-    additionalPrice: 0,
+    costPrice: "0.00",
+    additionalPrice: "0.00",
   }));
 };
 
@@ -311,8 +311,9 @@ export const createQuantitiesItem = (product, options, name = null) => {
   return quantities?.map((quantity) =>
     Object.assign({}, quantity, {
       label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
-      price: product?.price,
+      price: "0.00",
       description: "",
+      fileId: 0,
     })
   );
 };

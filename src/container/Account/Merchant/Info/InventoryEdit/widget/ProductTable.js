@@ -53,7 +53,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         Header: <CustomTableHeader value="Versions" />,
         id: "label",
         accessor: (row) => <div className="table-tr">{row.label}</div>,
-        width: 280,
+        width: 260,
     },
     {
         Header: <CustomTableHeader value="Description" />,
@@ -113,7 +113,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
                     maxSize={10485760}
                     noDrag={true}
                     onDrop={(acceptedFiles) => {
-                        uploadImagesOption(acceptedFiles, row.id);
+                        uploadImagesOption(acceptedFiles, row.label);
                     }}
                 >
                     {({ getRootProps, getInputProps }) => (
@@ -122,12 +122,12 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
                             {...getRootProps()}
                         >
                             <input {...getInputProps()} />
-                            <img src={icon_upload} atl="uploadImage" />
+                            <img style={{ cursor: 'pointer' }} src={icon_upload} atl="uploadImage" />
                         </div>
                     )}
                 </Dropzone>
                 <img
-                    style={{ width: 43, height: 43, marginTop: 5 }}
+                    style={{ width: 43, height: 43, marginTop: 5 , cursor: 'pointer' }}
                     src={icon_trash} alt="imgjj"
                     onClick={() => deleteQuantities(row)}
                 />

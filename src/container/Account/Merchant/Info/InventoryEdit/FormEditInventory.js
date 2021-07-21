@@ -121,47 +121,6 @@ const FormEditInventory = ({
                         />
                         {isEmpty(barCode) && <Error />}
                     </Form.Group>
-
-                    {/******************** PRICE ********************/}
-                    <Form.Group style={{ position: "relative" }}>
-                        <Form.Label>
-                            Price ($) <span className="form_required">*</span>
-                        </Form.Label>
-                        <CurrencyInput
-                            ref={refPrice}
-                            name="price"
-                            id="price"
-                            type="text"
-                            className="currentInput"
-                            onChange={(e) => handleChange("price", e.target.value)}
-                            defaultValue={price}
-                            placeholder="0.00"
-                            style={{
-                                borderColor: isEmpty(formatMoney(price)) ? "red" : "#ced4da",
-                            }}
-                        />
-                        {isEmpty(formatMoney(price)) && <Error />}
-                    </Form.Group>
-
-                    {/******************** COST PRICE ********************/}
-                    <Form.Group style={{ position: "relative" }}>
-                        <Form.Label>
-                            Cost Price ($) <span className="form_required">*</span>
-                        </Form.Label>
-                        <br />
-                        <CurrencyInput
-                            ref={refCostPrice}
-                            name="costPrice"
-                            id="costPrice"
-                            type="text"
-                            className="currentInput"
-                            onChange={(e) => handleChange("costPrice", e.target.value)}
-                            defaultValue={costPrice}
-                            placeholder="0.00"
-                            style={{ borderColor: isEmpty(formatMoney(costPrice)) ? "red" : "#ced4da", }}
-                        />
-                        {isEmpty(formatMoney(costPrice)) && <Error />}
-                    </Form.Group>
                 </div>
             </Col>
 

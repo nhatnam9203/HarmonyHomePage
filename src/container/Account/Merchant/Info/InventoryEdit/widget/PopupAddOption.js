@@ -68,7 +68,7 @@ const PopupAddOption = ({
         let temptData = {
             ...data,
             attributeId: data.id,
-            values: data.values.map(dt => ({ ...dt, checked: true, attributeValueId: dt.id }))
+            values: data.values.map(dt => ({ ...dt, checked: true, attributeValueId: dt.id, id: 0 }))
         }
         mergeOption(temptData);
         let tempt = [...attributesSubmit];

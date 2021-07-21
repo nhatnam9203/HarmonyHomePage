@@ -76,7 +76,7 @@ const Index = ({ onBack }) => {
           return ({
             ...dt,
             checked: checkIsExist(tempt[0].values, dt),
-            attributeValueId: dt.id
+            attributeValueId: dt.id,
           })
         })
       }
@@ -180,14 +180,26 @@ const Index = ({ onBack }) => {
           name,
           sku,
           barCode,
-          price: formatMoney(refPrice.current.value),
-          costPrice: formatMoney(refCostPrice.current.value),
+          // price: formatMoney(refPrice.current.value),
+          // costPrice: formatMoney(refCostPrice.current.value),
           quantity,
           minThreshold,
           maxThreshold,
           categoryId,
           description,
           quantities,
+          options: options.map((x) => ({
+            attributeId: x.attributeId,
+            values: x.values
+              ?.filter((v) => v.checked)
+              ?.map((v) => {
+                return {
+                  id: v.id,
+                  attributeValueId: v?.attributeValueId,
+                  isDisabled: 0,
+                };
+              }),
+          })),
           fileId: findImageDefault() ? findImageDefault().fileId : inventoryDetail.fileId
         };
         dispatch(editProduct(body, inventoryDetail.productId, back));
@@ -275,17 +287,17 @@ const Index = ({ onBack }) => {
   };
 
   /***************** upload image option in product version *****************/
-  const uploadImagesOption = (files = [], optionId) => {
+  const uploadImagesOption = (files = [], label) => {
     let file = files[0];
     let formData = new FormData();
     formData.append("Filename3", file);
-    dispatch(uploadImageOptions(formData, optionId, callBackUploadImagesOption));
+    dispatch(uploadImageOptions(formData, label, callBackUploadImagesOption));
   }
 
-  const callBackUploadImagesOption = (data, optionId) => {
+  const callBackUploadImagesOption = (data, label) => {
     const temptQuantities = JSON.parse(JSON.stringify(quantities));
     for (let i = 0; i < temptQuantities.length; i++) {
-      if (parseInt(temptQuantities[i].id) === parseInt(optionId)) {
+      if (temptQuantities[i].label === label) {
         temptQuantities[i].fileId = data.fileId;
         temptQuantities[i].imageUrl = data.url;
       }
@@ -362,25 +374,25 @@ const Index = ({ onBack }) => {
 
   /***************** check value option *****************/
   const tickValueOption = (value) => {
-    let arrTemp = [...options];
-    let tempt = [...options].find(obj => obj.id === value.attributeId);
-    if (tempt) {
+    let arrTempOptions = [...options];
+    let temptOption = [...options].find(obj => obj.id === value.attributeId);
+    if (temptOption) {
 
       /* find value checked */
-      tempt.values.forEach(el => {
-        if (el.id === value.id) {
+      temptOption.values.forEach(el => {
+        if (el.attributeValueId === value.attributeValueId) {
           el.checked = !el.checked
         }
       });
 
       /* assign option after check */
-      for (let i = 0; i < arrTemp.length; i++) {
-        if (arrTemp[i].id === tempt.id) {
-          arrTemp[i] = tempt
+      for (let i = 0; i < arrTempOptions.length; i++) {
+        if (arrTempOptions[i].id === temptOption.id) {
+          arrTempOptions[i] = temptOption
         }
       }
-      setOptions(arrTemp);
-      setNewQuantities(arrTemp);
+      setOptions(arrTempOptions);
+      setNewQuantities(arrTempOptions);
     }
   }
 
@@ -426,8 +438,8 @@ const Index = ({ onBack }) => {
         return Object.assign({}, x, {
           quantity: isExistItem.quantity,
           costPrice: isExistItem.costPrice,
-          price : isExistItem.costPrice,
-          description : isExistItem.description,
+          price: isExistItem.costPrice,
+          description: isExistItem.description,
           additionalPrice: isExistItem.additionalPrice,
         });
       }
@@ -441,7 +453,7 @@ const Index = ({ onBack }) => {
     const qtys = createQuantitiesItem(inventoryDetail, optionMerge);
     setQuantities(qtys);
   }
-  
+
   if (!isVisible) return null;
 
   return (

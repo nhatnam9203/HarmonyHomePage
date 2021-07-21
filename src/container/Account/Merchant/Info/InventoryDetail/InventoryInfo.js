@@ -83,13 +83,6 @@ const InventoryInfo = ({ onBack }) => {
             <div style={{ fontWeight: '600' }}>{inventoryDetail.price}</div>
           </div>
           <div className="item_inventory_detail">
-            <div>Range</div>
-            <div
-              style={{ fontWeight: '600' }}>
-              {inventoryDetail.priceRange}
-            </div>
-          </div>
-          <div className="item_inventory_detail">
             <div>Total items in stock</div>
             <div
               style={{ fontWeight: '600', color: (parseInt(inventoryDetail.quantity) < parseInt(inventoryDetail.minThreshold)) ? "red" : "#404040", }}>

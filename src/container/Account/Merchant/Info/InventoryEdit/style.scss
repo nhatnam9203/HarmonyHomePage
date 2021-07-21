@@ -5,10 +5,6 @@
   height: 50;
   justify-content: flex-end;
   margin-top: 3rem;
-  padding-right: 12%;
-  @media only screen and (max-width: 1200px) {
-    padding-right: 1.8rem;
-  }
 }
 
 .button_new_category {
@@ -263,4 +259,9 @@
 
 .product-table .rt-tr{
   cursor: default !important;
+}
+
+.product-table{
+  max-height: 20rem;
+  overflow-y: scroll;
 }

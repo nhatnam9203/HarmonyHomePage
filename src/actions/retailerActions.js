@@ -655,13 +655,13 @@ export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
 };
 
 
-export const uploadImageOptions = (formData, optionId, callBack) => async (dispatch) => {
+export const uploadImageOptions = (formData, label, callBack) => async (dispatch) => {
   try {
     const url = "file?category=product";
     dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
     let { data } = await api.uploadFile(url, formData);
     if (parseInt(data.codeNumber) === 200) {
-      callBack(data.data, optionId);
+      callBack(data.data, label);
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }
@@ -702,6 +702,7 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
 
     dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
     let { data } = await api.putApi(url, body, token);
+    console.log({ url ,body, data })
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
