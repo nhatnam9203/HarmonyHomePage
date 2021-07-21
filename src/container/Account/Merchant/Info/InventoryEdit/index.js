@@ -2,6 +2,7 @@ import React from "react";
 import Title from "@/components/Title";
 import FormEditInventory from "./FormEditInventory";
 import Loading from "@/components/Loading";
+import ProductOptions from "./ProductOptions";
 import {
   uploadImageProduct,
   addNewCategory,
@@ -14,7 +15,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
 import { FormatPrice, formatMoney } from "@/util";
 import { PopupNewCategory, PopupDefaultImage, PopupAddOption, ProductTable } from "./widget"
-import ProductOptions from "./ProductOptions";
 import { createQuantitiesItem, arrayIsEqual } from "@/util";
 
 import "../Info.scss";
@@ -51,6 +51,7 @@ const Index = ({ onBack }) => {
   const [isVisibleNewCategory, setVisibleNewCategory] = React.useState(false);
   const [fileUpload, setFileUpload] = React.useState([]);
   const [isShowAddOption, showOption] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(false);
 
   const refPrice = React.useRef();
   const refCostPrice = React.useRef();
@@ -82,11 +83,15 @@ const Index = ({ onBack }) => {
       }
     ]);
     tempt.shift();
+    if (tempt.length === 0) {
+      setLoading(false);
+    }
     await setTemptOption(tempt);
   }
 
   React.useEffect(() => {
     if (temptOption.length > 0) {
+      setLoading(true);
       dispatch(
         getAttributeById(temptOption[0].attributeId, callBackGetOption)
       );
@@ -539,7 +544,7 @@ const Index = ({ onBack }) => {
         addNewCategory={actionAddNewCategory}
         loadingNewCategory={loadingNewCategory}
       />
-      {loadingNewCategory && <Loading />}
+      {(loadingNewCategory || isLoading) && <Loading />}
     </>
   );
 };

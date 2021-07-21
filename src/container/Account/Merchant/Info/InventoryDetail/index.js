@@ -11,8 +11,6 @@ import "./style.scss";
 const Index = ({ onBack }) => {
   const { inventoryDetail } = useSelector((state) => state.retailer);
 
-  console.log({ inventoryDetail });
-
   React.useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;

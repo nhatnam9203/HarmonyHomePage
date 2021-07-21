@@ -453,7 +453,6 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_EXPORT_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
-    console.log({ requestUrl, data });
     let path = typeof data.data === "object" ? data.data.path : data.data;
 
     if (parseInt(data.codeNumber) === 200) {
@@ -702,7 +701,6 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
 
     dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
     let { data } = await api.putApi(url, body, token);
-    console.log({ url ,body, data })
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
