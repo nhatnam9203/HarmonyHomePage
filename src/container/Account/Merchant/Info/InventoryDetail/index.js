@@ -29,7 +29,7 @@ const Index = ({ onBack }) => {
         Product Versions
       </Title>
       <ReactTable
-        className="table-inventoryDetail"
+        className="table-inventoryDetail product-table"
         manual
         sortable={false}
         data={inventoryDetail.quantities || []}

@@ -14,7 +14,7 @@ const ProductTable = ({
     quantities = [],
     uploadImagesOption = () => { },
     handleChangeInput = () => { },
-    deleteOption = () => { },
+    deleteQuantities = () => { },
 }) => {
 
     return (
@@ -31,14 +31,14 @@ const ProductTable = ({
                 Product Versions
             </Title>
             <ReactTable
-                className="table-inventoryDetail"
+                className="table-inventoryDetail product-table"
                 manual
                 sortable={false}
                 data={quantities || []}
                 minRows={1}
                 noDataText="NO DATA!"
                 NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
-                columns={columns(uploadImagesOption, handleChangeInput, deleteOption)}
+                columns={columns(uploadImagesOption, handleChangeInput, deleteQuantities)}
                 PaginationComponent={() => <div />}
             />
         </>
@@ -48,7 +48,7 @@ const ProductTable = ({
 export default ProductTable;
 
 
-const columns = (uploadImagesOption, handleChangeInput, deleteOption) => [
+const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
     {
         Header: <CustomTableHeader value="Versions" />,
         id: "label",
@@ -61,7 +61,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteOption) => [
         accessor: (row) => (
             <InputPrice
                 value={row.price}
-                handleChange={(value) => handleChangeInput(value, "price", row.id)}
+                handleChange={(value) => handleChangeInput(value, "price", row)}
             />
         )
     },
@@ -71,7 +71,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteOption) => [
         accessor: (row) => (
             <InputPrice
                 value={row.costPrice}
-                handleChange={(value) => handleChangeInput(value, "costPrice", row.id)}
+                handleChange={(value) => handleChangeInput(value, "costPrice", row)}
             />
         )
     },
@@ -81,7 +81,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteOption) => [
         accessor: (row) => (
             <InputQuantity
                 value={row.quantity}
-                handleChange={(value) => handleChangeInput(value, "quantity", row.id)}
+                handleChange={(value) => handleChangeInput(value, "quantity", row)}
             />
         ),
     },
@@ -117,7 +117,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteOption) => [
                 <img
                     style={{ width: 43, height: 43, marginTop: 5 }}
                     src={icon_trash} alt="imgjj"
-                    onClick={() => deleteOption(row.id)}
+                    onClick={() => deleteQuantities(row)}
                 />
             </div>
         )

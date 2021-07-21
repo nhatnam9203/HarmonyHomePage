@@ -250,12 +250,12 @@ export const formatMoney = (
       i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) +
       (decimalCount
         ? decimal +
-          Math.abs(amount - i)
-            .toFixed(decimalCount)
-            .slice(2)
+        Math.abs(amount - i)
+          .toFixed(decimalCount)
+          .slice(2)
         : "")
     );
-  } catch (e) {}
+  } catch (e) { }
 };
 
 
@@ -293,7 +293,7 @@ export const combineOptionsValuesQty = (qtyArr, optionValues) => {
   return resultArray;
 };
 
-export const createQuantitiesItem = (product, options) => {
+export const createQuantitiesItem = (product, options, name = null) => {
   if (!options || options?.length < 0) return null;
 
   const quantities = options?.reduce((accumulator, currentValue, index) => {
@@ -310,8 +310,17 @@ export const createQuantitiesItem = (product, options) => {
 
   return quantities?.map((quantity) =>
     Object.assign({}, quantity, {
-      label: `${product?.name ?? "New product"} - ${quantity.label ?? ""}`,
+      label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
       price: product?.price,
     })
   );
+};
+
+export const arrayIsEqual = (a, b) => {
+  if (a?.length !== b?.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (!b.includes(a[i])) return false;
+  }
+
+  return true;
 };

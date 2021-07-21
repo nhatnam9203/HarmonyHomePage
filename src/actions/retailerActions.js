@@ -453,6 +453,7 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_EXPORT_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
+    console.log({ requestUrl, data });
     let path = typeof data.data === "object" ? data.data.path : data.data;
 
     if (parseInt(data.codeNumber) === 200) {
@@ -478,7 +479,6 @@ export const getOrderDetail = (requestUrl = "", token = "", callBack) => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
     let { data } = await api.getByPage(requestUrl, token);
-
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_ORDER_DETAIL,
@@ -737,7 +737,6 @@ export const getAttribute = (merchantId) => async (dispatch) => {
 
 export const getAttributeById = (attributeId, callBack) => async (dispatch) => {
   try {
-    console.log({ attributeId,callBack });
     dispatch({ type: typeRetailer.LOADING_ATTRIBUTE });
 
     const url = `attribute/${attributeId}`;

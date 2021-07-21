@@ -15,6 +15,7 @@ import { isEmpty } from "lodash";
 import { FormatPrice, formatMoney } from "@/util";
 import { PopupNewCategory, PopupDefaultImage, PopupAddOption, ProductTable } from "./widget"
 import ProductOptions from "./ProductOptions";
+import { createQuantitiesItem, arrayIsEqual } from "@/util";
 
 import "../Info.scss";
 import "./style.scss";
@@ -46,28 +47,25 @@ const Index = ({ onBack }) => {
   const [options, setOptions] = React.useState([]);
 
   const [temptOption, setTemptOption] = React.useState([]);
-
   const [imageDefault, setImageDefault] = React.useState("");
-
   const [isVisibleNewCategory, setVisibleNewCategory] = React.useState(false);
-
   const [fileUpload, setFileUpload] = React.useState([]);
-
   const [isShowAddOption, showOption] = React.useState(false);
 
   const refPrice = React.useRef();
   const refCostPrice = React.useRef();
 
-  const checkIsExist = (arr, at) => {
+  const checkIsExist = (optionValues, value) => {
     let flag = false;
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i].attributeValueId === at.id) {
-            flag = true;
-        }
+    for (let i = 0; i < optionValues.length; i++) {
+      if (optionValues[i].attributeValueId === value.id) {
+        flag = true;
+      }
     }
     return flag;
-}
-  const callBackGetOption = (data) => {
+  }
+
+  const callBackGetOption = async (data) => {
     let tempt = [...temptOption];
     setOptions([
       ...options,
@@ -77,21 +75,15 @@ const Index = ({ onBack }) => {
         values: data.values.map((dt) => {
           return ({
             ...dt,
-            checked: checkIsExist(tempt[0].values,dt)
+            checked: checkIsExist(tempt[0].values, dt),
+            attributeValueId: dt.id
           })
         })
       }
     ]);
     tempt.shift();
-    setTemptOption(tempt);
+    await setTemptOption(tempt);
   }
-
-  React.useEffect(() => {
-    setTimeout(async () => {
-      await setData();
-      setVisible(true);
-    }, 300);
-  }, []);
 
   React.useEffect(() => {
     if (temptOption.length > 0) {
@@ -101,6 +93,15 @@ const Index = ({ onBack }) => {
     }
   }, [temptOption]);
 
+
+  React.useEffect(() => {
+    setTimeout(async () => {
+      await setData();
+      setVisible(true);
+    }, 300);
+  }, []);
+
+  /***************** SET DATA FIRST IN *****************/
   const setData = () => {
     setName(inventoryDetail.name);
     setSku(inventoryDetail.sku);
@@ -121,6 +122,7 @@ const Index = ({ onBack }) => {
     switch (type) {
       case "name":
         setName(value);
+        updateLabelQuantities(value);
         break;
       case "sku":
         setSku(value);
@@ -155,6 +157,7 @@ const Index = ({ onBack }) => {
     }
   };
 
+  /***************** HANDLE BUTTON SAVE *****************/
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -201,6 +204,7 @@ const Index = ({ onBack }) => {
     onBack();
   };
 
+  /***************** UPLOAD IMAGE PRODUCT *****************/
   React.useEffect(() => {
     if (fileUpload.length > 0) {
       let file = fileUpload[0];
@@ -231,6 +235,8 @@ const Index = ({ onBack }) => {
     temptFileUpload.shift();
     setFileUpload(temptFileUpload);
   };
+  /***************** END UPLOAD IMAGE PRODUCT *****************/
+
 
   const selectImage = (image) => {
     setImageDefault(image);
@@ -244,6 +250,7 @@ const Index = ({ onBack }) => {
     setImages(temptImages);
   };
 
+  /***************** set default image *****************/
   const setDefaultImage = async (image) => {
     const temptImages = JSON.parse(JSON.stringify(images));
     for (let i = 0; i < temptImages.length; i++) {
@@ -258,6 +265,7 @@ const Index = ({ onBack }) => {
     setImageDefault("");
   };
 
+  /***************** submit add new category *****************/
   const actionAddNewCategory = (body, callBack) => {
     const payload = {
       ...body,
@@ -266,6 +274,7 @@ const Index = ({ onBack }) => {
     dispatch(addNewCategory(payload, callBack));
   };
 
+  /***************** upload image option in product version *****************/
   const uploadImagesOption = (files = [], optionId) => {
     let file = files[0];
     let formData = new FormData();
@@ -284,12 +293,13 @@ const Index = ({ onBack }) => {
     setQuantities(temptQuantities);
   }
 
-  const handleChangeInputTable = (value, type, optionId) => {
+  /***************** CHANGE VALUE INPUT PRODUCT VERSION *****************/
+  const handleChangeInputTable = (value, type, row) => {
     let tempt = JSON.parse(JSON.stringify(quantities))
     switch (type) {
       case "costPrice":
         for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].id === optionId) {
+          if (tempt[i].label === row.label) {
             tempt[i].costPrice = value;
           }
         }
@@ -297,7 +307,7 @@ const Index = ({ onBack }) => {
 
       case "price":
         for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].id === optionId) {
+          if (tempt[i].label === row.label) {
             tempt[i].price = value;
           }
         }
@@ -305,7 +315,7 @@ const Index = ({ onBack }) => {
 
       case "quantity":
         for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].id === optionId) {
+          if (tempt[i].label === row.label) {
             tempt[i].quantity = value;
           }
         }
@@ -318,25 +328,107 @@ const Index = ({ onBack }) => {
     setQuantities(tempt);
   }
 
-  const deleteQuantities = (optionId) => {
-    let tempt = JSON.parse(JSON.stringify(quantities));
-    tempt = tempt.filter(t => t.id !== optionId);
+  /***************** Delete row of product versions *****************/
+  const deleteQuantities = (qtyItem) => {
+    let tempt = [...quantities];
+    tempt = tempt.filter(t => t.label !== qtyItem.label);
     setQuantities(tempt);
   }
 
+  /***************** merge options after add new option *****************/
   const mergeOption = async (data) => {
     setOptions([
       ...options,
-      {
-        ...data,
-      },
+      { ...data, },
     ]);
   }
 
+  /***************** Delete option *****************/
   const deleteOption = (attributeId) => {
     let tempt = [...options];
     tempt = tempt.filter(t => t.attributeId !== attributeId);
     setOptions(tempt);
+    createProductVersion(tempt);
+  }
+
+  /***************** check value option *****************/
+  const tickValueOption = (value) => {
+    let arrTemp = [...options];
+    let tempt = [...options].find(obj => obj.id === value.attributeId);
+    if (tempt) {
+
+      /* find value checked */
+      tempt.values.forEach(el => {
+        if (el.id === value.id) {
+          el.checked = !el.checked
+        }
+      });
+
+      /* assign option after check */
+      for (let i = 0; i < arrTemp.length; i++) {
+        if (arrTemp[i].id === tempt.id) {
+          arrTemp[i] = tempt
+        }
+      }
+      setOptions(arrTemp);
+      setNewQuantities(arrTemp);
+    }
+  }
+
+  const setNewQuantities = (optionsTicked) => {
+    const oldList = quantities ? [...quantities] : [];
+
+    let newList = createQuantitiesItem(inventoryDetail, optionsTicked)?.map((x) => {
+      const isExistItem = oldList?.find((f) =>
+        arrayIsEqual(f?.attributeIds, x?.attributeIds)
+      );
+
+      if (isExistItem) {
+        return Object.assign({}, x, {
+          quantity: isExistItem.quantity,
+          costPrice: isExistItem.costPrice,
+          additionalPrice: isExistItem.additionalPrice,
+          price: isExistItem.price,
+          imageUrl: isExistItem.imageUrl,
+          fileId: isExistItem.fileId,
+          position: isExistItem.position ?? 0,
+          id: isExistItem.id ?? 0,
+        });
+      }
+      return x;
+    });
+
+    setQuantities(newList);
+  }
+
+  const updateLabelQuantities = (value) => {
+    const quantitiesUpdateName = createQuantitiesItem(
+      inventoryDetail,
+      options,
+      value
+    )?.map((x) => {
+
+      const isExistItem = quantities.find((f) =>
+        arrayIsEqual(f?.attributeIds, x?.attributeIds)
+      );
+
+      if (isExistItem) {
+        return Object.assign({}, x, {
+          quantity: isExistItem.quantity,
+          costPrice: isExistItem.costPrice,
+          price : isExistItem.costPrice,
+          additionalPrice: isExistItem.additionalPrice,
+        });
+      }
+      return x;
+    });
+
+    setQuantities(quantitiesUpdateName);
+  }
+
+  const createProductVersion = (optionMerge) => {
+    const qtys = createQuantitiesItem(inventoryDetail, optionMerge);
+    setQuantities(qtys);
   }
 
   if (!isVisible) return null;
@@ -375,13 +467,14 @@ const Index = ({ onBack }) => {
           openAddOption={() => showOption(true)}
           options={options}
           deleteOption={deleteOption}
+          tickValueOption={tickValueOption}
         />
 
         <ProductTable
           quantities={quantities}
           uploadImagesOption={uploadImagesOption}
           handleChangeInput={handleChangeInputTable}
-          deleteOption={deleteQuantities}
+          deleteQuantities={deleteQuantities}
         />
 
         <div className="btn_group_edit_inventory">
@@ -406,6 +499,7 @@ const Index = ({ onBack }) => {
         attributes={attributes}
         mergeOption={mergeOption}
         options={options}
+        createProductVersion={createProductVersion}
       />
 
       <PopupDefaultImage

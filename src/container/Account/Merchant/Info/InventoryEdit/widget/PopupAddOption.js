@@ -14,11 +14,13 @@ const PopupAddOption = ({
     isVisible = false,
     options,
     mergeOption = () => { },
-    close = () => { }
+    close = () => { },
+    createProductVersion = () => { }
 }) => {
+
     const dispatch = useDispatch();
 
-    const { attributes, loadingAttribute } = useSelector(state => state.retailer);
+    const { attributes, loadingAttribute, inventoryDetail } = useSelector(state => state.retailer);
 
     const [temptAttributes, setTemptAttributes] = React.useState([]);
     const [attributesSubmit, setAttributesSubmit] = React.useState([]);
@@ -63,14 +65,18 @@ const PopupAddOption = ({
     }
 
     const callBackSubmit = (data) => {
-        mergeOption({
+        let temptData = {
             ...data,
-            attributeId: data.id
-        });
+            attributeId: data.id,
+            values: data.values.map(dt => ({ ...dt, checked: true, attributeValueId: dt.id }))
+        }
+        mergeOption(temptData);
         let tempt = [...attributesSubmit];
         tempt.shift();
         if (tempt.length === 0) {
+            let optionsMerge = [...options, { ...temptData }]
             closePopup();
+            createProductVersion(optionsMerge);
         }
         setAttributesSubmit(tempt);
     }

@@ -12,6 +12,7 @@ const ProductOptions = ({
     options,
     openAddOption = () => { },
     deleteOption = () => { },
+    tickValueOption = () => { },
 }) => {
     return (
         <>
@@ -35,6 +36,7 @@ const ProductOptions = ({
                         key={opt.id + 'option' + Math.random()}
                         item={opt}
                         deleteOption={deleteOption}
+                        tickValueOption={tickValueOption}
                     />
                 ))
             }
@@ -42,7 +44,7 @@ const ProductOptions = ({
     )
 }
 
-const OptionItem = ({ item, deleteOption }) => {
+const OptionItem = ({ item, deleteOption, tickValueOption }) => {
     return (
         <div className="optionItem">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -55,27 +57,27 @@ const OptionItem = ({ item, deleteOption }) => {
                 />
             </div>
             <ReactTable
-                className="table-inventoryDetail"
+                className="table-inventoryDetail product-option-table"
                 manual
                 sortable={false}
                 data={item.values || []}
                 minRows={1}
                 noDataText="NO DATA!"
                 NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
-                columns={item.inputType === "Visualswatch" ? columnVisualSwatch() : columns()}
+                columns={item.inputType === "Visualswatch" ? columnVisualSwatch(tickValueOption) : columns(tickValueOption)}
                 PaginationComponent={() => <div />}
             />
         </div>
     )
 }
 
-const columns = () => [
+const columns = (tickValueOption) => [
     {
         Header: <CustomTableHeader value="Active" />,
         id: "tick",
         accessor: (row) =>
-            <img src={row.checked ? tick_active : tick_inactive}
-                style={{ width: 20, height: 20, marginTop: 12, marginLeft: 10 }}
+            <img onClick={() => tickValueOption(row)} src={row.checked ? tick_active : tick_inactive}
+                style={{ width: 22, height: 22, marginTop: 12, marginLeft: 10 }}
             />,
         width: 80,
     },
@@ -93,13 +95,13 @@ const columns = () => [
     },
 ];
 
-const columnVisualSwatch = () => [
+const columnVisualSwatch = (tickValueOption) => [
     {
         Header: <CustomTableHeader value="Active" />,
         id: "tick",
         accessor: (row) =>
-            <img src={row.checked ? tick_active : tick_inactive}
-                style={{ width: 20, height: 20, marginTop: 12, marginLeft: 10 }}
+            <img onClick={() => tickValueOption(row)} src={row.checked ? tick_active : tick_inactive}
+                style={{ width: 22, height: 22, marginTop: 12, marginLeft: 10 }}
             />,
         width: 80,
     },
