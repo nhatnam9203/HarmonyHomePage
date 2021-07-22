@@ -39,11 +39,6 @@ const ProductTable = ({
                 noDataText="NO DATA!"
                 NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
                 columns={columns(uploadImagesOption, handleChangeInput, deleteQuantities)}
-                getTdProps={(state, rowInfo, column) => ({
-                    style: {
-                        height: '120px',
-                    },
-                })}
                 PaginationComponent={() => <div />}
             />
         </>
