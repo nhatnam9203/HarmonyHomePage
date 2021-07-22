@@ -39,6 +39,11 @@ const ProductTable = ({
                 noDataText="NO DATA!"
                 NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
                 columns={columns(uploadImagesOption, handleChangeInput, deleteQuantities)}
+                getTdProps={(state, rowInfo, column) => ({
+                    style: {
+                        height: '120px',
+                    },
+                })}
                 PaginationComponent={() => <div />}
             />
         </>
@@ -53,6 +58,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         Header: <CustomTableHeader value="Versions" />,
         id: "label",
         accessor: (row) => <div className="table-tr row-label">{row.label}</div>,
+        style: { 'whiteSpace': 'unset'},
         width: 260,
     },
     {
@@ -145,7 +151,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
                     )}
                 </Dropzone>
                 <img
-                    style={{ width: 43, height: 43, marginTop: 5 , cursor: 'pointer' }}
+                    style={{ width: 43, height: 43, marginTop: 5, cursor: 'pointer' }}
                     src={icon_trash} alt="imgjj"
                     onClick={() => deleteQuantities(row)}
                 />

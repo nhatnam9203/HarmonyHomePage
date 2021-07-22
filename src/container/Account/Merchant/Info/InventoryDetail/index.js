@@ -49,7 +49,8 @@ const columns = () => [
   {
     Header: <CustomTableHeader value="Versions" />,
     id: "label",
-    accessor: (row) => <div className="table-tr">{row.label}</div>,
+    accessor: (row) => <div className="table-tr row-label">{row.label}</div>,
+    style: { 'whiteSpace': 'unset'},
     width: 400,
   },
   {
@@ -65,6 +66,7 @@ const columns = () => [
     accessor: (row) => (
       <div className="table-tr">{`${row.description || ""}`}</div>
     ),
+    style: { 'whiteSpace': 'unset'},
   },
   {
     Header: <CustomTableHeader value="Cost price" />,

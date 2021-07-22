@@ -137,3 +137,9 @@
     left: 0px !important;
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .account_content{
+    padding: 1.5rem;
+  }
+}
