@@ -32,6 +32,7 @@ const FormEditInventory = ({
     selectImage = () => { },
     openNewCategory = () => { },
     deleteImage = () => { },
+    onBlurInputName = () => { },
 }) => {
     return (
         <Row className="formEditInventory" style={{ marginTop: 22, width: "90%" }}>
@@ -49,6 +50,7 @@ const FormEditInventory = ({
                             name="name"
                             value={name}
                             onChange={(e) => handleChange("name", e.target.value)}
+                            onBlur={onBlurInputName}
                             style={{ borderColor: isEmpty(name) ? "red" : "#ced4da" }}
                         />
                         {isEmpty(name) && <Error />}
@@ -123,7 +125,7 @@ const FormEditInventory = ({
 
                     {/******************** Price ********************/}
                     {
-                        (!quantities || quantities.length === 0)  &&
+                        (!quantities || quantities.length === 0) &&
                         <Form.Group style={{ position: "relative" }}>
                             <Form.Label>
                                 Price <span className="form_required">*</span>

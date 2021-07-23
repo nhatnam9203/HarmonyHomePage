@@ -122,11 +122,14 @@ const Index = ({ onBack }) => {
     setTemptOption(inventoryDetail.options);
   };
 
+  const onBlurInputName = () => {
+    updateLabelQuantities(name);
+  }
+
   const handleChange = (type, value) => {
     switch (type) {
       case "name":
         setName(value);
-        updateLabelQuantities(value);
         break;
       case "sku":
         setSku(value);
@@ -496,6 +499,7 @@ const Index = ({ onBack }) => {
           deleteImage={deleteImage}
           handleSubmit={handleSubmit}
           quantities={quantities}
+          onBlurInputName={onBlurInputName}
         />
 
         <ProductOptions
