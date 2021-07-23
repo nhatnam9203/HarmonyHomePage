@@ -53,9 +53,6 @@ const Index = ({ onBack }) => {
   const [isShowAddOption, showOption] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
 
-  const refPrice = React.useRef();
-  const refCostPrice = React.useRef();
-
   const checkIsExist = (optionValues, value) => {
     let flag = false;
     for (let i = 0; i < optionValues.length; i++) {
@@ -185,9 +182,9 @@ const Index = ({ onBack }) => {
           name,
           sku,
           barCode,
-          // price: formatMoney(refPrice.current.value),
+          price: (quantities && quantities.length > 0) ? inventoryDetail.price : price,
           // costPrice: formatMoney(refCostPrice.current.value),
-          quantity,
+          quantity: (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
           minThreshold,
           maxThreshold,
           categoryId,
@@ -494,9 +491,8 @@ const Index = ({ onBack }) => {
           selectImage={selectImage}
           openNewCategory={() => setVisibleNewCategory(true)}
           deleteImage={deleteImage}
-          refPrice={refPrice}
-          refCostPrice={refCostPrice}
           handleSubmit={handleSubmit}
+          quantities={quantities}
         />
 
         <ProductOptions

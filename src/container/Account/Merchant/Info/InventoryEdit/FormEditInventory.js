@@ -2,13 +2,13 @@ import React from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import SelectOption from "./SelectOption";
 import InputMask from "react-input-mask";
-import CurrencyInput from "react-currency-masked-input";
 import Dropzone from "react-dropzone";
 import Error from "./Error";
 import { isEmpty } from "lodash";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import icon_trash from "@/assets/images/retailer/trash.png";
 import icon_eye from "@/assets/images/retailer/eye.png";
+import InputPrice from "./widget/InputPrice";
 import { formatMoney } from "@/util";
 import "../Info.scss";
 import "./style.scss";
@@ -26,13 +26,12 @@ const FormEditInventory = ({
     categoryId,
     images,
     description,
+    quantities,
     handleChange = () => { },
     uploadImage = () => { },
     selectImage = () => { },
     openNewCategory = () => { },
     deleteImage = () => { },
-    refPrice,
-    refCostPrice,
 }) => {
     return (
         <Row className="formEditInventory" style={{ marginTop: 22, width: "90%" }}>
@@ -121,6 +120,22 @@ const FormEditInventory = ({
                         />
                         {isEmpty(barCode) && <Error />}
                     </Form.Group>
+
+                    {/******************** Price ********************/}
+                    {
+                        (!quantities || quantities.length === 0)  &&
+                        <Form.Group style={{ position: "relative" }}>
+                            <Form.Label>
+                                Price <span className="form_required">*</span>
+                            </Form.Label>
+                            <InputPrice
+                                value={price}
+                                handleChange={(value) => handleChange("price", value)}
+                                style={{ width: '100%', height: 57, color: '#404040' }}
+                            />
+                        </Form.Group>
+                    }
+
                 </div>
             </Col>
 
@@ -128,21 +143,24 @@ const FormEditInventory = ({
                 <div className="sign_up_form1">
 
                     {/******************** QUANTITY ********************/}
-                    <Form.Group style={{ position: "relative" }}>
-                        <Form.Label>
-                            Items in stock <span className="form_required">*</span>
-                        </Form.Label>
-                        <MaskInput
-                            type="text"
-                            placeholder="Quantity"
-                            name="quantity"
-                            value={quantity}
-                            onChange={(e) => { }}
-                            disabled
-                            style={{ borderColor: typeof quantity !== "number" && isEmpty(quantity) ? "red" : "#ced4da", }}
-                        />
-                        {typeof quantity !== "number" && isEmpty(quantity) && <Error />}
-                    </Form.Group>
+                    {
+                        (!quantities || quantities.length === 0) &&
+                        <Form.Group style={{ position: "relative" }}>
+                            <Form.Label>
+                                Items in stock <span className="form_required">*</span>
+                            </Form.Label>
+                            <MaskInput
+                                type="text"
+                                placeholder="Quantity"
+                                name="quantity"
+                                value={quantity}
+                                onChange={(e) => handleChange("quantity", e.target.value)}
+                                disabled
+                                style={{ borderColor: typeof quantity !== "number" && isEmpty(quantity) ? "red" : "#ced4da", }}
+                            />
+                            {typeof quantity !== "number" && isEmpty(quantity) && <Error />}
+                        </Form.Group>
+                    }
 
                     <Row>
                         <Col xs={6} xl={6} className="h-100">
