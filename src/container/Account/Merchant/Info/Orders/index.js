@@ -35,6 +35,8 @@ const Index = ({
     typeSort_orders,
   } = useSelector((state) => state.retailer);
 
+  console.log({ orders , orderPages });
+
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const onClickSort = (status, sortType) => {

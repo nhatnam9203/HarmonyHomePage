@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactTable from "react-table";
 import Title from "@/components/Title";
 import CustomTableHeader from "../../CustomTableHeader";
@@ -8,44 +8,71 @@ import icon_trash from "@/assets/images/retailer/trash.png";
 import Dropzone from "react-dropzone";
 import InputPrice from "./InputPrice";
 import InputQuantity from "./InputQuantity";
+import Pagination from "@/components/Pagination";
 import "../style.scss";
 
-const ProductTable = ({
-    quantities = [],
-    uploadImagesOption = () => { },
-    handleChangeInput = () => { },
-    deleteQuantities = () => { },
-}) => {
+export default class Producttable extends Component {
 
-    return (
-        <>
-            <Title
-                style={{
-                    borderBottomWidth: 0,
-                    marginTop: "2.5rem",
-                    marginBottom: "0.5rem",
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                }}
-            >
-                Product Versions
+    constructor(props) {
+        super(props);
+        this.state = {
+            activePage: 1,
+        }
+    }
+
+    changePage = (activePage) => {
+        this.setState({ activePage })
+    }
+
+    render() {
+        const {
+            quantities = [],
+            uploadImagesOption = () => { },
+            handleChangeInput = () => { },
+            deleteQuantities = () => { },
+        } = this.props;
+
+        const { activePage } = this.state;
+
+        let count = Math.ceil(quantities.length);
+
+        const quantitiesList = quantities.slice((activePage - 1) * 10, (activePage - 1) * 10 + 10);
+
+        return (
+            <>
+                <Title
+                    style={{
+                        borderBottomWidth: 0,
+                        marginTop: "2.5rem",
+                        marginBottom: "0.5rem",
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    Product Versions
             </Title>
-            <ReactTable
-                className="table-inventoryDetail product-table"
-                manual
-                sortable={false}
-                data={quantities || []}
-                minRows={1}
-                noDataText="NO DATA!"
-                NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
-                columns={columns(uploadImagesOption, handleChangeInput, deleteQuantities)}
-                PaginationComponent={() => <div />}
-            />
-        </>
-    )
+                <ReactTable
+                    className="table-inventoryDetail product-table"
+                    manual
+                    sortable={false}
+                    data={quantitiesList || []}
+                    minRows={1}
+                    noDataText="NO DATA!"
+                    NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
+                    columns={columns(uploadImagesOption, handleChangeInput, deleteQuantities)}
+                    PaginationComponent={() => <div />}
+                />
+                {
+                    count > 0 && <Pagination
+                        activePage={activePage}
+                        handlePageChange={this.changePage}
+                        totalItem={Math.ceil(count / 2)}
+                    />
+                }
+            </>
+        )
+    }
 }
-
-export default ProductTable;
 
 
 const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
@@ -53,7 +80,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         Header: <CustomTableHeader value="Versions" />,
         id: "label",
         accessor: (row) => <div className="table-tr row-label">{row.label}</div>,
-        style: { 'whiteSpace': 'unset'},
+        style: { 'whiteSpace': 'unset' },
         width: 260,
     },
     {
@@ -72,7 +99,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
                 className="input_price"
                 value={row.description}
                 onChange={(e) => handleChangeInput(e.target.value, "description", row)}
-                placeholder=""
+                placeholder="Description"
             />
         )
     },
