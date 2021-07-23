@@ -31,6 +31,8 @@ const Index = ({ onBack }) => {
   } = useSelector((state) => state.retailer);
   const { detail } = useSelector((state) => state.merchantDetail);
 
+  const refProductVersion = React.useRef(null);
+
   const [isVisible, setVisible] = React.useState(false);
   const [name, setName] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
@@ -120,11 +122,14 @@ const Index = ({ onBack }) => {
     setTemptOption(inventoryDetail.options);
   };
 
+  const onBlurInputName = () => {
+    updateLabelQuantities(name);
+  }
+
   const handleChange = (type, value) => {
     switch (type) {
       case "name":
         setName(value);
-        updateLabelQuantities(value);
         break;
       case "sku":
         setSku(value);
@@ -403,6 +408,7 @@ const Index = ({ onBack }) => {
       }
       setOptions(arrTempOptions);
       setNewQuantities(arrTempOptions);
+      refProductVersion.current.changePage(1);
     }
   }
 
@@ -493,6 +499,7 @@ const Index = ({ onBack }) => {
           deleteImage={deleteImage}
           handleSubmit={handleSubmit}
           quantities={quantities}
+          onBlurInputName={onBlurInputName}
         />
 
         <ProductOptions
@@ -507,6 +514,7 @@ const Index = ({ onBack }) => {
           uploadImagesOption={uploadImagesOption}
           handleChangeInput={handleChangeInputTable}
           deleteQuantities={deleteQuantities}
+          ref={refProductVersion}
         />
 
         <div className="btn_group_edit_inventory">

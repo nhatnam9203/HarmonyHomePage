@@ -5,16 +5,28 @@ import { useSelector } from "react-redux";
 import CustomTableHeader from "../CustomTableHeader";
 import product_default from "@/assets/images/product_default.png";
 import InventoryInfo from "./InventoryInfo";
+import Pagination from "@/components/Pagination";
 import "../Info.scss";
 import "./style.scss";
 
 const Index = ({ onBack }) => {
   const { inventoryDetail } = useSelector((state) => state.retailer);
 
+  const [activePage, setActivePage] = React.useState(1);
+
   React.useEffect(() => {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }, []);
+
+  const changePage = (page) => {
+    setActivePage(page);
+  }
+
+  let quantities = inventoryDetail.quantities || [];
+  let count = Math.ceil(quantities.length);
+
+  const quantitiesList = quantities.slice((activePage - 1) * 10, (activePage - 1) * 10 + 10);
 
   return (
     <>
@@ -32,13 +44,20 @@ const Index = ({ onBack }) => {
         className="table-inventoryDetail product-table"
         manual
         sortable={false}
-        data={inventoryDetail.quantities || []}
+        data={quantitiesList}
         minRows={1}
         noDataText="NO DATA!"
         NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
         columns={columns()}
         PaginationComponent={() => <div />}
       />
+      {
+        count > 0 && <Pagination
+          activePage={activePage}
+          handlePageChange={changePage}
+          totalItem={Math.ceil(count / 2)}
+        />
+      }
     </>
   );
 };
@@ -50,7 +69,7 @@ const columns = () => [
     Header: <CustomTableHeader value="Versions" />,
     id: "label",
     accessor: (row) => <div className="table-tr row-label">{row.label}</div>,
-    style: { 'whiteSpace': 'unset'},
+    style: { 'whiteSpace': 'unset' },
     width: 400,
   },
   {
@@ -66,7 +85,7 @@ const columns = () => [
     accessor: (row) => (
       <div className="table-tr">{`${row.description || ""}`}</div>
     ),
-    style: { 'whiteSpace': 'unset'},
+    style: { 'whiteSpace': 'unset' },
   },
   {
     Header: <CustomTableHeader value="Cost price" />,
