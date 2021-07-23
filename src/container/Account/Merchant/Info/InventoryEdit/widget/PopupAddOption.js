@@ -113,7 +113,7 @@ const PopupAddOption = ({
                     <div className="row_button_default_image">
                         <Button
                             variant="primary"
-                            style={{ marginRight: 10, width: 140, borderRadius: 0, background: "#FFFFFF", color: "#333", border: "1px solid #dddddd", }}
+                            style={{ marginRight: 10, width: 140, height: 50 ,borderRadius: 0, background: "#FFFFFF", color: "#333", border: "1px solid #dddddd", }}
                             onClick={closePopup}
                         >
                             Close
@@ -121,7 +121,7 @@ const PopupAddOption = ({
                         <Button
                             variant="primary"
                             type="submit"
-                            style={{ background: "#1366AE", color: "white", width: 140, borderRadius: 0, }}
+                            style={{ background: "#1366AE", color: "white", width: 140, height: 50, borderRadius: 0, }}
                             onClick={submit}
                         >
                             Add selected
