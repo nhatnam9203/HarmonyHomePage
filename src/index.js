@@ -18,11 +18,9 @@ import { CookiesProvider } from "react-cookie";
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
         <CookiesProvider>
           <App />
         </CookiesProvider>
-      </PersistGate>
     </Provider>
   </I18nextProvider>,
   document.getElementById("root")

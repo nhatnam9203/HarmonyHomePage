@@ -76,7 +76,9 @@ const InventoryInfo = ({ onBack }) => {
           </div>
           <div className="item_inventory_detail">
             <div>Price</div>
-            <div style={{ fontWeight: '600' }}>{inventoryDetail.price}</div>
+            <div style={{ fontWeight: '600' }}>
+              {inventoryDetail.quantities.length > 0 ? inventoryDetail.priceRange : `$ ${inventoryDetail.price}`}
+            </div>
           </div>
           <div className="item_inventory_detail">
             <div>Total items in stock</div>
@@ -98,8 +100,8 @@ const InventoryInfo = ({ onBack }) => {
               {
                 descriptionLength > 60 ?
                   !isMore ?
-                  inventoryDetail.description.slice(0, 60) + "..." :
-                  inventoryDetail.description : inventoryDetail.description
+                    inventoryDetail.description.slice(0, 60) + "..." :
+                    inventoryDetail.description : inventoryDetail.description
               }
               {
                 descriptionLength > 60 &&
