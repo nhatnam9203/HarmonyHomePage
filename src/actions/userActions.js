@@ -8,9 +8,10 @@ import { history } from "../History/history";
 export const userLogin = (dataLogin) => async (dispatch) => {
   try {
     dispatch({ type: typeUser.LOGIN_REQUEST });
-    const { data } = await api.login(dataLogin);
-    if (Number(data.codeNumber) === 200) {
+    const { data = null } = await api.login(dataLogin);
+    if (data && Number(data.codeNumber) === 200) {
       localStorage.setItem("user", JSON.stringify(data?.data));
+      localStorage.setItem("dataLogin", JSON.stringify(dataLogin));
       dispatch({ type: typeUser.LOGIN_REQUEST_SUCCESS, payload: data?.data });
 
       const x = window.location.href;
@@ -49,13 +50,7 @@ export const getMyAccountAction = () => async (dispatch, getState) => {
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.getMyAccount(token);
-
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    const { data = null } = await api.getMyAccount(token);
 
     dispatch({
       type: typeUser.GET_MY_ACCOUNT_SUCCESS,
@@ -75,6 +70,7 @@ export const updateMyAccountAction = (payload) => async (
   dispatch,
   getState
 ) => {
+
   try {
     dispatch({
       type: typeUser.UPDATE_MY_ACCOUNT_REQUEST,
@@ -82,20 +78,21 @@ export const updateMyAccountAction = (payload) => async (
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.updateMyAccount(payload, token);
+    const { data = null } = await api.updateMyAccount(payload, token);
 
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
-
-    if (Number(data?.codeNumber) === 200) {
+    if (data && Number(data?.codeNumber) === 200) {
       dispatch({
         type: typeUser.UPDATE_MY_ACCOUNT_SUCCESS,
         payload: data?.message,
       });
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+
+      const { IsChangePassword, email, newPassword } = payload;
+
+      const dataLogin = { email, password: newPassword };
+      if (IsChangePassword) {
+        localStorage.setItem("dataLogin", JSON.stringify(dataLogin));
+      }
 
       setTimeout(() => {
         history.goBack();
@@ -128,13 +125,7 @@ export const newsletterSubscriptionAction = (enable) => async (
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.newsletterSubscription(enable, token);
-
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    const { data = null } = await api.newsletterSubscription(enable, token);
 
     dispatch({
       type: typeUser.NEWSLETTER_SUB_SUCCESS,
@@ -162,19 +153,16 @@ export const getMerchantListAction = () => async (dispatch, getState) => {
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.getMerchantList(token);
+    const { data = null } = await api.getMerchantList(token);
 
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    console.log('get merchant lis : ', { data });
 
     dispatch({
       type: typeUser.GET_ALL_MERCHANT_SUCCESS,
       payload: data?.data,
     });
   } catch (error) {
+    console.log({ error })
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({
       type: typeUser.GET_ALL_MERCHANT_FAILURE,
@@ -192,13 +180,9 @@ export const getMerchantByIdAction = (id) => async (dispatch, getState) => {
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.getMerchantById(id, token);
+    const { data = null } = await api.getMerchantById(id, token);
 
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    if (!data) return;
 
     dispatch({
       type: typeUser.GET_MERCHANT_BY_ID_SUCCESS,
@@ -222,13 +206,9 @@ export const getMySubscriptionAction = () => async (dispatch, getState) => {
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.getMySubscription(token);
+    const { data = null } = await api.getMySubscription(token);
 
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    if (!data) return;
 
     dispatch({
       type: typeUser.GET_SUBSCRIPTION_SUCCESS,
@@ -255,13 +235,9 @@ export const getMySubscriptionByIdAction = (id) => async (
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.getSubscriptionById(id, token);
+    const { data = null } = await api.getSubscriptionById(id, token);
 
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    if (!data) return;
 
     dispatch({
       type: typeUser.GET_SUBSCRIPTION_BY_ID_SUCCESS,
@@ -288,13 +264,9 @@ export const cancelSubscriptionByIdAction = (id) => async (
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.cancelSubscriptionById(id, token);
+    const { data = null } = await api.cancelSubscriptionById(id, token);
 
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    if (!data) return;
 
     dispatch({
       type: typeUser.CANCEL_SUBSCRIPTION_SUCCESS,
@@ -320,15 +292,9 @@ export const getPackageAction = () => async (dispatch, getState) => {
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.getPackage(token);
+    const { data = null } = await api.getPackage(token);
 
-    console.log('get package : ', data)
-
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    if (!data) return;
 
     dispatch({
       type: typeUser.GET_PACKAGE_SUCCESS,
@@ -352,7 +318,10 @@ export const getRefundMoneyAction = (id) => async (dispatch, getState) => {
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.getRefundMoney(id, token);
+    const { data = null } = await api.getRefundMoney(id, token);
+
+    if (!data) return;
+
 
     if (data.codeNumber === 401) {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -385,7 +354,9 @@ export const updateSubscriptionAction = (value) => async (
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.updateSubscriptionById(value, token);
+    const { data = null } = await api.updateSubscriptionById(value, token);
+
+    if (!data) return;
 
     if (data.codeNumber === 401) {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -422,13 +393,9 @@ export const renewSubscriptionAction = (value) => async (
 
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    const { data } = await api.renewSubscriptionById(value, token);
+    const { data = null } = await api.renewSubscriptionById(value, token);
 
-    if (data.codeNumber === 401) {
-      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
-      dispatch(userLogoutAction());
-      return;
-    }
+    if (!data) return;
 
     dispatch({
       type: typeUser.RENEW_SUBSCRIPTION_SUCCESS,
@@ -454,7 +421,8 @@ export const forgotPasswordAction = (value) => async (dispatch) => {
       type: typeUser.GET_FORGOT_PASSWORD_REQUEST,
     });
 
-    const { data } = await api.forgotPassword(value.email);
+    const { data = null } = await api.forgotPassword(value.email);
+    if (!data) return;
 
     if (data.codeNumber !== 200) {
       dispatch({
@@ -487,9 +455,11 @@ export const getPackagePricingAction = () => async (dispatch) => {
     dispatch({
       type: typeUser.GET_PACKAGE_PRICING_REQUEST,
     });
-    const { data } = await api.getPackagePricing();
+    const { data = null } = await api.getPackagePricing();
 
-    if (data.codeNumber === 401) {
+    if (!data) return;
+
+    if (data && data.codeNumber === 401) {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
       dispatch(userLogoutAction());
       return;
@@ -516,7 +486,10 @@ export const resetPasswordAction = (id, tokenid, payload) => async (
     dispatch({
       type: typeUser.RESET_PASSWORD_REQUEST,
     });
-    const { data } = await api.resetPassword(id, tokenid, payload);
+    const { data = null } = await api.resetPassword(id, tokenid, payload);
+
+    if (!data) return;
+
     dispatch({
       type: typeUser.RESET_PASSWORD_SUCCESS,
       payload: data?.data,

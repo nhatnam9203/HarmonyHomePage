@@ -1,5 +1,4 @@
-import axios from "axios";
-import instance from "../helper/axios";
+import axios from "../helper/axios";
 
 // const url = "https://dev.harmonypayment.com/api";
 
@@ -11,7 +10,7 @@ const url = "https://staging.harmonypayment.com/api";
 
 const loginUrl = `${url}/principal/login`;
 
-export const login = (dataLogin) => instance.post(loginUrl, dataLogin);
+export const login = (dataLogin) => axios.post(loginUrl, dataLogin);
 
 const myAccountUrl = `${url}/principal/myaccount`;
 

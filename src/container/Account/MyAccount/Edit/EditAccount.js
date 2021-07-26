@@ -23,7 +23,6 @@ function EditAccount() {
   const { updateStatus } = useSelector((state) => state.updateMyAccount);
 
   const { password } = useParams();
-  console.log("password :>> ", password);
 
   const isEditPassword = password !== undefined;
 
