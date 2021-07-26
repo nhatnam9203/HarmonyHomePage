@@ -158,7 +158,7 @@ export default function ContactUs({ isContact }) {
             </span>
             <p className="contact__info-text text-center mb-4">
               Harmony Payment System LLC, 730 Peachtree Street NE, #570
-              Atlanta, GA 30308﻿
+              Atlanta, GA 30308
             </p>
             {/* <div className="contact__info-divider"></div> */}
           </div>
