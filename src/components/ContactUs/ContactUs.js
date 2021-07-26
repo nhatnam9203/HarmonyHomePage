@@ -157,8 +157,8 @@ export default function ContactUs({ isContact }) {
               <IoLocationSharp className=" " size={30} color="white" />
             </span>
             <p className="contact__info-text text-center mb-4">
-              Harmony Payment System LLC, 35246 US Hwy 19 N.Suite 189 Palm
-              Harbor,FL 34684
+              Harmony Payment System LLC, 730 Peachtree Street NE, #570
+              Atlanta, GA 30308﻿
             </p>
             {/* <div className="contact__info-divider"></div> */}
           </div>
