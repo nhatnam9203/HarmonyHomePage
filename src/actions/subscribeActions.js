@@ -5,7 +5,7 @@ import * as typeNotify from "../constants/notifyConstants";
 export const subscibeNewLetter = (email) => async (dispatch) => {
   try {
     dispatch({ type: typesSubs.SUBSCRIBE_REQUEST });
-    const { data } = await api.subscribe(email);
+    const { data = null } = await api.subscribe(email);
     dispatch({
       type: typesSubs.SUBSCRIBE_REQUEST_SUCCESS,
       payload: data?.data,

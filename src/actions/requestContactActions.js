@@ -7,7 +7,8 @@ import * as typeNotify from "../constants/notifyConstants";
 export const requestContact = (payload) => async (dispatch) => {
   try {
     dispatch({ type: typeContact.REQUEST_CONTACT_REQUEST });
-    const { data } = await api.requestContact(payload);
+    const { data = null } = await api.requestContact(payload);
+    
     dispatch({
       type: typeContact.REQUEST_CONTACT_REQUEST_SUCCESS,
       payload: data?.data,

@@ -44,12 +44,13 @@ export default function Header() {
   // const isMobile = useMediaQuery({ query: "(max-width: 425px)" });
 
   const { loading, user } = useSelector((state) => state.user);
+  const userInfo = JSON.parse(localStorage.getItem("user")) || "";
 
   useEffect(() => {
-    if (user) {
+    if (userInfo) {
       setShow(false);
     }
-  }, [user]);
+  }, [userInfo]);
 
   const handleConsumer = () => {
     setExpanded(false);
@@ -104,7 +105,7 @@ export default function Header() {
         <Container>
           <Row className="">
             <Col className="py-1 mx-sm-1 pr-0 pl-0 col__signin">
-              {!isEmpty(user) ? (
+              {!isEmpty(userInfo) ? (
                 <div className="sign_in" onClick={handleAccount}>
                   <img src={LoginIcon} width={21} className="mr-2" alt="img" />
                   <span className="text-white isMobile">Manage Account</span>

@@ -15,7 +15,7 @@ export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
 
-    const { data } = await api.getByPage(requestUrl, token);
+    const { data = null } = await api.getByPage(requestUrl, token);
 
     let orders = data.data
       ? data.data.map((obj) => { return { ...obj, total: FormatPrice(obj.total) }; }) : [];
@@ -42,7 +42,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
 
-    const { data } = await api.getByPage(requestUrl, token);
+    const { data = null } = await api.getByPage(requestUrl, token);
 
     let inventory = data.data
       ? data.data.map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
@@ -68,7 +68,7 @@ export const getCustomer = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    const { data } = await api.getByPage(requestUrl, token);
+    const { data = null } = await api.getByPage(requestUrl, token);
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_CUSTOMER,
@@ -88,7 +88,7 @@ export const getCustomer = (requestUrl = "", token = "") => async (
 export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
 
@@ -129,7 +129,7 @@ export const getSalesByOrder = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       let result = [];
@@ -157,7 +157,7 @@ export const getSalesByProduct = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
 
@@ -198,7 +198,7 @@ export const getSalesByCategory = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
 
@@ -238,7 +238,7 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
@@ -274,7 +274,7 @@ export const getTopProduct = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
@@ -312,7 +312,7 @@ export const getTopCategory = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
@@ -350,7 +350,7 @@ export const getPaymentByMethod = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       let result = [];
@@ -379,7 +379,7 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
@@ -416,7 +416,7 @@ export const getMarketingEfficiency = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
@@ -452,8 +452,7 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_EXPORT_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
-    console.log({ requestUrl, data })
+    let { data = null } = await api.getByPage(requestUrl, token);
     let path = typeof data.data === "object" ? data.data.path : data.data;
 
     if (parseInt(data.codeNumber) === 200) {
@@ -478,7 +477,7 @@ export const getOrderDetail = (requestUrl = "", token = "", callBack) => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_ORDER_DETAIL,
@@ -502,7 +501,7 @@ export const getInventoryDetail = (
 ) => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -528,7 +527,7 @@ export const getCustomerDetail = (
 ) => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -552,7 +551,7 @@ export const getAppointmentCustomer = (requestUrl = "", token = "") => async (
 ) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
     let temptData = data.data
       ? data.data.map((obj) => {
         return {
@@ -581,7 +580,7 @@ export const getSubCategory = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
   try {
-    let { data } = await api.getByPage(requestUrl, token);
+    let { data = null } = await api.getByPage(requestUrl, token);
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.SET_SUB_CATEGORY,
@@ -605,7 +604,7 @@ export const changeImageProduct = (formData, productId, callBack) => async (
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
-    let { data } = await api.uploadFile(urlUpload, formData);
+    let { data = null } = await api.uploadFile(urlUpload, formData);
 
     if (parseInt(data.codeNumber) === 200) {
       const { fileId, url } = data.data;
@@ -641,7 +640,7 @@ export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
   try {
     const url = "file?category=product";
     dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
-    let { data } = await api.uploadFile(url, formData);
+    let { data = null } = await api.uploadFile(url, formData);
     if (parseInt(data.codeNumber) === 200) {
       callBack(data.data);
     } else {
@@ -659,7 +658,7 @@ export const uploadImageOptions = (formData, label, callBack) => async (dispatch
   try {
     const url = "file?category=product";
     dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
-    let { data } = await api.uploadFile(url, formData);
+    let { data = null } = await api.uploadFile(url, formData);
     if (parseInt(data.codeNumber) === 200) {
       callBack(data.data, label);
     } else {
@@ -679,7 +678,7 @@ export const addNewCategory = (body, callBack) => async (dispatch) => {
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
-    let { data } = await api.postApi(url, body, token);
+    let { data = null } = await api.postApi(url, body, token);
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
@@ -701,7 +700,7 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
-    let { data } = await api.putApi(url, body, token);
+    let { data = null } = await api.putApi(url, body, token);
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
@@ -722,7 +721,7 @@ export const getAttribute = (merchantId) => async (dispatch) => {
     const url = `attribute/search?key=&page=1&row=20&sorts=&merchantId=${merchantId}`;
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    let { data } = await api.getApi(url, token);
+    let { data = null } = await api.getApi(url, token);
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeRetailer.SET_ATTRIBUTES, payload: data?.data || [] })
@@ -742,7 +741,7 @@ export const getAttributeById = (attributeId, callBack) => async (dispatch) => {
     const url = `attribute/${attributeId}`;
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
-    let { data } = await api.getApi(url, token);
+    let { data = null } = await api.getApi(url, token);
 
     if (parseInt(data.codeNumber) === 200) {
       callBack(data.data);

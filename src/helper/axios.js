@@ -1,4 +1,5 @@
 import axios from "axios";
+import { login } from '../api/index';
 
 const instance = axios.create();
 
@@ -14,12 +15,26 @@ instance.interceptors.request.use(
   }
 );
 
+const refreshToken = async() =>{
+  const dataLogin = JSON.parse(localStorage.getItem("dataLogin"));
+  const { data = null } = await login(dataLogin);
+  localStorage.setItem("user", JSON.stringify(data?.data));
+  localStorage.setItem("dataLogin", JSON.stringify(dataLogin));
+  return data;
+}
+
 // Add a response interceptor
 instance.interceptors.response.use(
-  function (response) {
+  async function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
-    console.log("OK", response);
+    if (response.data.codeNumber === 401) {
+      const rs = await refreshToken();
+      const config = response.config;
+      config.headers.Authorization = `Bearer ${rs?.data?.token}`;
+
+      return instance(config);
+    }
 
     return response;
   },

@@ -8,7 +8,8 @@ export const requestInfo = (dataInfo) => async (dispatch) => {
   try {
     dispatch({ type: typeRequest.REQUEST_INFO_REQUEST });
 
-    const { data } = await api.requestInfo(dataInfo);
+    const { data = null } = await api.requestInfo(dataInfo);
+
     dispatch({
       type: typeRequest.REQUEST_INFO_REQUEST_SUCCESS,
       payload: data?.data,
