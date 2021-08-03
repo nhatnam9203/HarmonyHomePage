@@ -8,6 +8,8 @@ import {
 import tick_active from "@/assets/images/retailer/tick_active.png";
 import tick_inactive from "@/assets/images/retailer/tick_inactive.png";
 import Loading from "@/components/Loading";
+import InfiniteScroll from "react-infinite-scroll-component";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import "../style.scss";
 
 const PopupAddOption = ({
@@ -20,10 +22,11 @@ const PopupAddOption = ({
 
     const dispatch = useDispatch();
 
-    const { attributes, loadingAttribute, inventoryDetail } = useSelector(state => state.retailer);
+    const { attributes, loadingAttribute } = useSelector(state => state.retailer);
 
     const [temptAttributes, setTemptAttributes] = React.useState([]);
     const [attributesSubmit, setAttributesSubmit] = React.useState([]);
+    const [isLoading, setLoading] = React.useState(false);
 
     React.useEffect(() => {
         if (isVisible) {
@@ -91,6 +94,10 @@ const PopupAddOption = ({
         setTemptAttributes(tempt);
     }
 
+    const fetchMoreData = () => {
+        console.log('fetch more')
+    }
+
     return (
         <>
             <Modal
@@ -103,17 +110,34 @@ const PopupAddOption = ({
                 <div style={{ position: 'relative' }} className="container_add_option">
                     <h4>Add attribute</h4>
                     <h6>Select customize options attribute</h6>
-                    <div className="wrap">
-                        <AttributeListSelect
-                            attributes={temptAttributes}
-                            onSelectAttribute={onSelectAttribute}
-                        />
+                    <div id="scrollableDiv" className="wrap">
+                        <InfiniteScroll
+                            dataLength={temptAttributes.length ? temptAttributes.length : 0}
+                            next={fetchMoreData}
+                            hasMore={true}
+                            loader={
+                                isLoading ?
+                                    <ScaleLoader
+                                        size={150}
+                                        height={35}
+                                        color={"#0764b0"}
+                                        loading={true}
+                                    />
+                                    : null
+                            }
+                            scrollableTarget="scrollableDiv"
+                        >
+                            <AttributeListSelect
+                                attributes={temptAttributes}
+                                onSelectAttribute={onSelectAttribute}
+                            />
+                        </InfiniteScroll>
                     </div>
 
                     <div className="row_button_default_image">
                         <Button
                             variant="primary"
-                            style={{ marginRight: 10, width: 140, height: 50 ,borderRadius: 0, background: "#FFFFFF", color: "#333", border: "1px solid #dddddd", }}
+                            style={{ marginRight: 10, width: 140, height: 50, borderRadius: 0, background: "#FFFFFF", color: "#333", border: "1px solid #dddddd", }}
                             onClick={closePopup}
                         >
                             Close

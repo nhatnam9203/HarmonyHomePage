@@ -55,7 +55,7 @@ const Index = ({ onBack }) => {
         count > 0 && <Pagination
           activePage={activePage}
           handlePageChange={changePage}
-          totalItem={Math.ceil(count / 2)}
+          totalItem={Math.ceil(count)}
         />
       }
     </>

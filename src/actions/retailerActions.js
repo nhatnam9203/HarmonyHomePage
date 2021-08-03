@@ -716,15 +716,22 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
   }
 };
 
-export const getAttribute = (merchantId) => async (dispatch) => {
+export const getAttribute = (merchantId, page = 1) => async (dispatch) => {
   try {
-    const url = `attribute/search?key=&page=1&row=20&sorts=&merchantId=${merchantId}`;
+    const url = `attribute/search?key=&page=${page}&row=10&sorts=&merchantId=${merchantId}`;
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
     let { data = null } = await api.getApi(url, token);
 
+    console.log({ data });
+
+    const payload = {
+      data : data?.data || [],
+      maxPageAttributes : data?.pages || 1
+    }
+
     if (parseInt(data.codeNumber) === 200) {
-      dispatch({ type: typeRetailer.SET_ATTRIBUTES, payload: data?.data || [] })
+      dispatch({ type: typeRetailer.SET_ATTRIBUTES, payload });
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }

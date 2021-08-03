@@ -66,7 +66,7 @@ export default class Producttable extends Component {
                     count > 0 && <Pagination
                         activePage={activePage}
                         handlePageChange={this.changePage}
-                        totalItem={Math.ceil(count / 2)}
+                        totalItem={Math.ceil(count)}
                     />
                 }
             </>

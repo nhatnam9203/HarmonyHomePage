@@ -76,7 +76,7 @@ const columns = (tickValueOption) => [
         Header: <CustomTableHeader value="Active" />,
         id: "tick",
         accessor: (row) =>
-            <img onClick={() => tickValueOption(row)} src={row.checked ? tick_active : tick_inactive}
+            <img alt="img" onClick={() => tickValueOption(row)} src={row.checked ? tick_active : tick_inactive}
                 style={{ width: 22, height: 22, marginTop: 12, marginLeft: 10 }}
             />,
         width: 80,
@@ -100,7 +100,7 @@ const columnVisualSwatch = (tickValueOption) => [
         Header: <CustomTableHeader value="Active" />,
         id: "tick",
         accessor: (row) =>
-            <img onClick={() => tickValueOption(row)} src={row.checked ? tick_active : tick_inactive}
+            <img alt="img" onClick={() => tickValueOption(row)} src={row.checked ? tick_active : tick_inactive}
                 style={{ width: 22, height: 22, marginTop: 12, marginLeft: 10 }}
             />,
         width: 80,

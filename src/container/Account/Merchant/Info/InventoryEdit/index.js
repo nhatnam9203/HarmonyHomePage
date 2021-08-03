@@ -55,6 +55,8 @@ const Index = ({ onBack }) => {
   const [isShowAddOption, showOption] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
 
+  const [pageAttribute, setPageAttribute] = React.useState(1);
+
   const checkIsExist = (optionValues, value) => {
     let flag = false;
     for (let i = 0; i < optionValues.length; i++) {

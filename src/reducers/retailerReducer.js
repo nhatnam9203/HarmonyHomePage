@@ -23,6 +23,7 @@ export const retailerReducer = (
     report: [],
     subCategory: [],
     attributes: [],
+    maxPageAttributes : 1,
 
     isVisibleCustomerDetail: false,
     isVisibleInventoryDetail: false,
@@ -214,7 +215,8 @@ export const retailerReducer = (
     case types.SET_ATTRIBUTES:
       return {
         ...state,
-        attributes: payload || [],
+        attributes: payload?.data || [],
+        maxPageAttributes : payload?.maxPageAttributes || 1,
       };
 
     case types.SET_APPOINTMENT_CUSTOMER_DETAIL:
