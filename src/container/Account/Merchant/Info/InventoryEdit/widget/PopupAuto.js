@@ -53,7 +53,7 @@ export default class PopupAuto extends Component {
                                 </div>
 
                                 <span>
-                                    Number new versions : {options.length}
+                                    Number of versions : {options.length}
                                 </span>
 
                                 <div className="popupAuto_button">

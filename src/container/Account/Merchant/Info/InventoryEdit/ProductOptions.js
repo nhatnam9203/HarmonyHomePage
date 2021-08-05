@@ -87,7 +87,7 @@ const columns = (tickValueOption) => [
         accessor: (row) =>
             <input
                 className="input_price"
-                style={{ width: 350, marginLeft: 8 }}
+                style={{ width: 350, marginLeft: 8 , pointerEvents : 'none' }}
                 type="text"
                 value={row.label}
                 onChange={() => { }}
@@ -129,7 +129,7 @@ const columnVisualSwatch = (tickValueOption) => [
         accessor: (row) =>
             <input
                 className="input_price"
-                style={{ width: 350, marginLeft: 8 }}
+                style={{ width: 350, marginLeft: 8, pointerEvents : 'none' }}
                 type="text"
                 value={row.label}
                 onChange={() => { }}
