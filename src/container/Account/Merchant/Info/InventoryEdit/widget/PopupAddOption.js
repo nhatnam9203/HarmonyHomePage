@@ -110,7 +110,7 @@ const PopupAddOption = ({
                 <div style={{ position: 'relative' }} className="container_add_option">
                     <h4>Add attribute</h4>
                     <h6>Select customize options attribute</h6>
-                    <div id="scrollableDiv" className="wrap">
+                    <div style={{overflowX : 'hidden' }} id="scrollableDiv" className="wrap">
                         <InfiniteScroll
                             dataLength={temptAttributes.length ? temptAttributes.length : 0}
                             next={fetchMoreData}
