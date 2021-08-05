@@ -6,7 +6,7 @@ import axios from "../helper/axios";
 const url = "https://staging.harmonypayment.com/api";
 
 // Prod
-// const url = "https://api.harmonypayment.com/api";
+//const url = "https://api.harmonypayment.com/api";
 
 const loginUrl = `${url}/principal/login`;
 

@@ -20,16 +20,14 @@ export default class Producttable extends Component {
         }
     }
 
-    changePage = (activePage) => {
-        this.setState({ activePage })
-    }
-
     render() {
         const {
             quantities = [],
             uploadImagesOption = () => { },
             handleChangeInput = () => { },
             deleteQuantities = () => { },
+            openPopupAuto = () => { },
+            openPopupManual = () => { },
         } = this.props;
 
         const { activePage } = this.state;
@@ -50,7 +48,12 @@ export default class Producttable extends Component {
                     }}
                 >
                     Product Versions
-            </Title>
+
+                    <div className="group_btn_generate">
+                        <span onClick={openPopupManual}>Manual Generate</span>
+                        <span onClick={openPopupAuto}>Auto Generate</span>
+                    </div>
+                </Title>
                 <ReactTable
                     className="table-inventoryDetail product-table"
                     manual

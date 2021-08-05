@@ -318,6 +318,28 @@ export const createQuantitiesItem = (product, options, name = null) => {
   );
 };
 
+export const createVersionFromItems = (product, items) => {
+  const item = items?.reduce((accumulator, currentValue, index) => {
+
+    return Object.assign({}, accumulator, {
+      label: accumulator?.label
+        ? `${accumulator.label ?? ""} - ${currentValue.label ?? ""}`
+        : currentValue.label,
+      attributeIds: [
+        ...(accumulator.attributeIds || []),
+        currentValue.attributeValueId,
+      ],
+    });
+    
+  }, {});
+
+  return {
+    label: `${product?.name ?? "New product"} - ${item.label ?? ""}`,
+    price: item?.price,
+    attributeIds: item.attributeIds,
+  };
+};
+
 export const arrayIsEqual = (a, b) => {
   if (a?.length !== b?.length) return false;
   for (var i = 0; i < a.length; i++) {

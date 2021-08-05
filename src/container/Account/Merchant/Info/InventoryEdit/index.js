@@ -14,7 +14,7 @@ import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
 import { FormatPrice, formatMoney } from "@/util";
-import { PopupNewCategory, PopupDefaultImage, PopupAddOption, ProductTable } from "./widget"
+import { PopupNewCategory, PopupDefaultImage, PopupAddOption, ProductTable, PopupAuto, PopupManual } from "./widget"
 import { createQuantitiesItem, arrayIsEqual } from "@/util";
 
 import "../Info.scss";
@@ -54,6 +54,9 @@ const Index = ({ onBack }) => {
   const [fileUpload, setFileUpload] = React.useState([]);
   const [isShowAddOption, showOption] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
+
+  const [isPopupManual, setPopupManual] = React.useState(false);
+  const [isPopupAuto, setPopupAuto] = React.useState(false);
 
   const [pageAttribute, setPageAttribute] = React.useState(1);
 
@@ -472,6 +475,10 @@ const Index = ({ onBack }) => {
     setQuantities(qtys);
   }
 
+  const createOtionsManual = (payload) =>{
+
+  }
+
   if (!isVisible) return null;
 
   return (
@@ -517,6 +524,8 @@ const Index = ({ onBack }) => {
           handleChangeInput={handleChangeInputTable}
           deleteQuantities={deleteQuantities}
           ref={refProductVersion}
+          openPopupAuto={() => setPopupAuto(true)}
+          openPopupManual={() => setPopupManual(true)}
         />
 
         <div className="btn_group_edit_inventory">
@@ -557,6 +566,19 @@ const Index = ({ onBack }) => {
         close={() => setVisibleNewCategory(false)}
         addNewCategory={actionAddNewCategory}
         loadingNewCategory={loadingNewCategory}
+      />
+
+      <PopupAuto
+        isVisible={isPopupAuto}
+        close={() => setPopupAuto(false)}
+        options={options}
+      />
+
+      <PopupManual
+        isVisible={isPopupManual}
+        close={() => setPopupManual(false)}
+        options={options}
+        createOtionsManual={createOtionsManual}
       />
       {(loadingNewCategory || isLoading) && <Loading />}
     </>

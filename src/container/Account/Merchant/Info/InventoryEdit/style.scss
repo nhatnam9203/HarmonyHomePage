@@ -270,3 +270,56 @@
   height: auto !important;
   max-height: 5rem !important;
 }
+
+.group_btn_generate{
+  &>span{
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  &>span:nth-child(1){
+    margin-right: 2rem;
+  }
+  &>span:hover{
+    text-decoration: underline;
+  }
+}
+
+.modal_auto{
+  width: 1200px;
+}
+
+.container_value_box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.value_box{
+  width: 48%;
+  margin-bottom: 15px;
+  pointer-events: none;
+}
+
+.popupAuto{
+  position: relative;
+  height: 670px;
+  &_ItemList{
+    height: 430px;
+    overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+  }
+  &_ItemList::-webkit-scrollbar { 
+    display: none;
+  }
+
+  &_button{
+    border-top : 1px solid #dddddd;
+    margin-top: 15px;
+    display : flex;
+    justify-content: center;
+    padding-top: 35px;
+  }
+}

@@ -4,6 +4,8 @@ import PopupAddOption from "./PopupAddOption";
 import PopupDefaultImage from "./PopupDefaultImage";
 import PopupNewCategory from "./PopupNewCategory";
 import ProductTable from "./ProductTable";
+import PopupAuto from "./PopupAuto";
+import PopupManual from "./PopupManual";
 
 export{
     InputPrice,
@@ -12,4 +14,6 @@ export{
     PopupDefaultImage,
     PopupNewCategory,
     ProductTable,
+    PopupAuto,
+    PopupManual,
 }
