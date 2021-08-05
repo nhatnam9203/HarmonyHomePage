@@ -16,22 +16,28 @@ export default class PopupManual extends Component {
         this.state = initialState;
     }
 
-    selectOption = (option) => {
-        const { optionsSelected } = this.state;
-        this.setState({
-            optionsSelected: [
-                ...optionsSelected,
-                option,
-            ]
-        })
+    selectOption = (option, index) => {
+        let { optionsSelected } = this.state;
+        optionsSelected[index] = option;
+        this.setState({ optionsSelected });
     }
 
-    handleSubmit = () => {
-        this.props.createOtionsManual();
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let { optionsSelected } = this.state;
+        let tempOptions = [...optionsSelected];
+        tempOptions = tempOptions.filter(el => el);
+        this.props.createOtionsManual(tempOptions);
+        this.closePopup();
     }
 
     closePopup = () => {
         this.props.close();
+        this.setState({ productOptions : [] , optionsSelected : [] });
+    }
+
+    resetState = () => {
+        this.setState(initialState);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -65,11 +71,13 @@ export default class PopupManual extends Component {
 
                                 <div style={{ height: 350 }} className="popupAuto_ItemList">
                                     {
-                                        productOptions.map((opt) => (
+                                        productOptions.map((opt, index) => (
                                             <OptionItem
                                                 item={opt}
                                                 key={opt.id + 'option' + Math.random()}
-                                                selectOption={this.selectOption}
+                                                selectOption={option => this.selectOption(option, index)}
+                                                optionsSelected={optionsSelected}
+                                                index={index}
                                             />
                                         ))
                                     }
@@ -101,7 +109,7 @@ export default class PopupManual extends Component {
     }
 }
 
-const OptionItem = ({ item, selectOption }) => {
+const OptionItem = ({ item, selectOption = () => { }, optionsSelected = [] , index }) => {
     return (
         <div className="optionItem">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -111,6 +119,8 @@ const OptionItem = ({ item, selectOption }) => {
             <ManualOptionSelect
                 values={item.values}
                 selectOption={selectOption}
+                optionsSelected={optionsSelected}
+                index={index}
             />
         </div>
     )

@@ -8,7 +8,6 @@ export default class ManualOptionSelect extends Component {
         super(props);
         this.state = {
             isPopup: false,
-            valueSelected: "",
         };
     }
 
@@ -26,14 +25,12 @@ export default class ManualOptionSelect extends Component {
     };
 
     onSelected = (value) => {
-        this.setState({ valueSelected: value });
         this.props.selectOption(value);
         this.close();
     };
 
     render() {
-        const { values } = this.props;
-        const { valueSelected } = this.state;
+        const { values, optionsSelected, index } = this.props;
         const { isPopup } = this.state;
 
         return (
@@ -44,7 +41,7 @@ export default class ManualOptionSelect extends Component {
                     className="select_subcategory"
                 >
                     <div>
-                        {valueSelected ? valueSelected.label : "Select value"}
+                        {optionsSelected[index] ? optionsSelected[index].label : "Select value"}
                     </div>
 
                     <img src={arrow_down} alt="imn" />
@@ -56,7 +53,7 @@ export default class ManualOptionSelect extends Component {
                                     values.map((vl) => (
                                         <div
                                             className="subCategory_item"
-                                            key={vl.id + "vl"}
+                                            key={vl.id + "vl" + Math.random()}
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 this.onSelected(vl);

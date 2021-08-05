@@ -330,12 +330,12 @@ export const createVersionFromItems = (product, items) => {
         currentValue.attributeValueId,
       ],
     });
-    
+
   }, {});
 
   return {
     label: `${product?.name ?? "New product"} - ${item.label ?? ""}`,
-    price: item?.price,
+    price: item?.price || "0.00",
     attributeIds: item.attributeIds,
   };
 };

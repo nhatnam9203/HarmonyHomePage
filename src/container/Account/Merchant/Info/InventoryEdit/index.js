@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
 import { FormatPrice, formatMoney } from "@/util";
 import { PopupNewCategory, PopupDefaultImage, PopupAddOption, ProductTable, PopupAuto, PopupManual } from "./widget"
-import { createQuantitiesItem, arrayIsEqual } from "@/util";
+import { createQuantitiesItem, arrayIsEqual, createVersionFromItems } from "@/util";
 
 import "../Info.scss";
 import "./style.scss";
@@ -475,8 +475,34 @@ const Index = ({ onBack }) => {
     setQuantities(qtys);
   }
 
-  const createOtionsManual = (payload) =>{
+  const createOtionsManual = (payload) => {
+    let newQuantityList = [...quantities];
+    let temp = createVersionFromItems(inventoryDetail, payload);
+    const isExistIndex = newQuantityList?.findIndex((f) =>
+      arrayIsEqual(f?.attributeIds, temp?.attributeIds)
+    );
 
+    if (isExistIndex >= 0) {
+      const isExistItem = newQuantityList[isExistIndex];
+      temp = Object.assign({}, temp, {
+        needToOrder: isExistItem.needToOrder,
+        quantity: isExistItem.quantity,
+        tempQuantity: isExistItem.tempQuantity,
+        description: isExistItem.description,
+        costPrice: isExistItem.costPrice,
+        price: isExistItem.price,
+        sku: isExistItem.sku,
+        imageUrl: isExistItem.imageUrl,
+        fileId: isExistItem.fileId,
+        position: isExistItem.position ?? 0,
+        id: isExistItem.id ?? 0,
+      });
+
+      newQuantityList[isExistIndex] = temp;
+    } else {
+      newQuantityList.push(temp);
+    }
+    setQuantities(newQuantityList);
   }
 
   if (!isVisible) return null;
