@@ -59,14 +59,7 @@ export default class PopupAuto extends Component {
                                 <div className="popupAuto_button">
                                     <Button
                                         variant="primary"
-                                        style={{
-                                            marginRight: 28,
-                                            width: 140,
-                                            borderRadius: 0,
-                                            background: "#FFFFFF",
-                                            color: "#333",
-                                            border: "1px solid #dddddd",
-                                        }}
+                                        style={{ marginRight: 28, width: 140, borderRadius: 0, background: "#FFFFFF", color: "#333", border: "1px solid #dddddd", }}
                                         onClick={this.closePopup}
                                     >
                                         Close
@@ -74,12 +67,7 @@ export default class PopupAuto extends Component {
                                     <Button
                                         variant="primary"
                                         type="submit"
-                                        style={{
-                                            background: "#1366AE",
-                                            color: "white",
-                                            width: 140,
-                                            borderRadius: 0,
-                                        }}
+                                        style={{ background: "#1366AE", color: "white", width: 140, borderRadius: 0, }}
                                     >
                                         Generate
                                     </Button>
@@ -118,9 +106,4 @@ const OptionItem = ({ item }) => {
             </div>
         </div>
     )
-}
-
-
-const OptionSelect = () => {
-
 }
