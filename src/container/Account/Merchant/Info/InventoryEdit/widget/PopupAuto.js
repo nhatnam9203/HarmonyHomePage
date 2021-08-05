@@ -15,8 +15,9 @@ export default class PopupAuto extends Component {
     }
 
 
-    handleSubmit = () => {
-
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.autoGenerate();
     }
 
     closePopup = () => {

@@ -51,8 +51,6 @@ export default class PopupManual extends Component {
         const { isVisible } = this.props;
         const { productOptions, optionsSelected } = this.state;
 
-        console.log({ optionsSelected });
-
         return (
             <>
                 <Modal

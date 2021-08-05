@@ -505,6 +505,38 @@ const Index = ({ onBack }) => {
     setQuantities(newQuantityList);
   }
 
+  const autoGenerate = () =>{
+    let optionsList = options;
+    const quantityList = quantities;
+
+    let generateList = createQuantitiesItem(inventoryDetail, optionsList)?.map((x) => {
+      const isExistItem = quantityList?.find((f) =>
+        arrayIsEqual(f?.attributeIds, x?.attributeIds)
+      );
+
+      if (isExistItem) {
+        return Object.assign({}, x, {
+          needToOrder: isExistItem.needToOrder,
+          quantity: isExistItem.quantity,
+          tempQuantity: isExistItem.tempQuantity,
+          description: isExistItem.description,
+          costPrice: isExistItem.costPrice,
+          price: isExistItem.price,
+          sku: isExistItem.sku,
+          imageUrl: isExistItem.imageUrl,
+          fileId: isExistItem.fileId,
+          position: isExistItem.position ?? 0,
+          id: isExistItem.id ?? 0,
+        });
+      }
+      return x;
+    });
+
+    setQuantities(generateList?.sort((a, b) => a.position - b.position));
+    setPopupAuto(false);
+
+  }
+
   if (!isVisible) return null;
 
   return (
@@ -597,6 +629,7 @@ const Index = ({ onBack }) => {
       <PopupAuto
         isVisible={isPopupAuto}
         close={() => setPopupAuto(false)}
+        autoGenerate={autoGenerate}
         options={options}
       />
 

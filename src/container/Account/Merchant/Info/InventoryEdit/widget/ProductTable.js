@@ -20,6 +20,10 @@ export default class Producttable extends Component {
         }
     }
 
+    changePage = (activePage) => {
+        this.setState({ activePage })
+    }
+
     render() {
         const {
             quantities = [],
