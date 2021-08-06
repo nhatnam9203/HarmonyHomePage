@@ -37,6 +37,9 @@
     img {
       height: auto;
     }
+    &>span:hover{
+      text-decoration: underline;
+    }
   }
   .isMobile {
     @media screen and (max-width: 425px) {
@@ -52,6 +55,9 @@
     a {
       color: white;
       padding-left: 0.5rem;
+    }
+    &>span:hover{
+      text-decoration: underline;
     }
   }
 
