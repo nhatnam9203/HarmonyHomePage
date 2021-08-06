@@ -23,6 +23,19 @@
   cursor: pointer;
 }
 
+.button_new_category:hover{
+  background : #218deb;
+}
+
+.btn-submit{
+  transition: background 0.2s;
+}
+
+.btn-submit:hover{
+  background : #237fcf !important;
+  border-color : white;
+}
+
 .select_subcategory {
   width: 73%;
   height: 57px;

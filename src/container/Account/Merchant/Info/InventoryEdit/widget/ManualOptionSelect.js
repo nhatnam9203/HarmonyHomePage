@@ -51,16 +51,10 @@ export default class ManualOptionSelect extends Component {
                             <div className="select_subcategory_popup">
                                 {
                                     values.map((vl) => (
-                                        <div
-                                            className="subCategory_item"
-                                            key={vl.id + "vl" + Math.random()}
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                this.onSelected(vl);
-                                            }}
-                                        >
-                                            {vl.label}
-                                        </div>
+                                        <OptionItem
+                                            value={vl}
+                                            onSelected={this.onSelected}
+                                        />
                                     ))
                                 }
                             </div>
@@ -70,4 +64,19 @@ export default class ManualOptionSelect extends Component {
             </OutsideClickHandler>
         );
     }
+}
+
+const OptionItem = ({ onSelected, value }) => {
+    return (
+        <div
+            className="subCategory_item"
+            key={value.id + "value" + Math.random()}
+            onClick={(e) => {
+                e.stopPropagation();
+                onSelected(value);
+            }}
+        >
+            {value.label}
+        </div>
+    )
 }

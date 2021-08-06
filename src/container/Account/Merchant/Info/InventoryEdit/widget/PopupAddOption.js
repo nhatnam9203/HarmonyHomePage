@@ -139,6 +139,7 @@ const PopupAddOption = ({
                             variant="primary"
                             style={{ marginRight: 10, width: 140, height: 50, borderRadius: 0, background: "#FFFFFF", color: "#333", border: "1px solid #dddddd", }}
                             onClick={closePopup}
+                            className="btn btn_cancel"
                         >
                             Close
                         </Button>
@@ -147,6 +148,7 @@ const PopupAddOption = ({
                             type="submit"
                             style={{ background: "#1366AE", color: "white", width: 140, height: 50, borderRadius: 0, }}
                             onClick={submit}
+                            className="btn btn-primary btn-submit"
                         >
                             Add selected
                         </Button>

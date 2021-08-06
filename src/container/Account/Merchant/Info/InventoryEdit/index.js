@@ -320,52 +320,12 @@ const Index = ({ onBack }) => {
   /***************** CHANGE VALUE INPUT PRODUCT VERSION *****************/
   const handleChangeInputTable = (value, type, row) => {
 
-    let tempt = JSON.parse(JSON.stringify(quantities))
-    switch (type) {
-      case "costPrice":
-        for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].label === row.label) {
-            tempt[i].costPrice = value;
-          }
-        }
-        break;
-
-      case "price":
-        for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].label === row.label) {
-            tempt[i].price = value;
-          }
-        }
-        break;
-
-      case "quantity":
-        for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].label === row.label) {
-            tempt[i].quantity = value;
-          }
-        }
-        break;
-
-      case "tempQuantity":
-        for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].label === row.label) {
-            tempt[i].tempQuantity = value;
-          }
-        }
-        break;
-
-      case "description":
-        for (let i = 0; i < tempt.length; i++) {
-          if (tempt[i].label === row.label) {
-            tempt[i].description = value;
-          }
-        }
-        break;
-
-      default:
-        break;
+    let tempt = JSON.parse(JSON.stringify(quantities));
+    for (let i = 0; i < tempt.length; i++) {
+      if (tempt[i].label === row.label) {
+        tempt[i][type] = value;
+      }
     }
-
     setQuantities(tempt);
   }
 
@@ -505,7 +465,7 @@ const Index = ({ onBack }) => {
     setQuantities(newQuantityList);
   }
 
-  const autoGenerate = () =>{
+  const autoGenerate = () => {
     let optionsList = options;
     const quantityList = quantities;
 
@@ -587,13 +547,18 @@ const Index = ({ onBack }) => {
         />
 
         <div className="btn_group_edit_inventory">
-          <Button onClick={back} variant="primary" style={{ marginRight: 10 }}>
+          <Button
+            className="btn btn_cancel"
+            onClick={back} variant="primary"
+            style={{ marginRight: 10 }}
+          >
             Cancel
           </Button>
           <Button
             variant="primary"
             style={{ background: "#1366AE", color: "white" }}
             onClick={handleSubmit}
+            className="btn btn-primary btn-submit"
           >
             Save
           </Button>

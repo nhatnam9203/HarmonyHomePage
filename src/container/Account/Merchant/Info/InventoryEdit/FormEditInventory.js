@@ -9,7 +9,7 @@ import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import icon_trash from "@/assets/images/retailer/trash.png";
 import icon_eye from "@/assets/images/retailer/eye.png";
 import InputPrice from "./widget/InputPrice";
-import { formatMoney } from "@/util";
+
 import "../Info.scss";
 import "./style.scss";
 
@@ -19,7 +19,7 @@ const FormEditInventory = ({
     sku,
     barCode,
     price,
-    costPrice,
+    // costPrice,
     quantity,
     minThreshold,
     maxThreshold,

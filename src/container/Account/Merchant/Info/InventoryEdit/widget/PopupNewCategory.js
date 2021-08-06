@@ -146,6 +146,7 @@ export default class Popupnewcategory extends Component {
                                             border: "1px solid #dddddd",
                                         }}
                                         onClick={this.closePopup}
+                                        className="btn btn_cancel"
                                     >
                                         Cancel
                                     </Button>
@@ -158,6 +159,7 @@ export default class Popupnewcategory extends Component {
                                             width: 140,
                                             borderRadius: 0,
                                         }}
+                                        className="btn btn-primary btn-submit"
                                     >
                                         Save
                                     </Button>

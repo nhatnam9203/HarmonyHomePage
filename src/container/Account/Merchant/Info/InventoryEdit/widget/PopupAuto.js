@@ -61,6 +61,7 @@ export default class PopupAuto extends Component {
                                         variant="primary"
                                         style={{ marginRight: 28, width: 140, borderRadius: 0, background: "#FFFFFF", color: "#333", border: "1px solid #dddddd", }}
                                         onClick={this.closePopup}
+                                        className="btn btn_cancel"
                                     >
                                         Close
                                     </Button>
@@ -68,6 +69,7 @@ export default class PopupAuto extends Component {
                                         variant="primary"
                                         type="submit"
                                         style={{ background: "#1366AE", color: "white", width: 140, borderRadius: 0, }}
+                                        className="btn btn-primary btn-submit"
                                     >
                                         Generate
                                     </Button>
