@@ -1,0 +1,43 @@
+
+.headerPackage{
+    height: 183px;
+    position: relative;
+    background : #1266AE;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 30px 25px 18px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    overflow: hidden;
+    
+    @media screen and (max-width: 520px) {
+        height: 150px !important;
+      }
+    &>h2{
+        font-weight : 900;
+        font-size : 2rem;
+        @media screen and (max-width: 520px) {
+            font-size : 1.5rem;
+        }
+    }
+    &>h2:nth-child(2){
+        font-weight: 400;
+    }
+    &__ron{
+        position: absolute;
+        background: #ff8917;
+        padding-top: 9px;
+        width: 150px;
+        height: 35px;
+        right: -50px;
+        top: 20px;
+        transform: rotate(45deg);
+        color: white;
+        font-weight: bold;
+        font-size: 11px;
+        padding-left: 28px;
+        box-shadow: 0 16px 30px rgb(23 31 114 / 20%);
+    }
+  }

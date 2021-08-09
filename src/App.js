@@ -76,7 +76,7 @@ function App() {
             </Switch>
           </Suspense>
         </main>
-        {!isNotPopup && <PopupAfterLoad />}
+        {/* {!isNotPopup && <PopupAfterLoad />} */}
         <Footer />
       </div>
     </Router>

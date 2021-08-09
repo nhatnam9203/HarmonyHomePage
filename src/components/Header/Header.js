@@ -53,13 +53,13 @@ export default function Header() {
   }, [userInfo]);
 
   const handleConsumer = () => {
-    setExpanded(false);
-    setIsConsumer(true);
+    // setExpanded(false);
+    // setIsConsumer(true);
   };
 
   const handleNotConsumer = () => {
-    setExpanded(false);
-    setIsConsumer(false);
+    // setExpanded(false);
+    // setIsConsumer(false);
   };
 
   const handleAccount = () => {
@@ -164,7 +164,7 @@ export default function Header() {
       </div>
       {isConsumer ? (
         <Navbar
-          expanded={expanded}
+          // expanded={expanded}
           expand="xl"
           className="nav_header shadow-sm bg-white"
           sticky="top"
@@ -182,11 +182,6 @@ export default function Header() {
             </Navbar.Brand>
             <Navbar.Toggle
               aria-controls="basic-navbar-nav"
-              onClick={() =>
-                setTimeout(() => {
-                  setExpanded(!expanded);
-                }, 150)
-              }
             />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="align-items-end ml-auto">

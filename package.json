@@ -13,6 +13,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "country-flag-icons": "^1.2.7",
+    "env-cmd": "^10.1.0",
     "formik": "^2.2.6",
     "framer-motion": "^3.1.1",
     "i18next": "^19.8.4",
@@ -62,7 +63,15 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+
+    "start:development": "env-cmd -f .env.development craco start",
+    "start:staging": "env-cmd -f .env.staging craco start",
+    "start:production": "env-cmd -f .env.production craco start",
+
+    "build:development": "env-cmd -f .env.development craco build",
+    "build:staging": "env-cmd -f .env.staging craco build",
+    "build:production": "env-cmd -f .env.production craco build"
   },
   "eslintConfig": {
     "extends": [

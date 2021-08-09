@@ -33,7 +33,6 @@ export default class PopupAuto extends Component {
                     show={isVisible}
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
-                    dialogClassName="modal_auto"
                     size='lg'
                 >
                     <div className="popupAuto">
