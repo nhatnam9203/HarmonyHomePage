@@ -604,7 +604,7 @@ const Index = ({ onBack }) => {
         options={options}
         createOtionsManual={createOtionsManual}
       />
-      {(loadingNewCategory || isLoading) && <Loading />}
+      {(loadingNewCategory || isLoading) && <Loading isFullLoading={true} />}
     </>
   );
 };

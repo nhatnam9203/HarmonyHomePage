@@ -129,7 +129,7 @@ const Index = ({
             />
           )}
         </div>
-        {loadingDetail && <Loading />}
+        {loadingDetail && <Loading isFullLoading={true} />}
       </div>
       <PopupExport
         isVisible={isVisibleExport}

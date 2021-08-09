@@ -9,3 +9,23 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.5);
 }
+
+.modalBackdrop{
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.modalContentLoading{
+  background : transparent;
+  border : none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__wrap{
+    background: rgba(0, 0, 0, 0.4);
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+}

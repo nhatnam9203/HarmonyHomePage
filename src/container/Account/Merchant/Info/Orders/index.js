@@ -101,7 +101,7 @@ const Index = ({
           )}
         </div>
       </Fade>
-      {loadingDetail && <Loading />}
+      {loadingDetail && <Loading isFullLoading={true} />}
     </div>
   );
 };
