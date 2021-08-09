@@ -51,6 +51,8 @@ const Index = ({ onBack }) => {
   const [temptOption, setTemptOption] = React.useState([]);
   const [imageDefault, setImageDefault] = React.useState("");
   const [isVisibleNewCategory, setVisibleNewCategory] = React.useState(false);
+  const [visibility, setVisibility] = React.useState("");
+
   const [fileUpload, setFileUpload] = React.useState([]);
   const [isShowAddOption, showOption] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
@@ -125,6 +127,7 @@ const Index = ({ onBack }) => {
     setDescription(inventoryDetail.description);
     setQuantities(inventoryDetail.quantities);
     setTemptOption(inventoryDetail.options);
+    setVisibility(inventoryDetail.visibility);
   };
 
   const onBlurInputName = () => {
@@ -163,6 +166,9 @@ const Index = ({ onBack }) => {
       case "description":
         setDescription(value);
         break;
+      case "visibility":
+        setVisibility(value);
+        break;
 
       default:
         break;
@@ -200,6 +206,7 @@ const Index = ({ onBack }) => {
           categoryId,
           description,
           quantities,
+          visibility,
           options: options.map((x) => ({
             attributeId: x.attributeId,
             values: x.values
@@ -224,8 +231,8 @@ const Index = ({ onBack }) => {
     return imgeDefault;
   }
 
-  const back = () => {
-    onBack();
+  const back = (data) => {
+    onBack(data);
   };
 
   /***************** UPLOAD IMAGE PRODUCT *****************/
@@ -526,6 +533,7 @@ const Index = ({ onBack }) => {
           deleteImage={deleteImage}
           handleSubmit={handleSubmit}
           quantities={quantities}
+          visibility={visibility}
           onBlurInputName={onBlurInputName}
         />
 

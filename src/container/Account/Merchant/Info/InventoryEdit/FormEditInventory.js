@@ -9,6 +9,7 @@ import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import icon_trash from "@/assets/images/retailer/trash.png";
 import icon_eye from "@/assets/images/retailer/eye.png";
 import InputPrice from "./widget/InputPrice";
+import Visibility from "./widget/Visibility";
 
 import "../Info.scss";
 import "./style.scss";
@@ -27,6 +28,7 @@ const FormEditInventory = ({
     images,
     description,
     quantities,
+    visibility,
     handleChange = () => { },
     uploadImage = () => { },
     selectImage = () => { },
@@ -66,7 +68,7 @@ const FormEditInventory = ({
                             as="textarea"
                             placeholder="Description"
                             name="description"
-                            value={description}
+                            value={description || ""}
                             onChange={(e) => handleChange("description", e.target.value)}
                         />
                     </Form.Group>
@@ -122,6 +124,16 @@ const FormEditInventory = ({
                         />
                         {isEmpty(barCode) && <Error />}
                     </Form.Group>
+
+
+                    {/******************** VISIBILITY ********************/}
+                    <Form.Group>
+                        <Visibility
+                            visibility={visibility}
+                            onChange={(value) => handleChange("visibility", value)}
+                        />
+                    </Form.Group>
+
 
                     {/******************** Price ********************/}
                     {

@@ -45,7 +45,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
     const { data = null } = await api.getByPage(requestUrl, token);
 
     let inventory = data.data
-      ? data.data.map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
+      ? data.data.filter(obj=>obj.visibility !== "app").map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -705,7 +705,7 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
       dispatch(getInventoryDetail(url, token, () => { }));
-      callBack();
+      callBack(body);
     } else {
       dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
     }

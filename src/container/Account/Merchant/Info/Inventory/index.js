@@ -85,9 +85,18 @@ const Index = ({
     getInventoryData();
   }
 
+  const backFromEdit = (data) => {
+    if(data.visibility === "app"){
+      dispatch(setVisibleInventoryEdit(false));
+      backToInventory();
+    }else{
+      dispatch(setVisibleInventoryEdit(false))
+    }
+  }
+
   if (isVisibleInventoryEdit) {
     return (
-      <InventoryEdit onBack={() => dispatch(setVisibleInventoryEdit(false))} />
+      <InventoryEdit onBack={backFromEdit} />
     );
   }
 
