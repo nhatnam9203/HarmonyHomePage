@@ -48,7 +48,9 @@ export default class ManualOptionSelect extends Component {
 
                     {
                         isPopup && (
-                            <div className="select_subcategory_popup">
+                            <div style={{ height: 'auto' }}
+                                className="select_subcategory_popup select_filter"
+                            >
                                 {
                                     data.map((vl) => (
                                         <OptionItem

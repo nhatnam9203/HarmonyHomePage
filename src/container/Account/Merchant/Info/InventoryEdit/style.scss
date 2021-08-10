@@ -292,13 +292,18 @@
 }
 
 .group_btn_generate{
+  display: flex;
+  align-items: center;
+  &>div{
+    margin-right: 1rem;
+  }
   &>span{
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
   }
-  &>span:nth-child(1){
-    margin-right: 2rem;
+  &>span:nth-child(2){
+    margin-right: 1rem;
   }
   &>span:hover{
     text-decoration: underline;
@@ -342,4 +347,15 @@
     justify-content: center;
     padding-top: 35px;
   }
+}
+
+.select_filter{
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  top : 50px !important;
+  padding-top : 10px;
+}
+
+.select_filter::-webkit-scrollbar {
+  display: none !important;
 }

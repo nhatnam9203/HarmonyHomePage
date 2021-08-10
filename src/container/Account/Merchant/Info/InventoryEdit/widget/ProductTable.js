@@ -9,6 +9,8 @@ import Dropzone from "react-dropzone";
 import InputPrice from "./InputPrice";
 import InputQuantity from "./InputQuantity";
 import Pagination from "@/components/Pagination";
+import Search from "@/components/Search";
+import { isEmpty } from "lodash";
 import "../style.scss";
 
 export default class Producttable extends Component {
@@ -17,11 +19,17 @@ export default class Producttable extends Component {
         super(props);
         this.state = {
             activePage: 1,
+            searchValue: "",
         }
     }
 
     changePage = (activePage) => {
         this.setState({ activePage })
+    }
+
+    onChangeSearch = (e) => {
+        const searchValue = e.target.value;
+        this.setState({ searchValue });
     }
 
     render() {
@@ -34,11 +42,27 @@ export default class Producttable extends Component {
             openPopupManual = () => { },
         } = this.props;
 
-        const { activePage } = this.state;
+        const { activePage, searchValue } = this.state;
 
         let count = Math.ceil(quantities.length);
 
-        const quantitiesList = quantities.slice((activePage - 1) * 10, (activePage - 1) * 10 + 10);
+        let quantitiesList = quantities.slice((activePage - 1) * 10, (activePage - 1) * 10 + 10);
+
+        if (!isEmpty(searchValue)) {
+            quantitiesList = quantitiesList.filter((e) => {
+                if (e) {
+                    return (
+                        e.label
+                            .trim()
+                            .toLowerCase()
+                            .indexOf(searchValue.toLowerCase()) !== -1
+                    );
+                }
+                return null;
+            });
+            this.changePage(1)
+            count = Math.ceil(quantitiesList.length);
+        }
 
         return (
             <>
@@ -54,6 +78,13 @@ export default class Producttable extends Component {
                     Product Versions
 
                     <div className="group_btn_generate">
+                        <div>
+                            <Search
+                                value={searchValue}
+                                onChange={this.onChangeSearch}
+                                onSubmit={() => { }}
+                            />
+                        </div>
                         <span onClick={openPopupManual}>Manual Generate</span>
                         <span onClick={openPopupAuto}>Auto Generate</span>
                     </div>
