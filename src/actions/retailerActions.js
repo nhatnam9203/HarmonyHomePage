@@ -723,8 +723,6 @@ export const getAttribute = (merchantId, page = 1) => async (dispatch) => {
 
     let { data = null } = await api.getApi(url, token);
 
-    console.log({ data });
-
     const payload = {
       data : data?.data || [],
       maxPageAttributes : data?.pages || 1

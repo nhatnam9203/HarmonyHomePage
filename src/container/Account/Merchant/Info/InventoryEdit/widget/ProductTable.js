@@ -11,6 +11,8 @@ import InputQuantity from "./InputQuantity";
 import Pagination from "@/components/Pagination";
 import Search from "@/components/Search";
 import { isEmpty } from "lodash";
+import MediaQuery from 'react-responsive'
+
 import "../style.scss";
 
 export default class Producttable extends Component {
@@ -79,11 +81,13 @@ export default class Producttable extends Component {
 
                     <div className="group_btn_generate">
                         <div>
+                        <MediaQuery minWidth={600}>
                             <Search
                                 value={searchValue}
                                 onChange={this.onChangeSearch}
                                 onSubmit={() => { }}
                             />
+                        </MediaQuery>
                         </div>
                         <span onClick={openPopupManual}>Manual Generate</span>
                         <span onClick={openPopupAuto}>Auto Generate</span>

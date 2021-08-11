@@ -10,5 +10,8 @@ $black: #404040;
     width: 100%;
     border-bottom: 1px solid #dddddd;
     margin-top: 1.6rem;
+    @media screen and (max-width : 600px){
+      font-size: 1rem;
+    }
   }
 }
