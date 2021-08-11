@@ -81,7 +81,7 @@ export default class Producttable extends Component {
 
                     <div className="group_btn_generate">
                         <div>
-                        <MediaQuery minWidth={600}>
+                        <MediaQuery minWidth={700}>
                             <Search
                                 value={searchValue}
                                 onChange={this.onChangeSearch}
