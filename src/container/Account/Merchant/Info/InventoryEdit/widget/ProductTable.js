@@ -32,6 +32,7 @@ export default class Producttable extends Component {
     onChangeSearch = (e) => {
         const searchValue = e.target.value;
         this.setState({ searchValue });
+        this.changePage(1)
     }
 
     render() {
@@ -62,7 +63,6 @@ export default class Producttable extends Component {
                 }
                 return null;
             });
-            this.changePage(1)
             count = Math.ceil(quantitiesList.length);
         }
 
