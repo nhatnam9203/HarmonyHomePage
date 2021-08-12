@@ -98,12 +98,12 @@ export default class PopupManual extends Component {
                                             ))
                                         }
                                     </div>
-                                    {
+                                    {/* {
                                         isExist &&
                                         <div className="itemExisted">
                                             Item is existed
                                         </div>
-                                    }
+                                    } */}
                                 </div>
 
                                 <div className="popupAuto_button">

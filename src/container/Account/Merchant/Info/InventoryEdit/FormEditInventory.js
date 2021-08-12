@@ -114,7 +114,7 @@ const FormEditInventory = ({
                     {/******************** BARCODE ********************/}
                     <Form.Group style={{ position: "relative" }}>
                         <Form.Label>
-                            Barcode <span className="form_required">*</span>
+                            Barcode
                         </Form.Label>
                         <Form.Control
                             type="text"
@@ -122,7 +122,6 @@ const FormEditInventory = ({
                             name="barCode"
                             value={barCode}
                             onChange={(e) => handleChange("barCode", e.target.value)}
-                            style={{ borderColor: (isEmpty(barCode) && !isVisibleInventoryAdd) ? "red" : "#ced4da" }}
                         />
                         {isEmpty(barCode) && !isVisibleInventoryAdd && <Error />}
                     </Form.Group>

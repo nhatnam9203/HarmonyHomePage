@@ -184,7 +184,6 @@ const Index = ({ onBack }) => {
     if (
       isEmpty(name) ||
       isEmpty(sku) ||
-      isEmpty(barCode) ||
       isEmpty(formatMoney(price)) ||
       (isEmpty(quantity) && typeof quantity !== "number") ||
       (isEmpty(minThreshold) && typeof minThreshold !== "number") ||
@@ -202,7 +201,6 @@ const Index = ({ onBack }) => {
     if (
       isEmpty(name) ||
       isEmpty(sku) ||
-      isEmpty(barCode) ||
       isEmpty(formatMoney(price)) ||
       // isEmpty(formatMoney(costPrice)) ||
       (isEmpty(quantity) && typeof quantity !== "number") ||
@@ -218,7 +216,7 @@ const Index = ({ onBack }) => {
           images,
           name,
           sku,
-          barCode,
+          barCode : isEmpty(barCode) ? sku : barCode,
           price: isVisibleInventoryAdd ? price : (quantities && quantities.length > 0) ? inventoryDetail.price : price,
           // costPrice: formatMoney(refCostPrice.current.value),
           quantity: isVisibleInventoryAdd ? quantity : (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
@@ -266,11 +264,7 @@ const Index = ({ onBack }) => {
   }
 
   const back = (data) => {
-    if (data.visibility === "app")
-      onBack("reset");
-    else {
-      onBack(null);
-    }
+    onBack(null);
   };
 
   /***************** UPLOAD IMAGE PRODUCT *****************/

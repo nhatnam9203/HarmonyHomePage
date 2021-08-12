@@ -45,7 +45,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
     const { data = null } = await api.getByPage(requestUrl, token);
 
     let inventory = data.data
-      ? data.data.filter(obj => obj.visibility !== "app").map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
+      ? data.data.map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -723,8 +723,6 @@ export const createProduct = (body, callBack) => async (dispatch) => {
 
     dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
     let { data = null } = await api.postApi(url, body, token);
-
-    console.log({ data , body });
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });

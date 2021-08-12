@@ -79,7 +79,7 @@ const PopupAddOption = ({
         if (tempt.length === 0) {
             let optionsMerge = [...options, { ...temptData }]
             closePopup();
-            createProductVersion(optionsMerge);
+            // createProductVersion(optionsMerge);
         }
         setAttributesSubmit(tempt);
     }
