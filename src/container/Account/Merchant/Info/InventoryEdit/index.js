@@ -9,6 +9,7 @@ import {
   editProduct,
   uploadImageOptions,
   getAttributeById,
+  createProduct,
 } from "@/actions/retailerActions";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,6 +29,7 @@ const Index = ({ onBack }) => {
     loadingUpfile,
     loadingNewCategory,
     attributes,
+    isVisibleInventoryAdd,
   } = useSelector((state) => state.retailer);
   const { detail } = useSelector((state) => state.merchantDetail);
 
@@ -36,13 +38,13 @@ const Index = ({ onBack }) => {
   const [isVisible, setVisible] = React.useState(false);
   const [name, setName] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
-  const [barCode, setBarCode] = React.useState("0");
+  const [barCode, setBarCode] = React.useState("");
   const [sku, setSku] = React.useState("");
   const [price, setPrice] = React.useState("0.00");
   const [costPrice, setCostPrice] = React.useState("0.00");
-  const [quantity, setQuantity] = React.useState("0");
-  const [minThreshold, setMinThreshold] = React.useState("0");
-  const [maxThreshold, setMaxThreshold] = React.useState("0");
+  const [quantity, setQuantity] = React.useState("");
+  const [minThreshold, setMinThreshold] = React.useState("");
+  const [maxThreshold, setMaxThreshold] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [images, setImages] = React.useState([]);
   const [quantities, setQuantities] = React.useState([]);
@@ -51,7 +53,7 @@ const Index = ({ onBack }) => {
   const [temptOption, setTemptOption] = React.useState([]);
   const [imageDefault, setImageDefault] = React.useState("");
   const [isVisibleNewCategory, setVisibleNewCategory] = React.useState(false);
-  const [visibility, setVisibility] = React.useState("");
+  const [visibility, setVisibility] = React.useState("webApp");
 
   const [fileUpload, setFileUpload] = React.useState([]);
   const [isShowAddOption, showOption] = React.useState(false);
@@ -96,7 +98,7 @@ const Index = ({ onBack }) => {
   }
 
   React.useEffect(() => {
-    if (temptOption.length > 0) {
+    if (temptOption && temptOption.length > 0) {
       setLoading(true);
       dispatch(
         getAttributeById(temptOption[0].attributeId, callBackGetOption)
@@ -107,7 +109,9 @@ const Index = ({ onBack }) => {
 
   React.useEffect(() => {
     setTimeout(async () => {
-      await setData();
+      if (!isVisibleInventoryAdd) {
+        await setData();
+      }
       setVisible(true);
     }, 300);
   }, []);
@@ -175,6 +179,23 @@ const Index = ({ onBack }) => {
     }
   };
 
+  const checkSubmit = () =>{
+    let flag = true;
+    if (
+      isEmpty(name) ||
+      isEmpty(sku) ||
+      isEmpty(barCode) ||
+      isEmpty(formatMoney(price)) ||
+      (isEmpty(quantity) && typeof quantity !== "number") ||
+      (isEmpty(minThreshold) && typeof minThreshold !== "number") ||
+      (isEmpty(maxThreshold) && typeof maxThreshold !== "number") ||
+      (isEmpty(categoryId) && typeof categoryId !== "number")
+    ){
+      flag = false
+    }
+    return flag;
+  }
+
   /***************** HANDLE BUTTON SAVE *****************/
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -183,7 +204,7 @@ const Index = ({ onBack }) => {
       isEmpty(sku) ||
       isEmpty(barCode) ||
       isEmpty(formatMoney(price)) ||
-      isEmpty(formatMoney(costPrice)) ||
+      // isEmpty(formatMoney(costPrice)) ||
       (isEmpty(quantity) && typeof quantity !== "number") ||
       (isEmpty(minThreshold) && typeof minThreshold !== "number") ||
       (isEmpty(maxThreshold) && typeof maxThreshold !== "number") ||
@@ -198,9 +219,9 @@ const Index = ({ onBack }) => {
           name,
           sku,
           barCode,
-          price: (quantities && quantities.length > 0) ? inventoryDetail.price : price,
+          price: isVisibleInventoryAdd ? price : (quantities && quantities.length > 0) ? inventoryDetail.price : price,
           // costPrice: formatMoney(refCostPrice.current.value),
-          quantity: (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
+          quantity: isVisibleInventoryAdd ? quantity : (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
           minThreshold,
           maxThreshold,
           categoryId,
@@ -219,12 +240,25 @@ const Index = ({ onBack }) => {
                 };
               }),
           })),
-          fileId: findImageDefault() ? findImageDefault().fileId : inventoryDetail.fileId
+          fileId: findImageDefault() ? findImageDefault().fileId : isVisibleInventoryAdd ? 0 : inventoryDetail.fileId
         };
-        dispatch(editProduct(body, inventoryDetail.productId, back));
+        if (isVisibleInventoryAdd) {
+          addNewProduct(body);
+          return;
+        } else {
+          dispatch(editProduct(body, inventoryDetail.productId, back));
+        }
       }, 200);
     }
   };
+
+  const addNewProduct = (body) => {
+    dispatch(createProduct(body, backAddNewProduct));
+  }
+
+  const backAddNewProduct = () => {
+    onBack("reset");
+  }
 
   const findImageDefault = () => {
     const imgeDefault = images.find(i => i.isDefault);
@@ -232,7 +266,11 @@ const Index = ({ onBack }) => {
   }
 
   const back = (data) => {
-    onBack(data);
+    if (data.visibility === "app")
+      onBack("reset");
+    else {
+      onBack(null);
+    }
   };
 
   /***************** UPLOAD IMAGE PRODUCT *****************/
@@ -510,7 +548,7 @@ const Index = ({ onBack }) => {
     <>
       <>
         <Title style={{ color: "#333" }}>
-          {inventoryDetail.name} - Edit details
+          {isVisibleInventoryAdd ? "New Product" : `${inventoryDetail.name} - Edit details`}
         </Title>
 
         <FormEditInventory
@@ -535,6 +573,7 @@ const Index = ({ onBack }) => {
           quantities={quantities}
           visibility={visibility}
           onBlurInputName={onBlurInputName}
+          isVisibleInventoryAdd={isVisibleInventoryAdd}
         />
 
         <ProductOptions
@@ -567,6 +606,7 @@ const Index = ({ onBack }) => {
             style={{ background: "#1366AE", color: "white" }}
             onClick={handleSubmit}
             className="btn btn-primary btn-submit"
+            disabled={!checkSubmit()}
           >
             Save
           </Button>

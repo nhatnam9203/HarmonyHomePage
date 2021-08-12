@@ -45,7 +45,7 @@ export const getInventory = (requestUrl = "", token = "") => async (
     const { data = null } = await api.getByPage(requestUrl, token);
 
     let inventory = data.data
-      ? data.data.filter(obj=>obj.visibility !== "app").map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
+      ? data.data.filter(obj => obj.visibility !== "app").map((obj) => { return { ...obj, price: FormatPrice(obj.price) }; }) : [];
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -716,6 +716,29 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
   }
 };
 
+export const createProduct = (body, callBack) => async (dispatch) => {
+  try {
+    const url = `product`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    dispatch({ type: typeRetailer.LOADING_NEW_CATEGORY });
+    let { data = null } = await api.postApi(url, body, token);
+
+    console.log({ data , body });
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_LOADING_NEW_CATEGORY });
+  }
+};
+
 export const getAttribute = (merchantId, page = 1) => async (dispatch) => {
   try {
     const url = `attribute/search?key=&page=${page}&row=10&sorts=&merchantId=${merchantId}`;
@@ -724,8 +747,8 @@ export const getAttribute = (merchantId, page = 1) => async (dispatch) => {
     let { data = null } = await api.getApi(url, token);
 
     const payload = {
-      data : data?.data || [],
-      maxPageAttributes : data?.pages || 1
+      data: data?.data || [],
+      maxPageAttributes: data?.pages || 1
     }
 
     if (parseInt(data.codeNumber) === 200) {
@@ -905,6 +928,13 @@ export const setVisibleInventoryEdit = (payload) => {
   };
 };
 
+export const setVisibleInventoryAdd = (payload) => {
+  return {
+    type: typeRetailer.SET_VISIBLE_INVENTORY_ADD,
+    payload,
+  };
+};
+
 export const setVisibleCustomerDetail = (payload) => {
   return {
     type: typeRetailer.SET_VISIBLE_CUSTOMER_DETAIL,
@@ -922,6 +952,13 @@ export const sortCustomerAppointment = (payload) => {
 export const resetSortCustomerAppointment = (payload) => {
   return {
     type: typeRetailer.RESET_SORT_CUSTOMER_APPOINTMENT,
+    payload,
+  };
+};
+
+export const setInventoryDetail = (payload) => {
+  return {
+    type: typeRetailer.SET_INVENTORY_DETAIL,
     payload,
   };
 };

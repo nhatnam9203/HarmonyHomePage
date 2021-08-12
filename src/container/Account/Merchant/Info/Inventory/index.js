@@ -15,6 +15,9 @@ import {
   closeExport,
   setVisibleInventoryEdit,
   getSubCategory,
+  setVisibleInventoryAdd,
+  getAttribute,
+  setInventoryDetail,
 } from "@/actions/retailerActions";
 
 import "react-table/react-table.css";
@@ -43,6 +46,7 @@ const Index = ({
     typeSort_inventory,
     linkExport,
   } = useSelector((state) => state.retailer);
+
   const { detail } = useSelector((state) => state.merchantDetail);
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
@@ -50,6 +54,16 @@ const Index = ({
 
   const onClickSort = (status, sortType) => {
     changeSortInventory(status, sortType);
+  };
+
+  const addProduct = () => {
+    dispatch(setVisibleInventoryEdit(true));
+    dispatch(setVisibleInventoryAdd(true));
+    dispatch(setInventoryDetail({}));
+
+    const urlSubCategory = `category/search?status=ACTIVE&merchantId=${detail.merchantId}`;
+    dispatch(getSubCategory(urlSubCategory, token));
+    dispatch(getAttribute(detail.merchantId));
   };
 
   const onRowClick = (state, rowInfo, column, instance) => {
@@ -85,13 +99,14 @@ const Index = ({
     getInventoryData();
   }
 
-  const backFromEdit = (data) => {
-    if(data.visibility === "app"){
+  const backFromEdit = (type) => {
+    if (type === "reset") {
       dispatch(setVisibleInventoryEdit(false));
       backToInventory();
-    }else{
+    } else {
       dispatch(setVisibleInventoryEdit(false))
     }
+    dispatch(setVisibleInventoryAdd(false));
   }
 
   if (isVisibleInventoryEdit) {
@@ -111,7 +126,15 @@ const Index = ({
   return (
     <>
       <>
-        <div className="info_merchant_title">Inventory</div>
+        <div className="info_merchant_title">
+          Inventory
+          <div
+            onClick={addProduct}
+            className="btn-new-product"
+          >
+            New product
+          </div>
+        </div>
         <div className="info_merchant_title" style={{ marginTop: -3 }}>
           <div style={{ marginTop: 15 }}>
             <Search

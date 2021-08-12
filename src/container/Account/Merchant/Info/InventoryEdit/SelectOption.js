@@ -39,7 +39,7 @@ export default class Selectoption extends Component {
         return (
             <OutsideClickHandler onOutsideClick={this.close}>
                 <div onClick={this.toggle} className="select_subcategory">
-                    <div>{selected ? selected.name : ""}</div>
+                    <div>{selected ? selected.name : "Please select category"}</div>
                     <img src={arrow_down} alt="imn" />
 
                     {

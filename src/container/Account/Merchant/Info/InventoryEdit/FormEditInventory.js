@@ -29,6 +29,7 @@ const FormEditInventory = ({
     description,
     quantities,
     visibility,
+    isVisibleInventoryAdd = false,
     handleChange = () => { },
     uploadImage = () => { },
     selectImage = () => { },
@@ -36,6 +37,7 @@ const FormEditInventory = ({
     deleteImage = () => { },
     onBlurInputName = () => { },
 }) => {
+
     return (
         <Row className="formEditInventory" style={{ marginTop: 22, width: "90%" }}>
             <Col xl={6} xs={12} className="h-100">
@@ -53,9 +55,9 @@ const FormEditInventory = ({
                             value={name}
                             onChange={(e) => handleChange("name", e.target.value)}
                             onBlur={onBlurInputName}
-                            style={{ borderColor: isEmpty(name) ? "red" : "#ced4da" }}
+                            style={{ borderColor: (isEmpty(name) && !isVisibleInventoryAdd) ? "red" : "#ced4da" }}
                         />
-                        {isEmpty(name) && <Error />}
+                        {isEmpty(name) && !isVisibleInventoryAdd && <Error />}
                     </Form.Group>
 
                     {/******************** DESCRIPTION ********************/}
@@ -104,9 +106,9 @@ const FormEditInventory = ({
                             name="sku"
                             value={sku}
                             onChange={(e) => handleChange("sku", e.target.value)}
-                            style={{ borderColor: isEmpty(sku) ? "red" : "#ced4da" }}
+                            style={{ borderColor: (isEmpty(sku) && !isVisibleInventoryAdd) ? "red" : "#ced4da" }}
                         />
-                        {isEmpty(sku) && <Error />}
+                        {isEmpty(sku) && !isVisibleInventoryAdd && <Error />}
                     </Form.Group>
 
                     {/******************** BARCODE ********************/}
@@ -120,9 +122,9 @@ const FormEditInventory = ({
                             name="barCode"
                             value={barCode}
                             onChange={(e) => handleChange("barCode", e.target.value)}
-                            style={{ borderColor: isEmpty(barCode) ? "red" : "#ced4da" }}
+                            style={{ borderColor: (isEmpty(barCode) && !isVisibleInventoryAdd) ? "red" : "#ced4da" }}
                         />
-                        {isEmpty(barCode) && <Error />}
+                        {isEmpty(barCode) && !isVisibleInventoryAdd && <Error />}
                     </Form.Group>
 
 
@@ -170,9 +172,9 @@ const FormEditInventory = ({
                                 value={quantity}
                                 onChange={(e) => handleChange("quantity", e.target.value)}
                                 disabled
-                                style={{ borderColor: typeof quantity !== "number" && isEmpty(quantity) ? "red" : "#ced4da", }}
+                                style={{ borderColor: (typeof quantity !== "number" && isEmpty(quantity) && !isVisibleInventoryAdd) ? "red" : "#ced4da", }}
                             />
-                            {typeof quantity !== "number" && isEmpty(quantity) && <Error />}
+                            {typeof quantity !== "number" && isEmpty(quantity) && !isVisibleInventoryAdd && <Error />}
                         </Form.Group>
                     }
 
@@ -184,13 +186,13 @@ const FormEditInventory = ({
                                     Low threshold <span className="form_required">*</span>
                                 </Form.Label>
                                 <MaskInput
-                                    placeholder="Low Threshold"
+                                    placeholder="Low threshold"
                                     name="minThreshold"
                                     value={minThreshold}
                                     onChange={(e) => handleChange("minThreshold", e.target.value)}
-                                    style={{ borderColor: typeof minThreshold !== "number" && isEmpty(minThreshold) ? "red" : "#ced4da", }}
+                                    style={{ borderColor: typeof minThreshold !== "number" && isEmpty(minThreshold) && !isVisibleInventoryAdd ? "red" : "#ced4da", }}
                                 />
-                                {typeof minThreshold !== "number" && isEmpty(minThreshold) && (
+                                {typeof minThreshold !== "number" && !isVisibleInventoryAdd && isEmpty(minThreshold) && (
                                     <Error />
                                 )}
                             </Form.Group>
@@ -203,13 +205,13 @@ const FormEditInventory = ({
                                     High threshold <span className="form_required">*</span>
                                 </Form.Label>
                                 <MaskInput
-                                    placeholder="High Threshold"
+                                    placeholder="High threshold"
                                     name="maxThreshold"
                                     value={maxThreshold}
                                     onChange={(e) => handleChange("maxThreshold", e.target.value)}
-                                    style={{ borderColor: typeof maxThreshold !== "number" && isEmpty(maxThreshold) ? "red" : "#ced4da", }}
+                                    style={{ borderColor: typeof maxThreshold !== "number" && isEmpty(maxThreshold) && !isVisibleInventoryAdd ? "red" : "#ced4da", }}
                                 />
-                                {typeof maxThreshold !== "number" && isEmpty(maxThreshold) && (<Error />)}
+                                {typeof maxThreshold !== "number" && isEmpty(maxThreshold) && !isVisibleInventoryAdd && (<Error />)}
                             </Form.Group>
                         </Col>
 

@@ -23,13 +23,14 @@ export const retailerReducer = (
     report: [],
     subCategory: [],
     attributes: [],
-    maxPageAttributes : 1,
+    maxPageAttributes: 1,
 
     isVisibleCustomerDetail: false,
     isVisibleInventoryDetail: false,
     isVisibleOrderDetail: false,
 
     isVisibleInventoryEdit: false,
+    isVisibleInventoryAdd : false,
 
     typeSort_inventory: "",
     directionSort_inventory: "ASC",
@@ -189,6 +190,12 @@ export const retailerReducer = (
         isVisibleInventoryEdit: payload,
       };
 
+    case types.SET_VISIBLE_INVENTORY_ADD:
+      return {
+        ...state,
+        isVisibleInventoryAdd: payload,
+      };
+
     case types.SET_VISIBLE_CUSTOMER_DETAIL:
       return {
         ...state,
@@ -216,7 +223,7 @@ export const retailerReducer = (
       return {
         ...state,
         attributes: payload?.data || [],
-        maxPageAttributes : payload?.maxPageAttributes || 1,
+        maxPageAttributes: payload?.maxPageAttributes || 1,
       };
 
     case types.SET_APPOINTMENT_CUSTOMER_DETAIL:
