@@ -53,6 +53,7 @@ export default class ManualOptionSelect extends Component {
                                     values.map((vl) => (
                                         <OptionItem
                                             value={vl}
+                                            key={Math.random()}
                                             onSelected={this.onSelected}
                                         />
                                     ))

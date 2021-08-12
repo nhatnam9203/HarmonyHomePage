@@ -606,7 +606,7 @@ const Index = ({ onBack }) => {
             style={{ background: "#1366AE", color: "white" }}
             onClick={handleSubmit}
             className="btn btn-primary btn-submit"
-            disabled={!checkSubmit()}
+            disabled={isVisibleInventoryAdd && !checkSubmit()}
           >
             Save
           </Button>
@@ -651,6 +651,7 @@ const Index = ({ onBack }) => {
         close={() => setPopupManual(false)}
         options={options}
         createOtionsManual={createOtionsManual}
+        quantities={quantities}
       />
       {(loadingNewCategory || isLoading) && <Loading isFullLoading={true} />}
     </>

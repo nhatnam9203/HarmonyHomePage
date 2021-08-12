@@ -3,11 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import ManualOptionSelect from "./ManualOptionSelect";
+import { arrayIsEqual } from "@/util";
 import "../style.scss";
 
 const initialState = {
     productOptions: [],
     optionsSelected: [],
+    isExist: false
 };
 
 export default class PopupManual extends Component {
@@ -20,6 +22,7 @@ export default class PopupManual extends Component {
         let { optionsSelected } = this.state;
         optionsSelected[index] = option;
         this.setState({ optionsSelected });
+        this.checkProductVersions(optionsSelected);
     }
 
     handleSubmit = (e) => {
@@ -33,7 +36,7 @@ export default class PopupManual extends Component {
 
     closePopup = () => {
         this.props.close();
-        this.setState({ productOptions : [] , optionsSelected : [] });
+        this.setState({ productOptions: [], optionsSelected: [], isExist: false });
     }
 
     resetState = () => {
@@ -47,9 +50,23 @@ export default class PopupManual extends Component {
         }
     }
 
+    checkProductVersions = (payload) => {
+        const { quantities } = this.props;
+        let checkQuantities =
+            quantities?.length > 0 ? [...quantities] : [];
+        const listAttributeValueIds = payload?.map(
+            (x) => x.attributeValueId
+        );
+        const findExistIndex = checkQuantities?.findIndex((f) =>
+            arrayIsEqual(f?.attributeIds, listAttributeValueIds)
+        );
+        const itemIsExisted = findExistIndex >= 0 ? true : false;
+        this.setState({ isExist: itemIsExisted });
+    }
+
     render() {
         const { isVisible } = this.props;
-        const { productOptions, optionsSelected } = this.state;
+        const { productOptions, optionsSelected, isExist } = this.state;
 
         return (
             <>
@@ -67,17 +84,25 @@ export default class PopupManual extends Component {
                                 <h3>Manual Generate</h3>
                                 <h6 style={{ marginTop: 30 }}>Select options attribute and value</h6>
 
-                                <div style={{ height: 350 }} className="popupAuto_ItemList">
+                                <div style={{ height: 350, position: 'relative' }}>
+                                    <div style={{ height: isExist ? 320 : 350 }} className="popupAuto_ItemList">
+                                        {
+                                            productOptions.map((opt, index) => (
+                                                <OptionItem
+                                                    item={opt}
+                                                    key={opt.id + 'option' + Math.random()}
+                                                    selectOption={option => this.selectOption(option, index)}
+                                                    optionsSelected={optionsSelected}
+                                                    index={index}
+                                                />
+                                            ))
+                                        }
+                                    </div>
                                     {
-                                        productOptions.map((opt, index) => (
-                                            <OptionItem
-                                                item={opt}
-                                                key={opt.id + 'option' + Math.random()}
-                                                selectOption={option => this.selectOption(option, index)}
-                                                optionsSelected={optionsSelected}
-                                                index={index}
-                                            />
-                                        ))
+                                        isExist &&
+                                        <div className="itemExisted">
+                                            Item is existed
+                                        </div>
                                     }
                                 </div>
 
@@ -109,7 +134,7 @@ export default class PopupManual extends Component {
     }
 }
 
-const OptionItem = ({ item, selectOption = () => { }, optionsSelected = [] , index }) => {
+const OptionItem = ({ item, selectOption = () => { }, optionsSelected = [], index }) => {
     return (
         <div className="optionItem">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

@@ -359,3 +359,15 @@
 .select_filter::-webkit-scrollbar {
   display: none !important;
 }
+
+.itemExisted{
+  position: absolute;
+  bottom : 0px;
+  right : 0px;
+  left : 0px;
+  display : flex;
+  justify-content: center;
+  align-items: center;
+  color : #fcb744;
+  font-weight : 700;
+}
