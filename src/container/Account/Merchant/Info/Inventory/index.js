@@ -103,6 +103,8 @@ const Index = ({
     if (type === "reset") {
       dispatch(setVisibleInventoryEdit(false));
       backToInventory();
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     } else {
       dispatch(setVisibleInventoryEdit(false))
     }

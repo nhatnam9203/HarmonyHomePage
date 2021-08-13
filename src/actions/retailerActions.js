@@ -716,6 +716,27 @@ export const editProduct = (body, productId, callBack) => async (dispatch) => {
   }
 };
 
+export const deleteProduct = (productId, callBack) => async (dispatch) => {
+  try {
+    const url = `product/${productId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+    dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
+    let { data = null } = await api.deleteApi(url, token);
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
+  }
+};
+
 export const createProduct = (body, callBack) => async (dispatch) => {
   try {
     const url = `product`;

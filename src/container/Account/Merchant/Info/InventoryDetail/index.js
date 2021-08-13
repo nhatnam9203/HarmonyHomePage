@@ -6,13 +6,23 @@ import CustomTableHeader from "../CustomTableHeader";
 import product_default from "@/assets/images/product_default.png";
 import InventoryInfo from "./InventoryInfo";
 import Pagination from "@/components/Pagination";
+import PopupConfirm from "./PopupConfirm";
+import Loading from "@/components/Loading";
+import { useDispatch } from "react-redux";
+import {
+  deleteProduct
+} from "@/actions/retailerActions";
+
 import "../Info.scss";
 import "./style.scss";
 
 const Index = ({ onBack }) => {
-  const { inventoryDetail } = useSelector((state) => state.retailer);
+  const dispatch = useDispatch();
+  const { inventoryDetail , loadingDetail } = useSelector((state) => state.retailer);
+  const { productId } = inventoryDetail;
 
   const [activePage, setActivePage] = React.useState(1);
+  const [isModalDelete, setVisibileModalDelete] = React.useState(false);
 
   React.useEffect(() => {
     document.body.scrollTop = 0;
@@ -23,6 +33,15 @@ const Index = ({ onBack }) => {
     setActivePage(page);
   }
 
+  const onDelete = () => {
+    setVisibileModalDelete(false);
+    dispatch(deleteProduct(productId, callBackDeleteProduct))
+  }
+
+  const callBackDeleteProduct = () => {
+    onBack("reset");
+  }
+
   let quantities = inventoryDetail.quantities || [];
   let count = Math.ceil(quantities.length);
 
@@ -30,7 +49,10 @@ const Index = ({ onBack }) => {
 
   return (
     <>
-      <InventoryInfo onBack={onBack} />
+      <InventoryInfo
+        onBack={onBack}
+        setVisibleDelete={() => setVisibileModalDelete(true)}
+      />
       <Title
         style={{
           borderBottomWidth: 0,
@@ -58,6 +80,13 @@ const Index = ({ onBack }) => {
           totalItem={Math.ceil(count)}
         />
       }
+      <PopupConfirm
+        isVisible={isModalDelete}
+        close={() => setVisibileModalDelete(false)}
+        onDelete={onDelete}
+      />
+      {loadingDetail && <Loading isFullLoading={true} />}
+
     </>
   );
 };

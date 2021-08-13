@@ -263,8 +263,10 @@ const Index = ({ onBack }) => {
     return imgeDefault;
   }
 
-  const back = (data) => {
+  const back = () => {
     onBack(null);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   };
 
   /***************** UPLOAD IMAGE PRODUCT *****************/

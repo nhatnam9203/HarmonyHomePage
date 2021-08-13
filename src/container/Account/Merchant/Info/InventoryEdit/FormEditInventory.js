@@ -123,7 +123,6 @@ const FormEditInventory = ({
                             value={barCode}
                             onChange={(e) => handleChange("barCode", e.target.value)}
                         />
-                        {isEmpty(barCode) && !isVisibleInventoryAdd && <Error />}
                     </Form.Group>
 
 

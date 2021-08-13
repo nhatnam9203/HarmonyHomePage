@@ -9,10 +9,11 @@ import {
 } from "@/actions/retailerActions";
 import product_default from "@/assets/images/product_default.png";
 import icon_edit from "@/assets/images/retailer/icon_edit.png";
+import icon_delete from "@/assets/images/delete.png";
 import "../Info.scss";
 import "./style.scss";
 
-const InventoryInfo = ({ onBack }) => {
+const InventoryInfo = ({ onBack, setVisibleDelete }) => {
   const dispatch = useDispatch();
   const { inventoryDetail } = useSelector((state) => state.retailer);
   const { detail } = useSelector((state) => state.merchantDetail);
@@ -52,9 +53,20 @@ const InventoryInfo = ({ onBack }) => {
       >
         <Title style={{ borderBottomWidth: 0 }}>General Details</Title>
 
-        <div onClick={editInventory} className="row_edit_retailer">
-          <img src={icon_edit} />
-          <p>Edit</p>
+        <div style={{ display: 'flex' }}>
+          <div
+            style={{ marginRight: 30 }}
+            onClick={setVisibleDelete}
+            className="row_edit_retailer"
+          >
+            <img src={icon_delete} />
+            <p style={{ color: 'red' }}>Delete</p>
+          </div>
+
+          <div onClick={editInventory} className="row_edit_retailer">
+            <img src={icon_edit} />
+            <p>Edit</p>
+          </div>
         </div>
       </div>
 

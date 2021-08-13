@@ -212,3 +212,11 @@ export const getApi = (requestUrl, token) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const deleteApi = (requestUrl, token) => {
+  return axios.delete(`${url}/${requestUrl}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
