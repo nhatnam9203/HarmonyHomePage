@@ -217,7 +217,7 @@ const Index = ({ onBack }) => {
           images,
           name,
           sku,
-          barCode: isEmpty(barCode) ? sku : barCode,
+          barCode,
           price: isVisibleInventoryAdd ? price : (quantities && quantities.length > 0) ? inventoryDetail.price : price,
           // costPrice: formatMoney(refCostPrice.current.value),
           quantity: isVisibleInventoryAdd ? quantity : (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
@@ -391,6 +391,7 @@ const Index = ({ onBack }) => {
     let tempt = [...options];
     tempt = tempt.filter(t => t.attributeId !== attributeId);
     setOptions(tempt);
+
     createProductVersion(tempt);
   }
 

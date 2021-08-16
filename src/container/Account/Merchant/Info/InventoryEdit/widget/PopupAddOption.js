@@ -30,6 +30,7 @@ const PopupAddOption = ({
     const [attributesSubmit, setAttributesSubmit] = React.useState([]);
     const [isLoading, setLoading] = React.useState(false);
 
+
     React.useEffect(() => {
         if (isVisible) {
             mapAttributesVisible();
@@ -44,9 +45,25 @@ const PopupAddOption = ({
 
     const mapAttributesVisible = () => {
         let tempt = [...attributes].filter(at => !isExistAttribute(options, at));
-        tempt.forEach(el => {
-            el.isActive = false;
-        });
+
+        if (pageAttributes === 1) {
+            tempt.forEach(el => {
+                el.isActive = false;
+            });
+        } else {
+            for (let i = 0; i < tempt.length; i++) {
+                if (temptAttributes[i]) {
+                    if (temptAttributes[i]?.id === tempt[i].id) {
+                        tempt[i].isActive = temptAttributes[i].isActive;
+                    } else {
+                        tempt[i].isActive = false;
+                    }
+                } else {
+                    tempt[i].isActive = false;
+                }
+            }
+        }
+
         setTemptAttributes(tempt);
     }
 

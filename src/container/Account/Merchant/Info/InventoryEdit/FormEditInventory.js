@@ -116,7 +116,7 @@ const FormEditInventory = ({
                         <Form.Label>
                             Barcode
                         </Form.Label>
-                        <Form.Control
+                        <MaskInput
                             type="text"
                             placeholder="Bar code"
                             name="barCode"
