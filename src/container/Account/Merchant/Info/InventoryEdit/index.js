@@ -392,7 +392,7 @@ const Index = ({ onBack }) => {
     tempt = tempt.filter(t => t.attributeId !== attributeId);
     setOptions(tempt);
 
-    createProductVersion(tempt);
+    // createProductVersion(tempt);
   }
 
   /***************** check value option *****************/

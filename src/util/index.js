@@ -311,7 +311,7 @@ export const createQuantitiesItem = (product, options, name = null) => {
   return quantities?.map((quantity) =>
     Object.assign({}, quantity, {
       label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
-      price: "0.00",
+      price: product.price ? product.price : "0.00",
       description: "",
       fileId: 0,
     })
