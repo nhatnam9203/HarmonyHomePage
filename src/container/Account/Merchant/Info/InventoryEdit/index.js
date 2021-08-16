@@ -474,13 +474,13 @@ const Index = ({ onBack }) => {
   }
 
   const createProductVersion = (optionMerge) => {
-    const qtys = createQuantitiesItem(inventoryDetail, optionMerge);
+    const qtys = createQuantitiesItem(inventoryDetail, optionMerge , name);
     setQuantities(qtys);
   }
 
   const createOtionsManual = (payload) => {
     let newQuantityList = [...quantities];
-    let temp = createVersionFromItems(inventoryDetail, payload);
+    let temp = createVersionFromItems(inventoryDetail, payload, name);
     const isExistIndex = newQuantityList?.findIndex((f) =>
       arrayIsEqual(f?.attributeIds, temp?.attributeIds)
     );
@@ -523,7 +523,7 @@ const Index = ({ onBack }) => {
     let optionsList = options;
     const quantityList = quantities;
 
-    let generateList = createQuantitiesItem(inventoryDetail, optionsList)?.map((x) => {
+    let generateList = createQuantitiesItem(inventoryDetail, optionsList, name)?.map((x) => {
       const isExistItem = quantityList?.find((f) =>
         arrayIsEqual(f?.attributeIds, x?.attributeIds)
       );

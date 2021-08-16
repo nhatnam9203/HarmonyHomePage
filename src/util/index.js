@@ -294,6 +294,7 @@ export const combineOptionsValuesQty = (qtyArr, optionValues) => {
 };
 
 export const createQuantitiesItem = (product, options, name = null) => {
+  console.log({ name })
   if (!options || options?.length < 0) return null;
 
   const quantities = options?.reduce((accumulator, currentValue, index) => {
@@ -318,7 +319,7 @@ export const createQuantitiesItem = (product, options, name = null) => {
   );
 };
 
-export const createVersionFromItems = (product, items) => {
+export const createVersionFromItems = (product, items , name) => {
   const item = items?.reduce((accumulator, currentValue, index) => {
 
     return Object.assign({}, accumulator, {
@@ -334,7 +335,7 @@ export const createVersionFromItems = (product, items) => {
   }, {});
 
   return {
-    label: `${product?.name ?? "New product"} - ${item.label ?? ""}`,
+    label: `${name ? name : product?.name ?? "New product"} - ${item.label ?? ""}`,
     price: item?.price || "0.00",
     attributeIds: item.attributeIds,
   };

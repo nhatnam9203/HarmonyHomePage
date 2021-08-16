@@ -31,8 +31,10 @@ export default class PopupManual extends Component {
         let { optionsSelected } = this.state;
         let tempOptions = [...optionsSelected];
         tempOptions = tempOptions.filter(el => el);
-        this.props.createOtionsManual(tempOptions);
-        this.closePopup();
+        if(tempOptions.length > 0){
+            this.props.createOtionsManual(tempOptions);
+            this.closePopup();
+        }
     }
 
     closePopup = () => {
