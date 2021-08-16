@@ -3,7 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import ManualOptionSelect from "./ManualOptionSelect";
-import { arrayIsEqual } from "@/util";
+import { arrayIsEqual, createVersionFromItems } from "@/util";
+
 import "../style.scss";
 
 const initialState = {
@@ -46,17 +47,16 @@ export default class PopupManual extends Component {
     componentWillReceiveProps(nextProps) {
         const { isVisible, options } = nextProps;
         if (isVisible === true && isVisible !== this.props.isVisible) {
-            this.setState({ productOptions: options });
+            this.setState({ productOptions: options, optionsSelected: [] });
         }
     }
 
     checkProductVersions = (payload) => {
-        const { quantities } = this.props;
+        const { quantities, inventoryDetail } = this.props;
         let checkQuantities =
             quantities?.length > 0 ? [...quantities] : [];
-        const listAttributeValueIds = payload?.map(
-            (x) => x.attributeValueId
-        );
+        let tempAttributes = createVersionFromItems(inventoryDetail, payload);
+        const listAttributeValueIds = tempAttributes?.attributeIds;
         const findExistIndex = checkQuantities?.findIndex((f) =>
             arrayIsEqual(f?.attributeIds, listAttributeValueIds)
         );
@@ -98,12 +98,12 @@ export default class PopupManual extends Component {
                                             ))
                                         }
                                     </div>
-                                    {/* {
+                                    {
                                         isExist &&
                                         <div className="itemExisted">
                                             Item is existed
                                         </div>
-                                    } */}
+                                    }
                                 </div>
 
                                 <div className="popupAuto_button">

@@ -35,6 +35,21 @@ export default class Producttable extends Component {
         this.changePage(1)
     }
 
+    resetSearch = () =>{
+        this.setState({ searchValue :"" });
+    }
+
+    getTrProps = (state, rowInfo, instance) => {
+        const { itemExisted } = this.props;
+        const label = itemExisted ? itemExisted?.label : null;
+        return {
+            style: {
+                'background': (label && rowInfo?.original?.label === label) ? "#fffebf" : "transparent"
+            }
+        }
+
+    }
+
     render() {
         const {
             quantities = [],
@@ -81,13 +96,13 @@ export default class Producttable extends Component {
 
                     <div className="group_btn_generate">
                         <div>
-                        <MediaQuery minWidth={700}>
-                            <Search
-                                value={searchValue}
-                                onChange={this.onChangeSearch}
-                                onSubmit={() => { }}
-                            />
-                        </MediaQuery>
+                            <MediaQuery minWidth={700}>
+                                <Search
+                                    value={searchValue}
+                                    onChange={this.onChangeSearch}
+                                    onSubmit={() => { }}
+                                />
+                            </MediaQuery>
                         </div>
                         <span onClick={openPopupManual}>Manual Generate</span>
                         <span onClick={openPopupAuto}>Auto Generate</span>
@@ -95,6 +110,7 @@ export default class Producttable extends Component {
                 </Title>
                 <ReactTable
                     className="table-inventoryDetail product-table"
+                    id="product_versions"
                     manual
                     sortable={false}
                     data={quantitiesList || []}
@@ -103,6 +119,7 @@ export default class Producttable extends Component {
                     NoDataComponent={() => <div className="retailer_nodata">NO DATA!</div>}
                     columns={columns(uploadImagesOption, handleChangeInput, deleteQuantities)}
                     PaginationComponent={() => <div />}
+                    getTrProps={this.getTrProps}
                 />
                 {
                     count > 0 && <Pagination

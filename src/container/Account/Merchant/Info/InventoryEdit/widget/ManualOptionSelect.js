@@ -50,10 +50,10 @@ export default class ManualOptionSelect extends Component {
                         isPopup && (
                             <div className="select_subcategory_popup">
                                 {
-                                    values.map((vl) => (
+                                    values.map((vl, index) => (
                                         <OptionItem
                                             value={vl}
-                                            key={Math.random()}
+                                            key={'optionItem' + index + Math.random()}
                                             onSelected={this.onSelected}
                                         />
                                     ))

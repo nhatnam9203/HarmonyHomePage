@@ -3,7 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    getAttributeById
+    getAttributeById,
+    getAttribute,
 } from "@/actions/retailerActions";
 import tick_active from "@/assets/images/retailer/tick_active.png";
 import tick_inactive from "@/assets/images/retailer/tick_inactive.png";
@@ -22,7 +23,8 @@ const PopupAddOption = ({
 
     const dispatch = useDispatch();
 
-    const { attributes, loadingAttribute } = useSelector(state => state.retailer);
+    const { attributes, loadingAttribute, maxPageAttributes, pageAttributes } = useSelector(state => state.retailer);
+    const { detail } = useSelector((state) => state.merchantDetail);
 
     const [temptAttributes, setTemptAttributes] = React.useState([]);
     const [attributesSubmit, setAttributesSubmit] = React.useState([]);
@@ -30,19 +32,23 @@ const PopupAddOption = ({
 
     React.useEffect(() => {
         if (isVisible) {
-            let tempt = [...attributes].filter(at => !isExistAttribute(options, at));
-            tempt.forEach(el => {
-                el.isActive = false;
-            });
-            setTemptAttributes(tempt);
+            mapAttributesVisible();
         }
-    }, [isVisible]);
+    }, [isVisible, attributes]);
 
     React.useEffect(() => {
         if (attributesSubmit.length > 0) {
             dispatch(getAttributeById(attributesSubmit[0].id, callBackSubmit));
         }
     }, [attributesSubmit]);
+
+    const mapAttributesVisible = () => {
+        let tempt = [...attributes].filter(at => !isExistAttribute(options, at));
+        tempt.forEach(el => {
+            el.isActive = false;
+        });
+        setTemptAttributes(tempt);
+    }
 
     const isExistAttribute = (arr, at) => {
         let flag = false;
@@ -95,8 +101,12 @@ const PopupAddOption = ({
     }
 
     const fetchMoreData = () => {
-        console.log('fetch more')
+        let page = pageAttributes + 1;
+        if (page <= maxPageAttributes) {
+            dispatch(getAttribute(detail.merchantId, page))
+        }
     }
+
 
     return (
         <>
@@ -110,7 +120,7 @@ const PopupAddOption = ({
                 <div style={{ position: 'relative' }} className="container_add_option">
                     <h4>Add attribute</h4>
                     <h6>Select customize options attribute</h6>
-                    <div style={{overflowX : 'hidden' }} id="scrollableDiv" className="wrap">
+                    <div style={{ overflowX: 'hidden' }} id="scrollableDiv" className="wrap">
                         <InfiniteScroll
                             dataLength={temptAttributes.length ? temptAttributes.length : 0}
                             next={fetchMoreData}

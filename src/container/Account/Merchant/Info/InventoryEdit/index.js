@@ -61,6 +61,7 @@ const Index = ({ onBack }) => {
 
   const [isPopupManual, setPopupManual] = React.useState(false);
   const [isPopupAuto, setPopupAuto] = React.useState(false);
+  const [itemExisted, setItemExisted] = React.useState(-1);
 
   const [pageAttribute, setPageAttribute] = React.useState(1);
 
@@ -179,7 +180,7 @@ const Index = ({ onBack }) => {
     }
   };
 
-  const checkSubmit = () =>{
+  const checkSubmit = () => {
     let flag = true;
     if (
       isEmpty(name) ||
@@ -189,7 +190,7 @@ const Index = ({ onBack }) => {
       (isEmpty(minThreshold) && typeof minThreshold !== "number") ||
       (isEmpty(maxThreshold) && typeof maxThreshold !== "number") ||
       (isEmpty(categoryId) && typeof categoryId !== "number")
-    ){
+    ) {
       flag = false
     }
     return flag;
@@ -216,7 +217,7 @@ const Index = ({ onBack }) => {
           images,
           name,
           sku,
-          barCode : isEmpty(barCode) ? sku : barCode,
+          barCode: isEmpty(barCode) ? sku : barCode,
           price: isVisibleInventoryAdd ? price : (quantities && quantities.length > 0) ? inventoryDetail.price : price,
           // costPrice: formatMoney(refCostPrice.current.value),
           quantity: isVisibleInventoryAdd ? quantity : (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
@@ -413,8 +414,8 @@ const Index = ({ onBack }) => {
         }
       }
       setOptions(arrTempOptions);
-      setNewQuantities(arrTempOptions);
-      refProductVersion.current.changePage(1);
+      // setNewQuantities(arrTempOptions);
+      // refProductVersion.current.changePage(1);
     }
   }
 
@@ -487,22 +488,33 @@ const Index = ({ onBack }) => {
       const isExistItem = newQuantityList[isExistIndex];
       temp = Object.assign({}, temp, {
         needToOrder: isExistItem.needToOrder,
-        quantity: isExistItem.quantity,
-        tempQuantity: isExistItem.tempQuantity,
-        description: isExistItem.description,
-        costPrice: isExistItem.costPrice,
-        price: isExistItem.price,
+        quantity: "0",
+        tempQuantity: "0",
+        description: "",
+        costPrice: "0.00",
+        price: "0.00",
         sku: isExistItem.sku,
         imageUrl: isExistItem.imageUrl,
         fileId: isExistItem.fileId,
         position: isExistItem.position ?? 0,
         id: isExistItem.id ?? 0,
       });
+      const page = Math.ceil((isExistIndex + 1) / 10);
+      page && refProductVersion?.current?.changePage(page);
+      const positionItem = (isExistIndex + 1) % 10;
+      if (positionItem > 5) {
+        const item = document.getElementById('product_versions');
+        item && item.scrollIntoView(false);
+      }
 
       newQuantityList[isExistIndex] = temp;
+      setItemExisted(newQuantityList[isExistIndex]);
     } else {
       newQuantityList.push(temp);
+      setItemExisted(null);
     }
+    refProductVersion?.current?.resetSearch();
+
     setQuantities(newQuantityList);
   }
 
@@ -535,6 +547,8 @@ const Index = ({ onBack }) => {
 
     setQuantities(generateList?.sort((a, b) => a.position - b.position));
     setPopupAuto(false);
+    setItemExisted(null);
+    refProductVersion?.current?.resetSearch();
 
   }
 
@@ -587,6 +601,7 @@ const Index = ({ onBack }) => {
           ref={refProductVersion}
           openPopupAuto={() => setPopupAuto(true)}
           openPopupManual={() => setPopupManual(true)}
+          itemExisted={itemExisted}
         />
 
         <div className="btn_group_edit_inventory">
@@ -648,6 +663,7 @@ const Index = ({ onBack }) => {
         options={options}
         createOtionsManual={createOtionsManual}
         quantities={quantities}
+        inventoryDetail={inventoryDetail}
       />
       {(loadingNewCategory || isLoading) && <Loading isFullLoading={true} />}
     </>

@@ -767,7 +767,8 @@ export const getAttribute = (merchantId, page = 1) => async (dispatch) => {
 
     const payload = {
       data: data?.data || [],
-      maxPageAttributes: data?.pages || 1
+      maxPageAttributes: data?.pages || 1,
+      page
     }
 
     if (parseInt(data.codeNumber) === 200) {

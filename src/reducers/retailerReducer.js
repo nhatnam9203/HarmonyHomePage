@@ -24,6 +24,7 @@ export const retailerReducer = (
     subCategory: [],
     attributes: [],
     maxPageAttributes: 1,
+    pageAttributes : 1,
 
     isVisibleCustomerDetail: false,
     isVisibleInventoryDetail: false,
@@ -220,10 +221,12 @@ export const retailerReducer = (
       };
 
     case types.SET_ATTRIBUTES:
+      const data =  payload.page === 1 ? payload?.data : state.attributes.concat(payload?.data);
       return {
         ...state,
-        attributes: payload?.data || [],
+        attributes: data,
         maxPageAttributes: payload?.maxPageAttributes || 1,
+        pageAttributes : payload.page,
       };
 
     case types.SET_APPOINTMENT_CUSTOMER_DETAIL:
