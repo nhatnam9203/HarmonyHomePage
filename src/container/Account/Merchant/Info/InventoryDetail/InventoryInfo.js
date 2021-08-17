@@ -83,12 +83,12 @@ const InventoryInfo = ({ onBack, setVisibleDelete }) => {
             <div>{inventoryDetail.categoryName}</div>
           </div>
           <div className="item_inventory_detail">
-            <div>Barcode</div>
-            <div>{inventoryDetail.barCode}</div>
+            <div>SKU</div>
+            <div>{inventoryDetail.sku}</div>
           </div>
           <div className="item_inventory_detail">
-            <div>Sku</div>
-            <div>{inventoryDetail.sku}</div>
+            <div>Barcode</div>
+            <div>{inventoryDetail.barCode}</div>
           </div>
           <div className="item_inventory_detail">
             <div>Price</div>
