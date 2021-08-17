@@ -102,10 +102,10 @@ const columns = () => [
     width: 400,
   },
   {
-    Header: <CustomTableHeader value="Sku" />,
-    id: "sku",
+    Header: <CustomTableHeader value="Barcode" />,
+    id: "barCode",
     accessor: (row) => (
-      <div className="table-tr">{`${row.sku || ""}`}</div>
+      <div className="table-tr">{`${row.barCode ? row.barCode : row.barcode}`}</div>
     ),
   },
   {

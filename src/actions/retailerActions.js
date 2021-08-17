@@ -11,6 +11,9 @@ import {
   FormatPrice,
 } from "@/util";
 
+const url = process.env.REACT_APP_API_ENDPOINT;
+
+
 export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });

@@ -87,6 +87,10 @@ const InventoryInfo = ({ onBack, setVisibleDelete }) => {
             <div>{inventoryDetail.barCode}</div>
           </div>
           <div className="item_inventory_detail">
+            <div>Sku</div>
+            <div>{inventoryDetail.sku}</div>
+          </div>
+          <div className="item_inventory_detail">
             <div>Price</div>
             <div style={{ fontWeight: '600' }}>
               {inventoryDetail.quantities.length > 0 ? inventoryDetail.priceRange : `$ ${inventoryDetail.price}`}
