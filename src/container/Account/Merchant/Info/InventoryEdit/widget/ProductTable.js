@@ -151,6 +151,18 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         width: 40
     },
     {
+        Header: <CustomTableHeader value="Barcode" />,
+        id: "barCode",
+        accessor: (row) => (
+            <input
+                className="input_price"
+                value={row.description}
+                onChange={(e) => handleChangeInput(e.target.value, "barCode", row)}
+                placeholder="Bar code"
+            />
+        )
+    },
+    {
         Header: <CustomTableHeader value="Description" />,
         id: "description",
         accessor: (row) => (
