@@ -37,7 +37,32 @@ const InventoryInfo = ({ onBack, setVisibleDelete }) => {
 
   const imgDefault = imageDefault();
 
+  let descriptions = inventoryDetail?.description?.split("\n") || [];
+
   const descriptionLength = inventoryDetail?.description?.length || 0;
+
+  const renderDescription = () => {
+    return (
+      descriptions.map((des, index) => des ? (
+        index !== descriptions.length - 1 ?
+          <div key={index + "description"}>
+            {des}
+          </div>
+          :
+          <div key={index + "description"}>
+            {des}
+            {
+              descriptionLength > 60 &&
+              <span onClick={() => { showMore(isMore => !isMore) }}
+                style={{ color: '#1366AE', fontWeight: '600', cursor: 'pointer' }}>
+                {"less"}
+              </span>
+            }
+          </div>
+      ) : <div style={{ height: 15 }} />
+      )
+    )
+  }
 
   return (
     <>
@@ -112,22 +137,20 @@ const InventoryInfo = ({ onBack, setVisibleDelete }) => {
           </div>
           <div className="item_inventory_detail">
             <div>Description</div>
-            <div style={{ width: 300 }}>
-              {
-                descriptionLength > 60 ?
-                  !isMore ?
-                    inventoryDetail.description.slice(0, 60) + "..." :
-                    inventoryDetail.description : inventoryDetail.description
-              }
+            <div style={{ width: 300, }}>
               {
                 descriptionLength > 60 &&
-                <span
-                  onClick={() => {
-                    showMore(isMore => !isMore)
-                  }}
-                  style={{ color: '#1366AE', fontWeight: '600', cursor: 'pointer' }}>
-                  {isMore ? " less" : "more"}
-                </span>
+                  !isMore ?
+                  <div>
+                    {
+                      descriptions[0].slice(0, 60) + "..."
+                    }
+                    <span onClick={() => { showMore(isMore => !isMore) }}
+                      style={{ color: '#1366AE', fontWeight: '600', cursor: 'pointer' }}>
+                      {"more"}
+                    </span>
+                  </div>
+                  : renderDescription()
               }
             </div>
           </div>
