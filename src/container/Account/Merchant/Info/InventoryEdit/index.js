@@ -361,7 +361,6 @@ const Index = ({ onBack }) => {
 
   /***************** CHANGE VALUE INPUT PRODUCT VERSION *****************/
   const handleChangeInputTable = (value, type, row) => {
-
     let tempt = JSON.parse(JSON.stringify(quantities));
     for (let i = 0; i < tempt.length; i++) {
       if (tempt[i].label === row.label) {

@@ -105,7 +105,7 @@ const columns = () => [
     Header: <CustomTableHeader value="Barcode" />,
     id: "barCode",
     accessor: (row) => (
-      <div className="table-tr">{`${row.barCode}`}</div>
+      <div className="table-tr">{`${row.barCode ? row.barCode : ""}`}</div>
     ),
   },
   {

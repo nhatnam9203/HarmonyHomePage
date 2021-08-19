@@ -156,7 +156,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         accessor: (row) => (
             <input
                 className="input_price"
-                value={row.description}
+                value={row.barCode}
                 onChange={(e) => handleChangeInput(e.target.value, "barCode", row)}
                 placeholder="Bar code"
             />
