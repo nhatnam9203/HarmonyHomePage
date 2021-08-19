@@ -7,16 +7,18 @@ import "../style.scss";
 const InputQuantity = ({
     placeholder = "0",
     value = "0",
-    handleChange = () => { }
+    handleChange = () => { },
+    isBarcode
 }) => {
     return (
         <div style={{ position: 'relative' }}>
             <MaskInput
                 type="text"
                 onChange={(e) => handleChange(e.target.value)}
-                onBlur={()=>{
-                    if(value === ""){
-                        handleChange("0");
+                onBlur={() => {
+                    if (value === "") {
+                        if (!isBarcode)
+                            handleChange("0");
                     }
                 }}
                 value={value}
@@ -43,7 +45,7 @@ const MaskInput = (props) => (
                     className="input_price"
                     style={props.style}
                     placeholder={props.placeholder}
-                    {...inputProps} 
+                    {...inputProps}
                     type="text"
                 />)
         }

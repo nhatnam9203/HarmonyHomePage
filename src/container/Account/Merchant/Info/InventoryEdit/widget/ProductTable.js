@@ -35,8 +35,8 @@ export default class Producttable extends Component {
         this.changePage(1)
     }
 
-    resetSearch = () =>{
-        this.setState({ searchValue :"" });
+    resetSearch = () => {
+        this.setState({ searchValue: "" });
     }
 
     getTrProps = (state, rowInfo, instance) => {
@@ -154,10 +154,10 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
         Header: <CustomTableHeader value="Barcode" />,
         id: "barCode",
         accessor: (row) => (
-            <input
-                className="input_price"
-                value={row.barCode}
-                onChange={(e) => handleChangeInput(e.target.value, "barCode", row)}
+            <InputQuantity
+                value={row.barCode || ""}
+                handleChange={(value) => handleChangeInput(value, "barCode", row)}
+                isBarcode={true}
                 placeholder="Bar code"
             />
         )
