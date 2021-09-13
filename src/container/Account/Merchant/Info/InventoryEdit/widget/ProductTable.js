@@ -158,7 +158,7 @@ const columns = (uploadImagesOption, handleChangeInput, deleteQuantities) => [
                 value={row.barCode || ""}
                 handleChange={(value) => handleChangeInput(value, "barCode", row)}
                 isBarcode={true}
-                placeholder="Bar code"
+                placeholder="Barcode"
             />
         )
     },

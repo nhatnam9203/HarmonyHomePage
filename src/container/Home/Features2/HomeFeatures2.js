@@ -10,6 +10,13 @@ import POS3 from "../../../assets/images/home/pos3.png";
 import POS4 from "../../../assets/images/home/pos4.png";
 
 import Lap from "../../../assets/images/home/laptop.png";
+import iconWorking from "../../../assets/images/iconWorking.png";
+import iconUpgrade from "../../../assets/images/iconUpgrade.png";
+import iconMarketing from "../../../assets/images/iconMarketing.png";
+import iconEquipment from "../../../assets/images/iconEquipment.png";
+import iconLocation from "../../../assets/images/iconLocation.png";
+import iconDebit from "../../../assets/images/iconDebit.png";
+
 import Carousell from "../../Pricing/Carousel/Carousel";
 
 export default function HomeFeatures2() {
@@ -28,7 +35,7 @@ export default function HomeFeatures2() {
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             HarmonyPay Salon POS
           </h1>
-          <p className="bot_features2-item--text text-center">
+          <p className="bot_features2-item--text text-md-left p-0">
             An inclusive app for the most exclusive salon clients. Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
@@ -51,8 +58,8 @@ export default function HomeFeatures2() {
                 </Card>
               </LazyLoad>
             </Col>
-            <Col xs={12} md={6} className="text-center text-md-left p-0">
-              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+            <Col xs={12} md={6} className=" p-0">
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
                 On Demand Marketing
               </h1>
               <p className="bot_features2-item--text2 ">
@@ -68,9 +75,9 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="text-center text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
+              className="p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
             >
-              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left ">
                 Interactive Booking
               </h1>
               <p className="bot_features2-item--text2 ">
@@ -115,9 +122,9 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="text-center text-md-left p-0 order-1 order-md-0"
+              className="p-0 order-1 order-md-0"
             >
-              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
                 LIVE WAITLIST
               </h1>
               <p className="bot_features2-item--text2 ">
@@ -147,7 +154,7 @@ export default function HomeFeatures2() {
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             HarmonyPay consumer
           </h1>
-          <p className="bot_features2-item--text text-center">
+          <p className="bot_features2-item--text text-md-center">
             An inclusive app for the most exclusive salon clients. Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
@@ -171,8 +178,8 @@ export default function HomeFeatures2() {
                 </Card>
               </LazyLoad>
             </Col>
-            <Col xs={12} md={9} className="text-center text-md-left p-0">
-              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+            <Col xs={12} md={9} className="text-md-left p-0">
+              <h1 className="text-center text-uppercase font-weight-bold bot_features2-item--title2">
                 PREMIER LOCAL MARKETING
               </h1>
               <p className="bot_features2-item--text2 ">
@@ -187,7 +194,7 @@ export default function HomeFeatures2() {
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             HarmonyPay staff
           </h1>
-          <p className="bot_features2-item--text text-center">
+          <p className="bot_features2-item--text text-md-center">
             An inclusive app for the most exclusive salon clients. Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
@@ -199,9 +206,9 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={9}
-              className="text-center text-md-left p-0 order-1 order-md-0"
+              className="p-0 order-1 order-md-0"
             >
-              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
                 Appointment Reminders
               </h1>
               <p className="bot_features2-item--text2 ">
@@ -232,7 +239,7 @@ export default function HomeFeatures2() {
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             other features
           </h1>
-          <p className="bot_features2-item--text text-center">
+          <p className="bot_features2-item--text text-md-center">
             An inclusive app for the most exclusive salon clients. Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
@@ -245,7 +252,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="text-center text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
+              className="text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
             >
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
                 Credit Card Processing
@@ -290,7 +297,7 @@ export default function HomeFeatures2() {
                 </Card>
               </LazyLoad>
             </Col>
-            <Col xs={12} md={6} className="text-center text-md-left p-0">
+            <Col xs={12} md={6} className="text-md-left p-0">
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
                 gift card
               </h1>
@@ -308,7 +315,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="text-center text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
+              className="text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
             >
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
                 online booking plugin
@@ -335,6 +342,66 @@ export default function HomeFeatures2() {
                   />
                 </Card>{" "}
               </LazyLoad>
+            </Col>
+          </Row>
+        </div>
+
+        <div style={{ marginTop: 90 }} className="bot_features2-item d-flex flex-column justify-content-center align-items-center mb-0">
+          <h1 style={{ marginBottom : 40 }} className="bot_features2-item--title text-uppercase text-center font-weight-bold">
+            BUSINESSS CASH ADVANCED
+          </h1>
+          <Row>
+            <Col
+              xs={12}
+              md={6}
+              className="text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center contentCash"
+            >
+              <p className="bot_features2-item--text2 ">
+                Growing a business is not always an easy task. We have a financing solution available to help you grow, no matter what your business needs may be. Here at Harmony Payment we specialize in merchant cash advance to help your business get the funds you need fast and simple.
+              </p>
+
+              <p className="bot_features2-item--text2 ">
+                Our financing option such as merchant cash advance was created to help you accomplish great things. Our team knows the ins and outs of owning a busines, as most of us are small business owner ourselves; and we are 100% committed to helping you to expand.
+              </p>
+            </Col>
+            <Col
+              xs={12}
+              md={6}
+              className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
+            >
+              <div className="row_distance">
+                <div>
+                  <div>
+                    <img src={iconWorking} />
+                    <p>WORKING CAPATIAL</p>
+                  </div>
+                  <div>
+                    <img src={iconUpgrade} />
+                    <p>TECHNOLOGY UPGRADE</p>
+                  </div>
+                  <div>
+                    <img src={iconMarketing} />
+                    <p>MARKETING SOLUTIONS</p>
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <img src={iconLocation} />
+                    <p>LOCATION EXPANSION</p>
+                  </div>
+                  <div>
+                    <img src={iconEquipment} />
+                    <p>EQUIPMENT LEASING</p>
+                  </div>
+                  <div>
+                    <img src={iconDebit} />
+                    <p>DEBT CONSOLIDATION</p>
+                  </div>
+                </div>
+
+              
+              </div>
             </Col>
           </Row>
         </div>

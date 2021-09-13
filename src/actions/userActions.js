@@ -24,6 +24,7 @@ export const userLogin = (dataLogin) => async (dispatch) => {
       dispatch({ type: typeUser.LOGIN_REQUEST_FAILURE, payload: data.message });
     }
   } catch (error) {
+    console.log({ error })
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({ type: typeUser.LOGIN_REQUEST_FAILURE, payload: error.message });
   }
