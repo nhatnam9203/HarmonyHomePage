@@ -97,10 +97,10 @@ function Info() {
     dispatch(getInventory(url, token));
   };
 
-  const exportInventory = (exportType) => {
-    let url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts={"${sortTypeInventory}":"${sortInventory}"&merchantId=${detail.merchantId}&type=${exportType}`;
+  const exportInventory = (exportType, isNeedToOrder) => {
+    let url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts={"${sortTypeInventory}":"${sortInventory}"&merchantId=${detail.merchantId}&type=${exportType}&isNeedToOrder=${isNeedToOrder}`;
     if (isEmpty(sortInventory) || isEmpty(sortTypeInventory)) {
-      url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}&type=${exportType}`;
+      url = `product/export?page=${pageInventory}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}&type=${exportType}&isNeedToOrder=${isNeedToOrder}`;
     }
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));

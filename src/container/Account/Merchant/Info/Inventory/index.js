@@ -19,6 +19,7 @@ import {
   getAttribute,
   setInventoryDetail,
 } from "@/actions/retailerActions";
+import PopupSelectExport from "./PopupSelectExport";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -51,6 +52,8 @@ const Index = ({
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+  const [isConfirmExport, setConfirmExport] = React.useState(false);
+  const [reportType, setReportType] = React.useState("");
 
   const onClickSort = (status, sortType) => {
     changeSortInventory(status, sortType);
@@ -89,10 +92,18 @@ const Index = ({
     dispatch(closeExport());
   };
 
-  const onClickExport = (reportType) => {
-    setVisibileExport(true);
-    exportInventory(reportType.toString().toLowerCase());
+  const onClickExport = (typeReport) => {
+    setConfirmExport(true)
+    setReportType(typeReport);
+    // setVisibileExport(true);
+    // exportInventory(reportType.toString().toLowerCase(), isNeedToOrder);
   };
+
+  const onExport = (isNeedToOrder) => {
+    setVisibileExport(true);
+    exportInventory(reportType.toString().toLowerCase(), isNeedToOrder);
+    setConfirmExport(false);
+  }
 
   const backToInventory = () => {
     dispatch(setVisibleInventoryDetail(false));
@@ -181,6 +192,12 @@ const Index = ({
         isVisible={isVisibleExport}
         linkExport={linkExport}
         closeExport={onCloseExport}
+      />
+
+      <PopupSelectExport
+        isVisible={isConfirmExport}
+        onExport={onExport}
+        close={() => setConfirmExport(false)}
       />
     </>
   );

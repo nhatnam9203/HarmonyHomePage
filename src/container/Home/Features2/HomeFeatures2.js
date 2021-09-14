@@ -178,8 +178,8 @@ export default function HomeFeatures2() {
                 </Card>
               </LazyLoad>
             </Col>
-            <Col xs={12} md={9} className="text-md-left p-0">
-              <h1 className="text-center text-uppercase font-weight-bold bot_features2-item--title2">
+            <Col xs={12} md={9} className="p-0">
+              <h1 className="text-center text-md-left text-uppercase font-weight-bold bot_features2-item--title2">
                 PREMIER LOCAL MARKETING
               </h1>
               <p className="bot_features2-item--text2 ">
@@ -252,9 +252,9 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="text-md-left p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
+              className="p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
             >
-              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
                 Credit Card Processing
               </h1>
               <p className="bot_features2-item--text2 ">
@@ -297,8 +297,8 @@ export default function HomeFeatures2() {
                 </Card>
               </LazyLoad>
             </Col>
-            <Col xs={12} md={6} className="text-md-left p-0">
-              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2">
+            <Col xs={12} md={6} className="p-0">
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
                 gift card
               </h1>
               <p className="bot_features2-item--text2 ">
