@@ -95,8 +95,6 @@ const Index = ({
   const onClickExport = (typeReport) => {
     setConfirmExport(true)
     setReportType(typeReport);
-    // setVisibileExport(true);
-    // exportInventory(reportType.toString().toLowerCase(), isNeedToOrder);
   };
 
   const onExport = (isNeedToOrder) => {
