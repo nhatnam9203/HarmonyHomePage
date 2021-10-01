@@ -20,7 +20,7 @@ const FormEditInventory = ({
     sku,
     barCode,
     price,
-    // costPrice,
+    costPrice,
     quantity,
     minThreshold,
     maxThreshold,
@@ -133,6 +133,20 @@ const FormEditInventory = ({
                             onChange={(value) => handleChange("visibility", value)}
                         />
                     </Form.Group>
+
+                    {/******************** Cost price ********************/}
+                    {
+                        <Form.Group style={{ position: "relative" }}>
+                            <Form.Label>
+                                Cost price <span className="form_required">*</span>
+                            </Form.Label>
+                            <InputPrice
+                                value={costPrice}
+                                handleChange={(value) => handleChange("costPrice", value)}
+                                style={{ width: '100%', height: 57, color: '#404040' }}
+                            />
+                        </Form.Group>
+                    }
 
 
                     {/******************** Price ********************/}

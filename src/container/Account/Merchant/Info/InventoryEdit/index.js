@@ -203,7 +203,7 @@ const Index = ({ onBack }) => {
       isEmpty(name) ||
       isEmpty(sku) ||
       isEmpty(formatMoney(price)) ||
-      // isEmpty(formatMoney(costPrice)) ||
+      isEmpty(formatMoney(costPrice)) ||
       (isEmpty(quantity) && typeof quantity !== "number") ||
       (isEmpty(minThreshold) && typeof minThreshold !== "number") ||
       (isEmpty(maxThreshold) && typeof maxThreshold !== "number") ||
@@ -219,7 +219,7 @@ const Index = ({ onBack }) => {
           sku,
           barCode,
           price: isVisibleInventoryAdd ? price : (quantities && quantities.length > 0) ? inventoryDetail.price : price,
-          // costPrice: formatMoney(refCostPrice.current.value),
+          costPrice,
           quantity: isVisibleInventoryAdd ? quantity : (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
           minThreshold,
           maxThreshold,
@@ -241,6 +241,7 @@ const Index = ({ onBack }) => {
           })),
           fileId: findImageDefault() ? findImageDefault().fileId : isVisibleInventoryAdd ? 0 : inventoryDetail.fileId
         };
+
         if (isVisibleInventoryAdd) {
           addNewProduct(body);
           return;

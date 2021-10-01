@@ -121,6 +121,13 @@ const InventoryInfo = ({ onBack, setVisibleDelete }) => {
               {inventoryDetail.quantities.length > 0 ? inventoryDetail.priceRange : `$ ${inventoryDetail.price}`}
             </div>
           </div>
+
+          <div className="item_inventory_detail">
+            <div>Cost price</div>
+            <div style={{ fontWeight: '600' }}>
+              {`$ ${inventoryDetail.costPrice}`}
+            </div>
+          </div>
           <div className="item_inventory_detail">
             <div>Total items in stock</div>
             <div
