@@ -219,7 +219,7 @@ const Index = ({ onBack }) => {
           sku,
           barCode,
           price: isVisibleInventoryAdd ? price : (quantities && quantities.length > 0) ? inventoryDetail.price : price,
-          costPrice,
+          costPrice : (quantities && quantities.length > 0) ? inventoryDetail.costPrice : costPrice,
           quantity: isVisibleInventoryAdd ? quantity : (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
           minThreshold,
           maxThreshold,

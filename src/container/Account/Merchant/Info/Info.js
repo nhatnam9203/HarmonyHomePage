@@ -80,9 +80,9 @@ function Info() {
   }, [merchantId]);
 
   const getOrdersData = (page, sort, sortType) => {
-    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}`;
+    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}&includeDeleted=${true}`;
     if (isEmpty(sort) || isEmpty(sortType)) {
-      url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}`;
+      url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}&includeDeleted=${true}`;
     }
     url = encodeURI(url);
     dispatch(getOrders(url, token));

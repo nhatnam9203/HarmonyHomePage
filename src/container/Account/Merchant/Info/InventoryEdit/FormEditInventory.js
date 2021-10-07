@@ -136,6 +136,7 @@ const FormEditInventory = ({
 
                     {/******************** Cost price ********************/}
                     {
+                        (!quantities || quantities.length === 0) &&
                         <Form.Group style={{ position: "relative" }}>
                             <Form.Label>
                                 Cost price <span className="form_required">*</span>
