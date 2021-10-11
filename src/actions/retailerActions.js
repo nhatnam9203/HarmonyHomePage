@@ -641,6 +641,7 @@ export const changeImageProduct = (formData, productId, callBack) => async (
 
 export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
   try {
+    console.log({ formData });
     const url = "file?category=product";
     dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
     let { data = null } = await api.uploadFile(url, formData);
@@ -653,6 +654,29 @@ export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
   } finally {
     dispatch({ type: typeRetailer.STOP_UPLOAD_FILE_REQUEST });
+  }
+};
+
+export const importProduct = (formData, merchantId, callBack) => async (dispatch) => {
+  try {
+    const url = `product/import/manageQuantity/${merchantId}`;
+    const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+    dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
+    let { data = null } = await api.uploadImportProduct(url, formData, token);
+    dispatch({
+      type: typeNotify.NOTIFY_SUCCESS,
+      payload: data?.message,
+    });
+
+    if (parseInt(data.codeNumber) === 200) {
+      callBack();
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_DETAIL_REQUEST });
   }
 };
 

@@ -182,6 +182,16 @@ export const uploadFile = (requestUrl, formData) => {
   return axios.post(`${url}/${requestUrl}`, formData, config);
 };
 
+export const uploadImportProduct = (requestUrl, formData, token) => {
+  const config = {
+    headers: {
+      "content-type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.post(`${url}/${requestUrl}`, formData, config);
+};
+
 export const updateImageProduct = (requestUrl, payload, token) => {
   return axios.put(`${url}/${requestUrl}`, payload, {
     headers: {

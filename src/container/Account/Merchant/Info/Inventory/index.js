@@ -18,8 +18,11 @@ import {
   setVisibleInventoryAdd,
   getAttribute,
   setInventoryDetail,
+  importProduct
 } from "@/actions/retailerActions";
+
 import PopupSelectExport from "./PopupSelectExport";
+import ButtonImport from "./ButtonImport";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -108,6 +111,15 @@ const Index = ({
     getInventoryData();
   }
 
+  const importInventory = (files) => {
+    let file = files[0];
+    let formData = new FormData();
+    formData.append("Filename3", file);
+    dispatch(importProduct(formData, detail.merchantId, () => {
+      getInventoryData();
+    }));
+  }
+
   const backFromEdit = (type) => {
     if (type === "reset") {
       dispatch(setVisibleInventoryEdit(false));
@@ -154,11 +166,14 @@ const Index = ({
               onSubmit={searchInventory}
             />
           </div>
-          <ButtonReport
-            onClickShowReport={() => { }}
-            onClickExport={onClickExport}
-            isNotShowReport
-          />
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            <ButtonImport importInventory={importInventory} />
+            <ButtonReport
+              onClickShowReport={() => { }}
+              onClickExport={onClickExport}
+              isNotShowReport
+            />
+          </div>
         </div>
         <div className="table-container">
           <ReactTable

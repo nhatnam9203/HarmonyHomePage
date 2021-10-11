@@ -31,6 +31,8 @@ function Info() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { detail } = useSelector((state) => state.merchantDetail);
+
+
   const {
     directionSort_inventory,
     directionSort_orders,
