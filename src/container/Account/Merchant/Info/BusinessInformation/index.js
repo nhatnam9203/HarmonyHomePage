@@ -19,10 +19,6 @@ function Index() {
   const [bank, setBank] = useState(true);
   const [principal, setPrincipal] = useState(true);
 
-  useEffect(() => {
-    dispatch(getMerchantByIdAction(id));
-  }, [dispatch]);
-
   const { detail } = useSelector((state) => state.merchantDetail);
 
   return (

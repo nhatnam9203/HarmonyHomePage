@@ -52,6 +52,21 @@
   margin-right : 16px
 }
 
+.row_button_report{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media screen and (max-width : 600px){
+  .row_button_report{
+    flex-direction: column !important;
+  }
+  .buttonUpload{
+    display: none;
+  }
+}
+
 .buttonUpload >img{
   width : 34px;
   height : 34px

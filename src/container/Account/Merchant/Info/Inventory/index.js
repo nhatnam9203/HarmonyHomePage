@@ -146,6 +146,8 @@ const Index = ({
     );
   }
 
+  console.log({ inventory })
+
   return (
     <>
       <>
@@ -166,7 +168,7 @@ const Index = ({
               onSubmit={searchInventory}
             />
           </div>
-          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+          <div className="row_button_report">
             <ButtonImport importInventory={importInventory} />
             <ButtonReport
               onClickShowReport={() => { }}
