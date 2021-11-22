@@ -448,6 +448,7 @@ const Index = ({ onBack }) => {
   }
 
   const updateLabelQuantities = (value) => {
+
     const quantitiesUpdateName = createQuantitiesItem(
       inventoryDetail,
       options,
@@ -465,6 +466,8 @@ const Index = ({ onBack }) => {
           price: isExistItem.costPrice,
           description: isExistItem.description,
           additionalPrice: isExistItem.additionalPrice,
+          barCode : isExistItem.barCode,
+          tempQuantity : isExistItem.tempQuantity,
         });
       }
       return x;

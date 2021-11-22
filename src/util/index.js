@@ -260,6 +260,7 @@ export const formatMoney = (
 
 
 const createOptionsValuesQty = (optionValues) => {
+
   if (!optionValues || optionValues?.length <= 0) return null;
 
   return optionValues?.map((item) => ({
@@ -294,7 +295,6 @@ export const combineOptionsValuesQty = (qtyArr, optionValues) => {
 };
 
 export const createQuantitiesItem = (product, options, name = null) => {
-  console.log({ name })
   if (!options || options?.length < 0) return null;
 
   const quantities = options?.reduce((accumulator, currentValue, index) => {
@@ -308,6 +308,8 @@ export const createQuantitiesItem = (product, options, name = null) => {
       currentValue?.values?.filter((x) => x.checked)
     );
   }, []);
+
+  console.log({ quantities })
 
   return quantities?.map((quantity) =>
     Object.assign({}, quantity, {
