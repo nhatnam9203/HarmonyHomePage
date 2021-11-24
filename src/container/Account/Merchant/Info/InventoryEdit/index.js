@@ -463,7 +463,7 @@ const Index = ({ onBack }) => {
         return Object.assign({}, x, {
           quantity: isExistItem.quantity,
           costPrice: isExistItem.costPrice,
-          price: isExistItem.costPrice,
+          price: isExistItem.price,
           description: isExistItem.description,
           additionalPrice: isExistItem.additionalPrice,
           barCode : isExistItem.barCode,

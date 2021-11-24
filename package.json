@@ -1,6 +1,6 @@
 {
   "name": "react-base-structure",
-  "homepage" : "https://stage-new.harmonypayment.com/home/",
+  "homepage" : "https://stage-new.harmonypayment.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
