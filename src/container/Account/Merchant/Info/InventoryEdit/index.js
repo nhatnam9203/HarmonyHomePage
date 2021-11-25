@@ -130,7 +130,7 @@ const Index = ({ onBack }) => {
     setCategoryId(inventoryDetail.categoryId);
     setImages(inventoryDetail.images);
     setDescription(inventoryDetail.description);
-    setQuantities(inventoryDetail.quantities);
+    setQuantities(inventoryDetail.quantities.map((x, index) => ({ ...x, position: index })));
     setTemptOption(inventoryDetail.options);
     setVisibility(inventoryDetail.visibility);
   };
@@ -219,7 +219,7 @@ const Index = ({ onBack }) => {
           sku,
           barCode,
           price: isVisibleInventoryAdd ? price : (quantities && quantities.length > 0) ? inventoryDetail.price : price,
-          costPrice : (quantities && quantities.length > 0) ? inventoryDetail.costPrice : costPrice,
+          costPrice: (quantities && quantities.length > 0) ? inventoryDetail.costPrice : costPrice,
           quantity: isVisibleInventoryAdd ? quantity : (quantities && quantities.length > 0) ? inventoryDetail.quantity : quantity,
           minThreshold,
           maxThreshold,
@@ -420,42 +420,53 @@ const Index = ({ onBack }) => {
     }
   }
 
-  const setNewQuantities = (optionsTicked) => {
-    const oldList = quantities ? [...quantities] : [];
+  // const setNewQuantities = (optionsTicked) => {
+  //   const oldList = quantities ? [...quantities] : [];
 
-    let newList = createQuantitiesItem(inventoryDetail, optionsTicked)?.map((x) => {
-      const isExistItem = oldList?.find((f) =>
-        arrayIsEqual(f?.attributeIds, x?.attributeIds)
-      );
+  //   let newList = createQuantitiesItem(inventoryDetail, optionsTicked)?.map((x) => {
+  //     const isExistItem = oldList?.find((f) =>
+  //       arrayIsEqual(f?.attributeIds, x?.attributeIds)
+  //     );
 
-      if (isExistItem) {
-        return Object.assign({}, x, {
-          quantity: isExistItem.quantity,
-          costPrice: isExistItem.costPrice,
-          additionalPrice: isExistItem.additionalPrice,
-          price: isExistItem.price,
-          imageUrl: isExistItem.imageUrl,
-          fileId: isExistItem.fileId,
-          position: isExistItem.position ?? 0,
-          id: isExistItem.id ?? 0,
-          description: isExistItem.description ?? "",
-        });
-      }
-      return x;
-    });
+  //     if (isExistItem) {
+  //       return Object.assign({}, x, {
+  //         quantity: isExistItem.quantity,
+  //         costPrice: isExistItem.costPrice,
+  //         additionalPrice: isExistItem.additionalPrice,
+  //         price: isExistItem.price,
+  //         imageUrl: isExistItem.imageUrl,
+  //         fileId: isExistItem.fileId,
+  //         position: isExistItem.position ?? 0,
+  //         id: isExistItem.id ?? 0,
+  //         description: isExistItem.description ?? "",
+  //       });
+  //     }
+  //     return x;
+  //   });
 
-    setQuantities(newList);
-  }
+  //   setQuantities(newList);
+  // }
+
 
   const updateLabelQuantities = (value) => {
 
-    const quantitiesUpdateName = createQuantitiesItem(
+    let temp = createQuantitiesItem(
       inventoryDetail,
       options,
       value
-    )?.map((x) => {
+    );
 
-      const isExistItem = quantities.find((f) =>
+    console.log({ temp })
+
+    let quantitiesUpdateName = createQuantitiesItem(
+      inventoryDetail,
+      options,
+      value
+    )?.map((x, index) => {
+
+      let quantitiesTemp = [...quantities];
+
+      const isExistItem = quantitiesTemp.find((f) =>
         arrayIsEqual(f?.attributeIds, x?.attributeIds)
       );
 
@@ -466,18 +477,21 @@ const Index = ({ onBack }) => {
           price: isExistItem.price,
           description: isExistItem.description,
           additionalPrice: isExistItem.additionalPrice,
-          barCode : isExistItem.barCode,
-          tempQuantity : isExistItem.tempQuantity,
+          barCode: isExistItem.barCode,
+          tempQuantity: isExistItem.tempQuantity,
+          position : isExistItem?.position,
         });
       }
       return x;
     });
 
+    quantitiesUpdateName = quantitiesUpdateName?.sort((a, b) => a.position - b.position);
+
     setQuantities(quantitiesUpdateName);
   }
 
   const createProductVersion = (optionMerge) => {
-    const qtys = createQuantitiesItem(inventoryDetail, optionMerge , name);
+    const qtys = createQuantitiesItem(inventoryDetail, optionMerge, name);
     setQuantities(qtys);
   }
 

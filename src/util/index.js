@@ -295,6 +295,7 @@ export const combineOptionsValuesQty = (qtyArr, optionValues) => {
 };
 
 export const createQuantitiesItem = (product, options, name = null) => {
+
   if (!options || options?.length < 0) return null;
 
   const quantities = options?.reduce((accumulator, currentValue, index) => {
@@ -309,8 +310,7 @@ export const createQuantitiesItem = (product, options, name = null) => {
     );
   }, []);
 
-  console.log({ quantities })
-
+ 
   return quantities?.map((quantity) =>
     Object.assign({}, quantity, {
       label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
