@@ -294,6 +294,19 @@ export const combineOptionsValuesQty = (qtyArr, optionValues) => {
   return resultArray;
 };
 
+export const quantitiesUpdateLabel = (product, quantities, name = null) => {
+ 
+  return quantities?.map((quantity) =>
+    Object.assign({}, quantity, {
+      label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
+      price: product.price ? product.price : "0.00",
+      description: "",
+      fileId: 0,
+    })
+  );
+};
+
+
 export const createQuantitiesItem = (product, options, name = null) => {
 
   if (!options || options?.length < 0) return null;

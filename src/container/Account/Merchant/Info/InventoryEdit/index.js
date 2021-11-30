@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
 import { FormatPrice, formatMoney } from "@/util";
 import { PopupNewCategory, PopupDefaultImage, PopupAddOption, ProductTable, PopupAuto, PopupManual } from "./widget"
-import { createQuantitiesItem, arrayIsEqual, createVersionFromItems } from "@/util";
+import { createQuantitiesItem, arrayIsEqual, createVersionFromItems, quantitiesUpdateLabel } from "@/util";
 
 import "../Info.scss";
 import "./style.scss";
@@ -448,15 +448,7 @@ const Index = ({ onBack }) => {
   // }
 
 
-  const updateLabelQuantities = (value) => {
-
-    let temp = createQuantitiesItem(
-      inventoryDetail,
-      options,
-      value
-    );
-
-    console.log({ temp })
+  const updateLabelQuantities = async (value) => {
 
     let quantitiesUpdateName = createQuantitiesItem(
       inventoryDetail,
@@ -479,15 +471,28 @@ const Index = ({ onBack }) => {
           additionalPrice: isExistItem.additionalPrice,
           barCode: isExistItem.barCode,
           tempQuantity: isExistItem.tempQuantity,
-          position : isExistItem?.position,
+          position: isExistItem?.position,
         });
       }
       return x;
     });
 
     quantitiesUpdateName = quantitiesUpdateName?.sort((a, b) => a.position - b.position);
+    quantitiesUpdateName = await filterQuantitiesUpdate(quantitiesUpdateName);
 
     setQuantities(quantitiesUpdateName);
+  }
+
+  const filterQuantitiesUpdate = (quantitiesUpdateName) => {
+    let tempArr = [];
+    for(let i = 0; i < quantities.length ; i++){
+      for(let j = 0; j < quantitiesUpdateName.length ; j++){
+        if(quantities[i].position === quantitiesUpdateName[j].position){
+          tempArr.push(quantitiesUpdateName[j]);
+        }
+      }
+    }
+    return tempArr;
   }
 
   const createProductVersion = (optionMerge) => {
