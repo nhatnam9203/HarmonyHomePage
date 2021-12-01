@@ -373,7 +373,7 @@ export default function HomeFeatures2() {
                 <div>
                   <div>
                     <img src={iconWorking} />
-                    <p>WORKING CAPATIAL</p>
+                    <p>WORKING CAPITAL</p>
                   </div>
                   <div>
                     <img src={iconUpgrade} />

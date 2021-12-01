@@ -7,11 +7,12 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 
 import next_blue from "../../assets/images/retailer/next_blue.png";
 import prev_blue from "../../assets/images/retailer/prev_blue.png";
+import Info from "./Merchant/Info/Info";
 
 import "./Account.scss";
 
 const Merchant = lazy(() => import("./Merchant/Merchant"));
-const Info = lazy(() => import("./Merchant/Info/Info"));
+// const Info = lazy(() => import("./Merchant/Info/Info"));
 const EditInfo = lazy(() => import("./Merchant/EditInfo/EditInfo"));
 
 const MyAccount = lazy(() => import("./MyAccount/MyAccount"));
