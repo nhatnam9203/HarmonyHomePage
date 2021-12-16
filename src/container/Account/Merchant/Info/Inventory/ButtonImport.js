@@ -6,7 +6,7 @@ export default class Buttonimport extends Component {
     render() {
         return (
             <Dropzone
-                accept={".xlsx , .xls"}
+                accept={".xlsx , .xls, .csv"}
                 multiple={false}
                 maxSize={10485760}
                 noDrag={true}

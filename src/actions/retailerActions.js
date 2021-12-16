@@ -659,7 +659,7 @@ export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
 
 export const importProduct = (formData, merchantId, callBack) => async (dispatch) => {
   try {
-    const url = `product/import/manageQuantity/${merchantId}`;
+    const url = `product/import/manageQuantity/${merchantId}?replaceQuantity=${true}`;
     const token = JSON.parse(localStorage.getItem("user"))?.token || "";
     dispatch({ type: typeRetailer.RETAILER_DETAIL_REQUEST });
     let { data = null } = await api.uploadImportProduct(url, formData, token);
