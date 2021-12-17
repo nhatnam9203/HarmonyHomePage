@@ -6,6 +6,7 @@ import "../Info.scss";
 import "./style.scss";
 
 const ItemsOrdered = ({ products = [] }) => {
+
   return (
     <>
       <Title>Items Ordered</Title>

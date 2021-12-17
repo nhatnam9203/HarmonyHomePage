@@ -111,8 +111,18 @@ const Index = ({
     getInventoryData();
   }
 
+  function newFile(originalFile, newName) {
+    return new File([originalFile], newName, {
+        type: "text/csv",
+        lastModified: originalFile.lastModified,
+    });
+}
+
   const importInventory = (files) => {
     let file = files[0];
+    if(file.name?.toString().includes(".csv")){
+      file = newFile(file,file.name)
+    }
     let formData = new FormData();
     formData.append("Filename3", file);
     dispatch(importProduct(formData, detail.merchantId, () => {
@@ -145,8 +155,6 @@ const Index = ({
       />
     );
   }
-
-  console.log({ inventory })
 
   return (
     <>
