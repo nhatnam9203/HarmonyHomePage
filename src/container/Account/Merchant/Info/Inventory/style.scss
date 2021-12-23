@@ -61,6 +61,7 @@
 @media screen and (max-width : 600px){
   .row_button_report{
     flex-direction: column !important;
+    align-items: 'flex-end';
   }
   .buttonUpload{
     display: none;

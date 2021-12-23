@@ -1,12 +1,12 @@
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import LazyLoad from "react-lazyload";
-import POS1 from "../../../assets/images/home/pos1.png";
-import POS2 from "../../../assets/images/home/pos2.png";
+import POS1 from "../../../assets/images/home/on_demand_marketing.png";
+import POS2 from "../../../assets/images/home/interactive_booking.png";
 import Ipad from "../../../assets/images/home/ipad.png";
-import Iphone from "../../../assets/images/home/iphone4.png";
-import Iphone2 from "../../../assets/images/home/iphone2.png";
-import POS3 from "../../../assets/images/home/pos3.png";
+import Iphone from "../../../assets/images/home/harmony_consumer.png";
+import Iphone2 from "../../../assets/images/home/harmony_one.png";
+import POS3 from "../../../assets/images/home/merchant_services.png";
 import POS4 from "../../../assets/images/home/pos4.png";
 
 import Lap from "../../../assets/images/home/laptop.png";
@@ -35,7 +35,7 @@ export default function HomeFeatures2() {
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             HarmonyPay Salon POS
           </h1>
-          <p className="bot_features2-item--text text-md-left p-0">
+          <p className="bot_features2-item--text text-md-center p-0">
             An inclusive app for the most exclusive salon clients. Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
@@ -158,14 +158,12 @@ export default function HomeFeatures2() {
             An inclusive app for the most exclusive salon clients. Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
-            pedicure chairs. Pay-it-back with peer-2-peer features or
-            pay-it-forward with universal gift cards at any participating
-            salons.
+            pedicure chairs.
           </p>
           <Row>
             <Col
               xs={12}
-              md={3}
+              md={6}
               className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
             >
               <LazyLoad height={200}>
@@ -178,7 +176,7 @@ export default function HomeFeatures2() {
                 </Card>
               </LazyLoad>
             </Col>
-            <Col xs={12} md={9} className="p-0">
+            <Col xs={12} md={6} className="p-0">
               <h1 className="text-center text-md-left text-uppercase font-weight-bold bot_features2-item--title2">
                 PREMIER LOCAL MARKETING
               </h1>
@@ -189,23 +187,19 @@ export default function HomeFeatures2() {
               </p>
             </Col>
           </Row>
+
         </div>
         <div className="bot_features2-item d-flex flex-column justify-content-center align-items-center">
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
-            HarmonyPay staff
+            HARMONY ONE
           </h1>
           <p className="bot_features2-item--text text-md-center">
-            An inclusive app for the most exclusive salon clients. Book, modify,
-            and confirm appointments directly with your beloved salons. Know
-            exactly how much you are paying and pay from the comfort of your
-            pedicure chairs. Pay-it-back with peer-2-peer features or
-            pay-it-forward with universal gift cards at any participating
-            salons.
+            Salon owners make Harmony One for salon owners, stylists, manicurists, and beauticians. It is the most powerful salon POS System in the palm of your hand. It’s so easy; even Grandma can use it, but with all the powerful features of our complete POS System. On-Demand Marketing - help bring in clients when you want. Never have to sit and wait, and wait and wait for your clients ever again. Interactive booking - upgrade your booking system to the most advanced interactive booking system on planet Earth. It is like going from hand radio to a smartphone.
           </p>
           <Row>
             <Col
               xs={12}
-              md={9}
+              md={6}
               className="p-0 order-1 order-md-0"
             >
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
@@ -220,7 +214,7 @@ export default function HomeFeatures2() {
             </Col>
             <Col
               xs={12}
-              md={3}
+              md={6}
               className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
             >
               <LazyLoad height={200}>
@@ -228,7 +222,7 @@ export default function HomeFeatures2() {
                   <Card.Img
                     className="bot_features2-item--phone"
                     src={Iphone2}
-                    alt="Staff App"
+                    alt="Harmony one"
                   />
                 </Card>
               </LazyLoad>
@@ -240,7 +234,7 @@ export default function HomeFeatures2() {
             other features
           </h1>
           <p className="bot_features2-item--text text-md-center">
-            An inclusive app for the most exclusive salon clients. Book, modify,
+            Book, modify,
             and confirm appointments directly with your beloved salons. Know
             exactly how much you are paying and pay from the comfort of your
             pedicure chairs. Pay-it-back with peer-2-peer features or
@@ -255,14 +249,10 @@ export default function HomeFeatures2() {
               className="p-0 order-1 order-md-0 d-md-flex flex-md-column justify-content-md-center"
             >
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
-                Credit Card Processing
+                Merchant services
               </h1>
               <p className="bot_features2-item--text2 ">
-                Integrated credit card processing simplifies checkout – no more
-                switching between systems as your client waits. Consolidated
-                reporting means no more reconciling bank statements with closed
-                tickets to determine if you’ve been paid for all your work.
-                “Meet or beat rates” means you save on every swipe!
+                Choose your favorite payments provider Have a favorite card processor already? HarmonyPay is fully compatible with any payment service you may be using. Easily accept card payments in any country, anywhere you do business. Your rates, your features, your way. This is how merchant services and point of sale should be.
               </p>
             </Col>
             <Col
@@ -347,7 +337,7 @@ export default function HomeFeatures2() {
         </div>
 
         <div style={{ marginTop: 90 }} className="bot_features2-item d-flex flex-column justify-content-center align-items-center mb-0">
-          <h1 style={{ marginBottom : 40 }} className="bot_features2-item--title text-uppercase text-center font-weight-bold">
+          <h1 style={{ marginBottom: 40 }} className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             BUSINESSS CASH ADVANCED
           </h1>
           <Row>
@@ -400,7 +390,7 @@ export default function HomeFeatures2() {
                   </div>
                 </div>
 
-              
+
               </div>
             </Col>
           </Row>
