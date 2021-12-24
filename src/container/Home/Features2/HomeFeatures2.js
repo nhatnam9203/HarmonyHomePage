@@ -169,7 +169,7 @@ export default function HomeFeatures2() {
               <LazyLoad height={200}>
                 <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
                   <Card.Img
-                    className="bot_features2-item--phone"
+                    className="bot_features2-item--img"
                     src={Iphone}
                     alt="Consumer App"
                   />
@@ -220,7 +220,7 @@ export default function HomeFeatures2() {
               <LazyLoad height={200}>
                 <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
                   <Card.Img
-                    className="bot_features2-item--phone"
+                    className="bot_features2-item--img"
                     src={Iphone2}
                     alt="Harmony one"
                   />

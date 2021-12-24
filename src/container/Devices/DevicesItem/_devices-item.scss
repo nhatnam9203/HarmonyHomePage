@@ -104,13 +104,19 @@
       color: #707070;
       margin-bottom: 1.5rem;
       line-height: 2rem;
+      
       @include mediaQueryMax("large") {
         letter-spacing: 0rem;
       }
       @media screen and(max-width:768px) {
         font-size: 1.35rem;
       }
+
+      &--clover{
+        color: #000;
+      }
     }
+
     &--title2 {
       font-size: 0.9375rem;
       font-weight: 600;

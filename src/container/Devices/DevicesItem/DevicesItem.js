@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Card, CardDeck, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import PayPoint from "../../../assets/images/device/paypoint.png";
+import PayPoint from "../../../assets/images/home/on_demand_marketing.png";
 import Mpop from "../../../assets/images/device/mpop.png";
-import Drawer1 from "../../../assets/images/device/drawer_1.jpg";
-import Drawer2 from "../../../assets/images/device/drawer_2.jpg";
-import Drawer3 from "../../../assets/images/device/drawer_3.jpg";
+import Drawer1 from "../../../assets/images/device/clover_device_1.png";
+import Drawer2 from "../../../assets/images/device/clover_device_2.png";
+import Drawer3 from "../../../assets/images/device/clover_device_3.png";
 import Ipad2 from "../../../assets/images/device/ipad1w.jpg";
 import Ipad1 from "../../../assets/images/device/ipad2w.jpg";
 import Ipad3 from "../../../assets/images/device/ipad3w.jpg";
@@ -14,11 +14,10 @@ import StandBlack2 from "../../../assets/images/device/ipad2.jpg";
 import StandBlack3 from "../../../assets/images/device/ipad3.jpg";
 import Terminal1 from "../../../assets/images/img/Device/device1Notext.png";
 import Terminal2 from "../../../assets/images/img/Device/device2Notext.png";
-// import Terminal3 from "../../../assets/images/img/Device/divice3.png";
-import Terminal4 from "../../../assets/images/img/Device/device4Notext.png";
-// import Terminal5 from "../../../assets/images/device/terminal5.png";
 import Terminal5 from "../../../assets/images/img/Device/device5Notext.png";
 import Printer from "../../../assets/images/device/printer.png";
+import dejavoo_QD2 from "../../../assets/images/device/dejavoo_QD2.png";
+import dejavoo_QD3 from "../../../assets/images/device/dejavoo_QD3.png";
 
 export default function DevicesItem() {
   const [swap, setSwap] = useState(true);
@@ -33,6 +32,11 @@ export default function DevicesItem() {
             <h1 className="divices__item--title text-uppercase text-center font-weight-bold">
               Choose the Right Hardware for business
             </h1>
+
+            <h2 className="divices__bot-title text-uppercase font-weight-bold text-center">
+              paypoint
+            </h2>
+            <hr className="divices__bot-hr" />
 
             <Row className="row__size mx-0">
               <Col
@@ -117,9 +121,10 @@ export default function DevicesItem() {
           </div>
         </div>
         <div className="divices__bot">
+        
           <div className="divices__bot-item d-flex flex-column justify-content-center align-items-center">
             <h2 className="divices__bot-title text-uppercase font-weight-bold text-center">
-              cash drawer
+              clover devices
             </h2>
             <hr className="divices__bot-hr" />
             <Row className="mx-0">
@@ -131,41 +136,11 @@ export default function DevicesItem() {
                     className="divices__bot-card--img mx-auto"
                   />
                   <Card.Body>
-                    <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
-                      POS CASH DRAWER 12 INCH, BX1214S
+                    <Card.Title className="divices__bot-card--title divices__bot-card--title--clover text-center text-text-uppercase">
+                      Clover GO
                     </Card.Title>
                     <div className="divices__bot-card--text">
-                      <ul className="divices__bot-card--ul">
-                        <li className="divices__bot-card--li">
-                          11.9 x 13.7 x 4 inches
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Removable Tray,5Bill/5Coin,Aluminium Alloy,RJ11/RJ12
-                          Cable,DC24V
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Lifecycle - Tested to Over 2,000,000 Times Operation -
-                          Heavy Duty
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Aluminium Alloy material, 5Bill/5Coin Tray, Ball
-                          bearing slide for smooth and stable operations
-                        </li>
-                        <li className="divices__bot-card--li">
-                          This POS cash drawer can be used alone or connects to
-                          receipt printer via RJ11/RJ12 cable
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Key open or auto open when it hooks up with receipt
-                          printer / thermal printers which compatible with
-                          RJ11/RJ12 Interfaces, such as Epson, Star, Citizen...
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Why Choose us? - We are your premier POS partner with
-                          12 Years Experience on cash drawers and related
-                          products
-                        </li>
-                      </ul>
+                      Take your business to your customers with this sleek, compact mobile credit card reader and app that pack a lot of processing power. Whether at the local farmer’s market or at a customer’s job site, you can accept payments on the go, wherever you have a Wi-Fi or cellular connection.
                     </div>
                   </Card.Body>
                 </Card>
@@ -176,40 +151,11 @@ export default function DevicesItem() {
                     className="divices__bot-card--img mx-auto"
                   />
                   <Card.Body>
-                    <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
-                      POS CASH DRAWER 13 INCH, BX1315W
+                    <Card.Title className="divices__bot-card--title divices__bot-card--title--clover text-center text-text-uppercase">
+                      Clover Mini
                     </Card.Title>
                     <div className="divices__bot-card--text">
-                      <ul className="divices__bot-card--ul">
-                        <li className="divices__bot-card--li">
-                          13.5 x 15.2 x 3.9 inches
-                        </li>
-                        <li className="divices__bot-card--li">
-                          5B/5C,Via RJ11/RJ12 Cable for Auto Open,DC24V
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Lifecycle - Tested to Over 2,000,000 Times Operation -
-                          Heavy Duty
-                        </li>
-                        <li className="divices__bot-card--li">
-                          5Bill - 5Coin Cash Drawer Tray, Media slot to insert
-                          check and large bills
-                        </li>
-                        <li className="divices__bot-card--li">
-                          This cash register can be used alone or connects to
-                          receipt printer via RJ11/RJ12 cable
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Key open or auto open when it hooks up with receipt
-                          printer / thermal printers which compatible with
-                          RJ11/RJ12 interfaces, such as Epson, Star, Citizen...
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Why Choose us? - We are your premier POS partner with
-                          12 Years Experience on cash drawers and related
-                          products
-                        </li>
-                      </ul>
+                      A full point-of-sale system in one sleek little package. Mini can fit into any space but packs plenty of POS power to run your business, end to end. Use it just for payments or to run your whole business from inventory to payroll.
                     </div>
                   </Card.Body>
                 </Card>
@@ -220,40 +166,11 @@ export default function DevicesItem() {
                     className="divices__bot-card--img mx-auto"
                   />
                   <Card.Body>
-                    <Card.Title className="divices__bot-card--title text-center text-text-uppercase">
-                      POS CASH DRAWER 16 INCH, BX1618W
+                    <Card.Title className="divices__bot-card--title divices__bot-card--title--clover text-center text-text-uppercase">
+                      Clover Flex
                     </Card.Title>
                     <div className="divices__bot-card--text">
-                      <ul className="divices__bot-card--ul">
-                        <li className="divices__bot-card--li">
-                          16.1 x 18.1 x 4.3 inches
-                        </li>
-                        <li className="divices__bot-card--li">
-                          5Bill/5Coin Removable Tray, RJ11/RJ12 Cable, DC24V
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Lifecycle - Tested to Over 2,000,000 Times Operation -
-                          Heavy Duty
-                        </li>
-                        <li className="divices__bot-card--li">
-                          5Bill/5Coin Removable Tray,1 big slots to insert
-                          checks, credit card receipts...
-                        </li>
-                        <li className="divices__bot-card--li">
-                          This POS cash drawer can be used alone or connects to
-                          receipt printer via RJ11/RJ12 cable
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Key open or auto open when it hooks up with receipt
-                          printer / thermal printers which compatible with
-                          RJ11/RJ12 interfaces, such as Epson, Star, Citizen...
-                        </li>
-                        <li className="divices__bot-card--li">
-                          Why Choose us? - We are your premier POS partner with
-                          12 Years Experience on cash drawers and related
-                          products
-                        </li>
-                      </ul>
+                      Serve customers better – at the counter, in line, at the table, or in the field – with the Clover Flex handheld POS system. This all-in-one device offers built-in capabilities to accept payments, conduct business, and track sales all from the palm of your hand.
                     </div>
                   </Card.Body>
                 </Card>
@@ -266,6 +183,7 @@ export default function DevicesItem() {
               contact sale
             </Link>
           </div>
+
           <div className="divices__bot-item d-flex flex-column justify-content-center align-items-center">
             <h2 className="divices__bot-title text-uppercase font-weight-bold text-center">
               Ipad stand
@@ -430,15 +348,29 @@ export default function DevicesItem() {
                 <Card className="divices__bot-card">
                   <Card.Img
                     variant="top"
-                    src={Terminal4}
+                    src={dejavoo_QD2}
                     className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
                     <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
-                      Dejavoo Z1 MPOS Terminal
+                      Dejavoo QD2 Mobile Wireless Android
                     </Card.Title>
                   </Card.Body>
                 </Card>
+
+                <Card className="divices__bot-card">
+                  <Card.Img
+                    variant="top"
+                    src={dejavoo_QD3}
+                    className="divices__bot-card--img1 mx-auto"
+                  />
+                  <Card.Body>
+                    <Card.Title className="divices__bot-card--title2 text-center text-text-uppercase">
+                      Dejavoo QD3 mPOS Android
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+
               </CardDeck>
             </Row>{" "}
             <Link
