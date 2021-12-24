@@ -12,12 +12,12 @@ import Ipad3 from "../../../assets/images/device/ipad3w.jpg";
 import StandBlack1 from "../../../assets/images/device/ipad1.jpg";
 import StandBlack2 from "../../../assets/images/device/ipad2.jpg";
 import StandBlack3 from "../../../assets/images/device/ipad3.jpg";
-import Terminal1 from "../../../assets/images/img/Device/device1Notext.png";
-import Terminal2 from "../../../assets/images/img/Device/device2Notext.png";
-import Terminal5 from "../../../assets/images/img/Device/device5Notext.png";
 import Printer from "../../../assets/images/device/printer.png";
 import dejavoo_QD2 from "../../../assets/images/device/dejavoo_QD2.png";
 import dejavoo_QD3 from "../../../assets/images/device/dejavoo_QD3.png";
+import a60 from "../../../assets/images/device/a60.png";
+import a80 from "../../../assets/images/device/a80.png";
+import a920 from "../../../assets/images/device/a920.png";
 
 export default function DevicesItem() {
   const [swap, setSwap] = useState(true);
@@ -300,7 +300,7 @@ export default function DevicesItem() {
                 <Card className="divices__bot-card">
                   <Card.Img
                     variant="top"
-                    src={Terminal5}
+                    src={a60}
                     className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
@@ -312,7 +312,7 @@ export default function DevicesItem() {
                 <Card className="divices__bot-card">
                   <Card.Img
                     variant="top"
-                    src={Terminal1}
+                    src={a80}
                     className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
@@ -324,7 +324,7 @@ export default function DevicesItem() {
                 <Card className="divices__bot-card">
                   <Card.Img
                     variant="top"
-                    src={Terminal2}
+                    src={a920}
                     className="divices__bot-card--img1 mx-auto"
                   />
                   <Card.Body>
