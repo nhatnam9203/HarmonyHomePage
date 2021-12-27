@@ -4,6 +4,7 @@ import Packkage1 from "../../../assets/images/img/Pricing/Group 5957.jpg";
 import Packkage2 from "../../../assets/images/img/Pricing/Group 5958.jpg";
 import Packkage3 from "../../../assets/images/img/Pricing/Group 5959.jpg";
 import Packkage4 from "../../../assets/images/img/Pricing/Group 5960.jpg";
+import icon_checked from "../../../assets/images/home/icon_checked.png";
 import FullFeatures from "../../../assets/images/pricing/imgpsh_fullsize_anim.jpeg";
 import { Link } from "react-router-dom";
 import { TiTick } from "react-icons/ti";
@@ -150,7 +151,27 @@ export default function Package() {
                   The legendary struggle of a salon owner without Harmony POS
                   system. Let’s this package mark the beginning of your
                   legendary successful salon.
+                  <span style={{ color : "white" }}>
+                    The Quan”. We are your ambassador of Quan. gghjghjgjhg
+                  </span>
                 </Card.Text>
+
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>POS</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Check-in App</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Marketing</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Report</div>
+                </div>
               </Card.Body>
             </Card>
           </Col>
@@ -184,7 +205,27 @@ export default function Package() {
                   The purpose of life is to live it, to experience and enjoy the
                   love it gives in every breath. Let live, love, and enjoy life
                   as it comes.
+                  <span style={{ color : "white" }}>
+                    The Quan”. We are your ambassador of Quan. We will show you the money hghghjgghghj
+                  </span>
                 </Card.Text>
+
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>POS</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Check-in App</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Marketing</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Report</div>
+                </div>
               </Card.Body>
             </Card>
           </Col>
@@ -220,6 +261,23 @@ export default function Package() {
                   entire package. The Quan”. We are your ambassador of Quan. We
                   will show you the money
                 </Card.Text>
+
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>POS</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Check-in App</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Marketing</div>
+                </div>
+                <div className="item__check">
+                  <img src={icon_checked} alt="image_checked" />
+                  <div>Report</div>
+                </div>
               </Card.Body>
             </Card>
           </Col>
@@ -362,12 +420,12 @@ export default function Package() {
           </div> */}
         </Row>
 
-        <div className="package__container package__feature_title">
+        {/* <div className="package__container package__feature_title">
           Features
-        </div>
+        </div> */}
 
         <div>
-          <Row className="package__container package__features--row mx-auto">
+          {/* <Row className="package__container package__features--row mx-auto">
             <Col xs={3} className="package__features--title">
               POS
             </Col>
@@ -523,8 +581,8 @@ export default function Package() {
                 <MdKeyboardArrowRight size={30} className="package__rightArr" />
               </button>
             </Col>
-          </Row>
-          <Modal
+          </Row> */}
+          {/* <Modal
             show={show}
             onHide={() => setShow(false)}
             size="xl"
@@ -536,7 +594,7 @@ export default function Package() {
             <Modal.Body>
               <img src={FullFeatures} alt="" className="w-100" />
             </Modal.Body>
-          </Modal>
+          </Modal> */}
         </div>
       </main>
     </>

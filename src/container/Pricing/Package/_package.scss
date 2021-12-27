@@ -104,18 +104,21 @@
     padding-right: 15px;
     .package__item {
       border-radius: 3px 3px 0px 0px;
-      height: 37rem;
+      min-height: 56rem;
       width: 100%;
       @media screen and (max-width: 1000px) {
-        height: 36rem;
+        // height: 36rem;
       }
       @media screen and (max-width: 600px) {
-        height: 30rem;
-        margin-bottom: 1rem;
+        // height: 30rem;
+        
       }
       @media screen and (max-width: 425px) {
         height: auto;
       }
+      @media screen and (max-width: 816px) {
+        min-height: 40rem;
+    }
       &--title {
         font: normal normal bold 48px/58px Roboto;
         letter-spacing: 0px;
@@ -153,9 +156,9 @@
         background-color: $blue-0;
         cursor: pointer;
         padding: 1rem 2.5rem;
-        @include mediaQueryMax("large") {
-          padding: 0.7rem 1.12rem;
-        }
+        // @include mediaQueryMax("large") {
+        //   padding: 0.7rem 1.12rem;
+        // }
 
         &:hover {
           background-color: $blue-1;
@@ -307,4 +310,22 @@
   margin: auto;
   max-width: calc(85.625rem - 30px) !important;
   text-align: center;
+}
+
+.item__check{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  & > img{
+    width : 27px;
+    height : 27px;
+  }
+
+  & > div{
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #000;
+    margin-left: 20px;
+  }
 }
