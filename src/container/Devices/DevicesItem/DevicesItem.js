@@ -52,13 +52,13 @@ export default function DevicesItem() {
                   />
                 </Card>
               </Col>
-              <Col xs={12} md={6} className="text-center text-md-left p-0">
-                <h1 className="text-uppercase font-weight-bold divices__item--title2">
+              <Col xs={12} md={6} className="text-md-left p-0">
+                <h1 className="text-center text-uppercase font-weight-bold divices__item--title2">
                   PayPoint® Plus
                   <br />
                   for iPad®POS System
                 </h1>
-                <p className="divices__item--text2 ">
+                <p className="divices__item--text2">
                   PayPoint Plus for iPad is a new all-in-one mPOS solution that
                   brings unmatched style to the point of sale with a distinctive
                   modern aesthetic. PayPoint Plus provides everything a merchant
@@ -72,39 +72,43 @@ export default function DevicesItem() {
                   restaurants and entertainment venues.
                 </p>
 
-                <Link
-                  className="divices__item--btn text-uppercase font-weight-bold text-center"
-                  to="/home/sign-up"
-                >
-                  contact sale
-                </Link>
+                <div className="xs-d-flex d-sm-flex d-md-block justify-content-center">
+                  <Link
+                    className="divices__item--btn text-uppercase font-weight-bold text-center"
+                    to="/home/sign-up"
+                  >
+                    contact sale
+                  </Link>
+                </div>
               </Col>
             </Row>
             <Row className="mx-0">
               <Col
                 xs={12}
                 md={6}
-                className="text-center text-md-left p-0 order-1 order-md-0"
+                className="text-md-left p-0 order-1 order-md-0"
               >
-                <h1 className="text-uppercase font-weight-bold divices__item--title2">
+                <h1 className="text-uppercase font-weight-bold divices__item--title2 text-center">
                   mPOP™ Multifunction System
                 </h1>
-                <h3 className="divices__item--subtitle">
+                <h3 className="divices__item--subtitle text-center">
                   Compact and Sleek Design
                 </h3>
-                <p className="divices__item--text2 ">
+                <p className="divices__item--text2">
                   The functions and connectivity of the mPOP make processing
                   customer transactions smooth and effective for small shops,
                   cafes, florists, bars, and many more. Aesthetically simple and
                   elegant, the mPOP™ provides the ultimate point of sale
                   solution for the new face of mPOS.
                 </p>
-                <Link
-                  className="divices__item--btn text-uppercase font-weight-bold text-center"
-                  to="/home/sign-up"
-                >
-                  contact sale
-                </Link>
+                <div className="xs-d-flex d-sm-flex d-md-block justify-content-center">
+                  <Link
+                    className="divices__item--btn text-uppercase font-weight-bold text-center"
+                    to="/home/sign-up"
+                  >
+                    contact sale
+                  </Link>
+                </div>
               </Col>
               <Col
                 xs={12}
@@ -121,7 +125,7 @@ export default function DevicesItem() {
           </div>
         </div>
         <div className="divices__bot">
-        
+
           <div className="divices__bot-item d-flex flex-column justify-content-center align-items-center">
             <h2 className="divices__bot-title text-uppercase font-weight-bold text-center">
               clover devices
@@ -420,12 +424,14 @@ export default function DevicesItem() {
                   of 43 RPM (250mm/s) and includes "Drop-In and Print" paper
                   loading and a guillotine auto-cutter.`}
                 </p>
-                <Link
-                  className="divices__item--btn text-uppercase font-weight-bold text-center"
-                  to="/home/sign-up"
-                >
-                  contact sale
-                </Link>
+                <div className="xs-d-flex d-sm-flex d-md-block justify-content-center">
+                  <Link
+                    className="divices__item--btn text-uppercase font-weight-bold text-center"
+                    to="/home/sign-up"
+                  >
+                    contact sale
+                  </Link>
+                </div>
               </Col>
             </Row>
           </div>
