@@ -122,7 +122,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="p-0 order-1 order-md-0"
+              className="p-2 order-1 order-md-0"
             >
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
                 LIVE WAITLIST
@@ -176,7 +176,7 @@ export default function HomeFeatures2() {
                 </Card>
               </LazyLoad>
             </Col>
-            <Col xs={12} md={6} className="p-0">
+            <Col xs={12} md={6} className="p-3">
               <h1 className="text-center text-md-left text-uppercase font-weight-bold bot_features2-item--title2">
                 PREMIER LOCAL MARKETING
               </h1>
@@ -200,7 +200,7 @@ export default function HomeFeatures2() {
             <Col
               xs={12}
               md={6}
-              className="p-0 order-1 order-md-0"
+              className="p-3 order-1 order-md-0"
             >
               <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
                 Appointment Reminders
