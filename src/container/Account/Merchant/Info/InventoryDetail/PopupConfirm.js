@@ -12,6 +12,7 @@ const Popupconfirm = ({ isVisible , close = () =>{} , onDelete = () =>{} }) => {
                 centered
                 contentClassName="confirmModal"
                 size={"large"}
+                animation={false}
             >
                 <div className="confirmModal__header">
                     Confirmation

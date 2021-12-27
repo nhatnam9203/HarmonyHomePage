@@ -11,6 +11,7 @@ function Loading({ }) {
             size={"large"}
             backdropClassName="modalBackdrop"
             contentClassName="modalContentLoading"
+            animation={false}
         >
             <div className="modalContentLoading__wrap">
                 <ScaleLoader
