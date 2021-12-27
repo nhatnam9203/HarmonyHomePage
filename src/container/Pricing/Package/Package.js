@@ -69,7 +69,7 @@ export default function Package() {
         </div>
 
         {
-          packageName == "HarmonyOne" ?
+          packageName === "HarmonyOne" ?
             <PackageHPOne
               checked={checked}
               setChecked={setChecked}

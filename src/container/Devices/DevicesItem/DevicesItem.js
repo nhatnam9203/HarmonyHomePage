@@ -53,7 +53,7 @@ export default function DevicesItem() {
                 </Card>
               </Col>
               <Col xs={12} md={6} className="text-md-left p-0">
-                <h1 className="text-center text-uppercase font-weight-bold divices__item--title2">
+                <h1 className="text-uppercase font-weight-bold divices__item--title2 text-center text-md-left">
                   PayPoint® Plus
                   <br />
                   for iPad®POS System
@@ -88,10 +88,10 @@ export default function DevicesItem() {
                 md={6}
                 className="text-md-left p-0 order-1 order-md-0"
               >
-                <h1 className="text-uppercase font-weight-bold divices__item--title2 text-center">
+                <h1 className="text-uppercase font-weight-bold divices__item--title2 text-center text-md-left">
                   mPOP™ Multifunction System
                 </h1>
-                <h3 className="divices__item--subtitle text-center">
+                <h3 className="divices__item--subtitle text-center text-md-left">
                   Compact and Sleek Design
                 </h3>
                 <p className="divices__item--text2">

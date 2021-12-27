@@ -457,7 +457,6 @@ export const getPackagePricingAction = () => async (dispatch) => {
       type: typeUser.GET_PACKAGE_PRICING_REQUEST,
     });
     const { data = null } = await api.getPackagePricing();
-
     if (!data) return;
 
     if (data && data.codeNumber === 401) {

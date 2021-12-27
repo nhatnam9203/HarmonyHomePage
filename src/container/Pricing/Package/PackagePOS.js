@@ -10,6 +10,7 @@ import Switch from "react-switch";
 import Modal from "react-bootstrap/Modal";
 import HeaderPackage from "./HeaderPackpage";
 import FeaturePOS from "./FeaturePOS";
+import { useMediaQuery } from 'react-responsive'
 
 
 export default function PackagePOS({
@@ -22,6 +23,10 @@ export default function PackagePOS({
     show,
     setShow
 }) {
+
+    const isIpadPro = useMediaQuery(
+        { minWidth: 1024, maxWidth : 1050 },
+     )
 
     return (
         <>
@@ -100,6 +105,7 @@ export default function PackagePOS({
                                     system. Let’s this package mark the beginning of your
                                     legendary successful salon.
                                     <br />
+                                    { isIpadPro && <br /> }
                                     <span style={{ color: "white" }}>
                                         The Quan”. We are your ambas  sador of Quan.
                                     </span>

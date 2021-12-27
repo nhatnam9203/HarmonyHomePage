@@ -350,6 +350,11 @@
     height: 35rem;
   }
 
+  @media screen and (max-width : 350px){
+    padding : 0px 10px;
+    height: 27rem;
+  }
+
   &__header{
     display: flex;
     flex-direction: row;

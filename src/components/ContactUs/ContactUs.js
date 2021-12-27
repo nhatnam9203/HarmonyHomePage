@@ -42,7 +42,7 @@ export default function ContactUs({ isContact }) {
   return (
     <main className="contact m-auto">
       <Row className="contact__container mx-0">
-        <Col xs={12} md={6} className="contact__form bg-white">
+        <Col xs={12} md={6} className="contact__form bg-white" style={{ marginTop: 16 }}>
           <h1 className="contact__form-title text-uppercase font-weight-bold">
             contact us
           </h1>
@@ -124,7 +124,7 @@ export default function ContactUs({ isContact }) {
             )}
           </Form>
         </Col>
-        <Col xs={12} md={6} className="contact__info">
+        <Col xs={12} md={6} className="contact__info" style={{ marginTop: 16 }}>
           <div className="contact__info-item d-flex flex-column justify-content-center align-items-center">
             <span className="p-2 rounded-circle contact__info-icon mb-3">
               {" "}
