@@ -8,6 +8,8 @@ import FullFeatures from "../../../assets/images/pricing/imgpsh_fullsize_anim.jp
 import { Link } from "react-router-dom";
 import { TiTick } from "react-icons/ti";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import Switch from "react-switch";
+
 
 import Modal from "react-bootstrap/Modal";
 import HeaderPackage from "./HeaderPackpage";
@@ -60,29 +62,35 @@ export default function Package() {
           </h2>
           <div className="d-flex align-items-center package__subItem">
             {checked ? (
-              <span className="text-center mr-lg-3 package__features--span">
+              <span className="text-center mr-lg-3 package__features--span font-weight-bold">
                 Billed
                 <br /> Monthly
               </span>
             ) : (
-              <span className="text-center mr-lg-3 package__features--span checked">
+              <span className="text-center mr-lg-3 package__features--span font-weight-bold checked">
                 Billed
                 <br /> Monthly
               </span>
             )}
 
-            <input
-              type="checkbox"
-              className="switch mr-lg-3 switch_price"
-              onClick={handleChecked}
-            />
+            <div style={{ marginRight : 10 }}>
+              <Switch
+                onChange={setChecked}
+                checked={checked}
+                uncheckedIcon={<div />}
+                checkedIcon={<div />}
+                onColor="#45954F"
+                offColor="#45954F"
+              />
+            </div>
+
             {checked ? (
-              <span className="text-center package__features--span checked">
+              <span className="text-center package__features--span font-weight-bold checked">
                 Billed
                 <br /> Annually
               </span>
             ) : (
-              <span className="text-center package__features--span">
+              <span className="text-center package__features--span font-weight-bold">
                 Billed
                 <br /> Annually
               </span>

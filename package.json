@@ -1,6 +1,6 @@
 {
   "name": "react-base-structure",
-  "homepage" : "https://stage-new.harmonypayment.com/",
+  "homepage": "https://stage-new.harmonypayment.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -53,6 +53,7 @@
     "react-slidedown": "^2.4.5",
     "react-spinners": "^0.9.0",
     "react-spring": "^8.0.27",
+    "react-switch": "^6.0.0",
     "react-table": "^6.11.5",
     "react-toastify": "^6.2.0",
     "react-toggle-button": "^2.2.0",
