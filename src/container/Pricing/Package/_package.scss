@@ -157,6 +157,11 @@
         background-color: $blue-0;
         cursor: pointer;
         padding: 1rem 2.5rem;
+
+        @media screen and (max-width : 767px){
+          margin: 0px auto;
+        }
+
         // @include mediaQueryMax("large") {
         //   padding: 0.7rem 1.12rem;
         // }
@@ -329,4 +334,112 @@
     color: #000;
     margin-left: 20px;
   }
+}
+
+
+.featurePOS{
+  height : 45rem;
+  padding : 0px 45px;
+  overflow-y: scroll;
+  
+  @media screen and (max-width : 995px){
+    padding : 0px 20px;
+  }
+  @media screen and (max-width : 450px){
+    padding : 0px 10px;
+  }
+
+  &__header{
+    display: flex;
+    flex-direction: row;
+
+    &>h2{
+      color: #000;
+      font-weight :600;
+      font-size : 28px;
+      width : 46%;
+      text-align: left;
+
+      @media screen and (max-width : 995px){
+        font-size : 20px;
+      }
+      @media screen and (max-width : 450px){
+        font-size : 17px;
+      }
+      @media screen and (max-width : 374px){
+        font-size :15px;
+      }
+    
+    }
+
+    &>div{
+      text-align: center;
+      width : 18%;
+      &>h5{
+        color : #2B62AA;
+        font-weight : 700;
+        font-size : 16px;
+        @media screen and (max-width : 995px){
+          font-size : 12px;
+        }
+        @media screen and (max-width : 450px){
+          font-size : 10px;
+        }
+        @media screen and (max-width : 374px){
+          font-size :8px;
+        }
+      }
+      &>h6{
+        color : #404040;
+        font-weight : 400;
+        font-size: 14px;
+        @media screen and (max-width : 995px){
+          font-size : 11px;
+        }
+        @media screen and (max-width : 450px){
+          font-size : 10px;
+        }
+        @media screen and (max-width : 374px){
+          font-size :8px;
+        }
+      }
+    }
+  }
+
+  &__body{
+
+  }
+
+  &__item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background : #FAFAFA;
+    padding-left: 10px;
+    &>p{
+      color : #404040;
+      font-size: 14px;
+      font-weight : 600;
+      text-align: left;
+      width :46%;
+      margin-top: 10px;
+    }
+    &>div{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 18%;
+      &>img{
+        width : 20px;
+        height : 20px;
+      }
+    }
+  }
+}
+
+
+.feature__bot-hr {
+  width: 100%;
+  border-top: 2px solid $blue-0;
+  margin-top: 0.5rem;
 }
