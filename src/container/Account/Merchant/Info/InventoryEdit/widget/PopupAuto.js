@@ -11,6 +11,7 @@ const Popupconfirm = ({ isVisible , close = () =>{} , autoGenerate = () =>{} }) 
                 centered
                 contentClassName="confirmModal"
                 size={"large"}
+                animation={false}
             >
                 <div className="confirmModal__header">
                     Confirmation

@@ -78,7 +78,6 @@ export default class PopupManual extends Component {
                     centered
                     contentClassName="popup_upload_container"
                     size={"large"}
-                    animation={false}
                 >
                     <div style={{ height: 580 }} className="popupAuto">
                         <Form onSubmit={this.handleSubmit}>
