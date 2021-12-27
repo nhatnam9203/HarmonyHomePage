@@ -49,7 +49,8 @@
     background: #ffffff00 0% 0% no-repeat padding-box;
     border: 1px solid $blue-0;
     cursor: pointer;
-    padding: 1rem 3.75rem;
+    padding: 1rem 3.75rem; 
+    transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out, border 0.25s ease-in-out ;
     &:hover {
       background-color: $blue-0;
       color: #fff;
