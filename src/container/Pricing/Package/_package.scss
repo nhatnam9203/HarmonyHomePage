@@ -343,12 +343,17 @@
   overflow-y: scroll;
 
   @media screen and (max-width : 1025px){
-    height : 39rem
+    height : 40rem
   }
-  
+
   @media screen and (max-width : 995px){
     padding : 0px 20px;
   }
+
+  @media screen and (max-width : 768px){
+    height : 32rem
+  }
+  
   @media screen and (max-width : 450px){
     padding : 0px 10px;
     height: 35rem;
