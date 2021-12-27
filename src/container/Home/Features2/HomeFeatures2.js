@@ -233,15 +233,37 @@ export default function HomeFeatures2() {
           <h1 className="bot_features2-item--title text-uppercase text-center font-weight-bold">
             other features
           </h1>
-          <p className="bot_features2-item--text text-md-center">
-            Book, modify,
-            and confirm appointments directly with your beloved salons. Know
-            exactly how much you are paying and pay from the comfort of your
-            pedicure chairs. Pay-it-back with peer-2-peer features or
-            pay-it-forward with universal gift cards at any participating
-            salons.
-          </p>
 
+          <Row>
+            <Col
+              xs={12}
+              md={6}
+              className="p-3 order-1 order-md-0 mt-md-5"
+            >
+              <h1 className="text-uppercase font-weight-bold bot_features2-item--title2 text-center text-md-left">
+                Merchant services
+              </h1>
+              <p className="bot_features2-item--text2 ">
+                Choose your favorite payments provider Have a favorite card processor already? HarmonyPay is fully compatible with any payment service you may be using. Easily accept card payments in any country, anywhere you do business. Your rates, your features, your way. This is how merchant services and point of sale should be.
+              </p>
+            </Col>
+            <Col
+              xs={12}
+              md={6}
+              className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1"
+            >
+              <LazyLoad height={200}>
+                <Card className="xs-d-flex d-sm-flex justify-content-sm-center justify-content-md-end p-0 order-0 order-md-1 align-items-center border-0">
+                  <Card.Img
+                    className="bot_features2-item--img"
+                    src={POS3}
+                    alt="Harmony one"
+                  />
+                </Card>
+              </LazyLoad>
+            </Col>
+          </Row>
+          {/* 
           <Row>
             <Col
               xs={12}
@@ -270,7 +292,7 @@ export default function HomeFeatures2() {
                 </Card>{" "}
               </LazyLoad>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col
               xs={12}

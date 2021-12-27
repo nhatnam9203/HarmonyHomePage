@@ -6,7 +6,7 @@ const contents = [
     "Staff App for appointment reiceiving",
     "Owner App",
     "Appointment Management",
-    "Connect the data when Consumer makea a appointment via call",
+    "Connect the data when Consumer make a appointment via call",
     "Check-in System at the store",
     "Support for the payment with a lot of types: cash, credit card, wallet, crypto,...",
     "Revenue management",
@@ -14,7 +14,7 @@ const contents = [
     "Stock management",
     "Salary management",
     "Loyalty Marketing management",
-    "Notification via all apps(Consumer App, App Staff, Owner App)",
+    "Notification via all apps (Consumer App, App Staff, Owner App)",
     "Advertising system at the store",
     "24/7 Support through phone, text, chats, and emails",
     "Chatting System via Web, App and Connecting with Social Platforms(Facebook, Instagram, ...)"
