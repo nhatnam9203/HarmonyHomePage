@@ -104,7 +104,7 @@
     padding-right: 15px;
     .package__item {
       border-radius: 3px 3px 0px 0px;
-      min-height: 56rem;
+      min-height: 50rem;
       width: 100%;
       @media screen and (max-width: 1000px) {
         // height: 36rem;
@@ -225,7 +225,7 @@
       color: $blue-0;
       letter-spacing: 0.36px;
       font-size: 1.125rem;
-      margin: 1.5rem;
+      margin: 1.5rem auto;
       &:hover {
         color: $blue-1;
         text-decoration: underline !important;

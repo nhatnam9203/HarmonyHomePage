@@ -151,8 +151,8 @@ export default function Package() {
                   The legendary struggle of a salon owner without Harmony POS
                   system. Let’s this package mark the beginning of your
                   legendary successful salon.
-                  <span style={{ color : "white" }}>
-                    The Quan”. We are your ambassador of Quan. gghjghjgjhg
+                  <span style={{ color: "white" }}>
+                    The Quan”. We are your ambassador of Quan. gghjghjgjhghgdgd767fgfhssg
                   </span>
                 </Card.Text>
 
@@ -205,7 +205,7 @@ export default function Package() {
                   The purpose of life is to live it, to experience and enjoy the
                   love it gives in every breath. Let live, love, and enjoy life
                   as it comes.
-                  <span style={{ color : "white" }}>
+                  <span style={{ color: "white" }}>
                     The Quan”. We are your ambassador of Quan. We will show you the money hghghjgghghj
                   </span>
                 </Card.Text>
@@ -282,307 +282,17 @@ export default function Package() {
             </Card>
           </Col>
 
-          {/* <div className="package__col">
 
-            <div className="package__item__group">
-              <Card className="package__item">
-                <HeaderPackage
-                  title="Package"
-                  subTitle=""
-                  color="#011D25"
-                  isSpecial={false}
-                />
-                <Card.Body className="package__item--cardbody d-flex flex-column align-items-center checked-group-pricing">
-                  <Card.Title className="package__features--title1 text-left border-0">
-                    Pricing model
-                  </Card.Title>
-                  <div className="d-flex align-items-center">
-                    {checked ? (
-                      <span className="text-center mr-lg-3 package__features--span">
-                        Billed
-                        <br /> Monthly
-                      </span>
-                    ) : (
-                        <span className="text-center mr-lg-3 package__features--span checked">
-                          Billed
-                          <br /> Monthly
-                        </span>
-                      )}
+          <button
+            className="text-capitalize package__features--btn text-center bg-white border-0 font-weight-bold"
+            onClick={() => setShow(true)}
+          >
+            See features{" "}
+            <MdKeyboardArrowRight size={30} className="package__rightArr" />
+          </button>
 
-                    <input
-                      type="checkbox"
-                      className="switch mr-lg-3 switch_price"
-                      onClick={handleChecked}
-                    />
-                    {checked ? (
-                      <span className="text-center package__features--span checked">
-                        Billed
-                        <br /> Annually
-                      </span>
-                    ) : (
-                        <span className="text-center package__features--span">
-                          Billed
-                          <br /> Annually
-                        </span>
-                      )}
-                  </div>
-                </Card.Body>
-              </Card>
 
-              <Card className="package__item">
-                <HeaderPackage
-                  title="LEGEND"
-                  subTitle="8 Staffs"
-                  color="#1266AE"
-                  isSpecial={false}
-                />
-                <Card.Body className="package__item--cardbody d-flex flex-column">
-                  <Card.Title className="package__item--title text-center font-weight-bold">
-                    ${checked ? pricingAnnuallyBasic1 : packageList[2]?.pricing}
-                    <span className="package__item--sub">
-                      /{checked ? "year" : "month"}
-                    </span>
-                  </Card.Title>
-                  <Link
-                    className="package__item--btn text-center"
-                    to="/home/sign-up"
-                  >
-                    Start free trial
-                </Link>
-                  <Card.Text className="package__item--text">
-                    The legendary struggle of a salon owner without Harmony POS
-                    system. Let’s this package mark the beginning of your
-                    legendary successful salon.
-                </Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
-
-            <div className="package__item__group">
-              <Card className="package__item">
-                <HeaderPackage
-                  title="LIVE, LOVE AND ENJOY"
-                  subTitle="15 Staffs"
-                  color="#0E5999"
-                  isSpecial={true}
-                />
-                <Card.Body className="package__item--cardbody d-flex flex-column">
-                  <Card.Title className="package__item--title text-center font-weight-bold">
-                    ${checked ? pricingAnnuallyMedium1 : packageList[1]?.pricing}
-                    <span className="package__item--sub">
-                      /{checked ? "year" : "month"}
-                    </span>
-                  </Card.Title>
-                  <Link
-                    className="package__item--btn text-center"
-                    to="/home/sign-up"
-                  >
-                    Start free trial
-                </Link>
-                  <Card.Text className="package__item--text">
-                    The purpose of life is to live it, to experience and enjoy the
-                    love it gives in every breath. Let live, love, and enjoy life
-                    as it comes.
-                </Card.Text>
-                </Card.Body>
-              </Card>
-
-              <Card className="package__item">
-                <HeaderPackage
-                  title="THE QUAN"
-                  subTitle="16+ Staffs"
-                  color="#032E53"
-                  isSpecial={true}
-                />
-                <Card.Body className="package__item--cardbody d-flex flex-column">
-                  <Card.Title className="package__item--title text-center font-weight-bold">
-                    ${checked ? pricingAnnuallyPro1 : packageList[0]?.pricing}
-                    <span className="package__item--sub">
-                      /{checked ? "year" : "month"}
-                    </span>
-                  </Card.Title>
-                  <Link
-                    className="package__item--btn text-center"
-                    to="/home/sign-up"
-                  >
-                    Start free trial
-                </Link>
-                  <Card.Text className="package__item--text">
-                    Inspire by Rod Tidwell’s word in the movie Jerry Maguire. “It
-                    means love, respect, community… and the dollars too. The
-                    entire package. The Quan”. We are your ambassador of Quan. We
-                    will show you the money
-                </Card.Text>
-                </Card.Body>
-              </Card>
-            </div>
-
-          </div> */}
-        </Row>
-
-        {/* <div className="package__container package__feature_title">
-          Features
-        </div> */}
-
-        <div>
-          {/* <Row className="package__container package__features--row mx-auto">
-            <Col xs={3} className="package__features--title">
-              POS
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-          </Row>
-          <Row className="package__container package__features--row mx-auto">
-            <Col xs={3} className="package__features--title text-capitalize">
-              Sign In App
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-          </Row>
-          <Row className="package__container package__features--row mx-auto">
-            <Col xs={3} className="package__features--title text-capitalize">
-              App for staff
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-          </Row>
-          <Row className="package__container package__features--row mx-auto">
-            <Col xs={3} className="package__features--title text-capitalize">
-              Marketing
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-          </Row>
-          <Row className="package__container package__features--row mx-auto">
-            <Col xs={3} className="package__features--title text-capitalize">
-              Report
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <TiTick size={35} />
-            </Col>
-          </Row>
-          <Row className="package__container package__features--row mx-auto">
-            <Col
-              xs={3}
-              className="package__features--title text-capitalize"
-            ></Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <button
-                className="text-capitalize package__features--btn text-center bg-white border-0 font-weight-bold"
-                onClick={() => setShow(true)}
-              >
-                See features{" "}
-                <MdKeyboardArrowRight size={30} className="package__rightArr" />
-              </button>
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <button
-                className="text-capitalize package__features--btn text-center bg-white border-0 font-weight-bold"
-                onClick={() => setShow(true)}
-              >
-                See features{" "}
-                <MdKeyboardArrowRight size={30} className="package__rightArr" />
-              </button>
-            </Col>
-            <Col
-              xs={3}
-              className="package__features--tick d-flex justify-content-center align-items-center"
-            >
-              <button
-                className="text-capitalize package__features--btn text-center bg-white border-0 font-weight-bold"
-                onClick={() => setShow(true)}
-              >
-                See features{" "}
-                <MdKeyboardArrowRight size={30} className="package__rightArr" />
-              </button>
-            </Col>
-          </Row> */}
-          {/* <Modal
+          <Modal
             show={show}
             onHide={() => setShow(false)}
             size="xl"
@@ -594,8 +304,8 @@ export default function Package() {
             <Modal.Body>
               <img src={FullFeatures} alt="" className="w-100" />
             </Modal.Body>
-          </Modal> */}
-        </div>
+          </Modal>
+        </Row>
       </main>
     </>
   );
