@@ -19,15 +19,13 @@ import { getPackagePricingAction } from "../../../actions/userActions";
 export default function Package() {
   const [show, setShow] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [packageName, setPackpageName] = React.useState("HarmonyOne");
   const dispatch = useDispatch();
-
-  const handleChecked = () => {
-    setChecked(!checked);
-  };
 
   useEffect(() => {
     dispatch(getPackagePricingAction());
   }, [dispatch]);
+
   const { packageList } = useSelector((state) => state.pricing);
 
   const pricingAnnuallyBasic =
@@ -54,10 +52,33 @@ export default function Package() {
           <h6 className="package__subTitle text-center">
             Try HarmonyPay Merchants free for 30 days, no credit card required
           </h6>
+
+          <Row className="package__container mx-auto justify-content-md-center">
+            <Col
+              xs={6}
+              md={5}
+              style={{ paddingRight: 5 }}
+            >
+              <div style={{ opacity: packageName == "HarmonyOne" ? 1 : 0.6 }} onClick={() => setPackpageName("HarmonyOne")} className="package__name">
+                <h3>Harmony One</h3>
+              </div>
+            </Col>
+
+            <Col
+              xs={6}
+              md={5}
+              style={{ paddingLeft: 5 }}
+            >
+              <div style={{ opacity: packageName == "HarmonyPOS" ? 1 : 0.6 }} onClick={() => setPackpageName("HarmonyPOS")} className="package__name">
+                <h3>HarmonyPay POS Salon</h3>
+              </div>
+            </Col>
+
+          </Row>
         </div>
 
         <div className="package__subItem">
-          <h2 className="text-center font-weight-bold">
+          <h2 style={{ fontSize: 37 }} className="text-center font-weight-bold">
             HarmonyPay POS Salon
           </h2>
           <div className="d-flex align-items-center package__subItem">
@@ -73,7 +94,7 @@ export default function Package() {
               </span>
             )}
 
-            <div style={{ marginRight : 10 }}>
+            <div style={{ marginRight: 10 }}>
               <Switch
                 onChange={setChecked}
                 checked={checked}

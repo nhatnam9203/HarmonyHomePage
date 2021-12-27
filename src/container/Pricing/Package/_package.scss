@@ -15,7 +15,6 @@
 
   &__header{
     padding-top: 4.75rem;
-    padding-bottom: 0.75rem;
     background : #E7EFF6;
   }
 
@@ -33,6 +32,39 @@
   &__subItem{
     justify-content: center;    
     margin : 3rem 16px;
+    
+  }
+
+  &__name{
+    width: 100%;
+    background : white;
+    border-radius: 5px 5px 0px 0px;
+    border-top : 10px solid #2B62AA;
+    height : 6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 0px 16px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1 !important;
+    }
+
+    h3 {
+      color : #000;
+      text-align: center;
+      font-weight : 800;
+      font-size: 24px;
+      @media screen and (max-width: 860px) {
+        font-size: 20px;
+        line-height: 26px;
+      }
+
+      @media screen and (max-width: 500px) {
+        font-size: 18px;
+      }
+    }
   }
 
   &__text {
