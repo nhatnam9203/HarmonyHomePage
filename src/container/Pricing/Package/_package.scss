@@ -1,17 +1,35 @@
 .package {
-  margin-top: 3.75rem;
   &__title {
     letter-spacing: $title-0;
     font-size: $fs-title;
     // margin-bottom: $m-6;
     //margin__text:
-    margin-bottom: 3.75rem;
+    margin-bottom: 1.75rem;
 
     @include mediaQueryMax("large") {
       font-size: 2rem;
-      margin-bottom: 3rem;
+      margin-bottom: 1.25rem;
+    }
+  
+  }
+
+  &__header{
+    padding-top: 4.75rem;
+    padding-bottom: 0.75rem;
+    background : #E7EFF6;
+  }
+
+  &__subTitle{
+    color : #404040 !important;
+    margin-bottom: 3.75rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+
+    @include mediaQueryMax("large") {
+      font-size: 0.9rem;
     }
   }
+
   &__text {
     margin-bottom: 3.75rem;
     @include mediaQueryMax("large") {

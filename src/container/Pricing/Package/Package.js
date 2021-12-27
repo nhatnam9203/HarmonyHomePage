@@ -27,12 +27,14 @@ export default function Package() {
     dispatch(getPackagePricingAction());
   }, [dispatch]);
   const { packageList } = useSelector((state) => state.pricing);
+
   const pricingAnnuallyBasic =
     packageList[2]?.pricing * packageList[2]?.annually;
+
   const pricingAnnuallyMedium =
     packageList[1]?.pricing * packageList[1]?.annually;
-  const pricingAnnuallyPro = packageList[0]?.pricing * packageList[0]?.annually;
 
+  const pricingAnnuallyPro = packageList[0]?.pricing * packageList[0]?.annually;
   const pricingAnnuallyBasic1 = pricingAnnuallyBasic.toFixed(2);
   const pricingAnnuallyMedium1 = pricingAnnuallyMedium.toFixed(2);
   const pricingAnnuallyPro1 = pricingAnnuallyPro.toFixed(2);
@@ -40,9 +42,16 @@ export default function Package() {
   return (
     <>
       <main className="package">
-        <h1 className="package__title text-uppercase text-center font-weight-bold">
-          Package & Pricing
-        </h1>
+
+        <div className="package__header">
+          <h1 className="package__title text-uppercase text-center font-weight-bold">
+            Package & Pricing
+          </h1>
+
+          <h6 className="package__subTitle text-center">
+            Try HarmonyPay Merchants free for 30 days, no credit card required
+          </h6>
+        </div>
 
         <Row className="package__container mx-auto ">
           <div className="package__col">

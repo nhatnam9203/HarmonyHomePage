@@ -139,7 +139,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title divices__bot-card--title--clover text-center text-text-uppercase">
                       Clover GO
                     </Card.Title>
-                    <div className="divices__bot-card--text">
+                    <div className="divices__item--text2">
                       Take your business to your customers with this sleek, compact mobile credit card reader and app that pack a lot of processing power. Whether at the local farmer’s market or at a customer’s job site, you can accept payments on the go, wherever you have a Wi-Fi or cellular connection.
                     </div>
                   </Card.Body>
@@ -154,7 +154,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title divices__bot-card--title--clover text-center text-text-uppercase">
                       Clover Mini
                     </Card.Title>
-                    <div className="divices__bot-card--text">
+                    <div className="divices__item--text2">
                       A full point-of-sale system in one sleek little package. Mini can fit into any space but packs plenty of POS power to run your business, end to end. Use it just for payments or to run your whole business from inventory to payroll.
                     </div>
                   </Card.Body>
@@ -169,7 +169,7 @@ export default function DevicesItem() {
                     <Card.Title className="divices__bot-card--title divices__bot-card--title--clover text-center text-text-uppercase">
                       Clover Flex
                     </Card.Title>
-                    <div className="divices__bot-card--text">
+                    <div className="divices__item--text2">
                       Serve customers better – at the counter, in line, at the table, or in the field – with the Clover Flex handheld POS system. This all-in-one device offers built-in capabilities to accept payments, conduct business, and track sales all from the palm of your hand.
                     </div>
                   </Card.Body>
@@ -388,7 +388,7 @@ export default function DevicesItem() {
             <Row className="mx-0">
               <Col
                 xs={12}
-                md={3}
+                md={4}
                 className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0"
               >
                 <Card className="xs-d-flex d-sm-flex d-md-block justify-content-center p-0 align-items-center border-0">
@@ -402,13 +402,13 @@ export default function DevicesItem() {
               </Col>
               <Col
                 xs={12}
-                md={9}
-                className="text-center text-md-left p-0 order-1 order-md-0"
+                md={8}
+                className="p-0 order-1 order-md-0"
               >
-                <h1 className="text-uppercase font-weight-bold divices__item--title2">
+                <h1 className="text-uppercase font-weight-bold divices__item--title2 text-center text-md-left">
                   TSP143III Thermal Printer
                 </h1>
-                <h3 className="divices__item--subtitle">
+                <h3 className="divices__item--subtitle text-center text-md-left">
                   High-Speed and Reliable
                 </h3>
                 <p className="divices__item--text2 ">
