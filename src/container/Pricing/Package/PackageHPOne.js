@@ -92,7 +92,7 @@ export default function PackageHPOne({
                                 >
                                     Start free trial
                                 </Link>
-                                <Card.Text className="package__item--text">
+                                <Card.Text className="package__item--text text-left">
                                     The purpose of life is to live it, to experience and enjoy the
                                     love it gives in every breath. Let live, love, and enjoy life
                                     as it comes.
@@ -147,7 +147,7 @@ export default function PackageHPOne({
                                 >
                                     Start free trial
                                 </Link>
-                                <Card.Text className="package__item--text">
+                                <Card.Text className="package__item--text text-left">
                                     Inspire by Rod Tidwell’s word in the movie Jerry Maguire. “It
                                     means love, respect, community… and the dollars too. The
                                     entire package. The Quan”. We are your ambassador of Quan. We

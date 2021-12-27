@@ -7,11 +7,10 @@ import reportWebVitals from "./reportWebVitals";
 
 import { I18nextProvider } from "react-i18next";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
 
 import i18n from "./language/i18n";
 
-import { store, persistor } from "./store";
+import { store } from "./store";
 
 import { CookiesProvider } from "react-cookie";
 
