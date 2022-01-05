@@ -1,6 +1,13 @@
 .divices__container {
   max-width: 88.625rem;
-  margin: 6.25rem auto;
+  margin: 4.25rem auto;
+  @media screen and (max-width : 800px){
+    margin-top : 1rem;
+  }
+
+  @media screen and (max-width : 450px){
+    margin-top : 0rem;
+  }
 }
 .divices__item {
   margin-bottom: 6.25rem;
@@ -20,6 +27,10 @@
     margin-bottom: 6.25rem;
     @include mediaQueryMax("large") {
       font-size: 2rem;
+    }
+    @media screen and (max-width : 600px){
+      margin-bottom : 2rem;
+      font-size: 30px;
     }
   }
   &--text {
