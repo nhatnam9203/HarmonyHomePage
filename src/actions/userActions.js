@@ -495,7 +495,11 @@ export const resetPasswordAction = (id, tokenid, payload) => async (
       payload: data?.data,
     });
     dispatch({ type: typeNotify.NOTIFY_SUCCESS, payload: data?.message });
-    history.push("/home");
+    const x = window.location.href;
+    const url = new URL(x).origin;
+    setTimeout(() => {
+      window.location.href = `${url}/home`;
+    }, 200);
   } catch (error) {
     dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
     dispatch({
