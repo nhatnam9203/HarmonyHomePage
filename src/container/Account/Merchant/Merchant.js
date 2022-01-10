@@ -26,7 +26,7 @@ function Merchant() {
 
   const renderMerchantTable = list?.map((i) => (
     <tr key={i?.merchantId}>
-      <td>{i?.merchantId}</td>
+      <td>{i?.merchantCode}</td>
       <td>{i?.businessName}</td>
       <td>{i?.cellPhone}</td>
       <td>{Number(i?.isDisabled) === 0 ? "Active" : "Inactive"}</td>
