@@ -28,7 +28,6 @@ function Merchant() {
     <tr key={i?.merchantId}>
       <td>{i?.merchantId}</td>
       <td>{i?.businessName}</td>
-      <td>{i?.email}</td>
       <td>{i?.cellPhone}</td>
       <td>{Number(i?.isDisabled) === 0 ? "Active" : "Inactive"}</td>
       <td className="text-center">
@@ -63,11 +62,10 @@ function Merchant() {
         <Table responsive className="mt-4">
           <thead>
             <tr>
-              <th>ID</th>
+              <th>MID</th>
               <th>
                 <p className="th_business_name">Business name</p>
               </th>
-              <th>Email</th>
               <th>Contact phone</th>
               <th>Status</th>
               <th className="text-center">Actions</th>
