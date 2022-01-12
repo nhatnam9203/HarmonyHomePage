@@ -1,10 +1,10 @@
 import React from 'react';
-import { Form, FormControl } from "react-bootstrap";
-import { useController } from "react-hook-form";
+import { Form } from "react-bootstrap";
 import InputMask from "react-input-mask";
 
 import InputSelect from "../InputSelect";
 import InputText from "../InputText";
+import { useForm } from "react-hook-form";
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import "./index.scss";
@@ -15,72 +15,53 @@ const phoneGroup = [
 ]
 
 
-
 const Index = ({
     name,
     form,
     error,
     isRequired = false,
-    defaultValue = "",
     label,
-    placeholder = "",
-    mask = null,
 }) => {
 
-    const { field } = useController({
-        control: form.control,
-        defaultValue,
-        name,
-    });
+    console.log('error phone input :',{ error, name })
 
-    const handleOnChange = (value, data, event, formattedValue) => {
-        console.log({ value, data, event, formattedValue })
-        form.setValue(name, value);
-    }
+    const formInput = useForm({});
+
+    // const { field } = useController({
+    //     control: form.control,
+    //     defaultValue,
+    //     name,
+    // });
+
+    // const handleOnChange = (value, data, event, formattedValue) => {
+    //     console.log({ value, data, event, formattedValue })
+    //     form.setValue(name, value);
+    // }
 
     return (
         <Form.Group>
             <Form.Label style={{ fontWeight: "600" }}>
                 {label} {isRequired && <span style={{ color: "red", fontWeight: "600" }}>*</span>}
             </Form.Label>
-            {/* <PhoneInput
-                onlyCountries={['us', 'vn']}
-                masks={{ us: '...-...-....', vn: '...-...-....' }}
-                name={name}
-                placeholder="Enter phone number"
-                value={field.value}
-                onChange={handleOnChange}
-                className="inputPhone_signUp"
-                alwaysDefaultMask={true}
-                countryCodeEditable={false}
-
-            /> */}
-            <div className='phone_container'>
-                <div style={{ width: "30%" }}>
-                    <InputSelect
+            <div style={{ display: "flex", flexDirection: "row" }} v>
+                <div style={{ width: 140 }}>
+                    <InputSelect width="90%"
+                        form={formInput}
+                        name={"prefixPhone"}
                         data={phoneGroup}
-                        form={form}
-                        defaultValue="+1"
                         label=""
-                        name="headPhone"
+                        defaultValue={"+1"}
                     />
                 </div>
-                <div>
-                <InputText
-                    form={form}
-                    name="zip"
-                    label={""}
-                    renderLabel={false}
-                    placeholder="Zip code"
-                />
+                <div style={{ width: "100%" }}>
+                    <InputText
+                        form={formInput}
+                        name={name}
+                        isRequired={isRequired}
+                    />
                 </div>
             </div>
-
-            {
-                error && <Form.Control.Feedback type="invalid">
-                    {error}
-                </Form.Control.Feedback>
-            }
+            <div style={{ right : 15 }} className="inputErrorMessage">{error?.message}</div>
         </Form.Group>
     )
 };

@@ -40,3 +40,18 @@
         justify-content: center;
     }
 } 
+
+.sameAsDBA{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &>img{
+        margin-right : 10px;
+        margin-bottom: 14px;
+    } 
+    &>p{
+        color : #2B62AA !important;
+        font-weight : 400 !important;
+        font-size : 15px;
+    }   
+}

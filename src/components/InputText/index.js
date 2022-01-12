@@ -13,7 +13,10 @@ const Index = ({
     label,
     placeholder = "",
     mask = null,
-    renderLabel = true
+    renderLabel = true,
+    renderRight = null,
+    valueVisible = null,
+    editable = true
 }) => {
 
     const { field } = useController({
@@ -23,9 +26,9 @@ const Index = ({
     });
 
     return (
-        <Form.Group>
+        <Form.Group style={{ position: "relative" }}>
             {
-                renderLabel &&
+                label &&
                 <Form.Label className='lblInputText'>
                     {label} {isRequired && <span className="input_form_required">*</span>}
                 </Form.Label>
@@ -36,9 +39,10 @@ const Index = ({
                         type="text"
                         placeholder={placeholder}
                         name={name}
-                        value={field.value}
+                        value={valueVisible ?? field.value}
                         mask={mask}
                         onChange={e => form.setValue(name, e.target.value)}
+                        disabled={editable}
                     /> :
                     <Form.Control
                         className='inputText'
@@ -46,14 +50,16 @@ const Index = ({
                         placeholder={placeholder}
                         name={name}
                         onChange={e => form.setValue(name, e.target.value)}
-                        value={field.value}
+                        value={valueVisible ?? field.value}
+                        disabled={!editable}
                     />
             }
             {
-                error && <Form.Control.Feedback type="invalid">
-                    {error}
-                </Form.Control.Feedback>
+                renderRight ?
+                <div className="inputErrorMessage">{renderRight()}</div>
+                : <div className="inputErrorMessage">{error?.message}</div>
             }
+
         </Form.Group>
     )
 };

@@ -12,10 +12,9 @@ const Index = ({
     data = [],
     label = "",
     isRequired,
+    width = "73%"
 }) => {
     const [isPopup, setIsPopup] = React.useState(false);
-
-    console.log({ defaultValue })
 
     const toggle = () => {
         setIsPopup(!isPopup)
@@ -49,10 +48,12 @@ const Index = ({
     return (
         <OutsideClickHandler onOutsideClick={close}>
             <Form.Group>
-                <Form.Label style={{ fontWeight: "600" }}>
-                    {label} {isRequired && <span style={{ color: "red", fontWeight: "600" }}>*</span>}
-                </Form.Label>
-                <div onClick={toggle} className="select_subcategory">
+                {
+                    label && <Form.Label style={{ fontWeight: "600" }}>
+                        {label} {isRequired && <span style={{ color: "red", fontWeight: "600" }}>*</span>}
+                    </Form.Label>
+                }
+                <div onClick={toggle} style={{ width }} className="select_subcategory">
                     <div>{selected ? selected.label : "Please select"}</div>
                     <img src={arrow_down} alt="imn" />
                     {

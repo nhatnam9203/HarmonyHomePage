@@ -508,3 +508,21 @@ export const resetPasswordAction = (id, tokenid, payload) => async (
     });
   }
 };
+
+export const getState = (id, tokenid, payload) => async (
+  dispatch
+) => {
+  try {
+    const { data = null } = await api.resetPassword(id, tokenid, payload);
+
+    if (!data) return;
+
+    dispatch({
+      type: typeUser.RESET_PASSWORD_SUCCESS,
+      payload: data?.data,
+    });
+ 
+  } catch (error) {
+
+  }
+};

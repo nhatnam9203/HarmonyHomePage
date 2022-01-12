@@ -13,3 +13,11 @@
 .lblInputText{
     font-weight: 600;
 }
+
+.inputErrorMessage{
+    color : red;
+    font-weight: 600;
+    position: absolute;
+    right : 0;
+    top: 0
+}
