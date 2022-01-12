@@ -1,9 +1,20 @@
 import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import { Helmet } from "react-helmet";
+import checkBox from "../../assets/images/check-box@3x.png";
+import checkBoxEmpty from "../../assets/images/check-box-empty@3x.png";
 import "./SignUpInformation.scss";
 
 const Index = () => {
+
+    const [isAgree, setIsAgree] = React.useState(false);
+
+    const agreeTermCondition = () => {
+        if (isAgree) {
+
+        }
+    }
+
     return (
         <div className='signUp_information' >
             <Helmet>
@@ -391,6 +402,19 @@ const Index = () => {
                             If you have any questions about these Terms, please contact Harmony Pay at
                             team@harmonypayment.com.
                         </p>
+
+                        <div className='divAgreeTermCondition'>
+                            <img onClick={() => setIsAgree(!isAgree)} src={isAgree ? checkBox : checkBoxEmpty} alt="img_checkbox" />
+                            <p>I have read & agree to the Term and Condition</p>
+                        </div>
+
+                        <div className='divAgreeTermCondition_button'>
+                            <div
+                                onClick={agreeTermCondition}
+                                style={{ background: isAgree ? "#04579b" : "#F1F1F1", color: isAgree ? "white" : "#585858", cursor: isAgree ? "pointer" : "initial" }} >
+                                Continue
+                            </div>
+                        </div>
 
                     </Col>
                 </Row>

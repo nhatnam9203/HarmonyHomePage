@@ -1,5 +1,7 @@
 
 .signUp_information{
+    max-height : 1366px;
+    overflow-y: scroll;
     &_container{
         &_row{
             padding-top: 16px;
@@ -19,6 +21,39 @@
                 margin-left: 32px;
                 margin-bottom : 8px;
             }
+        }
+    }
+}
+
+.divAgreeTermCondition{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    &>img{
+        width : 27px;
+        height : 27px;
+    }
+    &>p{
+        margin-left: 16px;
+        color: #245696;
+        font-weight : 500;
+    }
+    &_button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+        margin-top: 30px;
+        &>div{
+            width: 130px;
+            height: 50px;     
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background : #04579b;
+            color: white;
+            font-weight: 600;
+            cursor : pointer;
         }
     }
 }
