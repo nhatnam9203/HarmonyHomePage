@@ -1,0 +1,24 @@
+
+.signUp_information{
+    &_container{
+        &_row{
+            padding-top: 16px;
+            &>h1{
+                margin : 30px auto;
+                font-weight: 900;
+            }
+            
+        }
+        &_col{
+            &>h6{
+                margin : 38px 0px 16px auto;
+                font-weight: 900;
+                font-size : 22px;
+            }
+            &_dot{
+                margin-left: 32px;
+                margin-bottom : 8px;
+            }
+        }
+    }
+}

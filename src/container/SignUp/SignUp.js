@@ -78,7 +78,7 @@ function SignUp() {
   return (
     <div className="sign_up_container">
       <Helmet>
-        <title>Harmony | Sign Up</title>
+        <title>Harmony | Request Information</title>
         <meta name="Sign Up" content="Harmony Sign Up" />
       </Helmet>
       <Container>
