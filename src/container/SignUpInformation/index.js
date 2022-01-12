@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import checkBox from "../../assets/images/check-box@3x.png";
-import checkBoxEmpty from "../../assets/images/check-box-empty@3x.png";
+import checkBox from "@/assets/images/check-box@3x.png";
+import checkBoxEmpty from "@/assets/images/check-box-empty@3x.png";
 import "./SignUpInformation.scss";
 
 const Index = () => {
@@ -82,14 +82,6 @@ const Index = () => {
                             relationship with Merchant, solely and exclusively for Merchant’s internal business purposes.
                         </p>
 
-                        <h6>Notes:</h6>
-                        <p>
-                            You may only access and use the Services if you are an authorized user
-                            of a Harmony Pay customer (“Merchant”) pursuant to these Terms. Harmony
-                            Pay grants you a limited, revocable, non-exclusive, non-transferable
-                            license to access and use the applicable Services during the course of your
-                            relationship with Merchant, solely and exclusively for Merchant’s internal business purposes.
-                        </p>
                         <p>
                             You agree to use the Platform only for the management and operation of Merchant’s
                             business pursuant to the terms and conditions of these Terms and not directly or
