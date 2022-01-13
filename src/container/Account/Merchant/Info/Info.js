@@ -20,6 +20,7 @@ import BusinessInformation from "./BusinessInformation";
 import Inventory from "./Inventory";
 import Customer from "./Customer";
 import Report from "./Report";
+import ReportPOS from "./ReportPOS";
 import Orders from "./Orders";
 import Tabs from "./Tabs";
 
@@ -247,6 +248,9 @@ function Info() {
       case "Report":
         return <Report />;
 
+      case "Report Salon POS":
+        return <ReportPOS />
+
       default:
         return null;
     }
@@ -268,9 +272,10 @@ function Info() {
               Back
             </Button> */}
           </div>
-
-          <Tabs tabActive={tabActive} changeTab={changeTab} merchantType={detail.type} />
-
+          {/* {detail.type == "Retailer" && (
+            <Tabs tabActive={tabActive} changeTab={changeTab} />
+          )} */}
+          <Tabs tabActive={tabActive} changeTab={changeTab} type={detail?.type} />
           {renderTabItem()}
         </>
       )}

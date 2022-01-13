@@ -1,0 +1,27 @@
+
+
+
+.custom-input-date{
+    width : 180px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-Left : 16px;
+    padding-Right : 16px;
+    background : white;
+    color : #404040;
+    font-weight: 500;
+    border : 1px solid #dddddd;
+    cursor: pointer;
+}
+
+.react-datepicker__year-dropdown-container{
+}
+.react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow{
+    top : 3px !important;
+    right : -18px;
+}
+.react-datepicker__navigation-icon{
+    top : 6px
+}

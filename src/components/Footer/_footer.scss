@@ -86,3 +86,12 @@ footer {
     }
   }
 }
+
+
+.icon-social{
+  transition: transform .2s;
+}
+
+.icon-social:hover{
+  transform: scale(1.3); 
+}

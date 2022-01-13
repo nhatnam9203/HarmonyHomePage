@@ -78,12 +78,13 @@ export default function Footer() {
                 className="text-white"
                 style={{ marginRight: 16 }}
               >
-                <AiFillFacebook size={48} />
+                <AiFillFacebook size={48} className="icon-social" />
               </a>
               <img
                 src={instagramIcon}
                 style={{ width: 43, height: 43, cursor: "pointer" }}
                 alt="instagram"
+                className="icon-social"
                 onClick={() =>
                   (window.location.href =
                     "https://instagram.com/harmonypay_salon_pos?utm_medium=copy_link")

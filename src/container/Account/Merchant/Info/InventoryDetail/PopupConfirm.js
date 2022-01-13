@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import close_white from "@/assets/images/retailer/close_white.png";
 import "./style.scss";
 
-const Popupconfirm = ({ isVisible , close = () =>{} , onDelete = () =>{} }) => {
+const Popupconfirm = ({ isVisible , close = () =>{} , onDelete = () =>{}, title = "Are you sure you want to Delete this Product?" }) => {
     return (
         <div>
             <Modal
@@ -20,7 +20,7 @@ const Popupconfirm = ({ isVisible , close = () =>{} , onDelete = () =>{} }) => {
                 </div>
                 <div className="confirmModal__body">
                     <div>
-                        Are you sure you want to Delete this Product?
+                        {title}
                     </div>
                     <div>
                         <div onClick={onDelete} style={{ marginRight: 45 }} className="btn_popup_confirm btn_popup_confirm_no">

@@ -1,0 +1,23 @@
+
+.inputText{
+    height: 3.6rem;
+    padding: 1rem;
+    border-radius: 0px;
+}
+
+.input_form_required{
+    color : red;
+    font-weight: 600;
+}
+
+.lblInputText{
+    font-weight: 600;
+}
+
+.inputErrorMessage{
+    color : red;
+    font-weight: 600;
+    position: absolute;
+    right : 0;
+    top: 0
+}

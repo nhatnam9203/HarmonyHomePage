@@ -131,6 +131,10 @@ export const getPackage = (token) =>
     },
   });
 
+const getStateUrl = `${url}/state`;
+  export const getState = () =>
+    axios.get(getStateUrl);
+
 // Get Refund Money
 export const getRefundMoney = (id, token) =>
   axios.get(`${getMySubscriptionUrl}/refundAmount/${id}`, {

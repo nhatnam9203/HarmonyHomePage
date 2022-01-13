@@ -1,0 +1,229 @@
+
+.general_information{
+
+}
+
+
+.title_signup{
+    font-size: 1.2rem;
+    color: #1b68ac;
+    font-weight: 700;
+    padding-bottom: 0.4rem;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
+}
+
+.submit_signup{
+    margin-bottom: 6rem;
+    // width: 100%;
+    border-radius: 0px;
+    width: 10rem;
+    height: 2.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0764b0;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0.36px;
+    margin-right: 10px;
+    border : 0px;
+}
+
+.back_signup{
+    margin-bottom: 6rem;
+    // width: 100%;
+    border-radius: 0px;
+    width: 10rem;
+    height: 2.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #404040;
+    font-size: 1rem;
+    letter-spacing: 0.36px;
+    margin-right: 10px;
+    border : 1px solid #404040;
+}
+
+.signup_bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 30px;
+} 
+
+.sameAsDBA{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &>img{
+        margin-right : 10px;
+        margin-bottom: 14px;
+    } 
+    &>p{
+        color : #2B62AA !important;
+        font-weight : 400 !important;
+        font-size : 15px;
+    }   
+}
+
+.itemBusiness{
+    &>p{
+        font-weight: 600;
+    }
+    &>div{
+        display: flex;
+        flex-direction: row;
+        &>div{
+            display: flex;
+            flex-direction: row;
+    
+            &>div:nth-child(1){
+                display: flex;
+                flex-direction: row;
+                
+            }
+        }
+        &>div:nth-child(2){
+            margin-left: 50px;
+        }
+    }
+}
+
+.images_inventory_dropzone_2{
+    width: 160px;
+    height: 160px;
+    background: #f6f6f6;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    & > img {
+      width: 40px;
+      height: 40px;
+    }
+    & > p {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color : #585858;
+      margin-top: 6px;
+    }
+  }
+  
+  .img-upload-bank{
+    width: 160px;
+    height: 160px;
+    cursor: pointer;
+  }
+
+  .txtRemove{
+      color : red;
+      text-decoration: underline;
+      position: absolute;
+      right : 15px;
+      bottom : 38px;
+      font-size: 1rem;
+      cursor: pointer;
+  }
+
+  .selectPackage{
+      font-weight : 700;
+      margin-top: 30px;
+      margin-bottom: 30px;
+  }
+
+
+  .circle_radio{
+    width : 25px;
+    height : 25px;
+    border-radius: 500px;
+    border : 1px solid #cccccc;
+    background : white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right : 12px;
+    &>div{
+        width : 17px;
+        height : 17px;
+        border-radius: 500px;
+        background : #2B62AA; 
+    }
+}
+
+.circle_radio_white{
+    width : 25px;
+    height : 25px;
+    border-radius: 500px;
+    border : 1px solid #cccccc;
+    background : white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right : 12px;
+    &>div{
+        width : 25px;
+        height : 25px;
+        border-radius: 500px;
+        background : #eeeeee; 
+    }
+}
+
+
+.success_register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &_container{
+        padding-top : 50px;
+    }
+    &>h1{
+        font-weight: 700;
+        color: #4CA256;
+        text-align: center;
+        @media screen and (max-width: 600px){
+            font-size : 25px
+        }
+
+        @media screen and (max-width: 374px){
+            font-size : 22px
+        }
+    }
+    &>h4{
+        font-weight: 600;
+        max-width : 700px;
+        text-align: center;
+        font-size : 20px;
+        margin-top : 40px;
+        margin-bottom : 40px;
+        line-height: 30px;
+        @media screen and (max-width: 600px){
+            font-size : 17px
+        }
+        @media screen and (max-width: 374px){
+            font-size : 15px
+        }
+    }
+    &>img{
+        width : 90px;
+        height : 90px;
+        @media screen and (max-width: 600px){
+            width : 70px;
+            height : 70px;
+        }
+    }
+}
+
+.iconPerson{
+    width: 20px; height: 20px; margin-right: 6px; 
+}

@@ -6,6 +6,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux"; 
+import { getState } from "@/actions/userActions";
 
 import PageLoader from "./util/PageLoader";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -35,10 +37,18 @@ const GiftCardTerms = lazy(() =>
 );
 const Policy = lazy(() => import("./components/Policy/Policy"));
 const Account = lazy(() => import("./container/Account"));
+const SignUpInformation = lazy(() => import("./container/SignUpInformation"));
+
+
 
 function App() {
   const url = window.location.href;
   const isNotPopup = url.toString().includes("account");
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getState());
+  }, []);
 
   return (
     <Router>
@@ -59,6 +69,7 @@ function App() {
               <Route path="/home/contact" component={Contact} />
 
               <Route path="/home/sign-up" component={SignUp} />
+              <Route path="/home/sign-up-information" component={SignUpInformation} />
               <Route path="/shop" component={Shop} />
 
               <Route path="/investor" component={ForInvestor} />

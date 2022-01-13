@@ -508,3 +508,21 @@ export const resetPasswordAction = (id, tokenid, payload) => async (
     });
   }
 };
+
+export const getState = () => async (
+  dispatch
+) => {
+  try {
+    const { data = null } = await api.getState();
+
+    if (!data) return;
+
+    dispatch({
+      type: 'GET_STATE_SUCCESS',
+      payload: data?.data,
+    });
+ 
+  } catch (error) {
+
+  }
+};

@@ -1,0 +1,138 @@
+import React from "react";
+import { ButtonReport } from "../../widget";
+import columns from "./column";
+import ReactTable from "react-table";
+import { Button } from "react-bootstrap";
+import Loading from "@/components/Loading";
+import {
+  exportRetailer,
+  closeExport,
+} from "@/actions/retailerActions";
+
+import {
+  getStaffStatistic,
+  sort_customer_statistic
+} from "@/actions/reportPosActions";
+
+import { useSelector, useDispatch } from "react-redux";
+import PopupExport from "@/components/PopupExport";
+import { convertDateData, handleChange } from "@/util";
+import InputSelect from "@/components/InputSelect";
+import { useForm } from "react-hook-form";
+
+import "react-table/react-table.css";
+// import "../../style.scss";
+
+const initialFilterList = [
+  { label: "All services", value: "all" },
+  { label: "Top 5 services", value: "top5" },
+  { label: "Top 10 services", value: "top10" },
+];
+
+const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChildFilter }) => {
+  const dispatch = useDispatch();
+  const [isVisibleExport, setVisibileExport] = React.useState(false);
+
+  const [filterList, setFilterList] = React.useState([initialFilterList]);
+
+
+  const {
+    loading,
+    linkExport,
+  } = useSelector((state) => state.retailer);
+
+  const {
+    directionSort_customer_statistic,
+    customer_statistic,
+    typeSort_customer_statistic,
+  } = useSelector((state) => state.reportPos);
+
+  const {
+    detail: { merchantId },
+  } = useSelector((state) => state.merchantDetail);
+  const token = JSON.parse(localStorage.getItem("user"))?.token || "";
+
+  const form = useForm({});
+
+  const onCloseExport = () => {
+    setVisibileExport(false);
+    dispatch(closeExport());
+  };
+
+  const onClickSort = (direction, type) => {
+    dispatch(sort_customer_statistic({ type }));
+  };
+
+
+  React.useEffect(() => {
+    const list = [
+      ...parentList
+    ].map((obj) => ({
+      label: obj?.name,
+      value: obj?.customerId
+    }));
+    setFilterList(list);
+  }, [parentList]);
+
+  return (
+    <>
+      <div className="info_merchant_title">
+        Customer statistic
+        <Button className="btn btn_cancel" onClick={onBack}>
+          Back
+        </Button>
+      </div>
+      <div style={{ position: "relative" }}>
+        {/* <ButtonReport
+          onClickShowReport={(() => { })}
+          onClickExport={onClickExport}
+          renderShowReport={() => <div />}
+        /> */}
+        <div style={{  marginTop : 50}}>
+          <InputSelect
+            data={filterList}
+            form={form}
+            defaultValue={defaultFilter}
+            label=""
+            name="filterType"
+            width={"15rem"}
+            height={"2.57rem"}
+            onChange={(value) => {
+              if(value){
+                onChildFilter(value)
+              }
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="table-container">
+        <ReactTable
+          manual
+          sortable={false}
+          data={customer_statistic || []}
+          minRows={1}
+          noDataText="NO DATA!"
+          NoDataComponent={() => (
+            <div className="retailer_nodata">NO DATA!</div>
+          )}
+          LoadingComponent={() => loading && <Loading />}
+          loading={loading}
+          columns={columns(
+            directionSort_customer_statistic,
+            onClickSort,
+            typeSort_customer_statistic
+          )}
+          PaginationComponent={() => <div />}
+        />
+      </div>
+      <PopupExport
+        isVisible={isVisibleExport}
+        linkExport={linkExport}
+        closeExport={onCloseExport}
+      />
+    </>
+  );
+};
+
+export default Index;

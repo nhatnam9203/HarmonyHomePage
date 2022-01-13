@@ -9,6 +9,7 @@ import {
   summary_payment_by_method,
   summary_marketing_efficiency,
   FormatPrice,
+  handleChange
 } from "@/util";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
@@ -243,6 +244,8 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data = null } = await api.getByPage(requestUrl, token);
 
+    console.log({ requestUrl , data })
+
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {
@@ -255,7 +258,13 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
         : [];
       let result = [];
       if (temptData.length > 0)
-        result = [...temptData, summary_sales_by_customer(data.summary)];
+        result = [
+          ...temptData,
+          {
+            ...summary_sales_by_customer(data.summary),
+            total_lastVisitSale: handleChange("lastVisitSale", temptData)
+          },
+        ];
 
       dispatch({
         type: "SET_SALES_BY_CUSTOMER",
@@ -381,6 +390,7 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
   try {
+    console.log('get staff report')
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data = null } = await api.getByPage(requestUrl, token);
 
@@ -457,6 +467,8 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.RETAILER_EXPORT_REQUEST });
     let { data = null } = await api.getByPage(requestUrl, token);
     let path = typeof data.data === "object" ? data.data.path : data.data;
+
+    console.log('response export : ',{ data });
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -641,7 +653,6 @@ export const changeImageProduct = (formData, productId, callBack) => async (
 
 export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
   try {
-    console.log({ formData });
     const url = "file?category=product";
     dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
     let { data = null } = await api.uploadFile(url, formData);
