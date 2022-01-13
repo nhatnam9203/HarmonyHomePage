@@ -509,11 +509,11 @@ export const resetPasswordAction = (id, tokenid, payload) => async (
   }
 };
 
-export const getState = (id, tokenid, payload) => async (
+export const getState = () => async (
   dispatch
 ) => {
   try {
-    const { data = null } = await api.getState(id, tokenid, payload);
+    const { data = null } = await api.getState();
 
     if (!data) return;
 
