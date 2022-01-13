@@ -9,10 +9,18 @@ const data = [
   "Report",
 ];
 
-const Tabs = ({ tabActive, changeTab }) => {
+const dataPOS = [
+  "Business Information",
+  "Report",
+];
+
+const Tabs = ({ tabActive, changeTab, merchantType }) => {
+
+  const tabList = merchantType == "Retailer" ? data : dataPOS;
+
   return (
     <div className="infoTab_container">
-      {data.map((tab, index) => (
+      {tabList.map((tab, index) => (
         <div
           onClick={() => changeTab(tab)}
           key={"tab" + index}

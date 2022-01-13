@@ -228,7 +228,7 @@ function Info() {
             onChangeSearch={onChangeSearchInventory}
             changeTab={changeTab}
             exportInventory={exportInventory}
-            getInventoryData={()=>getInventoryData(pageInventory,sortInventory,sortTypeInventory)}
+            getInventoryData={() => getInventoryData(pageInventory, sortInventory, sortTypeInventory)}
           />
         );
       case "Customer":
@@ -268,9 +268,9 @@ function Info() {
               Back
             </Button> */}
           </div>
-          {detail.type == "Retailer" && (
-            <Tabs tabActive={tabActive} changeTab={changeTab} />
-          )}
+
+          <Tabs tabActive={tabActive} changeTab={changeTab} merchantType={detail.type} />
+
           {renderTabItem()}
         </>
       )}
