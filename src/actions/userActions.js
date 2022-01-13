@@ -513,12 +513,12 @@ export const getState = (id, tokenid, payload) => async (
   dispatch
 ) => {
   try {
-    const { data = null } = await api.resetPassword(id, tokenid, payload);
+    const { data = null } = await api.getState(id, tokenid, payload);
 
     if (!data) return;
 
     dispatch({
-      type: typeUser.RESET_PASSWORD_SUCCESS,
+      type: 'GET_STATE_SUCCESS',
       payload: data?.data,
     });
  

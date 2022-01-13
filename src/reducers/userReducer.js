@@ -374,7 +374,7 @@ export const forgotPasswordReducer = (
 };
 
 export const getPackagePricingReducer = (
-  state = { loading: false, packageList: [] },
+  state = { loading: false, packageList: [], stateList: [] },
   { type, payload }
 ) => {
   switch (type) {
@@ -394,6 +394,11 @@ export const getPackagePricingReducer = (
         ...state,
         loading: false,
       };
+    case "GET_STATE_SUCCESS":
+      return {
+        ...state,
+        stateList: payload,
+      }
 
     default:
       return state;
