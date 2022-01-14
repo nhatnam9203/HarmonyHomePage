@@ -24,6 +24,8 @@ const Index = React.forwardRef(({
 
     React.useImperativeHandle(ref, () => ({
         getValuePrefix: () => {
+            const inputPhoneValue = formInput.getValues("prefixPhone");
+            console.log({ inputPhoneValue })
             return formInput.getValues("prefixPhone")
         }
     }));

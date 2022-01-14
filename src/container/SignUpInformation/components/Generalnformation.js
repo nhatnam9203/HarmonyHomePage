@@ -1,9 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useForm, useWatch } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { signUpGeneralInfoSchema, signUpGeneralInfoSchema2 } from "@/util/schema";
-import { useDispatch, useSelector } from "react-redux";
+import { useWatch } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { getStateId } from "@/util"
 import InputText from "@/components/InputText";
 import InputSelect from "@/components/InputSelect";
@@ -20,10 +18,12 @@ const merchantTypeGroup = [
 ]
 
 
-const Generalnformation = () => {
-    const dispatch = useDispatch();
+const Generalnformation = ({
+    form,
+    errors,
+    updateValues,
+}) => {
 
-    const [schemaValidate, setSchemaValidate] = React.useState(signUpGeneralInfoSchema([]));
     const [isSameBusinessAddress, setIsSameBusinessAddress] = React.useState(true);
 
     const refBusinessPhone = React.useRef();
@@ -32,12 +32,6 @@ const Generalnformation = () => {
     const {
         stateList = []
     } = useSelector(state => state.pricing);
-
-    const form = useForm({
-        resolver: yupResolver(schemaValidate)
-    });
-
-    const errors = form.formState.errors;
 
 
     const streetBusinessAddress = useWatch({
@@ -66,32 +60,28 @@ const Generalnformation = () => {
         }
     }, [stateBusinessAddress])
 
-    const onBlurStateBusinessAddress = () => {
-        if (stateBusinessAddress && isSameBusinessAddress) {
-            form.setValue("stateDbaAddress", stateBusinessAddress);
-        }
-    }
-
 
     const onChangeIsSameBusinessAddress = (status) => {
         setIsSameBusinessAddress(status);
-        if (!status) {
-            form.setValue("streetDbaAddress", "");
-            form.setValue("cityDbaAddress", "");
-            form.setValue("zipDbaAddress", "");
-            form.setValue("stateDbaAddress", "");
-            setSchemaValidate(signUpGeneralInfoSchema());
-        } else {
-            setSchemaValidate(signUpGeneralInfoSchema2())
-        }
     }
 
 
 
     const checkValid = (values) => {
-        for (const [key, value] of Object.entries(values)) {
-            if (!value) {
-                return false;
+        if (isSameBusinessAddress) {
+            for (const [key, value] of Object.entries(values)) {
+                if (key !== "streetDbaAddress" && key !== "cityDbaAddress" && key !== "zipDbaAddress" && key !== "stateDbaAddress") {
+                    if (!value) {
+                        console.log({ key })
+                        return false;
+                    }
+                }
+            }
+        } else {
+            for (const [key, value] of Object.entries(values)) {
+                if (!value) {
+                    return false;
+                }
             }
         }
         return true;
@@ -129,33 +119,35 @@ const Generalnformation = () => {
         }
     }
 
-    const addGeneralInformation = (values) =>{
+    const addGeneralInformation = (values) => {
+
+        const phoneHeadeBusiness = refBusinessPhone?.current?.getValuePrefix();
+        const phoneHeadContact = refContactPhone?.current?.getValuePrefix();
         const generalInfor = {
             businessName: values.businessName,
             businessAddress: {
                 address: values.streetBusinessAddress,
                 city: values.cityBusinessAddress,
-                state: getStateId(stateList,values.stateBusinessAddress),
+                state: getStateId(stateList, values.stateBusinessAddress),
                 zip: values.zipBusinessAddress,
             },
             dbaAddress: {
                 address: isSameBusinessAddress ? values.streetBusinessAddress : values.streetDbaAddress,
                 city: isSameBusinessAddress ? values.cityBusinessAddress : values.cityDbaAddress,
-                state: isSameBusinessAddress ? getStateId(stateList,values.stateBusinessAddress) : getStateId(stateList,values.stateDbaAddress),
+                state: isSameBusinessAddress ? getStateId(stateList, values.stateBusinessAddress) : getStateId(stateList, values.stateDbaAddress),
                 zip: isSameBusinessAddress ? values.zipBusinessAddress : values.zipDbaAddress,
             },
-            businessPhone: refBusinessPhone?.current?.getValue()?.value + values.businessPhone,
-            contactPhone: refContactPhone?.current?.getValue()?.value + values.contactPhone,
+            businessPhone: phoneHeadeBusiness + values.businessPhone,
+            contactPhone: phoneHeadContact + values.contactPhone,
             doingBusiness: values.doingBusiness,
             email: values.email,
             firstName: values.firstName,
             lastName: values.lastName,
             position: values.position,
             tax: values.tax
-        }
+        };
 
-        // dispatch(updateGeneralInformation({ generalInfor, type: values.type }));
-
+        updateValues("generalInfor", generalInfor);
     }
 
     const stateData = stateList.map((obj) => ({

@@ -13,18 +13,21 @@ import Loading from "@/components/Loading";
 import "./index.scss";
 
 
-const BankInformaion = () => {
+const BankInformaion = ({
+    form,
+    errors,
+}) => {
 
     const dispatch = useDispatch();
 
-    const form = useForm({
-        resolver: yupResolver(signUpBankInformation)
-    });
+    // const form = useForm({
+    //     resolver: yupResolver(signUpBankInformation)
+    // });
 
     const [fileId, setFileId] = React.useState(null);
     const [imageUrl, setImageUrl] = React.useState(null);
 
-    const errors = form.formState.errors;
+    // const errors = form.formState.errors;
 
     const {
         loadingUpfile,

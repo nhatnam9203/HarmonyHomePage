@@ -1,5 +1,11 @@
 import React from 'react';
 import { Stepper } from 'react-form-stepper';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import {
+    signUpGeneralInfoSchema,
+    signUpGeneralInfoSchema2,
+} from "@/util/schema";
 
 import "./index.scss";
 const Generalnformation = React.lazy(() => import("../components/Generalnformation"));
@@ -12,29 +18,64 @@ const Success = React.lazy(() => import("../components/Success"));
 
 export const FilloutApplication = () => {
 
+    const form_0 = useForm({});
+    const errors_0 = form_0.formState.errors;
+
     const [activeStep, setActiveStep] = React.useState(0);
+
+    const [generalInfor, setGeneralInfor] = React.useState({});
+    const [businessInfor, setBusinessInfor] = React.useState({});
+    const [bankInfor, setBankInfor] = React.useState({});
 
     const handleStepClick = (step) => {
         setActiveStep(step);
     }
 
+    const updateValues = async (type, values) => {
+        switch (type) {
+            case "generalInfor":
+                setGeneralInfor(values);
+                setActiveStep(1);
+                break;
+
+            case "businessInfor":
+                setBusinessInfor(values);
+                setActiveStep(2);
+                break;
+
+            case "bankInfor":
+                setBankInfor(values);
+                setActiveStep(3);
+                break;
+            default:
+                break;
+        }
+    }
+
     const renderByStep = () => {
         switch (activeStep) {
             case 0:
-                return <Generalnformation />;
+                return <Generalnformation
+                    handleStepClick={handleStepClick}
+                    form={form_0}
+                    errors={errors_0}
+                    signUpGeneralInfoSchema={signUpGeneralInfoSchema}
+                    signUpGeneralInfoSchema2={signUpGeneralInfoSchema2}
+                    updateValues={updateValues}
+                />;
             case 1:
-                return <BusinessInformation />;
+                return <BusinessInformation handleStepClick={handleStepClick} />;
             case 2:
-                return <BankInformation />;
+                return <BankInformation handleStepClick={handleStepClick} />;
             case 3:
-                return <PrincipalInformation />;
+                return <PrincipalInformation handleStepClick={handleStepClick} />;
             case 4:
-                return <PackagePricing />;
+                return <PackagePricing handleStepClick={handleStepClick} />;
             case 5:
-                return <Success />;
+                return <Success handleStepClick={handleStepClick} />;
 
             default:
-                return <Generalnformation />
+                return <Generalnformation handleStepClick={handleStepClick} />
         }
     }
 
