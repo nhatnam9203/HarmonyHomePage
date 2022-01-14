@@ -42,6 +42,10 @@ const Index = ({
                 onChange={(date) => {
                    field.onChange(date);
                 }}
+                showMonthDropdown
+                showYearDropdown
+                showPopperArrow={false}
+                dropdownMode='select'
                 customInput={<CustomInput />}
             />
         </>

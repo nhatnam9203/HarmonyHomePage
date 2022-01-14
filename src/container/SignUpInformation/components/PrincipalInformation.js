@@ -34,8 +34,9 @@ const PrincipalInformation = ({
 
     const onSubmit = (values, e) => {
         e?.preventDefault();
+
         let principalInfo = [
-            ...values?.principalInfo
+            ...values?.principalInfor
         ];
 
         for (let i = 0; i < principalInfo?.length; i++) {
