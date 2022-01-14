@@ -369,10 +369,16 @@ export const arrayIsEqual = (a, b) => {
 export const getStateId = (stateCity, value) => {
   let name = false;
   for (let i = 0; i < stateCity.length; i++) {
-      if (stateCity[i].name.includes(value)) {
+      if (stateCity[i]?.name?.includes(value)) {
           name = stateCity[i].stateId;
           return name;
       }
   }
   return name;
-}
+};
+
+export function validateEmail(email) {
+  const re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};

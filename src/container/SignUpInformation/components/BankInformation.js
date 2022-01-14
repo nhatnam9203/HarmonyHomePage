@@ -1,10 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import InputText from "@/components/InputText";
-import { signUpBankInformation } from "@/util/schema";
-import { yupResolver } from '@hookform/resolvers/yup';
 import Dropzone from "react-dropzone";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import { uploadImageProduct } from "@/actions/retailerActions";
@@ -16,37 +13,74 @@ import "./index.scss";
 const BankInformaion = ({
     form,
     errors,
+    updateValues = () => { },
+    goBack = () => { }
 }) => {
 
     const dispatch = useDispatch();
 
-    // const form = useForm({
-    //     resolver: yupResolver(signUpBankInformation)
-    // });
-
     const [fileId, setFileId] = React.useState(null);
     const [imageUrl, setImageUrl] = React.useState(null);
 
-    // const errors = form.formState.errors;
+    const [isSubmit, setIsSubmit] = React.useState(false);
 
     const {
         loadingUpfile,
     } = useSelector((state) => state.retailer);
 
 
-    const onSubmit = (values, e) => {
+    const checkValid = (values) => {
+        for (const [key, value] of Object.entries(values)) {
+            if (!value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    const checkErrors = () => {
+        if (isSubmit) {
+            validateErrors();
+        }
+    }
+
+    const validateErrors = () => {
+        const values = form.getValues();
+        for (const [key, value] of Object.entries({ ...values })) {
+            if (!value) {
+                form.setError(key, { message: "required", type: "required" });
+            } else {
+                form.clearErrors(key);
+            }
+        }
+    }
+
+
+    const onSubmit = (e) => {
         e?.preventDefault();
-        if (!fileId) {
-            alert("PLEASE UPDATE VOID CHECK")
-        } else {
+        setIsSubmit(true);
+        const values = form.getValues();
+
+        let isValid = true;
+        const valid = checkValid({
+            ...values
+        });
+
+        if (!valid) {
+            validateErrors();
+            isValid = false;
+        }
+
+        if (isValid) {
             const bankInformation = {
                 ...values,
                 fileId
             };
-
-            // dispatch(signup.updateBankInformation(bankInformation));
+            updateValues("bankInfo", bankInformation);
         }
     }
+
 
     const uploadImage = (fileUpload) => {
         let file = fileUpload[0];
@@ -57,14 +91,16 @@ const BankInformaion = ({
 
     const callBackUploadImage = (data) => {
         setFileId(data?.fileId);
+        form.setValue("fileId", data?.fileId);
         setImageUrl(data?.url);
+        checkErrors();
     }
 
     return (
         <>
             {loadingUpfile && <Loading isFullLoading />}
             <div className='general_information'>
-                <Form onSubmit={form.handleSubmit(onSubmit)}>
+                <Form onSubmit={(onSubmit)}>
                     <Container>
                         <Row className="justify-content-md-center">
                             <Col xs={12} md={12} lg={10}>
@@ -83,6 +119,7 @@ const BankInformaion = ({
                                     error={errors?.accountHolderName}
                                     label='Account Holder Name'
                                     isRequired
+                                    onBlur={checkErrors}
                                 />
                             </Col>
 
@@ -94,6 +131,7 @@ const BankInformaion = ({
                                     error={errors?.bankName}
                                     label='Bank Name'
                                     isRequired
+                                    onBlur={checkErrors}
                                 />
                             </Col>
 
@@ -105,6 +143,7 @@ const BankInformaion = ({
                                     error={errors?.routingNumber}
                                     label='Routing Number (ABA)'
                                     isRequired
+                                    onBlur={checkErrors}
                                 />
                             </Col>
 
@@ -116,6 +155,7 @@ const BankInformaion = ({
                                     error={errors?.accountNumber}
                                     label='Account Number (DDA)'
                                     isRequired
+                                    onBlur={checkErrors}
                                 />
                             </Col>
 
@@ -144,14 +184,17 @@ const BankInformaion = ({
                                             );
                                         } else {
                                             return (
-                                                <div
-                                                    className="images_inventory_dropzone_2"
-                                                    {...getRootProps()}
-                                                >
-                                                    <input {...getInputProps()} />
-                                                    <img src={icon_upload} atl="uploadImage" />
-                                                    <p>Upload image</p>
-                                                </div>
+                                                <>
+                                                    <div
+                                                        className="images_inventory_dropzone_2"
+                                                        {...getRootProps()}
+                                                    >
+                                                        <input {...getInputProps()} />
+                                                        <img src={icon_upload} atl="uploadImage" />
+                                                        <p>Upload image</p>
+                                                    </div>
+                                                    {!fileId && isSubmit && <div style={{ color: "red", fontWeight: "600" }}>{"Please update void check"}</div>}
+                                                </>
                                             )
                                         }
                                     }}
@@ -169,6 +212,7 @@ const BankInformaion = ({
                                     <Button
                                         variant="light"
                                         className="back_signup text-center font-weight-bold"
+                                        onClick={goBack}
                                     >
                                         Back
                                     </Button>

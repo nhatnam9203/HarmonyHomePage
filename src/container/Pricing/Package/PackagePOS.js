@@ -96,7 +96,7 @@ export default function PackagePOS({
                                 </Card.Title>
                                 <Link
                                     className="package__item--btn text-center"
-                                    to="/home/sign-up"
+                                    to="/home/sign-up-information"
                                 >
                                     Start free trial
                                 </Link>
@@ -152,7 +152,7 @@ export default function PackagePOS({
                                 </Card.Title>
                                 <Link
                                     className="package__item--btn text-center"
-                                    to="/home/sign-up"
+                                    to="/home/sign-up-information"
                                 >
                                     Start free trial
                                 </Link>
@@ -206,7 +206,7 @@ export default function PackagePOS({
                                 </Card.Title>
                                 <Link
                                     className="package__item--btn text-center"
-                                    to="/home/sign-up"
+                                    to="/home/sign-up-information"
                                 >
                                     Start free trial
                                 </Link>

@@ -6,15 +6,17 @@ import "./index.scss";
 
 const Succes = () => {
 
-    const onSubmit = (e) => {
+    const onSuccess = (e) => {
         e?.preventDefault();
+        const x = window.location.href;
+        const url = new URL(x).origin;
+        window.location.href = `${url}/home`;
     }
-
 
     return (
         <>
             <div className='success_register_container'>
-                <Form onSubmit={(onSubmit)}>
+                <Form onSubmit={onSuccess}>
                     <Container>
                         <Row className="justify-content-md-center">
                             <Col className='success_register'>
@@ -25,9 +27,10 @@ const Succes = () => {
                                 <img src={iconSuccess} alt="img" />
 
                                 <Button
+                                    type="submit"
                                     variant="light"
                                     className="back_signup text-center font-weight-bold"
-                                    style={{ marginTop : 40, marginBottom : 120}}
+                                    style={{ marginTop: 40, marginBottom: 120 }}
                                 >
                                     OK
                                 </Button>

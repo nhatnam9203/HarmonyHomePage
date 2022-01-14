@@ -19,6 +19,7 @@ const Index = ({
     editable = true,
     height = "3.6rem",
     renderError = true,
+    onBlur = () =>{},
 }) => {
 
     const { field } = useController({
@@ -46,6 +47,7 @@ const Index = ({
                         onChange={e => form.setValue(name, e.target.value)}
                         disabled={editable}
                         isInvalid={error}
+                        onBlur={onBlur}
                     /> :
                     <Form.Control
                         className='inputText'
@@ -57,6 +59,7 @@ const Index = ({
                         value={valueVisible ?? field.value}
                         disabled={!editable}
                         style={{ height }}
+                        onBlur={onBlur}
                     />
             }
             {
@@ -78,6 +81,7 @@ const MaskInput = (props) => (
         maskChar={null}
         value={props.value}
         onChange={props.onChange}
+        onBlur={props.onBlur }
     >
         {
             (inputProps) => (<Form.Control className='inputText' isInvalid={props.isInvalid} style={props.style} placeholder={props.placeholder}   {...inputProps} type="text" />)

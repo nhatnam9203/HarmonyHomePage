@@ -1,24 +1,39 @@
 
 .signUp_information{
-    overflow-y: scroll;
     &_container{
         &_row{
             padding-top: 16px;
             &>h1{
                 margin : 30px auto;
                 font-weight: 900;
+                font-size: 32px;
+                @media screen and (max-width : 600px) {
+                    font-size: 24px;
+                }
             }
             
         }
         &_col{
+            height : calc(100vh - 405px);
+            overflow-y: scroll;
+            margin-top: -15px;
+
             &>h6{
                 margin : 38px 0px 16px auto;
                 font-weight: 900;
                 font-size : 22px;
+                @media screen and (max-width : 600px) {
+                    font-size: 19px;
+                }
             }
             &_dot{
                 margin-left: 32px;
                 margin-bottom : 8px;
+            }
+            @media screen and (max-width : 600px) {
+                &>p{
+                    font-size: 14px;
+                }
             }
         }
     }

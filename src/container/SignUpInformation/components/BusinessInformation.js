@@ -1,16 +1,13 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import InputText from "@/components/InputText";
 import { useMediaQuery } from 'react-responsive';
 import "./index.scss";
 
 
-const BusinessInformation = () => {
-
-    const dispatch = useDispatch();
-
+const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
+ 
     const question1Ref = React.useRef();
     const question2Ref = React.useRef();
     const question3Ref = React.useRef();
@@ -57,6 +54,8 @@ const BusinessInformation = () => {
                 question: "Have you ever accepted Credit/Debit cards before?",
             },
         };
+
+        updateValues("businessInfo",businesssInfo);
 
         // dispatch(signup.updateBusinessInformation(businesssInfo));
     }
@@ -140,6 +139,7 @@ const BusinessInformation = () => {
                                 <Button
                                     variant="light"
                                     className="back_signup text-center font-weight-bold"
+                                    onClick={goBack}
                                 >
                                     Back
                                 </Button>
@@ -162,9 +162,17 @@ const BusinessInformation = () => {
 export default BusinessInformation;
 
 
-const ItemInformation = ({ label, textYes, form, name, isDrop }) => {
+const ItemInformation = React.forwardRef(({ label, textYes, form, name, isDrop }, ref) => {
 
-    const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
+
+    const [isCheck, setIsCheck] = React.useState(false);
+
+    React.useImperativeHandle(ref, () => ({
+        getStatus: () => {
+            return isCheck;
+        },
+    }));
 
     return (
         <div className='itemBusiness'>
@@ -178,7 +186,7 @@ const ItemInformation = ({ label, textYes, form, name, isDrop }) => {
 
             <div>
                 <div style={{ width: 80 }}>
-                    <div className="circle_radio">
+                    <div onClick={() => setIsCheck(!isCheck)} className={!isCheck ? "circle_radio" : "circle_radio_white"}>
                         <div />
                     </div>
                     <p>No</p>
@@ -186,7 +194,7 @@ const ItemInformation = ({ label, textYes, form, name, isDrop }) => {
 
                 <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
                     <div>
-                        <div className="circle_radio_white">
+                        <div onClick={() => setIsCheck(!isCheck)} className={isCheck ? "circle_radio" : "circle_radio_white"}>
                             <div />
                         </div>
                         <p>{textYes}</p>
@@ -199,9 +207,10 @@ const ItemInformation = ({ label, textYes, form, name, isDrop }) => {
                         label={""}
                         placeholder=""
                         height={"3rem"}
+                        editable={isCheck}
                     />
                 </div>
             </div>
         </div>
     )
-}
+});

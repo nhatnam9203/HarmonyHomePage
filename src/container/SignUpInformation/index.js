@@ -4,7 +4,7 @@ import { TermCondition, FilloutApplication } from "./pages"
 const Index = () => {
 
     const [isAgree, setIsAgree] = React.useState(false);
-    const [isAcceptAgree, setIsAcceptAgree] = React.useState(true);
+    const [isAcceptAgree, setIsAcceptAgree] = React.useState(false);
 
     if (isAcceptAgree) {
         return (

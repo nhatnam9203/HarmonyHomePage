@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useWatch } from "react-hook-form";
 import { useSelector } from "react-redux";
-import { getStateId } from "@/util"
+import { validateEmail } from "@/util";
 import InputText from "@/components/InputText";
 import InputSelect from "@/components/InputSelect";
 import InputPhone from "@/components/InputPhone";
@@ -25,6 +25,7 @@ const Generalnformation = ({
 }) => {
 
     const [isSameBusinessAddress, setIsSameBusinessAddress] = React.useState(true);
+    const [isSubmit, setIsSubmit] = React.useState(false);
 
     const refBusinessPhone = React.useRef();
     const refContactPhone = React.useRef();
@@ -72,7 +73,6 @@ const Generalnformation = ({
             for (const [key, value] of Object.entries(values)) {
                 if (key !== "streetDbaAddress" && key !== "cityDbaAddress" && key !== "zipDbaAddress" && key !== "stateDbaAddress") {
                     if (!value) {
-                        console.log({ key })
                         return false;
                     }
                 }
@@ -87,8 +87,36 @@ const Generalnformation = ({
         return true;
     }
 
+    const checkErrors = () => {
+        if (isSubmit) {
+            validateErrors();
+        }
+    }
+
+    const validateErrors = () => {
+        const values = form.getValues();
+        for (const [key, value] of Object.entries({ ...values })) {
+            if (!value) {
+                if (isSameBusinessAddress) {
+                    if (key !== "streetDbaAddress" && key !== "cityDbaAddress" && key !== "zipDbaAddress" && key !== "stateDbaAddress") {
+                        form.setError(key, { message: "required", type: "required" });
+                    }
+                } else {
+                    form.setError(key, { message: "required", type: "required" });
+                }
+            } else {
+                if (key == "email" && !validateEmail(value)) {
+                    form.setError(key, { message: "email is invalid", type: "required" });
+                } else {
+                    form.clearErrors(key);
+                }
+            }
+        }
+    }
+
     const onSubmit = (e) => {
         e?.preventDefault();
+        setIsSubmit(true);
         const values = form.getValues();
 
         let isValid = true;
@@ -98,19 +126,7 @@ const Generalnformation = ({
 
 
         if (!valid) {
-            for (const [key, value] of Object.entries({ ...values })) {
-                if (!value) {
-                    if (isSameBusinessAddress) {
-                        if (key !== "streetDbaAddress" && key !== "cityDbaAddress" && key !== "zipDbaAddress" && key !== "stateDbaAddress") {
-                            form.setError(key, { message: "required", type: "required" });
-                        }
-                    } else {
-                        form.setError(key, { message: "required", type: "required" });
-                    }
-                } else {
-                    form.clearErrors(key);
-                }
-            }
+            validateErrors();
             isValid = false;
         }
 
@@ -128,13 +144,13 @@ const Generalnformation = ({
             businessAddress: {
                 address: values.streetBusinessAddress,
                 city: values.cityBusinessAddress,
-                state: getStateId(stateList, values.stateBusinessAddress),
+                state: values.stateBusinessAddress,
                 zip: values.zipBusinessAddress,
             },
             dbaAddress: {
                 address: isSameBusinessAddress ? values.streetBusinessAddress : values.streetDbaAddress,
                 city: isSameBusinessAddress ? values.cityBusinessAddress : values.cityDbaAddress,
-                state: isSameBusinessAddress ? getStateId(stateList, values.stateBusinessAddress) : getStateId(stateList, values.stateDbaAddress),
+                state: isSameBusinessAddress ? values.stateBusinessAddress : values.stateDbaAddress,
                 zip: isSameBusinessAddress ? values.zipBusinessAddress : values.zipDbaAddress,
             },
             businessPhone: phoneHeadeBusiness + values.businessPhone,
@@ -176,6 +192,7 @@ const Generalnformation = ({
                                 label={"Legal Business Name"}
                                 placeholder="Legal Business Name"
                                 error={errors?.businessName}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -186,6 +203,7 @@ const Generalnformation = ({
                                 label={"Doing Business As(DBA)"}
                                 placeholder="DBA"
                                 error={errors?.doingBusiness}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -197,6 +215,7 @@ const Generalnformation = ({
                                 label="Merchant Type"
                                 name="type"
                                 isRequired
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -208,6 +227,7 @@ const Generalnformation = ({
                                 placeholder="99-9999999"
                                 mask={"99-9999999"}
                                 error={errors?.tax}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -218,6 +238,7 @@ const Generalnformation = ({
                                 label={"Business Address(no P.O.Boxes)"}
                                 placeholder="Street Address"
                                 error={errors?.streetBusinessAddress}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -228,6 +249,7 @@ const Generalnformation = ({
                                 label={"City"}
                                 placeholder="City"
                                 error={errors?.cityBusinessAddress}
+                                onBlur={checkErrors}
 
                             />
                         </Col>
@@ -242,6 +264,7 @@ const Generalnformation = ({
                                 isRequired
                                 width="100%"
                                 error={errors?.stateBusinessAddress}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -252,6 +275,7 @@ const Generalnformation = ({
                                 label={"Zip code"}
                                 placeholder="Zip code"
                                 error={errors?.zipBusinessAddress}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -274,6 +298,7 @@ const Generalnformation = ({
                                 error={errors?.streetDbaAddress}
                                 valueVisible={isSameBusinessAddress ? streetBusinessAddress : null}
                                 editable={!isSameBusinessAddress}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -286,6 +311,7 @@ const Generalnformation = ({
                                 error={(errors?.cityDbaAddress)}
                                 valueVisible={isSameBusinessAddress ? cityBusinessAddress : null}
                                 editable={!isSameBusinessAddress}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -299,6 +325,7 @@ const Generalnformation = ({
                                 isRequired
                                 width="100%"
                                 error={errors?.stateDbaAddress}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -311,6 +338,7 @@ const Generalnformation = ({
                                 error={(errors?.zipDbaAddress)}
                                 valueVisible={isSameBusinessAddress ? zipBusinessAddress : null}
                                 editable={!isSameBusinessAddress}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -321,6 +349,7 @@ const Generalnformation = ({
                                 label={"Email Contact"}
                                 placeholder="example@gmail.com"
                                 error={errors?.email}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -333,6 +362,7 @@ const Generalnformation = ({
                                 placeholder="012-3455-789"
                                 error={errors?.businessPhone}
                                 ref={refBusinessPhone}
+                                onBlur={checkErrors}
                             />
                         </Col>
                     </Row>
@@ -353,6 +383,7 @@ const Generalnformation = ({
                                 label={"First Name"}
                                 placeholder="First Name"
                                 error={errors?.firstName}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -363,6 +394,7 @@ const Generalnformation = ({
                                 label={"Last Name"}
                                 placeholder="Last Name"
                                 error={errors?.lastName}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -373,6 +405,7 @@ const Generalnformation = ({
                                 label={"Title/Position"}
                                 placeholder="President/Manager/Owner"
                                 error={errors?.position}
+                                onBlur={checkErrors}
                             />
                         </Col>
 
@@ -384,6 +417,7 @@ const Generalnformation = ({
                                 placeholder="012-3455-789"
                                 error={errors?.contactPhone}
                                 ref={refContactPhone}
+                                onBlur={checkErrors}
                             />
                         </Col>
                     </Row>

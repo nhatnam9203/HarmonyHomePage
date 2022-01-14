@@ -53,6 +53,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    margin-top: 30px;
 } 
 
 .sameAsDBA{
@@ -80,44 +81,6 @@
         &>div{
             display: flex;
             flex-direction: row;
-    
-            .circle_radio{
-                width : 25px;
-                height : 25px;
-                border-radius: 500px;
-                border : 1px solid #cccccc;
-                background : white; 
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                margin-right : 12px;
-                &>div{
-                    width : 17px;
-                    height : 17px;
-                    border-radius: 500px;
-                    background : #2B62AA; 
-                }
-            }
-    
-            .circle_radio_white{
-                width : 25px;
-                height : 25px;
-                border-radius: 500px;
-                border : 1px solid #cccccc;
-                background : white; 
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                margin-right : 12px;
-                &>div{
-                    width : 25px;
-                    height : 25px;
-                    border-radius: 500px;
-                    background : #eeeeee; 
-                }
-            }
     
             &>div:nth-child(1){
                 display: flex;
@@ -232,8 +195,8 @@
             font-size : 25px
         }
 
-        @media screen and (max-width: 375px){
-            font-size : 20px
+        @media screen and (max-width: 374px){
+            font-size : 22px
         }
     }
     &>h4{
@@ -247,6 +210,9 @@
         @media screen and (max-width: 600px){
             font-size : 17px
         }
+        @media screen and (max-width: 374px){
+            font-size : 15px
+        }
     }
     &>img{
         width : 90px;
@@ -256,4 +222,8 @@
             height : 70px;
         }
     }
+}
+
+.iconPerson{
+    width: 20px; height: 20px; margin-right: 6px; 
 }

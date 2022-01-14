@@ -396,7 +396,11 @@ export const TermCondition = ({
                             If you have any questions about these Terms, please contact Harmony Pay at
                             team@harmonypayment.com.
                         </p>
+                    </Col>
 
+                </Row>
+                <Row>
+                    <Col>
                         <div className='divAgreeTermCondition'>
                             <img onClick={() => setIsAgree(!isAgree)} src={isAgree ? checkBox : checkBoxEmpty} alt="img_checkbox" />
                             <p>I have read & agree to the Term and Condition</p>
@@ -409,7 +413,6 @@ export const TermCondition = ({
                                 Continue
                             </div>
                         </div>
-
                     </Col>
                 </Row>
             </Container>

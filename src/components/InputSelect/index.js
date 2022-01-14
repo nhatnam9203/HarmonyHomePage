@@ -57,7 +57,7 @@ const Index = ({
                 <div
                     onClick={toggle}
                     style={{
-                        width, 
+                        width,
                         // borderColor: error?.message ? "red" : "#ccccccc"
                     }}
                     className="select_subcategory"
@@ -71,7 +71,7 @@ const Index = ({
                                     data.map((item) => (
                                         <div
                                             className="subCategory_item"
-                                            key={item.vl + "subCategory"}
+                                            key={item.vl + "subCategory" + Math.random()}
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 onSelected(item.value);

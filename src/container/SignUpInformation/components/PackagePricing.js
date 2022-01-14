@@ -30,12 +30,17 @@ const packageList = [
 ]
 
 
-const PackagePricing = () => {
+const PackagePricing = ({
+    updateValues,
+    goBack,
+    form,
+    errors,
+}) => {
 
     const dispatch = useDispatch();
-    const form = useForm({
+    // const form = useForm({
 
-    });
+    // });
 
     const [packageId, setPackageId] = React.useState(1);
     const [isModalConfirm, setModalConfirm] = React.useState(false);
@@ -50,8 +55,9 @@ const PackagePricing = () => {
     }
 
 
-    const onConfirm = () =>{
-
+    const onConfirm = () => {
+        updateValues("packagePricing", packageId);
+        setModalConfirm(false)
     }
 
 
@@ -79,11 +85,13 @@ const PackagePricing = () => {
 
                                 <h6 className="selectPackage">Select package below</h6>
 
+                                {/********************** RENDER PACKAGE LIST  ***********************/}
                                 {
                                     packageList.map((obj, index) => (
                                         <div
                                             onClick={() => setPackageId(obj?.id)}
-                                            key={"packageId" + index} style={{ display: "flex", flexDirection: "row" }}
+                                            key={"packageId" + index}
+                                            style={{ display: "flex", flexDirection: "row" }}
                                         >
                                             <div className={packageId == obj?.id ? "circle_radio" : "circle_radio_white"}>
                                                 <div />
@@ -99,6 +107,7 @@ const PackagePricing = () => {
                                             <Button
                                                 variant="light"
                                                 className="back_signup text-center font-weight-bold"
+                                                onClick={goBack}
                                             >
                                                 Back
                                             </Button>
@@ -122,6 +131,7 @@ const PackagePricing = () => {
         </>
     )
 };
+
 
 export default PackagePricing;
 

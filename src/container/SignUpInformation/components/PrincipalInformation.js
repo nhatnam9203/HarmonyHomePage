@@ -1,10 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useForm, useWatch, useFieldArray } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { signUpPrincipalInfoSchema } from "@/util/schema";
+import { useFieldArray } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { getStateId } from "@/util"
 
 import InputText from "@/components/InputText";
 import InputSelect from "@/components/InputSelect";
@@ -16,46 +13,37 @@ import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import iconPerson from "@/assets/images/iconPerson.png";
 import { uploadImageProduct } from "@/actions/retailerActions";
 import Loading from "@/components/Loading";
+import moment from "moment";
 import "./index.scss";
 
-const initialValues = {
-    firstName: "",
-    lastName: "",
-    position: "",
-    ownership: "",
-    homePhone: "",
-    mobilePhone: "",
-    street: "",
-    city: "",
-    state: "",
-    zip: "",
-    yearAtThisAddress: "",
-    ssn: "",
-    dateOfBirth: new Date(),
-    email: "",
-    driverLicense: "",
-    stateIssued: "",
-    fileId: null,
-};
-
-const PrincipalInformation = () => {
-
-    const form = useForm({
-        defaultValues: {
-            principalInfor: [initialValues],
-        },
-        resolver: yupResolver(signUpPrincipalInfoSchema)
-    });
-    const errors = form.formState.errors;
+const PrincipalInformation = ({
+    updateValues,
+    goBack,
+    form,
+    errors,
+}) => {
 
     const {
         loadingUpfile,
     } = useSelector((state) => state.retailer);
 
+    const {
+        stateList = []
+    } = useSelector(state => state.pricing);
 
 
     const onSubmit = (values, e) => {
         e?.preventDefault();
+        let principalInfo = [
+            ...values?.principalInfo
+        ];
+
+        for (let i = 0; i < principalInfo?.length; i++) {
+            principalInfo[i].dateOfBirth = moment(principalInfo[i].dateOfBirth).format("MM/DD/YYYY");
+            principalInfo[i].fileId = parseInt(principalInfo[i].fileId);
+        }
+
+        updateValues("prinicipalInfo", principalInfo);
     }
 
     const { fields, append, remove } = useFieldArray({
@@ -63,6 +51,10 @@ const PrincipalInformation = () => {
         name: "principalInfor",
     });
 
+    const stateData = stateList.map((obj) => ({
+        label: obj?.name,
+        value: obj?.stateId
+    }));
 
 
     return (
@@ -81,6 +73,7 @@ const PrincipalInformation = () => {
                                             index={index}
                                             errors={errors}
                                             remove={remove}
+                                            stateData={stateData}
                                         />
                                     )
                                 })
@@ -94,7 +87,7 @@ const PrincipalInformation = () => {
                                 >
                                     <img src={iconPerson}
                                         alt='img'
-                                        style={{ width: 20, height: 20, marginRight: 6 }}
+                                        className='iconPerson'
                                     />
                                     Add Principal
                                 </Button>
@@ -110,6 +103,7 @@ const PrincipalInformation = () => {
                                     <Button
                                         variant="light"
                                         className="back_signup text-center font-weight-bold"
+                                        onClick={goBack}
                                     >
                                         Back
                                     </Button>
@@ -130,12 +124,8 @@ const PrincipalInformation = () => {
     )
 };
 
-const ItemPrinciPal = ({ form, errors, index, remove }) => {
+const ItemPrinciPal = ({ form, errors, index, remove, stateData = [] }) => {
     const dispatch = useDispatch();
-
-    const {
-        stateList = []
-    } = useSelector(state => state.pricing);
 
     const [fileId, setFileId] = React.useState(null);
     const [imageUrl, setImageUrl] = React.useState(null);
@@ -143,13 +133,6 @@ const ItemPrinciPal = ({ form, errors, index, remove }) => {
 
     const refMobilePhone = React.useRef();
     const refHomePhone = React.useRef();
-
-    const stateData = stateList.map((obj) => ({
-        label: obj?.name,
-        value: obj?.stateId
-    }));
-
-
 
     const uploadImage = (fileUpload) => {
         let file = fileUpload[0];
@@ -298,7 +281,8 @@ const ItemPrinciPal = ({ form, errors, index, remove }) => {
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="zip"
+                        form={form}
+                        name={`principalInfor.${index}.zip`}
                         isRequired
                         label={"Zip code"}
                         placeholder="Zip code"
@@ -314,6 +298,7 @@ const ItemPrinciPal = ({ form, errors, index, remove }) => {
                         label={"Year at this address"}
                         placeholder=""
                         error={errors?.principalInfor?.[index]?.yearAtThisAddress}
+                        mask="99"
                     />
                 </Col>
 
@@ -386,7 +371,7 @@ const ItemPrinciPal = ({ form, errors, index, remove }) => {
                                             <img src={icon_upload} atl="uploadImage" />
                                             <p>Upload image</p>
                                         </div>
-                                        {!fileId && <div style={{ color: "red", fontWeight: "600" }}>{"required"}</div>}
+                                        {errors?.principalInfor?.[index]?.fileId && <div style={{ color: "red", fontWeight: "600" }}>{"Please update void check"}</div>}
                                     </div>
                                 )
                             }

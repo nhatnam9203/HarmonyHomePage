@@ -75,6 +75,7 @@ export const signUpBankInformation = yup.object().shape({
     bankName: yup.string().required("required"),
     accountNumber: yup.string().required("required"),
     routingNumber: yup.string().required("required"),
+    fileId: yup.string().required("required"),
 });
 
 export const signUpPrincipalInfoSchema = yup.object().shape({
@@ -93,7 +94,7 @@ export const signUpPrincipalInfoSchema = yup.object().shape({
                 .required("required"),
             zip: yup.string().required("required"),
 
-            email: yup.string().required("required").email("Invalid email"),
+            email: yup.string().required("required").email("email is invalid"),
             stateIssued: yup.string()
                 .required("required"),
             yearAtThisAddress: yup.string().required("required"),
