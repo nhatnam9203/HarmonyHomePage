@@ -41,7 +41,7 @@ const PrincipalInformation = () => {
 
     const form = useForm({
         defaultValues: {
-            principalInfor: [initialValues, initialValues],
+            principalInfor: [initialValues],
         },
         resolver: yupResolver(signUpPrincipalInfoSchema)
     });
@@ -59,6 +59,7 @@ const PrincipalInformation = () => {
     });
 
 
+    console.log({ errors })
 
 
     return (
@@ -74,7 +75,6 @@ const PrincipalInformation = () => {
                                         form={form}
                                         index={index}
                                         errors={errors}
-                                        append={append}
                                         remove={remove}
                                     />
                                 )
@@ -84,8 +84,8 @@ const PrincipalInformation = () => {
                         <Col xs={12} md={6} lg={5}>
                             <Button
                                 className="submit_signup text-center font-weight-bold"
-                                style={{ fontSize: 14, marginLeft : -12 }}
-                                onClick={()=>append(fields.length)}
+                                style={{ fontSize: 14, marginLeft: -12 }}
+                                onClick={() => append(fields.length)}
                             >
                                 <img src={iconPerson} alt='img' style={{ width: 20, height: 20, marginRight: 6 }} />
                                 Add Principal
@@ -121,7 +121,7 @@ const PrincipalInformation = () => {
     )
 };
 
-const ItemPrinciPal = ({ form, errors, index, append, remove }) => {
+const ItemPrinciPal = ({ form, errors, index, remove }) => {
     const dispatch = useDispatch();
 
     const {
@@ -132,7 +132,7 @@ const ItemPrinciPal = ({ form, errors, index, append, remove }) => {
     const [imageUrl, setImageUrl] = React.useState(null);
 
 
-    const refContactPhone = React.useRef();
+    const refMobilePhone = React.useRef();
     const refHomePhone = React.useRef();
 
     const stateData = stateList.map((obj) => ({
@@ -157,7 +157,7 @@ const ItemPrinciPal = ({ form, errors, index, append, remove }) => {
 
     return (
         <>
-            <Col style={{ marginTop : index !== 0 ? 45 : 0 }} xs={12} md={12} lg={10}>
+            <Col style={{ marginTop: index !== 0 ? 45 : 0 }} xs={12} md={12} lg={10}>
                 <div style={{ psition: "relative" }} className='title_signup'>
                     Principal Information
                 </div>
@@ -166,101 +166,111 @@ const ItemPrinciPal = ({ form, errors, index, append, remove }) => {
             <Row className="justify-content-md-center">
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="firstName"
+                        form={form}
+                        name={`principalInfor.${index}.firstName`}
                         isRequired
                         label={"First Name"}
                         placeholder="First Name"
-                        error={errors?.firstName}
+                        error={errors?.principalInfor?.[index]?.firstName}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="lastName"
+                        form={form}
+                        name={`principalInfor.${index}.lastName`}
                         isRequired
                         label={"Last Name"}
                         placeholder="Last Name"
-                        error={errors?.lastName}
+                        error={errors?.principalInfor?.[index]?.lastName}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="position"
+                        form={form}
+                        name={`principalInfor.${index}.position`}
                         isRequired
                         label={"Title/Position"}
                         placeholder="President/Manager/Owner"
-                        error={errors?.position}
+                        error={errors?.principalInfor?.[index]?.position}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="ownership"
+                        form={form}
+                        name={`principalInfor.${index}.ownership`}
                         isRequired
                         label={"Ownership (%)"}
                         placeholder=""
-                        error={errors?.ownership}
+                        error={errors?.principalInfor?.[index]?.ownership}
                         mask="999999"
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputPhone
-                        form={form} name="homePhone"
+                        form={form}
+                        name={`principalInfor.${index}.homePhone`}
                         label={"Home Phone Number"}
                         placeholder="012-3455-789"
+                        error={errors?.principalInfor?.[index]?.homePhone}
                         ref={refHomePhone}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputPhone
-                        form={form} name="contactPhone"
+                        form={form}
+                        name={`principalInfor.${index}.mobilePhone`}
                         isRequired
                         label={"Contact Phone Number"}
                         placeholder="012-3455-789"
-                        error={errors?.contactPhone}
-                        ref={refContactPhone}
+                        error={errors?.principalInfor?.[index]?.mobilePhone}
+                        ref={refMobilePhone}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputDatePicker
                         form={form}
-                        name={"dateOfBirth"}
+                        name={`principalInfor.${index}.dateOfBirth`}
                         label={"Date of birth"}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="email"
+                        form={form}
+                        name={`principalInfor.${index}.email`}
                         isRequired
                         label={"Email Address"}
                         placeholder="example@gmail.com"
-                        error={errors?.email}
+                        error={errors?.principalInfor?.[index]?.email}
                     />
                 </Col>
 
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="address"
+                        form={form}
+                        name={`principalInfor.${index}.address`}
                         isRequired
                         label={"Address"}
                         placeholder="Street Address"
-                        error={errors?.address}
+                        error={errors?.principalInfor?.[index]?.address}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="city"
+                        form={form}
+                        name={`principalInfor.${index}.city`}
                         isRequired
                         label={"City"}
                         placeholder="City"
-                        error={errors?.city}
+                        error={errors?.principalInfor?.[index]?.city}
                     />
                 </Col>
 
@@ -270,10 +280,10 @@ const ItemPrinciPal = ({ form, errors, index, append, remove }) => {
                         form={form}
                         defaultValue=""
                         label="State"
-                        name="state"
+                        name={`principalInfor.${index}.state`}
                         isRequired
                         width="100%"
-                        error={errors?.state}
+                        error={errors?.principalInfor?.[index]?.state}
                     />
                 </Col>
 
@@ -283,37 +293,40 @@ const ItemPrinciPal = ({ form, errors, index, append, remove }) => {
                         isRequired
                         label={"Zip code"}
                         placeholder="Zip code"
-                        error={errors?.zip}
+                        error={errors?.principalInfor?.[index]?.zip}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="yearAtThisAddress"
+                        form={form}
+                        name={`principalInfor.${index}.yearAtThisAddress`}
                         isRequired
                         label={"Year at this address"}
                         placeholder=""
-                        error={errors?.yearAtThisAddress}
+                        error={errors?.principalInfor?.[index]?.yearAtThisAddress}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="ssn"
+                        form={form}
+                        name={`principalInfor.${index}.ssn`}
                         isRequired
                         label='Social Security Number (SSN)'
                         placeholder=""
-                        error={errors?.ssn}
+                        error={errors?.principalInfor?.[index]?.ssn}
                     />
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
                     <InputText
-                        form={form} name="driverLicense"
+                        form={form}
+                        name={`principalInfor.${index}.driverLicense`}
                         isRequired
                         label='Driver License Number'
                         placeholder=""
-                        error={errors?.driverLicense}
+                        error={errors?.principalInfor?.[index]?.driverLicense}
                     />
                 </Col>
 
@@ -323,10 +336,10 @@ const ItemPrinciPal = ({ form, errors, index, append, remove }) => {
                         form={form}
                         defaultValue=""
                         label="State Issued"
-                        name="stateIssued"
+                        name={`principalInfor.${index}.stateIssued`}
                         isRequired
                         width="100%"
-                        error={errors?.stateIssued}
+                        error={errors?.principalInfor?.[index]?.stateIssued}
                     />
                 </Col>
 

@@ -45,8 +45,6 @@ const Index = ({
             form.setValue(name, defaultValue);
         }
     }, []);
-    
-    console.log('error input select : ',{  valueItem })
 
     return (
         <OutsideClickHandler onOutsideClick={close}>
@@ -56,7 +54,14 @@ const Index = ({
                         {label} {isRequired && <span style={{ color: "red", fontWeight: "600" }}>*</span>}
                     </Form.Label>
                 }
-                <div onClick={toggle} style={{ width }} className="select_subcategory">
+                <div
+                    onClick={toggle}
+                    style={{
+                        width, 
+                        // borderColor: error?.message ? "red" : "#ccccccc"
+                    }}
+                    className="select_subcategory"
+                >
                     <div>{selected ? selected.label : "Please select"}</div>
                     <img src={arrow_down} alt="imn" />
                     {
@@ -80,7 +85,7 @@ const Index = ({
                         )
                     }
                 </div>
-                <div className="inputErrorMessage">{error?.message}</div>
+                <div style={{ right: 15 }} className="inputErrorMessage">{error?.message}</div>
             </Form.Group>
         </OutsideClickHandler>
     );

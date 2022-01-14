@@ -17,7 +17,8 @@ const Index = ({
     renderRight = null,
     valueVisible = null,
     editable = true,
-    height = "3.6rem"
+    height = "3.6rem",
+    renderError = true,
 }) => {
 
     const { field } = useController({
@@ -61,7 +62,7 @@ const Index = ({
             {
                 renderRight ?
                 <div className="inputErrorMessage">{renderRight()}</div>
-                : <div className="inputErrorMessage">{error?.message}</div>
+                : <div className="inputErrorMessage">{renderError ? error?.message: ""}</div>
             }
 
         </Form.Group>
@@ -79,7 +80,7 @@ const MaskInput = (props) => (
         onChange={props.onChange}
     >
         {
-            (inputProps) => (<Form.Control className='inputText' style={props.style} placeholder={props.placeholder}   {...inputProps} type="text" />)
+            (inputProps) => (<Form.Control className='inputText' isInvalid={props.isInvalid} style={props.style} placeholder={props.placeholder}   {...inputProps} type="text" />)
         }
     </InputMask>
 );

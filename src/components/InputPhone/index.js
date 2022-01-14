@@ -51,6 +51,8 @@ const Index = React.forwardRef(({
                         name={name}
                         isRequired={isRequired}
                         mask="999-999-9999"
+                        error={error}
+                        renderError={false}
                     />
                 </div>
             </div>

@@ -87,7 +87,7 @@ export const signUpPrincipalInfoSchema = yup.object().shape({
             lastName: yup.string().required("required"),
             position: yup.string().required("required"),
 
-            street: yup.string().required("required"),
+            address: yup.string().required("required"),
             city: yup.string().required("required"),
             state: yup.string()
                 .required("required"),
