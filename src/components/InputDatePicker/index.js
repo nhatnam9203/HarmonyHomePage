@@ -1,11 +1,49 @@
-import React, { Component } from 'react'
+import React from 'react'
+import DatePicker from "react-datepicker";
+import { Form } from "react-bootstrap";
+import { useController } from "react-hook-form";
+import "react-datepicker/dist/react-datepicker.css";
+import "./index.scss";
 
-export default class Index extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
-}
+const CustomInput = React.forwardRef(({ value, onClick }, ref) => {
+    return (
+        <div className="custom-input-date" onClick={onClick} ref={ref}>
+            {value}
+        </div>
+    )
+});
+
+
+const Index = ({
+    label,
+    form,
+    name
+}) => {
+
+    const { field } = useController({
+        control: form.control,
+        name,
+    });
+
+    React.useEffect(() => {
+        form.setValue(name, new Date());
+    }, []);
+
+
+    return (
+        <>
+            <Form.Label className='lblInputText'>
+                {label} {<span className="input_form_required">*</span>}
+            </Form.Label>
+            <DatePicker
+                selected={field.value}
+                onChange={(date) => {
+                   field.onChange(date);
+                }}
+                customInput={<CustomInput />}
+            />
+        </>
+    )
+};
+
+export default Index;

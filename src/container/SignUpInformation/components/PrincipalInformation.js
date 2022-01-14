@@ -140,7 +140,11 @@ const PrincipalInformation = () => {
                                 label={"Date of birth"}
                                 placeholder=""
                             /> */}
-                            <InputDatePicker />
+                            <InputDatePicker
+                                form={form}
+                                name={"dateOfBirth"}
+                                label={"Date of birth"}
+                            />
                         </Col>
 
                         <Col xs={12} md={6} lg={5}>
@@ -241,23 +245,6 @@ const PrincipalInformation = () => {
                         </Col>
 
                         <Col xs={12} md={6} lg={5}>
-                            <InputSelect
-                                data={stateData}
-                                form={form}
-                                defaultValue=""
-                                label="State Issued"
-                                name="stateIssued"
-                                isRequired
-                                width="100%"
-                                error={errors?.stateIssued}
-                            />
-                        </Col>
-
-                        <Col xs={12} md={6} lg={5}>
-
-                        </Col>
-
-                        <Col xs={12} md={6} lg={5}>
                             <Form.Label className='lblInputText'>
                                 {"Void Check"} <span className="input_form_required">*</span>
                             </Form.Label>
@@ -296,15 +283,15 @@ const PrincipalInformation = () => {
                             </Dropzone>
                             <Button
                                 className="submit_signup text-center font-weight-bold"
-                                style={{ fontSize : 14, width : 320 }}
+                                style={{ fontSize: 14 }}
                             >
-                                <img src={iconPerson} alt='img' style={{ width : 20, height : 20, marginRight : 6 }} />
+                                <img src={iconPerson} alt='img' style={{ width: 20, height: 20, marginRight: 6 }} />
                                 Add Principal
                             </Button>
                         </Col>
 
                         <Col xs={12} md={6} lg={5}>
-                      
+
                         </Col>
 
                     </Row>

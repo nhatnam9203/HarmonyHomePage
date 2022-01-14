@@ -1,0 +1,22 @@
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle{
+    margin-top: 0px !important;
+    display: none !important;
+}
+
+.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle{
+    display: none !important;
+}
+
+
+.custom-input-date{
+    width : 180px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    padding-Left : 16px;
+    background : white;
+    color : #404040;
+    font-weight: 500;
+    border : 1px solid #dddddd;
+    cursor: pointer;
+}
