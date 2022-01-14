@@ -6,8 +6,10 @@ import Dropzone from "react-dropzone";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import { uploadImageProduct } from "@/actions/retailerActions";
 import Loading from "@/components/Loading";
+import { useWatch } from "react-hook-form";
 
 import "./index.scss";
+import { Field } from 'formik';
 
 
 const BankInformaion = ({
@@ -55,12 +57,17 @@ const BankInformaion = ({
             }
         }
     }
-
+ 
 
     const onSubmit = (e) => {
         e?.preventDefault();
         setIsSubmit(true);
+        const file_id = form.getValues("fileId");
+        if(!file_id){
+            form.setValue("fileId","");
+        }
         const values = form.getValues();
+       
 
         let isValid = true;
         const valid = checkValid({
@@ -92,10 +99,15 @@ const BankInformaion = ({
     const callBackUploadImage = (data) => {
         setFileId(data?.fileId);
         form.setValue("fileId", data?.fileId);
+        form.setValue("imageUrl", data?.url);
         setImageUrl(data?.url);
         checkErrors();
     }
 
+    const image_url =  useWatch({
+        control : form.control,
+        name : "imageUrl"
+    })
     return (
         <>
             {loadingUpfile && <Loading isFullLoading />}
@@ -144,6 +156,7 @@ const BankInformaion = ({
                                     label='Routing Number (ABA)'
                                     isRequired
                                     onBlur={checkErrors}
+                                    mask="9999999999999999999999999999"
                                 />
                             </Col>
 
@@ -156,6 +169,7 @@ const BankInformaion = ({
                                     label='Account Number (DDA)'
                                     isRequired
                                     onBlur={checkErrors}
+                                    mask="9999999999999999999999999999"
                                 />
                             </Col>
 
@@ -173,13 +187,13 @@ const BankInformaion = ({
                                     }}
                                 >
                                     {({ getRootProps, getInputProps }) => {
-                                        if (imageUrl) {
+                                        if (image_url) {
                                             return (
                                                 <div
                                                     {...getRootProps()}
                                                 >
                                                     <input {...getInputProps()} />
-                                                    <img src={imageUrl} alt='img' className='img-upload-bank' />
+                                                    <img src={image_url} alt='img' className='img-upload-bank' />
                                                 </div>
                                             );
                                         } else {
@@ -193,7 +207,7 @@ const BankInformaion = ({
                                                         <img src={icon_upload} atl="uploadImage" />
                                                         <p>Upload image</p>
                                                     </div>
-                                                    {!fileId && isSubmit && <div style={{ color: "red", fontWeight: "600" }}>{"Please update void check"}</div>}
+                                                    {errors?.fileId && isSubmit && <div style={{ color: "red", fontWeight: "600" }}>{"Please update void check"}</div>}
                                                 </>
                                             )
                                         }

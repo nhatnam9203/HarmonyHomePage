@@ -73,7 +73,7 @@ export const FilloutApplication = () => {
     });
     const errors_4 = form_4.formState.errors;
 
-    const [activeStep, setActiveStep] = React.useState(3);
+    const [activeStep, setActiveStep] = React.useState(2);
 
     const [generalInfo, setGeneralInfor] = React.useState({});
     const [businessInfo, setBusinessInfor] = React.useState({});

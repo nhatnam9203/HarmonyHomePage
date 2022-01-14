@@ -311,6 +311,7 @@ const ItemPrinciPal = ({ form, errors, index, remove, stateData = [] }) => {
                         label='Social Security Number (SSN)'
                         placeholder=""
                         error={errors?.principalInfor?.[index]?.ssn}
+                        mask="9999-99-9999"
                     />
                 </Col>
 

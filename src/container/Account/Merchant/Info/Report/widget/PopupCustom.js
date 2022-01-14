@@ -217,37 +217,37 @@ const schema = Yup.object().shape({
     .required("required")
     .test("check-date", "Invalid date", function (value) {
       return moment(value, "MM/DD/YYYY", true).isValid();
-    })
-    .test("check-date-range", "Over 60 days", function (value) {
-      const { end } = this.parent;
-      if (
-        moment(value, ["MM/DD/YYYY"]).diff(
-          moment(end, ["MM/DD/YYYY"]),
-          "days"
-        ) > -60
-      ) {
-        return true;
-      }
-      return false;
-    })
-    .nullable(),
+    }),
+    // .test("check-date-range", "Over 60 days", function (value) {
+    //   const { end } = this.parent;
+    //   if (
+    //     moment(value, ["MM/DD/YYYY"]).diff(
+    //       moment(end, ["MM/DD/YYYY"]),
+    //       "days"
+    //     ) > -60
+    //   ) {
+    //     return true;
+    //   }
+    //   return false;
+    // })
+    // .nullable(),
 
   end: Yup.string()
     .required("required")
     .test("check-date", "Invalid date", function (value) {
       return moment(value, "MM/DD/YYYY", true).isValid();
     })
-    .test("check-date-range", "Over 60 days", function (value) {
-      const { start } = this.parent;
-      if (
-        moment(start, ["MM/DD/YYYY"]).diff(
-          moment(value, ["MM/DD/YYYY"]),
-          "days"
-        ) > -60
-      ) {
-        return true;
-      }
-      return false;
-    })
-    .nullable(),
+    // .test("check-date-range", "Over 60 days", function (value) {
+    //   const { start } = this.parent;
+    //   if (
+    //     moment(start, ["MM/DD/YYYY"]).diff(
+    //       moment(value, ["MM/DD/YYYY"]),
+    //       "days"
+    //     ) > -60
+    //   ) {
+    //     return true;
+    //   }
+    //   return false;
+    // })
+    // .nullable(),
 });
