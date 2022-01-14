@@ -20,6 +20,7 @@ const Index = React.forwardRef(({
     error,
     isRequired = false,
     label,
+    placeholder = ""
 }, ref) => {
 
     const formInput = useForm({});
@@ -53,6 +54,7 @@ const Index = React.forwardRef(({
                         mask="999-999-9999"
                         error={error}
                         renderError={false}
+                        placeholder={placeholder}
                     />
                 </div>
             </div>

@@ -15,6 +15,7 @@ import Dropzone from "react-dropzone";
 import icon_upload from "@/assets/images/retailer/icon_upload.png";
 import iconPerson from "@/assets/images/iconPerson.png";
 import { uploadImageProduct } from "@/actions/retailerActions";
+import Loading from "@/components/Loading";
 import "./index.scss";
 
 const initialValues = {
@@ -47,6 +48,10 @@ const PrincipalInformation = () => {
     });
     const errors = form.formState.errors;
 
+    const {
+        loadingUpfile,
+    } = useSelector((state) => state.retailer);
+
 
 
     const onSubmit = (values, e) => {
@@ -59,65 +64,66 @@ const PrincipalInformation = () => {
     });
 
 
-    console.log({ errors })
-
 
     return (
-        <div className='general_information'>
-            <Form onSubmit={form.handleSubmit(onSubmit)}>
-                <Container>
-                    <Row className="justify-content-md-center">
-                        {
-                            fields.map((field, index) => {
-                                return (
-                                    <ItemPrinciPal
-                                        key={index + "principalinfor"}
-                                        form={form}
-                                        index={index}
-                                        errors={errors}
-                                        remove={remove}
-                                    />
-                                )
-                            })
-                        }
+        <>
+            {loadingUpfile && <Loading isFullLoading />}
+            <div className='general_information'>
+                <Form onSubmit={form.handleSubmit(onSubmit)}>
+                    <Container>
+                        <Row className="justify-content-md-center">
+                            {
+                                fields.map((field, index) => {
+                                    return (
+                                        <ItemPrinciPal
+                                            key={index + "principalinfor"}
+                                            form={form}
+                                            index={index}
+                                            errors={errors}
+                                            remove={remove}
+                                        />
+                                    )
+                                })
+                            }
 
-                        <Col xs={12} md={6} lg={5}>
-                            <Button
-                                className="submit_signup text-center font-weight-bold"
-                                style={{ fontSize: 14, marginLeft: -12 }}
-                                onClick={() => append(fields.length)}
-                            >
-                                <img src={iconPerson} alt='img' style={{ width: 20, height: 20, marginRight: 6 }} />
-                                Add Principal
-                            </Button>
-                        </Col>
-                        <Col xs={12} md={6} lg={5}>
-
-                        </Col>
-                    </Row>
-
-                    <Row className="justify-content-md-center">
-                        <Col xs={12} md={12} lg={10}>
-                            <div className="signup_bottom">
+                            <Col xs={12} md={6} lg={5}>
                                 <Button
-                                    variant="light"
-                                    className="back_signup text-center font-weight-bold"
-                                >
-                                    Back
-                                </Button>
-                                <Button
-                                    type="submit"
                                     className="submit_signup text-center font-weight-bold"
+                                    style={{ fontSize: 14, marginLeft: -12, marginTop: 16 }}
+                                    onClick={() => append(fields.length)}
                                 >
-                                    Next
+                                    <img src={iconPerson} alt='img' style={{ width: 20, height: 20, marginRight: 6 }} />
+                                    Add Principal
                                 </Button>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Form>
+                            </Col>
+                            <Col xs={12} md={6} lg={5}>
 
-        </div>
+                            </Col>
+                        </Row>
+
+                        <Row className="justify-content-md-center">
+                            <Col xs={12} md={12} lg={10}>
+                                <div className="signup_bottom">
+                                    <Button
+                                        variant="light"
+                                        className="back_signup text-center font-weight-bold"
+                                    >
+                                        Back
+                                    </Button>
+                                    <Button
+                                        type="submit"
+                                        className="submit_signup text-center font-weight-bold"
+                                    >
+                                        Next
+                                    </Button>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Form>
+
+            </div>
+        </>
     )
 };
 
@@ -150,10 +156,10 @@ const ItemPrinciPal = ({ form, errors, index, remove }) => {
     }
 
     const callBackUploadImage = (data) => {
+        form.setValue(`principalInfor.${index}.fileId`, data?.fileId);
         setFileId(data?.fileId);
         setImageUrl(data?.url);
     }
-
 
     return (
         <>
@@ -368,18 +374,22 @@ const ItemPrinciPal = ({ form, errors, index, remove }) => {
                                 );
                             } else {
                                 return (
-                                    <div
-                                        className="images_inventory_dropzone_2"
-                                        {...getRootProps()}
-                                    >
-                                        <input {...getInputProps()} />
-                                        <img src={icon_upload} atl="uploadImage" />
-                                        <p>Upload image</p>
+                                    <div>
+                                        <div
+                                            className="images_inventory_dropzone_2"
+                                            {...getRootProps()}
+                                        >
+                                            <input {...getInputProps()} />
+                                            <img src={icon_upload} atl="uploadImage" />
+                                            <p>Upload image</p>
+                                        </div>
+                                        {!fileId && <div style={{ color: "red", fontWeight: "600" }}>{"required"}</div>}
                                     </div>
                                 )
                             }
                         }}
                     </Dropzone>
+
                 </Col>
 
                 <Col xs={12} md={6} lg={5}>
