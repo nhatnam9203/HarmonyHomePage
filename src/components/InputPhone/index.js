@@ -1,12 +1,9 @@
 import React from 'react';
 import { Form } from "react-bootstrap";
-import InputMask from "react-input-mask";
 
 import InputSelect from "../InputSelect";
 import InputText from "../InputText";
 import { useForm } from "react-hook-form";
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
 import "./index.scss";
 
 const phoneGroup = [
@@ -65,16 +62,3 @@ const Index = React.forwardRef(({
 
 export default Index;
 
-
-const MaskInput = (props) => (
-    <InputMask
-        mask={props.mask}
-        maskChar={null}
-        value={props.value}
-        onChange={props.onChange}
-    >
-        {
-            (inputProps) => (<PhoneInput className='inputText' onChange={props.onChange} style={props.style} placeholder={props.placeholder}   {...inputProps} type="text" />)
-        }
-    </InputMask>
-);

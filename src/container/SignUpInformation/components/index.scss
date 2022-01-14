@@ -169,3 +169,48 @@
       font-size: 1rem;
       cursor: pointer;
   }
+
+  .selectPackage{
+      font-weight : 700;
+      margin-top: 30px;
+      margin-bottom: 30px;
+  }
+
+
+  .circle_radio{
+    width : 25px;
+    height : 25px;
+    border-radius: 500px;
+    border : 1px solid #cccccc;
+    background : white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right : 12px;
+    &>div{
+        width : 17px;
+        height : 17px;
+        border-radius: 500px;
+        background : #2B62AA; 
+    }
+}
+
+.circle_radio_white{
+    width : 25px;
+    height : 25px;
+    border-radius: 500px;
+    border : 1px solid #cccccc;
+    background : white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right : 12px;
+    &>div{
+        width : 25px;
+        height : 25px;
+        border-radius: 500px;
+        background : #eeeeee; 
+    }
+}

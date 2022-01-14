@@ -10,6 +10,7 @@ const Generalnformation = React.lazy(() => import("../components/Generalnformati
 const BusinessInformation = React.lazy(() => import("../components/BusinessInformation"));
 const BankInformation = React.lazy(() => import("../components/BankInformation"));
 const PrincipalInformation = React.lazy(() => import("../components/PrincipalInformation"));
+const PackagePricing = React.lazy(() => import("../components/PackagePricing"));
 
 
 export const FilloutApplication = () => {
@@ -35,7 +36,7 @@ export const FilloutApplication = () => {
                 }}
             />
             <Switch>
-                <Route exact path="/home/sign-up-information" component={PrincipalInformation} />
+                <Route exact path="/home/sign-up-information" component={PackagePricing} />
             </Switch>
         </div>
     )

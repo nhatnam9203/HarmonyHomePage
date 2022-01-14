@@ -92,7 +92,10 @@ const PrincipalInformation = () => {
                                     style={{ fontSize: 14, marginLeft: -12, marginTop: 16 }}
                                     onClick={() => append(fields.length)}
                                 >
-                                    <img src={iconPerson} alt='img' style={{ width: 20, height: 20, marginRight: 6 }} />
+                                    <img src={iconPerson}
+                                        alt='img'
+                                        style={{ width: 20, height: 20, marginRight: 6 }}
+                                    />
                                     Add Principal
                                 </Button>
                             </Col>
