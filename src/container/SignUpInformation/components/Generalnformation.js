@@ -10,6 +10,7 @@ import InputSelect from "@/components/InputSelect";
 import InputPhone from "@/components/InputPhone";
 import checkBox from "@/assets/images/check-box.png";
 import checkBoxEmpty from "@/assets/images/check-box-empty.png";
+
 import "./index.scss";
 
 const merchantTypeGroup = [

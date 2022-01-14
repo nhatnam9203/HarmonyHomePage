@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from "react-bootstrap/Modal";
 import close_white from "@/assets/images/retailer/close_white.png";
-import "./style.scss";
+import "./index.scss";
 
 const Popupconfirm = ({ isVisible , close = () =>{} , onDelete = () =>{}, title = "Are you sure you want to Delete this Product?" }) => {
     return (
