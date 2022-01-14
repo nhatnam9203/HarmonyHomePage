@@ -3,6 +3,8 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpGeneralInfoSchema, signUpGeneralInfoSchema2 } from "@/util/schema";
+import { useDispatch, useSelector } from "react-redux";
+import { getStateId } from "@/util"
 import InputText from "@/components/InputText";
 import InputSelect from "@/components/InputSelect";
 import InputPhone from "@/components/InputPhone";
@@ -18,9 +20,17 @@ const merchantTypeGroup = [
 
 
 const Generalnformation = () => {
+    const dispatch = useDispatch();
 
     const [schemaValidate, setSchemaValidate] = React.useState(signUpGeneralInfoSchema([]));
     const [isSameBusinessAddress, setIsSameBusinessAddress] = React.useState(true);
+
+    const refBusinessPhone = React.useRef();
+    const refContactPhone = React.useRef();
+
+    const {
+        stateList = []
+    } = useSelector(state => state.pricing);
 
     const form = useForm({
         resolver: yupResolver(schemaValidate)
@@ -48,6 +58,12 @@ const Generalnformation = () => {
         control: form.control,
         name: 'stateBusinessAddress'
     });
+
+    React.useEffect(() => {
+        if (stateBusinessAddress) {
+            form.setValue("stateDbaAddress", stateBusinessAddress)
+        }
+    }, [stateBusinessAddress])
 
     const onBlurStateBusinessAddress = () => {
         if (stateBusinessAddress && isSameBusinessAddress) {
@@ -108,9 +124,43 @@ const Generalnformation = () => {
         }
 
         if (isValid) {
-
+            addGeneralInformation(values);
         }
     }
+
+    const addGeneralInformation = (values) =>{
+        const generalInfor = {
+            businessName: values.businessName,
+            businessAddress: {
+                address: values.streetBusinessAddress,
+                city: values.cityBusinessAddress,
+                state: getStateId(stateList,values.stateBusinessAddress),
+                zip: values.zipBusinessAddress,
+            },
+            dbaAddress: {
+                address: isSameBusinessAddress ? values.streetBusinessAddress : values.streetDbaAddress,
+                city: isSameBusinessAddress ? values.cityBusinessAddress : values.cityDbaAddress,
+                state: isSameBusinessAddress ? getStateId(stateList,values.stateBusinessAddress) : getStateId(stateList,values.stateDbaAddress),
+                zip: isSameBusinessAddress ? values.zipBusinessAddress : values.zipDbaAddress,
+            },
+            businessPhone: refBusinessPhone?.current?.getValue()?.value + values.businessPhone,
+            contactPhone: refContactPhone?.current?.getValue()?.value + values.contactPhone,
+            doingBusiness: values.doingBusiness,
+            email: values.email,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            position: values.position,
+            tax: values.tax
+        }
+
+        // dispatch(updateGeneralInformation({ generalInfor, type: values.type }));
+
+    }
+
+    const stateData = stateList.map((obj) => ({
+        label: obj?.name,
+        value: obj?.stateId
+    }));
 
 
     return (
@@ -172,7 +222,7 @@ const Generalnformation = () => {
                             <InputText
                                 form={form} name="streetBusinessAddress"
                                 isRequired
-                                label={"Business Address(no P.O.Boxes"}
+                                label={"Business Address(no P.O.Boxes)"}
                                 placeholder="Street Address"
                                 error={errors?.streetBusinessAddress}
                             />
@@ -190,11 +240,14 @@ const Generalnformation = () => {
                         </Col>
 
                         <Col xs={12} md={6} lg={5}>
-                            <InputText
-                                form={form} name="stateBusinessAddress"
+                            <InputSelect
+                                data={stateData}
+                                form={form}
+                                defaultValue=""
+                                label="State"
+                                name="stateBusinessAddress"
                                 isRequired
-                                label={"State"}
-                                placeholder="State"
+                                width="100%"
                                 error={errors?.stateBusinessAddress}
                             />
                         </Col>
@@ -222,7 +275,7 @@ const Generalnformation = () => {
                                             src={isSameBusinessAddress ? checkBox : checkBoxEmpty} alt='img'
                                         />
 
-                                        <p>Sam as Business Address</p>
+                                        <p>Same as Business Address</p>
                                     </div>
                                 )}
                                 error={errors?.streetDbaAddress}
@@ -244,14 +297,15 @@ const Generalnformation = () => {
                         </Col>
 
                         <Col xs={12} md={6} lg={5}>
-                            <InputText
-                                form={form} name="stateDbaAddress"
+                            <InputSelect
+                                data={stateData}
+                                form={form}
+                                defaultValue=""
+                                label="State"
+                                name="stateDbaAddress"
                                 isRequired
-                                label={"State"}
-                                placeholder="State"
-                                error={(errors?.stateDbaAddress)}
-                                editable={!isSameBusinessAddress}
-                                valueVisible={isSameBusinessAddress ? stateBusinessAddress : null}
+                                width="100%"
+                                error={errors?.stateDbaAddress}
                             />
                         </Col>
 
@@ -285,6 +339,7 @@ const Generalnformation = () => {
                                 label={"Business Phone Number"}
                                 placeholder="012-3455-789"
                                 error={errors?.businessPhone}
+                                ref={refBusinessPhone}
                             />
                         </Col>
                     </Row>
@@ -335,6 +390,7 @@ const Generalnformation = () => {
                                 label={"Contact Phone Number"}
                                 placeholder="012-3455-789"
                                 error={errors?.contactPhone}
+                                ref={refContactPhone}
                             />
                         </Col>
                     </Row>

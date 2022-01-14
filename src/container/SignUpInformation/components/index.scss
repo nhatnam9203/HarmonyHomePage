@@ -33,12 +33,28 @@
     border : 0px;
 }
 
+.back_signup{
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+    // width: 100%;
+    border-radius: 0px;
+    width: 10rem;
+    height: 2.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #404040;
+    font-size: 1rem;
+    letter-spacing: 0.36px;
+    margin-right: 10px;
+    border : 1px solid #404040;
+}
+
 .signup_bottom{
     display: flex;
+    flex-direction: row;
     justify-content: flex-end;
-    @media screen and (max-width : 767px) {
-        justify-content: center;
-    }
 } 
 
 .sameAsDBA{
@@ -55,3 +71,93 @@
         font-size : 15px;
     }   
 }
+
+.itemBusiness{
+    &>p{
+        font-weight: 600;
+    }
+    &>div{
+        display: flex;
+        flex-direction: row;
+        &>div{
+            display: flex;
+            flex-direction: row;
+    
+            .circle_radio{
+                width : 25px;
+                height : 25px;
+                border-radius: 500px;
+                border : 1px solid #cccccc;
+                background : white; 
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                margin-right : 12px;
+                &>div{
+                    width : 17px;
+                    height : 17px;
+                    border-radius: 500px;
+                    background : #2B62AA; 
+                }
+            }
+    
+            .circle_radio_white{
+                width : 25px;
+                height : 25px;
+                border-radius: 500px;
+                border : 1px solid #cccccc;
+                background : white; 
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                margin-right : 12px;
+                &>div{
+                    width : 25px;
+                    height : 25px;
+                    border-radius: 500px;
+                    background : #eeeeee; 
+                }
+            }
+    
+            &>div:nth-child(1){
+                display: flex;
+                flex-direction: row;
+                
+            }
+        }
+        &>div:nth-child(2){
+            margin-left: 50px;
+        }
+    }
+}
+
+.images_inventory_dropzone_2{
+    width: 160px;
+    height: 160px;
+    background: #f6f6f6;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    & > img {
+      width: 40px;
+      height: 40px;
+    }
+    & > p {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color : #585858;
+      margin-top: 6px;
+    }
+  }
+  
+  .img-upload-bank{
+    width: 160px;
+    height: 160px;
+    cursor: pointer;
+  }

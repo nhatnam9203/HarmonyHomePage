@@ -7,6 +7,9 @@ import { Stepper } from 'react-form-stepper';
 
 import "./index.scss";
 const Generalnformation = React.lazy(() => import("../components/Generalnformation"));
+const BusinessInformation = React.lazy(() => import("../components/BusinessInformation"));
+const BankInformation = React.lazy(() => import("../components/BankInformation"));
+const PrincipalInformation = React.lazy(() => import("../components/PrincipalInformation"));
 
 
 export const FilloutApplication = () => {
@@ -32,7 +35,7 @@ export const FilloutApplication = () => {
                 }}
             />
             <Switch>
-                <Route exact path="/home/sign-up-information" component={Generalnformation} />
+                <Route exact path="/home/sign-up-information" component={PrincipalInformation} />
             </Switch>
         </div>
     )

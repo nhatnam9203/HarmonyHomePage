@@ -14,29 +14,21 @@ const phoneGroup = [
     { value: "+1", label: "+1" },
 ]
 
-
-const Index = ({
+const Index = React.forwardRef(({
     name,
     form,
     error,
     isRequired = false,
     label,
-}) => {
-
-    console.log('error phone input :',{ error, name })
+}, ref) => {
 
     const formInput = useForm({});
 
-    // const { field } = useController({
-    //     control: form.control,
-    //     defaultValue,
-    //     name,
-    // });
-
-    // const handleOnChange = (value, data, event, formattedValue) => {
-    //     console.log({ value, data, event, formattedValue })
-    //     form.setValue(name, value);
-    // }
+    React.useImperativeHandle(ref, () => ({
+        getValuePrefix: () => {
+            return formInput.getValues("prefixPhone")
+        }
+    }));
 
     return (
         <Form.Group>
@@ -55,16 +47,17 @@ const Index = ({
                 </div>
                 <div style={{ width: "100%" }}>
                     <InputText
-                        form={formInput}
+                        form={form}
                         name={name}
                         isRequired={isRequired}
+                        mask="999-999-9999"
                     />
                 </div>
             </div>
-            <div style={{ right : 15 }} className="inputErrorMessage">{error?.message}</div>
+            <div style={{ right: 15 }} className="inputErrorMessage">{error?.message}</div>
         </Form.Group>
-    )
-};
+    );
+});
 
 export default Index;
 

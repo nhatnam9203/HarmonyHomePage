@@ -364,3 +364,15 @@ export const arrayIsEqual = (a, b) => {
 
   return true;
 };
+
+
+export const getStateId = (stateCity, value) => {
+  let name = false;
+  for (let i = 0; i < stateCity.length; i++) {
+      if (stateCity[i].name.includes(value)) {
+          name = stateCity[i].stateId;
+          return name;
+      }
+  }
+  return name;
+}

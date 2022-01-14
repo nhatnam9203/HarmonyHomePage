@@ -12,7 +12,8 @@ const Index = ({
     data = [],
     label = "",
     isRequired,
-    width = "73%"
+    width = "73%",
+    error
 }) => {
     const [isPopup, setIsPopup] = React.useState(false);
 
@@ -44,10 +45,12 @@ const Index = ({
             form.setValue(name, defaultValue);
         }
     }, []);
+    
+    console.log('error input select : ',{  valueItem })
 
     return (
         <OutsideClickHandler onOutsideClick={close}>
-            <Form.Group>
+            <Form.Group style={{ posiion: "relative" }}>
                 {
                     label && <Form.Label style={{ fontWeight: "600" }}>
                         {label} {isRequired && <span style={{ color: "red", fontWeight: "600" }}>*</span>}
@@ -77,6 +80,7 @@ const Index = ({
                         )
                     }
                 </div>
+                <div className="inputErrorMessage">{error?.message}</div>
             </Form.Group>
         </OutsideClickHandler>
     );

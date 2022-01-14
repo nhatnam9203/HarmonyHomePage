@@ -16,7 +16,8 @@ const Index = ({
     renderLabel = true,
     renderRight = null,
     valueVisible = null,
-    editable = true
+    editable = true,
+    height = "3.6rem"
 }) => {
 
     const { field } = useController({
@@ -43,15 +44,18 @@ const Index = ({
                         mask={mask}
                         onChange={e => form.setValue(name, e.target.value)}
                         disabled={editable}
+                        isInvalid={error}
                     /> :
                     <Form.Control
                         className='inputText'
                         type="text"
+                        isInvalid={error}
                         placeholder={placeholder}
                         name={name}
                         onChange={e => form.setValue(name, e.target.value)}
                         value={valueVisible ?? field.value}
                         disabled={!editable}
+                        style={{ height }}
                     />
             }
             {

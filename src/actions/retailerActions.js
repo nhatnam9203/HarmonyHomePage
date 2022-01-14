@@ -641,7 +641,6 @@ export const changeImageProduct = (formData, productId, callBack) => async (
 
 export const uploadImageProduct = (formData, callBack) => async (dispatch) => {
   try {
-    console.log({ formData });
     const url = "file?category=product";
     dispatch({ type: typeRetailer.UPLOAD_FILE_REQUEST });
     let { data = null } = await api.uploadFile(url, formData);
