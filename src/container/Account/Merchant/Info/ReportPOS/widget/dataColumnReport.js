@@ -53,10 +53,18 @@ const columnStaffs = [
   },
 ];
 
+const columnGiftCard = [
+  {
+    key: 11,
+    name: "Gift card sales",
+  },
+]
+
 export default {
   columnSales,
   columnProducts,
   columnCustomers,
   columnMarketing,
   columnStaffs,
+  columnGiftCard,
 };

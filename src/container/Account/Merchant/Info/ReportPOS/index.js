@@ -55,6 +55,9 @@ const Index = () => {
       case "Marketing Efficiency":
         return <MarketingEfficiency onBack={() => onClickItemColumn("")} />;
 
+      case "Gift card sales":
+        return <MarketingEfficiency onBack={() => onClickItemColumn("")} />;
+
       default:
         return (
           <>
@@ -73,6 +76,11 @@ const Index = () => {
               <ColumnReport
                 title="Customers"
                 data={data.columnCustomers}
+                onClickItem={onClickItemColumn}
+              />
+              <ColumnReport
+                title="Gift cards"
+                data={data.columnGiftCard}
                 onClickItem={onClickItemColumn}
               />
               <ColumnReport
