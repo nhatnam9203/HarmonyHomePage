@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 
 import icon_checked from "../../../assets/images/home/icon_checked.png";
-import feature_hhpone from "../../../assets/images/home/feature_hpone.jpg";
 import { Link } from "react-router-dom";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import Switch from "react-switch";

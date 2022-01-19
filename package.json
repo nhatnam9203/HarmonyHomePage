@@ -1,7 +1,7 @@
 {
   "name": "react-base-structure",
-  "homepage": "https://stage-new.harmonypayment.com/",
-  "version": "0.1.4",
+  "homepage": "https://www.harmonypayment.com/",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.2",
