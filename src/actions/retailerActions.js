@@ -381,6 +381,7 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
   dispatch
 ) => {
   try {
+    console.log('get staff report')
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data = null } = await api.getByPage(requestUrl, token);
 

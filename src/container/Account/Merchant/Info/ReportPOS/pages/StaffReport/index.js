@@ -11,9 +11,11 @@ import {
   sort_staff_report,
   exportRetailer,
   closeExport,
-  getStaffReport,
   resetSortStaff,
 } from "@/actions/retailerActions";
+
+import { getStaffReport  } from "@/actions/reportPosActions";
+
 import { useSelector, useDispatch } from "react-redux";
 import { convertDateData } from "@/util";
 import "react-table/react-table.css";
@@ -25,16 +27,21 @@ const Index = ({ onBack }) => {
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
   const [page, setPage] = React.useState(1);
-  const [keySearch, setKeySearch] = React.useState("");
 
   const {
     loading,
     linkExport,
+  } = useSelector((state) => state.retailer);
+
+  const {
     staff_report,
     staff_report_pages,
     directionSort_staff_report,
     typeSort_staff_report,
-  } = useSelector((state) => state.retailer);
+  } = useSelector((state) => state.reportPos);
+
+  console.log({ staff_report })
+
 
   const {
     detail: { merchantId },
@@ -54,6 +61,7 @@ const Index = ({ onBack }) => {
     sort
   ) => {
     let url = `staff/salary?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&page=${pageStaff}&merchantId=${merchantId}`;
+    console.log({ url })
     url = encodeURI(url);
     dispatch(getStaffReport(url, token));
   };
@@ -136,16 +144,6 @@ const Index = ({ onBack }) => {
     dispatch(sort_staff_report({ type }));
   };
 
-  const onChangeSearch = (e) => {
-    const value = e.target.value;
-    setKeySearch(value);
-  };
-
-  const searchSubmit = async () => {
-    await setPage(1);
-    dispatch(resetSortStaff());
-    onClickShowReport(1);
-  };
 
   return (
     <>
@@ -166,14 +164,6 @@ const Index = ({ onBack }) => {
         onClickExport={onClickExport}
       />
 
-      {/*       <div style={{ marginTop: 50 }} className="info_merchant_title">
-        <div />
-        <Search
-          value={keySearch}
-          onChange={onChangeSearch}
-          onSubmit={searchSubmit}
-        />
-      </div> */}
 
       <div className="table-container">
         <ReactTable

@@ -21,6 +21,7 @@ import { notifyReducer } from "./notifyReducer";
 import { subscribeReducer } from "./subscribeReducer";
 import { requestContactReducer } from "./requestContactReducer";
 import { retailerReducer } from "./retailerReducer";
+import { reportPosReducer } from "./reportPosReducer";
 
 export default combineReducers({
   // User
@@ -50,4 +51,5 @@ export default combineReducers({
   // Reset Password
   resetPassword: resetPasswordReducer,
   retailer: retailerReducer,
+  reportPos : reportPosReducer,
 });
