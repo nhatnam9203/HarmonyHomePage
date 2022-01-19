@@ -1,0 +1,49 @@
+@mixin styleThPayment() {
+  background: #f5f5f5;
+  color: #404040;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 0px !important;
+}
+
+.th_payment {
+  @include styleThPayment();
+  &_sort {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  & > img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+  }
+}
+
+.tbody_payment {
+  border: 1px solid #dddddd !important;
+  border-left-width: 0px !important;
+  border-right-width: 0px !important;
+  border-top-width: 0px !important;
+}
+
+.thead_payment {
+  border: 0px !important;
+}
+
+@mixin styleTd() {
+  font-size: 0.9rem !important;
+  color: #404040 !important;
+}
+
+.td_payment {
+  @include styleTd();
+  &_rowspan {
+    padding-top: 6.75rem !important;
+    @include styleTd();
+  }
+  &_last {
+    @include styleTd();
+    @include styleThPayment();
+  }
+}

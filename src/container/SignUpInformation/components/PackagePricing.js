@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useMediaQuery } from 'react-responsive';
 import PopupConfirm from "@/components/PopupConfirm"
 import "./index.scss";
 
@@ -36,8 +35,6 @@ const PackagePricing = ({
     form,
     errors,
 }) => {
-
-    const dispatch = useDispatch();
     // const form = useForm({
 
     // });

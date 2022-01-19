@@ -1,0 +1,41 @@
+.report {
+  &_container_column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    @media only screen and (max-width: 810px) {
+      flex-direction: column;
+      padding-left: 2rem;
+    }
+  }
+  &_column {
+    margin-right: 3rem;
+    & > h4 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    & > p {
+      font-size: 0.9rem;
+      color: #1366ae;
+      line-height: 2.8;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    & > p:hover {
+      color: red;
+    }
+
+    @media screen and (max-width: 1070px) {
+      &:nth-child(5) {
+        margin-left: 43px;
+      }
+    }
+    @media screen and (max-width: 810px) {
+      &:nth-child(5) {
+        margin-left: 0px;
+      }
+    }
+  }
+}

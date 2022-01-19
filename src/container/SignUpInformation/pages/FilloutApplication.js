@@ -59,6 +59,21 @@ export const FilloutApplication = () => {
     const form_0 = useForm({});
     const errors_0 = form_0.formState.errors;
 
+    const form_1 = useForm({
+        defaultValues: {
+            isAccept1: false,
+            question1: "",
+            isAccept2: false,
+            question2: "",
+            isAccept3: false,
+            question3: "",
+            isAccept4: false,
+            question4: "",
+            isAccept5: false,
+            question5: "",
+        },
+    });
+
 
     const form_2 = useForm({
         resolver: yupResolver(signUpBankInformation)
@@ -174,7 +189,7 @@ export const FilloutApplication = () => {
                     updateValues={updateValues}
                 />;
             case 1:
-                return <BusinessInformation handleStepClick={handleStepClick} updateValues={updateValues} goBack={goBack} />;
+                return <BusinessInformation handleStepClick={handleStepClick} updateValues={updateValues} goBack={goBack} form={form_1  } />;
             case 2:
                 return <BankInformation handleStepClick={handleStepClick} updateValues={updateValues} form={form_2} errors={errors_2} goBack={goBack} />;
             case 3:
