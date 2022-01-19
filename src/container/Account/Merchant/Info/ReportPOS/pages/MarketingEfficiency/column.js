@@ -28,26 +28,6 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Discount Amount"
-        valueSort={valueSort}
-        isActiveSort={sortType == "discount"}
-        onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "discount")
-        }
-      />
-    ),
-    id: "discount",
-    accessor: (row) =>
-      row.discount?.toString() ? (
-        <div className="table-tr">{`$ ${formatMoney(row.discount)}`}</div>
-      ) : (
-        <div className="table-tr-last">{`$ ${row.total_discount}`}</div>
-      ),
-  },
-  {
-    Header: (
-      <CustomTableHeader
-        isSort={true}
         value="Revenue"
         valueSort={valueSort}
         isActiveSort={sortType == "revenue"}
@@ -62,6 +42,26 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
         <div className="table-tr">{`$ ${formatMoney(row.revenue)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${row.total_revenue}`}</div>
+      ),
+  },
+  {
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Discount Amount"
+        valueSort={valueSort}
+        isActiveSort={sortType == "discount"}
+        onClickSort={() =>
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "discount")
+        }
+      />
+    ),
+    id: "discount",
+    accessor: (row) =>
+      row.discount?.toString() ? (
+        <div className="table-tr">{`$ ${formatMoney(row.discount)}`}</div>
+      ) : (
+        <div className="table-tr-last">{`$ ${row.total_discount}`}</div>
       ),
   },
 ];
