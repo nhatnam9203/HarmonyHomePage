@@ -82,7 +82,7 @@ const BankInformaion = ({
         if (isValid) {
             const bankInformation = {
                 ...values,
-                fileId
+                fileId: form.getValues("fileId"),
             };
             updateValues("bankInfo", bankInformation);
         }
