@@ -225,7 +225,7 @@ export const summary_payment_method_pos = (data = []) => {
   };
 };
 
-const handleChange = (type, data = []) => {
+export const handleChange = (type, data = []) => {
   let total = 0;
   for (let i = 0; i < data.length; i++) {
     total = total + data[i][type]

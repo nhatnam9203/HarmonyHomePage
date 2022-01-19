@@ -9,6 +9,7 @@ import {
   summary_payment_by_method,
   summary_marketing_efficiency,
   FormatPrice,
+  handleChange
 } from "@/util";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
@@ -255,7 +256,13 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
         : [];
       let result = [];
       if (temptData.length > 0)
-        result = [...temptData, summary_sales_by_customer(data.summary)];
+        result = [
+          ...temptData,
+          {
+            ...summary_sales_by_customer(data.summary),
+            total_lastVisitSale: handleChange("lastVisitSale", temptData)
+          },
+        ];
 
       dispatch({
         type: "SET_SALES_BY_CUSTOMER",
