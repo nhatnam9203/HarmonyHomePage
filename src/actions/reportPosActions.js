@@ -11,6 +11,7 @@ import {
     summary_payment_by_method,
     summary_marketing_efficiency,
     summary_payment_method_pos,
+    summary_sales_by_service_pos,
     FormatPrice,
 } from "@/util";
 
@@ -36,7 +37,7 @@ export const getPaymentByMethod = (requestUrl = "", token = "") => async (
                 })
                 : [];
 
-                console.log({ temptData })
+            console.log({ temptData })
 
             let result = [];
             if (temptData.length > 0)
@@ -93,6 +94,48 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
         dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
     }
 };
+
+export const getSalesByService = (requestUrl = "", token = "") => async (
+    dispatch
+) => {
+    try {
+        dispatch({ type: typeRetailer.RETAILER_REQUEST });
+        let { data = null } = await api.getByPage(requestUrl, token);
+
+        console.log('reponse sales by service : ', { data, requestUrl });
+
+        if (parseInt(data.codeNumber) === 200) {
+
+            let temptData = data?.data
+                ? data.data.map((obj) => {
+                    return {
+                        ...obj,
+                        totalSales: FormatPrice(obj.totalSales),
+                        avgPrice: FormatPrice(obj.avgPrice),
+                        totalDuration: FormatPrice(obj.totalDuration)
+                    };
+                })
+                : [];
+
+            let result = [];
+
+            if (temptData.length > 0)
+                result = [...temptData, summary_sales_by_service_pos(temptData)];
+
+            dispatch({
+                type: "SET_SALES_BY_SERVICE_POS",
+                payload: { data: result, summary: data.summary },
+            });
+        } else {
+            dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+        }
+    } catch (error) {
+        dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    } finally {
+        dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+    }
+};
+
 
 export const sort_staff_report = (payload) => {
     return {

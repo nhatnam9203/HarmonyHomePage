@@ -8,6 +8,7 @@ import TopProduct from "./TopProduct";
 import TopCategory from "./TopCategory";
 import StaffReport from "./StaffReport";
 import MarketingEfficiency from "./MarketingEfficiency";
+import SalesByService from "./SalesByService";
 
 export {
   Overall,
@@ -16,6 +17,7 @@ export {
   SalesByProduct,
   SalesByCategory,
   SalesByCustomer,
+  SalesByService,
   TopProduct,
   TopCategory,
   StaffReport,

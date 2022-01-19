@@ -58,7 +58,19 @@ const columnGiftCard = [
     key: 11,
     name: "Gift card sales",
   },
-]
+];
+
+const columnServive = [
+  {
+    key: 12,
+    name: "Sales by service",
+  },
+  {
+    key: 13,
+    name: "Service duration",
+  },
+];
+
 
 export default {
   columnSales,
@@ -67,4 +79,5 @@ export default {
   columnMarketing,
   columnStaffs,
   columnGiftCard,
+  columnServive,
 };

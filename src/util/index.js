@@ -225,6 +225,15 @@ export const summary_payment_method_pos = (data = []) => {
   };
 };
 
+export const summary_sales_by_service_pos = (data = []) => {
+  return {
+    total_quantity: handleChange("quantity", data),
+    total_totalDuration: handleChange("totalDuration", data),
+    total_avgPrice: handleChange("avgPrice", data),
+    total_totalSales: handleChange("totalSales", data),
+  };
+};
+
 export const handleChange = (type, data = []) => {
   let total = 0;
   for (let i = 0; i < data.length; i++) {

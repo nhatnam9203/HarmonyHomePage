@@ -11,6 +11,7 @@ import {
   TopCategory,
   StaffReport,
   MarketingEfficiency,
+  SalesByService,
 } from "./pages";
 import Fade from "react-reveal/Fade";
 
@@ -58,6 +59,9 @@ const Index = () => {
       case "Gift card sales":
         return <MarketingEfficiency onBack={() => onClickItemColumn("")} />;
 
+      case "Sales by service":
+        return <SalesByService onBack={() => onClickItemColumn("")} />;
+
       default:
         return (
           <>
@@ -66,6 +70,11 @@ const Index = () => {
               <ColumnReport
                 title="Sales"
                 data={data.columnSales}
+                onClickItem={onClickItemColumn}
+              />
+              <ColumnReport
+                title="Services"
+                data={data.columnServive}
                 onClickItem={onClickItemColumn}
               />
               <ColumnReport
