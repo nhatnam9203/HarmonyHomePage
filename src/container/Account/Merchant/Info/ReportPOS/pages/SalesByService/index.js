@@ -5,13 +5,13 @@ import ReactTable from "react-table";
 import { Button } from "react-bootstrap";
 import Loading from "@/components/Loading";
 import {
-  sort_sales_by_product,
   exportRetailer,
   closeExport,
 } from "@/actions/retailerActions";
 
 import {
   getSalesByService,
+  sort_sales_by_service,
 } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -122,7 +122,7 @@ const Index = ({ onBack }) => {
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_sales_by_product({ type }));
+    dispatch(sort_sales_by_service({ type }));
   };
 
   return (

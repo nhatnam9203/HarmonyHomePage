@@ -150,3 +150,12 @@ export const sort_payment_method = (payload) => {
         payload,
     };
 };
+
+
+export const sort_sales_by_service = (payload) => {
+    return {
+      type: "SORT_SALES_BY_SERVICE_POS",
+      payload,
+    };
+  };
+  
