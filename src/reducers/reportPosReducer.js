@@ -490,7 +490,7 @@ export const reportPosReducer = (
         staff_report_pages: payload?.count,
       };
 
-    case types.SORT_STAFF_REPORT:
+    case "SORT_STAFF_POS":
       return {
         ...state,
         directionSort_staff_report:

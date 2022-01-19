@@ -38,7 +38,7 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
             if (temptData.length > 0)
                 dispatch({
                     type: "SET_STAFF_REPORT_POS",
-                    payload: { data: temptData, count: data?.pages },
+                    payload: { data: temptData, count: data?.count },
                 });
         } else {
             dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -49,3 +49,11 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
         dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
     }
 };
+
+export const sort_staff_report = (payload) => {
+    return {
+      type: "SORT_STAFF_POS",
+      payload,
+    };
+  };
+  

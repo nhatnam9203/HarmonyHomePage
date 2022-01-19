@@ -5,16 +5,15 @@ import ReactTable from "react-table";
 import { Button } from "react-bootstrap";
 import Loading from "@/components/Loading";
 import PopupExport from "@/components/PopupExport";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/PaginationPOS";
 import Search from "@/components/Search";
 import {
-  sort_staff_report,
   exportRetailer,
   closeExport,
   resetSortStaff,
 } from "@/actions/retailerActions";
 
-import { getStaffReport  } from "@/actions/reportPosActions";
+import { getStaffReport, sort_staff_report, } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
 import { convertDateData } from "@/util";
@@ -40,7 +39,7 @@ const Index = ({ onBack }) => {
     typeSort_staff_report,
   } = useSelector((state) => state.reportPos);
 
-  console.log({ staff_report })
+  console.log({ staff_report_pages })
 
 
   const {
@@ -190,7 +189,7 @@ const Index = ({ onBack }) => {
         <Pagination
           activePage={page}
           handlePageChange={changePage}
-          totalItem={Math.ceil(staff_report_pages) / 2}
+          totalItem={staff_report_pages}
         />
       )}
       <PopupExport
