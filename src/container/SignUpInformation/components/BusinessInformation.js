@@ -1,22 +1,18 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { useForm } from "react-hook-form";
 import InputText from "@/components/InputText";
 import { useMediaQuery } from 'react-responsive';
+import { useController } from "react-hook-form";
 import "./index.scss";
 
 
-const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
- 
+const BusinessInformation = ({ updateValues = () => { }, goBack = () => { }, form, }) => {
+
     const question1Ref = React.useRef();
     const question2Ref = React.useRef();
     const question3Ref = React.useRef();
     const question4Ref = React.useRef();
     const question5Ref = React.useRef();
-
-    const form = useForm({
-
-    });
 
     const errors = form.formState.errors;
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' })
@@ -27,37 +23,35 @@ const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
 
         const businesssInfo = {
             question1: {
-                isAccept: Boolean(question1Ref.current?.getStatus()),
+                isAccept: form.getValues("isAccept1"),
                 desc: form.getValues("question1"),
                 question:
                     "Has Merchant been previously identified by Visa/Mastercard Risk Programs?",
             },
             question2: {
-                isAccept: Boolean(question2Ref.current?.getStatus()),
+                isAccept: form.getValues("isAccept2"),
                 desc: form.getValues("question2"),
                 question:
                     "Has Merchant or any associated principal and/or owners disclosed below filed bankruptcy or been subject to any involuntary bankruptcy?",
             },
             question3: {
-                isAccept: Boolean(question3Ref.current?.getStatus()),
+                isAccept: form.getValues("isAccept3"),
                 desc: form.getValues("question3"),
                 question: "Will product(s) or service(s) be sold outside of US?",
             },
             question4: {
-                isAccept: Boolean(question4Ref.current?.getStatus()),
+                isAccept: form.getValues("isAccept4"),
                 desc: form.getValues("question4"),
                 question: "Has a processor ever terminated your Merchant account?",
             },
             question5: {
-                isAccept: Boolean(question5Ref.current?.getStatus()),
+                isAccept: form.getValues("isAccept5"),
                 desc: form.getValues("question5"),
                 question: "Have you ever accepted Credit/Debit cards before?",
             },
         };
 
-        updateValues("businessInfo",businesssInfo);
-
-        // dispatch(signup.updateBusinessInformation(businesssInfo));
+        updateValues("businessInfo", businesssInfo);
     }
 
     return (
@@ -80,6 +74,7 @@ const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
                                 label="Has Merchant been previously identified by Visa/Mastercard Risk Programs?"
                                 textYes="Yes (if yes, who was the processor)"
                                 name="question1"
+                                isAccept={"isAccept1"}
                                 ref={question1Ref}
                                 isDrop
                             />
@@ -92,6 +87,7 @@ const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
                                 label="Has Merchant or any associated principal and/or owners disclosed bellow filed bankruptcy or been subject to any involuntary bankruptcy?"
                                 textYes="Yes (if yes, who was the processor)"
                                 name="question2"
+                                isAccept={"isAccept2"}
                                 ref={question2Ref}
                             />
                         </Col>
@@ -103,6 +99,7 @@ const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
                                 label="Will product(s) or service(s) be sold outside of US?"
                                 textYes="Yes (if yes, date filed)"
                                 name="question3"
+                                isAccept={"isAccept3"}
                                 ref={question3Ref}
                             />
                         </Col>
@@ -114,6 +111,7 @@ const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
                                 label="Has a processor ever terminated your Merchant account?"
                                 textYes="Yes (if yes, what was program and when)"
                                 name="question4"
+                                isAccept={"isAccept4"}
                                 ref={question4Ref}
                             />
                         </Col>
@@ -125,6 +123,7 @@ const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
                                 label="Have you ever accepted Credit/Edit cards before?"
                                 textYes="Yes (if yes, who was your previous company)"
                                 name="question5"
+                                isAccept={"isAccept5"}
                                 ref={question5Ref}
                             />
                         </Col>
@@ -162,17 +161,14 @@ const BusinessInformation = ({ updateValues = () =>{} , goBack = () =>{} }) => {
 export default BusinessInformation;
 
 
-const ItemInformation = React.forwardRef(({ label, textYes, form, name, isDrop }, ref) => {
+const ItemInformation = React.forwardRef(({ label, textYes, form, name, isDrop, isAccept }, ref) => {
 
     const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
 
-    const [isCheck, setIsCheck] = React.useState(false);
-
-    React.useImperativeHandle(ref, () => ({
-        getStatus: () => {
-            return isCheck;
-        },
-    }));
+    const { field } = useController({
+        control: form.control,
+        name: isAccept,
+    })
 
     return (
         <div className='itemBusiness'>
@@ -186,7 +182,7 @@ const ItemInformation = React.forwardRef(({ label, textYes, form, name, isDrop }
 
             <div>
                 <div style={{ width: 80 }}>
-                    <div onClick={() => setIsCheck(!isCheck)} className={!isCheck ? "circle_radio" : "circle_radio_white"}>
+                    <div onClick={() => form.setValue(isAccept, false)} className={!field.value ? "circle_radio" : "circle_radio_white"}>
                         <div />
                     </div>
                     <p>No</p>
@@ -194,7 +190,7 @@ const ItemInformation = React.forwardRef(({ label, textYes, form, name, isDrop }
 
                 <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
                     <div>
-                        <div onClick={() => setIsCheck(!isCheck)} className={isCheck ? "circle_radio" : "circle_radio_white"}>
+                        <div onClick={() => form.setValue(isAccept, true)} className={field.value ? "circle_radio" : "circle_radio_white"}>
                             <div />
                         </div>
                         <p>{textYes}</p>
@@ -207,7 +203,7 @@ const ItemInformation = React.forwardRef(({ label, textYes, form, name, isDrop }
                         label={""}
                         placeholder=""
                         height={"3rem"}
-                        editable={isCheck}
+                        editable={field.value}
                     />
                 </div>
             </div>

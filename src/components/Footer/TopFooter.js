@@ -41,13 +41,6 @@ function Topfooter() {
                     className="top_footer-form--button text-center"
                     disabled
                   >
-                    {/* <Spinner
-                      as="span"
-                      animation="grow"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    /> */}
                     Loading...
                   </Button>
                 ) : (
