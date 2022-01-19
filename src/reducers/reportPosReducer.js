@@ -525,7 +525,7 @@ export const reportPosReducer = (
       };
 
     /* PAYMENT METHOD */
-    case types.SET_PAYMENT_BY_METHOD:
+    case "SET_PAYMENT_BY_METHOD_POS":
       return {
         ...state,
         payment_method: payload?.data || [],

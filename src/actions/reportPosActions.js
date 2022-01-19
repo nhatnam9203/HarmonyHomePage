@@ -11,7 +11,44 @@ import {
     summary_payment_by_method,
     summary_marketing_efficiency,
     FormatPrice,
-  } from "@/util";
+} from "@/util";
+
+
+export const getPaymentByMethod = (requestUrl = "", token = "") => async (
+    dispatch
+) => {
+    try {
+        console.log({requestUrl})
+        dispatch({ type: typeRetailer.RETAILER_REQUEST });
+        let { data = null } = await api.getByPage(requestUrl, token);
+
+        if (parseInt(data.codeNumber) === 200) {
+
+            let temptData = data?.data
+            ? data.data.map((obj) => {
+                return {
+                    ...obj,
+                    grossPayment: FormatPrice(obj.grossPayment),
+                    netPayment: FormatPrice(obj.netPayment),
+                    refund: FormatPrice(obj.refund),
+                };
+            })
+            : [];
+
+            dispatch({
+                type: "SET_PAYMENT_BY_METHOD_POS",
+                payload: { data: temptData, summary: data?.summary },
+            });
+        } else {
+            dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+        }
+    } catch (error) {
+        dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    } finally {
+        dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+    }
+};
+
 
 export const getStaffReport = (requestUrl = "", token = "") => async (
     dispatch
@@ -52,7 +89,14 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
 
 export const sort_staff_report = (payload) => {
     return {
-      type: "SORT_STAFF_POS",
+        type: "SORT_STAFF_POS",
+        payload,
+    };
+};
+
+export const sort_payment_method = (payload) => {
+    return {
+      type: typeRetailer.SORT_PAYMENT_BY_METHOD,
       payload,
     };
   };

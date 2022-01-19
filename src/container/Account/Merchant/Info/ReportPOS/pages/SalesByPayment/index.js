@@ -1,17 +1,22 @@
 import React from "react";
 import { SelectDate, ButtonReport } from "../../widget";
 import {
-  sort_payment_method,
   exportRetailer,
   closeExport,
-  getPaymentByMethod,
 } from "@/actions/retailerActions";
+
+import {
+  sort_payment_method,
+  getPaymentByMethod,
+} from "@/actions/reportPosActions";
+
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
 import { convertDateData } from "@/util";
-import TablePayment from "./TablePayment";
 import Loading from "@/components/Loading";
+import ReactTable from "react-table";
+import columns from "./column";
 import "react-table/react-table.css";
 import "../style.scss";
 
@@ -22,12 +27,15 @@ const Index = ({ onBack }) => {
 
   const {
     loading,
-    directionSort_payment_method,
     linkExport,
+  } = useSelector((state) => state.retailer);
+
+  const {
+    directionSort_payment_method,
     payment_method,
     summary_payment_method,
     typeSort_payment_method,
-  } = useSelector((state) => state.retailer);
+  } = useSelector((state) => state.reportPos);
 
   const {
     detail: { merchantId },
@@ -39,13 +47,15 @@ const Index = ({ onBack }) => {
   }, []);
 
   const getData = (quickFilter = "", start = "", end = "") => {
-    let url = `retailer/Appointment/report/sale/paymentMethod?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
+
+    let url = `overall/paymentMethod?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&method=all&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getPaymentByMethod(url, token));
   };
 
+
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `retailer/Appointment/report/sale/paymentMethod/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    let url = `overall/paymentMethod?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&method=all&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -57,6 +67,13 @@ const Index = ({ onBack }) => {
   const updateValueCustom = (start, end) => {
     setValueDate(`${start} - ${end}`);
   };
+
+  console.log({
+    directionSort_payment_method,
+    payment_method,
+    summary_payment_method,
+    typeSort_payment_method,
+  })
 
   const onClickShowReport = () => {
     if (
@@ -135,12 +152,23 @@ const Index = ({ onBack }) => {
         onClickExport={onClickExport}
       />
       <div className="table-container" style={{ position: "relative" }}>
-        <TablePayment
-          data={payment_method}
-          onClickSort={onClickSort}
-          valueSort={directionSort_payment_method}
-          summary={summary_payment_method}
-          typeSort_payment_method={typeSort_payment_method}
+        <ReactTable
+          manual
+          sortable={false}
+          data={payment_method || []}
+          minRows={1}
+          noDataText="NO DATA!"
+          NoDataComponent={() => (
+            <div className="retailer_nodata">NO DATA!</div>
+          )}
+          LoadingComponent={() => loading && <Loading />}
+          loading={loading}
+          columns={columns(
+            directionSort_payment_method,
+            onClickSort,
+            typeSort_payment_method
+          )}
+          PaginationComponent={() => <div />}
         />
         {loading && <Loading />}
       </div>
