@@ -216,6 +216,25 @@ export const summary_marketing_efficiency = (value) => {
   };
 };
 
+export const summary_payment_method_pos = (data = []) => {
+  return {
+    total_refund: handleChange("refund", data),
+    total_grossPayment: handleChange("grossPayment", data),
+    total_netPayment: handleChange("netPayment", data),
+    total_transactions: handleChange("transactions", data),
+  };
+};
+
+const handleChange = (type, data = []) => {
+  let total = 0;
+  for (let i = 0; i < data.length; i++) {
+    total = total + data[i][type]
+  }
+
+  return total;
+}
+
+
 export const FormatPrice = (price) => {
   const checkPrice = price ? price + "" : "0";
   const formatPrice = checkPrice.replace(",", "");
@@ -295,7 +314,7 @@ export const combineOptionsValuesQty = (qtyArr, optionValues) => {
 };
 
 export const quantitiesUpdateLabel = (product, quantities, name = null) => {
- 
+
   return quantities?.map((quantity) =>
     Object.assign({}, quantity, {
       label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
@@ -312,8 +331,8 @@ export const createQuantitiesItem = (product, options, name = null) => {
   if (!options || options?.length < 0) return null;
 
   const quantities = options?.reduce((accumulator, currentValue, index) => {
-    if (!accumulator || accumulator?.length <= 0)      
-    return createOptionsValuesQty(
+    if (!accumulator || accumulator?.length <= 0)
+      return createOptionsValuesQty(
         currentValue?.values?.filter((x) => x.checked)
       );
 
@@ -323,7 +342,7 @@ export const createQuantitiesItem = (product, options, name = null) => {
     );
   }, []);
 
- 
+
   return quantities?.map((quantity) =>
     Object.assign({}, quantity, {
       label: `${name ? name : product.name ? product.name : "New - product"} - ${quantity.label ?? ""}`,
@@ -334,7 +353,7 @@ export const createQuantitiesItem = (product, options, name = null) => {
   );
 };
 
-export const createVersionFromItems = (product, items , name) => {
+export const createVersionFromItems = (product, items, name) => {
   const item = items?.reduce((accumulator, currentValue, index) => {
 
     return Object.assign({}, accumulator, {
@@ -369,10 +388,10 @@ export const arrayIsEqual = (a, b) => {
 export const getStateId = (stateCity, value) => {
   let name = false;
   for (let i = 0; i < stateCity.length; i++) {
-      if (stateCity[i]?.name?.includes(value)) {
-          name = stateCity[i].stateId;
-          return name;
-      }
+    if (stateCity[i]?.name?.includes(value)) {
+      name = stateCity[i].stateId;
+      return name;
+    }
   }
   return name;
 };

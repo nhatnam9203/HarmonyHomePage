@@ -10,6 +10,7 @@ import {
     summary_sales_by_customer,
     summary_payment_by_method,
     summary_marketing_efficiency,
+    summary_payment_method_pos,
     FormatPrice,
 } from "@/util";
 
@@ -18,26 +19,32 @@ export const getPaymentByMethod = (requestUrl = "", token = "") => async (
     dispatch
 ) => {
     try {
-        console.log({requestUrl})
+        console.log({ requestUrl })
         dispatch({ type: typeRetailer.RETAILER_REQUEST });
         let { data = null } = await api.getByPage(requestUrl, token);
 
         if (parseInt(data.codeNumber) === 200) {
 
             let temptData = data?.data
-            ? data.data.map((obj) => {
-                return {
-                    ...obj,
-                    grossPayment: FormatPrice(obj.grossPayment),
-                    netPayment: FormatPrice(obj.netPayment),
-                    refund: FormatPrice(obj.refund),
-                };
-            })
-            : [];
+                ? data.data.map((obj) => {
+                    return {
+                        ...obj,
+                        grossPayment: FormatPrice(obj.grossPayment),
+                        netPayment: FormatPrice(obj.netPayment),
+                        refund: FormatPrice(obj.refund),
+                    };
+                })
+                : [];
+
+                console.log({ temptData })
+
+            let result = [];
+            if (temptData.length > 0)
+                result = [...temptData, summary_payment_method_pos(temptData)];
 
             dispatch({
                 type: "SET_PAYMENT_BY_METHOD_POS",
-                payload: { data: temptData, summary: data?.summary },
+                payload: { data: result, summary: data?.summary },
             });
         } else {
             dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
@@ -96,8 +103,7 @@ export const sort_staff_report = (payload) => {
 
 export const sort_payment_method = (payload) => {
     return {
-      type: typeRetailer.SORT_PAYMENT_BY_METHOD,
-      payload,
+        type: typeRetailer.SORT_PAYMENT_BY_METHOD,
+        payload,
     };
-  };
-  
+};

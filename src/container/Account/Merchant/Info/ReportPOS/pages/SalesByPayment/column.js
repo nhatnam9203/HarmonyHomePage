@@ -1,4 +1,5 @@
 import CustomTableHeader from "../../../CustomTableHeader";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
@@ -16,7 +17,14 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       />
     ),
     id: "displayMethod",
-    accessor: (row) => <div className="table-tr">{row.displayMethod}</div>
+    accessor: (row) =>
+      row.displayMethod ? (
+        <div className="table-tr">
+          <div className="table-tr">{row.displayMethod}</div>
+        </div>
+      ) : (
+        <div className="table-tr-last">{"Total"}</div>
+      ),
   },
   {
     Header: (
@@ -31,7 +39,14 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       />
     ),
     id: "transactions",
-    accessor: (row) => <div className="table-tr">{`$ ${row.transactions}`}</div>
+    accessor: (row) =>
+      row.transactions?.toString() ? (
+        <div className="table-tr">
+          <div className="table-tr">{(row.transactions) || "0"}</div>
+        </div>
+      ) : (
+        <div className="table-tr-last">{(row.total_transactions) || "0"}</div>
+      ),
   },
   {
     Header: (
@@ -46,7 +61,14 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       />
     ),
     id: "grossPayment",
-    accessor: (row) => <div className="table-tr">{`$ ${row.grossPayment}`}</div>
+    accessor: (row) =>
+      row.grossPayment?.toString() ? (
+        <div className="table-tr">
+          <div className="table-tr">$ {formatMoney(row.grossPayment)}</div>
+        </div>
+      ) : (
+        <div className="table-tr-last">$ {formatMoney(row.total_grossPayment)}</div>
+      ),
 
   },
   {
@@ -62,7 +84,14 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       />
     ),
     id: "refund",
-    accessor: (row) => <div className="table-tr">{row.refund}</div>
+    accessor: (row) =>
+      row.refund?.toString() ? (
+        <div className="table-tr">
+          <div className="table-tr">$ {formatMoney(row.refund)}</div>
+        </div>
+      ) : (
+        <div className="table-tr-last">$ {formatMoney(row.total_refund)}</div>
+      ),
   },
   {
     Header: (
@@ -77,7 +106,14 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       />
     ),
     id: "netPayment",
-    accessor: (row) => <div className="table-tr">{`$ ${row.netPayment}`}</div>
+    accessor: (row) =>
+      row.netPayment?.toString()  ? (
+        <div className="table-tr">
+          <div className="table-tr">$ {formatMoney(row.netPayment)}</div>
+        </div>
+      ) : (
+        <div className="table-tr-last">$ {formatMoney(row.total_netPayment)}</div>
+      ),
 
   },
 ];
