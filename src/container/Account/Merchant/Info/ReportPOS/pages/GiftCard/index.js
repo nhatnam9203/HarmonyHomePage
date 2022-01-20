@@ -16,9 +16,10 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, handleChange, FormatPrice } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm, useWatch } from "react-hook-form";
+import GiftCardStatistic from "../../subPages/GiftCardStatistic";
 
 import "react-table/react-table.css";
 import "../style.scss";
@@ -34,6 +35,9 @@ const Index = ({ onBack }) => {
 
   const [filterList, setFilterList] = React.useState(initialFilter);
   const [dataList, setDataList] = React.useState([]);
+  const [isDetail, setDetail] = React.useState(false);
+  const [idDetail, setIdDetail] = React.useState("");
+  const [dataDetail, setDataDetail] = React.useState([]);
 
   const {
     loading,
@@ -52,8 +56,8 @@ const Index = ({ onBack }) => {
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   const form = useForm({
-    defaultValues : {
-      filterType : "0"
+    defaultValues: {
+      filterType: "0"
     }
   });
 
@@ -68,7 +72,7 @@ const Index = ({ onBack }) => {
     } else {
       setDataList(sales_by_giftCard)
     }
-  }, [filterType,sales_by_giftCard]);
+  }, [filterType, sales_by_giftCard]);
 
   React.useEffect(() => {
     getData(convertDateData(valueDate));
@@ -177,6 +181,79 @@ const Index = ({ onBack }) => {
     dispatch(sort_sales_by_giftCard({ type }));
   };
 
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          const { giftCardStatistics, giftCardGeneralId } = rowInfo?.original;
+          onFilter(giftCardStatistics, giftCardGeneralId);
+        }
+      },
+    };
+  };
+
+  const sum = (data) => {
+    return {
+      total_quantity: handleChange("quantity", data),
+      total_sales: handleChange("sales", data),
+    }
+  }
+
+  const onFilter = (giftCardStatistics = [], giftCardGeneralId) => {
+    setDataDetail(giftCardStatistics);
+    setIdDetail(giftCardGeneralId);
+    setDetail(true);
+    let result = [];
+    result = giftCardStatistics.map((obj => ({
+      ...obj,
+      sales: FormatPrice(obj.sales)
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_GIFTCARD_STATISTIC",
+      payload: result
+    });
+  }
+
+  const onChildFilter = (generalId) => {
+    setIdDetail(generalId);
+    const giftCard = dataList.find(obj => obj?.giftCardGeneralId == generalId);
+
+    let result = [];
+    result = giftCard?.giftCardStatistics?.map((obj => ({
+      ...obj,
+      sales: FormatPrice(obj.sales)
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_GIFTCARD_STATISTIC",
+      payload: result
+    });
+  }
+
+  if (isDetail) {
+    return (
+      <GiftCardStatistic
+        parentList={dataList}
+        onBack={() => setDetail(false)}
+        defaultFilter={idDetail}
+        valueDate={valueDate}
+        data={dataDetail}
+        onChildFilter={onChildFilter}
+      />
+    )
+  }
+
   return (
     <>
       <div className="info_merchant_title">
@@ -225,9 +302,11 @@ const Index = ({ onBack }) => {
             onClickSort,
             typeSort_sales_by_giftCard
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
       </div>
+
       <PopupExport
         isVisible={isVisibleExport}
         linkExport={linkExport}

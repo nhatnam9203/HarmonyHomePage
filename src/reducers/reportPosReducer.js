@@ -73,11 +73,18 @@ export const reportPosReducer = (
     typeSort_payment_method: "",
     directionSort_payment_method: "ASC",
 
-    /* SALES BY CATEGORY */
+    /* SALES BY GIFTCARD */
     sales_by_giftCard: [],
     summary_sales_by_giftCard: {},
     typeSort_sales_by_giftCard: "",
     directionSort_sales_by_giftCard: "ASC",
+
+    /* GIFTCARD STATISTIC */
+    giftCard_statistic: [],
+    summary_giftCard_statistic: {},
+    typeSort_giftCard_statistic: "",
+    directionSort_giftCard_statistic: "ASC",
+
 
     /* SALES BY CATEGORY */
     service_duration: [],
@@ -256,6 +263,27 @@ export const reportPosReducer = (
           state.directionSort_sales_by_giftCard === "ASC" ? "DESC" : "ASC"
         ),
       };
+
+
+    case "SET_GIFTCARD_STATISTIC":
+      return {
+        ...state,
+        giftCard_statistic: payload || [],
+      };
+
+    case "SORT_GIFTCARD_STATISTIC":
+      return {
+        ...state,
+        directionSort_giftCard_statistic:
+          state.directionSort_giftCard_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_giftCard_statistic: payload.type,
+        giftCard_statistic: sortTable(
+          payload.type,
+          state.giftCard_statistic,
+          state.directionSort_giftCard_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
 
     /* PAYMENT METHOD */
     case "SET_PAYMENT_BY_METHOD_POS":

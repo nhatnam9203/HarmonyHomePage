@@ -421,3 +421,10 @@ export const sort_staff_statistic = (payload) =>{
         payload
     }
 }
+
+export const sort_giftCard_statistic = (payload) =>{
+    return{
+        type : "SORT_GIFTCARD_STATISTIC",
+        payload
+    }
+}
