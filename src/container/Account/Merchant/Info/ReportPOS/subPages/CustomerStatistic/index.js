@@ -16,7 +16,7 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, handleChange } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
 
@@ -134,11 +134,11 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
     const list = [
       ...parentList
     ].map((obj) => ({
-      label: obj?.type,
-      value: obj?.giftCardGeneralId
+      label: obj?.name,
+      value: obj?.customerId
     }));
     setFilterList(list);
-  }, [parentList])
+  }, [parentList]);
 
   return (
     <>

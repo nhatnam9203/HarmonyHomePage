@@ -337,7 +337,6 @@ export const getSalesByGiftCard = (requestUrl = "", token = "") => async (
     dispatch
 ) => {
     try {
-        console.log({ requestUrl });
         dispatch({ type: typeRetailer.RETAILER_REQUEST });
         let { data = null } = await api.getByPage(requestUrl, token);
 

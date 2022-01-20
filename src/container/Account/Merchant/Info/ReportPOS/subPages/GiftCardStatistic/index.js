@@ -138,7 +138,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
       value: obj?.giftCardGeneralId
     }));
     setFilterList(list);
-  }, [parentList])
+  }, [parentList]);
+
+  console.log({ giftCard_statistic })
 
   return (
     <>

@@ -128,7 +128,6 @@ const Index = ({ onBack }) => {
     return {
       onClick: (e) => {
         if (rowInfo) {
-          console.log({ rowInfo });
           const { details, customerId } = rowInfo?.original;
           onFilter(details, customerId);
         }
@@ -137,9 +136,9 @@ const Index = ({ onBack }) => {
   };
 
   const sum = (data) => {
-    return {
-      total_quantity: handleChange("quantity", data),
-      total_sales: handleChange("sales", data),
+    return     {
+      total_payamount : handleChange("payamount",data),
+      total_serviceCount : handleChange("serviceCount",data),
     }
   }
 
@@ -166,13 +165,15 @@ const Index = ({ onBack }) => {
 
   const onChildFilter = (generalId) => {
     setIdDetail(generalId);
-    const giftCard = sales_by_customer.find(obj => obj?.giftCardGeneralId == generalId);
+    const giftCard = sales_by_customer.find(obj => obj?.customerId == generalId);
 
     let result = [];
+
     result = giftCard?.details?.map((obj => ({
       ...obj,
       payamount: FormatPrice(obj.payamount)
     })));
+
 
     result = [
       ...result,
@@ -180,7 +181,7 @@ const Index = ({ onBack }) => {
     ];
 
     dispatch({
-      type: "SET_GIFTCARD_STATISTIC",
+      type: "SET_CUSTOMER_STATISTIC",
       payload: result
     });
   }
