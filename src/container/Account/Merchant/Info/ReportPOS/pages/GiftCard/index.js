@@ -184,7 +184,7 @@ const Index = ({ onBack }) => {
   const onRowClick = (state, rowInfo, column, instance) => {
     return {
       onClick: (e) => {
-        if (rowInfo) {
+        if (rowInfo && rowInfo?.original?.giftCardGeneralId) {
           const { giftCardStatistics, giftCardGeneralId } = rowInfo?.original;
           onFilter(giftCardStatistics, giftCardGeneralId);
         }

@@ -132,7 +132,7 @@ const Index = ({ onBack }) => {
   const onRowClick = (state, rowInfo, column, instance) => {
     return {
       onClick: (e) => {
-        if (rowInfo) {
+        if (rowInfo && rowInfo?.original?.staffId) {
           const { staffId } = rowInfo?.original;
           let quickFilter = "", start = "", end = "";
 

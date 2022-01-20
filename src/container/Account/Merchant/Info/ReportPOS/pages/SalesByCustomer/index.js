@@ -128,8 +128,10 @@ const Index = ({ onBack }) => {
     return {
       onClick: (e) => {
         if (rowInfo) {
-          const { details, customerId } = rowInfo?.original;
-          onFilter(details, customerId);
+          if(!rowInfo?.original?.total_appointmentCount){
+            const { details, customerId } = rowInfo?.original;
+            onFilter(details, customerId);
+          }
         }
       },
     };
