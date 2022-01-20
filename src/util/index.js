@@ -267,6 +267,15 @@ export const summary_sales_by_giftCard = (data = []) => {
   };
 };
 
+export const summary_sales_by_customer_pos = (data = []) => {
+  return {
+    total_appointmentCount: handleChange("appointmentCount", data),
+    total_lastVisitSale: handleChange("lastVisitSale", data),
+    total_total: handleChange("total", data),
+  };
+};
+
+
 export const summary_staff_statistic = (data = []) => {
   return {
     total_differenceDurationMinute: handleChange("differenceDurationMinute", data),

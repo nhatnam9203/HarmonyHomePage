@@ -12,8 +12,53 @@ import {
     summary_sales_by_giftCard,
     summary_service_duration,
     summary_staff_statistic,
+    summary_sales_by_customer_pos,
+    handleChange,
     FormatPrice,
 } from "@/util";
+
+export const getSalesByCustomer = (requestUrl = "", token = "") => async (
+    dispatch
+) => {
+    try {
+        dispatch({ type: typeRetailer.RETAILER_REQUEST });
+        let { data = null } = await api.getByPage(requestUrl, token);
+
+        console.log({ requestUrl, data })
+
+        if (parseInt(data.codeNumber) === 200) {
+            let temptData = data.data
+                ? data.data.map((obj) => {
+                    return {
+                        ...obj,
+                        lastVisitSale: FormatPrice(obj.lastVisitSale),
+                        total: FormatPrice(obj.total),
+                    };
+                })
+                : [];
+            let result = [];
+            if (temptData.length > 0)
+                result = [
+                    ...temptData,
+                    {
+                        ...summary_sales_by_customer_pos(temptData),
+                    },
+                ];
+            
+            dispatch({
+                type: "SET_SALES_BY_CUSTOMER",
+                payload: { data: result, summary: data.summary },
+            });
+        } else {
+            dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+        }
+    } catch (error) {
+        dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    } finally {
+        dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+    }
+};
+
 
 
 export const getPaymentByMethod = (requestUrl = "", token = "") => async (
@@ -415,16 +460,23 @@ export const sort_service_duration = (payload) => {
     };
 }
 
-export const sort_staff_statistic = (payload) =>{
-    return{
-        type : "SORT_STAFF_STATISTIC",
+export const sort_staff_statistic = (payload) => {
+    return {
+        type: "SORT_STAFF_STATISTIC",
         payload
     }
 }
 
-export const sort_giftCard_statistic = (payload) =>{
-    return{
-        type : "SORT_GIFTCARD_STATISTIC",
+export const sort_giftCard_statistic = (payload) => {
+    return {
+        type: "SORT_GIFTCARD_STATISTIC",
+        payload
+    }
+}
+
+export const sort_customer_statistic = (payload) => {
+    return {
+        type: "SORT_CUSTOMER_STATISTIC",
         payload
     }
 }

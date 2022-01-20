@@ -244,6 +244,8 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data = null } = await api.getByPage(requestUrl, token);
 
+    console.log({ requestUrl , data })
+
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
         ? data.data.map((obj) => {

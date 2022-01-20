@@ -29,6 +29,12 @@ export const reportPosReducer = (
     typeSort_sales_by_customer: "",
     directionSort_sales_by_customer: "ASC",
 
+    /* CUSTOMER STATISTIC */
+    customer_statistic: [],
+    summary_customer_statistic: {},
+    typeSort_customer_statistic: "",
+    directionSort_customer_statistic: "ASC",
+
     /* SALES BY PRODUCT */
     top_product: [],
     summary_top_product: {},
@@ -281,6 +287,25 @@ export const reportPosReducer = (
           payload.type,
           state.giftCard_statistic,
           state.directionSort_giftCard_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case "SET_CUSTOMER_STATISTIC":
+      return {
+        ...state,
+        customer_statistic: payload || [],
+      };
+
+    case "SORT_CUSTOMER_STATISTIC":
+      return {
+        ...state,
+        directionSort_customer_statistic:
+          state.directionSort_customer_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_customer_statistic: payload.type,
+        customer_statistic: sortTable(
+          payload.type,
+          state.customer_statistic,
+          state.directionSort_customer_statistic === "ASC" ? "DESC" : "ASC"
         ),
       };
 

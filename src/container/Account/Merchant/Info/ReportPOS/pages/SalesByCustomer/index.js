@@ -8,11 +8,14 @@ import {
   sort_sales_by_customer,
   exportRetailer,
   closeExport,
-  getSalesByCustomer,
 } from "@/actions/retailerActions";
+import {
+  getSalesByCustomer,
+} from "@/actions/reportPosActions"
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, handleChange, FormatPrice } from "@/util";
+import CustomerStatistic from "../../subPages/CustomerStatistic";
 import "react-table/react-table.css";
 import "../style.scss";
 
@@ -20,6 +23,10 @@ const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+
+  const [isDetail, setDetail] = React.useState(false);
+  const [idDetail, setIdDetail] = React.useState("");
+  const [dataDetail, setDataDetail] = React.useState([]);
 
   const {
     loading,
@@ -39,13 +46,13 @@ const Index = ({ onBack }) => {
   }, []);
 
   const getData = (quickFilter = "", start = "", end = "") => {
-    let url = `retailer/appointment/report/customerSales?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
+    let url = `appointment/report/customerSales?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getSalesByCustomer(url, token));
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `retailer/appointment/report/customerSales/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    let url = `appointment/report/customerSales/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -117,6 +124,81 @@ const Index = ({ onBack }) => {
     dispatch(sort_sales_by_customer({ type }));
   };
 
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          console.log({ rowInfo });
+          const { details, customerId } = rowInfo?.original;
+          onFilter(details, customerId);
+        }
+      },
+    };
+  };
+
+  const sum = (data) => {
+    return {
+      total_quantity: handleChange("quantity", data),
+      total_sales: handleChange("sales", data),
+    }
+  }
+
+  const onFilter = (giftCardStatistics = [], giftCardGeneralId) => {
+    setDataDetail(giftCardStatistics);
+    setIdDetail(giftCardGeneralId);
+    setDetail(true);
+    let result = [];
+    result = giftCardStatistics.map((obj => ({
+      ...obj,
+      payamount: FormatPrice(obj.payamount)
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_CUSTOMER_STATISTIC",
+      payload: result
+    });
+  }
+
+  const onChildFilter = (generalId) => {
+    setIdDetail(generalId);
+    const giftCard = sales_by_customer.find(obj => obj?.giftCardGeneralId == generalId);
+
+    let result = [];
+    result = giftCard?.details?.map((obj => ({
+      ...obj,
+      payamount: FormatPrice(obj.payamount)
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_GIFTCARD_STATISTIC",
+      payload: result
+    });
+  }
+
+  if(isDetail){
+    return(
+      <CustomerStatistic
+      parentList={sales_by_customer}
+      onBack={() => setDetail(false)}
+      defaultFilter={idDetail}
+      valueDate={valueDate}
+      data={dataDetail}
+      onChildFilter={onChildFilter}
+    />
+    )
+  }
+
+
   return (
     <>
       <div className="info_merchant_title">
@@ -151,6 +233,7 @@ const Index = ({ onBack }) => {
             onClickSort,
             typeSort_sales_by_customer
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
       </div>
