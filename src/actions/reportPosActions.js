@@ -152,12 +152,14 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
                 ? data.data.map((obj) => {
                     return {
                         ...obj,
-                        productSales: FormatPrice(obj.productSales),
-                        productSplit: FormatPrice(obj.productSplit),
-                        salaryWage: FormatPrice(obj.salaryWage),
-                        refundAmount: FormatPrice(obj.refundAmount),
-                        discountByStaff: FormatPrice(obj.discountByStaff),
+                        serviceSales: FormatPrice(obj.serviceSales),
+                        surcharge: FormatPrice(obj.surcharge),
+                        netServiceSales: FormatPrice(obj.netServiceSales),
+                        serviceSplit: FormatPrice(obj.serviceSplit),
+                        tip: FormatPrice(obj.tip),
                         salary: FormatPrice(obj.salary),
+                        discountByStaff : FormatPrice(obj.discountByStaff),
+                        refundAmount : FormatPrice(obj.refundAmount),
                     };
                 })
                 : [];
