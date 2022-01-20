@@ -1,34 +1,13 @@
-const columnSales = [
-  {
-    key: 1,
-    name: "Overall",
-  },
-  {
-    key: 2,
-    name: "Sales by Order",
-  },
-  {
-    key: 3,
-    name: "Sales by Payment method",
-  },
-];
+
 
 const columnProducts = [
   {
-    key: 4,
-    name: "Top Categories",
-  },
-  {
-    key: 5,
-    name: "Top Products",
+    key: 7,
+    name: "Sales by Product",
   },
   {
     key: 6,
     name: "Sales by Category",
-  },
-  {
-    key: 7,
-    name: "Sales by Product",
   },
 ];
 
@@ -44,12 +23,21 @@ const columnMarketing = [
     key: 9,
     name: "Marketing Efficiency",
   },
+  {
+    key: 3,
+    name: "Sales by Payment method",
+  },
+  
 ];
 
 const columnStaffs = [
   {
     key: 9,
     name: "Staff reports",
+  },
+  {
+    key: 15,
+    name: "Service duration",
   },
 ];
 
@@ -67,13 +55,12 @@ const columnServive = [
   },
   {
     key: 13,
-    name: "Service duration",
+    name: "Sales by Category",
   },
 ];
 
 
 export default {
-  columnSales,
   columnProducts,
   columnCustomers,
   columnMarketing,

@@ -3,58 +3,7 @@ import sortArray from "sort-array";
 
 export const reportPosReducer = (
   state = {
-    loading: false,
-    loadingExport: false,
-    loadingDetail: false,
-    loadingUpfile: false,
-    loadingAttribute: false,
-    loadingNewCategory: false,
-    orders: [],
-    orderDetail: {},
-    orderPages: 0,
-    inventory: [],
-    inventoryDetail: {},
-    inventoryPages: 0,
-    customer: [],
-    customerDetail: {},
-    customerPages: 0,
-    customerAppointments: [],
-    countCustomerAppointments: 0,
-    report: [],
-    subCategory: [],
-    attributes: [],
-    maxPageAttributes: 1,
-    pageAttributes: 1,
 
-    isVisibleCustomerDetail: false,
-    isVisibleInventoryDetail: false,
-    isVisibleOrderDetail: false,
-
-    isVisibleInventoryEdit: false,
-    isVisibleInventoryAdd: false,
-
-    typeSort_inventory: "",
-    directionSort_inventory: "ASC",
-
-    typeSort_orders: "",
-    directionSort_orders: "ASC",
-
-    typeSort_customer: "",
-    directionSort_customer: "ASC",
-
-    typeSort_customerAppointments: "",
-    directionSort_customerAppointments: "ASC",
-
-    reportOverall: [],
-    summaryOverall: {},
-    typeSortOverall: "",
-    directionSortOverall: "ASC",
-
-    /* SALES BY ORDER */
-    sales_by_order: [],
-    summary_sales_by_order: {},
-    typeSort_sales_by_order: "",
-    directionSort_sales_by_order: "ASC",
 
     /* SALES BY PRODUCT */
     sales_by_product: [],
@@ -69,10 +18,10 @@ export const reportPosReducer = (
     directionSort_sales_by_service: "ASC",
 
     /* SALES BY CATEGORY */
-    sales_by_categoryt: [],
-    summary_sales_by_categoryt: {},
-    typeSort_sales_by_category: "",
-    directionSort_sales_by_categoryt: "ASC",
+    sales_by_category_product: [],
+    summary_sales_by_category_product: {},
+    typeSort_sales_by_category_product: "",
+    directionSort_sales_by_category_product: "ASC",
 
     /* SALES BY CUSTOMER */
     sales_by_customer: [],
@@ -92,12 +41,25 @@ export const reportPosReducer = (
     typeSort_top_category: "",
     directionSort_top_category: "ASC",
 
+    /* SALES BY CATEGORY SERVICE */
+    sales_by_category_service: [],
+    summary_sales_by_category_service: {},
+    typeSort_sales_by_category_service: "",
+    directionSort_sales_by_category_service: "ASC",
+
+
     /* STAFF REPORT */
     staff_report: [],
     staff_report_pages: 0,
     summary_staff_report: {},
     typeSort_staff_report: "",
     directionSort_staff_report: "ASC",
+
+    /* STAFF STATISTIC */
+    staff_statistic: [],
+    summary_staff_statistic: {},
+    typeSort_staff_statistic: "",
+    directionSort_staff_statistic: "ASC",
 
     /* MARKING EFFICIENCY */
     marketing_efficiency: [],
@@ -111,19 +73,72 @@ export const reportPosReducer = (
     typeSort_payment_method: "",
     directionSort_payment_method: "ASC",
 
-    linkExport: "",
+    /* SALES BY CATEGORY */
+    sales_by_giftCard: [],
+    summary_sales_by_giftCard: {},
+    typeSort_sales_by_giftCard: "",
+    directionSort_sales_by_giftCard: "ASC",
+
+    /* SALES BY CATEGORY */
+    service_duration: [],
+    summary_service_duration: {},
+    typeSort_service_duration: "",
+    directionSort_service_duration: "ASC",
+
   },
   { type, payload }
 ) => {
   switch (type) {
 
+    case "SET_SERVICE_DURATION":
+      return {
+        ...state,
+        service_duration: payload?.data || [],
+        summary_service_duration: payload?.summary || {},
+      }
+
+    case "SORT_SERVICE_DURATION":
+      return {
+        ...state,
+        directionSort_service_duration:
+          state.directionSort_service_duration === "ASC" ? "DESC" : "ASC",
+        typeSort_service_duration: payload.type,
+        service_duration: sortTable(
+          payload.type,
+          state.service_duration,
+          state.directionSort_service_duration === "ASC" ? "DESC" : "ASC"
+        ),
+      }
+
     case "SET_SALES_BY_SERVICE_POS":
-      console.log({ payload })
       return {
         ...state,
         sales_by_service: payload?.data || [],
         summary_sales_by_service: payload?.summary || {},
       };
+
+    case "SET_SALES_BY_CATEGORY_SERVICE_POS":
+      return {
+        ...state,
+        sales_by_category_service: payload?.data || [],
+        summary_sales_by_category_service: payload?.summary || {},
+      };
+
+    case "SET_SALES_BY_PRODUCT_POS":
+      return {
+        ...state,
+        sales_by_product: payload?.data || [],
+        summary_sales_by_product: payload?.summary || {},
+      };
+
+    case "SET_SALES_BY_CATEGORY_PRODUCT_POS":
+      return {
+        ...state,
+        sales_by_category_product: payload?.data || [],
+        summary_sales_by_category_product: payload?.summary || {},
+      };
+
+
 
     case "SORT_SALES_BY_SERVICE_POS":
       return {
@@ -138,65 +153,20 @@ export const reportPosReducer = (
         ),
       };
 
-
-    case types.RESET_SORT_STAFF:
+    case "SORT_SALES_BY_CATEGORY_SERVICE_POS":
       return {
         ...state,
-        typeSort_staff_report: "",
-        directionSort_staff_report: "ASC",
-      };
-
-    /* OVERALL */
-    case types.SET_OVERALL:
-      return {
-        ...state,
-        reportOverall: payload?.data || [],
-        summaryOverall: payload?.summary || {},
-      };
-
-    case types.SORT_OVRERALL:
-      return {
-        ...state,
-        directionSortOverall:
-          state.directionSortOverall === "ASC" ? "DESC" : "ASC",
-        typeSortOverall: payload.type,
-        reportOverall: sortTable(
+        directionSort_sales_by_category_service:
+          state.directionSort_sales_by_category_service === "ASC" ? "DESC" : "ASC",
+        typeSort_sales_by_category_service: payload.type,
+        sales_by_category_service: sortTable(
           payload.type,
-          state.reportOverall,
-          state.directionSortOverall === "ASC" ? "DESC" : "ASC"
+          state.sales_by_category_service,
+          state.directionSort_sales_by_category_service === "ASC" ? "DESC" : "ASC"
         ),
       };
 
-    /* SALES BY ORDER */
-    case types.SET_SALES_BY_ORDER:
-      return {
-        ...state,
-        sales_by_order: payload?.data || [],
-        summary_sales_by_order: payload?.summary || {},
-      };
-
-    case types.SORT_SALES_BY_ORDER:
-      return {
-        ...state,
-        directionSort_sales_by_order:
-          state.directionSort_sales_by_order === "ASC" ? "DESC" : "ASC",
-        typeSort_sales_by_order: payload.type,
-        sales_by_order: sortTable(
-          payload.type,
-          state.sales_by_order,
-          state.directionSort_sales_by_order === "ASC" ? "DESC" : "ASC"
-        ),
-      };
-
-    /* SALES BY PRODUCT */
-    case types.SET_SALES_BY_PRODUCT:
-      return {
-        ...state,
-        sales_by_product: payload?.data || [],
-        summary_sales_by_product: payload?.summary || {},
-      };
-
-    case types.SORT_SALES_BY_PRODUCT:
+    case "SORT_SALES_BY_PRODUCT_POS":
       return {
         ...state,
         directionSort_sales_by_product:
@@ -209,89 +179,22 @@ export const reportPosReducer = (
         ),
       };
 
-    /* SALES BY CATEGORY */
-    case types.SET_SALES_BY_CATEGORY:
-      return {
-        ...state,
-        sales_by_category: payload?.data || [],
-        summary_sales_by_category: payload?.summary || {},
-      };
 
-    case types.SORT_SALES_BY_CATEGORY:
+    case "SORT_SALES_BY_CATEGORY_PRODUCT_POS":
       return {
         ...state,
-        directionSort_sales_by_category:
-          state.directionSort_sales_by_category === "ASC" ? "DESC" : "ASC",
-        typeSort_sales_by_category: payload.type,
-        sales_by_category: sortTable(
+        directionSort_sales_by_category_product:
+          state.directionSort_sales_by_category_product === "ASC" ? "DESC" : "ASC",
+        typeSort_sales_by_category_product: payload.type,
+        sales_by_category_product: sortTable(
           payload.type,
-          state.sales_by_category,
-          state.directionSort_sales_by_category === "ASC" ? "DESC" : "ASC"
+          state.sales_by_category_product,
+          state.directionSort_sales_by_category_product === "ASC" ? "DESC" : "ASC"
         ),
       };
 
-    /* SALES BY CUSTOMER */
-    case types.SET_SALES_BY_CUSTOMER:
-      return {
-        ...state,
-        sales_by_customer: payload?.data || [],
-        summary_sales_by_customer: payload?.summary || {},
-      };
 
-    case types.SORT_SALES_BY_CUSTOMER:
-      return {
-        ...state,
-        directionSort_sales_by_customer:
-          state.directionSort_sales_by_customer === "ASC" ? "DESC" : "ASC",
-        typeSort_sales_by_customer: payload.type,
-        sales_by_customer: sortTable(
-          payload.type,
-          state.sales_by_customer,
-          state.directionSort_sales_by_customer === "ASC" ? "DESC" : "ASC"
-        ),
-      };
 
-    /* TOP PRODUCT */
-    case types.SET_TOP_PRODUCT:
-      return {
-        ...state,
-        top_product: payload?.data || [],
-        summary_top_product: payload?.summary || {},
-      };
-
-    case types.SORT_TOP_PRODUCT:
-      return {
-        ...state,
-        directionSort_top_product:
-          state.directionSort_top_product === "ASC" ? "DESC" : "ASC",
-        typeSort_top_product: payload.type,
-        top_product: sortTable(
-          payload.type,
-          state.top_product,
-          state.directionSort_top_product === "ASC" ? "DESC" : "ASC"
-        ),
-      };
-
-    /* TOP CATEGORY */
-    case types.SET_TOP_CATEGORY:
-      return {
-        ...state,
-        top_category: payload?.data || [],
-        summary_top_category: payload?.summary || {},
-      };
-
-    case types.SORT_TOP_CATEGORY:
-      return {
-        ...state,
-        directionSort_top_category:
-          state.directionSort_top_category === "ASC" ? "DESC" : "ASC",
-        typeSort_top_category: payload.type,
-        top_category: sortTable(
-          payload.type,
-          state.top_category,
-          state.directionSort_top_category === "ASC" ? "DESC" : "ASC"
-        ),
-      };
 
     /* STAFF REPORT */
     case "SET_STAFF_REPORT_POS":
@@ -314,24 +217,43 @@ export const reportPosReducer = (
         ),
       };
 
-    /* MARKETING EFFICIENCY */
-    case types.SET_MARKETING_EFFICIENCY:
+    case "SET_STAFF_STATISTIC":
       return {
         ...state,
-        marketing_efficiency: payload?.data || [],
-        summary_marketing_efficiency: payload?.summary || {},
+        staff_statistic: payload?.data || [],
+        summary_staff_statistic: payload?.summary || {},
       };
 
-    case types.SORT_MARKETING_EFFICIENCY:
+
+    case "SORT_STAFF_STATISTIC":
       return {
         ...state,
-        directionSort_marketing_efficiency:
-          state.directionSort_marketing_efficiency === "ASC" ? "DESC" : "ASC",
-        typeSort_marketing_efficiency: payload.type,
-        marketing_efficiency: sortTable(
+        directionSort_staff_statistic:
+          state.directionSort_staff_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_staff_statistic: payload.type,
+        staff_statistic: sortTable(
           payload.type,
-          state.marketing_efficiency,
-          state.directionSort_marketing_efficiency === "ASC" ? "DESC" : "ASC"
+          state.staff_statistic,
+          state.directionSort_staff_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case "SET_SALES_BY_GIFTCARD":
+      return {
+        ...state,
+        sales_by_giftCard: payload?.data || [],
+      };
+
+    case "SORT_SALES_BY_GIFTCARD":
+      return {
+        ...state,
+        directionSort_sales_by_giftCard:
+          state.directionSort_sales_by_giftCard === "ASC" ? "DESC" : "ASC",
+        typeSort_sales_by_giftCard: payload.type,
+        sales_by_giftCard: sortTable(
+          payload.type,
+          state.sales_by_giftCard,
+          state.directionSort_sales_by_giftCard === "ASC" ? "DESC" : "ASC"
         ),
       };
 
@@ -354,19 +276,6 @@ export const reportPosReducer = (
           state.payment_method,
           state.directionSort_payment_method === "ASC" ? "DESC" : "ASC"
         ),
-      };
-
-    case types.SORT_CUSTOMER_APPOINTMENT:
-      return {
-        ...state,
-        directionSort_customerAppointments:
-          state.directionSort_customerAppointments === "ASC" ? "DESC" : "ASC",
-        typeSort_customerAppointments: payload.type,
-        // customerAppointments: sortTable(
-        //   payload.type,
-        //   state.customerAppointments,
-        //   state.directionSort_customerAppointments === "ASC" ? "DESC" : "ASC"
-        // ),
       };
 
     default:

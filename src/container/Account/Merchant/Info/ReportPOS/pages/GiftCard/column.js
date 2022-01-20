@@ -3,23 +3,23 @@ import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => {}, sortType) => [
+const columns = (valueSort, onClickSort = () => { }, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Campaign Name"
+        value="Type"
         valueSort={valueSort}
-        isActiveSort={sortType == "name"}
+        isActiveSort={sortType == "type"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "type")
         }
       />
     ),
-    id: "name",
+    id: "type",
     accessor: (row) =>
-      row.name ? (
-        <div className="table-tr">{`${row.name}`}</div>
+      row.type ? (
+        <div className="table-tr">{`${row.type}`}</div>
       ) : (
         <div className="table-tr-last">{"Total"}</div>
       ),
@@ -28,40 +28,41 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Revenue"
+        value="Quantity sold"
         valueSort={valueSort}
-        isActiveSort={sortType == "revenue"}
+        isActiveSort={sortType == "quantity"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "revenue")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "quantity")
         }
       />
     ),
-    id: "revenue",
+    id: "quantity",
     accessor: (row) =>
-      row.revenue?.toString() ? (
-        <div className="table-tr">{`$ ${formatMoney(row.revenue)}`}</div>
+      row.quantity?.toString() ? (
+        <div className="table-tr">{row.quantity}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_revenue}`}</div>
+        <div className="table-tr-last">{row.total_quantity}</div>
       ),
   },
+
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Discount Amount"
+        value="Net sales"
         valueSort={valueSort}
-        isActiveSort={sortType == "discount"}
+        isActiveSort={sortType == "sales"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "discount")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "sales")
         }
       />
     ),
-    id: "discount",
+    id: "sales",
     accessor: (row) =>
-      row.discount?.toString() ? (
-        <div className="table-tr">{`$ ${formatMoney(row.discount)}`}</div>
+      row.sales?.toString() ? (
+        <div className="table-tr">{`$ ${formatMoney(row.sales)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_discount}`}</div>
+        <div className="table-tr-last">$ {formatMoney(row.total_sales)}</div>
       ),
   },
 ];

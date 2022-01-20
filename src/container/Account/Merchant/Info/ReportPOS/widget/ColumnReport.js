@@ -8,7 +8,7 @@ const ColumnReport = ({ title = "", data = [], onClickItem = () => {} }) => {
       {data.map((obj) => {
         return (
           <p
-            onClick={() => onClickItem(obj.name)}
+            onClick={() => onClickItem(obj.name, obj.key)}
             className="report_column_item"
             key={obj.key}
           >

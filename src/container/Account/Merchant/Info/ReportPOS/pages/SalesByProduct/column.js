@@ -28,6 +28,26 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
+        value="Stock On Hand"
+        valueSort={valueSort}
+        isActiveSort={sortType == "stockOnHand"}
+        onClickSort={() =>
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "stockOnHand")
+        }
+      />
+    ),
+    id: "stockOnHand",
+    accessor: (row) =>
+      row.stockOnHand?.toString() ? (
+        <div className="table-tr">{row.stockOnHand}</div>
+      ) : (
+        <div className="table-tr-last">{row.total_stockOnHand}</div>
+      ),
+  },
+  {
+    Header: (
+      <CustomTableHeader
+        isSort={true}
         value="Qty Sold"
         valueSort={valueSort}
         isActiveSort={sortType == "quantity"}
@@ -48,80 +68,41 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Total Revenue"
+        value="Av.Price"
         valueSort={valueSort}
-        isActiveSort={sortType == "totalRevenue"}
+        isActiveSort={sortType == "avgPrice"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalRevenue")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "avgPrice")
         }
       />
     ),
-    id: "totalRevenue",
+    id: "avgPrice",
     accessor: (row) =>
-      row.totalRevenue?.toString() ? (
-        <div className="table-tr">{`$ ${formatMoney(row.totalRevenue)}`}</div>
+      row.avgPrice?.toString() ? (
+        <div className="table-tr">{`$ ${formatMoney(row.avgPrice)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_totalRevenue}`}</div>
+        <div className="table-tr-last">{`$ ${formatMoney(row.total_avgPrice)}`}</div>
       ),
   },
+ 
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Total Cost"
+        value="Total Sales"
         valueSort={valueSort}
-        isActiveSort={sortType == "totalCost"}
+        isActiveSort={sortType == "totalSales"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalCost")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalSales")
         }
       />
     ),
-    id: "totalCost",
+    id: "totalSales",
     accessor: (row) =>
-      row.totalCost?.toString() ? (
-        <div className="table-tr">{`$ ${formatMoney(row.totalCost)}`}</div>
+      row.totalSales?.toString() ? (
+        <div className="table-tr">{`$ ${formatMoney(row.totalSales)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_totalCost}`}</div>
-      ),
-  },
-  {
-    Header: (
-      <CustomTableHeader
-        isSort={true}
-        value="Total Tax"
-        valueSort={valueSort}
-        isActiveSort={sortType == "totalTax"}
-        onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalTax")
-        }
-      />
-    ),
-    id: "totalTax",
-    accessor: (row) =>
-      row.totalTax?.toString() ? (
-        <div className="table-tr">{`$ ${formatMoney(row.totalTax)}`}</div>
-      ) : (
-        <div className="table-tr-last">{row.total_totalTax}</div>
-      ),
-  },
-  {
-    Header: (
-      <CustomTableHeader
-        isSort={true}
-        value="Total Profit"
-        valueSort={valueSort}
-        isActiveSort={sortType == "totalProfit"}
-        onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalProfit")
-        }
-      />
-    ),
-    id: "totalProfit",
-    accessor: (row) =>
-      row.totalProfit?.toString() ? (
-        <div className="table-tr">{`$ ${formatMoney(row.totalProfit)}`}</div>
-      ) : (
-        <div className="table-tr-last">{`$ ${row.total_totalProfit}`}</div>
+        <div className="table-tr-last">{`$ ${formatMoney(row.total_totalSales)}`}</div>
       ),
   },
 ];

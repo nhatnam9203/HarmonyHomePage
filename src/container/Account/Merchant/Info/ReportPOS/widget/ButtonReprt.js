@@ -7,8 +7,9 @@ import "./style.scss";
 const ButtonReport = ({
   isNotReport = false,
   isNotShowReport = false,
-  onClickExport = () => {},
-  onClickShowReport = () => {},
+  onClickExport = () => { },
+  onClickShowReport = () => { },
+  renderShowReport
 }) => {
   const [isPopupExport, setPopupExport] = React.useState(false);
 
@@ -22,11 +23,11 @@ const ButtonReport = ({
 
   return (
     <div className="row_button_report top20">
-      {!isNotShowReport && (
-        <div onClick={onClickShowReport} className="report_button">
+      {
+        renderShowReport ? renderShowReport() : <div onClick={onClickShowReport} className="report_button">
           Show report
         </div>
-      )}
+      }
       {!isNotReport && (
         <OutsideClickHandler onOutsideClick={closePopupReport}>
           <div

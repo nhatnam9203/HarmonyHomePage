@@ -234,6 +234,51 @@ export const summary_sales_by_service_pos = (data = []) => {
   };
 };
 
+export const summary_sales_by_product_pos = (data = []) => {
+  return {
+    total_stockOnHand: handleChange("stockOnHand", data),
+    total_quantity: handleChange("quantity", data),
+    total_avgPrice: handleChange("avgPrice", data),
+    total_totalSales: handleChange("totalSales", data),
+  };
+};
+
+export const summary_sales_by_category_service_pos = (data = []) => {
+  return {
+    total_quantity: handleChange("quantity", data),
+    total_totalHour: handleChange("totalHour", data),
+    total_totalSales: handleChange("totalSales", data),
+    total_serviceCount: handleChange("serviceCount", data),
+  };
+};
+
+export const summary_sales_by_category_product_pos = (data = []) => {
+  return {
+    total_quantity: handleChange("quantity", data),
+    total_avgPrice: handleChange("avgPrice", data),
+    total_totalSales: handleChange("totalSales", data),
+  };
+};
+
+export const summary_sales_by_giftCard = (data = []) => {
+  return {
+    total_quantity: handleChange("quantity", data),
+    total_sales: handleChange("sales", data),
+  };
+};
+
+export const summary_staff_statistic = (data = []) => {
+  return {
+    total_differenceDurationMinute: handleChange("differenceDurationMinute", data),
+  };
+};
+
+export const summary_service_duration = (data = []) =>{
+  return{
+    total_differenceDurationMinute : handleChange("differenceDurationMinute", data)
+  }
+}
+
 export const handleChange = (type, data = []) => {
   let total = 0;
   for (let i = 0; i < data.length; i++) {
@@ -410,3 +455,37 @@ export function validateEmail(email) {
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
+
+
+export function convertMinsToHrsMins(mins) {
+  let minutes = mins;
+  if (mins?.toString().includes("+")) {
+    minutes = minutes?.toString()?.replace("+", "");
+    minutes = parseInt(minutes);
+  }
+
+  if (mins?.toString().includes("-")) {
+    minutes = minutes?.toString()?.replace("-", "");
+    minutes = parseInt(minutes);
+  }
+
+  let h = Math.floor(minutes / 60);
+  let m = minutes % 60;
+  // h = h < 10 ? '0' + h : h;
+  // m = m < 10 ? '0' + m : m;
+
+  let stringConvert = `${m} min`;
+
+  if (h !== 0 && m == 0) stringConvert = `${h} hour`;
+  if (h !== 0 && m !== 0) stringConvert = `${h} hour ${m} min`;
+
+  if (mins?.toString().includes("+")) {
+    stringConvert = `+${stringConvert}`;
+  }
+
+  if (mins?.toString().includes("-")) {
+    stringConvert = `-${stringConvert}`;
+  }
+
+  return stringConvert;
+}

@@ -17,8 +17,17 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
 import { convertDateData } from "@/util";
+import InputSelect from "@/components/InputSelect";
+import { useForm } from "react-hook-form";
+
 import "react-table/react-table.css";
 import "../style.scss";
+
+const filterList = [
+  { label: "All services", value: "all" },
+  { label: "Top 5 services", value: "top5" },
+  { label: "Top 10 services", value: "top10" },
+];
 
 const Index = ({ onBack }) => {
   const dispatch = useDispatch();
@@ -41,17 +50,21 @@ const Index = ({ onBack }) => {
   } = useSelector((state) => state.merchantDetail);
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
+  const form = useForm({});
+
   React.useEffect(() => {
     getData(convertDateData(valueDate));
   }, []);
 
-  const getData = (quickFilter = "", start = "", end = "", filterType = "all") => {
+  const getData = (quickFilter = "", start = "", end = "") => {
+    const filterType = form.getValues("filterType");
     let url = `service/report/saleByService?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&service=${filterType}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getSalesByService(url, token));
   };
 
-  const exportData = (quickFilter = "", start = "", end = "", filterType = "") => {
+  const exportData = (quickFilter = "", start = "", end = "") => {
+    const filterType = form.getValues("filterType");
     let url = `service/report/saleByService/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&service=${filterType}&merchantId=${merchantId}`;
 
     url = encodeURI(url);
@@ -138,10 +151,24 @@ const Index = ({ onBack }) => {
         onChangeDate={onChangeDate}
         updateValueCustom={updateValueCustom}
       />
-      <ButtonReport
-        onClickShowReport={onClickShowReport}
-        onClickExport={onClickExport}
-      />
+      <div style={{ position: "relative" }}>
+        <ButtonReport
+          onClickShowReport={onClickShowReport}
+          onClickExport={onClickExport}
+        />
+        <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
+          <InputSelect
+            data={filterList}
+            form={form}
+            defaultValue="all"
+            label=""
+            name="filterType"
+            width={"10rem"}
+            height={"2.57rem"}
+          />
+        </div>
+      </div>
+
       <div className="table-container">
         <ReactTable
           manual
