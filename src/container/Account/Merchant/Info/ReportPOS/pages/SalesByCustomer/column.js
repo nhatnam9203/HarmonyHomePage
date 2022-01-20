@@ -29,7 +29,7 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Orders"
+        value="Appointments"
         valueSort={valueSort}
         isActiveSort={sortType == "appointmentCount"}
         onClickSort={() =>
@@ -49,7 +49,7 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Last Order"
+        value="Last Visit"
         valueSort={valueSort}
         isActiveSort={sortType == "lastVisitDate"}
         onClickSort={() =>
@@ -61,19 +61,19 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     accessor: (row) =>
       row.lastVisitDate?.toString() ? (
         <div className="table-tr">{`${moment(row.lastVisitDate).format(
-          "MMMM DD, YYYY"
+          "MM/DD/YYYY"
         )}`}</div>
       ) : (
         <div className="table-tr-last">{`${moment(
           row.total_lastVisitDate
-        ).format("MMMM DD, YYYY")}`}</div>
+        ).format("MM/DD/YYYY")}`}</div>
       ),
   },
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Last Order Sales"
+        value="Last Visit Sales"
         valueSort={valueSort}
         isActiveSort={sortType == "lastVisitSale"}
         onClickSort={() =>
@@ -84,7 +84,7 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     id: "lastVisitSale",
     accessor: (row) =>
       row.lastVisitSale?.toString() ? (
-        <div className="table-tr">{`$ ${row.lastVisitSale}`}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.lastVisitSale)}`}</div>
       ) : (
         <div className="table-tr-last">{`$ ${formatMoney(
           row.total_lastVisitSale

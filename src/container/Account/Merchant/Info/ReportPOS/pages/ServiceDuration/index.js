@@ -2,21 +2,23 @@ import React from "react";
 import { SelectDate, ButtonReport } from "../../widget";
 import columns from "./column";
 import ReactTable from "react-table";
-import { Button } from "react-bootstrap";
 import Loading from "@/components/Loading";
-import PopupExport from "@/components/PopupExport";
-import Pagination from "@/components/PaginationPOS";
-import Search from "@/components/Search";
+import { Button } from "react-bootstrap";
 import {
   exportRetailer,
   closeExport,
-  resetSortStaff,
 } from "@/actions/retailerActions";
 
-import { getStaffReport, sort_staff_report, } from "@/actions/reportPosActions";
+import {
+  sort_service_duration,
+  getServiceDuration,
+  getStaffStatistic
+} from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
+import PopupExport from "@/components/PopupExport";
 import { convertDateData } from "@/util";
+import StaffStatistic from "../../subPages/StaffStatistic";
 import "react-table/react-table.css";
 import "../style.scss";
 
@@ -24,8 +26,9 @@ const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+  const [isDetail, setDetail] = React.useState(false);
 
-  const [page, setPage] = React.useState(1);
+  const [idDetail, setIdDetail] =  React.useState("");
 
   const {
     loading,
@@ -33,10 +36,9 @@ const Index = ({ onBack }) => {
   } = useSelector((state) => state.retailer);
 
   const {
-    staff_report,
-    staff_report_pages,
-    directionSort_staff_report,
-    typeSort_staff_report,
+    directionSort_service_duration,
+    service_duration,
+    typeSort_service_duration,
   } = useSelector((state) => state.reportPos);
 
   const {
@@ -45,25 +47,17 @@ const Index = ({ onBack }) => {
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
   React.useEffect(() => {
-    getData(convertDateData(valueDate), "", "", page);
+    getData(convertDateData(valueDate));
   }, []);
 
-  const getData = (
-    quickFilter = "",
-    start = "",
-    end = "",
-    pageStaff = 1,
-    sortType,
-    sort
-  ) => {
-    let url = `staff/salary?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&page=${pageStaff}&merchantId=${merchantId}`;
-    console.log({ url })
+  const getData = (quickFilter = "", start = "", end = "") => {
+    let url = `staff/report/serviceduration?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&page=1&merchantId=${merchantId}`;
     url = encodeURI(url);
-    dispatch(getStaffReport(url, token));
+    dispatch(getServiceDuration(url, token));
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `staff/salary/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    let url = `staff/report/serviceduration/export?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&page=1&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -76,12 +70,7 @@ const Index = ({ onBack }) => {
     setValueDate(`${start} - ${end}`);
   };
 
-  const changePage = async (pageStaff) => {
-    await setPage(pageStaff);
-    onClickShowReport(pageStaff);
-  };
-
-  const onClickShowReport = (pageStaff = null) => {
+  const onClickShowReport = () => {
     if (
       valueDate === "Today" ||
       valueDate === "Yesterday" ||
@@ -90,13 +79,13 @@ const Index = ({ onBack }) => {
       valueDate === "This Month" ||
       valueDate === "Last Month"
     ) {
-      getData(convertDateData(valueDate), "", "", pageStaff ? pageStaff : page);
+      getData(convertDateData(valueDate));
     } else {
       let temps = valueDate.toString().split(" - ");
       let start = temps[0],
         end = temps[1];
       try {
-        getData("custom", start, end, pageStaff ? pageStaff : page);
+        getData("custom", start, end);
       } catch (error) {
         alert(error);
       }
@@ -137,35 +126,80 @@ const Index = ({ onBack }) => {
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_staff_report({ type }));
+    dispatch(sort_service_duration({ type }));
   };
+
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          const { staffId } = rowInfo?.original;
+          let quickFilter = "", start = "", end = "";
+
+          if (
+            valueDate === "Today" ||
+            valueDate === "Yesterday" ||
+            valueDate === "This Week" ||
+            valueDate === "Last Week" ||
+            valueDate === "This Month" ||
+            valueDate === "Last Month"
+          ) {
+            quickFilter = convertDateData(valueDate);
+          } else {
+            let temps = valueDate.toString().split(" - ");
+            start = temps[0];
+            end = temps[1];
+            quickFilter = "custom";
+          }
+
+          setIdDetail(staffId);
+          let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
+          dispatch(getStaffStatistic(url, token, callBack));
+
+        }
+      },
+    };
+  };
+
+  const callBack = () => {
+    setDetail(true);
+  }
+
+
+  if (isDetail) {
+    return (
+      <StaffStatistic
+        parentList={service_duration}
+        onBack={() => setDetail(false)}
+        defaultFilter={idDetail}
+        valueDate={valueDate}
+      />
+    )
+  }
 
 
   return (
     <>
       <div className="info_merchant_title">
-        Staffs reports
+        Service duration
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
       </div>
-
       <SelectDate
         value={valueDate}
         onChangeDate={onChangeDate}
         updateValueCustom={updateValueCustom}
       />
       <ButtonReport
-        onClickShowReport={() => onClickShowReport(null)}
+        onClickShowReport={onClickShowReport}
         onClickExport={onClickExport}
       />
-
-
       <div className="table-container">
         <ReactTable
           manual
           sortable={false}
-          data={staff_report || []}
+          data={service_duration || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -174,21 +208,14 @@ const Index = ({ onBack }) => {
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
           columns={columns(
-            directionSort_staff_report,
+            directionSort_service_duration,
             onClickSort,
-            typeSort_staff_report
+            typeSort_service_duration
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
       </div>
-
-      {staff_report.length > 0 && (
-        <Pagination
-          activePage={page}
-          handlePageChange={changePage}
-          totalItem={staff_report_pages}
-        />
-      )}
       <PopupExport
         isVisible={isVisibleExport}
         linkExport={linkExport}

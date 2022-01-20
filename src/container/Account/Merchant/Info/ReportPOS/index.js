@@ -1,8 +1,6 @@
 import React from "react";
 import { ColumnReport, dataColumnReport as data } from "./widget";
 import {
-  Overall,
-  SalesByOrder,
   SalesByPayment,
   SalesByProduct,
   SalesByCategory,
@@ -11,6 +9,10 @@ import {
   TopCategory,
   StaffReport,
   MarketingEfficiency,
+  SalesByService,
+  SalesByCategoryService,
+  GiftCard,
+  ServiceDuration
 } from "./pages";
 import Fade from "react-reveal/Fade";
 
@@ -18,18 +20,15 @@ import "../Info.scss";
 
 const Index = () => {
   const [pageVisibile, setPageVisible] = React.useState("");
+  const [keyVisible, setKeyVisible] = React.useState("");
 
-  const onClickItemColumn = (page) => {
+  const onClickItemColumn = (page, key) => {
     setPageVisible(page);
+    setKeyVisible(key);
   };
 
   const renderPages = () => {
     switch (pageVisibile) {
-      case "Overall":
-        return <Overall onBack={() => onClickItemColumn("")} />;
-
-      case "Sales by Order":
-        return <SalesByOrder onBack={() => onClickItemColumn("")} />;
 
       case "Sales by Payment method":
         return <SalesByPayment onBack={() => onClickItemColumn("")} />;
@@ -38,7 +37,9 @@ const Index = () => {
         return <SalesByProduct onBack={() => onClickItemColumn("")} />;
 
       case "Sales by Category":
-        return <SalesByCategory onBack={() => onClickItemColumn("")} />;
+        if (keyVisible !== 13)
+          return <SalesByCategory onBack={() => onClickItemColumn("")} />;
+        else return <SalesByCategoryService onBack={() => onClickItemColumn("")} />
 
       case "Sales by Customer":
         return <SalesByCustomer onBack={() => onClickItemColumn("")} />;
@@ -55,14 +56,28 @@ const Index = () => {
       case "Marketing Efficiency":
         return <MarketingEfficiency onBack={() => onClickItemColumn("")} />;
 
+      case "Gift card sales":
+        return <GiftCard onBack={() => onClickItemColumn("")} />;
+
+      case "Sales by service":
+        return <SalesByService onBack={() => onClickItemColumn("")} />;
+
+      case "Service duration":
+        return <ServiceDuration onBack={() => onClickItemColumn("")} />;
+
       default:
         return (
           <>
             <div className="info_merchant_title">Report</div>
             <div className="report_container_column">
               <ColumnReport
-                title="Sales"
-                data={data.columnSales}
+                title="Staffs"
+                data={data.columnStaffs}
+                onClickItem={onClickItemColumn}
+              />
+              <ColumnReport
+                title="Services"
+                data={data.columnServive}
                 onClickItem={onClickItemColumn}
               />
               <ColumnReport
@@ -76,13 +91,13 @@ const Index = () => {
                 onClickItem={onClickItemColumn}
               />
               <ColumnReport
-                title="Marketing"
-                data={data.columnMarketing}
+                title="Gift cards"
+                data={data.columnGiftCard}
                 onClickItem={onClickItemColumn}
               />
               <ColumnReport
-                title="Staffs"
-                data={data.columnStaffs}
+                title="Overall"
+                data={data.columnMarketing}
                 onClickItem={onClickItemColumn}
               />
             </div>

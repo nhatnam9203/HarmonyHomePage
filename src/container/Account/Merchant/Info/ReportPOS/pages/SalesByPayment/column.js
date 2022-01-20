@@ -1,124 +1,120 @@
 import CustomTableHeader from "../../../CustomTableHeader";
-import moment from "moment";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => {}) => [
+const columns = (valueSort, onClickSort = () => { }, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Date"
+        value="Method"
         valueSort={valueSort}
+        isActiveSort={sortType == "displayMethod"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "date")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "displayMethod")
         }
       />
     ),
-    id: "date",
+    id: "displayMethod",
     accessor: (row) =>
-      row.date ? (
+      row.displayMethod ? (
         <div className="table-tr">
-          {`${moment(row.date).format("MMMM DD, YYYY")}`}
+          <div className="table-tr">{row.displayMethod}</div>
         </div>
       ) : (
-        <div className="table-tr-last">{row.total_date}</div>
+        <div className="table-tr-last">{"Total"}</div>
       ),
   },
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Completed Orders"
+        value="Transactions"
         valueSort={valueSort}
+        isActiveSort={sortType == "transactions"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "completed")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "transactions")
         }
       />
     ),
-    id: "completed",
+    id: "transactions",
     accessor: (row) =>
-      row.completed?.toString() ? (
-        <div className="table-tr">{row.completed}</div>
+      row.transactions?.toString() ? (
+        <div className="table-tr">
+          <div className="table-tr">{(row.transactions) || "0"}</div>
+        </div>
       ) : (
-        <div className="table-tr-last">{row.total_completed}</div>
+        <div className="table-tr-last">{(row.total_transactions) || "0"}</div>
       ),
   },
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Uncompleted Orders"
+        value="Gross Payments"
         valueSort={valueSort}
+        isActiveSort={sortType == "grossPayment"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "unCompleted")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "grossPayment")
         }
       />
     ),
-    id: "unCompleted",
+    id: "grossPayment",
     accessor: (row) =>
-      row.unCompleted?.toString() ? (
-        <div className="table-tr">{`$ ${row.unCompleted}`}</div>
+      row.grossPayment?.toString() ? (
+        <div className="table-tr">
+          <div className="table-tr">$ {formatMoney(row.grossPayment)}</div>
+        </div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_unCompleted}`}</div>
+        <div className="table-tr-last">$ {formatMoney(row.total_grossPayment)}</div>
+      ),
+
+  },
+  {
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Refunds"
+        valueSort={valueSort}
+        isActiveSort={sortType == "refund"}
+        onClickSort={() =>
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "refund")
+        }
+      />
+    ),
+    id: "refund",
+    accessor: (row) =>
+      row.refund?.toString() ? (
+        <div className="table-tr">
+          <div className="table-tr">$ {formatMoney(row.refund)}</div>
+        </div>
+      ) : (
+        <div className="table-tr-last">$ {formatMoney(row.total_refund)}</div>
       ),
   },
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Canceled Orders"
+        value="Net Payments"
         valueSort={valueSort}
+        isActiveSort={sortType == "netPayment"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "canceled")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "netPayment")
         }
       />
     ),
-    id: "canceled",
+    id: "netPayment",
     accessor: (row) =>
-      row.canceled?.toString() ? (
-        <div className="table-tr">{`$ ${row.canceled}`}</div>
+      row.netPayment?.toString()  ? (
+        <div className="table-tr">
+          <div className="table-tr">$ {formatMoney(row.netPayment)}</div>
+        </div>
       ) : (
-        <div className="table-tr-last">{`$ ${row.total_canceled}`}</div>
+        <div className="table-tr-last">$ {formatMoney(row.total_netPayment)}</div>
       ),
-  },
-  {
-    Header: (
-      <CustomTableHeader
-        isSort={true}
-        value="Returned Orders"
-        valueSort={valueSort}
-        onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "returned")
-        }
-      />
-    ),
-    id: "returned",
-    accessor: (row) =>
-      row.returned?.toString() ? (
-        <div className="table-tr">{row.returned}</div>
-      ) : (
-        <div className="table-tr-last">{row.total_returned}</div>
-      ),
-  },
-  {
-    Header: (
-      <CustomTableHeader
-        isSort={true}
-        value="Total Orders"
-        valueSort={valueSort}
-        onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "total")
-        }
-      />
-    ),
-    id: "total",
-    accessor: (row) =>
-      row.total?.toString() ? (
-        <div className="table-tr">{`$ ${row.total}`}</div>
-      ) : (
-        <div className="table-tr-last">{`$ ${row.total_total}`}</div>
-      ),
+
   },
 ];
 

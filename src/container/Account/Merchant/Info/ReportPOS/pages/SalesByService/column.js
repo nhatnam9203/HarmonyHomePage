@@ -3,23 +3,23 @@ import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => {}, sortType) => [
+const columns = (valueSort, onClickSort = () => { }, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Product name"
+        value="Service name"
         valueSort={valueSort}
-        isActiveSort={sortType == "categoryName"}
+        isActiveSort={sortType == "name"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "categoryName")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
         }
       />
     ),
-    id: "categoryName",
+    id: "name",
     accessor: (row) =>
-      row.categoryName ? (
-        <div className="table-tr">{`${row.categoryName}`}</div>
+      row.name ? (
+        <div className="table-tr">{`${row.name}`}</div>
       ) : (
         <div className="table-tr-last">{"Total"}</div>
       ),
@@ -28,7 +28,7 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Qty Sold"
+        value="Sale Qty"
         valueSort={valueSort}
         isActiveSort={sortType == "quantity"}
         onClickSort={() =>
@@ -42,6 +42,26 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
         <div className="table-tr">{row.quantity}</div>
       ) : (
         <div className="table-tr-last">{row.total_quantity}</div>
+      ),
+  },
+  {
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Total Durations"
+        valueSort={valueSort}
+        isActiveSort={sortType == "totalDuration"}
+        onClickSort={() =>
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalDuration")
+        }
+      />
+    ),
+    id: "totalDuration",
+    accessor: (row) =>
+      row.totalDuration?.toString() ? (
+        <div className="table-tr">{row.totalDuration} hrs</div>
+      ) : (
+        <div className="table-tr-last">{parseFloat(row.total_totalDuration).toFixed(2)} hrs</div>
       ),
   },
   {
@@ -64,7 +84,6 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
         <div className="table-tr-last">{`$ ${formatMoney(row.total_avgPrice)}`}</div>
       ),
   },
- 
   {
     Header: (
       <CustomTableHeader
@@ -82,7 +101,7 @@ const columns = (valueSort, onClickSort = () => {}, sortType) => [
       row.totalSales?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.totalSales)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${formatMoney(row.total_totalSales)}`}</div>
+        <div className="table-tr-last">{formatMoney(row.total_totalSales)}</div>
       ),
   },
 ];

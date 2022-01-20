@@ -13,7 +13,9 @@ const Index = ({
     label = "",
     isRequired,
     width = "73%",
-    error
+    error,
+    height = "57px",
+    onChange
 }) => {
     const [isPopup, setIsPopup] = React.useState(false);
 
@@ -23,6 +25,7 @@ const Index = ({
 
     const onSelected = (vl) => {
         form.setValue(name, vl);
+        onChange && onChange(vl);
         close();
     };
 
@@ -58,6 +61,7 @@ const Index = ({
                     onClick={toggle}
                     style={{
                         width,
+                        height,
                         // borderColor: error?.message ? "red" : "#ccccccc"
                     }}
                     className="select_subcategory"

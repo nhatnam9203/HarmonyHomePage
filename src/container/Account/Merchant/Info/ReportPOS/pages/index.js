@@ -8,6 +8,10 @@ import TopProduct from "./TopProduct";
 import TopCategory from "./TopCategory";
 import StaffReport from "./StaffReport";
 import MarketingEfficiency from "./MarketingEfficiency";
+import SalesByService from "./SalesByService";
+import SalesByCategoryService from "./SalesByCategoryService";
+import GiftCard from "./GiftCard";
+import ServiceDuration from "./ServiceDuration";
 
 export {
   Overall,
@@ -16,8 +20,12 @@ export {
   SalesByProduct,
   SalesByCategory,
   SalesByCustomer,
+  SalesByService,
   TopProduct,
   TopCategory,
   StaffReport,
   MarketingEfficiency,
+  SalesByCategoryService,
+  GiftCard,
+  ServiceDuration,
 };

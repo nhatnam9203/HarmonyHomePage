@@ -5,16 +5,29 @@ import ReactTable from "react-table";
 import { Button } from "react-bootstrap";
 import Loading from "@/components/Loading";
 import {
-  sort_sales_by_product,
   exportRetailer,
   closeExport,
-  getSalesByProduct,
 } from "@/actions/retailerActions";
+
+import {
+  getSalesByProduct,
+  sort_sales_by_product_pos
+} from "@/actions/reportPosActions";
+
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
 import { convertDateData } from "@/util";
+import InputSelect from "@/components/InputSelect";
+import { useForm } from "react-hook-form";
+
 import "react-table/react-table.css";
 import "../style.scss";
+
+const filterList = [
+  { label: "All products", value: "all" },
+  { label: "Top 5 products", value: "top5" },
+  { label: "Top 10 products", value: "top10" },
+];
 
 const Index = ({ onBack }) => {
   const dispatch = useDispatch();
@@ -23,29 +36,38 @@ const Index = ({ onBack }) => {
 
   const {
     loading,
-    directionSort_sales_by_product,
     linkExport,
+  } = useSelector((state) => state.retailer);
+
+  const {
+    directionSort_sales_by_product,
     sales_by_product,
     typeSort_sales_by_product,
-  } = useSelector((state) => state.retailer);
+  } = useSelector((state) => state.reportPos);
+
+  console.log({sales_by_product})
 
   const {
     detail: { merchantId },
   } = useSelector((state) => state.merchantDetail);
   const token = JSON.parse(localStorage.getItem("user"))?.token || "";
 
+  const form = useForm({});
+
   React.useEffect(() => {
     getData(convertDateData(valueDate));
   }, []);
 
   const getData = (quickFilter = "", start = "", end = "") => {
-    let url = `product/report/saleByProduct?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
+    const filterType = form.getValues("filterType");
+    let url = `product/report/saleByProduct?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&product=${filterType}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(getSalesByProduct(url, token));
   };
 
-  const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `product/report/saleByProduct/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+  const exportData = (quickFilter = "", start = "", end = "") => {
+    const filterType = form.getValues("filterType");
+    let url =  `product/report/saleByProduct/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&product=${filterType}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -114,7 +136,7 @@ const Index = ({ onBack }) => {
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_sales_by_product({ type }));
+    dispatch(sort_sales_by_product_pos({ type }));
   };
 
   return (
@@ -130,10 +152,24 @@ const Index = ({ onBack }) => {
         onChangeDate={onChangeDate}
         updateValueCustom={updateValueCustom}
       />
-      <ButtonReport
-        onClickShowReport={onClickShowReport}
-        onClickExport={onClickExport}
-      />
+      <div style={{ position: "relative" }}>
+        <ButtonReport
+          onClickShowReport={onClickShowReport}
+          onClickExport={onClickExport}
+        />
+        <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
+          <InputSelect
+            data={filterList}
+            form={form}
+            defaultValue="all"
+            label=""
+            name="filterType"
+            width={"12rem"}
+            height={"2.57rem"}
+          />
+        </div>
+      </div>
+
       <div className="table-container">
         <ReactTable
           manual

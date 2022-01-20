@@ -24,14 +24,14 @@ export const retailerReducer = (
     subCategory: [],
     attributes: [],
     maxPageAttributes: 1,
-    pageAttributes : 1,
+    pageAttributes: 1,
 
     isVisibleCustomerDetail: false,
     isVisibleInventoryDetail: false,
     isVisibleOrderDetail: false,
 
     isVisibleInventoryEdit: false,
-    isVisibleInventoryAdd : false,
+    isVisibleInventoryAdd: false,
 
     typeSort_inventory: "",
     directionSort_inventory: "ASC",
@@ -61,6 +61,12 @@ export const retailerReducer = (
     summary_sales_by_product: {},
     typeSort_sales_by_product: "",
     directionSort_sales_by_product: "ASC",
+
+    /* SALES BY SERVICE */
+    sales_by_service: [],
+    summary_sales_by_service: {},
+    typeSort_sales_by_service: "",
+    directionSort_sales_by_service: "ASC",
 
     /* SALES BY CATEGORY */
     sales_by_categoryt: [],
@@ -221,12 +227,12 @@ export const retailerReducer = (
       };
 
     case types.SET_ATTRIBUTES:
-      const data =  payload.page === 1 ? payload?.data : state.attributes.concat(payload?.data);
+      const data = payload.page === 1 ? payload?.data : state.attributes.concat(payload?.data);
       return {
         ...state,
         attributes: data,
         maxPageAttributes: payload?.maxPageAttributes || 1,
-        pageAttributes : payload.page,
+        pageAttributes: payload.page,
       };
 
     case types.SET_APPOINTMENT_CUSTOMER_DETAIL:
@@ -312,6 +318,13 @@ export const retailerReducer = (
         ...state,
         directionSort_inventory: "ASC",
         typeSort_inventory: "",
+      };
+
+    case "RESET_SORT_SERVICE_POS":
+      return {
+        ...state,
+        directionSort_sales_by_service: "ASC",
+        typeSort_sales_by_service: "",
       };
 
     case types.RESET_SORT_CUSTOMER:

@@ -10,8 +10,8 @@ import {
 } from "@/actions/retailerActions";
 
 import {
-  getSalesByCategoryProduct,
-  sort_sales_by_category_product_pos
+  getStaffStatistic,
+  sort_staff_statistic,
 } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -21,18 +21,19 @@ import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
 
 import "react-table/react-table.css";
-import "../style.scss";
+// import "../../style.scss";
 
-const filterList = [
-  { label: "All categories", value: "all" },
-  { label: "Top 5 categories", value: "top5" },
-  { label: "Top 10 categories", value: "top10" },
+const initialFilterList = [
+  { label: "All services", value: "all" },
+  { label: "Top 5 services", value: "top5" },
+  { label: "Top 10 services", value: "top10" },
 ];
 
-const Index = ({ onBack }) => {
+const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate }) => {
   const dispatch = useDispatch();
-  const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+
+  const [filterList, setFilterList] = React.useState([initialFilterList]);
 
   const {
     loading,
@@ -40,9 +41,9 @@ const Index = ({ onBack }) => {
   } = useSelector((state) => state.retailer);
 
   const {
-    directionSort_sales_by_category_product,
-    sales_by_category_product,
-    typeSort_sales_by_category_product,
+    directionSort_staff_statistic,
+    staff_statistic,
+    typeSort_staff_statistic,
   } = useSelector((state) => state.reportPos);
 
   const {
@@ -52,53 +53,21 @@ const Index = ({ onBack }) => {
 
   const form = useForm({});
 
-  React.useEffect(() => {
-    getData(convertDateData(valueDate));
-  }, []);
-
   const getData = (quickFilter = "", start = "", end = "") => {
-    const filterType = form.getValues("filterType");
-    let url = `product/report/saleByCategory?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&category=${filterType}&merchantId=${merchantId}`
+    const staffId = form.getValues("filterType");
+    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
     url = encodeURI(url);
-    dispatch(getSalesByCategoryProduct(url, token));
+    dispatch(getStaffStatistic(url, token));
   };
 
   const exportData = (quickFilter = "", start = "", end = "") => {
-    const filterType = form.getValues("filterType");
-    let url = `product/report/saleByCategory/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&category=${filterType}&merchantId=${merchantId}`
+    const staffId = form.getValues("filterType");
+    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
+
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
 
-  const onChangeDate = (date) => {
-    setValueDate(date);
-  };
-
-  const updateValueCustom = (start, end) => {
-    setValueDate(`${start} - ${end}`);
-  };
-
-  const onClickShowReport = () => {
-    if (
-      valueDate === "Today" ||
-      valueDate === "Yesterday" ||
-      valueDate === "This Week" ||
-      valueDate === "Last Week" ||
-      valueDate === "This Month" ||
-      valueDate === "Last Month"
-    ) {
-      getData(convertDateData(valueDate));
-    } else {
-      let temps = valueDate.toString().split(" - ");
-      let start = temps[0],
-        end = temps[1];
-      try {
-        getData("custom", start, end);
-      } catch (error) {
-        alert(error);
-      }
-    }
-  };
 
   const onClickExport = (reportType) => {
     setVisibileExport(true);
@@ -134,36 +103,66 @@ const Index = ({ onBack }) => {
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_sales_by_category_product_pos({ type }));
+    dispatch(sort_staff_statistic({ type }));
   };
+
+  const onClickShowReport = () => {
+    if (
+      valueDate === "Today" ||
+      valueDate === "Yesterday" ||
+      valueDate === "This Week" ||
+      valueDate === "Last Week" ||
+      valueDate === "This Month" ||
+      valueDate === "Last Month"
+    ) {
+      getData(convertDateData(valueDate));
+    } else {
+      let temps = valueDate.toString().split(" - ");
+      let start = temps[0],
+        end = temps[1];
+      try {
+        getData("custom", start, end);
+      } catch (error) {
+        alert(error);
+      }
+    }
+  };
+
+
+  React.useEffect(() => {
+    const list = [
+      ...parentList
+    ].map((obj) => ({
+      label: obj?.name,
+      value: obj?.staffId
+    }));
+    setFilterList(list);
+  }, [parentList])
 
   return (
     <>
       <div className="info_merchant_title">
-        Sales by Product
+        Staff statistic
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
       </div>
-      <SelectDate
-        value={valueDate}
-        onChangeDate={onChangeDate}
-        updateValueCustom={updateValueCustom}
-      />
       <div style={{ position: "relative" }}>
         <ButtonReport
-          onClickShowReport={onClickShowReport}
+          onClickShowReport={(() => { })}
           onClickExport={onClickExport}
+          renderShowReport={() => <div />}
         />
-        <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
+        <div style={{ position: "absolute", left: 0, top: 0 }}>
           <InputSelect
             data={filterList}
             form={form}
-            defaultValue="all"
+            defaultValue={defaultFilter}
             label=""
             name="filterType"
-            width={"12rem"}
+            width={"15rem"}
             height={"2.57rem"}
+            onChange={onClickShowReport}
           />
         </div>
       </div>
@@ -172,7 +171,7 @@ const Index = ({ onBack }) => {
         <ReactTable
           manual
           sortable={false}
-          data={sales_by_category_product || []}
+          data={staff_statistic || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -181,9 +180,9 @@ const Index = ({ onBack }) => {
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
           columns={columns(
-            directionSort_sales_by_category_product,
+            directionSort_staff_statistic,
             onClickSort,
-            typeSort_sales_by_category_product
+            typeSort_staff_statistic
           )}
           PaginationComponent={() => <div />}
         />
