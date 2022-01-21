@@ -11,12 +11,12 @@ import {
 
 import {
   getStaffStatistic,
-  sort_giftCard_statistic
+  sort_service_category_statistic
 } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, handleChange } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
 
@@ -42,10 +42,12 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   } = useSelector((state) => state.retailer);
 
   const {
-    directionSort_giftCard_statistic,
-    giftCard_statistic,
-    typeSort_giftCard_statistic,
+    directionSort_service_category_statistic,
+    service_category_statistic,
+    typeSort_service_category_statistic,
   } = useSelector((state) => state.reportPos);
+
+  console.log({ service_category_statistic })
 
   const {
     detail: { merchantId },
@@ -104,16 +106,15 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_giftCard_statistic({ type }));
+    dispatch(sort_service_category_statistic({ type }));
   };
-
 
   React.useEffect(() => {
     const list = [
       ...parentList
     ].map((obj) => ({
-      label: obj?.type,
-      value: obj?.giftCardGeneralId
+      label: obj?.categoryName,
+      value: obj?.categoryId
     }));
     setFilterList(list);
   }, [parentList]);
@@ -121,7 +122,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   return (
     <>
       <div className="info_merchant_title">
-        Gift card statistic
+        Service category statistic
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
@@ -152,7 +153,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
         <ReactTable
           manual
           sortable={false}
-          data={giftCard_statistic || []}
+          data={service_category_statistic || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -161,9 +162,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
           columns={columns(
-            directionSort_giftCard_statistic,
+            directionSort_service_category_statistic,
             onClickSort,
-            typeSort_giftCard_statistic
+            typeSort_service_category_statistic
           )}
           PaginationComponent={() => <div />}
         />
