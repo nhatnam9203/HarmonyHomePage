@@ -24,8 +24,6 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
         dispatch({ type: typeRetailer.RETAILER_REQUEST });
         let { data = null } = await api.getByPage(requestUrl, token);
 
-        console.log({ requestUrl, data })
-
         if (parseInt(data.codeNumber) === 200) {
             let temptData = data.data
                 ? data.data.map((obj) => {
@@ -478,6 +476,19 @@ export const sort_giftCard_statistic = (payload) => {
 export const sort_customer_statistic = (payload) => {
     return {
         type: "SORT_CUSTOMER_STATISTIC",
+        payload
+    }
+}
+
+export const sort_service_statistic = (payload) => {
+    return {
+        type: "SORT_SERVICE_STATISTIC",
+        payload
+    }
+}
+export const sort_service_category_statistic = (payload) =>{
+    return {
+        type: "SORT_CATEGORY_SERVICE_STATISTIC",
         payload
     }
 }

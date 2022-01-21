@@ -81,7 +81,7 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       row.totalHour?.toString() ? (
         <div className="table-tr">{row.totalHour} hrs</div>
       ) : (
-        <div className="table-tr-last">{parseFloat(row.total_totalHour).toFixed(2)} hrs</div>
+        <div className="table-tr-last">&nbsp;</div>
       ),
   },
   {

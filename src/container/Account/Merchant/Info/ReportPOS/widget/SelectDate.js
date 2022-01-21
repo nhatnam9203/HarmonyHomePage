@@ -26,6 +26,7 @@ const SelectDate = ({
       value === "Last Week" ||
       value === "This Month" ||
       value === "Last Month" ||
+      value === "Last Year" ||
       value === "Custom"
     )
       return "button_select_date";

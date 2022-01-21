@@ -16,9 +16,10 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, handleChange, FormatPrice } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
+import ServiceStatistic from "../../subPages/ServiceStatistic";
 
 import "react-table/react-table.css";
 import "../style.scss";
@@ -33,6 +34,11 @@ const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+
+  const [isDetail, setDetail] = React.useState(false);
+  const [idDetail, setIdDetail] = React.useState("");
+  const [dataDetail, setDataDetail] = React.useState([]);
+
 
   const {
     loading,
@@ -138,6 +144,90 @@ const Index = ({ onBack }) => {
     dispatch(sort_sales_by_service({ type }));
   };
 
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          if (!rowInfo?.original?.total_appointmentCount) {
+            const { details, serviceId } = rowInfo?.original;
+            onFilter(details, serviceId);
+          }
+        }
+      },
+    };
+  };
+
+  const sum = (data) => {
+    return {
+      total_quantity: handleChange("quantity", data),
+      total_totalSales: handleChange("totalSales", data),
+      total_totalDuration: handleChange("totalDuration", data),
+      total_avgPrice: handleChange("avgPrice", data),
+    }
+  }
+
+  const onFilter = (giftCardStatistics = [], giftCardGeneralId) => {
+    setDataDetail(giftCardStatistics);
+    setIdDetail(giftCardGeneralId);
+    setDetail(true);
+    let result = [];
+    result = giftCardStatistics.map((obj => ({
+      ...obj,
+      avgPrice: FormatPrice(obj.avgPrice),
+      totalSales: FormatPrice(obj.totalSales),
+      totalDuration : FormatPrice(obj.totalDuration)  
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_SERVICE_STATISTIC",
+      payload: result
+    });
+  }
+
+  const onChildFilter = (generalId) => {
+    setIdDetail(generalId);
+
+    const giftCard = sales_by_service.find(obj => obj?.serviceId == generalId);
+
+    let result = [];
+
+    result = giftCard?.details?.map((obj => ({
+      ...obj,
+      avgPrice: FormatPrice(obj.avgPrice),
+      totalSales: FormatPrice(obj.totalSales),
+      totalDuration : FormatPrice(obj.totalDuration)  
+    })));
+
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_SERVICE_STATISTIC",
+      payload: result
+    });
+  }
+
+  if (isDetail) {
+    return (
+      <ServiceStatistic
+        parentList={sales_by_service}
+        onBack={() => setDetail(false)}
+        defaultFilter={idDetail}
+        valueDate={valueDate}
+        data={dataDetail}
+        onChildFilter={onChildFilter}
+      />
+    )
+  }
+
   return (
     <>
       <div className="info_merchant_title">
@@ -186,6 +276,7 @@ const Index = ({ onBack }) => {
             onClickSort,
             typeSort_sales_by_service
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
       </div>

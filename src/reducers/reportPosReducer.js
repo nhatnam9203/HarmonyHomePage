@@ -91,6 +91,17 @@ export const reportPosReducer = (
     typeSort_giftCard_statistic: "",
     directionSort_giftCard_statistic: "ASC",
 
+    /* SERVICE STATISTIC */
+    service_statistic: [],
+    summary_service_statistic: {},
+    typeSort_service_statistic: "",
+    directionSort_service_statistic: "ASC",
+
+    /* SERVICE STATISTIC */
+    service_category_statistic: [],
+    summary_service_category_statistic: {},
+    typeSort_service_category_statistic: "",
+    directionSort_service_category_statistic: "ASC",
 
     /* SALES BY CATEGORY */
     service_duration: [],
@@ -306,6 +317,46 @@ export const reportPosReducer = (
           payload.type,
           state.customer_statistic,
           state.directionSort_customer_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case "SET_SERVICE_STATISTIC":
+      console.log({ payload })
+      return {
+        ...state,
+        service_statistic: payload || [],
+      };
+
+    case "SORT_SERVICE_STATISTIC":
+      return {
+        ...state,
+        directionSort_service_statistic:
+          state.directionSort_service_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_service_statistic: payload.type,
+        service_statistic: sortTable(
+          payload.type,
+          state.service_statistic,
+          state.directionSort_service_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+    case "SET_CATEGORY_SERVICE_STATISTIC":
+      console.log({ payload })
+      return {
+        ...state,
+        service_category_statistic: payload || [],
+      };
+
+    case "SORT_CATEGORY_SERVICE_STATISTIC":
+      return {
+        ...state,
+        directionSort_service_category_statistic:
+          state.directionSort_service_category_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_service_category_statistic: payload.type,
+        service_category_statistic: sortTable(
+          payload.type,
+          state.service_category_statistic,
+          state.directionSort_service_category_statistic === "ASC" ? "DESC" : "ASC"
         ),
       };
 
