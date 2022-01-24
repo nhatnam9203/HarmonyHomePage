@@ -60,9 +60,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate }) => {
     dispatch(getStaffStatistic(url, token));
   };
 
-  const exportData = (quickFilter = "", start = "", end = "") => {
+  const exportData = (quickFilter = "", start = "", end = "", type) => {
     const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}/export?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
+    let url = `staff/report/serviceduration/detail/${staffId}/export?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}&type=${type}`;
 
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));

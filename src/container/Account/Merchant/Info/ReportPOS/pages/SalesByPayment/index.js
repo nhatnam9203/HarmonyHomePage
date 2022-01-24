@@ -61,7 +61,7 @@ const Index = ({ onBack }) => {
 
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `overall/paymentMethod/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&method=all&merchantId=${merchantId}`;
+    let url = `overall/paymentMethod/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&method=all&merchantId=${merchantId}&type=${type}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
