@@ -25,9 +25,9 @@ import "react-table/react-table.css";
 import "../style.scss";
 
 const filterList = [
-  { label: "All categories", value: "all" },
   { label: "Top 5 categories", value: "top5" },
   { label: "Top 10 categories", value: "top10" },
+  { label: "All categories", value: "all" },
 ];
 
 const Index = ({ onBack }) => {
@@ -252,7 +252,7 @@ const Index = ({ onBack }) => {
           <InputSelect
             data={filterList}
             form={form}
-            defaultValue="all"
+            defaultValue="top5"
             label=""
             name="filterType"
             width={"12rem"}

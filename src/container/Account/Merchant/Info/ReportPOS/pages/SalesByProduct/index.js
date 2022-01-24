@@ -16,18 +16,19 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData, FormatPrice,handleChange } from "@/util";
+import { convertDateData, FormatPrice, handleChange } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
 import ProductStatistic from "../../subPages/ProductStatistic";
+import { isEmpty } from "lodash";
 
 import "react-table/react-table.css";
 import "../style.scss";
 
 const filterList = [
-  { label: "All products", value: "all" },
   { label: "Top 5 products", value: "top5" },
   { label: "Top 10 products", value: "top10" },
+  { label: "All products", value: "all" },
 ];
 
 const Index = ({ onBack }) => {
@@ -35,10 +36,17 @@ const Index = ({ onBack }) => {
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
+  const [filterListState, setFilterListState] = React.useState(filterList);
+
+
 
   const [isDetail, setDetail] = React.useState(false);
   const [idDetail, setIdDetail] = React.useState("");
   const [dataDetail, setDataDetail] = React.useState([]);
+
+  const [idFilter, setIdFilter] = React.useState("top5");
+  const [dataFilter, setDataFilter] = React.useState([]);
+
 
   const {
     loading,
@@ -62,6 +70,21 @@ const Index = ({ onBack }) => {
     getData(convertDateData(valueDate));
   }, []);
 
+
+  // React.useEffect(() => {
+  //   let tempArr = [];
+  //   if (sales_by_product.length > 0) {
+  //     tempArr = sales_by_product.map((obj) => ({
+  //       label: obj?.name,
+  //       value: obj?.productId
+  //     }));
+  //     setFilterListState([
+  //       ...filterList,
+  //       ...tempArr,
+  //     ])
+  //   }
+  // }, [sales_by_product]);
+
   const getData = (quickFilter = "", start = "", end = "") => {
     const filterType = form.getValues("filterType");
     let url = `product/report/saleByProduct?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&product=${filterType}&merchantId=${merchantId}`;
@@ -71,7 +94,7 @@ const Index = ({ onBack }) => {
 
   const exportData = (quickFilter = "", start = "", end = "") => {
     const filterType = form.getValues("filterType");
-    let url =  `product/report/saleByProduct/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&product=${filterType}&merchantId=${merchantId}`;
+    let url = `product/report/saleByProduct/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&product=${filterType}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -211,6 +234,18 @@ const Index = ({ onBack }) => {
     });
   }
 
+  const handleSelectFilter = (value) => {
+    if (value == "all" || value == "top5" || value == "top10") {
+      onClickShowReport();
+      setIdFilter(null);
+    } else {
+      setIdFilter(value);
+      const tempList = sales_by_product.filter(obj => obj.productId == value);
+      setDataFilter(tempList);
+    }
+  }
+
+
   if (isDetail) {
     return (
       <ProductStatistic
@@ -244,13 +279,14 @@ const Index = ({ onBack }) => {
         />
         <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
           <InputSelect
-            data={filterList}
+            data={filterListState}
             form={form}
-            defaultValue="all"
+            defaultValue="top5"
             label=""
             name="filterType"
             width={"12rem"}
             height={"2.57rem"}
+            // onChange={value => handleSelectFilter(value)}
           />
         </div>
       </div>
@@ -259,7 +295,7 @@ const Index = ({ onBack }) => {
         <ReactTable
           manual
           sortable={false}
-          data={sales_by_product || []}
+          data={sales_by_product}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (

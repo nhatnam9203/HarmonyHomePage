@@ -25,9 +25,9 @@ import "react-table/react-table.css";
 import "../style.scss";
 
 const filterList = [
-  { label: "All categories", value: "all" },
   { label: "Top 5 categories", value: "top5" },
   { label: "Top 10 categories", value: "top10" },
+  { label: "All categories", value: "all" },
 ];
 
 const Index = ({ onBack }) => {
@@ -35,9 +35,15 @@ const Index = ({ onBack }) => {
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
+  const [filterListState, setFilterListState] = React.useState(filterList);
+
+
   const [isDetail, setDetail] = React.useState(false);
   const [idDetail, setIdDetail] = React.useState("");
   const [dataDetail, setDataDetail] = React.useState([]);
+
+  const [idFilter, setIdFilter] = React.useState("top5");
+  const [dataFilter, setDataFilter] = React.useState([]);
 
   const {
     loading,
@@ -60,6 +66,20 @@ const Index = ({ onBack }) => {
   React.useEffect(() => {
     getData(convertDateData(valueDate));
   }, []);
+
+  // React.useEffect(() => {
+  //   let tempArr = [];
+  //   if (sales_by_category_service.length > 0) {
+  //     tempArr = sales_by_category_service.map((obj) => ({
+  //       label: obj?.categoryName,
+  //       value: obj?.categoryId
+  //     }));
+  //     setFilterListState([
+  //       ...filterList,
+  //       ...tempArr,
+  //     ])
+  //   }
+  // }, [sales_by_category_service]);
 
   const getData = (quickFilter = "", start = "", end = "") => {
     const filterType = form.getValues("filterType");
@@ -214,6 +234,20 @@ const Index = ({ onBack }) => {
     });
   }
 
+  const handleSelectFilter = (value) => {
+    if (value == "all" || value == "top5" || value == "top10") {
+      onClickShowReport();
+      setIdFilter(null);
+    } else {
+      console.log({ value , sales_by_category_service })
+      setIdFilter(value);
+      const tempList = sales_by_category_service.filter(obj => obj.categoryId == value);
+      console.log({ tempList })
+      setDataFilter(tempList);
+    }
+  }
+
+
   if (isDetail) {
     return (
       <ServiceCategoryStatistic
@@ -227,8 +261,8 @@ const Index = ({ onBack }) => {
     )
   }
 
+  console.log({ idFilter, sales_by_category_service })
 
-  console.log({ sales_by_category_service })
 
   return (
     <>
@@ -250,13 +284,14 @@ const Index = ({ onBack }) => {
         />
         <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
           <InputSelect
-            data={filterList}
+            data={filterListState}
             form={form}
-            defaultValue="all"
+            defaultValue="top5"
             label=""
             name="filterType"
             width={"12rem"}
             height={"2.57rem"}
+            // onChange={value => handleSelectFilter(value)}
           />
         </div>
       </div>
@@ -265,7 +300,7 @@ const Index = ({ onBack }) => {
         <ReactTable
           manual
           sortable={false}
-          data={sales_by_category_service || []}
+          data={sales_by_category_service}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
