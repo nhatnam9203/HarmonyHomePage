@@ -54,50 +54,6 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
 
   const form = useForm({});
 
-  const getData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
-    url = encodeURI(url);
-    dispatch(getStaffStatistic(url, token));
-  };
-
-  const exportData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
-
-    url = encodeURI(url);
-    dispatch(exportRetailer(url, token));
-  };
-
-
-  const onClickExport = (reportType) => {
-    setVisibileExport(true);
-    if (
-      valueDate === "Today" ||
-      valueDate === "Yesterday" ||
-      valueDate === "This Week" ||
-      valueDate === "Last Week" ||
-      valueDate === "This Month" ||
-      valueDate === "Last Month"
-    ) {
-      exportData(
-        convertDateData(valueDate),
-        "",
-        "",
-        reportType.toString().toLowerCase()
-      );
-    } else {
-      let temps = valueDate.toString().split(" - ");
-      let start = temps[0],
-        end = temps[1];
-      try {
-        exportData("custom", start, end, reportType.toString().toLowerCase());
-      } catch (error) {
-        alert(error);
-      }
-    }
-  };
-
   const onCloseExport = () => {
     setVisibileExport(false);
     dispatch(closeExport());
@@ -105,28 +61,6 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
 
   const onClickSort = (direction, type) => {
     dispatch(sort_customer_statistic({ type }));
-  };
-
-  const onClickShowReport = () => {
-    if (
-      valueDate === "Today" ||
-      valueDate === "Yesterday" ||
-      valueDate === "This Week" ||
-      valueDate === "Last Week" ||
-      valueDate === "This Month" ||
-      valueDate === "Last Month"
-    ) {
-      getData(convertDateData(valueDate));
-    } else {
-      let temps = valueDate.toString().split(" - ");
-      let start = temps[0],
-        end = temps[1];
-      try {
-        getData("custom", start, end);
-      } catch (error) {
-        alert(error);
-      }
-    }
   };
 
 
@@ -149,12 +83,12 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
         </Button>
       </div>
       <div style={{ position: "relative" }}>
-        <ButtonReport
+        {/* <ButtonReport
           onClickShowReport={(() => { })}
           onClickExport={onClickExport}
           renderShowReport={() => <div />}
-        />
-        <div style={{ position: "absolute", left: 0, top: 0 }}>
+        /> */}
+        <div style={{  marginTop : 50}}>
           <InputSelect
             data={filterList}
             form={form}
@@ -164,7 +98,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
             width={"15rem"}
             height={"2.57rem"}
             onChange={(value) => {
-              onChildFilter(value)
+              if(value){
+                onChildFilter(value)
+              }
             }}
           />
         </div>

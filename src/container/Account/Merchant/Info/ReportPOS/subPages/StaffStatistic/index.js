@@ -62,7 +62,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate }) => {
 
   const exportData = (quickFilter = "", start = "", end = "") => {
     const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
+    let url = `staff/report/serviceduration/detail/${staffId}/export?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
 
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));

@@ -11,7 +11,7 @@ import {
 
 import {
   getStaffStatistic,
-  sort_service_statistic
+  sort_product_statistic
 } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -42,12 +42,10 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   } = useSelector((state) => state.retailer);
 
   const {
-    directionSort_service_statistic,
-    service_statistic,
-    typeSort_service_statistic,
+    directionSort_product_statistic,
+    product_statistic,
+    typeSort_product_statistic,
   } = useSelector((state) => state.reportPos);
-
-  console.log({ service_statistic })
 
   const {
     detail: { merchantId },
@@ -56,16 +54,13 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
 
   const form = useForm({});
 
-  const getData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
-    url = encodeURI(url);
-    dispatch(getStaffStatistic(url, token));
-  };
 
-  const exportData = (quickFilter = "", start = "", end = "", type) => {
+  const exportData = (quickFilter = "", start = "", end = "") => {
     const filterType = form.getValues("filterType");
-    let url = `service/report/saleByService/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${type}&service=${filterType}&merchantId=${merchantId}`;
+    // let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
+
+    let url = `product/report/saleByProduct/export?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&product=${filterType}&merchantId=${merchantId}`;
+
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -105,38 +100,15 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_service_statistic({ type }));
+    dispatch(sort_product_statistic({ type }));
   };
-
-  const onClickShowReport = () => {
-    if (
-      valueDate === "Today" ||
-      valueDate === "Yesterday" ||
-      valueDate === "This Week" ||
-      valueDate === "Last Week" ||
-      valueDate === "This Month" ||
-      valueDate === "Last Month"
-    ) {
-      getData(convertDateData(valueDate));
-    } else {
-      let temps = valueDate.toString().split(" - ");
-      let start = temps[0],
-        end = temps[1];
-      try {
-        getData("custom", start, end);
-      } catch (error) {
-        alert(error);
-      }
-    }
-  };
-
 
   React.useEffect(() => {
     const list = [
       ...parentList
     ].map((obj) => ({
       label: obj?.name,
-      value: obj?.serviceId
+      value: obj?.productId
     }));
     setFilterList(list);
   }, [parentList]);
@@ -144,7 +116,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   return (
     <>
       <div className="info_merchant_title">
-        Service statistic
+        Product statistic
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
@@ -165,7 +137,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
             width={"15rem"}
             height={"2.57rem"}
             onChange={(value) => {
-              onChildFilter(value)
+              if(value){
+                onChildFilter(value);
+              }
             }}
           />
         </div>
@@ -175,7 +149,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
         <ReactTable
           manual
           sortable={false}
-          data={service_statistic || []}
+          data={product_statistic || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -184,9 +158,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
           columns={columns(
-            directionSort_service_statistic,
+            directionSort_product_statistic,
             onClickSort,
-            typeSort_service_statistic
+            typeSort_product_statistic
           )}
           PaginationComponent={() => <div />}
         />

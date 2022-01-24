@@ -1,25 +1,25 @@
 import CustomTableHeader from "../../../CustomTableHeader";
 import { formatMoney } from "@/util";
 import "../../../Info.scss";
-import "../style.scss";
+// import "../style.scss";
 
 const columns = (valueSort, onClickSort = () => {}, sortType) => [
   {
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Campaign Name"
+        value="Date"
         valueSort={valueSort}
-        isActiveSort={sortType == "name"}
+        isActiveSort={sortType == "date"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "name")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "date")
         }
       />
     ),
-    id: "name",
+    id: "date",
     accessor: (row) =>
-      row.name ? (
-        <div className="table-tr">{`${row.name}`}</div>
+      row.date ? (
+        <div className="table-tr">{`${row.dateString}`}</div>
       ) : (
         <div className="table-tr-last">{"Total"}</div>
       ),

@@ -468,6 +468,8 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
     let { data = null } = await api.getByPage(requestUrl, token);
     let path = typeof data.data === "object" ? data.data.path : data.data;
 
+    console.log('response export : ',{ data });
+
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
         type: typeRetailer.EXPORT_SUCCESS,

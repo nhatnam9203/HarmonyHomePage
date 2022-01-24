@@ -10,13 +10,12 @@ import {
 } from "@/actions/retailerActions";
 
 import {
-  getStaffStatistic,
-  sort_service_statistic
+  sort_payment_method_statistic
 } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData, handleChange } from "@/util";
+import { convertDateData } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
 
@@ -42,12 +41,10 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   } = useSelector((state) => state.retailer);
 
   const {
-    directionSort_service_statistic,
-    service_statistic,
-    typeSort_service_statistic,
+    directionSort_payment_method_statistic,
+    payment_method_statistic,
+    typeSort_payment_method_statistic,
   } = useSelector((state) => state.reportPos);
-
-  console.log({ service_statistic })
 
   const {
     detail: { merchantId },
@@ -56,16 +53,12 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
 
   const form = useForm({});
 
-  const getData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
-    url = encodeURI(url);
-    dispatch(getStaffStatistic(url, token));
-  };
 
   const exportData = (quickFilter = "", start = "", end = "", type) => {
     const filterType = form.getValues("filterType");
-    let url = `service/report/saleByService/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${type}&service=${filterType}&merchantId=${merchantId}`;
+
+    let url = `overall/paymentMethod/export/${filterType}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&type=${type}&merchantId=${merchantId}`;
+ 
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -105,38 +98,15 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_service_statistic({ type }));
+    dispatch(sort_payment_method_statistic({ type }));
   };
-
-  const onClickShowReport = () => {
-    if (
-      valueDate === "Today" ||
-      valueDate === "Yesterday" ||
-      valueDate === "This Week" ||
-      valueDate === "Last Week" ||
-      valueDate === "This Month" ||
-      valueDate === "Last Month"
-    ) {
-      getData(convertDateData(valueDate));
-    } else {
-      let temps = valueDate.toString().split(" - ");
-      let start = temps[0],
-        end = temps[1];
-      try {
-        getData("custom", start, end);
-      } catch (error) {
-        alert(error);
-      }
-    }
-  };
-
 
   React.useEffect(() => {
     const list = [
       ...parentList
     ].map((obj) => ({
-      label: obj?.name,
-      value: obj?.serviceId
+      label: obj?.displayMethod,
+      value: obj?.method
     }));
     setFilterList(list);
   }, [parentList]);
@@ -144,7 +114,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   return (
     <>
       <div className="info_merchant_title">
-        Service statistic
+        Payment method statistic
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
@@ -175,7 +145,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
         <ReactTable
           manual
           sortable={false}
-          data={service_statistic || []}
+          data={payment_method_statistic || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -184,9 +154,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
           columns={columns(
-            directionSort_service_statistic,
+            directionSort_payment_method_statistic,
             onClickSort,
-            typeSort_service_statistic
+            typeSort_payment_method_statistic
           )}
           PaginationComponent={() => <div />}
         />

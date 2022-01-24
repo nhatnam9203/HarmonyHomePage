@@ -16,9 +16,10 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, FormatPrice, handleChange } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
+import ProductCategoryStatistic from "../../subPages/ProductCategoryStatistic"
 
 import "react-table/react-table.css";
 import "../style.scss";
@@ -33,6 +34,10 @@ const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+
+  const [isDetail, setDetail] = React.useState(false);
+  const [idDetail, setIdDetail] = React.useState("");
+  const [dataDetail, setDataDetail] = React.useState([]);
 
   const {
     loading,
@@ -63,9 +68,9 @@ const Index = ({ onBack }) => {
     dispatch(getSalesByCategoryProduct(url, token));
   };
 
-  const exportData = (quickFilter = "", start = "", end = "") => {
+  const exportData = (quickFilter = "", start = "", end = "", type) => {
     const filterType = form.getValues("filterType");
-    let url = `product/report/saleByCategory/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&category=${filterType}&merchantId=${merchantId}`
+    let url = `product/report/saleByCategory/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&category=${filterType}&type=${type}&merchantId=${merchantId}`
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -137,10 +142,98 @@ const Index = ({ onBack }) => {
     dispatch(sort_sales_by_category_product_pos({ type }));
   };
 
+
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          if (!rowInfo?.original?.total_quantity) {
+            const { details, categoryId } = rowInfo?.original;
+            onFilter(details, categoryId);
+          }
+        }
+      },
+    };
+  };
+
+  const sum = (data) => {
+    return {
+      total_quantity: handleChange("quantity", data),
+      total_totalSales: handleChange("totalSales", data),
+      total_totalDuration: handleChange("totalDuration", data),
+      total_avgPrice: handleChange("avgPrice", data),
+    }
+  }
+
+  const onFilter = (giftCardStatistics = [], giftCardGeneralId) => {
+
+    setDataDetail(giftCardStatistics);
+    setIdDetail(giftCardGeneralId);
+    setDetail(true);
+    let result = [];
+    result = giftCardStatistics.map((obj => ({
+      ...obj,
+      avgPrice: FormatPrice(obj.avgPrice),
+      totalSales: FormatPrice(obj.totalSales),
+      totalDuration: FormatPrice(obj.totalDuration)
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+
+    dispatch({
+      type: "SET_PRODUCT_CATEGORY_STATISTIC",
+      payload: result
+    });
+  }
+
+  const onChildFilter = (generalId) => {
+    setIdDetail(generalId);
+    const giftCard = sales_by_category_product.find(obj => obj?.categoryId == generalId);
+
+    let result = [];
+
+    result = giftCard?.details?.map((obj => ({
+      ...obj,
+      avgPrice: FormatPrice(obj.avgPrice),
+      totalSales: FormatPrice(obj.totalSales),
+      totalDuration: FormatPrice(obj.totalDuration)
+    })));
+
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_PRODUCT_CATEGORY_STATISTIC",
+      payload: result
+    });
+  }
+
+  if (isDetail) {
+    return (
+      <ProductCategoryStatistic
+        parentList={sales_by_category_product}
+        onBack={() => setDetail(false)}
+        defaultFilter={idDetail}
+        valueDate={valueDate}
+        data={dataDetail}
+        onChildFilter={onChildFilter}
+      />
+    )
+  }
+
+  console.log({ sales_by_category_product })
+
   return (
     <>
       <div className="info_merchant_title">
-        Sales by Product
+        Sales by category - Product
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
@@ -185,6 +278,7 @@ const Index = ({ onBack }) => {
             onClickSort,
             typeSort_sales_by_category_product
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
       </div>

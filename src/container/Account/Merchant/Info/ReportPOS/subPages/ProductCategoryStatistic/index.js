@@ -10,8 +10,7 @@ import {
 } from "@/actions/retailerActions";
 
 import {
-  getStaffStatistic,
-  sort_service_category_statistic
+  sort_product_category_statistic
 } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -42,12 +41,11 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   } = useSelector((state) => state.retailer);
 
   const {
-    directionSort_service_category_statistic,
-    service_category_statistic,
-    typeSort_service_category_statistic,
+    directionSort_product_category_statistic,
+    product_category_statistic,
+    typeSort_product_category_statistic,
   } = useSelector((state) => state.reportPos);
 
-  console.log({ service_category_statistic })
 
   const {
     detail: { merchantId },
@@ -56,16 +54,11 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
 
   const form = useForm({});
 
-  const getData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
-    url = encodeURI(url);
-    dispatch(getStaffStatistic(url, token));
-  };
 
-  const exportData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
+  const exportData = (quickFilter = "", start = "", end = "", type) => {
+    const filterType = form.getValues("filterType");
+    // let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
+    let url = `product/report/saleByCategory/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${type}&merchantId=${merchantId}`
 
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
@@ -106,7 +99,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   };
 
   const onClickSort = (direction, type) => {
-    dispatch(sort_service_category_statistic({ type }));
+    dispatch(sort_product_category_statistic({ type }));
   };
 
   React.useEffect(() => {
@@ -122,7 +115,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
   return (
     <>
       <div className="info_merchant_title">
-        Service category statistic
+        Product category statistic
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
@@ -143,7 +136,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
             width={"15rem"}
             height={"2.57rem"}
             onChange={(value) => {
-              onChildFilter(value)
+              if(value){
+                onChildFilter(value);
+              }
             }}
           />
         </div>
@@ -153,7 +148,7 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
         <ReactTable
           manual
           sortable={false}
-          data={service_category_statistic || []}
+          data={product_category_statistic || []}
           minRows={1}
           noDataText="NO DATA!"
           NoDataComponent={() => (
@@ -162,9 +157,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
           columns={columns(
-            directionSort_service_category_statistic,
+            directionSort_product_category_statistic,
             onClickSort,
-            typeSort_service_category_statistic
+            typeSort_product_category_statistic
           )}
           PaginationComponent={() => <div />}
         />

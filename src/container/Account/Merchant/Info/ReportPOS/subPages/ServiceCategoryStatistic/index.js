@@ -10,13 +10,12 @@ import {
 } from "@/actions/retailerActions";
 
 import {
-  getStaffStatistic,
   sort_service_category_statistic
 } from "@/actions/reportPosActions";
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData, handleChange } from "@/util";
+import { convertDateData } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
 
@@ -56,17 +55,9 @@ const Index = ({ onBack, parentList = [], defaultFilter = "", valueDate, onChild
 
   const form = useForm({});
 
-  const getData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
-    url = encodeURI(url);
-    dispatch(getStaffStatistic(url, token));
-  };
-
-  const exportData = (quickFilter = "", start = "", end = "") => {
-    const staffId = form.getValues("filterType");
-    let url = `staff/report/serviceduration/detail/${staffId}?timeStart=${start}&timeEnd=${end}&quickFilter=${quickFilter}&merchantId=${merchantId}`;
-
+  const exportData = (quickFilter = "", start = "", end = "",type) => {
+    const filterType = form.getValues("filterType");
+    let url = `service/report/saleByCategory/export/${filterType}?quickFilter=${quickFilter}&type=${type}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };

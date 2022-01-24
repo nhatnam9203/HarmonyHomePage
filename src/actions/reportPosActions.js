@@ -303,11 +303,12 @@ export const getSalesByCategoryProduct = (requestUrl = "", token = "") => async 
         if (parseInt(data.codeNumber) === 200) {
 
             let temptData = data.data
-                ? data.data.map((obj) => {
+                ? data.data.map((obj,key) => {
                     return {
                         ...obj,
                         avgPrice: FormatPrice(obj.avgPrice),
                         totalSales: FormatPrice(obj.totalSales),
+                        categoryId :"product" + key
                     };
                 })
                 : [];
@@ -489,6 +490,36 @@ export const sort_service_statistic = (payload) => {
 export const sort_service_category_statistic = (payload) =>{
     return {
         type: "SORT_CATEGORY_SERVICE_STATISTIC",
+        payload
+    }
+}
+
+export const sort_product_category_statistic = (payload) =>{
+    return {
+        type: "SORT_PRODUCT_CATEGORY_STATISTIC",
+        payload
+    }
+}
+
+
+export const sort_product_statistic = (payload) =>{
+    return {
+        type: "SORT_PRODUCT_STATISTIC",
+        payload
+    }
+}
+
+
+export const  sort_marketing_statistic = (payload) =>{
+    return {
+        type: "SORT_MARKETING_STATISTIC",
+        payload
+    }
+}
+
+export const  sort_payment_method_statistic = (payload) =>{
+    return {
+        type: "SORT_PAYMENT_METHOD_STATISTIC",
         payload
     }
 }

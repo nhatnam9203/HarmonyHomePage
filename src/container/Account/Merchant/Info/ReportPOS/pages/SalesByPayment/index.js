@@ -13,10 +13,11 @@ import {
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, FormatPrice, handleChange } from "@/util";
 import Loading from "@/components/Loading";
 import ReactTable from "react-table";
 import columns from "./column";
+import PaymentMethodStatistic from "../../subPages/PaymentMethodStatistic";
 import "react-table/react-table.css";
 import "../style.scss";
 
@@ -24,6 +25,11 @@ const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+
+  const [isDetail, setDetail] = React.useState(false);
+  const [idDetail, setIdDetail] = React.useState("");
+  const [dataDetail, setDataDetail] = React.useState([]);
+
 
   const {
     loading,
@@ -55,7 +61,7 @@ const Index = ({ onBack }) => {
 
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `overall/paymentMethod?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&method=all&merchantId=${merchantId}`;
+    let url = `overall/paymentMethod/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&method=all&merchantId=${merchantId}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
   };
@@ -67,13 +73,6 @@ const Index = ({ onBack }) => {
   const updateValueCustom = (start, end) => {
     setValueDate(`${start} - ${end}`);
   };
-
-  console.log({
-    directionSort_payment_method,
-    payment_method,
-    summary_payment_method,
-    typeSort_payment_method,
-  })
 
   const onClickShowReport = () => {
     if (
@@ -134,6 +133,93 @@ const Index = ({ onBack }) => {
     dispatch(sort_payment_method({ type }));
   };
 
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          if (!rowInfo?.original?.total_refund?.toString()) {
+            const { statistics, method } = rowInfo?.original;
+            onFilter(statistics, method);
+          }
+        }
+      },
+    };
+  };
+
+  const sum = (data) => {
+    return {
+      total_transactions: handleChange("transactions", data),
+      total_grossPayment: handleChange("grossPayment", data),
+      total_refund: handleChange("refund", data),
+      total_netPayment: handleChange("netPayment", data),
+
+    }
+  }
+
+  const onFilter = (giftCardStatistics = [], giftCardGeneralId) => {
+    setDataDetail(giftCardStatistics);
+    setIdDetail(giftCardGeneralId);
+    setDetail(true);
+    let result = [];
+    result = giftCardStatistics.map((obj => ({
+      ...obj,
+      refund: FormatPrice(obj.refund),
+      grossPayment: FormatPrice(obj.grossPayment),
+      netPayment: FormatPrice(obj.netPayment),
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_PAYMENT_METHOD_STATISTIC",
+      payload: result
+    });
+  }
+
+  const onChildFilter = (generalId) => {
+    setIdDetail(generalId);
+
+    const giftCard = payment_method.find(obj => obj?.method == generalId);
+
+    let result = [];
+
+    result = giftCard?.statistics?.map((obj => ({
+      ...obj,
+      refund: FormatPrice(obj.refund),
+      grossPayment: FormatPrice(obj.grossPayment),
+      netPayment: FormatPrice(obj.netPayment),
+    })));
+
+    if (result) {
+
+      result = [
+        ...result,
+        sum(result)
+      ];
+
+      dispatch({
+        type: "SET_PAYMENT_METHOD_STATISTIC",
+        payload: result
+      });
+    }
+  }
+
+  if (isDetail) {
+    return (
+      <PaymentMethodStatistic
+        parentList={payment_method}
+        onBack={() => setDetail(false)}
+        defaultFilter={idDetail}
+        valueDate={valueDate}
+        data={dataDetail}
+        onChildFilter={onChildFilter}
+      />
+    )
+  }
+
   return (
     <>
       <div className="info_merchant_title">
@@ -168,6 +254,7 @@ const Index = ({ onBack }) => {
             onClickSort,
             typeSort_payment_method
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
         {loading && <Loading />}

@@ -12,7 +12,6 @@ const data = [
   "Last Week",
   "This Month",
   "Last Month",
-  "Last Year",
   "Custom",
 ];
 

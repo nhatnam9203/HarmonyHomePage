@@ -11,16 +11,16 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
         isSort={true}
         value="Date"
         valueSort={valueSort}
-        isActiveSort={sortType == "date"}
+        isActiveSort={sortType == "dateString"}
         onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "date")
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "dateString")
         }
       />
     ),
-    id: "date",
+    id: "dateString",
     accessor: (row) =>
-      row.date ? (
-        <div className="table-tr">{`${moment(row.date).format("MM/DD/YYYY")}`}</div>
+      row.dateString ? (
+        <div className="table-tr">{row.dateString}</div>
       ) : (
         <div className="table-tr-last">Total</div>
       ),
@@ -29,7 +29,7 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
     Header: (
       <CustomTableHeader
         isSort={true}
-        value="Qty Sold"
+        value="Sales Qty"
         valueSort={valueSort}
         isActiveSort={sortType == "quantity"}
         onClickSort={() =>
@@ -43,26 +43,6 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
         <div className="table-tr">{`${row.quantity}`}</div>
       ) : (
         <div className="table-tr-last">{`${row.total_quantity}`}</div>
-      ),
-  },
-  {
-    Header: (
-      <CustomTableHeader
-        isSort={true}
-        value="Total Duration"
-        valueSort={valueSort}
-        isActiveSort={sortType == "totalDuration"}
-        onClickSort={() =>
-          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "totalDuration")
-        }
-      />
-    ),
-    id: "totalDuration",
-    accessor: (row) =>
-      row.totalDuration?.toString() ? (
-        <div className="table-tr">{row.totalDuration} hrs</div>
-      ) : (
-        <div className="table-tr-last">&nbsp;</div>
       ),
   },
   {

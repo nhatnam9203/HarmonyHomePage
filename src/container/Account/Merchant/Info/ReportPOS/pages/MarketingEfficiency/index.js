@@ -12,7 +12,8 @@ import {
 } from "@/actions/retailerActions";
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, FormatPrice, handleChange } from "@/util";
+import MarketingStatistic from "../../subPages/MarketingStatitic";
 import "react-table/react-table.css";
 import "../style.scss";
 
@@ -20,6 +21,10 @@ const Index = ({ onBack }) => {
   const dispatch = useDispatch();
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
+
+  const [isDetail, setDetail] = React.useState(false);
+  const [idDetail, setIdDetail] = React.useState("");
+  const [dataDetail, setDataDetail] = React.useState([]);
 
   const {
     loading,
@@ -117,6 +122,92 @@ const Index = ({ onBack }) => {
     dispatch(sort_marketing_efficiency({ type }));
   };
 
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          if (!rowInfo?.original?.total_discount) {
+            const { statistics, promotionId } = rowInfo?.original;
+            onFilter(statistics, promotionId);
+          }
+        }
+      },
+    };
+  };
+
+  const sum = (data) => {
+    return {
+      total_discount: handleChange("discount", data),
+      total_revenue: handleChange("revenue", data),
+    }
+  }
+
+  const onFilter = (giftCardStatistics = [], giftCardGeneralId) => {
+
+    setDataDetail(giftCardStatistics);
+    setIdDetail(giftCardGeneralId);
+    setDetail(true);
+    let result = [];
+    result = giftCardStatistics.map((obj => ({
+      ...obj,
+      revenue: FormatPrice(obj.revenue),
+      discount: FormatPrice(obj.discount),
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+
+    dispatch({
+      type: "SET_MARKETING_STATISTIC",
+      payload: result
+    });
+  }
+
+  const onChildFilter = (generalId) => {
+    
+    setIdDetail(generalId);
+    const tempObj = marketing_efficiency.find(obj => obj?.promotionId == generalId);
+
+    if(tempObj){
+      let result = [];
+
+      result = tempObj?.statistics?.map((obj => ({
+        ...obj,
+        revenue: FormatPrice(obj.revenue),
+        discount: FormatPrice(obj.discount),
+      })));
+
+      if(result){
+        result = [
+          ...result,
+          sum(result)
+        ];
+    
+        dispatch({
+          type: "SET_MARKETING_STATISTIC",
+          payload: result
+        });
+      }
+  
+    }
+  }
+
+  if (isDetail) {
+    return (
+      <MarketingStatistic
+        parentList={marketing_efficiency}
+        onBack={() => setDetail(false)}
+        defaultFilter={idDetail}
+        valueDate={valueDate}
+        data={dataDetail}
+        onChildFilter={onChildFilter}
+      />
+    )
+  }
+
   return (
     <>
       <div className="info_merchant_title">
@@ -151,6 +242,7 @@ const Index = ({ onBack }) => {
             onClickSort,
             typeSort_marketing_efficiency
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
       </div>

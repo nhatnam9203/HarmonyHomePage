@@ -103,11 +103,35 @@ export const reportPosReducer = (
     typeSort_service_category_statistic: "",
     directionSort_service_category_statistic: "ASC",
 
+    /* PRODUCT CATEGORY STATISTIC */
+    product_category_statistic: [],
+    summary_product_category_statistic: {},
+    typeSort_product_category_statistic: "",
+    directionSort_product_category_statistic: "ASC",
+
+    /* PRODUCT STATISTIC */
+    product_statistic: [],
+    summary_product_statistic: {},
+    typeSort_product_statistic: "",
+    directionSort_product_statistic: "ASC",
+
     /* SALES BY CATEGORY */
     service_duration: [],
     summary_service_duration: {},
     typeSort_service_duration: "",
     directionSort_service_duration: "ASC",
+
+    /* MARKETING STATUSTIC */
+    marketing_stayistic: [],
+    summary_marketing_stayistic: {},
+    typeSort_marketing_stayistic: "",
+    directionSort_marketing_stayistic: "ASC",
+
+    /* MARKETING STATUSTIC */
+    payment_method_statistic: [],
+    summary_payment_method_statistic: {},
+    typeSort_payment_method_statistic: "",
+    directionSort_payment_method_statistic: "ASC",
 
   },
   { type, payload }
@@ -321,7 +345,6 @@ export const reportPosReducer = (
       };
 
     case "SET_SERVICE_STATISTIC":
-      console.log({ payload })
       return {
         ...state,
         service_statistic: payload || [],
@@ -341,7 +364,6 @@ export const reportPosReducer = (
       };
 
     case "SET_CATEGORY_SERVICE_STATISTIC":
-      console.log({ payload })
       return {
         ...state,
         service_category_statistic: payload || [],
@@ -359,6 +381,89 @@ export const reportPosReducer = (
           state.directionSort_service_category_statistic === "ASC" ? "DESC" : "ASC"
         ),
       };
+
+
+    case "SET_PRODUCT_STATISTIC":
+      return {
+        ...state,
+        product_statistic: payload || [],
+      };
+
+    case "SORT_PRODUCT_STATISTIC":
+      return {
+        ...state,
+        directionSort_product_statistic:
+          state.directionSort_product_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_product_statistic: payload.type,
+        product_statistic: sortTable(
+          payload.type,
+          state.product_statistic,
+          state.directionSort_product_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+
+    case "SET_PRODUCT_CATEGORY_STATISTIC":
+      console.log({ payload })
+      return {
+        ...state,
+        product_category_statistic: payload || [],
+      };
+
+    case "SORT_PRODUCT_CATEGORY_STATISTIC":
+      return {
+        ...state,
+        directionSort_product_category_statistic:
+          state.directionSort_product_category_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_product_category_statistic: payload.type,
+        product_category_statistic: sortTable(
+          payload.type,
+          state.product_category_statistic,
+          state.directionSort_product_category_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+
+
+    case "SET_MARKETING_STATISTIC":
+      console.log({ payload })
+      return {
+        ...state,
+        marketing_statistic: payload || [],
+      };
+
+    case "SORT_MARKETING_STATISTIC":
+      return {
+        ...state,
+        directionSort_marketing_statistic:
+          state.directionSort_marketing_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_marketing_statistic: payload.type,
+        marketing_statistic: sortTable(
+          payload.type,
+          state.marketing_statistic,
+          state.directionSort_marketing_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+      case "SET_PAYMENT_METHOD_STATISTIC":
+        console.log({ payload })
+        return {
+          ...state,
+          payment_method_statistic: payload || [],
+        };
+  
+      case "SORT_PAYMENT_METHOD_STATISTIC":
+        return {
+          ...state,
+          directionSort_payment_method_statistic:
+            state.directionSort_payment_method_statistic === "ASC" ? "DESC" : "ASC",
+          typeSort_payment_method_statistic: payload.type,
+          payment_method_statistic: sortTable(
+            payload.type,
+            state.payment_method_statistic,
+            state.directionSort_payment_method_statistic === "ASC" ? "DESC" : "ASC"
+          ),
+        };
 
 
     /* PAYMENT METHOD */

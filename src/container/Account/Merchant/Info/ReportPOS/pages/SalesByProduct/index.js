@@ -16,9 +16,10 @@ import {
 
 import { useSelector, useDispatch } from "react-redux";
 import PopupExport from "@/components/PopupExport";
-import { convertDateData } from "@/util";
+import { convertDateData, FormatPrice,handleChange } from "@/util";
 import InputSelect from "@/components/InputSelect";
 import { useForm } from "react-hook-form";
+import ProductStatistic from "../../subPages/ProductStatistic";
 
 import "react-table/react-table.css";
 import "../style.scss";
@@ -34,6 +35,11 @@ const Index = ({ onBack }) => {
   const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
 
+
+  const [isDetail, setDetail] = React.useState(false);
+  const [idDetail, setIdDetail] = React.useState("");
+  const [dataDetail, setDataDetail] = React.useState([]);
+
   const {
     loading,
     linkExport,
@@ -44,8 +50,6 @@ const Index = ({ onBack }) => {
     sales_by_product,
     typeSort_sales_by_product,
   } = useSelector((state) => state.reportPos);
-
-  console.log({sales_by_product})
 
   const {
     detail: { merchantId },
@@ -139,6 +143,87 @@ const Index = ({ onBack }) => {
     dispatch(sort_sales_by_product_pos({ type }));
   };
 
+  const onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: (e) => {
+        if (rowInfo) {
+          if (!rowInfo?.original?.total_quantity) {
+            const { details, productId } = rowInfo?.original;
+            onFilter(details, productId);
+          }
+        }
+      },
+    };
+  };
+
+  const sum = (data) => {
+    return {
+      total_quantity: handleChange("quantity", data),
+      total_totalSales: handleChange("totalSales", data),
+      total_avgPrice: handleChange("avgPrice", data),
+    }
+  }
+
+  const onFilter = (giftCardStatistics = [], giftCardGeneralId) => {
+    setDataDetail(giftCardStatistics);
+    setIdDetail(giftCardGeneralId);
+    setDetail(true);
+    let result = [];
+    result = giftCardStatistics.map((obj => ({
+      ...obj,
+      avgPrice: FormatPrice(obj.avgPrice),
+      totalSales: FormatPrice(obj.totalSales),
+    })));
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_PRODUCT_STATISTIC",
+      payload: result
+    });
+  }
+
+  const onChildFilter = (generalId) => {
+    setIdDetail(generalId);
+
+    const giftCard = sales_by_product.find(obj => obj?.productId == generalId);
+
+    let result = [];
+
+    result = giftCard?.details?.map((obj => ({
+      ...obj,
+      avgPrice: FormatPrice(obj.avgPrice),
+      totalSales: FormatPrice(obj.totalSales),
+    })));
+
+
+    result = [
+      ...result,
+      sum(result)
+    ];
+
+    dispatch({
+      type: "SET_PRODUCT_STATISTIC",
+      payload: result
+    });
+  }
+
+  if (isDetail) {
+    return (
+      <ProductStatistic
+        parentList={sales_by_product}
+        onBack={() => setDetail(false)}
+        defaultFilter={idDetail}
+        valueDate={valueDate}
+        data={dataDetail}
+        onChildFilter={onChildFilter}
+      />
+    )
+  }
+
   return (
     <>
       <div className="info_merchant_title">
@@ -187,6 +272,7 @@ const Index = ({ onBack }) => {
             onClickSort,
             typeSort_sales_by_product
           )}
+          getTdProps={onRowClick}
           PaginationComponent={() => <div />}
         />
       </div>
