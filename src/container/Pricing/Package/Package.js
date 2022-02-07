@@ -18,6 +18,8 @@ export default function Package() {
 
   const { packageList } = useSelector((state) => state.pricing);
 
+  console.log({ packageList })
+
   const pricingAnnuallyBasic =
     packageList[2]?.pricing * packageList[2]?.annually;
 

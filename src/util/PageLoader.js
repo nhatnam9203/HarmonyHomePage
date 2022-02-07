@@ -18,6 +18,6 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    color: "#0764b0",
+    color: "#0764b0"
   },
 };

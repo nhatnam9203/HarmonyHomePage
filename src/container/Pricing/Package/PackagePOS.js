@@ -89,7 +89,7 @@ export default function PackagePOS({
                             />
                             <Card.Body className="package__item--cardbody d-flex flex-column">
                                 <Card.Title className="package__item--title text-center font-weight-bold">
-                                    ${checked ? pricingAnnuallyBasic1 : packageList[2]?.pricing}
+                                    ${checked ? "499.50" : "49.95"}
                                     <span className="package__item--sub">
                                         /{checked ? "year" : "month"}
                                     </span>
@@ -145,7 +145,7 @@ export default function PackagePOS({
                             />
                             <Card.Body className="package__item--cardbody d-flex flex-column">
                                 <Card.Title className="package__item--title text-center font-weight-bold">
-                                    ${checked ? pricingAnnuallyMedium1 : packageList[1]?.pricing}
+                                    ${checked ? "899.50" : "89.95"}
                                     <span className="package__item--sub">
                                         /{checked ? "year" : "month"}
                                     </span>
@@ -199,7 +199,7 @@ export default function PackagePOS({
                             />
                             <Card.Body className="package__item--cardbody d-flex flex-column">
                                 <Card.Title className="package__item--title text-center font-weight-bold">
-                                    ${checked ? pricingAnnuallyPro1 : packageList[0]?.pricing}
+                                    ${checked ? "949.50" : "94.95"}
                                     <span className="package__item--sub">
                                         /{checked ? "year" : "month"}
                                     </span>
