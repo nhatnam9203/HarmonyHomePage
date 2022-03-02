@@ -26,6 +26,9 @@ export default function PackagePOS({
 
     const isIpadPro = useMediaQuery(
         { minWidth: 1024, maxWidth : 1050 },
+     );
+     const isIpad = useMediaQuery(
+        { minWidth: 768, maxWidth : 1024 },
      )
 
     return (
@@ -105,10 +108,12 @@ export default function PackagePOS({
                                     The legendary struggle of a salon owner without Harmony POS
                                     system. Let’s this package mark the beginning of your
                                     legendary successful salon.
-                                    <br />
+
+                                    { !isIpadPro && !isIpad && <br /> }
+                                    { !isIpadPro && <br /> }
                                     { isIpadPro && <br /> }
                                     <span style={{ color: "white" }}>
-                                        The Quan”. We are your ambas  sador of Quan.
+                                        The Quan”. We are your ambas  sador of Quan.sador of Quan
                                     </span>
                                 </Card.Text>
 
@@ -249,7 +254,7 @@ export default function PackagePOS({
                         <Card className="package__item">
                             <HeaderPackage
                                 title="Unlimited"
-                                subTitle={()=><div>&#8734; Staff</div>}
+                                subTitle={()=><div>&#8734; Staffs</div>}
                                 color="#091b30"
                                 isSpecial={true}
                             />
