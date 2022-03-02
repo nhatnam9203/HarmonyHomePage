@@ -25,6 +25,10 @@ const packageList = [
     {
         id: 5,
         content: "Duo"
+    },
+    {
+        id: 6,
+        content: "Unlimited"
     }
 ]
 

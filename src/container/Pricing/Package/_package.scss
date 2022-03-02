@@ -121,13 +121,20 @@
         min-height: 40rem;
     }
       &--title {
-        font: normal normal bold 48px/58px Roboto;
+        font: normal normal bold 48px/68px Roboto;
         letter-spacing: 0px;
         color: #11a54c;
         margin-bottom: 1rem;
-        @include mediaQueryMax("large") {
-          font-size: 1.8rem;
+        font-size: 2.1rem;
+        @media screen and (max-width : 1367px){
+          // font-size: 1.3rem;
         }
+        @media screen and (max-width : 1024px){
+          font-size: 2rem;
+        }
+        // @media screen and (max-width : 767px){
+        //   font-size: 2rem;
+        // }
       }
       &--text {
         // max-width: 17.875rem;

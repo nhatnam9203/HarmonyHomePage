@@ -77,7 +77,8 @@ export default function PackagePOS({
                 <Row className="package__container mx-auto ">
                     <Col
                         xs={12}
-                        md={4}
+                        md={6}
+                        lg={3}
                         className=""
                     >
                         <Card className="package__item">
@@ -133,7 +134,8 @@ export default function PackagePOS({
 
                     <Col
                         xs={12}
-                        md={4}
+                        md={6}
+                        lg={3}
                         className=""
                     >
                         <Card className="package__item">
@@ -187,7 +189,8 @@ export default function PackagePOS({
 
                     <Col
                         xs={12}
-                        md={4}
+                        md={6}
+                        lg={3}
                         className=""
                     >
                         <Card className="package__item">
@@ -215,6 +218,58 @@ export default function PackagePOS({
                                     means love, respect, community… and the dollars too. The
                                     entire package. The Quan”. We are your ambassador of Quan. We
                                     will show you the money
+                                </Card.Text>
+
+                                <div className="item__check">
+                                    <img src={icon_checked} alt="image_checked" />
+                                    <div>POS</div>
+                                </div>
+                                <div className="item__check">
+                                    <img src={icon_checked} alt="image_checked" />
+                                    <div>Check-in App</div>
+                                </div>
+                                <div className="item__check">
+                                    <img src={icon_checked} alt="image_checked" />
+                                    <div>Marketing</div>
+                                </div>
+                                <div className="item__check">
+                                    <img src={icon_checked} alt="image_checked" />
+                                    <div>Report</div>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+
+                    <Col
+                        xs={12}
+                        md={6}
+                        lg={3}
+                        className=""
+                    >
+                        <Card className="package__item">
+                            <HeaderPackage
+                                title="Unlimited"
+                                subTitle={()=><div>&#8734; Staff</div>}
+                                color="#091b30"
+                                isSpecial={true}
+                            />
+                            <Card.Body className="package__item--cardbody d-flex flex-column">
+                                <Card.Title className="package__item--title text-center font-weight-bold">
+                                    ${checked ? "1995.00" : "199.50"}
+                                    <span className="package__item--sub">
+                                        /{checked ? "year" : "month"}
+                                    </span>
+                                </Card.Title>
+                                <Link
+                                    className="package__item--btn text-center"
+                                    to="/home/sign-up-information"
+                                >
+                                    Start free trial
+                                </Link>
+                                <Card.Text className="package__item--text text-left">
+                                    With Unlimited package. The Quan”. 
+                                    We take the time to understand your specific needs and goals to develop the best custom packaging solution for you.
+                                    Unlimted staff , supporting and a lot of services of our Salon System.
                                 </Card.Text>
 
                                 <div className="item__check">

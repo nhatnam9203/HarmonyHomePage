@@ -159,27 +159,27 @@ function Index() {
               <Col sm={12} md={4}>
                 <p className="info_label">ABA Routing Number</p>
                 <p className="info_text">
-                  {detail?.businessBank?.routingNumber}
+                  {`***** ${detail?.businessBank?.routingNumber?.toString()?.slice(detail?.businessBank?.routingNumber?.toString()?.length - 4)}`}
                 </p>
               </Col>
               <Col xs={12} md={4}>
                 <p className="info_label">Checking Account Number (DDA)</p>
                 <p className="info_text">
-                  {detail?.businessBank?.accountNumber}
+                  {`***** ${detail?.businessBank?.accountNumber?.toString()?.slice(detail?.businessBank?.accountNumber?.toString()?.length - 4)}`}
                 </p>
               </Col>
-              <Col xs={12} md={4}>
+              {/* <Col xs={12} md={4}>
                 <p className="info_label mt-4">Void Check</p>
                 <img
                   className="img-fluid"
                   src={detail?.businessBank?.imageUrl || BankVoid}
                   alt="img"
                 />
-              </Col>
+              </Col> */}
             </Row>
           </div>
         )}
-      </Collapse>
+      </Collapse> 
 
       {/*  Principal */}
       <div
@@ -267,24 +267,24 @@ function Index() {
 
                   <Col sm={12} md={4} className="mt-4">
                     <p className="info_label">Social Security Number (SSN)</p>
-                    <p className="info_text">{e?.ssn}</p>
+                    <p className="info_text">{`***** ${e?.ssn?.toString()?.slice(e?.ssn?.toString()?.length - 4)}`}</p>
                   </Col>
                   <Col sm={12} md={4} className="mt-4">
                     <p className="info_label">Driver License Number</p>
-                    <p className="info_text">{e?.driverNumber}</p>
+                    <p className="info_text">{`***** ${e?.driverNumber?.toString()?.slice(e?.driverNumber?.toString()?.length - 4)}`}</p>
                   </Col>
                   <Col sm={12} md={4} className="mt-4">
                     <p className="info_label">State Issued</p>
                     <p className="info_text">{e?.stateIssuedName}</p>
                   </Col>
-                  <Col xs={12} md={4} className="mt-4">
+                  {/* <Col xs={12} md={4} className="mt-4">
                     <p className="info_label">Driver License Picture</p>
                     <img
                       className="img-fluid"
                       src={e?.imageUrl || DriverLicenseImg}
                       alt="img"
                     />
-                  </Col>
+                  </Col> */}
                 </Row>
               </div>
             ))}
