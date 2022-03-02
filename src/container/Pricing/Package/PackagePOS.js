@@ -267,7 +267,7 @@ export default function PackagePOS({
                                     Start free trial
                                 </Link>
                                 <Card.Text className="package__item--text text-left">
-                                    With Unlimited package. The Quan”. 
+                                    With Unlimited package. 
                                     We take the time to understand your specific needs and goals to develop the best custom packaging solution for you.
                                     Unlimted staff , supporting and a lot of services of our Salon System.
                                 </Card.Text>
