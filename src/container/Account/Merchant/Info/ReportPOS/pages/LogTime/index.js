@@ -27,7 +27,7 @@ import "react-table/react-table.css";
 import "../style.scss";
 
 const filterList = [
-  { label: "All type", value: "" },
+  { label: "All type", value: "null" },
   { label: "Check In", value: "0" },
   { label: "Check Out", value: "1" },
 ];
@@ -80,7 +80,7 @@ const Index = ({ onBack }) => {
   ) => {
 
     const filterType = form.getValues("filterType");
-    let url = isEmpty(filterType) ?
+    let url = filterType == "null" ?
       `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}` :
       `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}`
     const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudElkIjoiNDA2Iiwic3RhZmZJZCI6IjExMzYiLCJyb2xlIjoiTWVyY2hhbnQiLCJuYmYiOjE2NDkwMzEwNjMsImV4cCI6MTY1OTg2MDY0MywiaWF0IjoxNjQ5MDMxMDYzLCJpc3MiOiJodHRwczovL3N0YWdpbmcucmVwb3J0LmhwLmNvbS9hcGkvIiwiYXVkIjoiSFBfQVBJX0NsaWVudCJ9.YvtQl9NmBfMgnEeAIvPRg8U7l-FLHMthi79ZxUqe5Dk';
@@ -90,7 +90,7 @@ const Index = ({ onBack }) => {
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
     const filterType = form.getValues("filterType");
-    let url = isEmpty(filterType) ?
+    let url = filterType == "null" ?
       `MerchantStaffLogtime/export?exportType=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}` :
       `MerchantStaffLogtime/export?exportTyper=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}`
     const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudElkIjoiNDA2Iiwic3RhZmZJZCI6IjExMzYiLCJyb2xlIjoiTWVyY2hhbnQiLCJuYmYiOjE2NDkwMzEwNjMsImV4cCI6MTY1OTg2MDY0MywiaWF0IjoxNjQ5MDMxMDYzLCJpc3MiOiJodHRwczovL3N0YWdpbmcucmVwb3J0LmhwLmNvbS9hcGkvIiwiYXVkIjoiSFBfQVBJX0NsaWVudCJ9.YvtQl9NmBfMgnEeAIvPRg8U7l-FLHMthi79ZxUqe5Dk';
@@ -217,7 +217,7 @@ const Index = ({ onBack }) => {
           <InputSelect
             data={filterList}
             form={form}
-            defaultValue=""
+            defaultValue="null"
             label=""
             name="filterType"
             width={"12rem"}
