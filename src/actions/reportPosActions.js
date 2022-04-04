@@ -42,7 +42,7 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
                         ...summary_sales_by_customer_pos(temptData),
                     },
                 ];
-            
+
             dispatch({
                 type: "SET_SALES_BY_CUSTOMER",
                 payload: { data: result, summary: data.summary },
@@ -156,8 +156,8 @@ export const getStaffReport = (requestUrl = "", token = "") => async (
                         serviceSplit: FormatPrice(obj.serviceSplit),
                         tip: FormatPrice(obj.tip),
                         salary: FormatPrice(obj.salary),
-                        discountByStaff : FormatPrice(obj.discountByStaff),
-                        refundAmount : FormatPrice(obj.refundAmount),
+                        discountByStaff: FormatPrice(obj.discountByStaff),
+                        refundAmount: FormatPrice(obj.refundAmount),
                     };
                 })
                 : [];
@@ -303,12 +303,12 @@ export const getSalesByCategoryProduct = (requestUrl = "", token = "") => async 
         if (parseInt(data.codeNumber) === 200) {
 
             let temptData = data.data
-                ? data.data.map((obj,key) => {
+                ? data.data.map((obj, key) => {
                     return {
                         ...obj,
                         avgPrice: FormatPrice(obj.avgPrice),
                         totalSales: FormatPrice(obj.totalSales),
-                        categoryId :"product" + key
+                        categoryId: "product" + key
                     };
                 })
                 : [];
@@ -403,6 +403,39 @@ export const getStaffStatistic = (requestUrl = "", token = "", callBack) => asyn
 };
 
 
+export const getStaffLogTime = (requestUrl = "", token = "") => async (
+    dispatch
+) => {
+    try {
+        dispatch({ type: typeRetailer.RETAILER_REQUEST });
+        let { data = null } = await api.getReportByPage(requestUrl, token);
+
+        if (parseInt(data.codeNumber) === 200) {
+            let temptData = data.data
+                ? data.data.map((obj) => {
+                    return {
+                        ...obj,
+                        amount: FormatPrice(obj.amount),
+                    };
+                })
+                : [];
+            dispatch({
+                type: "SET_STAFF_LOG_TIME",
+                payload: { data: temptData, count: data?.count },
+            });
+
+        } else {
+            dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+        }
+    } catch (error) {
+        dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+    } finally {
+        dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+    }
+};
+
+
+
 export const sort_staff_report = (payload) => {
     return {
         type: "SORT_STAFF_POS",
@@ -487,14 +520,14 @@ export const sort_service_statistic = (payload) => {
         payload
     }
 }
-export const sort_service_category_statistic = (payload) =>{
+export const sort_service_category_statistic = (payload) => {
     return {
         type: "SORT_CATEGORY_SERVICE_STATISTIC",
         payload
     }
 }
 
-export const sort_product_category_statistic = (payload) =>{
+export const sort_product_category_statistic = (payload) => {
     return {
         type: "SORT_PRODUCT_CATEGORY_STATISTIC",
         payload
@@ -502,7 +535,7 @@ export const sort_product_category_statistic = (payload) =>{
 }
 
 
-export const sort_product_statistic = (payload) =>{
+export const sort_product_statistic = (payload) => {
     return {
         type: "SORT_PRODUCT_STATISTIC",
         payload
@@ -510,16 +543,23 @@ export const sort_product_statistic = (payload) =>{
 }
 
 
-export const  sort_marketing_statistic = (payload) =>{
+export const sort_marketing_statistic = (payload) => {
     return {
         type: "SORT_MARKETING_STATISTIC",
         payload
     }
 }
 
-export const  sort_payment_method_statistic = (payload) =>{
+export const sort_payment_method_statistic = (payload) => {
     return {
         type: "SORT_PAYMENT_METHOD_STATISTIC",
+        payload
+    }
+}
+
+export const sort_staff_logTime = (payload) => {
+    return {
+        type: "SORT_STAFF_LOG_TIME",
         payload
     }
 }

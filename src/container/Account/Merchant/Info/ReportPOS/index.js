@@ -12,7 +12,8 @@ import {
   SalesByService,
   SalesByCategoryService,
   GiftCard,
-  ServiceDuration
+  ServiceDuration,
+  LogTime
 } from "./pages";
 import Fade from "react-reveal/Fade";
 
@@ -64,6 +65,9 @@ const Index = () => {
 
       case "Service duration":
         return <ServiceDuration onBack={() => onClickItemColumn("")} />;
+
+      case "Log Time":
+        return <LogTime onBack={() => onClickItemColumn("")} />;
 
       default:
         return (

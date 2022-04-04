@@ -6,6 +6,7 @@ const HomeFeatures = lazy(() => import("./Features2/HomeFeatures2"));
 const TopFooter = lazy(() => import("../../components/Footer/TopFooter"));
 
 function Home() {
+
   return (
     <>
       <Helmet>

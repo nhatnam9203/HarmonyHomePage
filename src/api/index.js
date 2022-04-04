@@ -1,6 +1,7 @@
 import axios from "../helper/axios";
 
 const url = process.env.REACT_APP_API_ENDPOINT;
+const url_report = process.env.REPORT_ENDPOINT;
 
 const loginUrl = `${url}/principal/login`;
 
@@ -132,8 +133,8 @@ export const getPackage = (token) =>
   });
 
 const getStateUrl = `${url}/state`;
-  export const getState = () =>
-    axios.get(getStateUrl);
+export const getState = () =>
+  axios.get(getStateUrl);
 
 // Get Refund Money
 export const getRefundMoney = (id, token) =>
@@ -178,6 +179,17 @@ export const getByPage = (requestUrl, token) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+
+export const getReportByPage = (requestUrl, token) => {
+  console.log({ url_report, requestUrl });
+  return axios.get(`https://staging-report.harmonypayment.com/api/${requestUrl}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 
 export const uploadFile = (requestUrl, formData) => {
   const config = {

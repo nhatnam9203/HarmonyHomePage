@@ -133,6 +133,12 @@ export const reportPosReducer = (
     typeSort_payment_method_statistic: "",
     directionSort_payment_method_statistic: "ASC",
 
+    /* STAFF LOG TIME */    
+    staff_logTime: [],
+    staff_logTime_pages: 0,
+    summary_staff_logTime: {},
+    typeSort_staff_logTime: "",
+    directionSort_staff_logTime: "ASC",
   },
   { type, payload }
 ) => {
@@ -445,26 +451,45 @@ export const reportPosReducer = (
         ),
       };
 
-      case "SET_PAYMENT_METHOD_STATISTIC":
-        console.log({ payload })
+    case "SET_PAYMENT_METHOD_STATISTIC":
+      console.log({ payload })
+      return {
+        ...state,
+        payment_method_statistic: payload || [],
+      };
+
+    case "SORT_PAYMENT_METHOD_STATISTIC":
+      return {
+        ...state,
+        directionSort_payment_method_statistic:
+          state.directionSort_payment_method_statistic === "ASC" ? "DESC" : "ASC",
+        typeSort_payment_method_statistic: payload.type,
+        payment_method_statistic: sortTable(
+          payload.type,
+          state.payment_method_statistic,
+          state.directionSort_payment_method_statistic === "ASC" ? "DESC" : "ASC"
+        ),
+      };
+
+      case "SET_STAFF_LOG_TIME":
         return {
           ...state,
-          payment_method_statistic: payload || [],
+          staff_logTime: payload?.data || [],
+          staff_logTime_pages: payload?.count,
         };
   
-      case "SORT_PAYMENT_METHOD_STATISTIC":
+      case "SORT_STAFF_LOG_TIME":
         return {
           ...state,
-          directionSort_payment_method_statistic:
-            state.directionSort_payment_method_statistic === "ASC" ? "DESC" : "ASC",
-          typeSort_payment_method_statistic: payload.type,
-          payment_method_statistic: sortTable(
+          directionSort_staff_logTime:
+            state.directionSort_staff_logTime === "ASC" ? "DESC" : "ASC",
+          typeSort_staff_logTime: payload.type,
+          staff_logTime: sortTable(
             payload.type,
-            state.payment_method_statistic,
-            state.directionSort_payment_method_statistic === "ASC" ? "DESC" : "ASC"
+            state.staff_logTime,
+            state.directionSort_staff_logTime === "ASC" ? "DESC" : "ASC"
           ),
         };
-
 
     /* PAYMENT METHOD */
     case "SET_PAYMENT_BY_METHOD_POS":

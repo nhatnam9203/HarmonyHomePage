@@ -27,6 +27,10 @@ const columnMarketing = [
     key: 3,
     name: "Sales by Payment method",
   },
+  {
+    key: 16,
+    name : "Log Time"
+  }
   
 ];
 

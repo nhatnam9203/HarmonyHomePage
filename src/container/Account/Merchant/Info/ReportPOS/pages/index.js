@@ -12,6 +12,7 @@ import SalesByService from "./SalesByService";
 import SalesByCategoryService from "./SalesByCategoryService";
 import GiftCard from "./GiftCard";
 import ServiceDuration from "./ServiceDuration";
+import LogTime from "./LogTime";
 
 export {
   Overall,
@@ -28,4 +29,5 @@ export {
   SalesByCategoryService,
   GiftCard,
   ServiceDuration,
+  LogTime,
 };
