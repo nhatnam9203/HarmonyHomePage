@@ -158,58 +158,7 @@ editLogTime = () =>{},
         <div className="table-tr">{` `}</div>
       ),
   },
-  {
-    Header: (
-      <CustomTableHeader
-        isSort={false}
-        value={'\u00A0'}
-        valueSort={valueSort}
-        isActiveSort={sortType == "actions"}
-        onClickSort={() =>
-          onClickSort(() => { })
-        }
-      />
-    ),
-    id: "actions",
-    accessor: (row) => (
-      <div className="table-tr">
-        <div style={{ display: 'flex' }}>
-          <div
-            style={{ marginRight: 30 }}
-            onClick={()=>showModalDelete(row.merchantStaffLogtimeId)}
-            className="row_edit_retailer"
-          >
-            <p style={{ color: 'red' }}>Delete</p>
-          </div>
 
-          <div onClick={editLogTime} className="row_edit_retailer">
-            <p>Edit</p>
-          </div>
-        </div>
-      </div>
-    )
-  },
-
-  // {
-  //   Header: (
-  //     <CustomTableHeader
-  //       isSort={true}
-  //       value="Salary"
-  //       valueSort={valueSort}
-  //       isActiveSort={sortType == "salary"}
-  //       onClickSort={() =>
-  //         onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "salary")
-  //       }
-  //     />
-  //   ),
-  //   id: "salary",
-  //   accessor: (row) =>
-  //     row.salary?.toString() ? (
-  //       <div className="table-tr">{`$ ${formatMoney(row.salary)}`}</div>
-  //     ) : (
-  //       <div className="table-tr-last">{`$ ${row.total_salary}`}</div>
-  //     ),
-  // },
 ];
 
 export default columns;
