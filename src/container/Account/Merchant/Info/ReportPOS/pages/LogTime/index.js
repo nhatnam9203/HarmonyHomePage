@@ -11,6 +11,7 @@ import {
   exportRetailer,
   closeExport,
   resetSortStaff,
+  exportReport
 } from "@/actions/retailerActions";
 
 import { getStaffReport, sort_staff_logTime, getStaffLogTime } from "@/actions/reportPosActions";
@@ -20,6 +21,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { convertDateData } from "@/util";
 import { useForm } from "react-hook-form";
 import { isEmpty } from "lodash";
+import PopupConfirm from "@/components/PopupConfirm";
 
 import "react-table/react-table.css";
 import "../style.scss";
@@ -38,6 +40,9 @@ const Index = ({ onBack }) => {
 
   const [page, setPage] = React.useState(1);
 
+  const [isModalDelete, setVisibleDelete] = React.useState(false);
+  const [merchantStaffLogtimeId, setMerchantStaffLogtimeId] = React.useState(null);
+
   const form = useForm({});
 
   const {
@@ -52,7 +57,7 @@ const Index = ({ onBack }) => {
     typeSort_staff_logTime,
   } = useSelector((state) => state.reportPos);
 
-  const onChangeSearch = (e) =>{
+  const onChangeSearch = (e) => {
     setValueSearch(e.target.value);
   }
 
@@ -73,21 +78,24 @@ const Index = ({ onBack }) => {
     sortType,
     sort
   ) => {
+
     const filterType = form.getValues("filterType");
-    console.log({ filterType })
     let url = isEmpty(filterType) ?
       `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}` :
       `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}`
     const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudElkIjoiNDA2Iiwic3RhZmZJZCI6IjExMzYiLCJyb2xlIjoiTWVyY2hhbnQiLCJuYmYiOjE2NDkwMzEwNjMsImV4cCI6MTY1OTg2MDY0MywiaWF0IjoxNjQ5MDMxMDYzLCJpc3MiOiJodHRwczovL3N0YWdpbmcucmVwb3J0LmhwLmNvbS9hcGkvIiwiYXVkIjoiSFBfQVBJX0NsaWVudCJ9.YvtQl9NmBfMgnEeAIvPRg8U7l-FLHMthi79ZxUqe5Dk';
-    console.log({ url });
     url = encodeURI(url);
     dispatch(getStaffLogTime(url, tempToken));
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    let url = `staff/salary/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+    const filterType = form.getValues("filterType");
+    let url = isEmpty(filterType) ?
+      `MerchantStaffLogtime/export?exportType=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}` :
+      `MerchantStaffLogtime/export?exportTyper=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}`
+    const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudElkIjoiNDA2Iiwic3RhZmZJZCI6IjExMzYiLCJyb2xlIjoiTWVyY2hhbnQiLCJuYmYiOjE2NDkwMzEwNjMsImV4cCI6MTY1OTg2MDY0MywiaWF0IjoxNjQ5MDMxMDYzLCJpc3MiOiJodHRwczovL3N0YWdpbmcucmVwb3J0LmhwLmNvbS9hcGkvIiwiYXVkIjoiSFBfQVBJX0NsaWVudCJ9.YvtQl9NmBfMgnEeAIvPRg8U7l-FLHMthi79ZxUqe5Dk';
     url = encodeURI(url);
-    dispatch(exportRetailer(url, token));
+    dispatch(exportReport(url, tempToken));
   };
 
   const onChangeDate = (date) => {
@@ -162,6 +170,18 @@ const Index = ({ onBack }) => {
     dispatch(sort_staff_logTime({ type }));
   };
 
+  const editLogTime = () =>{
+
+  };
+
+  const onDelete = () =>{
+
+  };
+
+  const showModalDelete = (id) =>{
+    setMerchantStaffLogtimeId(id);
+    setVisibleDelete(true);
+  }
 
   return (
     <>
@@ -175,7 +195,7 @@ const Index = ({ onBack }) => {
       <Search
         value={valueSearch}
         onChange={onChangeSearch}
-        onSubmit={() => { 
+        onSubmit={() => {
           setPage(1);
           onClickShowReport(1)
         }}
@@ -191,6 +211,7 @@ const Index = ({ onBack }) => {
         <ButtonReport
           onClickShowReport={() => onClickShowReport(null)}
           onClickExport={onClickExport}
+          isShowCSV={false}
         />
         <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
           <InputSelect
@@ -221,7 +242,9 @@ const Index = ({ onBack }) => {
           columns={columns(
             directionSort_staff_logTime,
             onClickSort,
-            typeSort_staff_logTime
+            typeSort_staff_logTime,
+            showModalDelete,
+            editLogTime
           )}
           PaginationComponent={() => <div />}
         />
@@ -238,6 +261,12 @@ const Index = ({ onBack }) => {
         isVisible={isVisibleExport}
         linkExport={linkExport}
         closeExport={onCloseExport}
+      />
+      <PopupConfirm
+        isVisible={isModalDelete}
+        close={() => setVisibleDelete(false)}
+        onDelete={onDelete}
+        title="Are you sure you want to Delete this session?"
       />
     </>
   );

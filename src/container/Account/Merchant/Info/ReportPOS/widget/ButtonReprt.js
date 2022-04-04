@@ -9,7 +9,8 @@ const ButtonReport = ({
   isNotShowReport = false,
   onClickExport = () => { },
   onClickShowReport = () => { },
-  renderShowReport
+  renderShowReport,
+  isShowCSV = true
 }) => {
   const [isPopupExport, setPopupExport] = React.useState(false);
 
@@ -43,6 +44,7 @@ const ButtonReport = ({
                 onClickExport(reportType);
                 closePopupReport();
               }}
+              isShowCSV={isShowCSV}
             />
           </div>
         </OutsideClickHandler>
@@ -51,12 +53,12 @@ const ButtonReport = ({
   );
 };
 
-const PopupExport = ({ isPopupExport, onClickExport }) => {
+const PopupExport = ({ isPopupExport, onClickExport, isShowCSV }) => {
   if (!isPopupExport) return null;
   return (
     <div className="popupExport">
       <div>
-        <ItemExport onClick={onClickExport} title="CSV" />
+        {isShowCSV && <ItemExport onClick={onClickExport} title="CSV" />}
         <ItemExport
           onClick={onClickExport}
           title="Excel"

@@ -1,15 +1,26 @@
 import CustomTableHeader from "../../../CustomTableHeader";
 import { formatMoney } from "@/util";
 import moment from "moment";
+import icon_edit from "@/assets/images/retailer/icon_edit.png";
+import icon_delete from "@/assets/images/delete.png";
 import "../../../Info.scss";
 import "../style.scss";
 
-const columns = (valueSort, onClickSort = () => { }, sortType) => [
+
+const columns = (
+valueSort, 
+onClickSort = () => { }, 
+sortType, 
+showModalDelete = () =>{},
+editLogTime = () =>{},
+
+) => [
   {
     Header: (
       <CustomTableHeader
         isSort={false}
         value="Id"
+        width={80}
         valueSort={valueSort}
         isActiveSort={sortType == "merchantStaffLogtimeId"}
         onClickSort={() =>
@@ -130,7 +141,7 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
   {
     Header: (
       <CustomTableHeader
-        isSort={true}
+        isSort={false}
         value="Note"
         valueSort={valueSort}
         isActiveSort={sortType == "note"}
@@ -146,6 +157,37 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       ) : (
         <div className="table-tr">{` `}</div>
       ),
+  },
+  {
+    Header: (
+      <CustomTableHeader
+        isSort={false}
+        value={'\u00A0'}
+        valueSort={valueSort}
+        isActiveSort={sortType == "actions"}
+        onClickSort={() =>
+          onClickSort(() => { })
+        }
+      />
+    ),
+    id: "actions",
+    accessor: (row) => (
+      <div className="table-tr">
+        <div style={{ display: 'flex' }}>
+          <div
+            style={{ marginRight: 30 }}
+            onClick={()=>showModalDelete(row.merchantStaffLogtimeId)}
+            className="row_edit_retailer"
+          >
+            <p style={{ color: 'red' }}>Delete</p>
+          </div>
+
+          <div onClick={editLogTime} className="row_edit_retailer">
+            <p>Edit</p>
+          </div>
+        </div>
+      </div>
+    )
   },
 
   // {

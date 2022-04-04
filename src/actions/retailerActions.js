@@ -486,6 +486,32 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
   }
 };
 
+export const exportReport = (requestUrl = "", token = "") => async (
+  dispatch
+) => {
+  try {
+    dispatch({ type: typeRetailer.RETAILER_EXPORT_REQUEST });
+    let { data = null } = await api.getReportByPage(requestUrl, token);
+    let path = typeof data.data === "object" ? data.data.path : data.data;
+
+    console.log('response export : ',{ data });
+
+    if (parseInt(data.codeNumber) === 200) {
+      dispatch({
+        type: typeRetailer.EXPORT_SUCCESS,
+        payload: path,
+      });
+    } else {
+      dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: data.message });
+    }
+  } catch (error) {
+    dispatch({ type: typeNotify.NOTIFY_FAILURE, payload: error.message });
+  } finally {
+    dispatch({ type: typeRetailer.STOP_RETAILER_EXPORT_REQUEST });
+    dispatch({ type: typeRetailer.STOP_RETAILER_REQUEST });
+  }
+};
+
 
 export const getOrderDetail = (requestUrl = "", token = "", callBack) => async (
   dispatch
