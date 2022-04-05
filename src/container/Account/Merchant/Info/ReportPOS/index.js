@@ -104,6 +104,12 @@ const Index = () => {
                 data={data.columnMarketing}
                 onClickItem={onClickItemColumn}
               />
+
+              <ColumnReport
+                title="Log time"
+                data={data.columnLogTime}
+                onClickItem={onClickItemColumn}
+              />
             </div>
           </>
         );

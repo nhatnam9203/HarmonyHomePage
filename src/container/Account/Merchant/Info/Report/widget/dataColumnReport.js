@@ -53,10 +53,18 @@ const columnStaffs = [
   },
 ];
 
+const columnLogTime = [
+  {
+    key: 16,
+    name : "Log Time"
+  }
+];
+
 export default {
   columnSales,
   columnProducts,
   columnCustomers,
   columnMarketing,
   columnStaffs,
+  columnLogTime
 };

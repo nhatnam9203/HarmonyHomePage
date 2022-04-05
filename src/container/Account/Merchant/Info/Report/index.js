@@ -12,6 +12,7 @@ import {
   StaffReport,
   MarketingEfficiency,
 } from "./pages";
+import LogTime from "../../Info/ReportPOS/pages/LogTime"
 import Fade from "react-reveal/Fade";
 
 import "../Info.scss";
@@ -55,6 +56,10 @@ const Index = () => {
       case "Marketing Efficiency":
         return <MarketingEfficiency onBack={() => onClickItemColumn("")} />;
 
+      case "Log Time":
+        return <LogTime onBack={() => onClickItemColumn("")} />;
+
+
       default:
         return (
           <>
@@ -83,6 +88,12 @@ const Index = () => {
               <ColumnReport
                 title="Staffs"
                 data={data.columnStaffs}
+                onClickItem={onClickItemColumn}
+              />
+
+              <ColumnReport
+                title="Log time"
+                data={data.columnLogTime}
                 onClickItem={onClickItemColumn}
               />
             </div>

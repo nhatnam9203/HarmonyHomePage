@@ -26,12 +26,7 @@ const columnMarketing = [
   {
     key: 3,
     name: "Sales by Payment method",
-  },
-  {
-    key: 16,
-    name : "Log Time"
-  }
-  
+  },  
 ];
 
 const columnStaffs = [
@@ -63,6 +58,13 @@ const columnServive = [
   },
 ];
 
+const columnLogTime = [
+  {
+    key: 16,
+    name : "Log Time"
+  }
+];
+
 
 export default {
   columnProducts,
@@ -71,4 +73,5 @@ export default {
   columnStaffs,
   columnGiftCard,
   columnServive,
+  columnLogTime
 };
