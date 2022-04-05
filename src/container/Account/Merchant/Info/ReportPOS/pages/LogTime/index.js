@@ -81,21 +81,19 @@ const Index = ({ onBack }) => {
 
     const filterType = form.getValues("filterType");
     let url = filterType == "null" ?
-      `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}` :
-      `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}`
-    const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudElkIjoiNDA2Iiwic3RhZmZJZCI6IjExMzYiLCJyb2xlIjoiTWVyY2hhbnQiLCJuYmYiOjE2NDkwMzEwNjMsImV4cCI6MTY1OTg2MDY0MywiaWF0IjoxNjQ5MDMxMDYzLCJpc3MiOiJodHRwczovL3N0YWdpbmcucmVwb3J0LmhwLmNvbS9hcGkvIiwiYXVkIjoiSFBfQVBJX0NsaWVudCJ9.YvtQl9NmBfMgnEeAIvPRg8U7l-FLHMthi79ZxUqe5Dk';
+      `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}` :
+      `MerchantStaffLogtime/?page=${pageStaff}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}&merchantId=${merchantId}`
     url = encodeURI(url);
-    dispatch(getStaffLogTime(url, tempToken));
+    dispatch(getStaffLogTime(url, token));
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
     const filterType = form.getValues("filterType");
     let url = filterType == "null" ?
-      `MerchantStaffLogtime/export?exportType=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}` :
-      `MerchantStaffLogtime/export?exportTyper=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}`
-    const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjaGFudElkIjoiNDA2Iiwic3RhZmZJZCI6IjExMzYiLCJyb2xlIjoiTWVyY2hhbnQiLCJuYmYiOjE2NDkwMzEwNjMsImV4cCI6MTY1OTg2MDY0MywiaWF0IjoxNjQ5MDMxMDYzLCJpc3MiOiJodHRwczovL3N0YWdpbmcucmVwb3J0LmhwLmNvbS9hcGkvIiwiYXVkIjoiSFBfQVBJX0NsaWVudCJ9.YvtQl9NmBfMgnEeAIvPRg8U7l-FLHMthi79ZxUqe5Dk';
+      `MerchantStaffLogtime/export?exportType=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}` :
+      `MerchantStaffLogtime/export?exportTyper=${type}&quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&type=${filterType}&merchantId=${merchantId}`
     url = encodeURI(url);
-    dispatch(exportReport(url, tempToken));
+    dispatch(exportReport(url, token));
   };
 
   const onChangeDate = (date) => {

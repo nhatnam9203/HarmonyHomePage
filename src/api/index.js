@@ -182,8 +182,7 @@ export const getByPage = (requestUrl, token) =>
 
 
 export const getReportByPage = (requestUrl, token) => {
-  console.log({ url_report, requestUrl });
-  return axios.get(`https://staging-report.harmonypayment.com/api/${requestUrl}`, {
+  return axios.get(`${url}/${requestUrl}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
