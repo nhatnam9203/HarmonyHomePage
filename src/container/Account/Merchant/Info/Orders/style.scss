@@ -12,8 +12,8 @@
 }
 
 .btnFilter{
-  width : 180px;
-  height : 40px;
+  width : 150px;
+  height : 43px;
   border : 1px solid #dddddd;
   display: flex;
   flex-direction: row;
@@ -67,8 +67,10 @@
   flex: 1;
   flex-direction: "column";
   position: "relative"; 
-  height: 100%;
+  height: 97vh;
   justify-content: "space-between";
+  z-index: 99999999999999999;
+  pointer-events: unset;
 }
 
 .iconFilter{
@@ -76,5 +78,6 @@
   height: 20px;
   position: absolute;
   right: 38px;
+  top : 25px;
   cursor: pointer;
 }

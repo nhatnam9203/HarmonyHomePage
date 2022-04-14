@@ -139,6 +139,9 @@ const Index = ({
   const [isVisibleExport, setVisibileExport] = React.useState(false);
   const [openPanel, setOpenPanel] = React.useState(false);
 
+  const [status, setStatus] = React.useState("");
+  const [purchasePoint, setPurchasePoint] = React.useState("");
+  const [payment, setPayment] = React.useState("");
 
   const form = useForm({});
 
@@ -240,11 +243,36 @@ const Index = ({
   };
 
 
+  const _openPanel = () => {
+    setOpenPanel(true);
+    setTimeout(() => {
+      const panels = document.getElementsByClassName("some-custom-overlay-class");
+      const panelsContent = document.getElementsByClassName("slide-pane__content");
+      if (panels) {
+        const panel = panels[0];
+        panel.addEventListener("click", (e) => {
+          const panelContent = panelsContent[0];
+          if (panelContent && !panelContent?.contains(e.target)) {
+            setOpenPanel(false);
+          }
+        });
+
+      }
+
+    }, 500);
+  };
+
+  React.useEffect(() => {
+ 
+  }, [status, purchasePoint, payment]);
+
+
   if (isVisibleOrderDetail) {
     return (
       <OrderDetail onBack={() => dispatch(setVisibleOrderDetail(false))} />
     );
   }
+
 
   return (
     <>
@@ -275,7 +303,7 @@ const Index = ({
               onClickExport={onClickExport}
             />
             <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
-              <div onClick={() => setOpenPanel(true)} className="btnFilter">
+              <div onClick={_openPanel} className="btnFilter">
                 Filters
                 <img
                   src={icon_filter}
@@ -326,6 +354,7 @@ const Index = ({
         width={300}
         shouldCloseOnEsc={true}
       >
+
         <div className="containerFilter">
           <div className="topFilter">
             <div
@@ -334,7 +363,10 @@ const Index = ({
             >
               Filters
               <img
-                onClick={() => setOpenPanel(false)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOpenPanel(false);
+                }}
                 src={icon_close} className="iconFilter"
               />
             </div>
@@ -347,6 +379,13 @@ const Index = ({
               name="ORDER_STATUS"
               width={"14rem"}
               height={"2.57rem"}
+              onChange={value => {
+                if (value !== "all") {
+                  setStatus(value);
+                } else {
+                  setStatus("");
+                }
+              }}
             />
             <InputSelect
               data={PURCHASE_POINTS}
@@ -356,6 +395,13 @@ const Index = ({
               name="PURCHASE_POINTS"
               width={"14rem"}
               height={"2.57rem"}
+              onChange={value => {
+                if (value !== "all") {
+                  setPurchasePoint(value);
+                } else {
+                  setPurchasePoint("");
+                }
+              }}
             />
             <InputSelect
               data={PAYMENTS}
@@ -365,6 +411,13 @@ const Index = ({
               name="PAYMENTS"
               width={"14rem"}
               height={"2.57rem"}
+              onChange={value => {
+                if (value !== "all") {
+                  setPayment(value);
+                } else {
+                  setPayment("");
+                }
+              }}
             />
           </div>
 
@@ -374,7 +427,6 @@ const Index = ({
           >
             Reset
           </div>
-
         </div>
       </SlidingPane>
     </>
