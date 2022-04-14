@@ -127,3 +127,19 @@
     }
   }
 }
+
+.row_button_report{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media screen and (max-width : 600px){
+  .row_button_report{
+    flex-direction: column !important;
+    align-items: 'flex-end';
+  }
+  .buttonUpload{
+    display: none;
+  }
+}

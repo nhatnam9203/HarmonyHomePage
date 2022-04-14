@@ -7,8 +7,9 @@ import "./style.scss";
 const ButtonReport = ({
   isNotReport = false,
   isNotShowReport = false,
-  onClickExport = () => {},
-  onClickShowReport = () => {},
+  onClickExport = () => { },
+  onClickShowReport = () => { },
+  isShowExcel = true,
 }) => {
   const [isPopupExport, setPopupExport] = React.useState(false);
 
@@ -42,6 +43,7 @@ const ButtonReport = ({
                 onClickExport(reportType);
                 closePopupReport();
               }}
+              isShowExcel={isShowExcel}
             />
           </div>
         </OutsideClickHandler>
@@ -50,17 +52,20 @@ const ButtonReport = ({
   );
 };
 
-const PopupExport = ({ isPopupExport, onClickExport }) => {
+const PopupExport = ({ isPopupExport, onClickExport, isShowExcel }) => {
   if (!isPopupExport) return null;
   return (
     <div className="popupExport">
       <div>
         <ItemExport onClick={onClickExport} title="CSV" />
-        <ItemExport
-          onClick={onClickExport}
-          title="Excel"
-          style={{ marginTop: 15 }}
-        />
+        {
+          isShowExcel &&
+          <ItemExport
+            onClick={onClickExport}
+            title="Excel"
+            style={{ marginTop: 15 }}
+          />
+        }
       </div>
     </div>
   );
