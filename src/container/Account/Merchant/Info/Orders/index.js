@@ -141,9 +141,9 @@ const Index = ({
   const [isVisibleExport, setVisibileExport] = React.useState(false);
   const [openPanel, setOpenPanel] = React.useState(false);
 
-  const [status, setStatus] = React.useState("");
-  const [purchasePoint, setPurchasePoint] = React.useState("");
-  const [payment, setPayment] = React.useState("");
+  const [status, setStatus] = React.useState("all");
+  const [purchasePoint, setPurchasePoint] = React.useState("all");
+  const [payment, setPayment] = React.useState("all");
 
   const form = useForm({});
 
@@ -245,12 +245,31 @@ const Index = ({
     }, 500);
   };
 
-  console.log({
-    valueDate
-  });
-
   React.useEffect(() => {
- 
+    if (status == "all" && purchasePoint == "all" && payment == "all") {
+
+    } else {
+      let tempObj = {};
+      if (status !== "all") {
+        tempObj = {
+          ...tempObj,
+          status,
+        }
+      }
+      if (purchasePoint !== "all") {
+        tempObj = {
+          ...tempObj,
+          purchasePoint,
+        }
+      }
+      if (payment !== "all") {
+        tempObj = {
+          ...tempObj,
+          payment,
+        }
+      }
+    }
+
   }, [status, purchasePoint, payment]);
 
 

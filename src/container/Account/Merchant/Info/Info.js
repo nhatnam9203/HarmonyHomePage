@@ -107,11 +107,6 @@ function Info() {
       url = `${url}&timeStart=${start}&timeEnd=${end}`;
     };
 
-    console.log({
-      url
-    });
-
-
     url = encodeURI(url);
     dispatch(getOrders(url, token));
   };
