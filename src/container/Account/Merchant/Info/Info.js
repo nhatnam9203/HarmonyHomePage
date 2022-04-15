@@ -25,6 +25,7 @@ import Orders from "./Orders";
 import Tabs from "./Tabs";
 
 import { isEmpty } from "lodash";
+import { convertDateData } from "@/util";
 
 import "./Info.scss";
 
@@ -53,6 +54,8 @@ function Info() {
   const [sortTypeOrders, setSortTypeOrders] = React.useState("");
   const [pageOrders, setPageOrders] = React.useState(1);
   const [keySearchOrders, setKeySearchOrders] = React.useState("");
+  const [valueDate, setValueDate] = React.useState("This Week");
+
 
   /* Inventory */
   const [sortInventory, setSortInventory] = React.useState("");
@@ -87,6 +90,28 @@ function Info() {
     if (isEmpty(sort) || isEmpty(sortType)) {
       url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}&includeDeleted=${true}`;
     }
+
+    if (
+      valueDate === "Today" ||
+      valueDate === "Yesterday" ||
+      valueDate === "This Week" ||
+      valueDate === "Last Week" ||
+      valueDate === "This Month" ||
+      valueDate === "Last Month"
+    ) {
+      url = `${url}&quickFilter=${convertDateData(valueDate)}`;
+    } else {
+      let temps = valueDate.toString().split(" - ");
+      let start = temps[0],
+        end = temps[1];
+      url = `${url}&timeStart=${start}&timeEnd=${end}`;
+    };
+
+    console.log({
+      url
+    });
+
+
     url = encodeURI(url);
     dispatch(getOrders(url, token));
   };
@@ -215,6 +240,9 @@ function Info() {
             valueSearch={keySearchOrders}
             valueSort={directionSort_orders}
             onChangeSearch={onChangeSearchOrder}
+            valueDate={valueDate}
+            setValueDate={setValueDate}
+            getOrdersData={getOrdersData}
           />
         );
       case "Inventory":

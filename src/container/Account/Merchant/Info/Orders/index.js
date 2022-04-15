@@ -119,6 +119,9 @@ const Index = ({
   searchOrder,
   valueSort,
   changeSortOrders,
+  valueDate,
+  setValueDate,
+  getOrdersData
 }) => {
   const dispatch = useDispatch();
 
@@ -135,7 +138,6 @@ const Index = ({
     detail: { merchantId },
   } = useSelector((state) => state.merchantDetail);
 
-  const [valueDate, setValueDate] = React.useState("This Week");
   const [isVisibleExport, setVisibileExport] = React.useState(false);
   const [openPanel, setOpenPanel] = React.useState(false);
 
@@ -171,30 +173,11 @@ const Index = ({
   };
 
   const onClickShowReport = (pageStaff = null) => {
-    if (
-      valueDate === "Today" ||
-      valueDate === "Yesterday" ||
-      valueDate === "This Week" ||
-      valueDate === "Last Week" ||
-      valueDate === "This Month" ||
-      valueDate === "Last Month"
-    ) {
-      getData(convertDateData(valueDate), "", "", pageStaff ? pageStaff : pageOrders);
-    } else {
-      let temps = valueDate.toString().split(" - ");
-      let start = temps[0],
-        end = temps[1];
-      try {
-        getData("custom", start, end, pageStaff ? pageStaff : pageOrders);
-      } catch (error) {
-        alert(error);
-      }
-    }
+    getOrdersData(pageStaff);
   };
 
   const onClickExport = (reportType) => {
     setVisibileExport(true);
-    console.log({ valueDate })
     if (
       valueDate === "Today" ||
       valueDate === "Yesterday" ||
@@ -262,6 +245,10 @@ const Index = ({
     }, 500);
   };
 
+  console.log({
+    valueDate
+  });
+
   React.useEffect(() => {
  
   }, [status, purchasePoint, payment]);
@@ -299,7 +286,7 @@ const Index = ({
 
           <div style={{ position: "relative" }}>
             <ButtonReport
-              onClickShowReport={() => onClickShowReport(null)}
+              onClickShowReport={() => onClickShowReport(pageOrders)}
               onClickExport={onClickExport}
             />
             <div style={{ position: "absolute", left: "9.6rem", top: 0 }}>
