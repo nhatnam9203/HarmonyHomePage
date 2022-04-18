@@ -81,3 +81,26 @@
   top : 28px;
   cursor: pointer;
 }
+
+.container_filter_close{
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+}
+
+.item_close{
+  display: flex;
+  flex-direction: row;
+  align-items : center;
+  color : #2B62AA;
+  font-weight: 600;
+  font-size : 1.1rem;
+  margin-right : 1rem;
+}
+
+.icon_closed{
+  width : 33px;
+  height : 33px;
+  cursor : pointer;
+  margin-left : 5px;
+}

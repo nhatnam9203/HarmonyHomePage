@@ -23,6 +23,7 @@ import icon_filter from "@/assets/images/icon_filter.png";
 import icon_close from "@/assets/images/icon_close.png";
 import SlidingPane from "react-sliding-pane";
 import { isEmpty } from "lodash";
+import icon_closed from "../../../../../assets/images/icon_closed.png"
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
 import "react-table/react-table.css";
@@ -341,6 +342,48 @@ const Index = ({
                 />
               </div>
             </div>
+          </div>
+
+          <div className="container_filter_close">
+            {
+              !isEmpty(status) && status !== "all" &&
+              <div className="item_close">
+                {`Status : ${status}`}
+                <img onClick={() => {
+                  setStatus("");
+                  form.setValue("ORDER_STATUS", "");
+                }}
+                  src={icon_closed}
+                  className="icon_closed"
+                />
+              </div>
+            }
+            {
+              !isEmpty(purchasePoint) && purchasePoint !== "all" &&
+              <div className="item_close">
+                {`PurchasePoint : ${purchasePoint}`}
+                <img onClick={() => {
+                  setPurchasePoint("");
+                  form.setValue("PURCHASE_POINTS", "");
+                }}
+                  src={icon_closed}
+                  className="icon_closed"
+                />
+              </div>
+            }
+            {
+              !isEmpty(payment) && payment !== "all" &&
+              <div className="item_close">
+                {`Payments : ${payment}`}
+                <img onClick={() => {
+                  setPayment("");
+                  form.setValue("PAYMENTS", "");
+                }}
+                  src={icon_closed}
+                  className="icon_closed"
+                />
+              </div>
+            }
           </div>
 
           <div className="table-container">
