@@ -15,7 +15,8 @@ import { useForm } from "react-hook-form";
 import {
   exportRetailer,
   closeExport,
-  exportReport
+  exportReport,
+  exportRetailerWithParams
 } from "@/actions/retailerActions";
 import { convertDateData } from "@/util";
 import InputSelect from "@/components/InputSelect";
@@ -23,7 +24,9 @@ import icon_filter from "@/assets/images/icon_filter.png";
 import icon_close from "@/assets/images/icon_close.png";
 import SlidingPane from "react-sliding-pane";
 import { isEmpty } from "lodash";
-import icon_closed from "../../../../../assets/images/icon_closed.png"
+import icon_closed from "../../../../../assets/images/icon_closed.png";
+import PopupExport from "@/components/PopupExport";
+
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
 import "react-table/react-table.css";
@@ -130,6 +133,7 @@ const Index = ({
     orders,
     orderPages,
     loading,
+    linkExport,
     loadingDetail,
     isVisibleOrderDetail,
     typeSort_orders,
@@ -155,10 +159,27 @@ const Index = ({
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
-    const filterType = form.getValues("filterType");
-    let url = `retailer/Appointment/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
-    url = encodeURI(url);
-    dispatch(exportRetailer(url, token));
+    // let url = `retailer/Appointment/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
+
+    let url = `retailer/Appointment/export`;
+    const filters = getFilters();
+
+    let params = {
+      page: pageOrders,
+      key: valueSearch,
+      sorts: {
+        sortType: valueSort
+      },
+      merchantId: merchantId,
+      includeDeleted: true,
+      type: type,
+      timeStart: start,
+      timeEnd: end,
+      quickFilter: quickFilter,
+      filters
+    };
+
+    dispatch(exportRetailerWithParams(url, params, token));
   };
 
   const onChangeDate = (date) => {
@@ -249,43 +270,49 @@ const Index = ({
     form.setValue("ORDER_STATUS", "all");
     form.setValue("PURCHASE_POINTS", "all");
     form.setValue("PAYMENTS", "all");
-    setStatus("");
-    setPurchasePoint("");
-    setPayment("");
+    setStatus("all");
+    setPurchasePoint("all");
+    setPayment("all");
+  };
+
+  const getFilters = () => {
+    let tempObj = {};
+    if (status !== "all") {
+      tempObj = {
+        ...tempObj,
+        status,
+      }
+    }
+    if (purchasePoint !== "all") {
+      tempObj = {
+        ...tempObj,
+        purchasePoint,
+      }
+    }
+    if (payment !== "all") {
+      tempObj = {
+        ...tempObj,
+        payment,
+      }
+    }
+
+    if (isEmpty(status)) {
+      delete tempObj["status"];
+    }
+    if (isEmpty(purchasePoint)) {
+      delete tempObj["purchasePoint"];
+    }
+    if (isEmpty(payment)) {
+      delete tempObj["payment"];
+    }
+
+    return tempObj;
   }
 
   React.useEffect(() => {
     if (status == "all" && purchasePoint == "all" && payment == "all") {
     } else {
-      let tempObj = {};
-      if (status !== "all") {
-        tempObj = {
-          ...tempObj,
-          status,
-        }
-      }
-      if (purchasePoint !== "all") {
-        tempObj = {
-          ...tempObj,
-          purchasePoint,
-        }
-      }
-      if (payment !== "all") {
-        tempObj = {
-          ...tempObj,
-          payment,
-        }
-      }
-
-      if (isEmpty(status)) {
-        delete tempObj["status"];
-      }
-      if (isEmpty(purchasePoint)) {
-        delete tempObj["purchasePoint"];
-      }
-      if (isEmpty(payment)) {
-        delete tempObj["payment"];
-      }
+      const tempObj = getFilters();
 
       if (isEmpty(tempObj)) {
         getOrdersData(1, null, null);
@@ -350,7 +377,7 @@ const Index = ({
               <div className="item_close">
                 {`Status : ${status}`}
                 <img onClick={() => {
-                  setStatus("");
+                  setStatus("all");
                   form.setValue("ORDER_STATUS", "");
                 }}
                   src={icon_closed}
@@ -363,7 +390,7 @@ const Index = ({
               <div className="item_close">
                 {`PurchasePoint : ${purchasePoint}`}
                 <img onClick={() => {
-                  setPurchasePoint("");
+                  setPurchasePoint("all");
                   form.setValue("PURCHASE_POINTS", "");
                 }}
                   src={icon_closed}
@@ -376,7 +403,7 @@ const Index = ({
               <div className="item_close">
                 {`Payments : ${payment}`}
                 <img onClick={() => {
-                  setPayment("");
+                  setPayment("all");
                   form.setValue("PAYMENTS", "");
                 }}
                   src={icon_closed}
@@ -455,7 +482,7 @@ const Index = ({
                 if (value !== "all") {
                   setStatus(value);
                 } else {
-                  setStatus("");
+                  setStatus("all");
                 }
               }}
             />
@@ -471,7 +498,7 @@ const Index = ({
                 if (value !== "all") {
                   setPurchasePoint(value);
                 } else {
-                  setPurchasePoint("");
+                  setPurchasePoint("all");
                 }
               }}
             />
@@ -487,7 +514,7 @@ const Index = ({
                 if (value !== "all") {
                   setPayment(value);
                 } else {
-                  setPayment("");
+                  setPayment("all");
                 }
               }}
             />
@@ -501,6 +528,11 @@ const Index = ({
           </div>
         </div>
       </SlidingPane>
+      <PopupExport
+        isVisible={isVisibleExport}
+        linkExport={linkExport}
+        closeExport={onCloseExport}
+      />
     </>
   );
 };
