@@ -64,6 +64,21 @@ const columns = (valueSort, onClickSort, sortType) => [
     id: "sku",
     accessor: (row) => <div className="table-tr">{`${row.sku}`}</div>,
   },
+    {
+    Header: (
+      <CustomTableHeader
+        isSort={true}
+        value="Barcode"
+        valueSort={valueSort}
+        isActiveSort={sortType == "barcode"}
+        onClickSort={() =>
+          onClickSort(valueSort === "DESC" ? "ASC" : "DESC", "barcode")
+        }
+      />
+    ),
+    id: "barcode",
+    accessor: (row) => <div className="table-tr">{`${row.barcode}`}</div>,
+  },
   {
     Header: (
       <CustomTableHeader
