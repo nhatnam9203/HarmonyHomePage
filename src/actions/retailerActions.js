@@ -15,11 +15,11 @@ import {
 const url = process.env.REACT_APP_API_ENDPOINT;
 
 
-export const getOrders = (requestUrl = "", token = "") => async (dispatch) => {
+export const getOrders = (requestUrl = "", params, token = "") => async (dispatch) => {
   try {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
 
-    const { data = null } = await api.getByPage(requestUrl, token);
+    const { data = null } = await api.getByPageWithParams(requestUrl, params, token);
 
     let orders = data.data
       ? data.data.map((obj) => { return { ...obj, total: FormatPrice(obj.total) }; }) : [];
@@ -244,7 +244,7 @@ export const getSalesByCustomer = (requestUrl = "", token = "") => async (
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data = null } = await api.getByPage(requestUrl, token);
 
-    console.log({ requestUrl , data })
+    console.log({ requestUrl, data })
 
     if (parseInt(data.codeNumber) === 200) {
       let temptData = data.data
@@ -468,7 +468,7 @@ export const exportRetailer = (requestUrl = "", token = "") => async (
     let { data = null } = await api.getByPage(requestUrl, token);
     let path = typeof data.data === "object" ? data.data.path : data.data;
 
-    console.log('response export : ',{ data });
+    console.log('response export : ', { data });
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({
@@ -494,7 +494,7 @@ export const exportReport = (requestUrl = "", token = "") => async (
     let { data = null } = await api.getReportByPage(requestUrl, token);
     let path = typeof data.data === "object" ? data.data.path : data.data;
 
-    console.log('response export : ',{ data });
+    console.log('response export : ', { data });
 
     if (parseInt(data.codeNumber) === 200) {
       dispatch({

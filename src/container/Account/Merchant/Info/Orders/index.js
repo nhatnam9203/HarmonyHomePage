@@ -1,5 +1,4 @@
 import React from "react";
-import Fade from "react-reveal/Fade";
 import ReactTable from "react-table";
 import columns from "./columns";
 import Search from "@/components/Search";
@@ -23,9 +22,8 @@ import InputSelect from "@/components/InputSelect";
 import icon_filter from "@/assets/images/icon_filter.png";
 import icon_close from "@/assets/images/icon_close.png";
 import SlidingPane from "react-sliding-pane";
+import { isEmpty } from "lodash";
 import "react-sliding-pane/dist/react-sliding-pane.css";
-
-// import ButtonImport from "../Inventory/ButtonImport";
 
 import "react-table/react-table.css";
 import "../Info.scss";
@@ -121,7 +119,9 @@ const Index = ({
   changeSortOrders,
   valueDate,
   setValueDate,
-  getOrdersData
+  getOrdersData,
+  sortOrders,
+  sortTypeOrders,
 }) => {
   const dispatch = useDispatch();
 
@@ -151,10 +151,6 @@ const Index = ({
 
   const onClickSort = (status, sortType) => {
     changeSortOrders(status, sortType);
-  };
-
-  const getData = () => {
-
   };
 
   const exportData = (quickFilter = "", start = "", end = "", type = "") => {
@@ -228,7 +224,11 @@ const Index = ({
 
   const _openPanel = () => {
     setOpenPanel(true);
+
     setTimeout(() => {
+      form.setValue("ORDER_STATUS", status);
+      form.setValue("PURCHASE_POINTS", purchasePoint);
+      form.setValue("PAYMENTS", payment);
       const panels = document.getElementsByClassName("some-custom-overlay-class");
       const panelsContent = document.getElementsByClassName("slide-pane__content");
       if (panels) {
@@ -239,15 +239,22 @@ const Index = ({
             setOpenPanel(false);
           }
         });
-
       }
 
     }, 500);
   };
 
+  const resetFilter = () => {
+    form.setValue("ORDER_STATUS", "all");
+    form.setValue("PURCHASE_POINTS", "all");
+    form.setValue("PAYMENTS", "all");
+    setStatus("");
+    setPurchasePoint("");
+    setPayment("");
+  }
+
   React.useEffect(() => {
     if (status == "all" && purchasePoint == "all" && payment == "all") {
-
     } else {
       let tempObj = {};
       if (status !== "all") {
@@ -267,6 +274,22 @@ const Index = ({
           ...tempObj,
           payment,
         }
+      }
+
+      if (isEmpty(status)) {
+        delete tempObj["status"];
+      }
+      if (isEmpty(purchasePoint)) {
+        delete tempObj["purchasePoint"];
+      }
+      if (isEmpty(payment)) {
+        delete tempObj["payment"];
+      }
+
+      if (isEmpty(tempObj)) {
+        getOrdersData(1, null, null);
+      } else {
+        getOrdersData(1, null, null, tempObj);
       }
     }
 
@@ -428,7 +451,7 @@ const Index = ({
           </div>
 
           <div
-            onClick={() => { }}
+            onClick={resetFilter}
             className="btn-reset-filter"
           >
             Reset

@@ -85,10 +85,27 @@ function Info() {
     }
   }, [merchantId]);
 
-  const getOrdersData = (page, sort, sortType) => {
-    let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}&includeDeleted=${true}`;
+  const getOrdersData = (page, sort, sortType, filters) => {
+
+    let params = {
+      page,
+      key: keySearchOrders,
+      sorts: {
+        sortType: sort
+      },
+      merchantId: detail.merchantId,
+      includeDeleted: true
+    };
+    let url = `retailer/appointment`;
+    // let url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts={"${sortType}":"${sort}"}&merchantId=${detail.merchantId}&includeDeleted=${true}`;
     if (isEmpty(sort) || isEmpty(sortType)) {
-      url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}&includeDeleted=${true}`;
+      params = {
+        page,
+        key: keySearchOrders,
+        merchantId: detail.merchantId,
+        includeDeleted: true
+      }
+      // url = `retailer/appointment?page=${page}&key=${keySearchOrders}&sorts=&merchantId=${detail.merchantId}&includeDeleted=${true}`;
     }
 
     if (
@@ -99,16 +116,32 @@ function Info() {
       valueDate === "This Month" ||
       valueDate === "Last Month"
     ) {
-      url = `${url}&quickFilter=${convertDateData(valueDate)}`;
+      // url = `${url}&quickFilter=${convertDateData(valueDate)}`;
+      params = {
+        ...params,
+        quickFilter:`${convertDateData(valueDate)}`
+      }
     } else {
       let temps = valueDate.toString().split(" - ");
       let start = temps[0],
         end = temps[1];
-      url = `${url}&timeStart=${start}&timeEnd=${end}`;
+      // url = `${url}&timeStart=${start}&timeEnd=${end}`;
+      params = {
+        ...params,
+        timeStart: start,
+        timeEnd: end
+      }
     };
 
-    url = encodeURI(url);
-    dispatch(getOrders(url, token));
+    if (!isEmpty(filters)) {
+      params = {
+        ...params,
+        filters
+      }
+    }
+
+    // url = encodeURI(url);
+    dispatch(getOrders(url, params, token));
   };
 
   const getInventoryData = (page, sort, sortType) => {
@@ -116,6 +149,7 @@ function Info() {
     if (isEmpty(sort) || isEmpty(sortType)) {
       url = `product?page=${page}&key=${keySearchInventory}&sorts=&merchantId=${detail.merchantId}`;
     }
+
     url = encodeURI(url);
     dispatch(getInventory(url, token));
   };
@@ -238,6 +272,8 @@ function Info() {
             valueDate={valueDate}
             setValueDate={setValueDate}
             getOrdersData={getOrdersData}
+            sortOrders={sortOrders}
+            sortTypeOrders={sortTypeOrders}
           />
         );
       case "Inventory":
