@@ -42,7 +42,8 @@
 
 ::-webkit-scrollbar
 {
-	width: 7px;
+	width: 5px;
+  height: 10px;
 	background-color: #F5F5F5;
 }
 
@@ -142,4 +143,8 @@
   .buttonUpload{
     display: none;
   }
+}
+
+.table-tr-last{
+  font-weight: 600 !important;
 }

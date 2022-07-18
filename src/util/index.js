@@ -142,13 +142,18 @@ export const CustomStatus = ({ status }) => {
 
 export const summary = (value) => {
   return {
-    total_averageOrder: value.averageOrder,
+    total_netSales: value.netSales,
     total_date: value.date,
     total_tax: value.tax,
-    total_revenue: value.revenue,
-    total_totalOrder: value.totalOrder,
-    total_cost: value.cost,
+    total_tip: value.tip,
+    total_giftCardSales: value.giftCardSales,
+    total_refunds: value.refuns,
     total_profit: value.profit,
+    total_totalEndDay: value.totalEndDay,
+    total_costOfProduct: value.costOfProduct,
+    total_grossSales: value.grossSales,
+    total_returns: value.returns,
+    total_discount: value.discount
   };
 };
 

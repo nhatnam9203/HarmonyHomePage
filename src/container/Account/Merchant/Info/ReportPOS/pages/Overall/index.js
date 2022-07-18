@@ -122,7 +122,6 @@ const Overall = ({ onBack = () => {} }) => {
   return (
     <>
       <div className="info_merchant_title">
-        Overall
         <Button className="btn btn_cancel" onClick={onBack}>
           Back
         </Button>
