@@ -14,7 +14,7 @@ pipeline {
       steps {
         sh '''echo "NODE_OPTIONS=--max-old-space-size=4096" >> ~/.bash_profile
 . ~/.bash_profile
-yarn install'''
+npm install'''
       }
     }
 
@@ -22,7 +22,7 @@ yarn install'''
       steps {
         sh '''echo "NODE_OPTIONS=--max-old-space-size=4096" >> ~/.bash_profile
 . ~/.bash_profile
-npm run build:staging
+CI=false npm run build:staging
 cd build
 tar -cvf ${program_filename}.tar .
 mv ${program_filename}.tar ${WORKSPACE}'''
