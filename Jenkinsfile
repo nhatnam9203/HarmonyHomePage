@@ -10,6 +10,15 @@ pipeline {
 
   }
   stages {
+	stage('Get Atuhor') {
+		steps {
+			script {
+				env.GIT_COMMIT_MSG = sh (returnStdout: true, script: 'git log -1 --pretty=%B').trim()
+				env.GIT_AUTHOR = sh (script: 'git log -1 --pretty=%cn ${GIT_COMMIT}', returnStdout: true).trim()
+			}
+		}
+    }
+	
     stage('Package Install') {
       steps {
         sh '''echo "NODE_OPTIONS=--max-old-space-size=4096" >> ~/.bash_profile
@@ -52,6 +61,7 @@ mv ${program_filename}.tar ${WORKSPACE}'''
   }
   environment {
     program_filename = 'harmonyhomepagestaging'
+	BUILD_TRIGGER_BY = "${currentBuild.getBuildCauses()[0].shortDescription} / ${currentBuild.getBuildCauses()[0].userId}"
   }
   post {
 		success {
@@ -74,5 +84,16 @@ mv ${program_filename}.tar ${WORKSPACE}'''
 				slackSend channel: 'harmony-homepage', color: '#FFFF33', message: "Hi\n Jenkins Notification\n\n Manually deploy by:  ${BUILD_TRIGGER_BY}\n Status Deploy Job:  ${currentBuild.result}\n\n Project Name:  ${env.JOB_NAME.replaceFirst('/.*', '')}              Build Number:  #${env.BUILD_NUMBER}                Branch Name:  ${env.BRANCH_NAME}\n Comitted by:  ${env.GIT_AUTHOR}\n Last commit message:  ${env.GIT_COMMIT_MSG}\n\n Commit Code: ${GIT_COMMIT}\n Commit URL: https://github.com/Levinci-Harmony/${env.JOB_NAME.replaceFirst('/.*', '')}/commit/${GIT_COMMIT}\n\n Deploy URL:  ${env.BUILD_URL}\n\n Design by Harry Le", teamDomain: 'levinci', tokenCredentialId: 'slack'
 			}
 		}
+        always {
+            emailext (
+                to: 'nam.phan@harmonypayment.com',
+                subject: "${currentBuild.result} CI/CD: Project name -> ${env.JOB_NAME}",
+                body: """<p>Hi Team,</p>
+                    <p><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL to build: ${env.BUILD_URL}</p>
+                    <p><br>Jenkins has <b>${currentBuild.result}</b> deployed on <b>${env.BRANCH_NAME}</b> branch.<br>please check back on your website.</p>
+                    <p><br>Thanks and Best Regards!!!<br>LEVINCI Co.,Ltd - www.levincigroup.com"</p>""",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+            )
+        }
     }
 }
