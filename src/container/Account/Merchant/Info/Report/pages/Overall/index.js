@@ -142,10 +142,6 @@ const Overall = ({ onBack = () => {} }) => {
           sortable={false}
           data={reportOverall || []}
           minRows={1}
-          noDataText="NO DATA!"
-          NoDataComponent={() => (
-            <div className="retailer_nodata">NO DATA!</div>
-          )}
           LoadingComponent={() => loading && <Loading />}
           loading={loading}
           columns={columns(directionSortOverall, onClickSort, typeSortOverall)}

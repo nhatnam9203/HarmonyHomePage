@@ -144,9 +144,9 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
     width: 150,
     accessor: (row) =>
       row.netSales?.toString() ? (
-        <div className="table-tr">{row.netSales}</div>
+        <div className="table-tr">{`$ ${formatMoney(row.netSales)}`}</div>
       ) : (
-        <div className="table-tr-last">{row.total_netSales}</div>
+        <div className="table-tr-last">{`$ ${formatMoney(row.total_netSales)}`}</div>
       ),
   },
   {
@@ -232,9 +232,7 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
         </div>
       ) : (
         <div style={{ color: formatMoney(row?.total_refunds) > 0 ? "#333" : "red" }} className="table-tr-last">
-          {`$ ${formatMoney(
-            row.total_refunds
-          )}`}</div>
+          </div>
       ),
   },
   {
