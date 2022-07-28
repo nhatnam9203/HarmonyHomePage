@@ -94,8 +94,6 @@ export const getOverall = (requestUrl = "", token = "") => async (dispatch) => {
     dispatch({ type: typeRetailer.RETAILER_REQUEST });
     let { data = null } = await api.getByPage(requestUrl, token);
 
-    console.log('response ; ', { data })
-
     if (parseInt(data.codeNumber) === 200) {
 
       let temptData = data.data

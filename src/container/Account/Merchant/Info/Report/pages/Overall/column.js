@@ -25,8 +25,8 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
           {`${moment(row.date).format("MMMM DD, YYYY")}`}
         </div>
       ) : (
-        <div className="table-tr-last">{row.total_date}</div>
-      ),
+          <div className="table-tr-last">{row.total_date}</div>
+        ),
   },
   {
     Header: (
@@ -48,10 +48,10 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
           {`$ ${formatMoney(row.costOfProduct)}`}
         </div>
       ) : (
-        <div className="table-tr-last">
-          {`$ ${formatMoney(row.total_costOfProduct)}`}
-        </div>
-      ),
+          <div className="table-tr-last">
+            {`$ ${formatMoney(row.total_costOfProduct)}`}
+          </div>
+        ),
   },
   {
     Header: (
@@ -70,13 +70,13 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
     accessor: (row) =>
       row.grossSales?.toString() ? (
         <div className="table-tr">
-          {`$ ${row.grossSales}`}
+          {`$ ${formatMoney(row.grossSales)}`}
         </div>
       ) : (
-        <div className="table-tr-last">
-          {`$ ${row.total_grossSales}`}
-        </div>
-      ),
+          <div className="table-tr-last">
+            {`$ ${formatMoney(row.total_grossSales)}`}
+          </div>
+        ),
   },
   {
     Header: (
@@ -98,10 +98,10 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
           {`$ ${formatMoney(row.returns)}`}
         </div>
       ) : (
-        <div style={{ color: formatMoney(row?.total_returns) > 0 ? "#333" : "red" }} className="table-tr-last">
-          {`$ ${formatMoney(row.total_returns)}`}
-        </div>
-      ),
+          <div style={{ color: formatMoney(row?.total_returns) > 0 ? "#333" : "red" }} className="table-tr-last">
+            {`$ ${formatMoney(row.total_returns)}`}
+          </div>
+        ),
   },
   {
     Header: (
@@ -123,10 +123,10 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
           {`$ ${formatMoney(row.discount)}`}
         </div>
       ) : (
-        <div style={{ color: row?.total_discount > 0 ? "#333" : "red" }} className="table-tr-last">
-          {`$ ${formatMoney(row.total_discount)}`}
-        </div>
-      ),
+          <div style={{ color: row?.total_discount > 0 ? "#333" : "red" }} className="table-tr-last">
+            {`$ ${formatMoney(row.total_discount)}`}
+          </div>
+        ),
   },
   {
     Header: (
@@ -146,8 +146,8 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       row.netSales?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.netSales)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${formatMoney(row.total_netSales)}`}</div>
-      ),
+          <div className="table-tr-last">{`$ ${formatMoney(row.total_netSales)}`}</div>
+        ),
   },
   {
     Header: (
@@ -167,8 +167,8 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       row.revenue?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.giftCardSales)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${formatMoney(row.total_giftCardSales)}`}</div>
-      ),
+          <div className="table-tr-last">{`$ ${formatMoney(row.total_giftCardSales)}`}</div>
+        ),
   },
   {
     Header: (
@@ -188,8 +188,8 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       row.tax?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.tax)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${formatMoney(row.total_tax)}`}</div>
-      ),
+          <div className="table-tr-last">{`$ ${formatMoney(row.total_tax)}`}</div>
+        ),
   },
   {
     Header: (
@@ -208,8 +208,8 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       row.tip?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.tip)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${formatMoney(row.total_tip)}`}</div>
-      ),
+          <div className="table-tr-last">{`$ ${formatMoney(row.total_tip)}`}</div>
+        ),
   },
   {
     Header: (
@@ -231,9 +231,10 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
           {`$ ${formatMoney(row.refunds)}`}
         </div>
       ) : (
-        <div style={{ color: formatMoney(row?.total_refunds) > 0 ? "#333" : "red" }} className="table-tr-last">
+          <div style={{ color: formatMoney(row?.total_refunds) > 0 ? "#333" : "red" }} className="table-tr-last">
+            {`$ ${formatMoney(row.total_refunds)}`}
           </div>
-      ),
+        ),
   },
   {
     Header: (
@@ -253,10 +254,10 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       row.totalEndDay?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.totalEndDay)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${formatMoney(
-          row.total_totalEndDay
-        )}`}</div>
-      ),
+          <div className="table-tr-last">{`$ ${formatMoney(
+            row.total_totalEndDay
+          )}`}</div>
+        ),
   },
   {
     Header: (
@@ -276,10 +277,10 @@ const columns = (valueSort, onClickSort = () => { }, sortType) => [
       row.profit?.toString() ? (
         <div className="table-tr">{`$ ${formatMoney(row.profit)}`}</div>
       ) : (
-        <div className="table-tr-last">{`$ ${formatMoney(
-          row.total_profit
-        )}`}</div>
-      ),
+          <div className="table-tr-last">{`$ ${formatMoney(
+            row.total_profit
+          )}`}</div>
+        ),
   },
 ];
 

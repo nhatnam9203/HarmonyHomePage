@@ -147,7 +147,7 @@ export const summary = (value) => {
     total_tax: value.tax,
     total_tip: value.tip,
     total_giftCardSales: value.giftCardSales,
-    total_refunds: value.refuns,
+    total_refunds: value.refunds,
     total_profit: value.profit,
     total_totalEndDay: value.totalEndDay,
     total_costOfProduct: value.costOfProduct,
