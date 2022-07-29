@@ -27,7 +27,10 @@ npm install'''
       }
     }
 
-    stage('Build') {
+    stage('Build for staging') {
+		when {
+				branch 'staging'
+		}
       steps {
         sh '''echo "NODE_OPTIONS=--max-old-space-size=4096" >> ~/.bash_profile
 . ~/.bash_profile
@@ -37,8 +40,24 @@ tar -cvf ${program_filename}.tar .
 mv ${program_filename}.tar ${WORKSPACE}'''
       }
     }
+	stage('Build for production') {
+		when {
+				branch 'production'
+		}
+      steps {
+        sh '''echo "NODE_OPTIONS=--max-old-space-size=4096" >> ~/.bash_profile
+. ~/.bash_profile
+CI=false npm run build:production
+cd build
+tar -cvf ${program_filename}.tar .
+mv ${program_filename}.tar ${WORKSPACE}'''
+      }
+    }
 
-    stage('Deployment') {
+    stage('Deploy to staging') {
+		when {
+				branch 'staging'
+			}	
       steps {
         sshPublisher(publishers: [sshPublisherDesc(configName: 'harmony-homepage-staging', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''set -xe
         program_filename=harmonyhomepagestaging
@@ -57,6 +76,39 @@ mv ${program_filename}.tar ${WORKSPACE}'''
         echo "completed"''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'harmonyhomepagestaging.tar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
       }
     }
+	stage('Deploy to Production') {
+			when {
+				branch 'production'
+		}
+		stages {
+			stage('approve to deploy to production') {
+				options {
+					timeout(time: 180, unit: "SECONDS")
+				}
+
+				steps {
+					input 'Click Process if you want to deploy!'
+				}
+			}
+			steps {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'harmony-booking', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '''set -xe
+				program_filename=harmonyhomepagestaging
+				origin_path=/home/homepage/target/
+				app_path=/home/homepage/web/harmonypayment.com/
+				#Source file
+				origin_filename=${origin_path}${program_filename}.tar
+				#Unzip file
+				tar -xvf ${origin_filename} -C ${app_path}
+				#After copying, delete the source file
+				if [ -f "${origin_filename}" ];then
+					rm -f ${origin_filename}
+					echo "${origin_filename} delete success"
+				fi
+				#Write the code for your startup program.
+				echo "completed"''', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'harmonyhomepagestaging.tar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
+			}
+		}
+	}
 
   }
   environment {
