@@ -50,8 +50,8 @@ const Overall = ({ onBack = () => {} }) => {
     let url = `retailer/Appointment/report/sale/overall/export?quickFilter=${quickFilter}&timeStart=${start}&timeEnd=${end}&merchantId=${merchantId}&type=${type}`;
     url = encodeURI(url);
     dispatch(exportRetailer(url, token));
-  };
-
+  }
+  
   const onChangeDate = (date) => {
     setValueDate(date);
   };

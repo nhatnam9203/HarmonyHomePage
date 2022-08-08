@@ -1,6 +1,6 @@
 import CustomTableHeader from "../../../CustomTableHeader";
 import moment from "moment";
-import { formatMoney, FormatPrice } from "@/util";
+import { formatMoney } from "@/util";
 import "../../../Info.scss";
 import "../style.scss";
 
