@@ -25,7 +25,6 @@ export const convertDateData = (date) => {
       temp = date;
       break;
   }
-
   return temp;
 };
 
